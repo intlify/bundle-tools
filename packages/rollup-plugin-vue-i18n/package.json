@@ -1,0 +1,34 @@
+{
+  "name": "@intlify/rollup-plugin-vue-i18n",
+  "description": "vue-i18n rollup plugin for i18n resource pre-compilation and custom blocks",
+  "version": "2.0.1",
+  "author": {
+    "name": "kazuya kawaguchi",
+    "email": "kawakazu80@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/intlify/rollup-plugin-vue-i18n/issues"
+  },
+  "dependencies": {
+    "@intlify/cli": "^0.5.0",
+    "@intlify/shared": "^9.0.0",
+    "@rollup/pluginutils": "^4.1.0"
+  },
+  "engines": {
+    "node": ">= 10"
+  },
+  "homepage": "https://github.com/intlify/rollup-plugin-vue-i18n#readme",
+  "keywords": [
+    "i18n",
+    "plugin",
+    "rollup",
+    "vue",
+    "vue-i18n"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intlify/rollup-plugin-vue-i18n.git"
+  }
+}

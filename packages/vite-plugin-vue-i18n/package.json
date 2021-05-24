@@ -1,0 +1,46 @@
+{
+  "name": "@intlify/vite-plugin-vue-i18n",
+  "description": "Vite plugin for i18n resource pre-compilation and custom blocks",
+  "version": "2.1.2",
+  "author": {
+    "name": "kazuya kawaguchi",
+    "email": "kawakazu80@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/intlify/vite-plugin-vue-i18n/issues"
+  },
+  "dependencies": {
+    "@intlify/cli": "^0.4.0",
+    "@intlify/shared": "^9.1.0",
+    "@rollup/pluginutils": "^4.1.0",
+    "debug": "^4.1.1",
+    "fast-glob": "^3.2.5"
+  },
+  "engines": {
+    "node": ">= 12"
+  },
+  "files": [
+    "lib",
+    "client.d.ts"
+  ],
+  "homepage": "https://github.com/intlify/vite-plugin-vue-i18n#readme",
+  "keywords": [
+    "i18n",
+    "plugin",
+    "vite",
+    "vitejs",
+    "vue",
+    "vue-i18n"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "peerDependencies": {
+    "vite": "^2.1.5",
+    "vue-i18n": "^9.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intlify/vite-plugin-vue-i18n.git"
+  },
+  "types": "lib/index.d.ts"
+}

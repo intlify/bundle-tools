@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`basic 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`global 1`] = `
+Array [
+  Object {
+    "locale": "ja",
+    "resource": Object {
+      "hello": [Function],
+    },
+  },
+]
+`;
+
+exports[`global 2`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`import 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`json5 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`locale attr 1`] = `
+Array [
+  Object {
+    "locale": "ja",
+    "resource": Object {
+      "hello": [Function],
+    },
+  },
+]
+`;
+
+exports[`locale attr and basic 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+  Object {
+    "locale": "ja",
+    "resource": Object {
+      "hello": [Function],
+    },
+  },
+]
+`;
+
+exports[`locale attr and import 1`] = `
+Array [
+  Object {
+    "locale": "en",
+    "resource": Object {
+      "hello": [Function],
+    },
+  },
+]
+`;
+
+exports[`multiple 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+  Object {
+    "locale": "",
+    "resource": Object {
+      "ja": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`special characters 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "hello": [Function],
+      },
+    },
+  },
+]
+`;
+
+exports[`yaml 1`] = `
+Array [
+  Object {
+    "locale": "en",
+    "resource": Object {
+      "hello": [Function],
+    },
+  },
+  Object {
+    "locale": "ja",
+    "resource": Object {
+      "hello": [Function],
+    },
+  },
+]
+`;

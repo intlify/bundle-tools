@@ -1,0 +1,15 @@
+coverage
+node_modules
+packages/rollup-plugin-vue-i18n/examples/legacy/index.js
+packages/rollup-plugin-vue-i18n/examples/global/index.js
+packages/rollup-plugin-vue-i18n/examples/composition/index.js
+packages/vite-plugin-vue-i18n/examples/dist
+.DS_Store
+lib
+*.log
+*.swp
+*~
+.vscode
+examples/**/dist
+.env
+.idea

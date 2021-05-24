@@ -1,0 +1,9 @@
+{
+  "extends": ["config:base", ":preserveSemverRanges"],
+  "labels": ["Type: Dependency"],
+  "automerge": true,
+  "ignoreDeps": ["puppeteer", "husky"],
+  "major": {
+    "automerge": false
+  }
+}

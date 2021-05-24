@@ -1,0 +1,7 @@
+.*
+*.log
+*.swp
+*.yml
+coverage
+__snapshots__
+test

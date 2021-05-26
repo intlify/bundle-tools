@@ -7,10 +7,7 @@ import path from 'path'
 // NOTE:
 //  load rollup-plugin-vue-18n from local.
 //  In general, use `requirie('rollup-plugin-vue-i18n')`
-const i18n = require(path.resolve(
-  __dirname,
-  '../../../lib/rollup-plugin-vue-i18n/src/index.js'
-)).default
+const i18n = require(path.resolve(__dirname, '../lib/index.js')).default
 
 export default [
   {

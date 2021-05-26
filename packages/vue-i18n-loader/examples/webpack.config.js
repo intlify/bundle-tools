@@ -47,10 +47,7 @@ module.exports = {
         ],
         use: [
           {
-            loader: path.resolve(
-              __dirname,
-              '../../../lib/vue-i18n-loader/src/index.js'
-            ),
+            loader: path.resolve(__dirname, '../lib/index.js'),
             options: {
               // Whether pre-compile number and boolean literal as message functions that return the string value, default `false`
               // forceStringify: true
@@ -61,10 +58,7 @@ module.exports = {
       {
         type: 'javascript/auto',
         resourceQuery: /blockType=i18n/,
-        loader: path.resolve(
-          __dirname,
-          '../../../lib/vue-i18n-loader/src/index.js'
-        )
+        loader: path.resolve(__dirname, '../lib/index.js')
       }
     ]
   },

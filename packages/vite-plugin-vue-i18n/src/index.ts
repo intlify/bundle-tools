@@ -137,6 +137,18 @@ function pluginI18n(
       }
     },
 
+    async handleHotUpdate({ file, server }) {
+      if (/\.(json5?|ya?ml)$/.test(file)) {
+        const module = server.moduleGraph.getModuleById(
+          INTLIFY_BUNDLE_IMPORT_ID
+        )
+        if (module) {
+          server.moduleGraph.invalidateModule(module)
+          return [module!]
+        }
+      }
+    },
+
     async transform(code: string, id: string) {
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query))

@@ -4,4 +4,6 @@ export type VitePluginVueI18nOptions = {
   compositionOnly?: boolean
   fullInstall?: boolean
   include?: string | string[]
+  defaultSFCLang?: 'json' | 'json5' | 'yml' | 'yaml'
+  globalSFCScope?: boolean
 }

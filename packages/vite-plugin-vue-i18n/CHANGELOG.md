@@ -1,4 +1,13 @@
 
+## v2.3.0 (2021-07-01)
+
+#### :star: Features
+* [#109](https://github.com/intlify/vite-plugin-vue-i18n/pull/109) feat: add default lang and global scope plugin options for SFC `i18n` custom block ([@userquin](https://github.com/userquin))
+
+#### Committers: 1
+- [@userquin](https://github.com/userquin)
+
+
 ## v2.2.1 (2021-06-07)
 
 #### :zap: Improvement Features

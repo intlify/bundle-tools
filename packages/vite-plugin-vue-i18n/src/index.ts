@@ -51,6 +51,12 @@ function pluginI18n(
   const fullIinstall = isBoolean(options.fullInstall)
     ? options.fullInstall
     : true
+  const defaultSFCLang = isString(options.defaultSFCLang)
+    ? options.defaultSFCLang
+    : undefined
+  const globalSFCScope = isBoolean(options.globalSFCScope)
+    ? options.globalSFCScope
+    : false
   let config: ResolvedConfig | null = null
 
   return {
@@ -187,11 +193,18 @@ function pluginI18n(
           if ('src' in query) {
             if (isString(query.lang)) {
               langInfo = query.lang === 'i18n' ? 'json' : query.lang
+            } else if (defaultSFCLang) {
+              langInfo = defaultSFCLang
             }
           } else {
             if (isString(query.lang)) {
               langInfo = query.lang
+            } else if (defaultSFCLang) {
+              langInfo = defaultSFCLang
             }
+          }
+          if (!parseOptions.isGlobal && globalSFCScope) {
+            parseOptions.isGlobal = true
           }
           const generate = /\.?json5?/.test(langInfo)
             ? generateJSON

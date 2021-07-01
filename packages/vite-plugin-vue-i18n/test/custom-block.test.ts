@@ -104,3 +104,35 @@ test('global', async () => {
   expect(g.locale).toEqual('')
   expect(g.resource.en.hello(createMessageContext())).toEqual('hello global!')
 })
+
+test('default lang', async () => {
+  const { module } = await bundleAndRun('default-lang.vue', {
+    defaultSFCLang: 'yml'
+  })
+  expect(module.__i18n).toMatchSnapshot()
+  const l = module.__i18n.pop()
+  expect(l.resource.en.hello(createMessageContext())).toEqual(
+    'hello from defaults!'
+  )
+})
+
+test('default lang and global scope', async () => {
+  const { module } = await bundleAndRun('default-lang.vue', {
+    defaultSFCLang: 'yml',
+    globalSFCScope: true
+  })
+  expect(module.__i18nGlobal).toMatchSnapshot()
+  const g = module.__i18nGlobal.pop()
+  expect(g.resource.en.hello(createMessageContext())).toEqual(
+    'hello from defaults!'
+  )
+})
+
+test('global scope and import', async () => {
+  const { module } = await bundleAndRun('global-scope-import.vue', {
+    globalSFCScope: true
+  })
+  expect(module.__i18nGlobal).toMatchSnapshot()
+  const g = module.__i18nGlobal.pop()
+  expect(g.resource.en.hello(createMessageContext())).toEqual('hello world!')
+})

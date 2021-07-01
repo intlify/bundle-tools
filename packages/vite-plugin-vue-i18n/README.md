@@ -90,7 +90,7 @@ Also, if you do a production build with vite, Vue I18n will automatically bundle
 
 ### i18n resources pre-compilation
 
-Since vue-i18n@v9.0, The locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+Since vue-i18n@v9.0, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
 
 However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, vue-i18n@v9.0 and later offer a full version that includes compiler and runtime, and a runtime only version.
 
@@ -122,7 +122,7 @@ export default defineConfig({
 
 ### i18n custom block
 
-the below example that `examples/composition/App.vue` have i18n custom block:
+The below example that `examples/composition/App.vue` have `i18n` custom block:
 
 ```vue
 <template>
@@ -171,9 +171,10 @@ You can be used by specifying the following format in the `lang` attribute:
 
 - json (default)
 - yaml
+- yml
 - json5
 
-example `yaml` foramt:
+example `yaml` format:
 
 ```vue
 <i18n lang="yaml">
@@ -322,7 +323,7 @@ About details, See the below section
 
   Whether pre-compile number and boolean values as message functions that return the string value.
 
-  for example, the following json resources:
+  For example, the following json resources:
 
   ```json
   {
@@ -370,6 +371,88 @@ About details, See the below section
       return fn
     })()
   }
+  ```
+
+### `defaultSFCLang`
+
+- **Type:** `string`
+- **Default:** `undefined`
+
+  Specify the content for all your inlined `i18n` custom blocks on your `SFC`.
+
+  `defaultSFCLang` must have one of the following values:
+
+  ```
+  - json
+  - json5
+  - yaml
+  - yml
+  ```
+
+  On inlined `i18n` custom blocks that have specified the `lang` attribute, the `defaultSFCLang` is not applied.
+
+  For example, with `defaultSFCLang: "yaml"` or `defaultSFCLang: "yml"`, this custom block:
+  ```html
+  <i18n lang="yaml">
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
+  ```
+
+  and this another one, are equivalent:
+  ```html
+  <i18n>
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
+  ```
+
+### `globalSFCScope`
+
+- **Type:** `boolean`
+- **Default:** `undefined`
+
+  Whether to include all `i18n` custom blocks on your `SFC` on `global` scope.
+
+  If `true`, it will be applied to all inlined `i18n` or `imported` custom blocks.
+
+  **Warning**: beware enabling `globalSFCScope: true`, all `i18n` custom blocks in all your `SFC` will be on `global` scope.
+
+  For example, with `globalSFCScope: true`, this custom block:
+
+  ```html
+  <i18n lang="yaml" global>
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
+  ```
+
+  and this another one, are equivalent:
+
+  ```html
+  <i18n lang="yaml">
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
+  ```
+
+  You can also use `defaultSFCLang: "yaml"`, following with previous example, this another is also equivalent to previous ones:
+
+  ```html
+  <i18n>
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
   ```
 
 ## :scroll: Changelog

@@ -1,4 +1,4 @@
-import { isBoolean } from '@intlify/shared'
+import { isBoolean, isString } from '@intlify/shared'
 import path from 'path'
 import { build } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -18,6 +18,12 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
       ? 'info'
       : 'silent'
     : 'silent'
+  const defaultSFCLang = isString(options.defaultSFCLang)
+    ? options.defaultSFCLang
+    : undefined
+  const globalSFCScope = isBoolean(options.globalSFCScope)
+    ? options.globalSFCScope
+    : undefined
 
   const alias: Record<string, string> = {
     vue: 'vue/dist/vue.runtime.esm-browser.js'
@@ -26,7 +32,8 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
     alias['~target'] = path.resolve(__dirname, target, fixture)
   }
 
-  const plugins = [vue(), vueI18n({ include })]
+  // @ts-ignore
+  const plugins = [vue(), vueI18n({ include, defaultSFCLang, globalSFCScope })]
   if (options.intlify) {
     const intlifyVue = (await import('../src/injection')).default
     plugins.push(intlifyVue(options.intlify as InjectionValues))

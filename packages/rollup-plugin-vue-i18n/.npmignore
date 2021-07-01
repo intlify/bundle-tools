@@ -1,9 +1,0 @@
-.*
-*.log
-*.swp
-*.yml
-coverage
-__snapshots__
-test
-example/components.esm.js
-.vscode

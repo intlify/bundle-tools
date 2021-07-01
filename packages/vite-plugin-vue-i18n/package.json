@@ -7,21 +7,7 @@
     "email": "kawakazu80@gmail.com"
   },
   "bugs": {
-    "url": "https://github.com/intlify/vite-plugin-vue-i18n/issues"
-  },
-  "changelog": {
-    "labels": {
-      "Type: Feature": ":star: Features",
-      "Type: Bug": ":bug: Bug Fixes",
-      "Type: Security": ":lock: Security Fixes",
-      "Type: Performance": ":chart_with_upwards_trend: Performance Fixes",
-      "Type: Improvement": ":zap: Improvement Features",
-      "Type: Breaking": ":boom: Breaking Change",
-      "Type: Deprecated": ":warning: Deprecated Features",
-      "Type: I18n": ":globe_with_meridians: Internationalization",
-      "Type: A11y": ":wheelchair: Accessibility",
-      "Type: Documentation": ":pencil: Documentation"
-    }
+    "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
     "@intlify/cli": "^0.5.0",
@@ -48,16 +34,14 @@
     "jest-puppeteer": "^5.0.4",
     "jest-watch-typeahead": "^0.6.4",
     "jsdom": "^16.6.0",
-    "lerna-changelog": "^1.0.1",
     "npm-run-all": "^4.1.5",
     "opener": "^1.5.2",
     "puppeteer": "^10.0.0",
-    "shipjs": "^0.23.2",
     "ts-jest": "^27.0.3",
     "typescript": "^4.3.2",
     "typescript-eslint-language-service": "^4.1.4",
     "vite": "^2.3.6",
-    "vue": "^3.0.11",
+    "vue": "^3.1.2",
     "vue-i18n": "^9.1.6"
   },
   "engines": {
@@ -67,7 +51,7 @@
     "lib",
     "client.d.ts"
   ],
-  "homepage": "https://github.com/intlify/vite-plugin-vue-i18n#readme",
+  "homepage": "https://github.com/intlify/bundle-tools/packages/vite-plugin-vue-i18n#readme",
   "keywords": [
     "i18n",
     "plugin",
@@ -84,7 +68,8 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/intlify/vite-plugin-vue-i18n.git"
+    "url": "git+https://github.com/intlify/bundle-tools.git",
+    "directory": "packages/vite-plugin-vue-i18n"
   },
   "scripts": {
     "build": "tsc -p .",
@@ -103,8 +88,6 @@
     "format:fix": "yarn format --write",
     "lint": "eslint ./src ./test --ext .ts",
     "lint:fix": "yarn lint --fix",
-    "release:prepare": "shipjs prepare",
-    "release:trigger": "shipjs trigger",
     "test": "yarn lint && yarn test:cover && yarn test:e2e",
     "test:cover": "yarn test:unit --coverage",
     "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",

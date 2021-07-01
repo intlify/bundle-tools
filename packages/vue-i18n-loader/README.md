@@ -10,79 +10,11 @@
 
 <p align="center">vue-i18n for webpack loader</p>
 
-<h2 align="center">🤝 Supporting Intlify Project</h2>
-
-Intlify Project is an open source project that is included Vue I18n and i18n tooling and libraries with its ongoing development made possible entirely by the support of Sponsors. If you would like to become a sponsor, please consider:
-
-<p align="center">
-  <a
-    href="https://github.com/sponsors/kazupon"
-    target="_blank">
-    Become a Sponsor on GitHub
-  </a>
-</p>
-
-<h3 align="center">🥇 Gold Sponsors</h3>
-
-<p align="center">
-  <a
-    href="https://nuxtjs.org/"
-    target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/intlify/vue-i18n-next/master/docs/public/nuxt.png"
-      width="240px"
-    />
-  </a>
-</p>
-
-<h3 align="center">🥈 Silver Sponsors</h3>
-
-<p align="center">
-  <a
-    href="https://www.codeandweb.com/babeledit?utm_campaign=vue-i18n-2019-01" 
-    target="_blank">
-    <img
-      src="https://secure.codeandweb.com/static/babeledit.svg"
-      width="200px"
-    />
-  </a>
-</p>
-
-<h3 align="center">🥉 Bronze Sponsors</h3>
-
-<p align="center">
-  <a href="https://zenarchitects.co.jp/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/intlify/vue-i18n-next/master/docs/public/zenarchitects.png"
-      width="144px"
-    />
-  </a>
-</p>
-<p align="center">
-  <a href="https://www.sendcloud.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/intlify/vue-i18n-next/master/docs/public/sendcloud.png"
-      width="144px"
-    />
-  </a>
-</p>
-<p align="center">
-  <a href="https://www.vuemastery.com/" target="_blank">
-    <img
-      src="https://raw.githubusercontent.com/intlify/vue-i18n-next/master/docs/public/vuemastery.png"
-      width="144px"
-    />
-  </a>
-</p>
-
 <br/>
 
 ## :warning: Notice
 
 This `next` branch is development branch for Vue 3! The version for Vue 2 is now in [`master`](https://github.com/intlify/vue-i18n-loader/tree/master) branch!
-
-
-<br/>
 
 
 ## :star: Features

@@ -1,7 +1,8 @@
-lib
+packages/**/lib
 coverage
 tsconfig.json
 dist
+packages/**/examples/dist
 packages/rollup-plugin-vue-i18n/examples/composition/index.js
 packages/rollup-plugin-vue-i18n/examples/global/index.js
 packages/rollup-plugin-vue-i18n/examples/legacy/index.js

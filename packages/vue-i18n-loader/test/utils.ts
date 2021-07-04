@@ -60,7 +60,9 @@ export function bundle(
     plugins: [new VueLoaderPlugin()]
   }
 
+  // @ts-ignore
   const config = merge({}, baseConfig)
+  // @ts-ignore
   const compiler = webpack(config)
 
   const mfs = new memoryfs() // eslint-disable-line
@@ -128,7 +130,9 @@ export function bundleEx(
     plugins: [new VueLoaderPlugin(), new IntlifyVuePlugin(options.intlify)]
   }
 
+  // @ts-ignore
   const config = merge({}, baseConfig)
+  // @ts-ignore
   const compiler = webpack(config)
 
   const mfs = new memoryfs() // eslint-disable-line
@@ -186,7 +190,9 @@ export function bundleLocale(
     plugins: [new VueLoaderPlugin()]
   }
 
+  // @ts-ignore
   const config = merge({}, baseConfig)
+  // @ts-ignore
   const compiler = webpack(config)
 
   const mfs = new memoryfs() // eslint-disable-line

@@ -1,3 +1,7 @@
-./lib
-./jest.config.js
-./test/fixtures
+jest.config.js
+packages/**/test/fixtures
+
+packages/vite-plugin-vue-i18n/client.d.ts
+packages/vue-i18n-loader/@types/*.d.ts
+packages/**/lib/*.d.ts
+packages/**/lib/*.js

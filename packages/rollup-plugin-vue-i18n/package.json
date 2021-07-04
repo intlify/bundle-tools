@@ -22,7 +22,7 @@
   "files": [
     "lib"
   ],
-  "homepage": "https://github.com/intlify/bundle-tools/packages/rollup-plugin-vue-i18n#readme",
+  "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/rollup-plugin-vue-i18n/README.md",
   "keywords": [
     "i18n",
     "plugin",

@@ -24,7 +24,7 @@
     "lib",
     "client.d.ts"
   ],
-  "homepage": "https://github.com/intlify/bundle-tools/packages/vite-plugin-vue-i18n#readme",
+  "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/vite-plugin-vue-i18n/README.md",
   "keywords": [
     "i18n",
     "plugin",

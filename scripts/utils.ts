@@ -1,7 +1,8 @@
-import 'zx'
 import path from 'path'
+import fs from 'fs/promises'
 import semver from 'semver'
 import prompts from 'prompts'
+import execa from 'execa'
 import { loadConfig, Changelog } from '@kazupon/lerna-changelog'
 
 export type PackageJson = {
@@ -11,7 +12,7 @@ export type PackageJson = {
   workspaces?: string[]
 }
 
-export type Mode = 'package' | 'batch'
+export type Mode = 'single' | 'batch'
 export type Logger = (...args: any[]) => void // eslint-disable-line @typescript-eslint/no-explicit-any
 export type Incrementer = (i: any) => string // eslint-disable-line @typescript-eslint/no-explicit-any
 
@@ -25,30 +26,27 @@ const VersionIncrements = [
   'prerelease'
 ] as const
 
-export const run = (bin, args) => {
-  const q = $.quote
-  const v = $.verbose
-  $.quote = v => v
-  $.verbose = false
-  try {
-    return $`${bin} ${args.join(' ')}`
-  } finally {
-    $.quote = q
-    $.verbose = v
-  }
-}
+export const run = (bin, args, opts = {}) =>
+  execa(bin, args, { stdio: 'inherit', ...opts })
 
 export async function getRootPath() {
-  const { stdout: rootPath } = await run('git', [
-    'rev-parse',
-    '--show-toplevel'
-  ])
-  return rootPath.split('\n')[0]
+  const { stdout: rootPath } = await run(
+    'git',
+    ['rev-parse', '--show-toplevel'],
+    { stdio: 'pipe' }
+  )
+  return rootPath
 }
 
 export async function getRelativePath() {
-  const { stdout } = await run('git', ['rev-parse', '--show-prefix'])
-  return stdout.split('\n')[0]
+  const { stdout: relativePath } = await run(
+    'git',
+    ['rev-parse', '--show-prefix'],
+    {
+      stdio: 'pipe'
+    }
+  )
+  return relativePath
 }
 
 export async function readPackageJson(path: string) {

@@ -48,6 +48,7 @@
     "@vitejs/plugin-vue": "^1.2.1",
     "@vue/compiler-sfc": "^3.0.11",
     "babel-loader": "^8.1.0",
+    "chalk": "^4.1.1",
     "debug": "^4.1.1",
     "eslint": "^7.23.0",
     "eslint-config-prettier": "^8.1.0",
@@ -55,6 +56,7 @@
     "eslint-plugin-vue": "^7.8.0",
     "eslint-plugin-vue-libs": "^4.0.0",
     "esno": "^0.7.3",
+    "execa": "^5.1.1",
     "jest": "^26.6.3",
     "jest-puppeteer": "^5.0.0",
     "jest-watch-typeahead": "^0.6.1",
@@ -84,8 +86,7 @@
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2",
-    "yorkie": "^2.0.0",
-    "zx": "^1.14.2"
+    "yorkie": "^2.0.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
@@ -117,7 +118,7 @@
     "clean:vite-plugin-vue-i18n": "cd packages/vite-plugin-vue-i18n && yarn clean",
     "clean:vue-i18n-loader": "cd packages/vue-i18n-loader && yarn clean",
     "coverage": "opener coverage/lcov-report/index.html",
-    "fix": "npm-run-all --parallel lint:fix format:fix",
+    "fix": "npm-run-all --parallel lint:eslint:fix format:fix",
     "format": "prettier --config .prettierrc --ignore-path .prettierignore '**/*.{js,json,html}'",
     "format:fix": "yarn format --write",
     "lint": "npm-run-all --parallel lint:eslint lint:secret",

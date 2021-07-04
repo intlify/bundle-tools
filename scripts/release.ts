@@ -1,8 +1,9 @@
-import 'zx'
 import path from 'path'
+import fs from 'fs/promises'
 import minimist from 'minimist'
 import semver from 'semver'
 import prompts from 'prompts'
+import chalk from 'chalk'
 import { Octokit } from '@octokit/rest'
 import {
   run,
@@ -26,7 +27,7 @@ const skipBuild = args.skipBuild
 const skipChangelog = args.skipChangelog
 
 const dryRun = (bin, args, opts = {}) =>
-  console.log(chalk.blue(`[dryrun] ${bin} ${args.join(' ')}`), opts)
+  console.log(chalk.yellow(`[dryrun] ${bin} ${args.join(' ')}`), opts)
 const runIfNotDry = isDryRun ? dryRun : run
 
 async function releasePackage(log: Logger) {
@@ -95,11 +96,10 @@ async function releasePackage(log: Logger) {
     console.log(`(skipped)`)
   }
 
-  const { stdout } = await run('git', ['diff'])
+  const { stdout } = await run('git', ['diff'], { stdio: 'pipe' })
   if (stdout) {
     log('Committing changes...')
     await runIfNotDry('git', ['add', '-A'])
-    await sleep(10)
     await runIfNotDry('git', ['commit', '-m', `'release: ${tag}'`])
   } else {
     console.log('No changes to commit.')

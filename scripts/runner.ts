@@ -1,5 +1,5 @@
-import 'zx'
 import path from 'path'
+import chalk from 'chalk'
 import glob from 'tiny-glob'
 import prompts from 'prompts'
 import { getRootPath, getRelativePath, readPackageJson } from './utils'
@@ -22,21 +22,18 @@ export async function execute(type: CommandType, command: Command) {
   const rootDir = await getRootPath()
   const pkgDir = path.resolve(rootDir, await getRelativePath())
 
-  let mode: Mode = 'package'
+  let mode: Mode = 'single'
   if (rootDir === pkgDir) {
     mode = 'batch'
   }
   const log = (...args) => {
     const ch =
-      mode === 'package'
-        ? chalk.black.bgGreenBright
-        : chalk.black.bgYellowBright
+      mode === 'single' ? chalk.black.bgGreenBright : chalk.black.bgYellowBright
     console.log(ch.bold(` ${mode} mode `), '', chalk.cyan(...args))
   }
 
   if (mode === 'batch') {
     log(`'${type}' confirm`)
-    await sleep(10)
     if (!(await confirmBatchMode(type))) {
       return
     }
@@ -48,8 +45,10 @@ export async function execute(type: CommandType, command: Command) {
     for (const workspace of pkg.workspaces) {
       const packages = await glob(workspace)
       for (const p of packages) {
-        cd(p)
+        const org = process.cwd()
+        process.chdir(`${rootDir}/${p}`)
         await command(log)
+        process.chdir(org)
       }
     }
   } else {

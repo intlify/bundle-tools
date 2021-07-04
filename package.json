@@ -70,6 +70,7 @@
     "jest-puppeteer": "^5.0.0",
     "jest-watch-typeahead": "^0.6.1",
     "jsdom": "^16.4.0",
+    "lint-staged": "^11.0.0",
     "memory-fs": "^0.5.0",
     "npm-run-all": "^4.1.5",
     "opener": "^1.5.2",
@@ -89,7 +90,8 @@
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3.11.0",
-    "webpack-merge": "^4.2.2"
+    "webpack-merge": "^4.2.2",
+    "yorkie": "^2.0.0"
   },
   "private": true,
   "changelog": {
@@ -105,6 +107,17 @@
       "Type: A11y": ":wheelchair: Accessibility",
       "Type: Documentation": ":pencil: Documentation"
     }
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write"
+    ],
+    "*.ts?(x)": [
+      "prettier --parser=typescript --write"
+    ]
   },
   "workspaces": [
     "packages/*"

@@ -1,4 +1,8 @@
 
+## v2.3.1 (2021-07-05)
+
+So the migration to monorepo, this release is for release tool to be work.
+
 ## v2.3.0 (2021-07-01)
 
 #### :star: Features

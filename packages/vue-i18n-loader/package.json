@@ -47,6 +47,8 @@
     "clean:example": "rm -rf ./examples/dist",
     "example": "yarn build && webpack-dev-server --config examples/webpack.config.js --inline --hot",
     "test": "yarn test:e2e",
-    "test:e2e": "yarn build && jest --runInBand --config ./jest.e2e.config.js"
+    "test:e2e": "yarn build && jest --runInBand --config ./jest.e2e.config.js",
+    "changelog": "esmo ../../scripts/changelog.ts",
+    "release": "esmo ../../scripts/release.ts"
   }
 }

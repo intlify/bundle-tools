@@ -56,7 +56,9 @@
     "dev:legacy": "vite examples/legacy --config ./examples/legacy/vite.config.ts",
     "test": "yarn test:e2e",
     "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",
-    "watch": "tsc -p . --watch"
+    "watch": "tsc -p . --watch",
+    "changelog": "esmo ../../scripts/changelog.ts",
+    "release": "esmo ../../scripts/release.ts"
   },
   "types": "lib/index.d.ts"
 }

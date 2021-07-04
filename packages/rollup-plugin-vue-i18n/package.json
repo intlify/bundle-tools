@@ -51,7 +51,9 @@
     "clean:lib": "rm -rf ./lib",
     "test": "yarn test:e2e",
     "test:e2e": "yarn build:example && jest --runInBand --config ./jest.e2e.config.js",
-    "watch": "tsc -p . --watch"
+    "watch": "tsc -p . --watch",
+    "changelog": "esmo ../../scripts/changelog.ts",
+    "release": "esmo ../../scripts/release.ts"
   },
   "types": "lib/index.d.ts"
 }

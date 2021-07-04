@@ -1,19 +1,24 @@
-# :globe_with_meridians: @intlify/rollup-plugin-vue-i18n
+# @intlify/rollup-plugin-vue-i18n
 
-![Test](https://github.com/intlify/rollup-plugin-vue-i18n/workflows/Test/badge.svg)
-[![npm](https://img.shields.io/npm/v/@intlify/rollup-plugin-vue-i18n/next.svg)](https://www.npmjs.com/package/@intlify/rollup-plugin-vue-i18n)
-[![npm](https://img.shields.io/npm/v/@intlify/rollup-plugin-vue-i18n.svg)](https://www.npmjs.com/package/@intlify/rollup-plugin-vue-i18n)
+[![Lint](https://github.com/intlify/bundle-tools/actions/workflows/lint.yml/badge.svg)](https://github.com/intlify/bundle-tools/actions/workflows/lint.yml)
+[![Test](https://github.com/intlify/bundle-tools/actions/workflows/test.yml/badge.svg)](https://github.com/intlify/bundle-tools/actions/workflows/test.yml)
+[![npm](https://img.shields.io/npm/v/@intlify/rollup-plugin-vue-i18n.svg?color=red)](https://www.npmjs.com/package/@intlify/rollup-plugin-vue-i18n)
 
-vue-i18n rollup plugin for i18n resource pre-compilation and custom blocks
+Rollup plugin for Vue I18n
 
-**NOTE:** :warning: This `next` branch is development branch for Vue 3! The version for Vue 2 is now in [`master`](https://github.com/intlify/rollup-plugin-vue-i18n/tree/master) branch!
+
+## :warning: Notice
+
+This package of `@intlify/bundle-tools` is for Vue I18n v9 or later!
+
+The version for Vue I18n v8.x is now in [`@intlify/rollup-plugin-vue-i18n`](https://github.com/intlify/rollup-plugin-vue-i18n/tree/master) repo!
 
 
 ## :exclamation: Requirement
 
 You need to install the follwoing:
 
-- rollup-plugin-vue@6.0.0-beta.4
+- `rollup-plugin-vue@6.0.0`
 
 If you use rollup-plugin-vue, We recommend you should read the [docs](https://rollup-plugin-vue.vuejs.org/)
 
@@ -25,13 +30,13 @@ If you use rollup-plugin-vue, We recommend you should read the [docs](https://ro
 
 ## :cd: Installation
 
-### NPM
+### npm
 
 ```sh
 $ npm i --save-dev @intlify/rollup-plugin-vue-i18n@next
 ```
 
-### YARN
+### yarn
 
 ```sh
 $ yarn add -D @intlify/rollup-plugin-vue-i18n@next
@@ -41,9 +46,9 @@ $ yarn add -D @intlify/rollup-plugin-vue-i18n@next
 
 ### i18n resource pre-compilation
 
-Since vue-i18n@v9.0, The locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+Since `vue-i18n@v9.0`, The locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
 
-However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, vue-i18n@v9.0 and later offer a full version that includes compiler and runtime, and a runtime only version.
+However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, `vue-i18n@v9.0` and later offer a full version that includes compiler and runtime, and a runtime only version.
 
 If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
 
@@ -232,11 +237,7 @@ ja:
   ```
 
 ## :scroll: Changelog
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/rollup-plugin-vue-i18n/blob/master/CHANGELOG.md).
-
-
-## :exclamation: Issues
-Please make sure to read the [Issue Reporting Checklist](https://github.com/inlitify/rollup-plugin-vue-i18n/blob/master/.github/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/rollup-plugin-vue-i18n/CHANGELOG.md)
 
 
 ## :copyright: License

@@ -1,7 +1,9 @@
-# :globe_with_meridians: @intlify/vite-plugin-vue-i18n
+# @intlify/vite-plugin-vue-i18n
 
-![Test](https://github.com/intlify/vite-plugin-vue-i18n/workflows/Test/badge.svg)
-[![npm](https://img.shields.io/npm/v/@intlify/vite-plugin-vue-i18n.svg)](https://www.npmjs.com/package/@intlify/vite-plugin-vue-i18n)
+[![Lint](https://github.com/intlify/bundle-tools/actions/workflows/lint.yml/badge.svg)](https://github.com/intlify/bundle-tools/actions/workflows/lint.yml)
+[![Test](https://github.com/intlify/bundle-tools/actions/workflows/test.yml/badge.svg)](https://github.com/intlify/bundle-tools/actions/workflows/test.yml)
+[![npm](https://img.shields.io/npm/v/@intlify/vite-plugin-vue-i18n.svg?color=blueviolet)](https://www.npmjs.com/package/@intlify/vite-plugin-vue-i18n)
+
 
 Vite plugin for Vue I18n
 
@@ -14,13 +16,13 @@ Vite plugin for Vue I18n
 
 ## :cd: Installation
 
-### NPM
+### npm
 
 ```sh
 $ npm i --save-dev @intlify/vite-plugin-vue-i18n
 ```
 
-### YARN
+### yarn
 
 ```sh
 $ yarn add -D @intlify/vite-plugin-vue-i18n
@@ -36,9 +38,9 @@ Also, if you do a production build with vite, Vue I18n will automatically bundle
 
 ### i18n resources pre-compilation
 
-Since vue-i18n@v9.0, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+Since `vue-i18n@v9.0`, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
 
-However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, vue-i18n@v9.0 and later offer a full version that includes compiler and runtime, and a runtime only version.
+However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, `vue-i18n@v9.0` and later offer a full version that includes compiler and runtime, and a runtime only version.
 
 If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
 
@@ -403,11 +405,7 @@ About details, See the below section
 
 ## :scroll: Changelog
 
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/vite-plugin-vue-i18n/blob/master/CHANGELOG.md).
-
-## :exclamation: Issues
-
-Please make sure to read the [Issue Reporting Checklist](https://github.com/inlitify/vite-plugin-vue-i18n/blob/master/.github/CONTRIBUTING.md#issue-reporting-guidelines) before opening an issue. Issues not conforming to the guidelines may be closed immediately.
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/vite-plugin-vue-i18n/CHANGELOG.md)
 
 ## :copyright: License
 

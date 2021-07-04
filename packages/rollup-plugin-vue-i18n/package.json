@@ -1,6 +1,6 @@
 {
   "name": "@intlify/rollup-plugin-vue-i18n",
-  "description": "vue-i18n rollup plugin for i18n resource pre-compilation and custom blocks",
+  "description": "Rollup plugin for Vue I18n",
   "version": "2.0.1",
   "author": {
     "name": "kazuya kawaguchi",

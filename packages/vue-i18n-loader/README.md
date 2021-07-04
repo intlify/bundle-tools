@@ -3,18 +3,20 @@
 <h1 align="center">@intlify/vue-i18n-loader</h1>
 
 <p align="center">
-  <a href="https://github.com/intlify/vue-i18n-loader/actions?query=workflow%3ATest"><img src="https://github.com/intlify/vue-i18n-loader/workflows/Test/badge.svg" alt="Build Status"></a>
-  <a href="https://www.npmjs.com/package/@intlify/vue-i18n-loader"><img src="https://img.shields.io/npm/v/@intlify/vue-i18n-loader/next.svg" alt="npm"></a>
-  <a href="https://www.npmjs.com/package/@intlify/vue-i18n-loader"><img src="https://img.shields.io/npm/v/@intlify/vue-i18n-loader.svg" alt="npm"></a>
+  <a href="https://github.com/intlify/bundle-tools/actions/workflows/lint.yml"><img src="https://github.com/intlify/bundle-tools/actions/workflows/lint.yml/badge.svg" alt="Lint Status"></a>
+  <a href="https://github.com/intlify/bundle-tools/actions/workflows/test.yml"><img src="https://github.com/intlify/bundle-tools/actions/workflows/test.yml/badge.svg" alt="Test Status"></a>
+  <a href="https://www.npmjs.com/package/@intlify/vue-i18n-loader"><img src="https://img.shields.io/npm/v/@intlify/vue-i18n-loader.svg?label=%20&color=blue" alt="npm"></a>
 </p>
 
-<p align="center">vue-i18n for webpack loader</p>
+<h2 align="center">vue-i18n for webpack loader</h2>
 
 <br/>
 
 ## :warning: Notice
 
-This `next` branch is development branch for Vue 3! The version for Vue 2 is now in [`master`](https://github.com/intlify/vue-i18n-loader/tree/master) branch!
+This package of `@intlify/bundle-tools` is for Vue I18n v9 or later!
+
+The version for Vue I18n v8.x is now in [`@intlify/vue-i18n-loader`](https://github.com/intlify/vue-i18n-loader/tree/master) repo!
 
 
 ## :star: Features
@@ -29,20 +31,17 @@ This `next` branch is development branch for Vue 3! The version for Vue 2 is now
 
 ## :cd: Installation
 
-### NPM
+### npm
 
 ```sh
 $ npm i --save-dev @intlify/vue-i18n-loader@next
 ```
 
-### YARN
+### yarm
 
 ```sh
 $ yarn add -D @intlify/vue-i18n-loader@next
 ```
-
-**NOTE:** :warning: `@intlify/vue-i18n-loader@next` is for Vue I18n v9 or later, if you want to use Vue I18n v8.x, you need to install `@intlify/vue-i18n-loader`.
-
 
 ## :rocket: i18n resource pre-compilation
 
@@ -358,10 +357,8 @@ module.exports = {
   ```
 
 ## :scroll: Changelog
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/vue-i18n-loader/blob/master/CHANGELOG.md).
 
-## :muscle: Contribution
-Please make sure to read the [Contributing Guide](https://github.com/intlify/vue-i18n-loader/blob/master/.github/CONTRIBUTING.md) before making a pull request.
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/vue-i18n-loader/CHANGELOG.md).
 
 ## :copyright: License
 

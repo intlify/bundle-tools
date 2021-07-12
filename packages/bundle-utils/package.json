@@ -1,0 +1,40 @@
+{
+  "name": "@intlify/bundle-utils",
+  "description": "Bundle utilities for Intlify project",
+  "version": "0.0.0",
+  "author": {
+    "name": "kazuya kawaguchi",
+    "email": "kawakazu80@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/intlify/bundle-tools/issues"
+  },
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "engines": {
+    "node": ">= 12"
+  },
+  "files": [
+    "lib"
+  ],
+  "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "peerDependencies": {
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intlify/bundle-tools.git",
+    "directory": "packages/bundle-utils"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "npm-run-all clean:*",
+    "clean:lib": "rm -rf ./lib",
+    "watch": "tsc -p . --watch",
+    "changelog": "esmo ../../scripts/changelog.ts",
+    "release": "esmo ../../scripts/release.ts"
+  },
+  "types": "lib/index.d.ts"
+}

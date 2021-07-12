@@ -110,10 +110,12 @@
   },
   "scripts": {
     "build": "npm-run-all --parallel build:*",
+    "build:bundle-utils": "cd packages/bundle-utils && yarn build",
     "build:rollup-plugin-vue-i18n": "cd packages/rollup-plugin-vue-i18n && yarn build",
     "build:vite-plugin-vue-i18n": "cd packages/vite-plugin-vue-i18n && yarn build",
     "build:vue-i18n-loader": "cd packages/vue-i18n-loader && yarn build",
     "clean": "npm-run-all --parallel clean:*",
+    "clean:bundle-utils": "cd packages/bundle-utils && yarn clean",
     "clean:rollup-plugin-vue-i18n": "cd packages/rollup-plugin-vue-i18n && yarn clean",
     "clean:vite-plugin-vue-i18n": "cd packages/vite-plugin-vue-i18n && yarn clean",
     "clean:vue-i18n-loader": "cd packages/vue-i18n-loader && yarn clean",

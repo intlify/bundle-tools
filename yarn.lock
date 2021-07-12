@@ -392,7 +392,7 @@
     "@intlify/shared" "9.1.6"
     "@intlify/vue-devtools" "9.1.6"
 
-"@intlify/core@^9.1.0":
+"@intlify/core@^9.1.0", "@intlify/core@^9.1.6":
   version "9.1.6"
   resolved "https://registry.yarnpkg.com/@intlify/core/-/core-9.1.6.tgz#02215f4f41fa2838923faf51b9d97d6ce055f0a1"
   integrity sha512-/B/2mRUqiNByKI+M13zRotiCecFHrlSg+V9HLSsIDW9xVWIn/NXucfCD4CUHzIPPGcCtzNjxixKTojGnWcsLSg==
@@ -406,7 +406,7 @@
   dependencies:
     "@intlify/shared" "9.1.6"
 
-"@intlify/message-compiler@9.1.6", "@intlify/message-compiler@^9.1.0":
+"@intlify/message-compiler@9.1.6", "@intlify/message-compiler@^9.1.0", "@intlify/message-compiler@^9.1.6":
   version "9.1.6"
   resolved "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-9.1.6.tgz#e3e99165c1e6ecc496211017799ae59e15b05a18"
   integrity sha512-DR8645VOrVK6x/8tkaCpHnckMAIcoOgeNS5j0wB12RfZoXYQp7vAXMaOP511KMll2mXCREgIB0ojpajiof7yzQ==

@@ -10,6 +10,12 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
+    "@intlify/core": "^9.1.6",
+    "@intlify/message-compiler": "^9.1.6",
+    "@intlify/shared": "^9.1.6",
+    "jsonc-eslint-parser": "^1.0.1",
+    "source-map": "^0.6.1",
+    "yaml-eslint-parser": "^0.3.2"
   },
   "devDependencies": {},
   "engines": {
@@ -21,8 +27,7 @@
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",
   "main": "lib/index.js",
-  "peerDependencies": {
-  },
+  "peerDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/bundle-tools.git",

@@ -1,0 +1,222 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`bare: code 1`] = `
+"{
+  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})()
+}"
+`;
+
+exports[`bare: map 1`] = `
+Object {
+  "mappings": ";6EACUA",
+  "names": Array [
+    "hello world!",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"hello\\": \\"hello world!\\"
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`complex: code 1`] = `
+"export default {
+  \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
+  \\"nested\\": {
+    \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
+    \\"more\\": {
+      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+    },
+    \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
+  },
+  \\"こんにちは\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは！\\"])};fn.source=\\"こんにちは！\\";return fn;})(),
+  \\"single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"I don't know!\\"])};fn.source=\\"I don't know!\\";return fn;})(),
+  \\"emoji\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"😺\\"])};fn.source=\\"😺\\";return fn;})(),
+  \\"unicode\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"A\\"])};fn.source=\\"A\\";return fn;})(),
+  \\"unicode-escape\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\u0041\\"])};fn.source=\\"\\\\\\\\u0041\\";return fn;})(),
+  \\"backslash-single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\'\\"])};fn.source=\\"\\\\\\\\'\\";return fn;})(),
+  \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
+  \\"errors\\": [
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})()
+  ],
+  \\"complex\\": {
+    \\"warnings\\": [
+      (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"NOTE: This is warning\\"])};fn.source=\\"NOTE: This is warning\\";return fn;})(),
+      {
+        \\"named-waring\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"this is \\", _interpolate(_named(\\"type\\")), \\" warining\\"])};fn.source=\\"this is {type} warining\\";return fn;})()
+      }
+    ]
+  }
+}"
+`;
+
+exports[`complex: map 1`] = `
+Object {
+  "mappings": ";0EACOA;;+EAEKC;;4LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;6EAEDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
+  "names": Array [
+    "hi there!",
+    "hello world!",
+    "no apples",
+    "caml",
+    "0",
+    " apple",
+    "n",
+    " apples",
+    "hi, ",
+    " !",
+    "こんにちは！",
+    "I don't know!",
+    "😺",
+    "A",
+    "\\\\u0041",
+    "\\\\'",
+    "\\\\\\\\",
+    "ERROR1001",
+    "ERROR1002",
+    "NOTE: This is warning",
+    "this is ",
+    "type",
+    " warining",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"hi\\": \\"hi there!\\",
+  \\"nested\\": {
+    \\"hello\\": \\"hello world!\\",
+    \\"more\\": {
+      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    },
+    \\"list\\": \\"hi, {0} !\\"
+  },
+  \\"こんにちは\\": \\"こんにちは！\\",
+  \\"single-quote\\": \\"I don't know!\\",
+  \\"emoji\\": \\"😺\\",
+  \\"unicode\\": \\"\\\\u0041\\",
+  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
+  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
+  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
+  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
+  \\"complex\\": {
+    \\"warnings\\": [
+      \\"NOTE: This is warning\\",
+      {
+        \\"named-waring\\": \\"this is {type} warining\\"
+      }
+    ]
+  }
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`force stringify: code 1`] = `
+"export default {
+  \\"trueValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"true\\"])};fn.source=\\"true\\";return fn;})(),
+  \\"falseValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"false\\"])};fn.source=\\"false\\";return fn;})(),
+  \\"nullValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"null\\"])};fn.source=\\"null\\";return fn;})(),
+  \\"numberValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"1\\"])};fn.source=\\"1\\";return fn;})()
+}"
+`;
+
+exports[`force stringify: map 1`] = `
+Object {
+  "mappings": ";iFACcA;kFACCC;iFACDC;mFACEC",
+  "names": Array [
+    "true",
+    "false",
+    "null",
+    "1",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"trueValue\\": true,
+  \\"falseValue\\": false,
+  \\"nullValue\\": null,
+  \\"numberValue\\": 1
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`simple: code 1`] = `
+"export default {
+  \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
+  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
+  \\"named\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"hi, \\", _interpolate(_named(\\"name\\")), \\" !\\"])};fn.source=\\"hi, {name} !\\";return fn;})(),
+  \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})(),
+  \\"literal\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi, \\", \\"kazupon\\", \\" !\\"])};fn.source=\\"hi, {  'kazupon'  } !\\";return fn;})(),
+  \\"linked\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked } = ctx;return _normalize([\\"hi, \\", _linked(\\"name\\"), \\" !\\"])};fn.source=\\"hi, @:name !\\";return fn;})(),
+  \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+}"
+`;
+
+exports[`simple: map 1`] = `
+Object {
+  "mappings": ";0EACOA;6EACGC;uHACAC,QAAAC,8BAAAC;oHACDF,QAAAG,wBAAAD;+EACGF,QAAAI,WAAAF;+FACDF,gBAAAC,SAAAC;wLACAG,aAAAC,uBAAAH,wBAAAI,wBAAAC,2BAAAC",
+  "names": Array [
+    "hi there!",
+    "hello world!",
+    "hi, ",
+    "name",
+    " !",
+    "0",
+    "kazupon",
+    "no apples",
+    "caml",
+    " apple",
+    "n",
+    " apples",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"hi\\": \\"hi there!\\",
+  \\"hello\\": \\"hello world!\\",
+  \\"named\\": \\"hi, {name} !\\",
+  \\"list\\": \\"hi, {0} !\\",
+  \\"literal\\": \\"hi, {  'kazupon'  } !\\",
+  \\"linked\\": \\"hi, @:name !\\",
+  \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`unhandling: code 1`] = `
+"export default {
+  \\"trueValue\\": true,
+  \\"falseValue\\": false,
+  \\"nullValue\\": null,
+  \\"numberValue\\": 1
+}"
+`;
+
+exports[`unhandling: map 1`] = `
+Object {
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
+  "version": 3,
+}
+`;

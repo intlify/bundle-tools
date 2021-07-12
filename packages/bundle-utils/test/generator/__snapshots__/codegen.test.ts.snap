@@ -1,0 +1,143 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`generateMessageFunction development 1`] = `
+Object {
+  "ast": Object {
+    "body": Object {
+      "end": 5,
+      "items": Array [
+        Object {
+          "end": 5,
+          "loc": Object {
+            "end": Object {
+              "column": 6,
+              "line": 1,
+              "offset": 5,
+            },
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 3,
+          "value": "hello",
+        },
+      ],
+      "loc": Object {
+        "end": Object {
+          "column": 6,
+          "line": 1,
+          "offset": 5,
+        },
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "start": 0,
+      "type": 2,
+    },
+    "end": 5,
+    "helpers": Array [
+      "normalize",
+    ],
+    "loc": Object {
+      "end": Object {
+        "column": 6,
+        "line": 1,
+        "offset": 5,
+      },
+      "source": "hello",
+      "start": Object {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "start": 0,
+    "type": 0,
+  },
+  "code": "(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})()",
+  "map": Object {
+    "mappings": "mEAAAA",
+    "names": Array [
+      "hello",
+    ],
+    "sources": Array [
+      "message.intl",
+    ],
+    "sourcesContent": Array [
+      "hello",
+    ],
+    "version": 3,
+  },
+}
+`;
+
+exports[`generateMessageFunction production 1`] = `
+Object {
+  "ast": Object {
+    "body": Object {
+      "end": 5,
+      "items": Array [
+        Object {
+          "end": 5,
+          "loc": Object {
+            "end": Object {
+              "column": 6,
+              "line": 1,
+              "offset": 5,
+            },
+            "start": Object {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 3,
+          "value": "hello",
+        },
+      ],
+      "loc": Object {
+        "end": Object {
+          "column": 6,
+          "line": 1,
+          "offset": 5,
+        },
+        "start": Object {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "start": 0,
+      "type": 2,
+    },
+    "end": 5,
+    "helpers": Array [
+      "normalize",
+    ],
+    "loc": Object {
+      "end": Object {
+        "column": 6,
+        "line": 1,
+        "offset": 5,
+      },
+      "source": "hello",
+      "start": Object {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "start": 0,
+    "type": 0,
+  },
+  "code": "(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])}",
+  "map": undefined,
+}
+`;

@@ -100,7 +100,7 @@ async function releasePackage(log: Logger) {
   if (stdout) {
     log('Committing changes...')
     await runIfNotDry('git', ['add', '-A'])
-    await runIfNotDry('git', ['commit', '-m', `'release: ${tag}'`])
+    await runIfNotDry('git', ['commit', '-m', `release: ${tag}`])
   } else {
     console.log('No changes to commit.')
   }

@@ -27,7 +27,7 @@ async function generateChangelog(log: Logger) {
     return
   }
 
-  const pkgName = pkg.name.replace(/^@kazupon\//, '')
+  const pkgName = pkg.name.replace(/^@intlify\//, '')
   const currentVersion = pkg.version
   const inc = getIncrementer(currentVersion)
 

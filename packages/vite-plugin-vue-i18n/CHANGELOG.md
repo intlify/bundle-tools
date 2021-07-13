@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@2.3.2 (2021-07-13)
+
+#### :zap: Improvement Features
+* [#29](https://github.com/intlify/bundle-tools/pull/29) fix(vite-plugin-vue-i18n): chagen from cli to bundle-utils ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.3.1 (2021-07-05)
 
 So the migration to monorepo, this release is for release tool to be work.

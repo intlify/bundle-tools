@@ -4,9 +4,9 @@ import loaderUtils from 'loader-utils'
 import { parse, ParsedUrlQuery } from 'querystring'
 import { RawSourceMap } from 'source-map'
 import { isEmptyObject, isString } from '@intlify/shared'
-import { generateJSON, generateYAML } from '@intlify/cli'
+import { generateJSON, generateYAML } from '@intlify/bundle-utils'
 
-import type { CodeGenOptions, DevEnv } from '@intlify/cli'
+import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type { VueI18nLoaderOptions } from './options'
 
 const loader: webpack.loader.Loader = function (

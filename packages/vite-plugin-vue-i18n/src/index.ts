@@ -12,14 +12,14 @@ import { promises as fs } from 'fs'
 import path from 'path'
 import { isArray, isBoolean, isEmptyObject, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
-import { generateJSON, generateYAML } from '@intlify/cli'
+import { generateJSON, generateYAML } from '@intlify/bundle-utils'
 import fg from 'fast-glob'
 import { debug as Debug } from 'debug'
 import { parseVueRequest } from './query'
 import { normalizePath } from 'vite'
 
 import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
-import type { CodeGenOptions, DevEnv } from '@intlify/cli'
+import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type { VitePluginVueI18nOptions } from './options'
 
 const debug = Debug('vite-plugin-vue-i18n')

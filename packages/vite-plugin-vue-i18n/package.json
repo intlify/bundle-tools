@@ -10,7 +10,7 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
-    "@intlify/cli": "^0.5.0",
+    "@intlify/bundle-utils": "^0.1.0",
     "@intlify/shared": "^9.1.6",
     "@rollup/pluginutils": "^4.1.0",
     "debug": "^4.3.1",

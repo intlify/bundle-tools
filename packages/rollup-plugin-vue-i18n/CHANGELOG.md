@@ -1,4 +1,13 @@
 
+## @intlify/rollup-plugin-vue-i18n@2.0.3 (2021-07-13)
+
+#### :zap: Improvement Features
+* [#27](https://github.com/intlify/bundle-tools/pull/27) fix(rollup-plugin-vue-i18n): change from cli to bundle-utils ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.0.2 (2021-07-05)
 
 So the migration to monorepo, this release is for release tool to be work.

@@ -113,7 +113,8 @@ async function releasePackage(log: Logger) {
   await runIfNotDry('git', ['push', 'origin', `refs/tags/${tag}`])
   await runIfNotDry('git', ['push'])
 
-  log('Releasing to GitHub Releases...')
+  const repo = await getRepoName()
+  log(`Releasing to ${repo} of GitHub Releases...`)
   if (!skipChangelog && !isDryRun) {
     await releaseGitHub(
       tag,
@@ -197,7 +198,7 @@ async function releaseGitHub(
   const repo = await getRepoName()
 
   return await octokit.repos.createRelease({
-    owner: user.login,
+    owner: 'intlify',
     repo,
     tag_name: tag,
     name: releaseName,

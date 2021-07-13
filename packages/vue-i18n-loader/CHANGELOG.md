@@ -1,4 +1,13 @@
 
+## @intlify/vue-i18n-loader@2.1.2 (2021-07-13)
+
+#### :zap: Improvement Features
+* [#28](https://github.com/intlify/bundle-tools/pull/28) fix(vue-i18n-loader): change from cli to bundle-utils ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## v2.1.1 (2021-07-05)
 
 So the migration to monorepo, this release is for release tool to be work.

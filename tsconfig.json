@@ -45,6 +45,7 @@
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     /* List of folders to include type definitions from. */
     "typeRoots": [
+      "./packages/bundle-utils/dist",
       "./packages/vue-i18n-loader/@types",
       "./node_modules/@types",
       "./node_modules/vue-i18n/dist"

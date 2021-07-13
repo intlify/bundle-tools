@@ -133,7 +133,7 @@
     "test:e2e:rollup-plugin-vue-i18n": "cd packages/rollup-plugin-vue-i18n && yarn test:e2e",
     "test:e2e:vite-plugin-vue-i18n": "cd packages/vite-plugin-vue-i18n && yarn test:e2e",
     "test:e2e:vue-i18n-loader": "cd packages/vue-i18n-loader && yarn test:e2e",
-    "test:unit": "jest --env node",
+    "test:unit": "yarn run build:bundle-utils && jest --env node",
     "test:watch": "jest --env node --watch",
     "changelog": "esmo --experimental-json-modules ./scripts/changelog.ts",
     "release": "esmo --experimental-json-modules ./scripts/release.ts"

@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@0.2.0 (2021-07-26)
+
+#### :star: Features
+* [#36](https://github.com/intlify/bundle-tools/pull/36) add install package checking ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@0.1.0 (2021-07-12)
 
 #### :star: Features

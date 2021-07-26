@@ -194,6 +194,7 @@ async function releaseGitHub(
   const octokit = new Octokit({
     auth: process.env.GITHUB_AUTH || ''
   })
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { data: user } = await octokit.request('GET /user')
   const repo = await getRepoName()
 

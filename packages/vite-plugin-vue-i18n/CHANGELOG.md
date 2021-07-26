@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@2.4.0 (2021-07-26)
+
+#### :star: Features
+* [#37](https://github.com/intlify/bundle-tools/pull/37) vite-plugin-vue-i18n: add 'useVueI18nImportName' option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@2.3.2 (2021-07-13)
 
 #### :zap: Improvement Features

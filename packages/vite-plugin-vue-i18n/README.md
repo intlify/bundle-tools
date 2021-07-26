@@ -38,9 +38,9 @@ Also, if you do a production build with vite, Vue I18n will automatically bundle
 
 ### i18n resources pre-compilation
 
-Since `vue-i18n@v9.0`, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+Since `vue-i18n@v9.x`, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
 
-However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, `vue-i18n@v9.0` and later offer a full version that includes compiler and runtime, and a runtime only version.
+However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, `vue-i18n@v9.x` and later offer a full version that includes compiler and runtime, and a runtime only version.
 
 If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
 
@@ -199,8 +199,16 @@ If you want type definition of `@intlify/vite-plugin-vue-i18n/messages`, add `vi
 
 vite-plugin-vue-i18n allows you to support bundle size optimization provided by vue-i18n.
 
-## :package: Automatic Vue I18n bundling
+## :balance_scale: Support for `petite-vue-ii8n` (Experimental)
 
+vite-plugin-vue-i18n plugin support for `petite-vue-i18n`.
+
+vite-plugin-vue-i18n plugin provides several dedicated options for `petite-vue-i18n`.
+
+Note that it is as experimental as `Petite-vue-i18n`.
+
+## :package: Automatic bundling
+### For Vue I18n
 As noted [here](https://vue-i18n.intlify.dev/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
 
 vite-plugin-vue-i18n will automatically select and bundle Vue I18n build according to the following vite behavior:
@@ -209,6 +217,13 @@ vite-plugin-vue-i18n will automatically select and bundle Vue I18n build accordi
 - vite build: `vue-i18n.runtime.esm-bundler.js`
 
 About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
+
+### For `petite-vue-ei18n`
+
+vite-plugin-vue-i18n will automatically select and bundle `petite-vue-i18n` build according to the following vite behavior:
+
+- vite dev: `petite-vue-i18n.esm-bundler.js`
+- vite build: `petite-vue-i18n.runtime.esm-bundler.js`
 
 ## :wrench: Options
 
@@ -402,6 +417,16 @@ About details, See the below section
     hello: Hola
   </i18n>
   ```
+
+### `useVueI18nImportName` (Experimental)
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether to use the imporot name of `petite-vue-i18n` with the same import name as vue-i18n (`import { xxx } from ‘vue-i18n’`).
+
+  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
+
 
 ## :scroll: Changelog
 

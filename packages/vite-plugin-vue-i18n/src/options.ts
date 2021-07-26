@@ -6,4 +6,5 @@ export type VitePluginVueI18nOptions = {
   include?: string | string[]
   defaultSFCLang?: 'json' | 'json5' | 'yml' | 'yaml'
   globalSFCScope?: boolean
+  useVueI18nImportName?: boolean
 }

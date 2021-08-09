@@ -53,7 +53,7 @@ However, with the message compiler, the javascript function conversion will not 
 
 If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
 
-You can pre-commpile by configuring vue-i18n-loader as the webpack loader.
+You can pre-compile by configuring vue-i18n-loader as the webpack loader.
 
 ### webpack configration
 

@@ -1,4 +1,20 @@
 
+## @intlify/vue-i18n-loader@3.0.0 (2021-08-10)
+
+#### :star: Features
+* [#39](https://github.com/intlify/bundle-tools/pull/39) Add option productionSourceMap for vue-i18n-loader ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+#### :boom: Breaking Change
+* [#39](https://github.com/intlify/bundle-tools/pull/39) Add option productionSourceMap for vue-i18n-loader ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+
+#### :pencil: Documentation
+* [#38](https://github.com/intlify/bundle-tools/pull/38) fix(README): replace 'pre-commpile' with 'pre-compile' ([@Vannsl](https://github.com/Vannsl))
+
+#### Committers: 2
+- Lee ([@PeterAlfredLee](https://github.com/PeterAlfredLee))
+- Vanessa Otto ([@Vannsl](https://github.com/Vannsl))
+
+
 ## @intlify/vue-i18n-loader@2.1.2 (2021-07-13)
 
 #### :zap: Improvement Features

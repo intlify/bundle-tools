@@ -50,12 +50,13 @@ function getOptions(
   inSourceMap?: RawSourceMap
 ): Record<string, unknown> {
   const loaderOptions = loaderUtils.getOptions(loaderContext) || {}
-  const { resourcePath: filename, mode, sourceMap } = loaderContext
-  const { forceStringify } = loaderOptions as VueI18nLoaderOptions
+  const { resourcePath: filename, mode } = loaderContext
+  const { forceStringify, productionSourceMap } =
+    loaderOptions as VueI18nLoaderOptions
 
   const baseOptions = {
     filename,
-    sourceMap,
+    sourceMap: productionSourceMap || false,
     inSourceMap,
     forceStringify,
     env: mode as DevEnv,

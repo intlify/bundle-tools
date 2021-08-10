@@ -356,6 +356,14 @@ module.exports = {
   }
   ```
 
+### `productionSourceMap`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether to generate source map.
+
+
 ## :scroll: Changelog
 
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/vue-i18n-loader/CHANGELOG.md).

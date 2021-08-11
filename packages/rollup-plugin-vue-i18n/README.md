@@ -7,14 +7,14 @@
 Rollup plugin for Vue I18n
 
 
-## :warning: Notice
+## ⚠️ Notice
 
 This package of `@intlify/bundle-tools` is for Vue I18n v9 or later!
 
 The version for Vue I18n v8.x is now in [`@intlify/rollup-plugin-vue-i18n`](https://github.com/intlify/rollup-plugin-vue-i18n/tree/master) repo!
 
 
-## :exclamation: Requirement
+## ❗ Requirement
 
 You need to install the follwoing:
 
@@ -23,12 +23,12 @@ You need to install the follwoing:
 If you use rollup-plugin-vue, We recommend you should read the [docs](https://rollup-plugin-vue.vuejs.org/)
 
 
-## :star: Features
+## 🌟 Features
 - i18n resources pre-compilation
 - i18n custom block
 
 
-## :cd: Installation
+## 💿 Installation
 
 ### npm
 
@@ -42,7 +42,7 @@ $ npm i --save-dev @intlify/rollup-plugin-vue-i18n@next
 $ yarn add -D @intlify/rollup-plugin-vue-i18n@next
 ```
 
-## :rocket: Usages
+## 🚀 Usages
 
 ### i18n resource pre-compilation
 
@@ -160,7 +160,7 @@ ja:
 </i18n>
 ```
 
-## :wrench: Options
+## 🔧 Options
 
 ### `include`
 
@@ -236,10 +236,10 @@ ja:
   ]
   ```
 
-## :scroll: Changelog
+## 📜 Changelog
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/rollup-plugin-vue-i18n/CHANGELOG.md)
 
 
-## :copyright: License
+## ©️ License
 
 [MIT](http://opensource.org/licenses/MIT)

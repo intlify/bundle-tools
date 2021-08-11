@@ -7,14 +7,14 @@
 
 Vite plugin for Vue I18n
 
-## :star: Features
+## 🌟 Features
 
 - i18n resources pre-compilation
 - i18n custom block
 - Static bundle importing
 - Bundling optimizations
 
-## :cd: Installation
+## 💿 Installation
 
 ### npm
 
@@ -28,13 +28,13 @@ $ npm i --save-dev @intlify/vite-plugin-vue-i18n
 $ yarn add -D @intlify/vite-plugin-vue-i18n
 ```
 
-## :warning: Notice
+## ⚠️ Notice
 
 When this plugin is installed, Vue I18n can only use the Composition API, and if you want to use the Legacy API, you need to set the `compositionOnly` option to `false`.
 
 Also, if you do a production build with vite, Vue I18n will automatically bundle the runtime only module. If you need on-demand compilation with Message compiler, you need to set the `runtimeOnly` option to `false`.
 
-## :rocket: Usage
+## 🚀 Usage
 
 ### i18n resources pre-compilation
 
@@ -199,7 +199,7 @@ If you want type definition of `@intlify/vite-plugin-vue-i18n/messages`, add `vi
 
 vite-plugin-vue-i18n allows you to support bundle size optimization provided by vue-i18n.
 
-## :balance_scale: Support for `petite-vue-ii8n` (Experimental)
+## ⚖️ Support for `petite-vue-ii8n` (Experimental)
 
 vite-plugin-vue-i18n plugin support for `petite-vue-i18n`.
 
@@ -207,7 +207,7 @@ vite-plugin-vue-i18n plugin provides several dedicated options for `petite-vue-i
 
 Note that it is as experimental as `Petite-vue-i18n`.
 
-## :package: Automatic bundling
+## 📦 Automatic bundling
 ### For Vue I18n
 As noted [here](https://vue-i18n.intlify.dev/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
 
@@ -225,7 +225,7 @@ vite-plugin-vue-i18n will automatically select and bundle `petite-vue-i18n` buil
 - vite dev: `petite-vue-i18n.esm-bundler.js`
 - vite build: `petite-vue-i18n.runtime.esm-bundler.js`
 
-## :wrench: Options
+## 🔧 Options
 
 You can specify options in the plugin option to support bundle size optimization provided by vue-i18n.
 
@@ -428,10 +428,10 @@ About details, See the below section
   This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
 
 
-## :scroll: Changelog
+## 📜 Changelog
 
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/vite-plugin-vue-i18n/CHANGELOG.md)
 
-## :copyright: License
+## ©️ License
 
 [MIT](http://opensource.org/licenses/MIT)

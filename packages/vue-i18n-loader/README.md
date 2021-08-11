@@ -12,14 +12,14 @@
 
 <br/>
 
-## :warning: Notice
+## ⚠️ Notice
 
-This package of `@intlify/bundle-tools` is for Vue I18n v9 or later!
+This package of `@intlify/bundle-tools` is for **Vue I18n v9 or later**!
 
-The version for Vue I18n v8.x is now in [`@intlify/vue-i18n-loader`](https://github.com/intlify/vue-i18n-loader/tree/master) repo!
+The version **for Vue I18n v8.x** is now in [`@intlify/vue-i18n-loader`](https://github.com/intlify/vue-i18n-loader/tree/master) **v1.x!**
 
 
-## :star: Features
+## 🌟 Features
 - i18n resource pre-compilation
 - i18n custom block
   - i18n resource definition
@@ -29,7 +29,7 @@ The version for Vue I18n v8.x is now in [`@intlify/vue-i18n-loader`](https://git
   - i18n resource formatting
 
 
-## :cd: Installation
+## 💿 Installation
 
 ### npm
 
@@ -37,13 +37,13 @@ The version for Vue I18n v8.x is now in [`@intlify/vue-i18n-loader`](https://git
 $ npm i --save-dev @intlify/vue-i18n-loader@next
 ```
 
-### yarm
+### yarn
 
 ```sh
 $ yarn add -D @intlify/vue-i18n-loader@next
 ```
 
-## :rocket: i18n resource pre-compilation
+## 🚀 i18n resource pre-compilation
 
 ### Why do we need to require the configuration?
 
@@ -118,7 +118,7 @@ module.exports = {
 The above uses webpack's `Rule.include` to specify the i18n resources to be precompiled. You can also use [`Rule.exclude`](https://webpack.js.org/configuration/module/#ruleexclude) to set the target.
 
 
-## :rocket: i18n custom block
+## 🚀 i18n custom block
 
 The below example that `App.vue` have i18n custom block:
 
@@ -299,7 +299,7 @@ module.exports = {
 ```
 
 
-## :wrench: Options
+## 🔧 Options
 
 ### `forceStringify`
 
@@ -364,10 +364,10 @@ module.exports = {
   Whether to generate source map.
 
 
-## :scroll: Changelog
+## 📜 Changelog
 
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/vue-i18n-loader/CHANGELOG.md).
 
-## :copyright: License
+## ©️ License
 
 [MIT](http://opensource.org/licenses/MIT)

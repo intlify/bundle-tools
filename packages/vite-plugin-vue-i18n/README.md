@@ -199,7 +199,7 @@ If you want type definition of `@intlify/vite-plugin-vue-i18n/messages`, add `vi
 
 vite-plugin-vue-i18n allows you to support bundle size optimization provided by vue-i18n.
 
-## ⚖️ Support for `petite-vue-ii8n` (Experimental)
+## ⚖️ Support for `petite-vue-i18n` (Experimental)
 
 vite-plugin-vue-i18n plugin support for `petite-vue-i18n`.
 

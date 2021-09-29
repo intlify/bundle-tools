@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@0.3.0 (2021-09-29)
+
+#### :star: Features
+* [#47](https://github.com/intlify/bundle-tools/pull/47) feat: support vue i18n bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@0.2.0 (2021-07-26)
 
 #### :star: Features

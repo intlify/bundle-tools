@@ -25,7 +25,7 @@ Object {
 
 exports[`bridge: code 1`] = `
 "module.exports = function (Component) {
-  Component.options.__i18n = Component.options.$__i18n || []
+  Component.options.__i18n = Component.options.__i18n || []
   Component.options.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {

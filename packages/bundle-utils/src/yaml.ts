@@ -94,7 +94,7 @@ function generateNode(
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
             generator.pushline(
-              `${componentNamespace}${variableName} = ${componentNamespace}$${variableName} || []`
+              `${componentNamespace}${variableName} = ${componentNamespace}${variableName} || []`
             )
             generator.push(`${componentNamespace}${variableName}.push({`)
             generator.indent()

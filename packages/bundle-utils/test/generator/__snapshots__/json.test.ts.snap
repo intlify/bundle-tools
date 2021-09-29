@@ -25,6 +25,139 @@ Object {
 }
 `;
 
+exports[`bridge: code 1`] = `
+"module.exports = function (Component) {
+  Component.options.__i18n = Component.options.$__i18n || []
+  Component.options.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
+      \\"nested\\": {
+        \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
+        \\"more\\": {
+          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+        },
+        \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
+      },
+      \\"こんにちは\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは！\\"])};fn.source=\\"こんにちは！\\";return fn;})(),
+      \\"single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"I don't know!\\"])};fn.source=\\"I don't know!\\";return fn;})(),
+      \\"emoji\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"😺\\"])};fn.source=\\"😺\\";return fn;})(),
+      \\"unicode\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"A\\"])};fn.source=\\"A\\";return fn;})(),
+      \\"unicode-escape\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\u0041\\"])};fn.source=\\"\\\\\\\\u0041\\";return fn;})(),
+      \\"backslash-single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\'\\"])};fn.source=\\"\\\\\\\\'\\";return fn;})(),
+      \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
+      \\"errors\\": [
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})()
+      ],
+      \\"complex\\": {
+        \\"warnings\\": [
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"NOTE: This is warning\\"])};fn.source=\\"NOTE: This is warning\\";return fn;})(),
+          {
+            \\"named-waring\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"this is \\", _interpolate(_named(\\"type\\")), \\" warining\\"])};fn.source=\\"this is {type} warining\\";return fn;})()
+          }
+        ]
+      }
+    }
+  })
+  Component.options.__i18nBridge = Component.options.__i18nBridge || []
+  Component.options.__i18nBridge.push('{
+  \\"hi\\": \\"hi there!\\",
+  \\"nested\\": {
+    \\"hello\\": \\"hello world!\\",
+    \\"more\\": {
+      \\"plural\\": \\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"
+    },
+    \\"list\\": \\"hi, {0} !\\"
+  },
+  \\"こんにちは\\": \\"こんにちは！\\",
+  \\"single-quote\\": \\"I don\\\\u0027t know!\\",
+  \\"emoji\\": \\"😺\\",
+  \\"unicode\\": \\"\\\\\\\\u0041\\",
+  \\"unicode-escape\\": \\"\\\\\\\\\\\\\\\\u0041\\",
+  \\"backslash-single-quote\\": \\"\\\\\\\\\\\\\\\\\\\\u0027\\",
+  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",
+  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
+  \\"complex\\": {
+    \\"warnings\\": [
+      \\"NOTE: This is warning\\",
+      {
+        \\"named-waring\\": \\"this is {type} warining\\"
+      }
+    ]
+  }
+}
+')
+  delete Component.options._Ctor
+  
+}
+"
+`;
+
+exports[`bridge: map 1`] = `
+Object {
+  "mappings": ";0EACOA;;+EAEKC;;4LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;6EAEDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
+  "names": Array [
+    "hi there!",
+    "hello world!",
+    "no apples",
+    "caml",
+    "0",
+    " apple",
+    "n",
+    " apples",
+    "hi, ",
+    " !",
+    "こんにちは！",
+    "I don't know!",
+    "😺",
+    "A",
+    "\\\\u0041",
+    "\\\\'",
+    "\\\\\\\\",
+    "ERROR1001",
+    "ERROR1002",
+    "NOTE: This is warning",
+    "this is ",
+    "type",
+    " warining",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"hi\\": \\"hi there!\\",
+  \\"nested\\": {
+    \\"hello\\": \\"hello world!\\",
+    \\"more\\": {
+      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    },
+    \\"list\\": \\"hi, {0} !\\"
+  },
+  \\"こんにちは\\": \\"こんにちは！\\",
+  \\"single-quote\\": \\"I don't know!\\",
+  \\"emoji\\": \\"😺\\",
+  \\"unicode\\": \\"\\\\u0041\\",
+  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
+  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
+  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
+  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
+  \\"complex\\": {
+    \\"warnings\\": [
+      \\"NOTE: This is warning\\",
+      {
+        \\"named-waring\\": \\"this is {type} warining\\"
+      }
+    ]
+  }
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
 exports[`complex: code 1`] = `
 "export default {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),

@@ -39,6 +39,7 @@ export interface SourceLocationable {
  */
 export interface CodeGenOptions {
   type?: 'plain' | 'sfc' | 'bare'
+  bridge?: boolean
   source?: string
   sourceMap?: boolean
   filename?: string

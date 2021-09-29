@@ -21,6 +21,7 @@ export function generate(
   targetSource: string | Buffer,
   {
     type = 'plain',
+    bridge = false,
     filename = 'vue-i18n-loader.yaml',
     inSourceMap = undefined,
     locale = '',
@@ -28,7 +29,8 @@ export function generate(
     sourceMap = false,
     env = 'development',
     forceStringify = false
-  }: CodeGenOptions
+  }: CodeGenOptions,
+  injector?: () => string
 ): CodeGenResult<YAMLProgram> {
   const value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
@@ -36,6 +38,7 @@ export function generate(
 
   const options = {
     type,
+    bridge,
     source: value,
     sourceMap,
     locale,
@@ -48,7 +51,7 @@ export function generate(
   const generator = createCodeGenerator(options)
 
   const ast = parseYAML(value, { filePath: filename })
-  const codeMaps = generateNode(generator, ast, options)
+  const codeMaps = generateNode(generator, ast, options, injector)
 
   const { code, map } = generator.context()
   // prettier-ignore
@@ -65,13 +68,16 @@ export function generate(
 function generateNode(
   generator: CodeGenerator,
   node: YAMLProgram,
-  options: CodeGenOptions
+  options: CodeGenOptions,
+  injector?: () => string
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
   const itemsCountStack = [] as number[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
-  const { type, sourceMap, isGlobal, locale } = options
+  const { type, bridge, sourceMap, isGlobal, locale } = options
+
+  const componentNamespace = bridge ? `Component.options.` : `Component.`
 
   traverseNodes(node, {
     enterNode(node: YAMLNode, parent: YAMLNode) {
@@ -84,12 +90,13 @@ function generateNode(
               type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
             const localeName =
               type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            generator.push(`export default function (Component) {`)
+            const exportSyntax = bridge ? `module.exports =` : `export default`
+            generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
             generator.pushline(
-              `Component.${variableName} = Component.${variableName} || []`
+              `${componentNamespace}${variableName} = ${componentNamespace}${variableName} || []`
             )
-            generator.push(`Component.${variableName}.push({`)
+            generator.push(`${componentNamespace}${variableName}.push({`)
             generator.indent()
             generator.pushline(`"locale": ${JSON.stringify(localeName)},`)
             generator.push(`"resource": `)
@@ -185,6 +192,16 @@ function generateNode(
           if (type === 'sfc') {
             generator.deindent()
             generator.push(`})`)
+            if (bridge && injector) {
+              generator.newline()
+              generator.pushline(
+                `${componentNamespace}__i18nBridge = ${componentNamespace}__i18nBridge || []`
+              )
+              generator.pushline(
+                `${componentNamespace}__i18nBridge.push('${injector()}')`
+              )
+              generator.pushline(`delete ${componentNamespace}_Ctor`)
+            }
             generator.deindent()
             generator.push(`}`)
           }

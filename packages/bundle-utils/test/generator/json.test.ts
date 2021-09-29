@@ -57,3 +57,26 @@ test('bare', async () => {
   expect(code).toMatchSnapshot('code')
   expect(map).toMatchSnapshot('map')
 })
+
+test('bridge', async () => {
+  const { source } = await readFile('./fixtures/codegen/complex.json')
+  const { code, map } = generate(
+    source,
+    {
+      type: 'sfc',
+      bridge: true,
+      sourceMap: true,
+      env: 'development'
+    },
+    () => {
+      return source
+        .replace(/\u2028/g, '\\u2028')
+        .replace(/\u2029/g, '\\u2029')
+        .replace(/\\/g, '\\\\')
+        .replace(/\u0027/g, '\\u0027')
+    }
+  )
+
+  expect(code).toMatchSnapshot('code')
+  expect(map).toMatchSnapshot('map')
+})

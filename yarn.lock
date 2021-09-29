@@ -1474,6 +1474,11 @@
     jest-diff "^27.0.0"
     pretty-format "^27.0.0"
 
+"@types/js-yaml@^4.0.3":
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-4.0.3.tgz#9f33cd6fbf0d5ec575dc8c8fc69c7fec1b4eb200"
+  integrity sha512-5t9BhoORasuF5uCPr+d5/hdB++zRFUTMIZOzbNkr+jZh3yQht4HYbRDyj9fY8n2TZT30iW9huzav73x4NikqWg==
+
 "@types/jsdom@^16.2.5":
   version "16.2.13"
   resolved "https://registry.yarnpkg.com/@types/jsdom/-/jsdom-16.2.13.tgz#126c8b7441b159d6234610a48de77b6066f1823f"
@@ -1487,6 +1492,13 @@
   version "7.0.8"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.8.tgz#edf1bf1dbf4e04413ca8e5b17b3b7d7d54b59818"
   integrity sha512-YSBPTLTVm2e2OoQIDYx8HaeWJ5tTToLH67kXR7zYNGupXMEHa2++G8k+DczX2cFVgalypqtyZIcU19AFcmOpmg==
+
+"@types/json5@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@types/json5/-/json5-2.2.0.tgz#afff29abf9182a7d4a7e39105ca051f11c603d13"
+  integrity sha512-NrVug5woqbvNZ0WX+Gv4R+L4TGddtmFek2u8RtccAgFZWtS9QXF2xCXY22/M4nzkaKF0q9Fc6M/5rxLDhfwc/A==
+  dependencies:
+    json5 "*"
 
 "@types/loader-utils@^2.0.0":
   version "2.0.3"
@@ -2362,6 +2374,11 @@ argparse@^1.0.7:
   integrity sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==
   dependencies:
     sprintf-js "~1.0.2"
+
+argparse@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/argparse/-/argparse-2.0.1.tgz#246f50f3ca78a3240f6c997e8a9bd1eac49e4b38"
+  integrity sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==
 
 arr-diff@^4.0.0:
   version "4.0.0"
@@ -6312,6 +6329,13 @@ js-yaml@^3.12.0, js-yaml@^3.13.1, js-yaml@^3.14.1:
     argparse "^1.0.7"
     esprima "^4.0.0"
 
+js-yaml@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-4.1.0.tgz#c1fb65f8f5017901cdd2c951864ba18458a10602"
+  integrity sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==
+  dependencies:
+    argparse "^2.0.1"
+
 jsdom@^16.4.0:
   version "16.6.0"
   resolved "https://registry.yarnpkg.com/jsdom/-/jsdom-16.6.0.tgz#f79b3786682065492a3da6a60a4695da983805ac"
@@ -6420,7 +6444,7 @@ json3@^3.3.3:
   resolved "https://registry.yarnpkg.com/json3/-/json3-3.3.3.tgz#7fc10e375fc5ae42c4705a5cc0aa6f62be305b81"
   integrity sha512-c7/8mbUsKigAbLkD5B010BK4D9LZm7A1pNItkEwiUZRpIN66exu/e7YQWysGun+TRKaJp8MhemM+VkfWv42aCA==
 
-json5@2.x, json5@^2.1.1, json5@^2.1.2:
+json5@*, json5@2.x, json5@^2.1.1, json5@^2.1.2, json5@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/json5/-/json5-2.2.0.tgz#2dfefe720c6ba525d9ebd909950f0515316c89a3"
   integrity sha512-f+8cldu7X/y7RAJurMEJmdoKXGB/X550w2Nr3tTbezL6RwEE/iMcm+tZnXeoZtKuOq6ft8+CqzEkrIgx1fPoQA==

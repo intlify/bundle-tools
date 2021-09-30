@@ -1,10 +1,12 @@
 ;(async () => {
-  try {
-    await import('vue-i18n')
-  } catch (e) {
-    throw new Error(
-      '@intlify/vue-i18n-loader requires vue-i18n to be present in the dependency tree.'
-    )
+  if (process.env.NODE_ENV !== 'test') {
+    try {
+      await import('vue-i18n')
+    } catch (e) {
+      throw new Error(
+        '@intlify/vue-i18n-loader requires vue-i18n to be present in the dependency tree.'
+      )
+    }
   }
 })()
 

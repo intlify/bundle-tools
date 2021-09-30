@@ -4,6 +4,14 @@ import vue from '@vitejs/plugin-vue'
 import vueI18n from '../src/index'
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      vue: path.resolve(
+        __dirname,
+        '../../../node_modules/vue3/dist/vue.esm-bundler.js'
+      )
+    }
+  },
   build: {
     rollupOptions: {
       input: {

@@ -5,6 +5,7 @@ import { parse, ParsedUrlQuery } from 'querystring'
 import { RawSourceMap } from 'source-map'
 import { isEmptyObject, isString } from '@intlify/shared'
 import { generateJSON, generateYAML } from '@intlify/bundle-utils'
+import { createBridgeCodeGenerator } from './legacy'
 
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type { VueI18nLoaderOptions } from './options'
@@ -14,6 +15,9 @@ const loader: webpack.loader.Loader = function (
   sourceMap: RawSourceMap | undefined
 ): void {
   const loaderContext = this // eslint-disable-line @typescript-eslint/no-this-alias
+  const loaderOptions = loaderUtils.getOptions(loaderContext) || {}
+  const { bridge } = loaderOptions as VueI18nLoaderOptions
+
   const query = parse(loaderContext.resourceQuery)
   const options = getOptions(loaderContext, query, sourceMap) as CodeGenOptions
   // console.log('query', this.resourcePath, this.resourceQuery, query, source)
@@ -36,7 +40,11 @@ const loader: webpack.loader.Loader = function (
     //   })
     // }
     const generate = /json5?/.test(langInfo) ? generateJSON : generateYAML
-    const { code, map } = generate(source, options)
+    const { code, map } = generate(
+      source,
+      options,
+      bridge ? createBridgeCodeGenerator(source, query) : undefined
+    )
     // console.log('code', code)
     this.callback(null, code, map)
   } catch (err) {
@@ -51,11 +59,12 @@ function getOptions(
 ): Record<string, unknown> {
   const loaderOptions = loaderUtils.getOptions(loaderContext) || {}
   const { resourcePath: filename, mode } = loaderContext
-  const { forceStringify, productionSourceMap } =
+  const { forceStringify, productionSourceMap, bridge } =
     loaderOptions as VueI18nLoaderOptions
 
   const baseOptions = {
     filename,
+    bridge,
     sourceMap: productionSourceMap || false,
     inSourceMap,
     forceStringify,

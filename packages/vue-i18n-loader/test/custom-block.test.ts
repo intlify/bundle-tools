@@ -1,5 +1,7 @@
-import { bundleAndRun } from './utils'
+import { bundleAndRun, bundle } from './utils'
 import { createMessageContext } from '@intlify/runtime'
+import { VueLoaderPlugin } from 'vue-loader15'
+import path from 'path'
 
 test('basic', async () => {
   const { module } = await bundleAndRun('basic.vue')
@@ -114,4 +116,27 @@ test('global and local', async () => {
   const g = module.__i18nGlobal.pop()
   expect(g.locale).toEqual('')
   expect(g.resource.en.hello(createMessageContext())).toEqual('hello global!')
+})
+
+test('bridge', async () => {
+  const { module } = await bundleAndRun(
+    'compile.vue',
+    bundle,
+    { bridge: true },
+    {
+      Plugin: VueLoaderPlugin,
+      loader: path.resolve(
+        __dirname,
+        '../../../node_modules/vue-loader15/lib/index.js'
+      )
+    }
+  )
+  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18nBridge).toMatchSnapshot()
+  const l = module.__i18n.pop()
+  expect(l.locale).toEqual('')
+  expect(l.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const g = module.__i18nBridge.pop()
+  const bridgeResource = JSON.parse(g)
+  expect(bridgeResource.en.hello).toEqual('hello world!')
 })

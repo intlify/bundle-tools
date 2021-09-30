@@ -1,6 +1,7 @@
 import VuePlugin from 'rollup-plugin-vue'
 import replace from '@rollup/plugin-replace'
 import resolve from '@rollup/plugin-node-resolve'
+import alias from '@rollup/plugin-alias'
 import commonjs from '@rollup/plugin-commonjs'
 import path from 'path'
 
@@ -19,6 +20,14 @@ export default [
     plugins: [
       replace({
         'process.env.NODE_ENV': JSON.stringify('production')
+      }),
+      alias({
+        entries: {
+          vue: path.resolve(
+            __dirname,
+            '../../../node_modules/vue3/dist/vue.esm-bundler.js'
+          )
+        }
       }),
       VuePlugin({ customBlocks: ['i18n'] }),
       // set `rollup-plugin-vue-i18n` after **`rollup-plugin-vue`**

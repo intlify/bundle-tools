@@ -24,7 +24,14 @@ type BundleResolveResolve = BundleResolve & {
 
 export function bundle(
   fixture: string,
-  options: Record<string, any> = {}
+  options: Record<string, any> = {},
+  vueloader: {
+    Plugin: any
+    loader: string
+  } = {
+    Plugin: VueLoaderPlugin,
+    loader: 'vue-loader'
+  }
 ): Promise<BundleResolve> {
   const baseConfig: webpack.Configuration = {
     mode: 'development',
@@ -43,7 +50,7 @@ export function bundle(
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: vueloader.loader
         },
         {
           resourceQuery: /blockType=i18n/,
@@ -57,7 +64,7 @@ export function bundle(
         }
       ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [new vueloader.Plugin()]
   }
 
   // @ts-ignore
@@ -83,7 +90,14 @@ export function bundle(
 
 export function bundleEx(
   fixture: string,
-  options: Record<string, any> = {}
+  options: Record<string, any> = {},
+  vueloader: {
+    Plugin: any
+    loader: string
+  } = {
+    Plugin: VueLoaderPlugin,
+    loader: 'vue-loader'
+  }
 ): Promise<BundleResolve> {
   const baseConfig: webpack.Configuration = {
     mode: 'development',
@@ -102,7 +116,7 @@ export function bundleEx(
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: vueloader.loader
         },
         {
           test: /\.(json5?|ya?ml)$/,
@@ -127,7 +141,7 @@ export function bundleEx(
         }
       ]
     },
-    plugins: [new VueLoaderPlugin(), new IntlifyVuePlugin(options.intlify)]
+    plugins: [new vueloader.Plugin(), new IntlifyVuePlugin(options.intlify)]
   }
 
   // @ts-ignore
@@ -153,7 +167,14 @@ export function bundleEx(
 
 export function bundleLocale(
   fixture: string,
-  options: Record<string, any> = {}
+  options: Record<string, any> = {},
+  vueloader: {
+    Plugin: any
+    loader: string
+  } = {
+    Plugin: VueLoaderPlugin,
+    loader: 'vue-loader'
+  }
 ): Promise<BundleResolve> {
   const baseConfig: webpack.Configuration = {
     mode: 'development',
@@ -172,7 +193,7 @@ export function bundleLocale(
       rules: [
         {
           test: /\.vue$/,
-          loader: 'vue-loader'
+          loader: vueloader.loader
         },
         {
           test: /\.(json5?|ya?ml)$/,
@@ -187,7 +208,7 @@ export function bundleLocale(
         }
       ]
     },
-    plugins: [new VueLoaderPlugin()]
+    plugins: [new vueloader.Plugin()]
   }
 
   // @ts-ignore
@@ -214,9 +235,16 @@ export function bundleLocale(
 export async function bundleAndRun(
   fixture: string,
   bundleFn = bundle,
-  config = {}
+  config = {},
+  vueloader: {
+    Plugin: any
+    loader: string
+  } = {
+    Plugin: VueLoaderPlugin,
+    loader: 'vue-loader'
+  }
 ): Promise<BundleResolveResolve> {
-  const { code, stats } = await bundleFn(fixture, config)
+  const { code, stats } = await bundleFn(fixture, config, vueloader)
   // console.log('code', code)
 
   let dom: JSDOM | null = null

@@ -1,4 +1,6 @@
 
+
+
 ## @intlify/vue-i18n-loader@3.0.0 (2021-08-10)
 
 #### :star: Features

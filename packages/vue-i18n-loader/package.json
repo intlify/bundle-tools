@@ -10,11 +10,12 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
-    "@intlify/bundle-utils": "^0.1.0",
-    "@intlify/shared": "^9.1.6",
-    "loader-utils": "^2.0.0"
+    "@intlify/bundle-utils": "^0.3.0",
+    "@intlify/shared": "^9.1.7",
+    "loader-utils": "^2.0.0",
+    "js-yaml": "^4.1.0",
+    "json5": "^2.2.0"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">= 12"
   },
@@ -31,7 +32,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "peerDependencies": {
-    "vue": "^3.0.0"
+    "vue": "^3.0.0 || ^2.6.0"
   },
   "repository": {
     "type": "git",

@@ -27,6 +27,7 @@ The version **for Vue I18n v8.x** is now in [`@intlify/vue-i18n-loader`](https:/
   - Locale of i18n resource definition
   - Locale of i18n resource definition for global scope
   - i18n resource formatting
+- i18n custom block birdge mode
 
 
 ## 💿 Installation
@@ -297,7 +298,13 @@ module.exports = {
   }
 }
 ```
+## i18n custom block bridge mode
 
+To support in a smooth transition from vue-i18n@v8.x to vue-i18n@v9.x, we provide a mode that bundles the i18n custom block to be available in either version.
+
+This is for use when using vue-i18n@v8.x + [vue-i18n-bridge](https://github.com/intlify/vue-i18n-next/tree/master/packages/vue-i18n-bridge).
+
+About details, See here.
 
 ## 🔧 Options
 
@@ -363,6 +370,17 @@ module.exports = {
 
   Whether to generate source map.
 
+
+### `bridge`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  The mode to birdge the i18n custom block to work in both vue-i18n@v8.x and vue-i18n@v9.x environments.
+
+  To support in a smooth transition from vue-i18n@v8.x to vue-i18n@v9.x, we provide a mode that bundles the i18n custom block to be available in either version.
+
+  > ⚠️ Note that if you set `bridge: true`, the bundle size will increase. It is recommended to disable this mode after the migration from vue-i18n@v8.26 to vue-i18n@v9.x is completed.
 
 ## 📜 Changelog
 

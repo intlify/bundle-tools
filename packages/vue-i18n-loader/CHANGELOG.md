@@ -1,4 +1,13 @@
 
+## @intlify/vue-i18n-loader@3.2.0 (2021-09-30)
+
+#### :star: Features
+* [#49](https://github.com/intlify/bundle-tools/pull/49) feat: bridge mode for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 
 
 ## @intlify/vue-i18n-loader@3.0.0 (2021-08-10)

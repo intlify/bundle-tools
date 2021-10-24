@@ -10,9 +10,8 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
-    "@intlify/core": "^9.1.9",
-    "@intlify/message-compiler": "^9.1.9",
-    "@intlify/shared": "^9.1.9",
+    "@intlify/message-compiler": "beta",
+    "@intlify/shared": "beta",
     "jsonc-eslint-parser": "^1.0.1",
     "source-map": "^0.6.1",
     "yaml-eslint-parser": "^0.3.2"

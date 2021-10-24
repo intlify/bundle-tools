@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@1.0.0 (2021-10-24)
+
+#### :star: Features
+* [#56](https://github.com/intlify/bundle-tools/pull/56) feat: bump to major version ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@0.3.0 (2021-09-29)
 
 #### :star: Features

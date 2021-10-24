@@ -1,7 +1,7 @@
 {
   "name": "@intlify/bundle-utils",
   "description": "Bundle utilities for Intlify project",
-  "version": "0.3.0",
+  "version": "1.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -10,9 +10,9 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
-    "@intlify/core": "^9.1.6",
-    "@intlify/message-compiler": "^9.1.6",
-    "@intlify/shared": "^9.1.6",
+    "@intlify/core": "^9.1.9",
+    "@intlify/message-compiler": "^9.1.9",
+    "@intlify/shared": "^9.1.9",
     "jsonc-eslint-parser": "^1.0.1",
     "source-map": "^0.6.1",
     "yaml-eslint-parser": "^0.3.2"

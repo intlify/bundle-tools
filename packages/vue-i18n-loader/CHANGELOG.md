@@ -1,4 +1,13 @@
 
+## @intlify/vue-i18n-loader@3.3.0 (2021-10-24)
+
+#### :zap: Improvement Features
+* [#58](https://github.com/intlify/bundle-tools/pull/58) improvement: bump deps version ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vue-i18n-loader@3.2.0 (2021-09-30)
 
 #### :star: Features

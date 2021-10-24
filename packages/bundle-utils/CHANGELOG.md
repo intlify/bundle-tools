@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@2.0.0 (2021-10-24)
+
+#### :star: Features
+* [#60](https://github.com/intlify/bundle-tools/pull/60) feat: change to intlify beta related deps ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@1.0.0 (2021-10-24)
 
 #### :star: Features

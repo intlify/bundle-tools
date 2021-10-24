@@ -1,5 +1,5 @@
 import { bundleAndRun, bundle } from './utils'
-import { createMessageContext } from '@intlify/runtime'
+import { createMessageContext } from '@intlify/core-base'
 import { VueLoaderPlugin } from 'vue-loader15'
 import path from 'path'
 

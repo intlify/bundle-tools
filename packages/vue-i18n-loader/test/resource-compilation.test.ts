@@ -1,5 +1,5 @@
 import { bundleAndRun, bundleLocale } from './utils'
-import { createMessageContext } from '@intlify/runtime'
+import { createMessageContext } from '@intlify/core-base'
 
 test('json resource', async () => {
   const { module } = await bundleAndRun('ja.json', bundleLocale)

@@ -1,6 +1,6 @@
 import path from 'path'
 import { bundleAndRun } from './utils'
-import { createMessageContext } from '@intlify/runtime'
+import { createMessageContext } from '@intlify/core-base'
 
 const options = {
   input: './fixtures/bundle.ts',

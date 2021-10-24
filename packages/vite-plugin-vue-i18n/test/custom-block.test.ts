@@ -1,5 +1,5 @@
 import { bundleAndRun } from './utils'
-import { createMessageContext } from '@intlify/runtime'
+import { createMessageContext } from '@intlify/core-base'
 
 test('basic', async () => {
   const { module } = await bundleAndRun('basic.vue')

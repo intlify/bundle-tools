@@ -11,8 +11,8 @@
   },
   "dependencies": {
     "debug": "^4.3.1",
-    "@intlify/bundle-utils": "^1.0.0",
-    "@intlify/shared": "^9.1.9",
+    "@intlify/bundle-utils": "next",
+    "@intlify/shared": "beta",
     "@rollup/pluginutils": "^4.1.0"
   },
   "devDependencies": {},

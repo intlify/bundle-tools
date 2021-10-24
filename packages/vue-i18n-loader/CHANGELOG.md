@@ -1,4 +1,13 @@
 
+## @intlify/vue-i18n-loader@4.0.0 (2021-10-24)
+
+#### :star: Features
+* [#61](https://github.com/intlify/bundle-tools/pull/61) feat: change to intlify or vue-i18n beta related deps version ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vue-i18n-loader@3.3.0 (2021-10-24)
 
 #### :zap: Improvement Features

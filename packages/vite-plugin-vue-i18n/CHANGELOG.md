@@ -1,4 +1,33 @@
 
+## @intlify/vite-plugin-vue-i18n@2.5.0 (2021-10-24)
+
+#### :zap: Improvement Features
+* [#57](https://github.com/intlify/bundle-tools/pull/57) improvement: drop peerDependencies & bump deps ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/vite-plugin-vue-i18n@2.5.0 (2021-09-30)
+
+#### :star: Features
+* [#49](https://github.com/intlify/bundle-tools/pull/49) feat: bridge mode for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/vite-plugin-vue-i18n@2.5.0 (2021-09-20)
+
+#### :pencil: Documentation
+* [#45](https://github.com/intlify/bundle-tools/pull/45) docs(README): fix typo in the README of vite-plugin-vue-i18n ([@nickxlao919](https://github.com/nickxlao919))
+* [#42](https://github.com/intlify/bundle-tools/pull/42) chore: typo ([@agoni1212](https://github.com/agoni1212))
+
+#### Committers: 2
+- Nick Ao ([@nickxlao919](https://github.com/nickxlao919))
+- [@agoni1212](https://github.com/agoni1212)
+
+
 ## @intlify/vite-plugin-vue-i18n@2.4.0 (2021-07-26)
 
 #### :star: Features

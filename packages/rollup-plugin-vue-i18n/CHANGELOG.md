@@ -1,4 +1,22 @@
 
+## @intlify/rollup-plugin-vue-i18n@2.1.0 (2021-10-24)
+
+#### :zap: Improvement Features
+* [#59](https://github.com/intlify/bundle-tools/pull/59) improvement: bump deps version ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/rollup-plugin-vue-i18n@2.1.0 (2021-09-30)
+
+#### :star: Features
+* [#49](https://github.com/intlify/bundle-tools/pull/49) feat: bridge mode for vue-i18n-bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/rollup-plugin-vue-i18n@2.0.3 (2021-07-13)
 
 #### :zap: Improvement Features

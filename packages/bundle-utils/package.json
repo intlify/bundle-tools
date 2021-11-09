@@ -9,6 +9,18 @@
   "bugs": {
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
+  "peerDependencies": {
+    "vue-i18n": "^9.0.0",
+    "petite-vue-i18n": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-i18n": {
+      "optional": true
+    },
+    "petite-vue-i18n": {
+      "optional": true
+    }
+  },
   "dependencies": {
     "@intlify/message-compiler": "beta",
     "@intlify/shared": "beta",

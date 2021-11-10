@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@2.1.0 (2021-11-10)
+
+#### :zap: Improvement Features
+* [#67](https://github.com/intlify/bundle-tools/pull/67) fix: add vite and vue-i18n as peerDependencies ([@AlexandreBonaventure](https://github.com/AlexandreBonaventure))
+
+#### Committers: 1
+- Alexandre Bonaventure Geissmann ([@AlexandreBonaventure](https://github.com/AlexandreBonaventure))
+
+
 ## @intlify/bundle-utils@2.0.0 (2021-10-24)
 
 #### :star: Features

@@ -1,7 +1,7 @@
 {
   "name": "@intlify/bundle-utils",
   "description": "Bundle utilities for Intlify project",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -9,10 +9,7 @@
   "bugs": {
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
-  "peerDependencies": {
-    "vue-i18n": "^9.0.0",
-    "petite-vue-i18n": "^9.0.0"
-  },
+  "peerDependencies": {},
   "peerDependenciesMeta": {
     "vue-i18n": {
       "optional": true
@@ -38,7 +35,6 @@
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",
   "main": "lib/index.js",
-  "peerDependencies": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/bundle-tools.git",

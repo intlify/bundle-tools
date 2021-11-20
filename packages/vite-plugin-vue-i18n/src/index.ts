@@ -8,15 +8,15 @@ import {
   checkInstallPackage
 } from '@intlify/bundle-utils'
 import fg from 'fast-glob'
-import { debug as Debug } from 'debug'
-import { parseVueRequest } from './query'
+import createDebug from 'debug'
 import { normalizePath } from 'vite'
+import { parseVueRequest } from './query'
 
 import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type { VitePluginVueI18nOptions } from './options'
 
-const debug = Debug('vite-plugin-vue-i18n')
+const debug = createDebug('vite-plugin-vue-i18n:index')
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/vite-plugin-vue-i18n/messages'
 
@@ -56,9 +56,7 @@ function pluginI18n(
   const defaultSFCLang = isString(options.defaultSFCLang)
     ? options.defaultSFCLang
     : undefined
-  const globalSFCScope = isBoolean(options.globalSFCScope)
-    ? options.globalSFCScope
-    : false
+  const globalSFCScope = !!options.globalSFCScope
   const useVueI18nImportName = options.useVueI18nImportName
   if (useVueI18nImportName != null) {
     console.warn(
@@ -71,14 +69,15 @@ function pluginI18n(
     useVueI18nImportName
       ? 'vue-i18n'
       : `${installedPkg}`
-  let config: ResolvedConfig | null = null
+  const forceStringify = !!options.forceStringify
+  let isProduction = false
 
   return {
     name: 'vite-plugin-vue-i18n',
 
     config(config: UserConfig, { command }) {
       if (command === 'build' && runtimeOnly) {
-        normalizeConfigResolveAliias(config)
+        normalizeConfigResolveAlias(config)
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: getAliasName(),
@@ -99,7 +98,7 @@ function pluginI18n(
         installedPkg === 'petite-vue-i18n' &&
         useVueI18nImportName
       ) {
-        normalizeConfigResolveAliias(config)
+        normalizeConfigResolveAlias(config)
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: 'vue-i18n',
@@ -128,9 +127,8 @@ function pluginI18n(
       config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
     },
 
-    configResolved(_config: ResolvedConfig) {
-      // store config
-      config = _config
+    configResolved(config: ResolvedConfig) {
+      isProduction = config.isProduction
 
       // json transform handling
       const jsonPlugin = config.plugins.find(p => p.name === 'vite:json')
@@ -172,8 +170,8 @@ function pluginI18n(
         // TODO: source-map
         const code = await generateBundleResources(
           resourcePaths,
-          config != null ? config.isProduction : false,
-          options.forceStringify!
+          isProduction,
+          forceStringify
         )
         return Promise.resolve(code)
       }
@@ -195,27 +193,31 @@ function pluginI18n(
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query))
 
-      const parseOptions = getOptions(
-        filename,
-        config != null ? config.isProduction : false,
-        query as Record<string, unknown>,
-        options.forceStringify
-      ) as CodeGenOptions
-      debug('parseOptions', parseOptions)
-
       let langInfo = 'json'
       if (!query.vue) {
         if (/\.(json5?|ya?ml)$/.test(id) && filter(id)) {
           langInfo = path.parse(filename).ext
+
           // NOTE:
           // `.json` is handled default in vite, and it's transformed to JS object.
           let _source = code
           if (langInfo === '.json') {
             _source = await getRaw(id)
           }
+
           const generate = /\.?json5?/.test(langInfo)
             ? generateJSON
             : generateYAML
+
+          const parseOptions = getOptions(
+            filename,
+            isProduction,
+            query as Record<string, unknown>,
+            globalSFCScope,
+            forceStringify
+          ) as CodeGenOptions
+          debug('parseOptions', parseOptions)
+
           const { code: generatedCode } = generate(_source, parseOptions)
           debug('generated code', generatedCode)
           // TODO: error handling & sourcempa
@@ -226,25 +228,29 @@ function pluginI18n(
       } else {
         // for Vue SFC
         if (isCustomBlock(query as Record<string, unknown>)) {
-          if ('src' in query) {
-            if (isString(query.lang)) {
-              langInfo = query.lang === 'i18n' ? 'json' : query.lang
-            } else if (defaultSFCLang) {
-              langInfo = defaultSFCLang
-            }
-          } else {
-            if (isString(query.lang)) {
-              langInfo = query.lang
-            } else if (defaultSFCLang) {
-              langInfo = defaultSFCLang
-            }
+          if (isString(query.lang)) {
+            langInfo = query.src
+              ? query.lang === 'i18n'
+                ? 'json'
+                : query.lang
+              : query.lang
+          } else if (defaultSFCLang) {
+            langInfo = defaultSFCLang
           }
-          if (!parseOptions.isGlobal && globalSFCScope) {
-            parseOptions.isGlobal = true
-          }
+
           const generate = /\.?json5?/.test(langInfo)
             ? generateJSON
             : generateYAML
+
+          const parseOptions = getOptions(
+            filename,
+            isProduction,
+            query as Record<string, unknown>,
+            globalSFCScope,
+            forceStringify
+          ) as CodeGenOptions
+          debug('parseOptions', parseOptions)
+
           const { code: generatedCode } = generate(code, parseOptions)
           debug('generated code', generatedCode)
           // TODO: error handling & sourcempa
@@ -257,7 +263,7 @@ function pluginI18n(
   }
 }
 
-function normalizeConfigResolveAliias(config: UserConfig): void {
+function normalizeConfigResolveAlias(config: UserConfig): void {
   // NOTE: cannot resolve Optional Chaining in jest E2E ...
   if (config.resolve && config.resolve.alias) {
     return
@@ -289,6 +295,7 @@ function getOptions(
   filename: string,
   isProduction: boolean,
   query: Record<string, unknown>,
+  isGlobal = false,
   forceStringify = false
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -309,7 +316,7 @@ function getOptions(
     return Object.assign(baseOptions, {
       type: 'sfc',
       locale: isString(query.locale) ? query.locale : '',
-      isGlobal: query.global != null
+      isGlobal: isGlobal || query.global != null
     })
   } else {
     return Object.assign(baseOptions, {
@@ -322,11 +329,13 @@ function getOptions(
 async function generateBundleResources(
   resources: string[],
   isProduction: boolean,
-  forceStringify: boolean
+  forceStringify: boolean,
+  isGlobal = false
 ) {
   const codes = []
   for (const res of resources) {
     debug(`${res} bundle loading ...`)
+
     if (/\.(json5?|ya?ml)$/.test(res)) {
       const { ext, name } = path.parse(res)
       const source = await getRaw(res)
@@ -335,14 +344,17 @@ async function generateBundleResources(
         res,
         isProduction,
         {},
+        isGlobal,
         forceStringify
       ) as CodeGenOptions
       parseOptions.type = 'bare'
       const { code } = generate(source, parseOptions)
+
       debug('generated code', code)
       codes.push(`${JSON.stringify(name)}: ${code}`)
     }
   }
+
   return `export default {
   ${codes.join(`,\n`)}
 }`

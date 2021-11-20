@@ -1,10 +1,10 @@
-import { debug as Debug } from 'debug'
+import createDebug from 'debug'
 import MagicString from 'magic-string'
 import { isObject, isFunction, isRegExp, isString } from '@intlify/shared'
 
 import type { Plugin, ResolvedConfig } from 'vite'
 
-const debug = Debug('vite-plugin-vue-i18n:intlify-vue')
+const debug = createDebug('vite-plugin-vue-i18n:intlify-vue')
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type InjectionValues = Record<string, any>

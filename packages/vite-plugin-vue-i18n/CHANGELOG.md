@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@3.1.1 (2021-11-20)
+
+#### :zap: Improvement Features
+* [#68](https://github.com/intlify/bundle-tools/pull/68) refactor: tweak codes ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@3.1.0 (2021-11-10)
 
 #### :zap: Improvement Features

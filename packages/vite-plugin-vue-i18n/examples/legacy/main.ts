@@ -1,12 +1,16 @@
 import { createApp } from 'vue'
 import { createI18n } from 'vue-i18n'
 import App from './App.vue'
-import messages from '@intlify/vite-plugin-vue-i18n/messages'
+import en from './locales/en.yaml'
+import ja from './locales/ja.json'
 
 const i18n = createI18n({
   legacy: true,
   locale: 'ja',
-  messages
+  messages: {
+    en,
+    ja
+  }
 })
 
 const app = createApp(App)

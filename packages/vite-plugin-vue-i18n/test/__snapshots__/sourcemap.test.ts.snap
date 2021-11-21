@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`custom blocks json 1`] = `";;;;;;;;;;;;;;;;;;;;;;AAIE;SACO;;;"`;
+
+exports[`custom blocks json5 1`] = `";;;;;;;;;;;;;;;;;;;;;;AAIE;SACO;;;"`;
+
+exports[`custom blocks yaml 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAIE;SACO;;;"`;
+
+exports[`custom blocks yml 1`] = `";;;;;;;;;;;;;;;;;;;;AAIE;SACO;;;"`;
+
+exports[`resource files json 1`] = `";;;2EACYA,gDAAAC;;;;;wBAEAC;;;;;;;;;;;;;;;;;;;;;;ACCV;SACO;;;"`;
+
+exports[`resource files json5 1`] = `";;;;;;;;;;;AAIE;SACO;;;"`;
+
+exports[`resource files yaml 1`] = `";;;;;;;;;;;AAIE;SACO;;;"`;

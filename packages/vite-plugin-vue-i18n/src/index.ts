@@ -10,6 +10,7 @@ import {
 import fg from 'fast-glob'
 import createDebug from 'debug'
 import { normalizePath } from 'vite'
+import { RawSourceMap } from 'source-map'
 import { parseVueRequest } from './query'
 
 import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
@@ -70,7 +71,9 @@ function pluginI18n(
       ? 'vue-i18n'
       : `${installedPkg}`
   const forceStringify = !!options.forceStringify
+
   let isProduction = false
+  let sourceMap = false
 
   return {
     name: 'vite-plugin-vue-i18n',
@@ -129,6 +132,7 @@ function pluginI18n(
 
     configResolved(config: ResolvedConfig) {
       isProduction = config.isProduction
+      sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
 
       // json transform handling
       const jsonPlugin = config.plugins.find(p => p.name === 'vite:json')
@@ -167,13 +171,15 @@ function pluginI18n(
         for (const inc of includePaths) {
           resourcePaths = [...(await fg(inc))]
         }
-        // TODO: source-map
         const code = await generateBundleResources(
           resourcePaths,
           isProduction,
           forceStringify
         )
-        return Promise.resolve(code)
+        return Promise.resolve({
+          code,
+          map: { mappings: '' }
+        })
       }
     },
 
@@ -194,16 +200,11 @@ function pluginI18n(
       debug('transform', id, JSON.stringify(query))
 
       let langInfo = 'json'
+      let inSourceMap: RawSourceMap | undefined
+
       if (!query.vue) {
         if (/\.(json5?|ya?ml)$/.test(id) && filter(id)) {
           langInfo = path.parse(filename).ext
-
-          // NOTE:
-          // `.json` is handled default in vite, and it's transformed to JS object.
-          let _source = code
-          if (langInfo === '.json') {
-            _source = await getRaw(id)
-          }
 
           const generate = /\.?json5?/.test(langInfo)
             ? generateJSON
@@ -213,17 +214,26 @@ function pluginI18n(
             filename,
             isProduction,
             query as Record<string, unknown>,
+            sourceMap,
+            inSourceMap,
             globalSFCScope,
             forceStringify
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
-          const { code: generatedCode } = generate(_source, parseOptions)
-          debug('generated code', generatedCode)
-          // TODO: error handling & sourcempa
-          return Promise.resolve(generatedCode)
+          const { code: generatedCode, map } = generate(code, parseOptions)
+          debug('generated code', generatedCode, id)
+          debug('sourcemap', map, id)
+
+          return Promise.resolve({
+            code: generatedCode,
+            map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+          })
         } else {
-          return Promise.resolve(code)
+          return Promise.resolve({
+            code,
+            map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
+          })
         }
       } else {
         // for Vue SFC
@@ -246,17 +256,26 @@ function pluginI18n(
             filename,
             isProduction,
             query as Record<string, unknown>,
+            sourceMap,
+            inSourceMap,
             globalSFCScope,
             forceStringify
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
-          const { code: generatedCode } = generate(code, parseOptions)
-          debug('generated code', generatedCode)
-          // TODO: error handling & sourcempa
-          return Promise.resolve(generatedCode)
+          const { code: generatedCode, map } = generate(code, parseOptions)
+          debug('generated code', generatedCode, id)
+          debug('sourcemap', map, id)
+
+          return Promise.resolve({
+            code: generatedCode,
+            map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+          })
         } else {
-          return Promise.resolve(code)
+          return Promise.resolve({
+            code,
+            map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
+          })
         }
       }
     }
@@ -295,6 +314,8 @@ function getOptions(
   filename: string,
   isProduction: boolean,
   query: Record<string, unknown>,
+  sourceMap: boolean,
+  inSourceMap: RawSourceMap | undefined,
   isGlobal = false,
   forceStringify = false
 ): Record<string, unknown> {
@@ -302,6 +323,8 @@ function getOptions(
 
   const baseOptions = {
     filename,
+    sourceMap,
+    inSourceMap,
     forceStringify,
     env: mode,
     onWarn: (msg: string): void => {
@@ -344,6 +367,8 @@ async function generateBundleResources(
         res,
         isProduction,
         {},
+        false,
+        undefined,
         isGlobal,
         forceStringify
       ) as CodeGenOptions

@@ -78,6 +78,13 @@ function pluginI18n(
   return {
     name: 'vite-plugin-vue-i18n',
 
+    /**
+     * NOTE:
+     * If we have json (including SFC's custom block),
+     * transform it first because it will be transformed into javascript code by `vite:json` plugin.
+     */
+    enforce: 'pre',
+
     config(config: UserConfig, { command }) {
       if (command === 'build' && runtimeOnly) {
         normalizeConfigResolveAlias(config)
@@ -142,6 +149,23 @@ function pluginI18n(
           if (!/\.json$/.test(id)) {
             return null
           }
+
+          /**
+           * NOTE:
+           * `vite:json` plugin will be handled if the query generated from the result of parse SFC
+           * with `vite:vue` plugin contains json as follows.
+           * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
+           *
+           * To avoid this, return the result that has already been processed (`enforce: 'pre'`) in the wrapped json plugin.
+           */
+          const { query } = parseVueRequest(id)
+          if (query.vue) {
+            return Promise.resolve({
+              code,
+              map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
+            })
+          }
+
           if (filter(id)) {
             const map = this.getCombinedSourcemap()
             debug('override json plugin', code, map)

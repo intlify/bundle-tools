@@ -13,6 +13,7 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
   const include = (options.include as string[]) || [
     path.resolve(__dirname, './fixtures/**')
   ]
+  const sourcemap = (options.sourcemap as boolean) || false
   const silent = isBoolean(options.silent)
     ? options.silent === false
       ? 'info'
@@ -46,6 +47,7 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
     },
     plugins,
     build: {
+      sourcemap,
       write: false,
       minify: false,
       rollupOptions: {
@@ -53,15 +55,19 @@ async function bundle(fixture: string, options: Record<string, unknown> = {}) {
       }
     }
   })
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  return { code: (result as any).output[0].code }
+  return {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    code: (result as any).output[0].code,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    map: (result as any).output[0].map
+  }
 }
 
 export async function bundleAndRun(
   fixture: string,
   options: Record<string, unknown> = {}
 ) {
-  const { code } = await bundle(fixture, options)
+  const { code, map } = await bundle(fixture, options)
 
   let dom: JSDOM | null = null
   let jsdomError
@@ -87,6 +93,8 @@ export async function bundleAndRun(
     window,
     module,
     exports,
+    code,
+    map,
     jsdomError
   })
 }

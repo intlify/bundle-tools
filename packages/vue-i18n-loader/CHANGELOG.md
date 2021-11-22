@@ -1,4 +1,13 @@
 
+## @intlify/vue-i18n-loader@4.0.1 (2021-11-22)
+
+#### :zap: Improvement Features
+* [#72](https://github.com/intlify/bundle-tools/pull/72) improvement: add peerDeps for vue-i18n-loader ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vue-i18n-loader@4.0.0 (2021-10-24)
 
 #### :star: Features

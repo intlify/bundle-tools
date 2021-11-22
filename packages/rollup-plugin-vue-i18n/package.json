@@ -1,7 +1,7 @@
 {
   "name": "@intlify/rollup-plugin-vue-i18n",
   "description": "Rollup plugin for Vue I18n",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"

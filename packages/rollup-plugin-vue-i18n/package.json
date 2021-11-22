@@ -15,7 +15,19 @@
     "@intlify/shared": "beta",
     "@rollup/pluginutils": "^4.1.0"
   },
-  "devDependencies": {},
+  "peerDependencies": {
+    "vue": "^3.0.0",
+    "vue-i18n": "^9.0.0",
+    "petite-vue-i18n": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-i18n": {
+      "optional": true
+    },
+    "petite-vue-i18n": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">= 12"
   },

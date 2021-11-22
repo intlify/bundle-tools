@@ -16,6 +16,19 @@
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0"
   },
+  "peerDependencies": {
+    "vue": "^3.0.0",
+    "vue-i18n": "^9.0.0",
+    "petite-vue-i18n": "^9.0.0"
+  },
+  "peerDependenciesMeta": {
+    "vue-i18n": {
+      "optional": true
+    },
+    "petite-vue-i18n": {
+      "optional": true
+    }
+  },
   "engines": {
     "node": ">= 12"
   },
@@ -31,9 +44,6 @@
   ],
   "license": "MIT",
   "main": "lib/index.js",
-  "peerDependencies": {
-    "vue": "^3.0.0 || ^2.6.0"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/bundle-tools.git",

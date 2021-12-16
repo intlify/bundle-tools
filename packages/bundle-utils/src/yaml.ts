@@ -81,10 +81,10 @@ function generateNode(
     options
 
   const componentNamespace = bridge
-    ? `Component.options.`
+    ? `Component.options`
     : useClassComponent
-    ? `Component.__o.`
-    : `Component.`
+    ? `Component.__o`
+    : `Component`
 
   traverseNodes(node, {
     enterNode(node: YAMLNode, parent: YAMLNode) {
@@ -101,9 +101,9 @@ function generateNode(
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
             generator.pushline(
-              `${componentNamespace}${variableName} = ${componentNamespace}${variableName} || []`
+              `${componentNamespace}.${variableName} = ${componentNamespace}.${variableName} || []`
             )
-            generator.push(`${componentNamespace}${variableName}.push({`)
+            generator.push(`${componentNamespace}.${variableName}.push({`)
             generator.indent()
             generator.pushline(`"locale": ${JSON.stringify(localeName)},`)
             generator.push(`"resource": `)
@@ -202,12 +202,12 @@ function generateNode(
             if (bridge && injector) {
               generator.newline()
               generator.pushline(
-                `${componentNamespace}__i18nBridge = ${componentNamespace}__i18nBridge || []`
+                `${componentNamespace}.__i18nBridge = ${componentNamespace}.__i18nBridge || []`
               )
               generator.pushline(
-                `${componentNamespace}__i18nBridge.push('${injector()}')`
+                `${componentNamespace}.__i18nBridge.push('${injector()}')`
               )
-              generator.pushline(`delete ${componentNamespace}_Ctor`)
+              generator.pushline(`delete ${componentNamespace}._Ctor`)
             }
             generator.deindent()
             generator.push(`}`)

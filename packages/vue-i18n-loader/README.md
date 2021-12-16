@@ -382,6 +382,13 @@ About details, See here.
 
   > ⚠️ Note that if you set `bridge: true`, the bundle size will increase. It is recommended to disable this mode after the migration from vue-i18n@v8.26 to vue-i18n@v9.x is completed.
 
+### `useClassComponent`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  This option that to use i18n custom blocks in `vue-class-component`.
+
 ## 📜 Changelog
 
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/vue-i18n-loader/CHANGELOG.md).

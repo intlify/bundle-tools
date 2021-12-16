@@ -48,6 +48,7 @@ export interface CodeGenOptions {
   locale?: string
   env?: DevEnv
   forceStringify?: boolean
+  useClassComponent?: boolean
   onWarn?: (msg: string) => void
   onError?: (msg: string) => void
 }

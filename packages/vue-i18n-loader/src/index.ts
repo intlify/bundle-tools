@@ -59,7 +59,7 @@ function getOptions(
 ): Record<string, unknown> {
   const loaderOptions = loaderUtils.getOptions(loaderContext) || {}
   const { resourcePath: filename, mode } = loaderContext
-  const { forceStringify, productionSourceMap, bridge } =
+  const { forceStringify, productionSourceMap, bridge, useClassComponent } =
     loaderOptions as VueI18nLoaderOptions
 
   const baseOptions = {
@@ -68,6 +68,7 @@ function getOptions(
     sourceMap: productionSourceMap || false,
     inSourceMap,
     forceStringify,
+    useClassComponent,
     env: mode as DevEnv,
     onWarn: (msg: string): void => {
       loaderContext.emitWarning(

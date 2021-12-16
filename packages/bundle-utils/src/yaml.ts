@@ -22,6 +22,7 @@ export function generate(
   {
     type = 'plain',
     bridge = false,
+    useClassComponent = false,
     filename = 'vue-i18n-loader.yaml',
     inSourceMap = undefined,
     locale = '',
@@ -46,7 +47,8 @@ export function generate(
     inSourceMap,
     env,
     filename,
-    forceStringify
+    forceStringify,
+    useClassComponent
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
@@ -75,9 +77,14 @@ function generateNode(
   const itemsCountStack = [] as number[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
-  const { type, bridge, sourceMap, isGlobal, locale } = options
+  const { type, bridge, sourceMap, isGlobal, locale, useClassComponent } =
+    options
 
-  const componentNamespace = bridge ? `Component.options.` : `Component.`
+  const componentNamespace = bridge
+    ? `Component.options.`
+    : useClassComponent
+    ? `Component.__o.`
+    : `Component.`
 
   traverseNodes(node, {
     enterNode(node: YAMLNode, parent: YAMLNode) {

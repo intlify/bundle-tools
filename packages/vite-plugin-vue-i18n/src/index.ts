@@ -195,7 +195,9 @@ function pluginI18n(
         for (const inc of includePaths) {
           resourcePaths = [...resourcePaths, ...(await fg(inc))]
         }
-        resourcePaths = resourcePaths.filter((el, pos) => resourcePaths.indexOf(el) === pos)
+        resourcePaths = resourcePaths.filter(
+          (el, pos) => resourcePaths.indexOf(el) === pos
+        )
         const code = await generateBundleResources(
           resourcePaths,
           isProduction,

@@ -193,8 +193,11 @@ function pluginI18n(
         let resourcePaths = [] as string[]
         const includePaths = isArray(include) ? include : [include]
         for (const inc of includePaths) {
-          resourcePaths = [...(await fg(inc))]
+          resourcePaths = [...resourcePaths, ...(await fg(inc))]
         }
+        resourcePaths = resourcePaths.filter(
+          (el, pos) => resourcePaths.indexOf(el) === pos
+        )
         const code = await generateBundleResources(
           resourcePaths,
           isProduction,

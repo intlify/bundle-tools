@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@3.2.2 (2022-02-06)
+
+#### :zap: Improvement Features
+* [#79](https://github.com/intlify/bundle-tools/pull/79) fix: use all globs from vue-i18n include array ([@zygzagZ](https://github.com/zygzagZ))
+
+#### Committers: 1
+- [@zygzagZ](https://github.com/zygzagZ)
+
+
 ## @intlify/vite-plugin-vue-i18n@3.2.1 (2021-11-22)
 
 #### :bug: Bug Fixes

@@ -32,6 +32,7 @@
     "node": ">= 12"
   },
   "files": [
+    "index.mjs",
     "lib"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/rollup-plugin-vue-i18n/README.md",
@@ -44,6 +45,15 @@
   ],
   "license": "MIT",
   "main": "lib/index.js",
+  "module": "./index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./lib/*": "./lib/*"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/bundle-tools.git",
@@ -66,6 +76,5 @@
     "watch": "tsc -p . --watch",
     "changelog": "esmo ../../scripts/changelog.ts",
     "release": "esmo ../../scripts/release.ts"
-  },
-  "types": "lib/index.d.ts"
+  }
 }

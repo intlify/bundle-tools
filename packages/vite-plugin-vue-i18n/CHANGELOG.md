@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@3.3.0 (2022-02-12)
+
+#### :star: Features
+* [#86](https://github.com/intlify/bundle-tools/pull/86) support node esm for vite-plugin ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@3.2.2 (2022-02-06)
 
 #### :zap: Improvement Features

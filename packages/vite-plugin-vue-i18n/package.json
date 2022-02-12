@@ -57,7 +57,9 @@
       "import": "./index.mjs",
       "require": "./lib/index.js"
     },
-    "./lib/*": "./lib/*"
+    "./lib/*": "./lib/*",
+    "./index.mjs": "./index.mjs",
+    "./package.json": "./package.json"
   },
   "repository": {
     "type": "git",

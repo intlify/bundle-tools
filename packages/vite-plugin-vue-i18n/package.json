@@ -36,6 +36,7 @@
   },
   "files": [
     "lib",
+    "index.mjs",
     "client.d.ts"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/vite-plugin-vue-i18n/README.md",
@@ -49,6 +50,17 @@
   ],
   "license": "MIT",
   "main": "lib/index.js",
+  "module": "./index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./index.mjs": "./index.mjs",
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/bundle-tools.git",
@@ -69,6 +81,5 @@
     "watch": "tsc -p . --watch",
     "changelog": "esmo ../../scripts/changelog.ts",
     "release": "esmo ../../scripts/release.ts"
-  },
-  "types": "lib/index.d.ts"
+  }
 }

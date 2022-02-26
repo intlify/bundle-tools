@@ -49,7 +49,7 @@ function pluginI18n(
       : true
     : true
   // prettier-ignore
-  const fullIinstall = installedPkg === 'vue-i18n'
+  const fullInstall = installedPkg === 'vue-i18n'
     ? isBoolean(options.fullInstall)
       ? options.fullInstall
       : true
@@ -129,7 +129,7 @@ function pluginI18n(
         `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
       )
 
-      config.define['__VUE_I18N_FULL_INSTALL__'] = fullIinstall
+      config.define['__VUE_I18N_FULL_INSTALL__'] = fullInstall
       debug(
         `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
       )
@@ -146,8 +146,8 @@ function pluginI18n(
       if (jsonPlugin) {
         const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
         jsonPlugin.transform = async function (code: string, id: string) {
-          if (!/\.json$/.test(id)) {
-            return null
+          if (!/\.json$/.test(id) || filter(id)) {
+            return
           }
 
           /**
@@ -160,23 +160,11 @@ function pluginI18n(
            */
           const { query } = parseVueRequest(id)
           if (query.vue) {
-            return Promise.resolve({
-              code,
-              map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
-            })
+            return
           }
 
-          if (filter(id)) {
-            const map = this.getCombinedSourcemap()
-            debug('override json plugin', code, map)
-            return Promise.resolve({
-              code,
-              map
-            })
-          } else {
-            debug('org json plugin')
-            return orgTransform!.apply(this, [code, id])
-          }
+          debug('org json plugin')
+          return orgTransform!.apply(this, [code, id])
         }
       }
     },
@@ -203,10 +191,10 @@ function pluginI18n(
           isProduction,
           forceStringify
         )
-        return Promise.resolve({
+        return {
           code,
           map: { mappings: '' }
-        })
+        }
       }
     },
 
@@ -252,15 +240,12 @@ function pluginI18n(
           debug('generated code', generatedCode, id)
           debug('sourcemap', map, id)
 
-          return Promise.resolve({
+          if (code === generatedCode) return
+
+          return {
             code: generatedCode,
             map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
-          })
-        } else {
-          return Promise.resolve({
-            code,
-            map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
-          })
+          }
         }
       } else {
         // for Vue SFC
@@ -294,15 +279,12 @@ function pluginI18n(
           debug('generated code', generatedCode, id)
           debug('sourcemap', map, id)
 
-          return Promise.resolve({
+          if (code === generatedCode) return
+
+          return {
             code: generatedCode,
             map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
-          })
-        } else {
-          return Promise.resolve({
-            code,
-            map: sourceMap ? this.getCombinedSourcemap() : { mappings: '' }
-          })
+          }
         }
       }
     }

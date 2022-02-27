@@ -8,7 +8,7 @@ exports[`custom blocks yaml 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,
 
 exports[`custom blocks yml 1`] = `";;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;SAC1B,SAASA;SACT,UAAU;AAAA;"`;
 
-exports[`resource files json 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;SAC1B,SAAS;SACT,UAAU;AAAA;"`;
+exports[`resource files json 1`] = `";;;2EACYA,gDAAAC;;;;;wBAEAC;;;;;;;;;;;;;;;;;;;;;;ACAZ,IAAI,OAAO,WAAW,aAAa;SAC1B,SAAS;SACT,UAAU;AAAA;"`;
 
 exports[`resource files json5 1`] = `";;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;SAC1B,SAAS;SACT,UAAU;AAAA;"`;
 

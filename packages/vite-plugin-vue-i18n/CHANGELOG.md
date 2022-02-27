@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@3.3.1 (2022-02-27)
+
+#### :zap: Improvement Features
+* [#92](https://github.com/intlify/bundle-tools/pull/92) perf(vite-plugin): skip transformation for unmodified code ([@antfu](https://github.com/antfu))
+
+#### Committers: 1
+- Anthony Fu ([@antfu](https://github.com/antfu))
+
+
 ## @intlify/vite-plugin-vue-i18n@3.3.0 (2022-02-12)
 
 #### :star: Features

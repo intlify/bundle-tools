@@ -247,10 +247,17 @@ function generateNode(
           }
           generator.deindent()
           generator.push(`]`)
+          if (parent.type === 'JSONArrayExpression') {
+            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              generator.pushline(`,`)
+            }
+          }
           break
         case 'JSONLiteral':
           if (parent.type === 'JSONArrayExpression') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              generator.pushline(`,`)
+            } else {
               generator.pushline(`,`)
             }
           }

@@ -105,3 +105,27 @@ test('useClassComponent', async () => {
   expect(code).not.toContain('Component.__i18n')
   expect(map).toMatchSnapshot('map')
 })
+
+test('array basic', async () => {
+  const { source } = await readFile('./fixtures/codegen/array-basic.json')
+  const { code, map } = generate(source, {
+    type: 'sfc',
+    sourceMap: true,
+    env: 'development'
+  })
+
+  expect(code).toMatchSnapshot('code')
+  expect(map).toMatchSnapshot('map')
+})
+
+test('array mixed', async () => {
+  const { source } = await readFile('./fixtures/codegen/array-mix.json')
+  const { code, map } = generate(source, {
+    type: 'sfc',
+    sourceMap: true,
+    env: 'development'
+  })
+
+  expect(code).toMatchSnapshot('code')
+  expect(map).toMatchSnapshot('map')
+})

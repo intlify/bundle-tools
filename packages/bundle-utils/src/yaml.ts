@@ -236,10 +236,17 @@ function generateNode(
           }
           generator.deindent()
           generator.push(`]`)
+          if (parent.type === 'YAMLSequence') {
+            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              generator.pushline(`,`)
+            }
+          }
           break
         case 'YAMLScalar':
           if (parent.type === 'YAMLSequence') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              generator.pushline(`,`)
+            } else {
               generator.pushline(`,`)
             }
           }

@@ -1,5 +1,128 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`array basic: code 1`] = `
+"export default function (Component) {
+  Component.__i18n = Component.__i18n || []
+  Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"foo\\": [
+        [
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})(),
+          
+        ],
+        [
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"baz\\"])};fn.source=\\"baz\\";return fn;})(),
+          
+        ],
+        
+      ]
+    }
+  })
+}
+"
+`;
+
+exports[`array basic: map 1`] = `
+Object {
+  "mappings": ";;;wEAGKA;;;wEAGAC",
+  "names": Array [
+    "bar",
+    "baz",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"foo\\": [
+    [
+      \\"bar\\"
+    ],
+    [ 
+      \\"baz\\"
+    ]
+  ]
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
+exports[`array mixed: code 1`] = `
+"export default function (Component) {
+  Component.__i18n = Component.__i18n || []
+  Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"foo\\": [
+        {
+          \\"foo\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"foo\\"])};fn.source=\\"foo\\";return fn;})()
+        },
+        [
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})(),
+          [
+            {
+              \\"foo\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"foo\\"])};fn.source=\\"foo\\";return fn;})()
+            },
+            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hoge\\"])};fn.source=\\"hoge\\";return fn;})(),
+            
+          ],
+          
+        ],
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"baz\\"])};fn.source=\\"baz\\";return fn;})(),
+        [
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"buz\\"])};fn.source=\\"buz\\";return fn;})(),
+          
+        ]
+      ]
+    }
+  })
+}
+"
+`;
+
+exports[`array mixed: map 1`] = `
+Object {
+  "mappings": ";;;+EAGYA;;;wEAGPC;;;mFAGWD;;0EAETE;;;sEAGJC;;wEAEEC",
+  "names": Array [
+    "foo",
+    "bar",
+    "hoge",
+    "baz",
+    "buz",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"foo\\": [
+    {
+      \\"foo\\": \\"foo\\"
+    },
+    [
+      \\"bar\\",
+      [
+        {
+          \\"foo\\": \\"foo\\"
+        },
+        \\"hoge\\"
+      ]
+    ],
+    \\"baz\\",
+    [
+      \\"buz\\"
+    ]
+  ]
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
 exports[`bare: code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})()
@@ -48,7 +171,8 @@ exports[`bridge: code 1`] = `
       \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
       \\"errors\\": [
         (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
-        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})()
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})(),
+        
       ],
       \\"complex\\": {
         \\"warnings\\": [
@@ -177,7 +301,8 @@ exports[`complex: code 1`] = `
   \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
   \\"errors\\": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
-    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})()
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})(),
+    
   ],
   \\"complex\\": {
     \\"warnings\\": [
@@ -377,7 +502,8 @@ exports[`useClassComponent: code 1`] = `
       \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
       \\"errors\\": [
         (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
-        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})()
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})(),
+        
       ],
       \\"complex\\": {
         \\"warnings\\": [

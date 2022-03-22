@@ -1,4 +1,22 @@
 
+## @intlify/bundle-utils@2.2.1 (2022-03-22)
+
+#### :bug: Bug Fixes
+* [#98](https://github.com/intlify/bundle-tools/pull/98) fix(bundle-utils): fix nested array code generation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@2.2.1 (2022-03-22)
+
+#### :bug: Bug Fixes
+* [#98](https://github.com/intlify/bundle-tools/pull/98) fix(bundle-utils): fix nested array code generation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@2.2.0 (2021-12-16)
 
 #### :zap: Improvement Features

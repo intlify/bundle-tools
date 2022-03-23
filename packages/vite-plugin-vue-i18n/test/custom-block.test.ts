@@ -136,3 +136,12 @@ test('global scope and import', async () => {
   const g = module.__i18nGlobal.pop()
   expect(g.resource.en.hello(createMessageContext())).toEqual('hello world!')
 })
+
+test('array', async () => {
+  const { module } = await bundleAndRun('array.vue')
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.locale).toEqual('')
+  expect(i18n.resource.en.foo[0][0](createMessageContext())).toEqual('bar')
+  expect(i18n.resource.en.foo[1](createMessageContext())).toEqual('baz')
+})

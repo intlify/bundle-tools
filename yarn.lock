@@ -541,9 +541,9 @@
   integrity sha512-wdppn25U8z/2yiaT6YGquE6X8sSv7hNMWSXYSSU1jGv/yd6XqjXgTDJ8KP4NgjTXfJ3GbRjeeb8RTV7a/VpM+w==
 
 "@intlify/bundle-utils@next":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@intlify/bundle-utils/-/bundle-utils-2.0.0.tgz#d8c87ea581c066dc74f430aeff7781ddd719ea02"
-  integrity sha512-FcZVN7PD9od+/qZJoTzlQyWdtuukx3JSWSId/sTy4jFJajhNWJ5aW07ZswtrU/ofgzzJaNqT9MpCos6vnDyp1g==
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@intlify/bundle-utils/-/bundle-utils-2.2.1.tgz#082f7da73ea9ad6e1f5c635b1ae6edb55fbf767a"
+  integrity sha512-8n8zhYEKypS+KP22KUAC6BnQifJDDWUGcn3OVPqsThqMMucU22MShGvOuiKqQ4AeT7XQ5O4pudlJmxv3L91JrQ==
   dependencies:
     "@intlify/message-compiler" beta
     "@intlify/shared" beta

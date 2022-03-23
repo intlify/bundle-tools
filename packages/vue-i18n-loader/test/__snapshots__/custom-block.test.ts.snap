@@ -1,5 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`array 1`] = `
+Array [
+  Object {
+    "locale": "",
+    "resource": Object {
+      "en": Object {
+        "foo": Array [
+          Array [
+            [Function],
+          ],
+          [Function],
+        ],
+      },
+    },
+  },
+]
+`;
+
 exports[`basic 1`] = `
 Array [
   Object {

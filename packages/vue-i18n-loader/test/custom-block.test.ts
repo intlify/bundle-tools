@@ -140,3 +140,12 @@ test('bridge', async () => {
   const bridgeResource = JSON.parse(g)
   expect(bridgeResource.en.hello).toEqual('hello world!')
 })
+
+test('array', async () => {
+  const { module } = await bundleAndRun('array.vue')
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.locale).toEqual('')
+  expect(i18n.resource.en.foo[0][0](createMessageContext())).toEqual('bar')
+  expect(i18n.resource.en.foo[1](createMessageContext())).toEqual('baz')
+})

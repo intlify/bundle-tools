@@ -581,6 +581,11 @@
   resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.2.0-beta.15.tgz#5903eba79495f5733fda20782338d5c9fe2dd088"
   integrity sha512-CK1qqrOA2tC8wWM4qldW/hfZ0wbjrSe2MdazUE2HHyhSH7Zt+6SUa0cxujYCZMJ2kd/1ZMs9/w2e7svgYbssTg==
 
+"@intlify/shared@next":
+  version "9.2.0-beta.32"
+  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-9.2.0-beta.32.tgz#fc4868c500b473a9e9a2ecfd3170c31d8edce3a2"
+  integrity sha512-lVaHnKFNg16eWlfDLzDFLapurrf0WK7xLWEkz8DMYNIXJshRQOZCkH7sQaqtONPoOT0LqjyPo1+sV0Wq85/HRQ==
+
 "@intlify/vue-devtools@9.2.0-beta.15":
   version "9.2.0-beta.15"
   resolved "https://registry.yarnpkg.com/@intlify/vue-devtools/-/vue-devtools-9.2.0-beta.15.tgz#b5b47fd8c5b6f2222046a3e64a3026bbc76a4bbc"

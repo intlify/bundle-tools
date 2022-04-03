@@ -160,7 +160,7 @@ const i18n = createI18n({
 })
 
 const app = createApp()
-app.use(i18n).mount('#app)
+app.use(i18n).mount('#app')
 ```
 
 vite-plugin-vue-i18n can use the vite (rollup) mechanism to import all locales at once, using the special identifier `@intlify/vite-plugin-vue-i18n/messages`, as the bellow:
@@ -180,7 +180,7 @@ const i18n = createI18n({
 })
 
 const app = createApp()
-app.use(i18n).mount('#app)
+app.use(i18n).mount('#app')
 ```
 
 ### Client Types

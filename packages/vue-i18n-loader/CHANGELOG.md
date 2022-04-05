@@ -1,4 +1,13 @@
 
+## @intlify/vue-i18n-loader@5.0.0 (2022-04-05)
+
+#### :star: Features
+* [#105](https://github.com/intlify/bundle-tools/pull/105) feat(vue-i18n-loader): pinned next version for intlify related modules ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vue-i18n-loader@4.2.0 (2022-04-05)
 
 #### :bug: Bug Fixes

@@ -1,7 +1,7 @@
 {
   "name": "@intlify/vue-i18n-loader",
   "description": "vue-i18n for webpack loader",
-  "version": "4.2.0",
+  "version": "5.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"

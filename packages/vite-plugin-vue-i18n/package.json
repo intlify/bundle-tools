@@ -1,7 +1,7 @@
 {
   "name": "@intlify/vite-plugin-vue-i18n",
   "description": "Vite plugin for Vue I18n",
-  "version": "3.4.0",
+  "version": "4.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"

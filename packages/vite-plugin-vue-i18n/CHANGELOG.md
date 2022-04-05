@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@4.0.0 (2022-04-05)
+
+#### :star: Features
+* [#103](https://github.com/intlify/bundle-tools/pull/103) feat(vite-plugin-vue-i18n): pinned next version for intlify related m… ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@3.4.0 (2022-04-05)
 
 #### :bug: Bug Fixes

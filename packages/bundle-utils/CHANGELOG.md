@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.0.0 (2022-04-05)
+
+#### :star: Features
+* [#101](https://github.com/intlify/bundle-tools/pull/101) feat(bundle-utils): pinned intlify related module next version ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@2.2.2 (2022-04-05)
 
 #### :zap: Improvement Features

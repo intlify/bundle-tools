@@ -1,4 +1,22 @@
 
+## @intlify/vite-plugin-vue-i18n@3.4.0 (2022-04-05)
+
+#### :bug: Bug Fixes
+* [#102](https://github.com/intlify/bundle-tools/pull/102) fix(vite-plugin-vue-i18n): pinned stable version for intlify related … ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/vite-plugin-vue-i18n@3.4.0 (2022-04-03)
+
+#### :pencil: Documentation
+* [#99](https://github.com/intlify/bundle-tools/pull/99) fix(vite-plugin-vue-i18n): docs typo ([@FlandreDaisuki](https://github.com/FlandreDaisuki))
+
+#### Committers: 1
+- Chun-Hao Lien ([@FlandreDaisuki](https://github.com/FlandreDaisuki))
+
+
 ## @intlify/vite-plugin-vue-i18n@3.3.1 (2022-02-27)
 
 #### :zap: Improvement Features

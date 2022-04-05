@@ -11,8 +11,8 @@
   },
   "peerDependencies": {
     "vite": "^2.0.0",
-    "vue-i18n": "^9.0.0",
-    "petite-vue-i18n": "^9.0.0"
+    "vue-i18n": "^9.1.0",
+    "petite-vue-i18n": "^9.1.0"
   },
   "peerDependenciesMeta": {
     "vue-i18n": {
@@ -23,8 +23,8 @@
     }
   },
   "dependencies": {
-    "@intlify/bundle-utils": "next",
-    "@intlify/shared": "next",
+    "@intlify/bundle-utils": "^2.2.2",
+    "@intlify/shared": "^9.1.0",
     "@rollup/pluginutils": "^4.1.0",
     "debug": "^4.3.1",
     "source-map": "0.6.1",

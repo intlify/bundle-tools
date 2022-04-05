@@ -10,16 +10,16 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
-    "@intlify/bundle-utils": "next",
-    "@intlify/shared": "next",
+    "@intlify/bundle-utils": "^2.2.2",
+    "@intlify/shared": "^9.1.0",
     "loader-utils": "^2.0.0",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0"
   },
   "peerDependencies": {
     "vue": "^3.0.0",
-    "vue-i18n": "^9.0.0",
-    "petite-vue-i18n": "^9.0.0"
+    "vue-i18n": "^9.1.0",
+    "petite-vue-i18n": "^9.1.0"
   },
   "peerDependenciesMeta": {
     "vue-i18n": {

@@ -8,6 +8,7 @@
   "bugs": {
     "url": "https://github.com/inlitify/bundle-tools/issues"
   },
+  "packageManager": "yarn@3.1.1",
   "changelog": {
     "labels": {
       "Type: Feature": ":star: Features",

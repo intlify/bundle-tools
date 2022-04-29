@@ -25,7 +25,7 @@ exports[`array basic: code 1`] = `
 
 exports[`array basic: map 1`] = `
 Object {
-  "mappings": ";;;wEAGKA;;;wEAGAC",
+  "mappings": ";6EACUA,SAASC",
   "names": Array [
     "bar",
     "baz",
@@ -35,14 +35,7 @@ Object {
   ],
   "sourcesContent": Array [
     "{
-  \\"foo\\": [
-    [
-      \\"bar\\"
-    ],
-    [ 
-      \\"baz\\"
-    ]
-  ]
+  \\"foo\\": [[\\"bar\\"], [\\"baz\\"]]
 }
 ",
   ],
@@ -85,7 +78,7 @@ exports[`array mixed: code 1`] = `
 
 exports[`array mixed: map 1`] = `
 Object {
-  "mappings": ";;;+EAGYA;;;wEAGPC;;;mFAGWD;;0EAETE;;;sEAGJC;;wEAEEC",
+  "mappings": ";;;+EAGYA;;;wEAGPC;;;mFAGWD;;0EAETE;;;sEAGJC;uEACCC",
   "names": Array [
     "foo",
     "bar",
@@ -112,9 +105,7 @@ Object {
       ]
     ],
     \\"baz\\",
-    [
-      \\"buz\\"
-    ]
+    [\\"buz\\"]
   ]
 }
 ",

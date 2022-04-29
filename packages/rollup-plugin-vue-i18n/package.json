@@ -10,21 +10,21 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "dependencies": {
-    "debug": "^4.3.1",
     "@intlify/bundle-utils": "next",
     "@intlify/shared": "beta",
-    "@rollup/pluginutils": "^4.1.0"
+    "@rollup/pluginutils": "^4.2.0",
+    "debug": "^4.3.1"
   },
   "peerDependencies": {
+    "petite-vue-i18n": "^9.0.0",
     "vue": "^3.0.0",
-    "vue-i18n": "^9.0.0",
-    "petite-vue-i18n": "^9.0.0"
+    "vue-i18n": "^9.0.0"
   },
   "peerDependenciesMeta": {
-    "vue-i18n": {
+    "petite-vue-i18n": {
       "optional": true
     },
-    "petite-vue-i18n": {
+    "vue-i18n": {
       "optional": true
     }
   },
@@ -51,12 +51,12 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "build:example": "yarn build && npm-run-all --parallel build:example:*",
+    "build:example": "yarn build && npm-run-all --parallel \"build:example:*\"",
     "build:example:composition": "rollup -c ./examples/rollup.config.js --environment BUILD:composition",
     "build:example:global": "rollup -c ./examples/rollup.config.js --environment BUILD:global",
     "build:example:legacy": "rollup -c ./examples/rollup.config.js --environment BUILD:legacy",
-    "clean": "npm-run-all clean:*",
-    "clean:example": "npm-run-all clean:example:*",
+    "clean": "npm-run-all \"clean:*\"",
+    "clean:example": "npm-run-all \"clean:example:*\"",
     "clean:example:composition": "rm -rf ./examples/composition/index.js",
     "clean:example:global": "rm -rf ./examples/global/index.js",
     "clean:example:legacy": "rm -rf ./examples/legacy/index.js",
@@ -64,8 +64,8 @@
     "test": "yarn test:e2e",
     "test:e2e": "yarn build:example && jest --runInBand --config ./jest.e2e.config.js",
     "watch": "tsc -p . --watch",
-    "changelog": "esmo ../../scripts/changelog.ts",
-    "release": "esmo ../../scripts/release.ts"
+    "changelog": "jiti ../../scripts/changelog.ts",
+    "release": "jiti ../../scripts/release.ts"
   },
   "types": "lib/index.d.ts"
 }

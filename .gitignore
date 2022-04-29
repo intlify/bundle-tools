@@ -13,3 +13,6 @@ lib
 examples/**/dist
 .env
 .idea
+.yarn/*
+!.yarn/releases
+!.yarn/plugins

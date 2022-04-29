@@ -176,7 +176,7 @@ function pluginI18n(
     },
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    async load(id: string, ssr: boolean) {
+    async load(id: string) {
       if (id === INTLIFY_BUNDLE_IMPORT_ID && include) {
         let resourcePaths = [] as string[]
         const includePaths = isArray(include) ? include : [include]

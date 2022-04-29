@@ -12,20 +12,20 @@
   "dependencies": {
     "@intlify/bundle-utils": "next",
     "@intlify/shared": "next",
-    "loader-utils": "^2.0.0",
     "js-yaml": "^4.1.0",
-    "json5": "^2.2.0"
+    "json5": "^2.2.0",
+    "loader-utils": "^2.0.0"
   },
   "peerDependencies": {
+    "petite-vue-i18n": "*",
     "vue": "^3.0.0",
-    "vue-i18n": "next",
-    "petite-vue-i18n": "next"
+    "vue-i18n": "*"
   },
   "peerDependenciesMeta": {
-    "vue-i18n": {
+    "petite-vue-i18n": {
       "optional": true
     },
-    "petite-vue-i18n": {
+    "vue-i18n": {
       "optional": true
     }
   },
@@ -53,13 +53,13 @@
     "build": "tsc -p .",
     "build:example": "yarn build && webpack --config examples/webpack.config.js",
     "build:watch": "tsc -p . --watch",
-    "clean": "npm-run-all clean:*",
+    "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
     "clean:example": "rm -rf ./examples/dist",
     "example": "yarn build && webpack-dev-server --config examples/webpack.config.js --inline --hot",
     "test": "yarn test:e2e",
     "test:e2e": "yarn build && jest --runInBand --config ./jest.e2e.config.js",
-    "changelog": "esmo ../../scripts/changelog.ts",
-    "release": "esmo ../../scripts/release.ts"
+    "changelog": "jiti ../../scripts/changelog.ts",
+    "release": "jiti ../../scripts/release.ts"
   }
 }

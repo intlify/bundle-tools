@@ -9,12 +9,11 @@
   "bugs": {
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
-  "peerDependencies": {},
   "peerDependenciesMeta": {
-    "vue-i18n": {
+    "petite-vue-i18n": {
       "optional": true
     },
-    "petite-vue-i18n": {
+    "vue-i18n": {
       "optional": true
     }
   },
@@ -22,10 +21,9 @@
     "@intlify/message-compiler": "next",
     "@intlify/shared": "next",
     "jsonc-eslint-parser": "^1.0.1",
-    "source-map": "^0.6.1",
+    "source-map": "0.6.1",
     "yaml-eslint-parser": "^0.3.2"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">= 12"
   },
@@ -42,11 +40,11 @@
   },
   "scripts": {
     "build": "tsc -p .",
-    "clean": "npm-run-all clean:*",
+    "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
     "watch": "tsc -p . --watch",
-    "changelog": "esmo ../../scripts/changelog.ts",
-    "release": "esmo ../../scripts/release.ts"
+    "changelog": "jiti ../../scripts/changelog.ts",
+    "release": "jiti ../../scripts/release.ts"
   },
   "types": "lib/index.d.ts"
 }

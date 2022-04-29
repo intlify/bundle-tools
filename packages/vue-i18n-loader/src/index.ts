@@ -48,7 +48,7 @@ const loader: webpack.loader.Loader = function (
     // console.log('code', code)
     this.callback(null, code, map)
   } catch (err) {
-    this.emitError(`[vue-i18n-loader]: ${err.message}`)
+    this.emitError(`[vue-i18n-loader]: ${(err as Error).message}`)
   }
 }
 

@@ -48,7 +48,7 @@
       "./packages/bundle-utils/dist",
       "./packages/vue-i18n-loader/@types",
       "./node_modules/@types",
-      "./node_modules/vue-i18n/dist"
+      "./node_modules/vue-i18n/dist",
     ],
     // "types": [],                           /* Type declaration files to be included in compilation. */
     // "allowSyntheticDefaultImports": true,  /* Allow default imports from modules with no default export. This does not affect code emit, just typechecking. */
@@ -73,10 +73,5 @@
   },
   "include": [
     "packages/**/src"
-  ],
-  "plugins": [
-    {
-      "name": "typescript-eslint-language-service"
-    }
   ]
 }

@@ -10,27 +10,26 @@
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
   "peerDependencies": {
+    "petite-vue-i18n": "*",
     "vite": "^2.9.0",
-    "vue-i18n": "next",
-    "petite-vue-i18n": "next"
+    "vue-i18n": "*"
   },
   "peerDependenciesMeta": {
-    "vue-i18n": {
+    "petite-vue-i18n": {
       "optional": true
     },
-    "petite-vue-i18n": {
+    "vue-i18n": {
       "optional": true
     }
   },
   "dependencies": {
     "@intlify/bundle-utils": "next",
     "@intlify/shared": "next",
-    "@rollup/pluginutils": "^4.1.0",
+    "@rollup/pluginutils": "^4.2.0",
     "debug": "^4.3.1",
-    "source-map": "0.6.1",
-    "fast-glob": "^3.2.5"
+    "fast-glob": "^3.2.5",
+    "source-map": "0.6.1"
   },
-  "devDependencies": {},
   "engines": {
     "node": ">= 12"
   },
@@ -69,7 +68,7 @@
   "scripts": {
     "build": "tsc -p .",
     "build:example": "vite build --config ./examples/vite.config.ts --outDir ./examples/dist",
-    "clean": "npm-run-all clean:*",
+    "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
     "clean:example": "rm -rf ./examples/dist",
     "dev": "vite examples --config ./examples/vite.config.ts",
@@ -79,7 +78,7 @@
     "test": "yarn test:e2e",
     "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",
     "watch": "tsc -p . --watch",
-    "changelog": "esmo ../../scripts/changelog.ts",
-    "release": "esmo ../../scripts/release.ts"
+    "changelog": "jiti ../../scripts/changelog.ts",
+    "release": "jiti ../../scripts/release.ts"
   }
 }

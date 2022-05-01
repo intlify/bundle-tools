@@ -121,11 +121,13 @@
     "build:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n build",
     "build:vite": "yarn workspace @intlify/vite-plugin-vue-i18n build",
     "build:webpack": "yarn workspace @intlify/vue-i18n-loader build",
+    "build:unplugin": "yarn workspace @intlify/unplugin-vue-i18n build",
     "clean": "npm-run-all --parallel \"clean:*\"",
     "clean:utils": "yarn workspace @intlify/bundle-utils clean",
     "clean:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n clean",
     "clean:vite": "yarn workspace @intlify/vite-plugin-vue-i18n clean",
     "clean:webpack": "yarn workspace @intlify/vue-i18n-loader clean",
+    "clean:unplugin": "yarn workspace @intlify/unplugin-vue-i18n clean",
     "coverage": "opener coverage/lcov-report/index.html",
     "fix": "npm-run-all --parallel lint:eslint:fix format:fix",
     "format": "prettier --config .prettierrc --ignore-path .prettierignore '**/*.{js,json,html}'",
@@ -147,11 +149,13 @@
     "changelog:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n changelog",
     "changelog:vite": "yarn workspace @intlify/vite-plugin-vue-i18n changelog",
     "changelog:webpack": "yarn workspace @intlify/vue-i18n-loader changelog",
+    "changelog:unplugin": "yarn workspace @intlify/unplugin-vue-i18n changelog",
     "release": "jiti ./scripts/release.ts",
     "release:utils": "yarn workspace @intlify/bundle-utils release",
     "release:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n release",
     "release:vite": "yarn workspace @intlify/vite-plugin-vue-i18n release",
-    "release:webpack": "yarn workspace @intlify/vue-i18n-loader release"
+    "release:webpack": "yarn workspace @intlify/vue-i18n-loader release",
+    "release:unplugin": "yarn workspace @intlify/unplugin-vue-i18n release"
   },
   "workspaces": [
     "packages/*"

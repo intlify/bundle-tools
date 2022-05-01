@@ -635,6 +635,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n":
+  version: 0.0.0-use.local
+  resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
+  dependencies:
+    "@intlify/bundle-utils": next
+    "@intlify/shared": next
+    debug: ^4.3.1
+    fast-glob: ^3.2.5
+    source-map: 0.6.1
+    unplugin: ^0.6.2
+  peerDependencies:
+    petite-vue-i18n: "*"
+    vue-i18n: "*"
+  peerDependenciesMeta:
+    petite-vue-i18n:
+      optional: true
+    vue-i18n:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
 "@intlify/vite-plugin-vue-i18n@workspace:packages/vite-plugin-vue-i18n":
   version: 0.0.0-use.local
   resolution: "@intlify/vite-plugin-vue-i18n@workspace:packages/vite-plugin-vue-i18n"
@@ -3902,7 +3923,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chokidar@npm:^3.4.1":
+"chokidar@npm:^3.4.1, chokidar@npm:^3.5.3":
   version: 3.5.3
   resolution: "chokidar@npm:3.5.3"
   dependencies:
@@ -12943,6 +12964,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"unplugin@npm:^0.6.2":
+  version: 0.6.2
+  resolution: "unplugin@npm:0.6.2"
+  dependencies:
+    chokidar: ^3.5.3
+    webpack-sources: ^3.2.3
+    webpack-virtual-modules: ^0.4.3
+  peerDependencies:
+    esbuild: ">=0.13"
+    rollup: ^2.50.0
+    vite: ^2.3.0
+    webpack: 4 || 5
+  peerDependenciesMeta:
+    esbuild:
+      optional: true
+    rollup:
+      optional: true
+    vite:
+      optional: true
+    webpack:
+      optional: true
+  checksum: 0ad0b290c00a528196f9af95cb31872d92221f1cd4a3b3ee7c72d6b1cf2130c1c342aca97ccee44e5c911b59cdf996c095c8188802d7ff7a002a98b84eafc4eb
+  languageName: node
+  linkType: hard
+
 "unset-value@npm:^1.0.0":
   version: 1.0.0
   resolution: "unset-value@npm:1.0.0"
@@ -13503,6 +13549,13 @@ __metadata:
   version: 3.2.3
   resolution: "webpack-sources@npm:3.2.3"
   checksum: 989e401b9fe3536529e2a99dac8c1bdc50e3a0a2c8669cbafad31271eadd994bc9405f88a3039cd2e29db5e6d9d0926ceb7a1a4e7409ece021fe79c37d9c4607
+  languageName: node
+  linkType: hard
+
+"webpack-virtual-modules@npm:^0.4.3":
+  version: 0.4.3
+  resolution: "webpack-virtual-modules@npm:0.4.3"
+  checksum: 158d30633e0d9be3cfcde10fe959b28df5d5adb1068e0f057fcfb10b0b16ede6c892eba438f6ced089c7c442087748c2fcd1e3f035e4e2dc6760517a8c227714
   languageName: node
   linkType: hard
 

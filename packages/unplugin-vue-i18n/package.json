@@ -1,0 +1,74 @@
+{
+  "name": "@intlify/unplugin-vue-i18n",
+  "version": "0.0.0",
+  "description": "unplugin for Vue I18n",
+  "author": {
+    "name": "kazuya kawaguchi",
+    "email": "kawakazu80@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/intlify/bundle-tools/issues"
+  },
+  "peerDependencies": {
+    "petite-vue-i18n": "*",
+    "vue-i18n": "*"
+  },
+  "peerDependenciesMeta": {
+    "petite-vue-i18n": {
+      "optional": true
+    },
+    "vue-i18n": {
+      "optional": true
+    }
+  },
+  "dependencies": {
+    "@intlify/bundle-utils": "next",
+    "@intlify/shared": "next",
+    "debug": "^4.3.1",
+    "fast-glob": "^3.2.5",
+    "source-map": "0.6.1",
+    "unplugin": "^0.6.2"
+  },
+  "engines": {
+    "node": ">= 12"
+  },
+  "files": [
+    "lib",
+    "index.mjs"
+  ],
+  "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/unplugin-vue-i18n/README.md",
+  "keywords": [
+    "i18n",
+    "plugin",
+    "unplugin",
+    "unjs",
+    "vue",
+    "vue-i18n"
+  ],
+  "license": "MIT",
+  "main": "lib/index.js",
+  "module": "./index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./lib/index.js"
+    },
+    "./lib/*": "./lib/*",
+    "./index.mjs": "./index.mjs",
+    "./package.json": "./package.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/intlify/bundle-tools.git",
+    "directory": "packages/unplugin-vue-i18n"
+  },
+  "scripts": {
+    "build": "tsc -p .",
+    "clean": "npm-run-all \"clean:*\"",
+    "clean:lib": "rm -rf ./lib",
+    "watch": "tsc -p . --watch",
+    "changelog": "jiti ../../scripts/changelog.ts",
+    "release": "jiti ../../scripts/release.ts"
+  }
+}

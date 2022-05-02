@@ -122,6 +122,7 @@ function generateCode(dep: VueComponentDependency, importVar: string): string {
     }
   })
 
+  // console.log('generateCode', injectionCodes)
   let ret = injectionCodes.join('\n')
   ret = ret.length > 0 ? `\n${ret}\n` : ''
   return (ret += `/* harmony default export */ __webpack_exports__["default"] = (${importVar});`)
@@ -168,7 +169,7 @@ function getTemplateBlockModule(parser: any): NormalModule | undefined {
 }
 
 function toVueComponentDependency(parser: any, values: InjectionValues) {
-  return function vueComponentDependencyw(statement: any) {
+  return function vueComponentDependency(statement: any) {
     // console.log('toVueComponentDependency##statement', statement)
     const dep = new VueComponentDependency(
       getScriptBlockModule(parser),
@@ -215,6 +216,11 @@ export default class IntlifyVuePlugin implements webpack.Plugin {
             PLUGIN_ID,
             // @ts-ignore
             (statement, declaration) => {
+              // console.log(
+              //   'exportExpression',
+              //   (parser as any).state.module.resource,
+              //   declaration.name
+              // )
               if (
                 (parser as any).state.module.resource.endsWith('.vue') &&
                 declaration.name === 'script'

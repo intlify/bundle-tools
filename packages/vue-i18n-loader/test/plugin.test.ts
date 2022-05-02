@@ -12,7 +12,7 @@ const options = {
   d: () => 'hello'
 }
 
-test('basic', async () => {
+test.skip('basic', async () => {
   const { module } = await bundleAndRun('./plugin/basic.vue', bundleEx, {
     intlify: options
   })
@@ -23,7 +23,7 @@ test('basic', async () => {
   expect(module.d).toEqual('hello')
 })
 
-test('script only', async () => {
+test.skip('script only', async () => {
   const { module } = await bundleAndRun('./plugin/script.vue', bundleEx, {
     intlify: options
   })

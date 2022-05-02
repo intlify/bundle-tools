@@ -142,7 +142,7 @@
     "test:e2e:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n test:e2e",
     "test:e2e:vite": "yarn workspace @intlify/vite-plugin-vue-i18n test:e2e",
     "test:e2e:webpack": "yarn workspace @intlify/vue-i18n-loader test:e2e",
-    "test:unit": "NODE_ENV=test yarn run build:utils && jest --env node packages/bundle-utils/test/**",
+    "test:unit": "NODE_ENV=test yarn run build:utils && jest --env node",
     "test:watch": "jest --env node --watch packages/bundle-utils/test/**",
     "changelog": "jiti ./scripts/changelog.ts",
     "changelog:utils": "yarn workspace @intlify/bundle-utils changelog",

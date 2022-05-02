@@ -77,7 +77,8 @@ export async function bundleAndRun(
       virtualConsole: new VirtualConsole()
     })
     dom.window.eval(code)
-  } catch (e) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } catch (e: any) {
     console.error(`JSDOM error:\n${e.stack}`)
     jsdomError = e
   }

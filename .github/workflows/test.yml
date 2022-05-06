@@ -16,13 +16,13 @@ env:
   CI: true
 
 jobs:
-  e2e:
-    name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
+  test:
+    name: "Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}}"
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [14]
+        node: [12, 14, 16]
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -34,4 +34,4 @@ jobs:
       - name: Install
         run: yarn install
       - name: Test
-        run: yarn test:e2e
+        run: yarn test

@@ -79,6 +79,9 @@
     "./types": {
       "types": "./types.d.ts"
     },
+    "./messages": {
+      "types": "./messages.d.ts"
+    },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json"
   },

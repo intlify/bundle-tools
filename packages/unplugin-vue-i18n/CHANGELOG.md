@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.2.0 (2022-05-06)
+
+#### :star: Features
+* [#117](https://github.com/intlify/bundle-tools/pull/117) feat: support virtual resource importing ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.1.2 (2022-05-06)
 
 #### :bug: Bug Fixes

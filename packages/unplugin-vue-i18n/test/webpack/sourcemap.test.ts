@@ -60,6 +60,6 @@ test('resource files: yaml', async () => {
   }
 ].forEach(item => {
   !process.env.CI
-    ? test.skip(item.subject, item.test)
-    : test(item.subject, item.test)
+    ? test(item.subject, item.test)
+    : test.skip(item.subject, item.test)
 })

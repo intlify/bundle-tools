@@ -15,7 +15,6 @@ const options = {
 
 test('json resource', async () => {
   const { module } = await bundleAndRun('ja.json', bundleWebpack, options)
-  console.log('module', module)
   const fn = module.message
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)

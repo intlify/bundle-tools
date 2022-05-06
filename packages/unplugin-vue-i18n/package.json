@@ -93,6 +93,8 @@
     "build:example:webpack": "yarn build && webpack --config ./examples/webpack/webpack.config.js",
     "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
+    "test": "yarn test:e2e",
+    "test:e2e": "yarn build && yarn build:example:vite && jest --runInBand --config ./jest.e2e.config.js",
     "changelog": "jiti ../../scripts/changelog.ts",
     "release": "jiti ../../scripts/release.ts"
   }

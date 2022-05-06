@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.1.2 (2022-05-06)
+
+#### :bug: Bug Fixes
+* [#115](https://github.com/intlify/bundle-tools/pull/115) fix(unplugin-vue-i18n): export d.ts files ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.1.1 (2022-05-06)
 
 #### :bug: Bug Fixes

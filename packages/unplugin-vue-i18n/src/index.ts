@@ -117,11 +117,13 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
        * NOTE:
        * After i18n resources are transformed into javascript by transform, avoid further transforming by webpack.
        */
-      compiler.options.module?.rules.push({
-        test: /\.(json5?|ya?ml)$/,
-        type: 'javascript/auto',
-        exclude: include // exclude target i18n resources
-      })
+      if (compiler.options.module) {
+        compiler.options.module.rules.push({
+          test: /\.(json5?|ya?ml)$/,
+          type: 'javascript/auto',
+          exclude: include // exclude target i18n resources
+        })
+      }
     },
 
     resolveId(id: string, importer: string) {

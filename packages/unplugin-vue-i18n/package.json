@@ -42,7 +42,8 @@
     "node": ">= 12"
   },
   "files": [
-    "lib"
+    "lib",
+    "*.d.ts"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/unplugin-vue-i18n/README.md",
   "keywords": [
@@ -58,25 +59,25 @@
   "license": "MIT",
   "main": "lib/index.cjs",
   "module": "./lib/index.mjs",
-  "types": "lib/index.d.ts",
+  "types": "./index.d.ts",
   "exports": {
     ".": {
       "require": "./lib/index.cjs",
       "import": "./lib/index.mjs",
-      "types": "./lib/index.d.ts"
+      "types": "./index.d.ts"
     },
     "./vite": {
       "require": "./lib/vite.cjs",
       "import": "./lib/vite.mjs",
-      "types": "./lib/vite.d.ts"
+      "types": "./vite.d.ts"
     },
     "./webpack": {
       "require": "./lib/webpack.cjs",
       "import": "./lib/webpack.mjs",
-      "types": "./lib/webpack.d.ts"
+      "types": "./webpack.d.ts"
     },
     "./types": {
-      "types": "./lib/types.d.ts"
+      "types": "./types.d.ts"
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json"

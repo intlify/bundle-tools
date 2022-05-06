@@ -24,38 +24,59 @@
   "dependencies": {
     "@intlify/bundle-utils": "next",
     "@intlify/shared": "next",
+    "@rollup/pluginutils": "^4.2.0",
+    "@vue/compiler-sfc": "^3.2.23",
     "debug": "^4.3.1",
     "fast-glob": "^3.2.5",
+    "js-yaml": "^4.1.0",
+    "json5": "^2.2.0",
+    "pathe": "^0.2.0",
     "source-map": "0.6.1",
     "unplugin": "^0.6.2"
+  },
+  "devDependencies": {
+    "mlly": "^0.5.2",
+    "unbuild": "^0.7.4"
   },
   "engines": {
     "node": ">= 12"
   },
   "files": [
-    "lib",
-    "index.mjs"
+    "lib"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/unplugin-vue-i18n/README.md",
   "keywords": [
     "i18n",
     "plugin",
     "unplugin",
-    "unjs",
+    "transform",
+    "webpack",
+    "vite",
     "vue",
     "vue-i18n"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "./index.mjs",
+  "main": "lib/index.cjs",
+  "module": "./lib/index.mjs",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./lib/index.js"
+      "require": "./lib/index.cjs",
+      "import": "./lib/index.mjs"
+    },
+    "./vite": {
+      "require": "./lib/vite.cjs",
+      "import": "./lib/vite.mjs"
+    },
+    "./webpack": {
+      "require": "./lib/webpack.cjs",
+      "import": "./lib/webpack.mjs"
+    },
+    "./types": {
+      "require": "./lib/types.cjs",
+      "import": "./lib/types.mjs"
     },
     "./lib/*": "./lib/*",
-    "./index.mjs": "./index.mjs",
     "./package.json": "./package.json"
   },
   "repository": {
@@ -64,10 +85,14 @@
     "directory": "packages/unplugin-vue-i18n"
   },
   "scripts": {
-    "build": "tsc -p .",
+    "dev:vite": "vite examples/vite --config ./examples/vite/vite.config.ts",
+    "dev:webpack": "yarn build && webpack-dev-server --config ./examples/webpack/webpack.config.js --inline --hot",
+    "build": "unbuild",
+    "build:example": "npm-run-all \"build:example:*\"",
+    "build:example:vite": "vite build --config ./examples/vite/vite.config.ts --outDir ./examples/vite/dist",
+    "build:example:webpack": "yarn build && webpack --config ./examples/webpack/webpack.config.js",
     "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
-    "watch": "tsc -p . --watch",
     "changelog": "jiti ../../scripts/changelog.ts",
     "release": "jiti ../../scripts/release.ts"
   }

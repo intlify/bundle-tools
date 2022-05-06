@@ -1,0 +1,3 @@
+select: Do you want banana?
+fruits:
+  banana: 'no bananas | {n} banana | {n} bananas'

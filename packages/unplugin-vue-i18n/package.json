@@ -62,19 +62,21 @@
   "exports": {
     ".": {
       "require": "./lib/index.cjs",
-      "import": "./lib/index.mjs"
+      "import": "./lib/index.mjs",
+      "types": "./lib/index.d.ts"
     },
     "./vite": {
       "require": "./lib/vite.cjs",
-      "import": "./lib/vite.mjs"
+      "import": "./lib/vite.mjs",
+      "types": "./lib/vite.d.ts"
     },
     "./webpack": {
       "require": "./lib/webpack.cjs",
-      "import": "./lib/webpack.mjs"
+      "import": "./lib/webpack.mjs",
+      "types": "./lib/webpack.d.ts"
     },
     "./types": {
-      "require": "./lib/types.cjs",
-      "import": "./lib/types.mjs"
+      "types": "./lib/types.d.ts"
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json"

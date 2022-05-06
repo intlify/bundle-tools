@@ -22,6 +22,7 @@ export function generate(
   {
     type = 'plain',
     bridge = false,
+    exportESM = false,
     filename = 'vue-i18n-loader.json',
     inSourceMap = undefined,
     locale = '',
@@ -44,6 +45,7 @@ export function generate(
   const options = {
     type,
     bridge,
+    exportESM,
     source: value,
     sourceMap,
     locale,
@@ -87,14 +89,22 @@ function generateNode(
   const itemsCountStack = [] as number[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
-  const { type, bridge, sourceMap, isGlobal, locale, useClassComponent } =
-    options
+  const {
+    type,
+    bridge,
+    exportESM,
+    sourceMap,
+    isGlobal,
+    locale,
+    useClassComponent
+  } = options
 
+  // prettier-ignore
   const componentNamespace = bridge
     ? `Component.options`
     : useClassComponent
-    ? `Component.__o`
-    : `Component`
+      ? `Component.__o`
+      : `Component`
 
   traverseNodes(node, {
     enterNode(node: JSONNode, parent: JSONNode) {
@@ -108,7 +118,11 @@ function generateNode(
               type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
             const localeName =
               type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            const exportSyntax = bridge ? `module.exports =` : `export default`
+            const exportSyntax = bridge
+              ? exportESM
+                ? `export default`
+                : `module.exports =`
+              : `export default`
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
             generator.pushline(

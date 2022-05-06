@@ -1,7 +1,7 @@
 import path from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
-import vueI18n from '../../lib/vite.mjs'
+import vueI18n from '../../src/vite'
 
 export default defineConfig({
   resolve: {

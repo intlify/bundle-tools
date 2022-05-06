@@ -94,7 +94,7 @@
     "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
     "test": "yarn test:e2e",
-    "test:e2e": "yarn build && yarn build:example:vite && jest --runInBand --config ./jest.e2e.config.js",
+    "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",
     "changelog": "jiti ../../scripts/changelog.ts",
     "release": "jiti ../../scripts/release.ts"
   }

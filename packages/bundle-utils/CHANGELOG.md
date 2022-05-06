@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.1.0 (2022-05-06)
+
+#### :zap: Improvement Features
+* [#116](https://github.com/intlify/bundle-tools/pull/116) improvement(bundle-utils): support ESM exporting on bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.0.0 (2022-04-05)
 
 #### :star: Features

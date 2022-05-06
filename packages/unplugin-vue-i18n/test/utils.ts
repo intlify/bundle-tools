@@ -76,9 +76,12 @@ export function bundleWebpack(
   fixture: string,
   options: Record<string, unknown> = {}
 ): Promise<BundleResolve> {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const VueLoader = (options.vueLoader ?? VueLoaderPlugin) as any
-  const vueLoaderPath = (options.vueLoaderPath ?? 'vue-loader') as string
+  const VueLoader = (
+    options.vueLoader ? options.vueLoader : VueLoaderPlugin
+  ) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+  const vueLoaderPath = (
+    options.vueLoaderPath ? options.vueLoaderPath : 'vue-loader'
+  ) as string
   const input = (options.input as string) || './fixtures/entry.js'
   const target = (options.target as string) || './fixtures'
   const include = (options.include as string[]) || [

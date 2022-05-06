@@ -28,7 +28,7 @@ npm i @intlify/unplugin-vue-i18n
 
 ```ts
 // vite.config.ts
-import vueI18n from 'unplugin-vue-i18n/vite'
+import vueI18n from '@intlify/unplugin-vue-i18n/vite'
 
 export default defineConfig({
   plugins: [
@@ -43,7 +43,7 @@ export default defineConfig({
 <summary>Webpack</summary><br>
 
 ```ts
-const VueI18nPlugin = require('unplugin-vue-i18n/webpack')
+const VueI18nPlugin = require('@intlify/unplugin-vue-i18n/webpack')
 
 // webpack.config.js
 module.exports = {
@@ -56,6 +56,148 @@ module.exports = {
 
 <br></details>
 
+## 🚀 Usage
+
+### i18n resources pre-compilation
+
+Since `vue-i18n@v9.x`, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+
+However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, `vue-i18n@v9.x` and later offer a full version that includes compiler and runtime, and a runtime only version.
+
+If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
+
+
+### i18n custom block
+
+The below example that `examples/vite/src/App.vue` have `i18n` custom block:
+
+```vue
+<template>
+  <form>
+    <label>{{ t('language') }}</label>
+    <select v-model="locale">
+      <option value="en">en</option>
+      <option value="ja">ja</option>
+    </select>
+  </form>
+  <p>{{ t('hello') }}</p>
+  <Banana />
+</template>
+
+<script>
+import { useI18n } from 'vue-i18n'
+import Banana from './Banana.vue'
+
+export default {
+  name: 'App',
+  components: {
+    Banana
+  },
+  setup() {
+    const { t, locale } = useI18n({
+      inheritLocale: true,
+      useScope: 'local'
+    })
+    return { t, locale }
+  }
+}
+</script>
+
+<i18n>
+{
+  "en": {
+    "language": "Language",
+    "hello": "hello, world!"
+  },
+  "ja": {
+    "language": "言語",
+    "hello": "こんにちは、世界！"
+  }
+}
+</i18n>
+```
+
+### Locale Messages formatting
+
+You can be used by specifying the following format in the `lang` attribute:
+
+- json (default)
+- yaml
+- yml
+- json5
+
+example `yaml` format:
+
+```vue
+<i18n lang="yaml">
+en:
+  hello: 'Hello World!'
+ja:
+  hello: 'こんにちは、世界！'
+</i18n>
+```
+
+### Static bundle importing
+
+unplugin-vue-i18n allows you to statically bundle i18n resources such as `json` or `yaml` specified by the [`include` option](#include) of the plugin described below as locale messages with the `import` syntax.
+
+In this case, only one i18n resource can be statically bundled at a time with `import` syntax, so the these code will be redundant for multiple locales.
+
+```js
+import { createApp } from 'vue'
+import { createI18n } from 'vue-i18n'
+/*
+ * The i18n resources in the path specified in the plugin `include` option can be read
+ * as vue-i18n optimized locale messages using the import syntax
+ */
+import en from './src/locales/en.json'
+import ja from './src/locales/ja.yaml'
+import fr from './src/locales/fr.json5'
+
+const i18n = createI18n({
+  locale: 'en',
+  messages: {
+    en,
+    ja,
+    fr
+  }
+})
+
+const app = createApp()
+app.use(i18n).mount('#app')
+```
+
+unplugin-vue-i18n can use the bundler virtual mechanism to import all locales at once, using the special identifier `@intlify/unplugin-vue-i18n/messages`, as the bellow:
+
+```js
+import { createApp } from 'vue'
+import { createI18n } from 'vue-i18n'
+/*
+ * All i18n resources specified in the plugin `include` option can be loaded
+ * at once using the import syntax
+ */
+import messages from '@intlify/unplugin-vue-i18n/messages'
+
+const i18n = createI18n({
+  locale: 'en',
+  messages
+})
+
+const app = createApp()
+app.use(i18n).mount('#app')
+```
+
+### Types
+
+If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplugin-vue-i18n/messages` to `compilerOptions.types` of your tsconfig:
+
+```json
+{
+  "compilerOptions": {
+    "types": ["@intlify/unplugin-vue-i18n/messages"]
+  }
+}
+```
 
 ## 🔧 Options
 
@@ -73,7 +215,7 @@ module.exports = {
   - yml
   ```
 
-  Note `json` resources matches this option, it will be handled **before the internal json plugin of Vite, and will not be processed afterwards**, else the option doesn't match, the Vite side will handle.
+  Note `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
 
 ### `forceStringify`
 
@@ -206,9 +348,7 @@ module.exports = {
 
 
 ## ✅ TODO
-- [ ] Virtual resource importing 
 - [ ] Bundling optimizations
-- [ ] i18n custom block birdge mode (for vite)
 - [ ] Support nuxt
 
 ## 📜 Changelog

@@ -25,28 +25,28 @@ describe('resource files', () => {
 })
 
 describe('custom blocks', () => {
-  test('json', async () => {
+  test.skip('json', async () => {
     const { map } = await bundleAndRun('basic.vue', bundleWebpack, {
       sourcemap: true
     })
     expect(map.mappings).toMatchSnapshot()
   })
 
-  test('yaml', async () => {
+  test.skip('yaml', async () => {
     const { map } = await bundleAndRun('yaml.vue', bundleWebpack, {
       sourcemap: true
     })
     expect(map.mappings).toMatchSnapshot()
   })
 
-  test('yml', async () => {
+  test.skip('yml', async () => {
     const { map } = await bundleAndRun('yml.vue', bundleWebpack, {
       sourcemap: true
     })
     expect(map.mappings).toMatchSnapshot()
   })
 
-  test('json5', async () => {
+  test.skip('json5', async () => {
     const { map } = await bundleAndRun('json5.vue', bundleWebpack, {
       sourcemap: true
     })

@@ -70,6 +70,20 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
      */
     enforce: meta.framework === 'vite' ? 'pre' : 'post',
 
+    transformInclude(id) {
+      debug('transformInclude', id)
+      if (meta.framework === 'vite') {
+        return true
+      } else {
+        const { filename } = parseVueRequest(id)
+        return filename.endsWith('vue') ||
+          filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
+          filename.endsWith(INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID)
+          ? true
+          : /\.(json5?|ya?ml)$/.test(id) && filter(id)
+      }
+    },
+
     vite: {
       configResolved(config) {
         isProduction = config.isProduction
@@ -180,7 +194,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     async transform(code, id) {
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query), filename)
-      debug('transform (code)', code)
 
       let langInfo = defaultSFCLang
       let inSourceMap: RawSourceMap | undefined
@@ -233,7 +246,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         }
       } else {
         // for Vue SFC
-        if (isCustomBlock(query as Record<string, unknown>)) {
+        if (isCustomBlock(query)) {
           if (isString(query.lang)) {
             langInfo = (
               query.src

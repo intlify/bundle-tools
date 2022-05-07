@@ -76,7 +76,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         return true
       } else {
         const { filename } = parseVueRequest(id)
-        return filename.endsWith('vue')
+        return filename.endsWith('vue') ||
+          filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
+          filename.endsWith(INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID)
           ? true
           : /\.(json5?|ya?ml)$/.test(id) && filter(id)
       }

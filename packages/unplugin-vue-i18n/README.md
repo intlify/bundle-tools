@@ -28,11 +28,11 @@ npm i @intlify/unplugin-vue-i18n
 
 ```ts
 // vite.config.ts
-import vueI18n from '@intlify/unplugin-vue-i18n/vite'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 export default defineConfig({
   plugins: [
-    vueI18n({ /* options */ }),
+    VueI18nPlugin({ /* options */ }),
   ],
 })
 ```
@@ -52,6 +52,32 @@ module.exports = {
     VueI18nPlugin({ /* options */ })
   ]
 }
+```
+
+<br></details>
+
+<details>
+<summary>Nuxt</summary><br>
+
+```ts
+// nuxt.config.ts
+import { defineNuxtConfig } from 'nuxt'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n'
+
+export default defineNuxtConfig({
+  vite: {
+    plugins: [
+      VueI18nPlugin.vite({ /* options */ }),
+    ],
+  },
+  // When using Webpack
+  // builder: '@nuxt/webpack-builder',
+  webpack: {
+    plugins: [
+      VueI18nPlugin.webpack({ /* options */ }),
+    ]
+  }
+})
 ```
 
 <br></details>

@@ -272,6 +272,15 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   For more details, See [here](#-automatic-bundling)
 
+### `compositionOnly`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether to make vue-i18n API only composition API. **By default the legacy API is tree-shaken.**
+
+  For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+
 ### `forceStringify`
 
 - **Type:** `boolean`

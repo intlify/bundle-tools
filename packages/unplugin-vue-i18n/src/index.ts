@@ -4,9 +4,11 @@ import createDebug from 'debug'
 import fg from 'fast-glob'
 import {
   isArray,
+  isObject,
   isEmptyObject,
   isString,
   isNumber,
+  isBoolean,
   assign
 } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
@@ -53,6 +55,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const useClassComponent = !!options.useClassComponent
   const bridge = !!options.bridge
   debug('bridge', bridge)
+  const runtimeOnly = isBoolean(options.runtimeOnly)
+    ? options.runtimeOnly
+    : true
+  debug('runtimeOnly', runtimeOnly)
 
   let isProduction = false
   let sourceMap = false
@@ -85,6 +91,23 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     },
 
     vite: {
+      config(config, { command }) {
+        normalizeConfigResolveAlias(config.resolve, meta.framework)
+        if (command === 'build' && runtimeOnly) {
+          if (isArray(config.resolve!.alias)) {
+            config.resolve!.alias.push({
+              find: 'vue-i18n',
+              replacement: `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
+            })
+          } else if (isObject(config.resolve!.alias)) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ;(config.resolve!.alias as any)[
+              'vue-i18n'
+            ] = `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
+          }
+        }
+      },
+
       configResolved(config) {
         isProduction = config.isProduction
         sourceMap =
@@ -126,6 +149,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       isProduction = compiler.options.mode !== 'development'
       sourceMap = !!compiler.options.devtool
       debug(`webpack: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
+
+      if (isProduction && runtimeOnly) {
+        normalizeConfigResolveAlias(compiler.options.resolve, meta.framework)
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(compiler.options.resolve!.alias as any)[
+          'vue-i18n'
+        ] = `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
+      }
 
       /**
        * NOTE:
@@ -305,6 +336,29 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     }
   } as UnpluginOptions
 })
+
+function normalizeConfigResolveAlias(
+  resolve: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  framework: UnpluginContextMeta['framework']
+): void {
+  if (resolve && resolve.alias) {
+    return
+  }
+
+  if (!resolve) {
+    if (framework === 'vite') {
+      resolve = { alias: [] }
+    } else if (framework === 'webpack') {
+      resolve = { alias: {} }
+    }
+  } else if (!resolve.alias) {
+    if (framework === 'vite') {
+      resolve.alias = []
+    } else if (framework === 'webpack') {
+      resolve.alias = {}
+    }
+  }
+}
 
 async function generateBundleResources(
   resources: string[],

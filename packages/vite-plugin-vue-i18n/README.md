@@ -257,7 +257,7 @@ About details, See the below section
   Whether or not to automatically use Vue I18n **runtime-only** in production build, set in the `vue-i18n` field of Vite `resolve.alias` option.
   If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
 
-  For more details, See [here](#package-automatic-vue-i18n-bundling)
+  For more details, See [here](#-automatic-bundling)
 
 ### `compositionOnly`
 

@@ -270,7 +270,7 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
 
-  For more details, See [here](#-automatic-vue-i18n-bundling)
+  For more details, See [here](#-automatic-bundling)
 
 ### `forceStringify`
 

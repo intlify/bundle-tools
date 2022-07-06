@@ -2,6 +2,7 @@ export type SFCLangFormat = 'json' | 'json5' | 'yml' | 'yaml'
 export interface PluginOptions {
   include?: string | string[]
   runtimeOnly?: boolean
+  compositionOnly?: boolean
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat
   globalSFCScope?: boolean

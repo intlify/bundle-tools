@@ -59,6 +59,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     ? options.runtimeOnly
     : true
   debug('runtimeOnly', runtimeOnly)
+  const compositionOnly = isBoolean(options.compositionOnly)
+    ? options.compositionOnly
+    : true
 
   let isProduction = false
   let sourceMap = false
@@ -106,6 +109,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             ] = `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
           }
         }
+
+        config.define = config.define || {}
+        config.define['__VUE_I18N_LEGACY_API__'] = !compositionOnly
+        debug(
+          `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
+        )
+
+        config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
       },
 
       configResolved(config) {
@@ -157,6 +168,20 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           'vue-i18n'
         ] = `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
       }
+
+      loadWebpack().then(webpack => {
+        if (webpack) {
+          compiler.options.plugins!.push(
+            new webpack.DefinePlugin({
+              __VUE_I18N_LEGACY_API__: JSON.stringify(compositionOnly),
+              __INTLIFY_PROD_DEVTOOLS__: 'false'
+            })
+          )
+          debug(`set __VUE_I18N_LEGACY_API__ is '${compositionOnly}'`)
+        } else {
+          debug('ignore vue-i18n feature flags with webpack.DefinePlugin')
+        }
+      })
 
       /**
        * NOTE:
@@ -358,6 +383,18 @@ function normalizeConfigResolveAlias(
       resolve.alias = {}
     }
   }
+}
+
+async function loadWebpack() {
+  let webpack = null
+  try {
+    webpack = await import('webpack').then(m => m.default || m)
+  } catch (e) {
+    console.warn(
+      `[@intlify/unplugin-vue-i18n] webpack not found, please install webpack.`
+    )
+  }
+  return webpack
 }
 
 async function generateBundleResources(

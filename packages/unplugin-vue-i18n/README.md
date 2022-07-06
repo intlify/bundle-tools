@@ -375,7 +375,6 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
 
 ## ✅ TODO
 - [ ] Bundling optimizations
-- [ ] Support nuxt
 
 ## 📜 Changelog
 

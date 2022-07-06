@@ -225,6 +225,19 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
 }
 ```
 
+
+## 📦 Automatic bundling
+### For Vue I18n
+As noted [here](https://vue-i18n.intlify.dev/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
+
+This plugin will automatically select and bundle Vue I18n build according to the following behavior:
+
+- development: `vue-i18n.esm-bundler.js`
+- production: `vue-i18n.runtime.esm-bundler.js`
+
+About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
+
+
 ## 🔧 Options
 
 ### `include`
@@ -242,6 +255,22 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
   ```
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+
+### `runtimeOnly`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether or not to automatically use Vue I18n **runtime-only** in production build, set `vue-i18n.runtime.esm-bundler.js` in the `vue-i18n` field of bundler config, the below:
+  
+  ```
+  - vite config: `resolve.alias`
+  - webpack config: `resolve.alias`
+  ```
+
+  If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
+
+  For more details, See [here](#-automatic-vue-i18n-bundling)
 
 ### `forceStringify`
 

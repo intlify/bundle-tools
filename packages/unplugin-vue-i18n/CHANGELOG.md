@@ -1,4 +1,19 @@
 
+## @intlify/unplugin-vue-i18n@0.3.0 (2022-07-07)
+
+#### :star: Features
+* [#136](https://github.com/intlify/bundle-tools/pull/136) feat(unplugin-vue-i18n): support fullinstall option ([@kazupon](https://github.com/kazupon))
+* [#135](https://github.com/intlify/bundle-tools/pull/135) feat(unplugin-vue-i18n): support composition only option ([@kazupon](https://github.com/kazupon))
+* [#134](https://github.com/intlify/bundle-tools/pull/134) feat(unplugin-vue-i18n): support runtimeOnly option ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#133](https://github.com/intlify/bundle-tools/pull/133) docs: consistent plugin name and add Nuxt ([@Atinux](https://github.com/Atinux))
+
+#### Committers: 2
+- Sébastien Chopin ([@Atinux](https://github.com/Atinux))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.2.1 (2022-05-07)
 
 #### :bug: Bug Fixes

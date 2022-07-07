@@ -414,6 +414,13 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   > ⚠️ Note that if you set `bridge: true`, the bundle size will increase. It is recommended to disable this mode after the migration from vue-i18n@v8.26 to vue-i18n@v9.x is completed.
 
+### `esm`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  For `bridge` option is `true`, whether to bundle locale resources with ESM. By default ESM, if you need to bundl with commonjs for especialy webpack, you need to set `false`
+
 ### `useClassComponent`
 
 - **Type:** `boolean`

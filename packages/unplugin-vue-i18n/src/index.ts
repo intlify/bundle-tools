@@ -53,20 +53,27 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     : 'json'
   const globalSFCScope = !!options.globalSFCScope
   const useClassComponent = !!options.useClassComponent
+
   const bridge = !!options.bridge
   debug('bridge', bridge)
+
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
     : true
   debug('runtimeOnly', runtimeOnly)
+
   const compositionOnly = isBoolean(options.compositionOnly)
     ? options.compositionOnly
     : true
   debug('compositionOnly', compositionOnly)
+
   const fullInstall = isBoolean(options.fullInstall)
     ? options.fullInstall
     : true
   debug('fullInstall', fullInstall)
+
+  const esm = isBoolean(options.esm) ? options.esm : true
+  debug('esm', esm)
 
   let isProduction = false
   let sourceMap = false
@@ -246,6 +253,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           {
             forceStringify,
             bridge,
+            exportESM: esm,
             useClassComponent
           }
         )
@@ -284,6 +292,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               bridge,
+              exportESM: esm,
               forceStringify
             }
           ) as CodeGenOptions
@@ -341,6 +350,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               bridge,
+              exportESM: esm,
               forceStringify
             }
           ) as CodeGenOptions
@@ -416,11 +426,13 @@ async function generateBundleResources(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    exportESM = true,
     useClassComponent = false
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    exportESM?: boolean
     useClassComponent?: boolean
   }
 ) {
@@ -436,6 +448,7 @@ async function generateBundleResources(
         isGlobal,
         useClassComponent,
         bridge,
+        exportESM,
         forceStringify
       }) as CodeGenOptions
       parseOptions.type = 'bare'
@@ -511,12 +524,14 @@ function getOptions(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    exportESM = true,
     useClassComponent = false
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    exportESM?: boolean
     useClassComponent?: boolean
   }
 ): Record<string, unknown> {
@@ -529,6 +544,7 @@ function getOptions(
     forceStringify,
     useClassComponent,
     bridge,
+    exportESM,
     env: mode,
     onWarn: (msg: string): void => {
       warn(`${filename} ${msg}`)

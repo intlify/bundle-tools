@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.4.0 (2022-07-07)
+
+#### :star: Features
+* [#138](https://github.com/intlify/bundle-tools/pull/138) feat(unplugin-vue-i18n): support esm options for bridge ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.3.0 (2022-07-07)
 
 #### :star: Features

@@ -3,6 +3,7 @@ export interface PluginOptions {
   include?: string | string[]
   runtimeOnly?: boolean
   compositionOnly?: boolean
+  fullInstall?: boolean
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat
   globalSFCScope?: boolean

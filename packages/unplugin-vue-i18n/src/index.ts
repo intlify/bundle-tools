@@ -62,6 +62,11 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const compositionOnly = isBoolean(options.compositionOnly)
     ? options.compositionOnly
     : true
+  debug('compositionOnly', compositionOnly)
+  const fullInstall = isBoolean(options.fullInstall)
+    ? options.fullInstall
+    : true
+  debug('fullInstall', fullInstall)
 
   let isProduction = false
   let sourceMap = false
@@ -114,6 +119,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         config.define['__VUE_I18N_LEGACY_API__'] = !compositionOnly
         debug(
           `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
+        )
+        config.define['__VUE_I18N_FULL_INSTALL__'] = fullInstall
+        debug(
+          `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
         )
 
         config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
@@ -174,10 +183,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           compiler.options.plugins!.push(
             new webpack.DefinePlugin({
               __VUE_I18N_LEGACY_API__: JSON.stringify(compositionOnly),
+              __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
               __INTLIFY_PROD_DEVTOOLS__: 'false'
             })
           )
           debug(`set __VUE_I18N_LEGACY_API__ is '${compositionOnly}'`)
+          debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
         } else {
           debug('ignore vue-i18n feature flags with webpack.DefinePlugin')
         }

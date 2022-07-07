@@ -281,6 +281,17 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
+### `fullInstall`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether to install the full set of APIs, components, etc. provided by Vue I18n. By default, all of them will be installed.
+
+  If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
+
+  For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+
 ### `forceStringify`
 
 - **Type:** `boolean`

@@ -46,13 +46,12 @@ If you are using the runtime version, you will need to compile before importing 
 
 #### Vite Config
 
-the below example that `examples/composition/vite.config.ts`:
-
 ```ts
-import path from 'path'
 import { defineConfig } from 'vite'
+import { resolve, dirname } from 'node:path'
+import { fileURLToPath } from 'url'
 import vue from '@vitejs/plugin-vue'
-import vueI18n from '@intlify/vite-plugin-vue-i18n'
+import { vueI18n } from '@intlify/vite-plugin-vue-i18n'
 
 export default defineConfig({
   plugins: [
@@ -62,7 +61,7 @@ export default defineConfig({
       // compositionOnly: false,
 
       // you need to set i18n resource including paths !
-      include: path.resolve(__dirname, './path/to/src/locales/**')
+      include: resolve(dirname(fileURLToPath(import.meta.url)), './path/to/src/locales/**'),
     })
   ]
 })

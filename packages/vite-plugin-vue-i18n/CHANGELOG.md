@@ -1,4 +1,16 @@
 
+## @intlify/vite-plugin-vue-i18n@5.0.0-beta.0 (2022-07-14)
+
+#### :star: Features
+* [#142](https://github.com/intlify/bundle-tools/pull/142) feat(vite-plugin-vue-i18n): support vite3 ([@kazupon](https://github.com/kazupon))
+
+#### :boom: Breaking Change
+* [#143](https://github.com/intlify/bundle-tools/pull/143) breaking(vite-plugin-vue-i18n): drop node v14.6 before ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@4.0.0 (2022-04-05)
 
 #### :star: Features

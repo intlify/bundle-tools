@@ -34,7 +34,7 @@
     "source-map": "0.6.1"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 14.6"
   },
   "files": [
     "lib",

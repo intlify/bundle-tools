@@ -18,10 +18,10 @@
     "petite-vue-i18n": {
       "optional": true
     },
-    "vue-i18n": {
+    "vite": {
       "optional": true
     },
-    "vite": {
+    "vue-i18n": {
       "optional": true
     }
   },
@@ -34,7 +34,7 @@
     "source-map": "0.6.1"
   },
   "engines": {
-    "node": ">= 14"
+    "node": ">= 12"
   },
   "files": [
     "lib",

@@ -11,7 +11,7 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "*",
-    "vite": "^2.9.0",
+    "vite": "^2.9.0 || ^3.0.0",
     "vue-i18n": "*"
   },
   "peerDependenciesMeta": {
@@ -19,6 +19,9 @@
       "optional": true
     },
     "vue-i18n": {
+      "optional": true
+    },
+    "vite": {
       "optional": true
     }
   },
@@ -31,7 +34,7 @@
     "source-map": "0.6.1"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 14"
   },
   "files": [
     "lib",

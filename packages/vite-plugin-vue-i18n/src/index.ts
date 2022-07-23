@@ -23,6 +23,16 @@ const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/vite-plugin-vue-i18n/messages'
 
 const installedPkg = checkInstallPackage('@intlify/vite-plugin-vue-i18n', debug)
 
+const VIRTUAL_PREFIX = '\0'
+
+function getVirtualId(id: string) {
+  return id.startsWith(VIRTUAL_PREFIX) ? id.slice(VIRTUAL_PREFIX.length) : null
+}
+
+function asVirtualId(id: string) {
+  return VIRTUAL_PREFIX + id
+}
+
 function pluginI18n(
   options: VitePluginVueI18nOptions = { forceStringify: false }
 ): Plugin {
@@ -171,13 +181,12 @@ function pluginI18n(
 
     resolveId(id: string) {
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
-        return id
+        return asVirtualId(id)
       }
     },
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async load(id: string) {
-      if (id === INTLIFY_BUNDLE_IMPORT_ID && include) {
+      if (getVirtualId(id) === INTLIFY_BUNDLE_IMPORT_ID && include) {
         let resourcePaths = [] as string[]
         const includePaths = isArray(include) ? include : [include]
         for (const inc of includePaths) {

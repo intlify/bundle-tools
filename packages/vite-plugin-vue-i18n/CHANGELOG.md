@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@5.0.1 (2022-07-23)
+
+#### :zap: Improvement Features
+* [#149](https://github.com/intlify/bundle-tools/pull/149) fix(vite-plugin-vue-i18n): improve wrong virtual modules implementation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@5.0.0 (2022-07-14)
 
 #### :star: Features

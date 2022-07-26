@@ -1,4 +1,17 @@
 
+## @intlify/unplugin-vue-i18n@0.5.0 (2022-07-26)
+
+#### :star: Features
+* [#156](https://github.com/intlify/bundle-tools/pull/156) feat(unplugin-vue-i18n): support petite-vue-i18n and useVueI18nImportName option ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#155](https://github.com/intlify/bundle-tools/pull/155) fix(unplugin-vue-i18n): improve wrong virtual module implementation ([@kazupon](https://github.com/kazupon))
+* [#154](https://github.com/intlify/bundle-tools/pull/154) fix(unplugin-vue-i18n): support unplugin v0.8 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.4.0 (2022-07-07)
 
 #### :star: Features

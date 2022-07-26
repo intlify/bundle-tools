@@ -12,7 +12,11 @@ import {
   assign
 } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
-import { generateJSON, generateYAML } from '@intlify/bundle-utils'
+import {
+  generateJSON,
+  generateYAML,
+  checkInstallPackage
+} from '@intlify/bundle-utils'
 import { RawSourceMap } from 'source-map'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
@@ -29,6 +33,8 @@ const INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID =
 const VIRTUAL_PREFIX = '\0'
 
 const debug = createDebug('unplugin-vue-i18n')
+
+const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
@@ -64,15 +70,34 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     : true
   debug('runtimeOnly', runtimeOnly)
 
-  const compositionOnly = isBoolean(options.compositionOnly)
-    ? options.compositionOnly
+  // prettier-ignore
+  const compositionOnly = installedPkg === 'vue-i18n'
+    ? isBoolean(options.compositionOnly)
+      ? options.compositionOnly
+      : true
     : true
   debug('compositionOnly', compositionOnly)
 
-  const fullInstall = isBoolean(options.fullInstall)
-    ? options.fullInstall
-    : true
+  // prettier-ignore
+  const fullInstall = installedPkg === 'vue-i18n'
+    ? isBoolean(options.fullInstall)
+      ? options.fullInstall
+      : true
+    : false
   debug('fullInstall', fullInstall)
+
+  const useVueI18nImportName = options.useVueI18nImportName
+  if (useVueI18nImportName != null) {
+    warn(`'useVueI18nImportName' option is experimental`)
+  }
+  debug('useVueI18nImportName', useVueI18nImportName)
+
+  const getAliasName = () =>
+    installedPkg === 'petite-vue-i18n' &&
+    isBoolean(useVueI18nImportName) &&
+    useVueI18nImportName
+      ? 'vue-i18n'
+      : `${installedPkg}`
 
   const esm = isBoolean(options.esm) ? options.esm : true
   debug('esm', esm)
@@ -99,15 +124,37 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         if (command === 'build' && runtimeOnly) {
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
-              find: 'vue-i18n',
-              replacement: `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
+              find: getAliasName(),
+              replacement: `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
             })
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[
-              'vue-i18n'
-            ] = `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
+              getAliasName()
+            ] = `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
           }
+          debug(`alias name: ${getAliasName()}`)
+          debug(
+            `set ${installedPkg} runtime only: ${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+          )
+        } else if (
+          command === 'serve' &&
+          installedPkg === 'petite-vue-i18n' &&
+          useVueI18nImportName
+        ) {
+          normalizeConfigResolveAlias(config.resolve, meta.framework)
+          if (isArray(config.resolve!.alias)) {
+            config.resolve!.alias.push({
+              find: 'vue-i18n',
+              replacement: `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+            })
+          } else {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            ;(config.resolve!.alias as any)[
+              'vue-i18n'
+            ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+          }
+          debug(`alias name: ${getAliasName()}`)
         }
 
         config.define = config.define || {}

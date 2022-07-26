@@ -10,4 +10,5 @@ export interface PluginOptions {
   globalSFCScope?: boolean
   bridge?: boolean
   useClassComponent?: boolean
+  useVueI18nImportName?: boolean
 }

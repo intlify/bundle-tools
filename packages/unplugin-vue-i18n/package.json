@@ -31,15 +31,16 @@
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0",
     "pathe": "^0.2.0",
+    "picocolors": "^1.0.0",
     "source-map": "0.6.1",
-    "unplugin": "^0.6.2"
+    "unplugin": "^0.8.0"
   },
   "devDependencies": {
     "mlly": "^0.5.2",
     "unbuild": "^0.7.4"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 14.16"
   },
   "files": [
     "lib",

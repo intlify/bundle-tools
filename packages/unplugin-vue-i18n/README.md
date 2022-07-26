@@ -237,6 +237,13 @@ This plugin will automatically select and bundle Vue I18n build according to the
 
 About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
 
+### For `petite-vue-i18n`
+
+This plugin will automatically select and bundle `petite-vue-i18n` build according to the following vite behavior:
+
+- vite dev: `petite-vue-i18n.esm-bundler.js`
+- vite build: `petite-vue-i18n.runtime.esm-bundler.js`
+
 
 ## 🔧 Options
 
@@ -428,9 +435,15 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   This option that to use i18n custom blocks in `vue-class-component`.
 
+### `useVueI18nImportName` (Experimental)
 
-## ✅ TODO
-- [ ] Bundling optimizations
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether to use the import name of `petite-vue-i18n` with the same import name as vue-i18n (`import { xxx } from 'vue-i18n'`).
+
+  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
+
 
 ## 📜 Changelog
 

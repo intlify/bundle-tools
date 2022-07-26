@@ -26,6 +26,8 @@ import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID =
   '@intlify/vite-plugin-vue-i18n/messages'
+const VIRTUAL_PREFIX = '\0'
+
 const debug = createDebug('unplugin-vue-i18n')
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
@@ -206,11 +208,11 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         warn(
           `deprected '${INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID}', you should switch to '${INTLIFY_BUNDLE_IMPORT_ID}'`
         )
-        return id
+        return asVirtualId(id, meta.framework)
       }
 
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
-        return id
+        return asVirtualId(id, meta.framework)
       }
     },
 
@@ -220,7 +222,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       const { query } = parseVueRequest(id)
       if (
         [INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID, INTLIFY_BUNDLE_IMPORT_ID].includes(
-          id
+          getVirtualId(id, meta.framework)
         ) &&
         include
       ) {
@@ -565,6 +567,25 @@ function getOptions(
       isGlobal: false
     })
   }
+}
+
+function getVirtualId(
+  id: string,
+  framework: UnpluginContextMeta['framework'] = 'vite'
+) {
+  // prettier-ignore
+  return framework === 'vite'
+    ? id.startsWith(VIRTUAL_PREFIX)
+      ? id.slice(VIRTUAL_PREFIX.length)
+      : ''
+    : id
+}
+
+function asVirtualId(
+  id: string,
+  framework: UnpluginContextMeta['framework'] = 'vite'
+) {
+  return framework === 'vite' ? VIRTUAL_PREFIX + id : id
 }
 
 export default unplugin

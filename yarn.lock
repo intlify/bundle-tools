@@ -659,7 +659,7 @@ __metadata:
     pathe: ^0.2.0
     source-map: 0.6.1
     unbuild: ^0.7.4
-    unplugin: ^0.6.2
+    unplugin: ^0.8.0
   peerDependencies:
     petite-vue-i18n: "*"
     vue-i18n: "*"
@@ -2777,6 +2777,15 @@ __metadata:
   bin:
     acorn: bin/acorn
   checksum: aca0aabf98826717920ac2583fdcad0a6fbe4e583fdb6e843af2594e907455aeafe30b1e14f1757cd83ce1776773cf8296ffc3a4acf13f0bd3dfebcf1db6ae80
+  languageName: node
+  linkType: hard
+
+"acorn@npm:^8.8.0":
+  version: 8.8.0
+  resolution: "acorn@npm:8.8.0"
+  bin:
+    acorn: bin/acorn
+  checksum: 7270ca82b242eafe5687a11fea6e088c960af712683756abf0791b68855ea9cace3057bd5e998ffcef50c944810c1e0ca1da526d02b32110e13c722aa959afdc
   languageName: node
   linkType: hard
 
@@ -13457,17 +13466,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unplugin@npm:^0.6.2":
-  version: 0.6.2
-  resolution: "unplugin@npm:0.6.2"
+"unplugin@npm:^0.8.0":
+  version: 0.8.0
+  resolution: "unplugin@npm:0.8.0"
   dependencies:
+    acorn: ^8.8.0
     chokidar: ^3.5.3
     webpack-sources: ^3.2.3
-    webpack-virtual-modules: ^0.4.3
+    webpack-virtual-modules: ^0.4.4
   peerDependencies:
     esbuild: ">=0.13"
     rollup: ^2.50.0
-    vite: ^2.3.0
+    vite: ^2.3.0 || ^3.0.0-0
     webpack: 4 || 5
   peerDependenciesMeta:
     esbuild:
@@ -13478,7 +13488,7 @@ __metadata:
       optional: true
     webpack:
       optional: true
-  checksum: 0ad0b290c00a528196f9af95cb31872d92221f1cd4a3b3ee7c72d6b1cf2130c1c342aca97ccee44e5c911b59cdf996c095c8188802d7ff7a002a98b84eafc4eb
+  checksum: 116052627de4b015ce6b856bfb589647390591cd4bd49120475ea591e14706d8ce3992f522192b222c6956a08afe361abd76d8139d028323fecc9821a5d8e5e5
   languageName: node
   linkType: hard
 
@@ -14070,10 +14080,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack-virtual-modules@npm:^0.4.3":
-  version: 0.4.3
-  resolution: "webpack-virtual-modules@npm:0.4.3"
-  checksum: 158d30633e0d9be3cfcde10fe959b28df5d5adb1068e0f057fcfb10b0b16ede6c892eba438f6ced089c7c442087748c2fcd1e3f035e4e2dc6760517a8c227714
+"webpack-virtual-modules@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "webpack-virtual-modules@npm:0.4.4"
+  checksum: 6720b4c47d76dc9cbaff557562506c192da7560a90395e9918a418e257a0c0cda9f5e3ac92107ec0789f8f23ad942313bd8cdebc95031d0adef1032bf6142bc7
   languageName: node
   linkType: hard
 

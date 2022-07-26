@@ -91,20 +91,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
      */
     enforce: meta.framework === 'vite' ? 'pre' : 'post',
 
-    transformInclude(id) {
-      debug('transformInclude', id)
-      if (meta.framework === 'vite') {
-        return true
-      } else {
-        const { filename } = parseVueRequest(id)
-        return filename.endsWith('vue') ||
-          filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
-          filename.endsWith(INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID)
-          ? true
-          : /\.(json5?|ya?ml)$/.test(id) && filter(id)
-      }
-    },
-
     vite: {
       config(config, { command }) {
         normalizeConfigResolveAlias(config.resolve, meta.framework)
@@ -266,6 +252,21 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       }
     },
 
+    transformInclude(id) {
+      debug('transformInclude', id)
+      if (meta.framework === 'vite') {
+        return true
+      } else {
+        const { filename } = parseVueRequest(id)
+        return (
+          filename.endsWith('vue') ||
+          filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
+          filename.endsWith(INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID) ||
+          (/\.(json5?|ya?ml)$/.test(filename) && filter(filename))
+        )
+      }
+    },
+
     async transform(code, id) {
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query), filename)
@@ -411,9 +412,7 @@ async function loadWebpack() {
   try {
     webpack = await import('webpack').then(m => m.default || m)
   } catch (e) {
-    console.warn(
-      `[@intlify/unplugin-vue-i18n] webpack not found, please install webpack.`
-    )
+    warn(`webpack not found, please install webpack.`)
   }
   return webpack
 }

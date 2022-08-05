@@ -403,6 +403,4 @@ async function generateBundleResources(
 }`
 }
 
-// overwrite for cjs require('...')() usage
 export default pluginI18n
-export const vueI18n = pluginI18n

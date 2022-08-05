@@ -33,6 +33,9 @@
     "fast-glob": "^3.2.5",
     "source-map": "0.6.1"
   },
+  "devDependencies": {
+    "unbuild": "^0.7.6"
+  },
   "engines": {
     "node": ">= 14.6"
   },
@@ -51,13 +54,13 @@
     "vue-i18n"
   ],
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "./index.mjs",
+  "main": "lib/index.cjs",
+  "module": "./lib/index.mjs",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./lib/index.js"
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs"
     },
     "./lib/*": "./lib/*",
     "./index.mjs": "./index.mjs",
@@ -69,7 +72,7 @@
     "directory": "packages/vite-plugin-vue-i18n"
   },
   "scripts": {
-    "build": "tsc -p .",
+    "build": "unbuild",
     "build:example": "vite build --config ./examples/vite.config.ts --outDir ./examples/dist",
     "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",

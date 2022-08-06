@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@6.0.0 (2022-08-06)
+
+#### :boom: Breaking Change
+* [#158](https://github.com/intlify/bundle-tools/pull/158) breaking(vite-plugin-vue-i18n): plugin export named default only ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@5.0.1 (2022-07-23)
 
 #### :zap: Improvement Features

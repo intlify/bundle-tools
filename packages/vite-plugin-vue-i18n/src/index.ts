@@ -210,7 +210,9 @@ function pluginI18n(
     async handleHotUpdate({ file, server }) {
       if (/\.(json5?|ya?ml)$/.test(file)) {
         const module = server.moduleGraph.getModuleById(
-          INTLIFY_BUNDLE_IMPORT_ID
+          getVirtualId(
+            INTLIFY_BUNDLE_IMPORT_ID
+          )
         )
         if (module) {
           server.moduleGraph.invalidateModule(module)

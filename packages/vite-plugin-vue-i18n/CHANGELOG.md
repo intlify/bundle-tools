@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@6.0.1 (2022-08-10)
+
+#### :bug: Bug Fixes
+* [#160](https://github.com/intlify/bundle-tools/pull/160) fix(vite-plugin-vue-i18n): use correct id in hmr ([@marekvospel](https://github.com/marekvospel))
+
+#### Committers: 1
+- Marek Vospel ([@marekvospel](https://github.com/marekvospel))
+
+
 ## @intlify/vite-plugin-vue-i18n@6.0.0 (2022-08-06)
 
 #### :boom: Breaking Change

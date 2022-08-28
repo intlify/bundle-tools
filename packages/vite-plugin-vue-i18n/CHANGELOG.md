@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@7.0.0-beta.0 (2022-08-28)
+
+#### :star: Features
+* [#167](https://github.com/intlify/bundle-tools/pull/167) feat: support esm file extension ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@6.0.1 (2022-08-10)
 
 #### :bug: Bug Fixes

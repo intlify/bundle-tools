@@ -101,17 +101,17 @@ function pluginI18n(
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: getAliasName(),
-            replacement: `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+            replacement: `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.mjs`
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(config.resolve!.alias as any)[
             getAliasName()
-          ] = `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+          ] = `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.mjs`
         }
         debug(`alias name: ${getAliasName()}`)
         debug(
-          `set ${installedPkg} runtime only: ${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+          `set ${installedPkg} runtime only: ${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.mjs`
         )
       } else if (
         command === 'serve' &&
@@ -122,13 +122,13 @@ function pluginI18n(
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: 'vue-i18n',
-            replacement: `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+            replacement: `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.mjs`
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(config.resolve!.alias as any)[
             'vue-i18n'
-          ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+          ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.mjs`
         }
         debug(`alias name: ${getAliasName()}`)
       }

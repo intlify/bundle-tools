@@ -1,4 +1,16 @@
 
+## @intlify/vite-plugin-vue-i18n@7.0.0-beta.1 (2022-08-31)
+
+#### :star: Features
+* [#170](https://github.com/intlify/bundle-tools/pull/170) feat(vite-plugin-vue-i18n): support vue-i18n@9.3.0-beta.2 or later ([@kazupon](https://github.com/kazupon))
+
+#### :bug: Bug Fixes
+* [#171](https://github.com/intlify/bundle-tools/pull/171) fix(vite-plugin-vue-i18n): wrong exporting ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@7.0.0-beta.0 (2022-08-28)
 
 #### :star: Features

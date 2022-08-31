@@ -41,7 +41,6 @@
   },
   "files": [
     "lib",
-    "index.mjs",
     "client.d.ts"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/vite-plugin-vue-i18n/README.md",
@@ -63,7 +62,6 @@
       "require": "./lib/index.cjs"
     },
     "./lib/*": "./lib/*",
-    "./index.mjs": "./index.mjs",
     "./package.json": "./package.json"
   },
   "repository": {

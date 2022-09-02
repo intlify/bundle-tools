@@ -20,6 +20,8 @@ import type { VitePluginVueI18nOptions } from './options'
 const debug = createDebug('vite-plugin-vue-i18n:index')
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/vite-plugin-vue-i18n/messages'
+const INTLIFY_FEATURE_FLAGS_ID = '@intlify-feature-flags'
+const INTLIFY_FEATURE_PROXY_SUFFIX = 'inject-feature-proxy'
 
 const installedPkg = checkInstallPackage('@intlify/vite-plugin-vue-i18n', debug)
 
@@ -80,6 +82,7 @@ function pluginI18n(
     useVueI18nImportName
       ? 'vue-i18n'
       : `${installedPkg}`
+  const runtimeModule = `${installedPkg}.runtime.mjs`
   const forceStringify = !!options.forceStringify
 
   let isProduction = false
@@ -101,17 +104,17 @@ function pluginI18n(
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: getAliasName(),
-            replacement: `${installedPkg}/dist/${installedPkg}.runtime.mjs`
+            replacement: `${installedPkg}/dist/${runtimeModule}`
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(config.resolve!.alias as any)[
             getAliasName()
-          ] = `${installedPkg}/dist/${installedPkg}.runtime.mjs`
+          ] = `${installedPkg}/dist/${runtimeModule}`
         }
         debug(`alias name: ${getAliasName()}`)
         debug(
-          `set ${installedPkg} runtime only: ${installedPkg}/dist/${installedPkg}.runtime.mjs`
+          `set ${installedPkg} runtime only: ${installedPkg}/dist/${runtimeModule}`
         )
       } else if (
         command === 'serve' &&
@@ -179,13 +182,65 @@ function pluginI18n(
       }
     },
 
-    resolveId(id: string) {
+    async resolveId(id: string, importer: string, options) {
+      if (options?.ssr) {
+        if (getVirtualId(id) === INTLIFY_FEATURE_FLAGS_ID) {
+          return {
+            id: asVirtualId(INTLIFY_FEATURE_FLAGS_ID),
+            moduleSideEffects: true
+          }
+        }
+
+        if (
+          id.endsWith(runtimeModule) &&
+          importer.toString().endsWith(INTLIFY_FEATURE_PROXY_SUFFIX)
+        ) {
+          return null
+        }
+
+        if (id.endsWith(runtimeModule)) {
+          const resolution = await this.resolve(id, importer, {
+            skipSelf: true,
+            ...options
+          })
+          if (!resolution) {
+            return resolution
+          }
+          return `${resolution.id}?${INTLIFY_FEATURE_PROXY_SUFFIX}`
+        }
+      }
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
         return asVirtualId(id)
       }
     },
 
-    async load(id: string) {
+    async load(id: string, options) {
+      /**
+       * NOTE:
+       *  Vue SSR with Vite3 (esm) will be worked on `@vue/server-renderer` with cjs.
+       *  This prevents the vue feature flag (`__VUE_PROD_DEVTOOLS__`)
+       *  and the vue-i18n feature flags used in `(petitle)-vue-i18n.runtime.mjs` from being set.
+       *  To work around this problem, proxy using the virutal module of vite (rollup)
+       */
+      if (options?.ssr) {
+        if (getVirtualId(id) === INTLIFY_FEATURE_FLAGS_ID) {
+          return `import { getGlobalThis } from '@intlify/shared';
+getGlobalThis().__VUE_I18N_LEGACY_API__ = ${JSON.stringify(!compositionOnly)};
+getGlobalThis().__VUE_I18N_FULL_INSTALL__ = ${JSON.stringify(fullInstall)};
+getGlobalThis().__VUE_I18N_PROD_DEVTOOLS__ = false;
+getGlobalThis().__VUE_PROD_DEVTOOLS__ = false;
+`
+        }
+
+        if (id.endsWith(INTLIFY_FEATURE_PROXY_SUFFIX)) {
+          // proxy with virtual module
+          return `
+import ${JSON.stringify(asVirtualId(INTLIFY_FEATURE_FLAGS_ID))};
+export * from ${JSON.stringify(getAliasName())};
+`
+        }
+      }
+
       if (getVirtualId(id) === INTLIFY_BUNDLE_IMPORT_ID && include) {
         let resourcePaths = [] as string[]
         const includePaths = isArray(include) ? include : [include]

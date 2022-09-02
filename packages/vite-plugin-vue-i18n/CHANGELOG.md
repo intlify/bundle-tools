@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@7.0.0-beta.2 (2022-09-02)
+
+#### :zap: Improvement Features
+* [#172](https://github.com/intlify/bundle-tools/pull/172) fix(vite-plugin-vue-i18n): support vite3 SSR ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@7.0.0-beta.1 (2022-08-31)
 
 #### :star: Features

@@ -223,7 +223,7 @@ export function generateMessageFunction(
   let occured = false
   const newOptions = Object.assign(options, { mode: 'arrow' }) as CompileOptions
   newOptions.onError = (err: CompileError): void => {
-    options.onError && options.onError(err.message)
+    options.onError && err.message && options.onError(err.message)
     occured = true
   }
   const { code, ast, map } = baseCompile(msg, newOptions)

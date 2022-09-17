@@ -129,3 +129,10 @@ test('array mixed', async () => {
   expect(code).toMatchSnapshot('code')
   expect(map).toMatchSnapshot('map')
 })
+
+test('is this yaml invalid', async () => {
+  const { source } = await readFile('./fixtures/codegen/is-this-invalid.yaml')
+  const { code, map } = generate(source, { sourceMap: true })
+  expect(code).toMatchSnapshot('code')
+  expect(map).toMatchSnapshot('map')
+})

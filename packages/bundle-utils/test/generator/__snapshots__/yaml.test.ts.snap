@@ -378,6 +378,35 @@ complex:
 }
 `;
 
+exports[`is this yaml invalid: code 1`] = `
+"export default {
+  \\"ja\\": {
+    \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
+    \\"this-is-ivalid\\": @
+  }
+}"
+`;
+
+exports[`is this yaml invalid: map 1`] = `
+Object {
+  "mappings": ";2EACQA;6GACSC",
+  "names": Array [
+    "こんにちは",
+    "",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.yaml",
+  ],
+  "sourcesContent": Array [
+    "ja:
+  hello: こんにちは
+  this-is-ivalid: '@' # is this ivalid?
+",
+  ],
+  "version": 3,
+}
+`;
+
 exports[`useClassComponent: code 1`] = `
 "export default function (Component) {
   Component.__o.__i18n = Component.__o.__i18n || []

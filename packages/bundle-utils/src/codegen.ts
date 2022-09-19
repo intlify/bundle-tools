@@ -51,7 +51,15 @@ export interface CodeGenOptions {
   forceStringify?: boolean
   useClassComponent?: boolean
   onWarn?: (msg: string) => void
-  onError?: (msg: string) => void
+  onError?: (
+    msg: string,
+    extra?: {
+      source: string
+      code?: CompileError['code']
+      domain?: CompileError['domain']
+      location?: CompileError['location']
+    }
+  ) => void
 }
 
 export interface CodeGenContext {
@@ -220,13 +228,23 @@ export function generateMessageFunction(
   options: CodeGenOptions
 ): CodeGenResult<ResourceNode> {
   const env = options.env != null ? options.env : 'development'
-  let occured = false
-  const newOptions = Object.assign(options, { mode: 'arrow' }) as CompileOptions
+  const onError = options.onError
+  const errors = [] as CompileError[]
+  const newOptions = Object.assign({ mode: 'arrow' }, options) as CompileOptions
   newOptions.onError = (err: CompileError): void => {
-    options.onError && options.onError(err.message)
-    occured = true
+    if (onError) {
+      const extra: Parameters<Required<CodeGenOptions>['onError']>[1] = {
+        source: msg,
+        code: err.code,
+        domain: err.domain,
+        location: err.location
+      }
+      onError(err.message, extra)
+      errors.push(err)
+    }
   }
   const { code, ast, map } = baseCompile(msg, newOptions)
+  const occured = errors.length > 0
   const genCode = !occured
     ? env === 'development'
       ? `(()=>{const fn=${code};fn.source=${JSON.stringify(msg)};return fn;})()`

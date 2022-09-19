@@ -30,7 +30,8 @@ export function generate(
     isGlobal = false,
     sourceMap = false,
     env = 'development',
-    forceStringify = false
+    forceStringify = false,
+    onError = undefined
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<YAMLProgram> {
@@ -50,6 +51,7 @@ export function generate(
     env,
     filename,
     forceStringify,
+    onError,
     useClassComponent
   } as CodeGenOptions
   const generator = createCodeGenerator(options)

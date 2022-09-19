@@ -30,6 +30,7 @@ export function generate(
     sourceMap = false,
     env = 'development',
     forceStringify = false,
+    onError = undefined,
     useClassComponent = false
   }: CodeGenOptions,
   injector?: () => string
@@ -54,6 +55,7 @@ export function generate(
     env,
     filename,
     forceStringify,
+    onError,
     useClassComponent
   } as CodeGenOptions
   const generator = createCodeGenerator(options)

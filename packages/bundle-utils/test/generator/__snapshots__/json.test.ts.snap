@@ -538,6 +538,75 @@ Object {
 }
 `;
 
+exports[`invalid message syntax: code 1`] = `
+"{
+  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
+  \\"this-is-ivalid\\": @
+}"
+`;
+
+exports[`invalid message syntax: errors 1`] = `
+Array [
+  Object {
+    "code": 14,
+    "domain": "parser",
+    "location": Object {
+      "end": Object {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": Object {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "msg": "Unexpected lexical analysis in token: 'EOF'",
+    "source": "@",
+  },
+  Object {
+    "code": 13,
+    "domain": "parser",
+    "location": Object {
+      "end": Object {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": Object {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+    },
+    "msg": "Unexpected empty linked key",
+    "source": "@",
+  },
+]
+`;
+
+exports[`invalid message syntax: map 1`] = `
+Object {
+  "mappings": ";6EACUA;+GACSC",
+  "names": Array [
+    "こんにちは",
+    "",
+  ],
+  "sources": Array [
+    "vue-i18n-loader.json",
+  ],
+  "sourcesContent": Array [
+    "{
+  \\"hello\\": \\"こんにちは\\",
+  \\"this-is-ivalid\\": \\"@\\"
+}
+",
+  ],
+  "version": 3,
+}
+`;
+
 exports[`simple: code 1`] = `
 "export default {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),

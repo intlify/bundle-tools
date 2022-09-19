@@ -26,7 +26,7 @@
     }
   },
   "dependencies": {
-    "@intlify/bundle-utils": "next",
+    "@intlify/bundle-utils": "^3.1.2",
     "@intlify/shared": "next",
     "@rollup/pluginutils": "^4.2.0",
     "debug": "^4.3.1",
@@ -34,7 +34,7 @@
     "source-map": "0.6.1"
   },
   "devDependencies": {
-    "unbuild": "^0.7.6"
+    "unbuild": "^0.8.11"
   },
   "engines": {
     "node": ">= 14.6"

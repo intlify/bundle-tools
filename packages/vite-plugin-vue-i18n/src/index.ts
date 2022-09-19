@@ -1,6 +1,12 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import { isArray, isBoolean, isEmptyObject, isString } from '@intlify/shared'
+import {
+  isArray,
+  isBoolean,
+  isEmptyObject,
+  isString,
+  generateCodeFrame
+} from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import {
   generateJSON,
@@ -403,8 +409,23 @@ function getOptions(
     onWarn: (msg: string): void => {
       console.warn(`[vite-plugin-vue-i18n]: ${filename} ${msg}`)
     },
-    onError: (msg: string): void => {
-      console.error(`[vite-plugin-vue-i18n]: ${filename} ${msg}`)
+    onError: (
+      msg: string,
+      extra?: NonNullable<Parameters<NonNullable<CodeGenOptions['onError']>>>[1]
+    ): void => {
+      const codeFrame = generateCodeFrame(
+        extra?.source || extra?.location?.source || '',
+        extra?.location?.start.column,
+        extra?.location?.end.column
+      )
+      const errMssage = `${msg} (error code: ${extra?.code}) in ${filename}
+  target message: ${extra?.source}
+  target message path: ${extra?.path}
+
+  ${codeFrame}
+`
+      console.error(`[vite-plugin-vue-i18n]: ${errMssage}`)
+      throw new Error(errMssage)
     }
   }
 

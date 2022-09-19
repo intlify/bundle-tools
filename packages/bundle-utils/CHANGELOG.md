@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.1.1 (2022-09-19)
+
+#### :bug: Bug Fixes
+* [#177](https://github.com/intlify/bundle-tools/pull/177) fix(bundle-utils): fix wrong error callbacking and error handling improvement ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.1.0 (2022-05-06)
 
 #### :zap: Improvement Features

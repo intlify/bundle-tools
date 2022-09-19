@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.6.0 (2022-09-19)
+
+#### :bug: Bug Fixes
+* [#180](https://github.com/intlify/bundle-tools/pull/180) fix(unplugin-vue-i18n): improve compilation error handling ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.5.0 (2022-07-26)
 
 #### :star: Features

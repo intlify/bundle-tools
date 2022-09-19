@@ -9,7 +9,8 @@ import {
   isString,
   isNumber,
   isBoolean,
-  assign
+  assign,
+  generateCodeFrame
 } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import {
@@ -597,8 +598,23 @@ function getOptions(
     onWarn: (msg: string): void => {
       warn(`${filename} ${msg}`)
     },
-    onError: (msg: string): void => {
-      error(`${filename} ${msg}`)
+    onError: (
+      msg: string,
+      extra?: NonNullable<Parameters<NonNullable<CodeGenOptions['onError']>>>[1]
+    ): void => {
+      const codeFrame = generateCodeFrame(
+        extra?.source || extra?.location?.source || '',
+        extra?.location?.start.column,
+        extra?.location?.end.column
+      )
+      const errMssage = `${msg} (error code: ${extra?.code}) in ${filename}
+  target message: ${extra?.source}
+  target message path: ${extra?.path}
+
+  ${codeFrame}
+`
+      error(errMssage)
+      throw new Error(errMssage)
     }
   }
 

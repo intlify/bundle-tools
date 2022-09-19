@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@7.0.0-beta.3 (2022-09-19)
+
+#### :zap: Improvement Features
+* [#179](https://github.com/intlify/bundle-tools/pull/179) fix(vite-plugin-vue-i18n): improve compilation error handling ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@7.0.0-beta.2 (2022-09-02)
 
 #### :zap: Improvement Features

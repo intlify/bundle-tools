@@ -78,6 +78,7 @@ function generateNode(
   injector?: () => string
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
+  const pathStack = [] as string[]
   const itemsCountStack = [] as number[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
@@ -131,6 +132,9 @@ function generateNode(
           propsCountStack.push(node.pairs.length)
           if (parent.type === 'YAMLSequence') {
             const lastIndex = itemsCountStack.length - 1
+            const currentCount =
+              parent.entries.length - itemsCountStack[lastIndex]
+            pathStack.push(currentCount.toString())
             itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
           }
           break
@@ -145,20 +149,31 @@ function generateNode(
             const value = node.value.value
             if (isString(value)) {
               generator.push(`${JSON.stringify(name)}: `)
-              const { code, map } = generateMessageFunction(value, options)
+              name && pathStack.push(name.toString())
+              const { code, map } = generateMessageFunction(
+                value,
+                options,
+                pathStack
+              )
               sourceMap && map != null && codeMaps.set(value, map)
               generator.push(`${code}`, node.value, value)
             } else {
               if (forceStringify) {
                 const strValue = JSON.stringify(value)
                 generator.push(`${JSON.stringify(name)}: `)
-                const { code, map } = generateMessageFunction(strValue, options)
+                name && pathStack.push(name.toString())
+                const { code, map } = generateMessageFunction(
+                  strValue,
+                  options,
+                  pathStack
+                )
                 sourceMap && map != null && codeMaps.set(strValue, map)
                 generator.push(`${code}`, node.value, strValue)
               } else {
                 generator.push(
                   `${JSON.stringify(name)}: ${JSON.stringify(value)}`
                 )
+                name && pathStack.push(name.toString())
               }
             }
           } else if (
@@ -170,6 +185,7 @@ function generateNode(
           ) {
             const name = node.key.value
             generator.push(`${JSON.stringify(name)}: `)
+            name && pathStack.push(name.toString())
           }
           const lastIndex = propsCountStack.length - 1
           propsCountStack[lastIndex] = --propsCountStack[lastIndex]
@@ -177,14 +193,29 @@ function generateNode(
         case 'YAMLSequence':
           generator.push(`[`)
           generator.indent()
+          if (parent.type === 'YAMLSequence') {
+            const lastIndex = itemsCountStack.length - 1
+            const currentCount =
+              parent.entries.length - itemsCountStack[lastIndex]
+            pathStack.push(currentCount.toString())
+            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+          }
           itemsCountStack.push(node.entries.length)
           break
         case 'YAMLScalar':
           if (parent.type === 'YAMLSequence') {
+            const lastIndex = itemsCountStack.length - 1
+            const currentCount =
+              parent.entries.length - itemsCountStack[lastIndex]
+            pathStack.push(currentCount.toString())
             if (node.type === 'YAMLScalar') {
               const value = node.value
               if (isString(value)) {
-                const { code, map } = generateMessageFunction(value, options)
+                const { code, map } = generateMessageFunction(
+                  value,
+                  options,
+                  pathStack
+                )
                 sourceMap && map != null && codeMaps.set(value, map)
                 generator.push(`${code}`, node, value)
               } else {
@@ -192,7 +223,8 @@ function generateNode(
                   const strValue = JSON.stringify(value)
                   const { code, map } = generateMessageFunction(
                     strValue,
-                    options
+                    options,
+                    pathStack
                   )
                   sourceMap && map != null && codeMaps.set(strValue, map)
                   generator.push(`${code}`, node, strValue)
@@ -201,7 +233,6 @@ function generateNode(
                 }
               }
             }
-            const lastIndex = itemsCountStack.length - 1
             itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
           }
           break
@@ -231,29 +262,34 @@ function generateNode(
           break
         case 'YAMLMapping':
           if (propsCountStack[propsCountStack.length - 1] === 0) {
+            pathStack.pop()
             propsCountStack.pop()
           }
           generator.deindent()
           generator.push(`}`)
           if (parent.type === 'YAMLSequence') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              pathStack.pop()
               generator.pushline(`,`)
             }
           }
           break
         case 'YAMLPair':
           if (propsCountStack[propsCountStack.length - 1] !== 0) {
+            pathStack.pop()
             generator.pushline(`,`)
           }
           break
         case 'YAMLSequence':
           if (itemsCountStack[itemsCountStack.length - 1] === 0) {
+            pathStack.pop()
             itemsCountStack.pop()
           }
           generator.deindent()
           generator.push(`]`)
           if (parent.type === 'YAMLSequence') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              pathStack.pop()
               generator.pushline(`,`)
             }
           }
@@ -261,6 +297,7 @@ function generateNode(
         case 'YAMLScalar':
           if (parent.type === 'YAMLSequence') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
+              pathStack.pop()
               generator.pushline(`,`)
             } else {
               generator.pushline(`,`)

@@ -14,8 +14,7 @@ exports[`array basic: code 1`] = `
         [
           (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"baz\\"])};fn.source=\\"baz\\";return fn;})(),
           
-        ],
-        
+        ]
       ]
     }
   })
@@ -61,8 +60,7 @@ exports[`array mixed: code 1`] = `
             },
             (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hoge\\"])};fn.source=\\"hoge\\";return fn;})(),
             
-          ],
-          
+          ]
         ],
         (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"baz\\"])};fn.source=\\"baz\\";return fn;})(),
         [
@@ -541,7 +539,14 @@ Object {
 exports[`invalid message syntax: code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
-  \\"this-is-ivalid\\": @
+  \\"this-is-ivalid\\": @,
+  \\"nested\\": {
+    \\"array\\": [
+      {
+        \\"this-is-ivalid\\": @
+      }
+    ]
+  }
 }"
 `;
 
@@ -563,6 +568,7 @@ Array [
       },
     },
     "msg": "Unexpected lexical analysis in token: 'EOF'",
+    "path": "this-is-ivalid",
     "source": "@",
   },
   Object {
@@ -581,6 +587,45 @@ Array [
       },
     },
     "msg": "Unexpected empty linked key",
+    "path": "this-is-ivalid",
+    "source": "@",
+  },
+  Object {
+    "code": 14,
+    "domain": "parser",
+    "location": Object {
+      "end": Object {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": Object {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "msg": "Unexpected lexical analysis in token: 'EOF'",
+    "path": "nested.array.0.this-is-ivalid",
+    "source": "@",
+  },
+  Object {
+    "code": 13,
+    "domain": "parser",
+    "location": Object {
+      "end": Object {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": Object {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+    },
+    "msg": "Unexpected empty linked key",
+    "path": "nested.array.0.this-is-ivalid",
     "source": "@",
   },
 ]
@@ -588,7 +633,7 @@ Array [
 
 exports[`invalid message syntax: map 1`] = `
 Object {
-  "mappings": ";6EACUA;+GACSC",
+  "mappings": ";6EACUA;+GACSC;;;mHAGIA",
   "names": Array [
     "こんにちは",
     "",
@@ -599,7 +644,12 @@ Object {
   "sourcesContent": Array [
     "{
   \\"hello\\": \\"こんにちは\\",
-  \\"this-is-ivalid\\": \\"@\\"
+  \\"this-is-ivalid\\": \\"@\\",
+  \\"nested\\": {
+    \\"array\\": [{
+      \\"this-is-ivalid\\": \\"@\\"
+    }]
+  }
 }
 ",
   ],

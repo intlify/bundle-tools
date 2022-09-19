@@ -55,6 +55,7 @@ export interface CodeGenOptions {
     msg: string,
     extra?: {
       source: string
+      path: string
       code?: CompileError['code']
       domain?: CompileError['domain']
       location?: CompileError['location']
@@ -225,7 +226,8 @@ function advancePositionWithSource(
 
 export function generateMessageFunction(
   msg: string,
-  options: CodeGenOptions
+  options: CodeGenOptions,
+  path?: string[]
 ): CodeGenResult<ResourceNode> {
   const env = options.env != null ? options.env : 'development'
   const onError = options.onError
@@ -235,6 +237,7 @@ export function generateMessageFunction(
     if (onError) {
       const extra: Parameters<Required<CodeGenOptions>['onError']>[1] = {
         source: msg,
+        path: path ? path.join('.') : '',
         code: err.code,
         domain: err.domain,
         location: err.location

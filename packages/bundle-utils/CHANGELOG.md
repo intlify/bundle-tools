@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.1.2 (2022-09-19)
+
+#### :zap: Improvement Features
+* [#178](https://github.com/intlify/bundle-tools/pull/178) fix(bundle-utils): improve compile error handling ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.1.1 (2022-09-19)
 
 #### :bug: Bug Fixes

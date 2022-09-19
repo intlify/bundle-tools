@@ -1,4 +1,9 @@
 {
   "hello": "こんにちは",
-  "this-is-ivalid": "@"
+  "this-is-ivalid": "@",
+  "nested": {
+    "array": [{
+      "this-is-ivalid": "@"
+    }]
+  }
 }

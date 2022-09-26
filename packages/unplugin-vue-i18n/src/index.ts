@@ -23,6 +23,7 @@ import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
 import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
+import { checkVueI18nBridgeInstallPackage } from './check'
 
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import type { PluginOptions } from './types'
@@ -36,6 +37,7 @@ const VIRTUAL_PREFIX = '\0'
 const debug = createDebug('unplugin-vue-i18n')
 
 const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
+const installedVueI18nBridge = checkVueI18nBridgeInstallPackage(debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
@@ -93,12 +95,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   }
   debug('useVueI18nImportName', useVueI18nImportName)
 
+  // prettier-ignore
   const getAliasName = () =>
-    installedPkg === 'petite-vue-i18n' &&
-    isBoolean(useVueI18nImportName) &&
-    useVueI18nImportName
-      ? 'vue-i18n'
-      : `${installedPkg}`
+    installedVueI18nBridge && installedPkg === 'vue-i18n'
+      ? 'vue-i18n-bridge'
+      : installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) &&
+        useVueI18nImportName
+        ? 'vue-i18n'
+        : `${installedPkg}`
 
   const esm = isBoolean(options.esm) ? options.esm : true
   debug('esm', esm)

@@ -12,6 +12,7 @@ import createDebug from 'debug'
 import { normalizePath } from 'vite'
 import { RawSourceMap } from 'source-map'
 import { parseVueRequest } from './query'
+import { checkVueI18nBridgeInstallPackage } from './check'
 
 import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
@@ -22,6 +23,7 @@ const debug = createDebug('vite-plugin-vue-i18n:index')
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/vite-plugin-vue-i18n/messages'
 
 const installedPkg = checkInstallPackage('@intlify/vite-plugin-vue-i18n', debug)
+const installedVueI18nBridge = checkVueI18nBridgeInstallPackage(debug)
 
 const VIRTUAL_PREFIX = '\0'
 
@@ -74,12 +76,14 @@ function pluginI18n(
       `[vite-plugin-vue-i18n]: 'useVueI18nImportName' option is experimental`
     )
   }
+  // prettier-ignore
   const getAliasName = () =>
-    installedPkg === 'petite-vue-i18n' &&
-    isBoolean(useVueI18nImportName) &&
-    useVueI18nImportName
-      ? 'vue-i18n'
-      : `${installedPkg}`
+    installedVueI18nBridge && installedPkg === 'vue-i18n'
+      ? 'vue-i18n-bridge'
+      : installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) &&
+        useVueI18nImportName
+        ? 'vue-i18n'
+        : `${installedPkg}`
   const forceStringify = !!options.forceStringify
 
   let isProduction = false

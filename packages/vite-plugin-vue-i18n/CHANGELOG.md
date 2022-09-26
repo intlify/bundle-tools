@@ -37,6 +37,13 @@
 #### Committers: 1
 - kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+## @intlify/vite-plugin-vue-i18n@6.0.2 (2022-09-26)
+
+#### :zap: Improvement Features
+* [#182](https://github.com/intlify/bundle-tools/pull/182) fix(vite-plugin-vue-i18n): support vue-i18n-bridge module detection ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/vite-plugin-vue-i18n@6.0.1 (2022-08-10)
 

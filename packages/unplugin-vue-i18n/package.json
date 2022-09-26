@@ -11,13 +11,17 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "*",
-    "vue-i18n": "*"
+    "vue-i18n": "*",
+    "vue-i18n-bridge": "*"
   },
   "peerDependenciesMeta": {
     "petite-vue-i18n": {
       "optional": true
     },
     "vue-i18n": {
+      "optional": true
+    },
+    "vue-i18n-bridge": {
       "optional": true
     }
   },

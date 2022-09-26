@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@7.0.0-beta.4 (2022-09-26)
+
+#### :zap: Improvement Features
+* [#183](https://github.com/intlify/bundle-tools/pull/183) fix(vite-plugin-vue-i18n): port vue-i18n-bridge module detecting from v6 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@7.0.0-beta.3 (2022-09-19)
 
 #### :zap: Improvement Features

@@ -798,7 +798,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@^3.1.2, @intlify/bundle-utils@workspace:packages/bundle-utils":
+"@intlify/bundle-utils@^3.1.2, @intlify/bundle-utils@^3.2.1, @intlify/bundle-utils@workspace:packages/bundle-utils":
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
@@ -895,7 +895,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
-    "@intlify/bundle-utils": ^3.1.2
+    "@intlify/bundle-utils": ^3.2.1
     "@intlify/shared": next
     "@rollup/pluginutils": ^4.2.0
     "@vue/compiler-sfc": ^3.2.23

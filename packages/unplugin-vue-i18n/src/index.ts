@@ -16,14 +16,14 @@ import { createFilter } from '@rollup/pluginutils'
 import {
   generateJSON,
   generateYAML,
-  checkInstallPackage
+  checkInstallPackage,
+  checkVueI18nBridgeInstallPackage
 } from '@intlify/bundle-utils'
 import { RawSourceMap } from 'source-map'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
 import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
-import { checkVueI18nBridgeInstallPackage } from './check'
 
 import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import type { PluginOptions } from './types'
@@ -127,20 +127,21 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       config(config, { command }) {
         normalizeConfigResolveAlias(config.resolve, meta.framework)
         if (command === 'build' && runtimeOnly) {
+          const aliasName = getAliasName()
+          debug(`alias name: ${aliasName}`)
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
-              find: getAliasName(),
-              replacement: `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+              find: aliasName,
+              replacement: `${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
             })
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[
-              getAliasName()
-            ] = `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+              aliasName
+            ] = `${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
           }
-          debug(`alias name: ${getAliasName()}`)
           debug(
-            `set ${installedPkg} runtime only: ${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+            `set ${aliasName} runtime only: ${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
           )
         } else if (
           command === 'serve' &&

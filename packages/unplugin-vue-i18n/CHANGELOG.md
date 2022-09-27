@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.7.0 (2022-09-27)
+
+#### :star: Features
+* [#189](https://github.com/intlify/bundle-tools/pull/189) fix(unplugin-vue-i18n): support HMR for vite ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.6.2 (2022-09-27)
 
 #### :bug: Bug Fixes

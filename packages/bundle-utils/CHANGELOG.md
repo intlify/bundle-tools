@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.2.0 (2022-09-27)
+
+#### :star: Features
+* [#185](https://github.com/intlify/bundle-tools/pull/185) feat: add vue-i18n-bridge install checking ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.1.2 (2022-09-19)
 
 #### :zap: Improvement Features

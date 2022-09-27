@@ -633,7 +633,7 @@ Array [
 
 exports[`invalid message syntax: map 1`] = `
 Object {
-  "mappings": ";6EACUA;+GACSC;;;mHAGIA",
+  "mappings": ";6EACUA;+GACSC;;;;qHAIMA",
   "names": Array [
     "こんにちは",
     "",
@@ -646,9 +646,11 @@ Object {
   \\"hello\\": \\"こんにちは\\",
   \\"this-is-ivalid\\": \\"@\\",
   \\"nested\\": {
-    \\"array\\": [{
-      \\"this-is-ivalid\\": \\"@\\"
-    }]
+    \\"array\\": [
+      {
+        \\"this-is-ivalid\\": \\"@\\"
+      }
+    ]
   }
 }
 ",

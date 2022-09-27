@@ -1,4 +1,13 @@
 
+## @intlify/vite-plugin-vue-i18n@6.0.3 (2022-09-27)
+
+#### :bug: Bug Fixes
+* [#188](https://github.com/intlify/bundle-tools/pull/188) fix(vite-plugin-vue-i18n): cannot resolve vue-i18n-bridge module ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/vite-plugin-vue-i18n@6.0.2 (2022-09-26)
 
 #### :zap: Improvement Features

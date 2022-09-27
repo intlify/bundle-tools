@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.6.2 (2022-09-27)
+
+#### :bug: Bug Fixes
+* [#187](https://github.com/intlify/bundle-tools/pull/187) fix(unplugin-vue-i18n): cannot set vue-i18n-bridge dist path ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.6.1 (2022-09-26)
 
 #### :zap: Improvement Features

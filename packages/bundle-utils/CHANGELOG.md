@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.2.1 (2022-09-27)
+
+#### :bug: Bug Fixes
+* [#186](https://github.com/intlify/bundle-tools/pull/186) fix(bundle-utils): export `checkVueI18nBridgeInstallPackage` ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.2.0 (2022-09-27)
 
 #### :star: Features

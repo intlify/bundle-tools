@@ -210,6 +210,18 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             return orgTransform!.apply(this, [code, id])
           }
         }
+      },
+
+      async handleHotUpdate({ file, server }) {
+        if (/\.(json5?|ya?ml)$/.test(file)) {
+          const module = server.moduleGraph.getModuleById(
+            asVirtualId(INTLIFY_BUNDLE_IMPORT_ID, meta.framework)
+          )
+          if (module) {
+            server.moduleGraph.invalidateModule(module)
+            return [module!]
+          }
+        }
       }
     },
 
@@ -253,6 +265,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           exclude: include // exclude target i18n resources
         })
       }
+
+      // TODO:
+      //  HMR for webpack
     },
 
     resolveId(id: string, importer: string) {

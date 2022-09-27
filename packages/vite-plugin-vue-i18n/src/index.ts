@@ -5,14 +5,14 @@ import { createFilter } from '@rollup/pluginutils'
 import {
   generateJSON,
   generateYAML,
-  checkInstallPackage
+  checkInstallPackage,
+  checkVueI18nBridgeInstallPackage
 } from '@intlify/bundle-utils'
 import fg from 'fast-glob'
 import createDebug from 'debug'
 import { normalizePath } from 'vite'
 import { RawSourceMap } from 'source-map'
 import { parseVueRequest } from './query'
-import { checkVueI18nBridgeInstallPackage } from './check'
 
 import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
@@ -100,22 +100,24 @@ function pluginI18n(
     enforce: 'pre',
 
     config(config: UserConfig, { command }) {
+      const aliasName = getAliasName()
+      debug(`alias name: ${aliasName}`)
+
       if (command === 'build' && runtimeOnly) {
         normalizeConfigResolveAlias(config)
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
-            find: getAliasName(),
-            replacement: `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+            find: aliasName,
+            replacement: `${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(config.resolve!.alias as any)[
-            getAliasName()
-          ] = `${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+            aliasName
+          ] = `${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
         }
-        debug(`alias name: ${getAliasName()}`)
         debug(
-          `set ${installedPkg} runtime only: ${installedPkg}/dist/${installedPkg}.runtime.esm-bundler.js`
+          `set ${aliasName} runtime only: ${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
         )
       } else if (
         command === 'serve' &&
@@ -134,7 +136,7 @@ function pluginI18n(
             'vue-i18n'
           ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
         }
-        debug(`alias name: ${getAliasName()}`)
+        debug(`alias name: ${aliasName}`)
       }
 
       config.define = config.define || {}

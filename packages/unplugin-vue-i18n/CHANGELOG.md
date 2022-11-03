@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.7.1 (2022-11-03)
+
+#### :bug: Bug Fixes
+* [#195](https://github.com/intlify/bundle-tools/pull/195) fix(unplugin-vue-i18n): strict filtering ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.7.0 (2022-09-27)
 
 #### :star: Features

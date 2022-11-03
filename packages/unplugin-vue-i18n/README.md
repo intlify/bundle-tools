@@ -252,7 +252,7 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 - **Type:** `string | string[] | undefined`
 - **Default:** `undefined`
 
-  A [minimatch](https://github.com/isaacs/minimatch) pattern, or array of patterns, you can specify a path to pre-compile i18n resources files. The extensions of i18n resources to be precompiled are as follows:
+  A [picomatch](https://github.com/micromatch/picomatch) pattern, or array of patterns, you can specify a path to pre-compile i18n resources files. The extensions of i18n resources to be precompiled are as follows:
 
   ```
   - json
@@ -262,6 +262,8 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   ```
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+
+  If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
 
 ### `runtimeOnly`
 

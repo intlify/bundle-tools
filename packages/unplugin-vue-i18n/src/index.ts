@@ -49,15 +49,18 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   // normalize for `options.include`
   let include = options.include
+  let exclude = null
   if (include) {
     if (isArray(include)) {
       include = include.map(item => normalize(item))
     } else if (isString(include)) {
       include = normalize(include)
     }
+  } else {
+    exclude = '**/**'
   }
 
-  const filter = createFilter(include)
+  const filter = createFilter(include, exclude)
   const forceStringify = !!options.forceStringify
   const defaultSFCLang = isString(options.defaultSFCLang)
     ? options.defaultSFCLang

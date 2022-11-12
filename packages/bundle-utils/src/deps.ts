@@ -43,3 +43,23 @@ export function checkVueI18nBridgeInstallPackage(debug: Function): boolean {
   }
   return ret
 }
+
+export function isInstalledVue2(debug: Function): boolean {
+  const vue = loadModule('vue', debug)
+  return vue != null && vue.version != null && vue.version.startsWith('2.')
+}
+
+export function isInstalledVue3(debug: Function): boolean {
+  const vue = loadModule('vue', debug)
+  return vue != null && vue.version != null && vue.version.startsWith('3.')
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function loadModule(moduleName: string, debug: Function): any {
+  try {
+    return require(moduleName)
+  } catch (e) {
+    debug(`cannot load '${moduleName}'`, e)
+    return null
+  }
+}

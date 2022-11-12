@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.7.2 (2022-11-12)
+
+#### :bug: Bug Fixes
+* [#198](https://github.com/intlify/bundle-tools/pull/198) fix(unplugin-vue-i18n): normalize undefined resolve ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.7.1 (2022-11-03)
 
 #### :bug: Bug Fixes

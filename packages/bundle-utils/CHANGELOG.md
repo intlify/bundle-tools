@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@3.3.0 (2022-11-12)
+
+#### :star: Features
+* [#199](https://github.com/intlify/bundle-tools/pull/199) feat(bundle-utils): add `isInstalledVue2` and `isInstalledVue3` APIs ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.2.1 (2022-09-27)
 
 #### :bug: Bug Fixes

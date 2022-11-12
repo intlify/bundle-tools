@@ -128,7 +128,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
     vite: {
       config(config, { command }) {
-        normalizeConfigResolveAlias(config.resolve, meta.framework)
+        config.resolve = normalizeConfigResolveAlias(
+          config.resolve,
+          meta.framework
+        )
         if (command === 'build' && runtimeOnly) {
           const aliasName = getAliasName()
           debug(`alias name: ${aliasName}`)
@@ -151,7 +154,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           installedPkg === 'petite-vue-i18n' &&
           useVueI18nImportName
         ) {
-          normalizeConfigResolveAlias(config.resolve, meta.framework)
+          config.resolve = normalizeConfigResolveAlias(
+            config.resolve,
+            meta.framework
+          )
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
               find: 'vue-i18n',
@@ -234,7 +240,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       debug(`webpack: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
 
       if (isProduction && runtimeOnly) {
-        normalizeConfigResolveAlias(compiler.options.resolve, meta.framework)
+        compiler.options.resolve = normalizeConfigResolveAlias(
+          compiler.options.resolve,
+          meta.framework
+        )
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(compiler.options.resolve!.alias as any)[
           'vue-i18n'
@@ -460,22 +469,25 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 function normalizeConfigResolveAlias(
   resolve: any, // eslint-disable-line @typescript-eslint/no-explicit-any
   framework: UnpluginContextMeta['framework']
-): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+): any {
   if (resolve && resolve.alias) {
-    return
+    return resolve
   }
 
   if (!resolve) {
     if (framework === 'vite') {
-      resolve = { alias: [] }
+      return { alias: [] }
     } else if (framework === 'webpack') {
-      resolve = { alias: {} }
+      return { alias: {} }
     }
   } else if (!resolve.alias) {
     if (framework === 'vite') {
       resolve.alias = []
+      return resolve
     } else if (framework === 'webpack') {
       resolve.alias = {}
+      return resolve
     }
   }
 }

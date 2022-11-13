@@ -2,7 +2,7 @@ import {
   checkInstallPackage,
   checkVueI18nBridgeInstallPackage,
   loadModule,
-  isInstalledVue2
+  getVueI18nVersion
 } from '../src/deps'
 
 test('vue-i18n', () => {
@@ -17,6 +17,6 @@ test('loadModule', () => {
   expect(loadModule('yaml-eslint-parser', jest.fn())).not.toBe(null)
 })
 
-test('isInstalledVue2', () => {
-  expect(isInstalledVue2(jest.fn())).toBe(true)
+test('getVueI18nVersion', () => {
+  expect(getVueI18nVersion(jest.fn())).toBe('9')
 })

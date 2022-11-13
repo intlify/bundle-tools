@@ -2,8 +2,7 @@ export { CodeGenOptions, CodeGenResult, DevEnv } from './codegen'
 export { generate as generateJSON } from './json'
 export { generate as generateYAML } from './yaml'
 export {
-  isInstalledVue2,
-  isInstalledVue3,
+  getVueI18nVersion,
   checkInstallPackage,
   checkVueI18nBridgeInstallPackage,
   InstalledPackage

@@ -17,7 +17,8 @@ import {
   generateJSON,
   generateYAML,
   checkInstallPackage,
-  checkVueI18nBridgeInstallPackage
+  checkVueI18nBridgeInstallPackage,
+  getVueI18nVersion
 } from '@intlify/bundle-utils'
 import { RawSourceMap } from 'source-map'
 import { parse } from '@vue/compiler-sfc'
@@ -38,6 +39,7 @@ const debug = createDebug('unplugin-vue-i18n')
 
 const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
 const installedVueI18nBridge = checkVueI18nBridgeInstallPackage(debug)
+const vueI18nVersion = getVueI18nVersion(debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
@@ -99,19 +101,28 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('useVueI18nImportName', useVueI18nImportName)
 
   // prettier-ignore
-  const getAliasName = () =>
-    installedVueI18nBridge && installedPkg === 'vue-i18n'
-      ? 'vue-i18n-bridge'
-      : installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) &&
-        useVueI18nImportName
+  const getVueI18nAliasName = () =>
+    vueI18nVersion === '9' || vueI18nVersion === '8'
+      ? 'vue-i18n'
+      : vueI18nVersion === 'unknown' && installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) && useVueI18nImportName
         ? 'vue-i18n'
-        : `${installedPkg}`
+        : installedPkg
+
+  const getVueI18nBridgeAliasPath = () =>
+    `vue-i18n-bridge/dist/vue-i18n-bridge.runtime.esm-bundler.js`
+
+  const getVueI18nAliasPath = (aliasName: string) =>
+    vueI18nVersion === '8'
+      ? `${aliasName}/dist/${aliasName}.esm.js` // for vue-i18n@8
+      : `${aliasName}/dist/${installedPkg}.runtime.esm-bundler.js`
 
   const esm = isBoolean(options.esm) ? options.esm : true
   debug('esm', esm)
 
   let isProduction = false
   let sourceMap = false
+
+  const vueI18nAliasName = getVueI18nAliasName()
 
   return {
     name: 'unplugin-vue-i18n',
@@ -132,23 +143,40 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           config.resolve,
           meta.framework
         )
+
         if (command === 'build' && runtimeOnly) {
-          const aliasName = getAliasName()
-          debug(`alias name: ${aliasName}`)
+          debug(`vue-i18n alias name: ${vueI18nAliasName}`)
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
-              find: aliasName,
-              replacement: `${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
+              find: vueI18nAliasName,
+              replacement: getVueI18nAliasPath(vueI18nAliasName)
             })
+            if (installedVueI18nBridge) {
+              config.resolve!.alias.push({
+                find: 'vue-i18n-bridge',
+                replacement: getVueI18nBridgeAliasPath()
+              })
+            }
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ;(config.resolve!.alias as any)[
-              aliasName
-            ] = `${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
+            ;(config.resolve!.alias as any)[vueI18nAliasName] =
+              getVueI18nAliasPath(vueI18nAliasName)
+            if (installedVueI18nBridge) {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              ;(config.resolve!.alias as any)['vue-i18n-bridge'] =
+                getVueI18nBridgeAliasPath()
+            }
           }
           debug(
-            `set ${aliasName} runtime only: ${aliasName}/dist/${aliasName}.runtime.esm-bundler.js`
+            `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
+              vueI18nAliasName
+            )}`
           )
+          if (installedVueI18nBridge) {
+            debug(
+              `set vue-i18n-bridge runtime only: ${getVueI18nBridgeAliasPath()}`
+            )
+          }
         } else if (
           command === 'serve' &&
           installedPkg === 'petite-vue-i18n' &&
@@ -160,16 +188,16 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           )
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
-              find: 'vue-i18n',
+              find: vueI18nAliasName,
               replacement: `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
             })
           } else {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[
-              'vue-i18n'
+              vueI18nAliasName
             ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
           }
-          debug(`alias name: ${getAliasName()}`)
+          debug(`petite-vue-i18n alias name: ${vueI18nAliasName}`)
         }
 
         config.define = config.define || {}
@@ -239,15 +267,40 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       sourceMap = !!compiler.options.devtool
       debug(`webpack: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
 
+      compiler.options.resolve = normalizeConfigResolveAlias(
+        compiler.options.resolve,
+        meta.framework
+      )
+
       if (isProduction && runtimeOnly) {
-        compiler.options.resolve = normalizeConfigResolveAlias(
-          compiler.options.resolve,
-          meta.framework
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
+          getVueI18nAliasPath(vueI18nAliasName)
+        if (installedVueI18nBridge) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          ;(compiler.options.resolve!.alias as any)['vue-i18n-bridge'] =
+            getVueI18nBridgeAliasPath()
+        }
+        debug(
+          `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
+            vueI18nAliasName
+          )}`
         )
+        if (installedVueI18nBridge) {
+          debug(
+            `set vue-i18n-bridge runtime only: ${getVueI18nBridgeAliasPath()}`
+          )
+        }
+      } else if (
+        !isProduction &&
+        installedPkg === 'petite-vue-i18n' &&
+        useVueI18nImportName
+      ) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(compiler.options.resolve!.alias as any)[
-          'vue-i18n'
-        ] = `vue-i18n/dist/vue-i18n.runtime.esm-bundler.js`
+          vueI18nAliasName
+        ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+        debug(`petite-vue-i18n alias name: ${vueI18nAliasName}`)
       }
 
       loadWebpack().then(webpack => {
@@ -274,7 +327,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         compiler.options.module.rules.push({
           test: /\.(json5?|ya?ml)$/,
           type: 'javascript/auto',
-          exclude: include // exclude target i18n resources
+          include(resource: string) {
+            return filter(resource)
+          }
         })
       }
 

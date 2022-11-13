@@ -26,15 +26,15 @@
     }
   },
   "dependencies": {
-    "@intlify/bundle-utils": "^3.2.1",
+    "@intlify/bundle-utils": "^3.4.0",
     "@intlify/shared": "next",
     "@rollup/pluginutils": "^4.2.0",
-    "@vue/compiler-sfc": "^3.2.23",
+    "@vue/compiler-sfc": "^3.2.45",
     "debug": "^4.3.1",
     "fast-glob": "^3.2.5",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0",
-    "pathe": "^0.2.0",
+    "pathe": "^0.3.9",
     "picocolors": "^1.0.0",
     "source-map": "0.6.1",
     "unplugin": "^0.8.0"

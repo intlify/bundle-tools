@@ -48,7 +48,6 @@ type VueI18nVersion = '8' | '9' | 'unknown' | ''
 
 export function getVueI18nVersion(debug: Function): VueI18nVersion {
   const VueI18n = loadModule('vue-i18n', debug)
-  console.log('vue-i18n version:', VueI18n)
   if (VueI18n == null) {
     return ''
   }

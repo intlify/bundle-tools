@@ -1,4 +1,16 @@
 
+## @intlify/bundle-utils@3.4.0 (2022-11-13)
+
+#### :star: Features
+* [#200](https://github.com/intlify/bundle-tools/pull/200) feat!: support getVueI18nVersion API ([@kazupon](https://github.com/kazupon))
+
+#### :boom: Breaking Change
+* [#200](https://github.com/intlify/bundle-tools/pull/200) feat!: support getVueI18nVersion API ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.3.0 (2022-11-12)
 
 #### :star: Features

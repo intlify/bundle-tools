@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.7.3 (2022-11-13)
+
+#### :bug: Bug Fixes
+* [#201](https://github.com/intlify/bundle-tools/pull/201) fix(unplugin-vue-i18n): resource resolving and alias resolving ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.7.2 (2022-11-12)
 
 #### :bug: Bug Fixes

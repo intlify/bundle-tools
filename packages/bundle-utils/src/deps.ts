@@ -44,14 +44,20 @@ export function checkVueI18nBridgeInstallPackage(debug: Function): boolean {
   return ret
 }
 
-export function isInstalledVue2(debug: Function): boolean {
-  const vue = loadModule('vue', debug)
-  return vue != null && vue.version != null && vue.version.startsWith('2.')
-}
+type VueI18nVersion = '8' | '9' | 'unknown' | ''
 
-export function isInstalledVue3(debug: Function): boolean {
-  const vue = loadModule('vue', debug)
-  return vue != null && vue.version != null && vue.version.startsWith('3.')
+export function getVueI18nVersion(debug: Function): VueI18nVersion {
+  const VueI18n = loadModule('vue-i18n', debug)
+  if (VueI18n == null) {
+    return ''
+  }
+  if (VueI18n.version && VueI18n.version.startsWith('8.')) {
+    return '8'
+  }
+  if (VueI18n.VERSION && VueI18n.VERSION.startsWith('9.')) {
+    return '9'
+  }
+  return 'unknown'
 }
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

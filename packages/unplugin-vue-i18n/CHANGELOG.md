@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.8.0 (2022-11-15)
+
+#### :star: Features
+* [#203](https://github.com/intlify/bundle-tools/pull/203) feat(unplugin-vue-i18n): support rollup v3 via unplugin v1.0 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.7.3 (2022-11-13)
 
 #### :bug: Bug Fixes

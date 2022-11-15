@@ -87,10 +87,11 @@ export function bundleWebpack(
   const include = (options.include as string[]) || [
     resolve(__dirname, './fixtures/**')
   ]
+  const sourcemap = isBoolean(options.sourcemap) || true
 
   const baseConfig: webpack.Configuration = {
     mode: 'development',
-    devtool: 'source-map',
+    devtool: sourcemap ? 'source-map' : false,
     entry: resolve(__dirname, input),
     resolve: {
       alias: {

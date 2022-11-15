@@ -8,7 +8,7 @@ import { createMessageContext } from '@intlify/core-base'
     fixture: '@intlify/unplugin-vue-i18n/messages'
   }
 ].forEach(({ testcase, input, fixture }) => {
-  test(testcase, async () => {
+  test.skip(testcase, async () => {
     const options = {
       input,
       include: [resolve(__dirname, '../fixtures/locales/**')]

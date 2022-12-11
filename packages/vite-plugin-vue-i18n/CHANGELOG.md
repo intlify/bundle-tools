@@ -1,4 +1,6 @@
 
+
+
 ## @intlify/vite-plugin-vue-i18n@7.0.0-beta.4 (2022-09-26)
 
 #### :zap: Improvement Features

@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.8.1 (2022-12-11)
+
+#### :bug: Bug Fixes
+* [#208](https://github.com/intlify/bundle-tools/pull/208) fix(unplugin-vue-i18n): generate sourcemap for ts/js ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.8.0 (2022-11-15)
 
 #### :star: Features

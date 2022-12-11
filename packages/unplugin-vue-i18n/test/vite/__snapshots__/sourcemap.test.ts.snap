@@ -1,15 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`custom blocks: json 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;"`;
+exports[`custom blocks: json 1`] = `";;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`custom blocks: json5 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;"`;
+exports[`custom blocks: json5 1`] = `";;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`custom blocks: yaml 1`] = `";AACOA,YAAAA,SAAAA,UAAAA,UAAAA,CAAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;"`;
+exports[`custom blocks: yaml 1`] = `";AACOA,YAAAA,SAAAA,UAAAA,UAAAA,CAAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ACEP,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASC;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`custom blocks: yml 1`] = `";;;;;;;;;;;;;;;;;;;;;;;"`;
+exports[`custom blocks: yml 1`] = `";;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`resource files: json 1`] = `";;;wCACYA,aAAAA,MAAAA,CAAAA,CAAAA,GAAAA,WAAAC,CAAAC,aAAAA,MAAAA,CAAAA,CAAAA,GAAAA,QAAAA,CAAAA,GAAAA,WAAAC,CAAAC,aAAAA,OAAAA,GAAAA,CAAAA,GAAAA,SAAAA,CAAAA,CAAAA,CAAAA;AAAAA,EAAAA;AAAAA;IAEAC,SAAAA,CAAAA,QAAAA;AAAAA,YAAAA,EAAAA,WAAAA,YAAAA,aAAAA,cAAAA,OAAAA,WAAAA;AAAAA,aAAAA,WAAAA,CAAAA,UAAAC,aAAAA,OAAAA,MAAAA,CAAAA,GAAAA,GAAAA,CAAAA;AAAAA,IAAAA;AAAAA;;;;;;;;;;;;;;;;;;;;;;;"`;
+exports[`resource files: json 1`] = `";;;wCACYA,aAAAA,MAAAA,CAAAA,CAAAA,GAAAA,WAAAC,CAAAC,aAAAA,MAAAA,CAAAA,CAAAA,GAAAA,QAAAA,CAAAA,GAAAA,WAAAC,CAAAC,aAAAA,OAAAA,GAAAA,CAAAA,GAAAA,SAAAA,CAAAA,CAAAA,CAAAA;AAAAA,EAAAA;AAAAA;IAEAC,SAAAA,CAAAA,QAAAA;AAAAA,YAAAA,EAAAA,WAAAA,YAAAA,aAAAA,cAAAA,OAAAA,WAAAA;AAAAA,aAAAA,WAAAA,CAAAA,UAAAC,aAAAA,OAAAA,MAAAA,CAAAA,GAAAA,GAAAA,CAAAA;AAAAA,IAAAA;AAAAA;;;;;;;;;;;;;;;;;;;ACAZ,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`resource files: json5 1`] = `";;;;;;;;;;;;;;"`;
+exports[`resource files: json5 1`] = `";;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`resource files: yaml 1`] = `";;;;;;;;;;;;;;"`;
+exports[`resource files: yaml 1`] = `";;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;

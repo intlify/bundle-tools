@@ -453,10 +453,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         } else {
           // TODO: support virtual import identifier
           // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
-          return {
-            code,
-            map: { mappings: '', version: '3', sources: [] }
-          }
         }
       } else {
         // for Vue SFC

@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "mlly": "^1.0.0",
-    "unbuild": "^0.8.11"
+    "unbuild": "^1.0.2"
   },
   "engines": {
     "node": ">= 14.16"

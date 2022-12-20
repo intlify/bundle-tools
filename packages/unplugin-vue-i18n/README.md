@@ -228,7 +228,7 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
 
 ## 📦 Automatic bundling
 ### For Vue I18n
-As noted [here](https://vue-i18n.intlify.dev/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
+As noted [here](https://vue-i18n.intlify.dev/guide/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
 
 This plugin will automatically select and bundle Vue I18n build according to the following behavior:
 

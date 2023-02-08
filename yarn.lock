@@ -969,7 +969,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@3.4.0, @intlify/bundle-utils@^3.1.2, @intlify/bundle-utils@^3.4.0, @intlify/bundle-utils@workspace:packages/bundle-utils":
+"@intlify/bundle-utils@^4.0.0, @intlify/bundle-utils@workspace:packages/bundle-utils":
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
@@ -985,6 +985,24 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
+
+"@intlify/bundle-utils@npm:3.4.0, @intlify/bundle-utils@npm:^3.1.2":
+  version: 3.4.0
+  resolution: "@intlify/bundle-utils@npm:3.4.0"
+  dependencies:
+    "@intlify/message-compiler": next
+    "@intlify/shared": next
+    jsonc-eslint-parser: ^1.0.1
+    source-map: 0.6.1
+    yaml-eslint-parser: ^0.3.2
+  peerDependenciesMeta:
+    petite-vue-i18n:
+      optional: true
+    vue-i18n:
+      optional: true
+  checksum: eb8bcec99fea495ac1011867f23e7a05aa2ba9b89366c6a1a8b7ecb0f1c4ef551e68aeabeb43bb01353a36a87791805c48290d0b847989cfb0c8fc07e2969b2e
+  languageName: node
+  linkType: hard
 
 "@intlify/bundle-utils@npm:next":
   version: 3.1.0
@@ -1073,7 +1091,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
-    "@intlify/bundle-utils": ^3.4.0
+    "@intlify/bundle-utils": ^4.0.0
     "@intlify/shared": next
     "@rollup/pluginutils": ^4.2.0
     "@vue/compiler-sfc": ^3.2.45

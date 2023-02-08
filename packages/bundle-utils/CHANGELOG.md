@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@4.0.0 (2023-02-08)
+
+#### :zap: Improvement Features
+* [#224](https://github.com/intlify/bundle-tools/pull/224) feat(bundle-utils): support es module ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@3.4.0 (2022-11-13)
 
 #### :star: Features

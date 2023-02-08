@@ -117,7 +117,7 @@
     "url": "git+https://github.com/intlify/bundle-tools.git"
   },
   "scripts": {
-    "build": "npm-run-all --parallel \"build:*\"",
+    "build": "npm-run-all -s \"build:*\"",
     "build:utils": "yarn workspace @intlify/bundle-utils build",
     "build:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n build",
     "build:vite": "yarn workspace @intlify/vite-plugin-vue-i18n build",

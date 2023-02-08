@@ -1,4 +1,23 @@
 
+## @intlify/unplugin-vue-i18n@0.8.2 (2023-02-08)
+
+#### :zap: Improvement Features
+* [#225](https://github.com/intlify/bundle-tools/pull/225) bump bundle-utils on unplugin-vue-i18n ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@0.8.2 (2022-12-20)
+
+#### :pencil: Documentation
+* [#213](https://github.com/intlify/bundle-tools/pull/213) docs(unplugin): fix docs link ([@marekvospel](https://github.com/marekvospel))
+
+#### Committers: 2
+- Marek Vospel ([@marekvospel](https://github.com/marekvospel))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.8.1 (2022-12-11)
 
 #### :bug: Bug Fixes

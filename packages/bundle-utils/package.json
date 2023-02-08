@@ -28,11 +28,23 @@
     "node": ">= 12"
   },
   "files": [
-    "lib"
+    "lib",
+    "index.mjs"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",
   "main": "lib/index.js",
+  "module": "./index.mjs",
+  "types": "lib/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./index.mjs",
+      "require": "./lib/index.js",
+      "types": "./lib/index.d.ts"
+    },
+    "./lib/*": "./lib/*",
+    "./package.json": "./package.json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/intlify/bundle-tools.git",
@@ -45,6 +57,5 @@
     "watch": "tsc -p . --watch",
     "changelog": "jiti ../../scripts/changelog.ts",
     "release": "jiti ../../scripts/release.ts"
-  },
-  "types": "lib/index.d.ts"
+  }
 }

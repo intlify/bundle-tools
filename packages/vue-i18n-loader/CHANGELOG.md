@@ -1,4 +1,10 @@
+## @intlify/vue-i18n-loader@5.0.1 (2023-02-09)
 
+#### :zap: Improvement Features
+* [#223](https://github.com/intlify/bundle-tools/pull/223) fix(vue-i18n-loader): pinned dependencies ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 
 ## @intlify/vue-i18n-loader@5.0.0 (2022-04-05)

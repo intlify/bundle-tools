@@ -213,6 +213,20 @@ const app = createApp()
 app.use(i18n).mount('#app')
 ```
 
+Change your vite.config.ts file accordingly to import all the files from locales folder on the root. Change `'./locales/**'` to path of your locales.
+```ts
+// vite.config.ts
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [
+    VueI18nPlugin({
+      include: [path.resolve(__dirname, './locales/**')],
+    }),
+  ],
+})
+```
 ### Types
 
 If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplugin-vue-i18n/messages` to `compilerOptions.types` of your tsconfig:

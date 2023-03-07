@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@5.0.1 (2023-03-07)
+
+#### :bug: Bug Fixes
+* [#231](https://github.com/intlify/bundle-tools/pull/231) fix(bundle-utils): export js generate API ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.0.0 (2023-03-07)
 
 #### :star: Features

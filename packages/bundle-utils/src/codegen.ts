@@ -31,7 +31,7 @@ export interface SourceLocationable {
   loc?: {
     start: Position
     end: Position
-  }
+  } | null
 }
 
 /**

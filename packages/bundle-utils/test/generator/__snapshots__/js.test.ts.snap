@@ -34,7 +34,7 @@ Object {
   ],
   "sourcesContent": Array [
     "export default {
-  foo: [[\\"bar\\"], [\\"baz\\"]]
+  foo: [['bar'], ['baz']]
 }
 ",
   ],
@@ -76,7 +76,7 @@ exports[`array mixed: code 1`] = `
 
 exports[`array mixed: map 1`] = `
 Object {
-  "mappings": ";;;+EAGYA;;;wEAGPC;;;mFAGWD;;0EAETE;;;sEAGJC;uEACCC",
+  "mappings": ";;;6EAGUA;;;wEAGLC;;;iFAGSD;;0EAEPE;;;sEAGJC;uEACCC",
   "names": Array [
     "foo",
     "bar",
@@ -91,19 +91,19 @@ Object {
     "export default {
   foo: [
     {
-      \\"foo\\": \\"foo\\"
+      foo: 'foo'
     },
     [
-      \\"bar\\",
+      'bar',
       [
         {
-          \\"foo\\": \\"foo\\"
+          foo: 'foo'
         },
-        \\"hoge\\"
+        'hoge'
       ]
     ],
-    \\"baz\\",
-    [\\"buz\\"]
+    'baz',
+    ['buz']
   ]
 }
 ",
@@ -129,7 +129,7 @@ Object {
   ],
   "sourcesContent": Array [
     "export default {
-  hello: \\"hello world!\\"
+  hello: 'hello world!'
 }
 ",
   ],
@@ -184,7 +184,7 @@ exports[`bridge with ESM exporting: code 1`] = `
 
 exports[`bridge with ESM exporting: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;+EAEOC;;4LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;8EAEAC;6EACDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
+  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -217,28 +217,28 @@ Object {
   "sourcesContent": Array [
     "const val1 = 1
 export default {
-  hi: \\"hi there!\\",
+  hi: 'hi there!',
   nested: {
-    \\"hello\\": \`hello world!\`,
-    \\"more\\": {
-      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    hello: \`hello world!\`,
+    more: {
+      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
     },
-    \\"list\\": \\"hi, {0} !\\"
+    list: 'hi, {0} !'
   },
   template: \`hello \${val1} world!\`,
-  \\"こんにちは\\": \\"こんにちは！\\",
-  \\"single-quote\\": \\"I don't know!\\",
-  \\"emoji\\": \\"😺\\",
-  \\"unicode\\": \\"\\\\u0041\\",
-  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
-  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
-  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
-  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
-  \\"complex\\": {
-    \\"warnings\\": [
-      \\"NOTE: This is warning\\",
+  こんにちは: 'こんにちは！',
+  'single-quote': \\"I don't know!\\",
+  emoji: '😺',
+  unicode: '\\\\u0041',
+  'unicode-escape': '\\\\\\\\u0041',
+  'backslash-single-quote': \\"\\\\\\\\'\\",
+  'backslash-backslash': '\\\\\\\\\\\\\\\\',
+  errors: ['ERROR1001', 'ERROR1002'],
+  complex: {
+    warnings: [
+      'NOTE: This is warning',
       {
-        \\"named-waring\\": \\"this is {type} warining\\"
+        'named-waring': 'this is {type} warining'
       }
     ]
   }
@@ -296,7 +296,7 @@ exports[`bridge: code 1`] = `
 
 exports[`bridge: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;+EAEOC;;4LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;8EAEAC;6EACDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
+  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -329,28 +329,28 @@ Object {
   "sourcesContent": Array [
     "const val1 = 1
 export default {
-  hi: \\"hi there!\\",
+  hi: 'hi there!',
   nested: {
-    \\"hello\\": \`hello world!\`,
-    \\"more\\": {
-      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    hello: \`hello world!\`,
+    more: {
+      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
     },
-    \\"list\\": \\"hi, {0} !\\"
+    list: 'hi, {0} !'
   },
   template: \`hello \${val1} world!\`,
-  \\"こんにちは\\": \\"こんにちは！\\",
-  \\"single-quote\\": \\"I don't know!\\",
-  \\"emoji\\": \\"😺\\",
-  \\"unicode\\": \\"\\\\u0041\\",
-  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
-  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
-  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
-  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
-  \\"complex\\": {
-    \\"warnings\\": [
-      \\"NOTE: This is warning\\",
+  こんにちは: 'こんにちは！',
+  'single-quote': \\"I don't know!\\",
+  emoji: '😺',
+  unicode: '\\\\u0041',
+  'unicode-escape': '\\\\\\\\u0041',
+  'backslash-single-quote': \\"\\\\\\\\'\\",
+  'backslash-backslash': '\\\\\\\\\\\\\\\\',
+  errors: ['ERROR1001', 'ERROR1002'],
+  complex: {
+    warnings: [
+      'NOTE: This is warning',
       {
-        \\"named-waring\\": \\"this is {type} warining\\"
+        'named-waring': 'this is {type} warining'
       }
     ]
   }
@@ -397,7 +397,7 @@ exports[`complex: code 1`] = `
 
 exports[`complex: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;+EAEOC;;4LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;8EAEAC;6EACDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
+  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -430,28 +430,28 @@ Object {
   "sourcesContent": Array [
     "const val1 = 1
 export default {
-  hi: \\"hi there!\\",
+  hi: 'hi there!',
   nested: {
-    \\"hello\\": \`hello world!\`,
-    \\"more\\": {
-      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    hello: \`hello world!\`,
+    more: {
+      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
     },
-    \\"list\\": \\"hi, {0} !\\"
+    list: 'hi, {0} !'
   },
   template: \`hello \${val1} world!\`,
-  \\"こんにちは\\": \\"こんにちは！\\",
-  \\"single-quote\\": \\"I don't know!\\",
-  \\"emoji\\": \\"😺\\",
-  \\"unicode\\": \\"\\\\u0041\\",
-  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
-  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
-  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
-  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
-  \\"complex\\": {
-    \\"warnings\\": [
-      \\"NOTE: This is warning\\",
+  こんにちは: 'こんにちは！',
+  'single-quote': \\"I don't know!\\",
+  emoji: '😺',
+  unicode: '\\\\u0041',
+  'unicode-escape': '\\\\\\\\u0041',
+  'backslash-single-quote': \\"\\\\\\\\'\\",
+  'backslash-backslash': '\\\\\\\\\\\\\\\\',
+  errors: ['ERROR1001', 'ERROR1002'],
+  complex: {
+    warnings: [
+      'NOTE: This is warning',
       {
-        \\"named-waring\\": \\"this is {type} warining\\"
+        'named-waring': 'this is {type} warining'
       }
     ]
   }
@@ -483,7 +483,7 @@ exports[`force stringify: code 1`] = `
 
 exports[`force stringify: map 1`] = `
 Object {
-  "mappings": ";;+EAEYA;gFACCC;+EACDC;iFACEC;;;;;4EAKLD,MAAMC;;iFAEDD;mFACEC",
+  "mappings": ";;+EAEYA;gFACCC;+EACDC;iFACEC;;;;;;sEAMXD;sEACAC;;;;;mFAKaD;qFACEC",
   "names": Array [
     "true",
     "false",
@@ -501,15 +501,23 @@ export default {
   nullValue: null,
   numberValue: 1,
   regexValue: /abc/,
-  funcValue1: function() {},
+  funcValue1: function () {},
   funcValue2: () => {},
   identifier: val1,
-  items: [null, 1, /abc/, function() {}, {
-    identifier: val1,
-    nullValue: null,
-    numberValue: 1,
-    regexValue: /abc/, 
-  }, () => {}, val1],
+  items: [
+    null,
+    1,
+    /abc/,
+    function () {},
+    {
+      identifier: val1,
+      nullValue: null,
+      numberValue: 1,
+      regexValue: /abc/
+    },
+    () => {},
+    val1
+  ]
 }
 ",
   ],
@@ -614,7 +622,7 @@ Array [
 
 exports[`invalid message syntax: map 1`] = `
 Object {
-  "mappings": ";6EACUA;+GACSC;;;;qHAIMA",
+  "mappings": ";2EACQA;+GACWC;;;;qHAIMA",
   "names": Array [
     "こんにちは",
     "",
@@ -624,12 +632,12 @@ Object {
   ],
   "sourcesContent": Array [
     "export default {
-  \\"hello\\": \\"こんにちは\\",
-  \\"this-is-ivalid\\": \\"@\\",
-  \\"nested\\": {
-    \\"array\\": [
+  hello: 'こんにちは',
+  'this-is-ivalid': '@',
+  nested: {
+    array: [
       {
-        \\"this-is-ivalid\\": \\"@\\"
+        'this-is-ivalid': '@'
       }
     ]
   }
@@ -674,12 +682,12 @@ Object {
   ],
   "sourcesContent": Array [
     "export default {
-  hi: \\"hi there!\\",
+  hi: 'hi there!',
   hello: 'hello world!',
   named: \`hi, {name} !\`,
-  list: \\"hi, {0} !\\",
+  list: 'hi, {0} !',
   literal: \\"hi, {  'kazupon'  } !\\",
-  linked: \\"hi, @:name !\\",
+  linked: 'hi, @:name !',
   plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
 }
 ",
@@ -759,7 +767,7 @@ exports[`useClassComponent: code 1`] = `
 
 exports[`useClassComponent: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;+EAEOC;;4LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;8EAEAC;6EACDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
+  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -792,28 +800,28 @@ Object {
   "sourcesContent": Array [
     "const val1 = 1
 export default {
-  hi: \\"hi there!\\",
+  hi: 'hi there!',
   nested: {
-    \\"hello\\": \`hello world!\`,
-    \\"more\\": {
-      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    hello: \`hello world!\`,
+    more: {
+      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
     },
-    \\"list\\": \\"hi, {0} !\\"
+    list: 'hi, {0} !'
   },
   template: \`hello \${val1} world!\`,
-  \\"こんにちは\\": \\"こんにちは！\\",
-  \\"single-quote\\": \\"I don't know!\\",
-  \\"emoji\\": \\"😺\\",
-  \\"unicode\\": \\"\\\\u0041\\",
-  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
-  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
-  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
-  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
-  \\"complex\\": {
-    \\"warnings\\": [
-      \\"NOTE: This is warning\\",
+  こんにちは: 'こんにちは！',
+  'single-quote': \\"I don't know!\\",
+  emoji: '😺',
+  unicode: '\\\\u0041',
+  'unicode-escape': '\\\\\\\\u0041',
+  'backslash-single-quote': \\"\\\\\\\\'\\",
+  'backslash-backslash': '\\\\\\\\\\\\\\\\',
+  errors: ['ERROR1001', 'ERROR1002'],
+  complex: {
+    warnings: [
+      'NOTE: This is warning',
       {
-        \\"named-waring\\": \\"this is {type} warining\\"
+        'named-waring': 'this is {type} warining'
       }
     ]
   }

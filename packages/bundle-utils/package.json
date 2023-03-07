@@ -20,12 +20,14 @@
   "dependencies": {
     "@babel/parser": "^7.21.2",
     "@babel/traverse": "^7.21.2",
-    "@babel/types": "^7.21.2",
     "@intlify/message-compiler": "next",
     "@intlify/shared": "next",
     "jsonc-eslint-parser": "^1.0.1",
     "source-map": "0.6.1",
     "yaml-eslint-parser": "^0.3.2"
+  },
+  "devDependencies": {
+    "@babel/types": "^7.21.2"
   },
   "engines": {
     "node": ">= 12"

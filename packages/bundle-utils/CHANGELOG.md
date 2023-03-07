@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@5.0.0 (2023-03-07)
+
+#### :star: Features
+* [#230](https://github.com/intlify/bundle-tools/pull/230) feat(bundle-utils): support js resource ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@4.0.0 (2023-02-08)
 
 #### :zap: Improvement Features

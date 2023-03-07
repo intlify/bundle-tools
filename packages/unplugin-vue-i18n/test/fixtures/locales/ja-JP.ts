@@ -1,0 +1,8 @@
+type Foo = 'foo'
+export default {
+  message: "@.caml:{'no apples'} | {0} apple | {n} apples",
+  nest: {
+    hello: 'hello {name}!'
+  },
+  items: ['hello', 2, { foo: 'foooo' }]
+}

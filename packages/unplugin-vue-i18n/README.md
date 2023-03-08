@@ -273,9 +273,20 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   - json5
   - yaml
   - yml
+  - js
+  - ts
   ```
 
   Note `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+
+  Note that `js` and `ts` resources are limited to **simple export (`export default`) as locale messages object only**, such as programmatically dynamic resource construction is not guaranteed to work currently.
+
+  ```js
+  export default {
+    hello: 'Hello, {name}!',
+    // ...
+  }
+  ```
 
   If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
 

@@ -26,18 +26,18 @@
     }
   },
   "dependencies": {
-    "@intlify/bundle-utils": "^4.0.0",
+    "@intlify/bundle-utils": "^5.0.0",
     "@intlify/shared": "next",
-    "@rollup/pluginutils": "^4.2.0",
-    "@vue/compiler-sfc": "^3.2.45",
-    "debug": "^4.3.1",
-    "fast-glob": "^3.2.5",
+    "@rollup/pluginutils": "^5.0.2",
+    "@vue/compiler-sfc": "^3.2.47",
+    "debug": "^4.3.3",
+    "fast-glob": "^3.2.12",
     "js-yaml": "^4.1.0",
-    "json5": "^2.2.0",
+    "json5": "^2.2.3",
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "source-map": "0.6.1",
-    "unplugin": "^1.0.0"
+    "unplugin": "^1.1.0"
   },
   "devDependencies": {
     "mlly": "^1.0.0",

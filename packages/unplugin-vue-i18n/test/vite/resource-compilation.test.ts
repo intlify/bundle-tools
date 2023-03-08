@@ -34,3 +34,17 @@ test('yml resource', async () => {
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
+
+test('js resource', async () => {
+  const { module } = await bundleAndRun('en-KK.mjs', bundleVite, options)
+  const fn = module.message
+  // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
+  expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
+})
+
+test('ts resource', async () => {
+  const { module } = await bundleAndRun('en-GB.ts', bundleVite, options)
+  const fn = module.message
+  // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
+  expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
+})

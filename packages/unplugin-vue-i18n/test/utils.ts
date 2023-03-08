@@ -31,7 +31,7 @@ export async function bundleVite(
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
   const include = (options.include as string[]) || [
-    resolve(__dirname, './fixtures/**')
+    resolve(__dirname, './fixtures/locales/**')
   ]
   const silent = isBoolean(options.silent)
     ? options.silent === false

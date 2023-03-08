@@ -1,4 +1,4 @@
-import { createUnplugin } from 'unplugin'
+import { createUnplugin, TransformResult } from 'unplugin'
 import { normalize, parse as parsePath } from 'pathe'
 import createDebug from 'debug'
 import fg from 'fast-glob'
@@ -16,6 +16,7 @@ import { createFilter } from '@rollup/pluginutils'
 import {
   generateJSON,
   generateYAML,
+  generateJavaScript,
   checkInstallPackage,
   checkVueI18nBridgeInstallPackage,
   getVueI18nVersion
@@ -26,7 +27,12 @@ import { parseVueRequest, VueQuery } from './query'
 import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
 
-import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
+import type {
+  UnpluginContextMeta,
+  UnpluginOptions,
+  SourceMapCompact
+} from 'unplugin'
+import type { SourceMapInput } from 'rollup'
 import type { PluginOptions } from './types'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 
@@ -247,6 +253,76 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             return orgTransform!.apply(this, [code, id])
           }
         }
+
+        /**
+         * typescript transform handling
+         *
+         * NOTE:
+         *  Typescript resources are handled using the already existing `vite:esbuild` plugin.
+         */
+        const esbuildPlugin = config.plugins.find(
+          p => p.name === 'vite:esbuild'
+        )
+        if (esbuildPlugin) {
+          const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
+          // @ts-ignore
+          esbuildPlugin.transform = async function (code: string, id: string) {
+            const result = (await orgTransform!.apply(this, [
+              code,
+              id
+            ])) as TransformResult
+            if (result == null) {
+              return result
+            }
+
+            const { filename, query } = parseVueRequest(id)
+            if (!query.vue && filter(id) && /\.[c|m]?ts$/.test(id)) {
+              const [_code, inSourceMap]: [string, RawSourceMap | undefined] =
+                isString(result)
+                  ? [result, undefined]
+                  : [result.code, result.map as RawSourceMap]
+
+              let langInfo = defaultSFCLang
+              langInfo = parsePath(filename)
+                .ext as Required<PluginOptions>['defaultSFCLang']
+
+              const generate = getGenerator(langInfo)
+              const parseOptions = getOptions(
+                filename,
+                isProduction,
+                query as Record<string, unknown>,
+                sourceMap,
+                {
+                  inSourceMap,
+                  isGlobal: globalSFCScope,
+                  useClassComponent,
+                  bridge,
+                  exportESM: esm,
+                  forceStringify
+                }
+              ) as CodeGenOptions
+              debug('parseOptions', parseOptions)
+
+              const { code: generatedCode, map } = generate(
+                _code,
+                parseOptions,
+                bridge ? createBridgeCodeGenerator(_code, query) : undefined
+              )
+              debug('generated code', generatedCode)
+              console.log('generated code', generatedCode)
+              debug('sourcemap', map, sourceMap)
+
+              if (_code === generatedCode) return
+
+              return {
+                code: generatedCode,
+                map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+              }
+            } else {
+              return result
+            }
+          }
+        }
       },
 
       async handleHotUpdate({ file, server }) {
@@ -412,14 +488,11 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       let inSourceMap: RawSourceMap | undefined
 
       if (!query.vue) {
-        if (/\.(json5?|ya?ml)$/.test(id) && filter(id)) {
+        if (/\.(json5?|ya?ml|[c|m]?js)$/.test(id) && filter(id)) {
           langInfo = parsePath(filename)
             .ext as Required<PluginOptions>['defaultSFCLang']
 
-          const generate = /\.?json5?/.test(langInfo)
-            ? generateJSON
-            : generateYAML
-
+          const generate = getGenerator(langInfo)
           const parseOptions = getOptions(
             filename,
             isProduction,
@@ -516,6 +589,17 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     }
   } as UnpluginOptions
 })
+
+function getGenerator(ext: string, defaultGen = generateJSON) {
+  // prettier-ignore
+  return /\.?json5?$/.test(ext)
+    ? generateJSON
+    : /\.ya?ml$/.test(ext)
+      ? generateYAML
+      : /\.([c|m]?js|[c|m]?ts)$/.test(ext)
+        ? generateJavaScript
+        : defaultGen
+}
 
 function normalizeConfigResolveAlias(
   resolve: any, // eslint-disable-line @typescript-eslint/no-explicit-any

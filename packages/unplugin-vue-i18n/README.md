@@ -277,9 +277,14 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   - ts
   ```
 
-  Note `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+  > ⚠️ NOTE: 
+  `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
 
-  Note that `js` and `ts` resources are limited to **simple export (`export default`) as locale messages object only**, such as programmatically dynamic resource construction is not guaranteed to work currently.
+  > ⚠️ NOTE: 
+  `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
+
+  > ⚠️ NOTE: 
+  `js` and `ts` resources are limited to **simple export (`export default`) as locale messages object only**, such as programmatically dynamic resource construction is not guaranteed to work currently.
 
   ```js
   export default {

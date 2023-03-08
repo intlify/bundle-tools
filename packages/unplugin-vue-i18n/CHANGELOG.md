@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.9.1 (2023-03-08)
+
+#### :zap: Improvement Features
+* [#233](https://github.com/intlify/bundle-tools/pull/233) fix(unplugin-vue-i18n): remove console log ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.9.0 (2023-03-08)
 
 #### :star: Features

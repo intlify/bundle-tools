@@ -1,4 +1,22 @@
 
+## @intlify/unplugin-vue-i18n@0.9.0 (2023-03-08)
+
+#### :star: Features
+* [#232](https://github.com/intlify/bundle-tools/pull/232) fix(unplugin-vue-i18n): support js and ts resource formats ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@0.9.0 (2023-03-07)
+
+#### :pencil: Documentation
+* [#229](https://github.com/intlify/bundle-tools/pull/229) docs(unplugin-vue-i18n): add clarification for importing all locales ([@onurusluca](https://github.com/onurusluca))
+
+#### Committers: 1
+- Onur Usluca ([@onurusluca](https://github.com/onurusluca))
+
+
 ## @intlify/unplugin-vue-i18n@0.8.2 (2023-02-08)
 
 #### :zap: Improvement Features

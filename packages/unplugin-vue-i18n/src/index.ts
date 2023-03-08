@@ -309,7 +309,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                 bridge ? createBridgeCodeGenerator(_code, query) : undefined
               )
               debug('generated code', generatedCode)
-              console.log('generated code', generatedCode)
               debug('sourcemap', map, sourceMap)
 
               if (_code === generatedCode) return

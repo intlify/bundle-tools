@@ -24,20 +24,9 @@ exports[`array basic: code 1`] = `
 
 exports[`array basic: map 1`] = `
 Object {
-  "mappings": ";2EACQA,SAASC",
-  "names": Array [
-    "bar",
-    "baz",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "export default {
-  foo: [['bar'], ['baz']]
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -76,38 +65,9 @@ exports[`array mixed: code 1`] = `
 
 exports[`array mixed: map 1`] = `
 Object {
-  "mappings": ";;;6EAGUA;;;wEAGLC;;;iFAGSD;;0EAEPE;;;sEAGJC;uEACCC",
-  "names": Array [
-    "foo",
-    "bar",
-    "hoge",
-    "baz",
-    "buz",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "export default {
-  foo: [
-    {
-      foo: 'foo'
-    },
-    [
-      'bar',
-      [
-        {
-          foo: 'foo'
-        },
-        'hoge'
-      ]
-    ],
-    'baz',
-    ['buz']
-  ]
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -120,19 +80,9 @@ exports[`bare: code 1`] = `
 
 exports[`bare: map 1`] = `
 Object {
-  "mappings": ";2EACQA",
-  "names": Array [
-    "hello world!",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "export default {
-  hello: 'hello world!'
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -184,67 +134,9 @@ exports[`bridge with ESM exporting: code 1`] = `
 
 exports[`bridge with ESM exporting: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
-  "names": Array [
-    "hi there!",
-    "hello world!",
-    "no apples",
-    "caml",
-    "0",
-    " apple",
-    "n",
-    " apples",
-    "hi, ",
-    " !",
-    "hello  world!",
-    "こんにちは！",
-    "I don't know!",
-    "😺",
-    "A",
-    "\\\\u0041",
-    "\\\\'",
-    "\\\\\\\\",
-    "ERROR1001",
-    "ERROR1002",
-    "NOTE: This is warning",
-    "this is ",
-    "type",
-    " warining",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "const val1 = 1
-export default {
-  hi: 'hi there!',
-  nested: {
-    hello: \`hello world!\`,
-    more: {
-      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
-    },
-    list: 'hi, {0} !'
-  },
-  template: \`hello \${val1} world!\`,
-  こんにちは: 'こんにちは！',
-  'single-quote': \\"I don't know!\\",
-  emoji: '😺',
-  unicode: '\\\\u0041',
-  'unicode-escape': '\\\\\\\\u0041',
-  'backslash-single-quote': \\"\\\\\\\\'\\",
-  'backslash-backslash': '\\\\\\\\\\\\\\\\',
-  errors: ['ERROR1001', 'ERROR1002'],
-  complex: {
-    warnings: [
-      'NOTE: This is warning',
-      {
-        'named-waring': 'this is {type} warining'
-      }
-    ]
-  }
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -296,67 +188,9 @@ exports[`bridge: code 1`] = `
 
 exports[`bridge: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
-  "names": Array [
-    "hi there!",
-    "hello world!",
-    "no apples",
-    "caml",
-    "0",
-    " apple",
-    "n",
-    " apples",
-    "hi, ",
-    " !",
-    "hello  world!",
-    "こんにちは！",
-    "I don't know!",
-    "😺",
-    "A",
-    "\\\\u0041",
-    "\\\\'",
-    "\\\\\\\\",
-    "ERROR1001",
-    "ERROR1002",
-    "NOTE: This is warning",
-    "this is ",
-    "type",
-    " warining",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "const val1 = 1
-export default {
-  hi: 'hi there!',
-  nested: {
-    hello: \`hello world!\`,
-    more: {
-      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
-    },
-    list: 'hi, {0} !'
-  },
-  template: \`hello \${val1} world!\`,
-  こんにちは: 'こんにちは！',
-  'single-quote': \\"I don't know!\\",
-  emoji: '😺',
-  unicode: '\\\\u0041',
-  'unicode-escape': '\\\\\\\\u0041',
-  'backslash-single-quote': \\"\\\\\\\\'\\",
-  'backslash-backslash': '\\\\\\\\\\\\\\\\',
-  errors: ['ERROR1001', 'ERROR1002'],
-  complex: {
-    warnings: [
-      'NOTE: This is warning',
-      {
-        'named-waring': 'this is {type} warining'
-      }
-    ]
-  }
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -397,67 +231,9 @@ exports[`complex: code 1`] = `
 
 exports[`complex: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
-  "names": Array [
-    "hi there!",
-    "hello world!",
-    "no apples",
-    "caml",
-    "0",
-    " apple",
-    "n",
-    " apples",
-    "hi, ",
-    " !",
-    "hello  world!",
-    "こんにちは！",
-    "I don't know!",
-    "😺",
-    "A",
-    "\\\\u0041",
-    "\\\\'",
-    "\\\\\\\\",
-    "ERROR1001",
-    "ERROR1002",
-    "NOTE: This is warning",
-    "this is ",
-    "type",
-    " warining",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "const val1 = 1
-export default {
-  hi: 'hi there!',
-  nested: {
-    hello: \`hello world!\`,
-    more: {
-      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
-    },
-    list: 'hi, {0} !'
-  },
-  template: \`hello \${val1} world!\`,
-  こんにちは: 'こんにちは！',
-  'single-quote': \\"I don't know!\\",
-  emoji: '😺',
-  unicode: '\\\\u0041',
-  'unicode-escape': '\\\\\\\\u0041',
-  'backslash-single-quote': \\"\\\\\\\\'\\",
-  'backslash-backslash': '\\\\\\\\\\\\\\\\',
-  errors: ['ERROR1001', 'ERROR1002'],
-  complex: {
-    warnings: [
-      'NOTE: This is warning',
-      {
-        'named-waring': 'this is {type} warining'
-      }
-    ]
-  }
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -483,44 +259,9 @@ exports[`force stringify: code 1`] = `
 
 exports[`force stringify: map 1`] = `
 Object {
-  "mappings": ";;+EAEYA;gFACCC;+EACDC;iFACEC;;;;;;sEAMXD;sEACAC;;;;;mFAKaD;qFACEC",
-  "names": Array [
-    "true",
-    "false",
-    "null",
-    "1",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "const val1 = 'hello'
-export default {
-  trueValue: true,
-  falseValue: false,
-  nullValue: null,
-  numberValue: 1,
-  regexValue: /abc/,
-  funcValue1: function () {},
-  funcValue2: () => {},
-  identifier: val1,
-  items: [
-    null,
-    1,
-    /abc/,
-    function () {},
-    {
-      identifier: val1,
-      nullValue: null,
-      numberValue: 1,
-      regexValue: /abc/
-    },
-    () => {},
-    val1
-  ]
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -622,28 +363,9 @@ Array [
 
 exports[`invalid message syntax: map 1`] = `
 Object {
-  "mappings": ";2EACQA;+GACWC;;;;qHAIMA",
-  "names": Array [
-    "こんにちは",
-    "",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "export default {
-  hello: 'こんにちは',
-  'this-is-ivalid': '@',
-  nested: {
-    array: [
-      {
-        'this-is-ivalid': '@'
-      }
-    ]
-  }
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -662,36 +384,9 @@ exports[`simple: code 1`] = `
 
 exports[`simple: map 1`] = `
 Object {
-  "mappings": ";wEACKA;2EACGC;qHACAC,QAAAC,8BAAAC;kHACDF,QAAAG,wBAAAD;6EACGF,QAAAI,WAAAF;6FACDF,gBAAAC,SAAAC;sLACAG,aAAAC,uBAAAH,wBAAAI,wBAAAC,2BAAAC",
-  "names": Array [
-    "hi there!",
-    "hello world!",
-    "hi, ",
-    "name",
-    " !",
-    "0",
-    "kazupon",
-    "no apples",
-    "caml",
-    " apple",
-    "n",
-    " apples",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "export default {
-  hi: 'hi there!',
-  hello: 'hello world!',
-  named: \`hi, {name} !\`,
-  list: 'hi, {0} !',
-  literal: \\"hi, {  'kazupon'  } !\\",
-  linked: 'hi, @:name !',
-  plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;
@@ -767,67 +462,9 @@ exports[`useClassComponent: code 1`] = `
 
 exports[`useClassComponent: map 1`] = `
 Object {
-  "mappings": ";;wEAEKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;8EAEEC;2EACHC;oFACSC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;6EACdC,aAAaC;;;wEAGlBC;;oIAEkBC,YAAAC,8BAAAC",
-  "names": Array [
-    "hi there!",
-    "hello world!",
-    "no apples",
-    "caml",
-    "0",
-    " apple",
-    "n",
-    " apples",
-    "hi, ",
-    " !",
-    "hello  world!",
-    "こんにちは！",
-    "I don't know!",
-    "😺",
-    "A",
-    "\\\\u0041",
-    "\\\\'",
-    "\\\\\\\\",
-    "ERROR1001",
-    "ERROR1002",
-    "NOTE: This is warning",
-    "this is ",
-    "type",
-    " warining",
-  ],
-  "sources": Array [
-    "vue-i18n-loader.js",
-  ],
-  "sourcesContent": Array [
-    "const val1 = 1
-export default {
-  hi: 'hi there!',
-  nested: {
-    hello: \`hello world!\`,
-    more: {
-      plural: \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
-    },
-    list: 'hi, {0} !'
-  },
-  template: \`hello \${val1} world!\`,
-  こんにちは: 'こんにちは！',
-  'single-quote': \\"I don't know!\\",
-  emoji: '😺',
-  unicode: '\\\\u0041',
-  'unicode-escape': '\\\\\\\\u0041',
-  'backslash-single-quote': \\"\\\\\\\\'\\",
-  'backslash-backslash': '\\\\\\\\\\\\\\\\',
-  errors: ['ERROR1001', 'ERROR1002'],
-  complex: {
-    warnings: [
-      'NOTE: This is warning',
-      {
-        'named-waring': 'this is {type} warining'
-      }
-    ]
-  }
-}
-",
-  ],
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
   "version": 3,
 }
 `;

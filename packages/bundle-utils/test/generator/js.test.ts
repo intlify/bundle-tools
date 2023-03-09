@@ -200,9 +200,10 @@ test('invalid message syntax', async () => {
   expect(map).toMatchSnapshot('map')
 })
 
-test('no export default', async () => {
-  console.log('ssss')
-  const { source } = await readFile('./fixtures/codegen/no-export-default.js')
+test('no export default with object', async () => {
+  const { source } = await readFile(
+    './fixtures/codegen/no-export-default-with-object.js'
+  )
   function doGenerate() {
     generate(source, {
       sourceMap: true,
@@ -211,6 +212,51 @@ test('no export default', async () => {
   }
 
   expect(doGenerate).toThrowError(
-    `You need to define an object as the locale message with "export default'.`
+    `You need to define an object as the locale message with 'export default'.`
   )
+})
+
+describe(`'allowDynamic' option`, () => {
+  test('no export default', async () => {
+    const { source } = await readFile('./fixtures/codegen/no-export-default.js')
+    function doGenerate() {
+      generate(source, {
+        allowDynamic: true,
+        sourceMap: true,
+        env: 'development'
+      })
+    }
+
+    expect(doGenerate).toThrowError(
+      `You need to define 'export default' that will return the locale messages.`
+    )
+  })
+
+  test('no generate', async () => {
+    const { source } = await readFile('./fixtures/codegen/allow-dynamic.js')
+    const { code, ast } = generate(source, {
+      allowDynamic: true,
+      sourceMap: true,
+      env: 'development'
+    })
+
+    expect(validateSyntax(code)).toBe(true)
+    expect(code).toBe(source)
+    expect(ast).toMatchSnapshot()
+  })
+
+  test('generate', async () => {
+    const { source } = await readFile(
+      './fixtures/codegen/export-default-with-object.js'
+    )
+    const { code, map } = generate(source, {
+      allowDynamic: true,
+      sourceMap: true,
+      env: 'development'
+    })
+
+    expect(validateSyntax(code)).toBe(true)
+    expect(code).toMatchSnapshot('code')
+    expect(map).toMatchSnapshot('map')
+  })
 })

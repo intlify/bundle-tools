@@ -28,6 +28,7 @@ export interface Position {
 }
 
 export interface SourceLocationable {
+  start?: number
   loc?: {
     start: Position
     end: Position
@@ -96,9 +97,10 @@ export interface CodeGenerator {
 /**
  * @internal
  */
-export interface CodeGenResult<ASTNode> {
+export interface CodeGenResult<ASTNode, CodeGenError extends Error = Error> {
   code: string
   ast: ASTNode
+  errors?: CodeGenError[]
   map?: RawSourceMap
 }
 
@@ -131,8 +133,8 @@ export function createCodeGenerator(
     name?: string
   ): void {
     _context.code += code
-    if (_context.map) {
-      if (node && node.loc && node.loc !== LocationStub) {
+    if (_context.map && node) {
+      if (node.loc && node.loc !== LocationStub) {
         addMapping(node.loc.start, name)
       }
       advancePositionWithSource(_context as Position, code)

@@ -1,14 +1,15 @@
 import { readFile } from '../utils'
 import { generate } from '../../src/js'
-import { parse } from '@babel/parser'
+import { parse } from 'acorn'
 
 function validateSyntax(code: string): boolean {
   let ret = false
   try {
-    const node = parse(code, {
+    parse(code, {
+      ecmaVersion: 'latest',
       sourceType: 'module'
     })
-    ret = !node.errors.length
+    ret = true
   } catch (e) {
     console.log(`invalid sytanx on \n${code}`)
     console.error(e)
@@ -197,4 +198,19 @@ test('invalid message syntax', async () => {
   expect(errors).toMatchSnapshot('errors')
   expect(code).toMatchSnapshot('code')
   expect(map).toMatchSnapshot('map')
+})
+
+test('no export default', async () => {
+  console.log('ssss')
+  const { source } = await readFile('./fixtures/codegen/no-export-default.js')
+  function doGenerate() {
+    generate(source, {
+      sourceMap: true,
+      env: 'development'
+    })
+  }
+
+  expect(doGenerate).toThrowError(
+    `You need to define an object as the locale message with "export default'.`
+  )
 })

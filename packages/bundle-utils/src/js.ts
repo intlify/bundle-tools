@@ -33,7 +33,8 @@ export function generate(
     env = 'development',
     forceStringify = false,
     onError = undefined,
-    useClassComponent = false
+    useClassComponent = false,
+    allowDynamic = false
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<Node> {
@@ -66,14 +67,43 @@ export function generate(
     allowImportExportEverywhere: true
   }) as Node
 
-  const selectedWithExportDefault = esquery(
+  const astExportDefaultWithObject = esquery(
     ast,
-    'Program:has(ExportDefaultDeclaration, [declaration=ObjectExpression])'
+    'Program:has(ExportDefaultDeclaration):has(ObjectExpression)'
   )
-  if (!selectedWithExportDefault.length) {
-    throw new Error(
-      `You need to define an object as the locale message with "export default'.`
+  console.log('astExportDefaultWithObject', astExportDefaultWithObject)
+
+  if (!allowDynamic) {
+    if (!astExportDefaultWithObject.length) {
+      throw new Error(
+        `You need to define an object as the locale message with 'export default'.`
+      )
+    }
+  } else {
+    const astExportDefault = esquery(
+      ast,
+      'Program:has(ExportDefaultDeclaration)'
     )
+    if (!astExportDefault.length) {
+      throw new Error(
+        `You need to define 'export default' that will return the locale messages.`
+      )
+    }
+    console.log('astExportDefault', astExportDefault)
+
+    if (!astExportDefaultWithObject.length) {
+      /**
+       * NOTE:
+       *  If `allowDynamic` is `true`, do not transform the code by this function, return it as is.
+       *  This means that the user **must transform locale messages ownself**.
+       *  Especially at the production, you need to do locale messages pre-compiling.
+       */
+      return {
+        ast,
+        code: value,
+        map: inSourceMap
+      }
+    }
   }
 
   const codeMaps = generateNode(generator, ast, options, injector)

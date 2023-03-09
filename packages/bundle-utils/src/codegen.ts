@@ -51,6 +51,7 @@ export interface CodeGenOptions {
   env?: DevEnv
   forceStringify?: boolean
   useClassComponent?: boolean
+  allowDynamic?: boolean
   onWarn?: (msg: string) => void
   onError?: (
     msg: string,

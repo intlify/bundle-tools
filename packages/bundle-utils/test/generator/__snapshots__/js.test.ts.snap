@@ -1,5 +1,154 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`'allowDynamic' option generate: code 1`] = `
+"export default {
+  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})()
+}"
+`;
+
+exports[`'allowDynamic' option generate: map 1`] = `
+Object {
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
+  "version": 3,
+}
+`;
+
+exports[`'allowDynamic' option no generate 1`] = `
+Node {
+  "body": Array [
+    Node {
+      "declaration": Node {
+        "async": false,
+        "body": Node {
+          "body": Array [
+            Node {
+              "argument": Node {
+                "arguments": Array [
+                  Node {
+                    "async": false,
+                    "body": Node {
+                      "arguments": Array [],
+                      "callee": Node {
+                        "computed": false,
+                        "end": 94,
+                        "object": Node {
+                          "end": 89,
+                          "name": "response",
+                          "start": 81,
+                          "type": "Identifier",
+                        },
+                        "optional": false,
+                        "property": Node {
+                          "end": 94,
+                          "name": "json",
+                          "start": 90,
+                          "type": "Identifier",
+                        },
+                        "start": 81,
+                        "type": "MemberExpression",
+                      },
+                      "end": 96,
+                      "optional": false,
+                      "start": 81,
+                      "type": "CallExpression",
+                    },
+                    "end": 96,
+                    "expression": true,
+                    "generator": false,
+                    "id": null,
+                    "params": Array [
+                      Node {
+                        "end": 77,
+                        "name": "response",
+                        "start": 69,
+                        "type": "Identifier",
+                      },
+                    ],
+                    "start": 69,
+                    "type": "ArrowFunctionExpression",
+                  },
+                ],
+                "callee": Node {
+                  "computed": false,
+                  "end": 68,
+                  "object": Node {
+                    "arguments": Array [
+                      Node {
+                        "end": 62,
+                        "name": "url",
+                        "start": 59,
+                        "type": "Identifier",
+                      },
+                    ],
+                    "callee": Node {
+                      "end": 58,
+                      "name": "fetch",
+                      "start": 53,
+                      "type": "Identifier",
+                    },
+                    "end": 63,
+                    "optional": false,
+                    "start": 53,
+                    "type": "CallExpression",
+                  },
+                  "optional": false,
+                  "property": Node {
+                    "end": 68,
+                    "name": "then",
+                    "start": 64,
+                    "type": "Identifier",
+                  },
+                  "start": 53,
+                  "type": "MemberExpression",
+                },
+                "end": 97,
+                "optional": false,
+                "start": 53,
+                "type": "CallExpression",
+              },
+              "end": 97,
+              "start": 46,
+              "type": "ReturnStatement",
+            },
+          ],
+          "end": 99,
+          "start": 42,
+          "type": "BlockStatement",
+        },
+        "end": 99,
+        "expression": false,
+        "generator": false,
+        "id": Node {
+          "end": 36,
+          "name": "loadResource",
+          "start": 24,
+          "type": "Identifier",
+        },
+        "params": Array [
+          Node {
+            "end": 40,
+            "name": "url",
+            "start": 37,
+            "type": "Identifier",
+          },
+        ],
+        "start": 15,
+        "type": "FunctionDeclaration",
+      },
+      "end": 99,
+      "start": 0,
+      "type": "ExportDefaultDeclaration",
+    },
+  ],
+  "end": 100,
+  "sourceType": "module",
+  "start": 0,
+  "type": "Program",
+}
+`;
+
 exports[`array basic: code 1`] = `
 "export default function (Component) {
   Component.__i18n = Component.__i18n || []

@@ -22,7 +22,7 @@
     "@intlify/shared": "next",
     "acorn": "^8.8.2",
     "esquery": "^1.5.0",
-    "estree-walker": "^3.0.3",
+    "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^1.0.1",
     "source-map": "0.6.1",
     "yaml-eslint-parser": "^0.3.2"

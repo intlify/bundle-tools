@@ -979,7 +979,7 @@ __metadata:
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
     esquery: ^1.5.0
-    estree-walker: ^3.0.3
+    estree-walker: ^2.0.2
     jsonc-eslint-parser: ^1.0.1
     source-map: 0.6.1
     yaml-eslint-parser: ^0.3.2
@@ -7260,15 +7260,6 @@ __metadata:
   version: 2.0.2
   resolution: "estree-walker@npm:2.0.2"
   checksum: 6151e6f9828abe2259e57f5fd3761335bb0d2ebd76dc1a01048ccee22fabcfef3c0859300f6d83ff0d1927849368775ec5a6d265dde2f6de5a1be1721cd94efc
-  languageName: node
-  linkType: hard
-
-"estree-walker@npm:^3.0.3":
-  version: 3.0.3
-  resolution: "estree-walker@npm:3.0.3"
-  dependencies:
-    "@types/estree": ^1.0.0
-  checksum: a65728d5727b71de172c5df323385755a16c0fdab8234dc756c3854cfee343261ddfbb72a809a5660fac8c75d960bb3e21aa898c2d7e9b19bb298482ca58a3af
   languageName: node
   linkType: hard
 

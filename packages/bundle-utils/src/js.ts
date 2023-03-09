@@ -126,7 +126,14 @@ function generateNode(
       : `Component`
 
   walk(node, {
-    enter(node, parent) {
+    /**
+     * NOTE:
+     *  force cast to Node of `estree-walker@3.x`,
+     *  because `estree-walker@3.x` is not dual packages,
+     *  so it's support only esm only ...
+     */
+    // @ts-ignore
+    enter(node: Node, parent: Node) {
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
@@ -290,7 +297,14 @@ function generateNode(
           break
       }
     },
-    leave(node, parent) {
+    /**
+     * NOTE:
+     *  force cast to Node of `estree-walker@3.x`,
+     *  because `estree-walker@3.x` is not dual packages,
+     *  so it's support only esm only ...
+     */
+    // @ts-ignore
+    leave(node: Node, parent: Node) {
       switch (node.type) {
         case 'Program':
           if (type === 'sfc') {

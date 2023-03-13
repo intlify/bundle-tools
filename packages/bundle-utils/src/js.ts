@@ -71,7 +71,6 @@ export function generate(
     ast,
     'Program:has(ExportDefaultDeclaration):has(ObjectExpression)'
   )
-  console.log('astExportDefaultWithObject', astExportDefaultWithObject)
 
   if (!allowDynamic) {
     if (!astExportDefaultWithObject.length) {
@@ -89,7 +88,6 @@ export function generate(
         `You need to define 'export default' that will return the locale messages.`
       )
     }
-    console.log('astExportDefault', astExportDefault)
 
     if (!astExportDefaultWithObject.length) {
       /**

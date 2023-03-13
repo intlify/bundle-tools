@@ -1,4 +1,16 @@
 
+## @intlify/bundle-utils@5.1.0 (2023-03-13)
+
+#### :star: Features
+* [#237](https://github.com/intlify/bundle-tools/pull/237) feat: support allow dynamic resource for js and ts format ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#236](https://github.com/intlify/bundle-tools/pull/236) fix(bundle-utils): switch to acorn ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.0.1 (2023-03-07)
 
 #### :bug: Bug Fixes

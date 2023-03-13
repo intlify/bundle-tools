@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@5.1.1 (2023-03-13)
+
+#### :zap: Improvement Features
+* [#239](https://github.com/intlify/bundle-tools/pull/239) fix(bundle-utils): remove console logs ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.1.0 (2023-03-13)
 
 #### :star: Features

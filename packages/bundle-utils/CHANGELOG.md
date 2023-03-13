@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@5.1.2 (2023-03-13)
+
+#### :bug: Bug Fixes
+* [#240](https://github.com/intlify/bundle-tools/pull/240) fix(bundle-utils): strictly js / ts syntax checking ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.1.1 (2023-03-13)
 
 #### :zap: Improvement Features

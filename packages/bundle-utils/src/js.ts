@@ -5,7 +5,6 @@
 import { isString, isBoolean, isNumber } from '@intlify/shared'
 import { parse as parseJavaScript } from 'acorn'
 import { walk } from 'estree-walker'
-import esquery from 'esquery'
 import {
   createCodeGenerator,
   generateMessageFunction,
@@ -67,29 +66,22 @@ export function generate(
     allowImportExportEverywhere: true
   }) as Node
 
-  const astExportDefaultWithObject = esquery(
-    ast,
-    'Program:has(ExportDefaultDeclaration):has(ObjectExpression)'
-  )
-
+  const exportResult = scanAst(ast)
   if (!allowDynamic) {
-    if (!astExportDefaultWithObject.length) {
+    // if (!astExportDefaultWithObject.length) {
+    if (!exportResult || exportResult !== 'object') {
       throw new Error(
         `You need to define an object as the locale message with 'export default'.`
       )
     }
   } else {
-    const astExportDefault = esquery(
-      ast,
-      'Program:has(ExportDefaultDeclaration)'
-    )
-    if (!astExportDefault.length) {
+    if (!exportResult) {
       throw new Error(
         `You need to define 'export default' that will return the locale messages.`
       )
     }
 
-    if (!astExportDefaultWithObject.length) {
+    if (exportResult !== 'object') {
       /**
        * NOTE:
        *  If `allowDynamic` is `true`, do not transform the code by this function, return it as is.
@@ -121,6 +113,29 @@ export function generate(
     ast,
     code,
     map: newMap != null ? newMap : undefined
+  }
+}
+
+function scanAst(ast: Node) {
+  let ret: false | 'object' | 'function' | 'arrow-function' = false
+  if (ast.type === 'Program') {
+    for (const node of ast.body) {
+      if (node.type === 'ExportDefaultDeclaration') {
+        if (node.declaration.type === 'ObjectExpression') {
+          ret = 'object'
+          break
+        } else if (node.declaration.type === 'FunctionDeclaration') {
+          ret = 'function'
+          break
+        } else if (node.declaration.type === 'ArrowFunctionExpression') {
+          ret = 'arrow-function'
+          break
+        }
+      }
+    }
+    return ret
+  } else {
+    throw new Error('Invalid AST: does not have Program node')
   }
 }
 

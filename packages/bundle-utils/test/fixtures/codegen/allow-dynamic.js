@@ -1,3 +1,4 @@
-export default function loadResource(url) {
-  return fetch(url).then(response => response.json())
+export default async function loadResource(url) {
+  const json = await fetch(url).then(response => response.json())
+  return { ...json }
 }

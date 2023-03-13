@@ -975,10 +975,8 @@ __metadata:
   dependencies:
     "@intlify/message-compiler": next
     "@intlify/shared": next
-    "@types/esquery": ^1.0.2
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
-    esquery: ^1.5.0
     estree-walker: ^2.0.2
     jsonc-eslint-parser: ^1.0.1
     source-map: 0.6.1
@@ -2272,15 +2270,6 @@ __metadata:
     "@types/estree": "*"
     "@types/json-schema": "*"
   checksum: e81268cdeb8d64d84af649344df88f064ece0f05db62072657c976b6162ffe16f94b6480a5367d627c629272c2d86d0ee8c24f7095e98f8e743b16f98500673b
-  languageName: node
-  linkType: hard
-
-"@types/esquery@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "@types/esquery@npm:1.0.2"
-  dependencies:
-    "@types/estree": "*"
-  checksum: 4b133e2c422161f8b78a0119bc54a7b011b28821c0b8ddcc6ed1d902057621aadb5a988871c22d3f94baf39145dd4365ce3bbe066f91120f2113fcbe2a86f538
   languageName: node
   linkType: hard
 
@@ -7207,15 +7196,6 @@ __metadata:
   dependencies:
     estraverse: ^5.1.0
   checksum: a0807e17abd7fbe5fbd4fab673038d6d8a50675cdae6b04fbaa520c34581be0c5fa24582990e8acd8854f671dd291c78bb2efb9e0ed5b62f33bac4f9cf820210
-  languageName: node
-  linkType: hard
-
-"esquery@npm:^1.5.0":
-  version: 1.5.0
-  resolution: "esquery@npm:1.5.0"
-  dependencies:
-    estraverse: ^5.1.0
-  checksum: aefb0d2596c230118656cd4ec7532d447333a410a48834d80ea648b1e7b5c9bc9ed8b5e33a89cb04e487b60d622f44cf5713bf4abed7c97343edefdc84a35900
   languageName: node
   linkType: hard
 

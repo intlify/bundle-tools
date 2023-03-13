@@ -1,4 +1,22 @@
 
+## @intlify/unplugin-vue-i18n@0.9.2 (2023-03-13)
+
+#### :star: Features
+* [#241](https://github.com/intlify/bundle-tools/pull/241) feat(unplugin-vue-i18n): support dynamic resource construction for js / ts formats ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@0.9.2 (2023-03-08)
+
+#### :pencil: Documentation
+* [#234](https://github.com/intlify/bundle-tools/pull/234) docs(unplugin-vue-i18n): add notcie for yaml format resource ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.9.1 (2023-03-08)
 
 #### :zap: Improvement Features

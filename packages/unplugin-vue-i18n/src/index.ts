@@ -27,12 +27,7 @@ import { parseVueRequest, VueQuery } from './query'
 import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
 
-import type {
-  UnpluginContextMeta,
-  UnpluginOptions,
-  SourceMapCompact
-} from 'unplugin'
-import type { SourceMapInput } from 'rollup'
+import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import type { PluginOptions } from './types'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 
@@ -124,6 +119,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   const esm = isBoolean(options.esm) ? options.esm : true
   debug('esm', esm)
+
+  const allowDynamic = !!options.allowDynamic
 
   let isProduction = false
   let sourceMap = false
@@ -296,6 +293,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   inSourceMap,
                   isGlobal: globalSFCScope,
                   useClassComponent,
+                  allowDynamic,
                   bridge,
                   exportESM: esm,
                   forceStringify
@@ -501,6 +499,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               inSourceMap,
               isGlobal: globalSFCScope,
               useClassComponent,
+              allowDynamic,
               bridge,
               exportESM: esm,
               forceStringify
@@ -743,7 +742,8 @@ function getOptions(
     isGlobal = false,
     bridge = false,
     exportESM = true,
-    useClassComponent = false
+    useClassComponent = false,
+    allowDynamic = false
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
@@ -751,6 +751,7 @@ function getOptions(
     bridge?: boolean
     exportESM?: boolean
     useClassComponent?: boolean
+    allowDynamic?: boolean
   }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -761,6 +762,7 @@ function getOptions(
     inSourceMap,
     forceStringify,
     useClassComponent,
+    allowDynamic,
     bridge,
     exportESM,
     env: mode,

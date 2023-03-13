@@ -153,6 +153,7 @@ export async function bundleAndRun(
   options.sourcemap = isBoolean(options.sourcemap) || false
   options.useClassComponent = isBoolean(options.useClassComponent) || false
   options.bridge = isBoolean(options.bridge) || false
+  options.allowDynamic = isBoolean(options.allowDynamic) || false
 
   const { code, map } = await bundler(fixture, options)
 

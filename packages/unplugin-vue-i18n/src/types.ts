@@ -1,6 +1,7 @@
 export type SFCLangFormat = 'json' | 'json5' | 'yml' | 'yaml'
 export interface PluginOptions {
   include?: string | string[]
+  allowDynamic?: boolean
   runtimeOnly?: boolean
   compositionOnly?: boolean
   fullInstall?: boolean

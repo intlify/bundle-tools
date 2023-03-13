@@ -117,26 +117,26 @@ export function generate(
 }
 
 function scanAst(ast: Node) {
-  let ret: false | 'object' | 'function' | 'arrow-function' = false
-  if (ast.type === 'Program') {
-    for (const node of ast.body) {
-      if (node.type === 'ExportDefaultDeclaration') {
-        if (node.declaration.type === 'ObjectExpression') {
-          ret = 'object'
-          break
-        } else if (node.declaration.type === 'FunctionDeclaration') {
-          ret = 'function'
-          break
-        } else if (node.declaration.type === 'ArrowFunctionExpression') {
-          ret = 'arrow-function'
-          break
-        }
-      }
-    }
-    return ret
-  } else {
+  if (ast.type !== 'Program') {
     throw new Error('Invalid AST: does not have Program node')
   }
+
+  let ret: false | 'object' | 'function' | 'arrow-function' = false
+  for (const node of ast.body) {
+    if (node.type === 'ExportDefaultDeclaration') {
+      if (node.declaration.type === 'ObjectExpression') {
+        ret = 'object'
+        break
+      } else if (node.declaration.type === 'FunctionDeclaration') {
+        ret = 'function'
+        break
+      } else if (node.declaration.type === 'ArrowFunctionExpression') {
+        ret = 'arrow-function'
+        break
+      }
+    }
+  }
+  return ret
 }
 
 function generateNode(

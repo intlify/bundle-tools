@@ -1,5 +1,6 @@
 import { resolve } from 'pathe'
 import { bundleVite, bundleAndRun } from '../utils'
+import { isFunction } from '@intlify/shared'
 import { createMessageContext } from '@intlify/core-base'
 
 const options = {
@@ -47,4 +48,12 @@ test('ts resource', async () => {
   const fn = module.message
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
+})
+
+test('dynamical resource with js / ts', async () => {
+  const { module } = await bundleAndRun('ka-JP.ts', bundleVite, {
+    allowDynamic: true,
+    ...options
+  })
+  expect(isFunction(module)).toBe(true)
 })

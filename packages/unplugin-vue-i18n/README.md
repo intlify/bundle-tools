@@ -277,6 +277,8 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   - ts
   ```
 
+  If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
+
   > ⚠️ NOTE: 
   `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
 
@@ -284,7 +286,8 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
 
   > ⚠️ NOTE: 
-  `js` and `ts` resources are limited to **simple export (`export default`) as locale messages object only**, such as programmatically dynamic resource construction is not guaranteed to work currently.
+  `js` and `ts` resources are limited to **simple export (`export default`) as locale messages object as default**
+  , such as programmatically dynamic resource construction is not guaranteed to work currently.
 
   ```js
   export default {
@@ -293,7 +296,19 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   }
   ```
 
-  If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
+  if you need to use programmatically dynamic resource construction, you would be enable `allowDynamic` option. In this case, you need to export the function with `export default` and construct the resource with the function as follow:
+
+  ```js
+  import resources from './locales/all.json'
+
+  export default async function loadResource(url) {
+    const res = await import(url).then(r => r.default || r)
+    return { ...resources, ...res }
+  }
+  ```
+
+  If you fetch some resources from a backend, the data **must be pre-compiled** for production. exmaple is [here](https://github.com/intlify/vue-i18n-next/tree/master/examples/backend).
+
 
 ### `runtimeOnly`
 

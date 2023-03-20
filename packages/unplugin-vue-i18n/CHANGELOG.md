@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.9.3 (2023-03-20)
+
+#### :bug: Bug Fixes
+* [#243](https://github.com/intlify/bundle-tools/pull/243) fix(bundle-utils): fallback code generation for SFC ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.9.2 (2023-03-13)
 
 #### :star: Features

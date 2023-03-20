@@ -193,8 +193,9 @@ Node {
 
 exports[`array basic: code 1`] = `
 "export default function (Component) {
-  Component.__i18n = Component.__i18n || []
-  Component.__i18n.push({
+  const _Component = Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"foo\\": [
@@ -224,8 +225,9 @@ Object {
 
 exports[`array mixed: code 1`] = `
 "export default function (Component) {
-  Component.__i18n = Component.__i18n || []
-  Component.__i18n.push({
+  const _Component = Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"foo\\": [
@@ -280,8 +282,9 @@ Object {
 
 exports[`bridge with ESM exporting: code 1`] = `
 "export default function (Component) {
-  Component.options.__i18n = Component.options.__i18n || []
-  Component.options.__i18n.push({
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
@@ -315,9 +318,9 @@ exports[`bridge with ESM exporting: code 1`] = `
       }
     }
   })
-  Component.options.__i18nBridge = Component.options.__i18nBridge || []
-  Component.options.__i18nBridge.push('\\"{\\\\\\\\n  \\\\\\\\\\"hi\\\\\\\\\\": \\\\\\\\\\"hi there!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"nested\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"hello\\\\\\\\\\": \\\\\\\\\\"hello world!\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\"more\\\\\\\\\\": {\\\\\\\\n      \\\\\\\\\\"plural\\\\\\\\\\": \\\\\\\\\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\"list\\\\\\\\\\": \\\\\\\\\\"hi, {0} !\\\\\\\\\\"\\\\\\\\n  },\\\\\\\\n  \\\\\\\\\\"こんにちは\\\\\\\\\\": \\\\\\\\\\"こんにちは！\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"single-quote\\\\\\\\\\": \\\\\\\\\\"I don\\\\u0027t know!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"emoji\\\\\\\\\\": \\\\\\\\\\"😺\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode-escape\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-single-quote\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-backslash\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"errors\\\\\\\\\\": [\\\\\\\\\\"ERROR1001\\\\\\\\\\", \\\\\\\\\\"ERROR1002\\\\\\\\\\"],\\\\\\\\n  \\\\\\\\\\"complex\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"warnings\\\\\\\\\\": [\\\\\\\\n      \\\\\\\\\\"NOTE: This is warning\\\\\\\\\\",\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\"named-waring\\\\\\\\\\": \\\\\\\\\\"this is {type} warining\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\"')
-  delete Component.options._Ctor
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('\\"{\\\\\\\\n  \\\\\\\\\\"hi\\\\\\\\\\": \\\\\\\\\\"hi there!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"nested\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"hello\\\\\\\\\\": \\\\\\\\\\"hello world!\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\"more\\\\\\\\\\": {\\\\\\\\n      \\\\\\\\\\"plural\\\\\\\\\\": \\\\\\\\\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\"list\\\\\\\\\\": \\\\\\\\\\"hi, {0} !\\\\\\\\\\"\\\\\\\\n  },\\\\\\\\n  \\\\\\\\\\"こんにちは\\\\\\\\\\": \\\\\\\\\\"こんにちは！\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"single-quote\\\\\\\\\\": \\\\\\\\\\"I don\\\\u0027t know!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"emoji\\\\\\\\\\": \\\\\\\\\\"😺\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode-escape\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-single-quote\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-backslash\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"errors\\\\\\\\\\": [\\\\\\\\\\"ERROR1001\\\\\\\\\\", \\\\\\\\\\"ERROR1002\\\\\\\\\\"],\\\\\\\\n  \\\\\\\\\\"complex\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"warnings\\\\\\\\\\": [\\\\\\\\n      \\\\\\\\\\"NOTE: This is warning\\\\\\\\\\",\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\"named-waring\\\\\\\\\\": \\\\\\\\\\"this is {type} warining\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\"')
+  delete _Component._Ctor
   
 }
 "
@@ -334,8 +337,9 @@ Object {
 
 exports[`bridge: code 1`] = `
 "module.exports = function (Component) {
-  Component.options.__i18n = Component.options.__i18n || []
-  Component.options.__i18n.push({
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
@@ -369,9 +373,9 @@ exports[`bridge: code 1`] = `
       }
     }
   })
-  Component.options.__i18nBridge = Component.options.__i18nBridge || []
-  Component.options.__i18nBridge.push('\\"{\\\\\\\\n  \\\\\\\\\\"hi\\\\\\\\\\": \\\\\\\\\\"hi there!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"nested\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"hello\\\\\\\\\\": \\\\\\\\\\"hello world!\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\"more\\\\\\\\\\": {\\\\\\\\n      \\\\\\\\\\"plural\\\\\\\\\\": \\\\\\\\\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\"list\\\\\\\\\\": \\\\\\\\\\"hi, {0} !\\\\\\\\\\"\\\\\\\\n  },\\\\\\\\n  \\\\\\\\\\"こんにちは\\\\\\\\\\": \\\\\\\\\\"こんにちは！\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"single-quote\\\\\\\\\\": \\\\\\\\\\"I don\\\\u0027t know!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"emoji\\\\\\\\\\": \\\\\\\\\\"😺\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode-escape\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-single-quote\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-backslash\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"errors\\\\\\\\\\": [\\\\\\\\\\"ERROR1001\\\\\\\\\\", \\\\\\\\\\"ERROR1002\\\\\\\\\\"],\\\\\\\\n  \\\\\\\\\\"complex\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"warnings\\\\\\\\\\": [\\\\\\\\n      \\\\\\\\\\"NOTE: This is warning\\\\\\\\\\",\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\"named-waring\\\\\\\\\\": \\\\\\\\\\"this is {type} warining\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\"')
-  delete Component.options._Ctor
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('\\"{\\\\\\\\n  \\\\\\\\\\"hi\\\\\\\\\\": \\\\\\\\\\"hi there!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"nested\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"hello\\\\\\\\\\": \\\\\\\\\\"hello world!\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\"more\\\\\\\\\\": {\\\\\\\\n      \\\\\\\\\\"plural\\\\\\\\\\": \\\\\\\\\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\"list\\\\\\\\\\": \\\\\\\\\\"hi, {0} !\\\\\\\\\\"\\\\\\\\n  },\\\\\\\\n  \\\\\\\\\\"こんにちは\\\\\\\\\\": \\\\\\\\\\"こんにちは！\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"single-quote\\\\\\\\\\": \\\\\\\\\\"I don\\\\u0027t know!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"emoji\\\\\\\\\\": \\\\\\\\\\"😺\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode-escape\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-single-quote\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-backslash\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"errors\\\\\\\\\\": [\\\\\\\\\\"ERROR1001\\\\\\\\\\", \\\\\\\\\\"ERROR1002\\\\\\\\\\"],\\\\\\\\n  \\\\\\\\\\"complex\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"warnings\\\\\\\\\\": [\\\\\\\\n      \\\\\\\\\\"NOTE: This is warning\\\\\\\\\\",\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\"named-waring\\\\\\\\\\": \\\\\\\\\\"this is {type} warining\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\"')
+  delete _Component._Ctor
   
 }
 "
@@ -612,8 +616,9 @@ Object {
 
 exports[`useClassComponent: code 1`] = `
 "export default function (Component) {
-  Component.__o.__i18n = Component.__o.__i18n || []
-  Component.__o.__i18n.push({
+  const _Component = Component.__o || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),

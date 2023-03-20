@@ -2,8 +2,9 @@
 
 exports[`array basic: code 1`] = `
 "export default function (Component) {
-  Component.__i18n = Component.__i18n || []
-  Component.__i18n.push({
+  const _Component = Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"foo\\": [
@@ -43,8 +44,9 @@ Object {
 
 exports[`array mixed: code 1`] = `
 "export default function (Component) {
-  Component.__i18n = Component.__i18n || []
-  Component.__i18n.push({
+  const _Component = Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"foo\\": [
@@ -124,8 +126,9 @@ Object {
 
 exports[`bridge with ESM exporting: code 1`] = `
 "export default function (Component) {
-  Component.options.__i18n = Component.options.__i18n || []
-  Component.options.__i18n.push({
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
@@ -158,8 +161,8 @@ exports[`bridge with ESM exporting: code 1`] = `
       }
     }
   })
-  Component.options.__i18nBridge = Component.options.__i18nBridge || []
-  Component.options.__i18nBridge.push('{
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('{
   \\"hi\\": \\"hi there!\\",
   \\"nested\\": {
     \\"hello\\": \\"hello world!\\",
@@ -186,7 +189,7 @@ exports[`bridge with ESM exporting: code 1`] = `
   }
 }
 ')
-  delete Component.options._Ctor
+  delete _Component._Ctor
   
 }"
 `;
@@ -251,8 +254,9 @@ complex:
 
 exports[`bridge: code 1`] = `
 "module.exports = function (Component) {
-  Component.options.__i18n = Component.options.__i18n || []
-  Component.options.__i18n.push({
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
@@ -285,8 +289,8 @@ exports[`bridge: code 1`] = `
       }
     }
   })
-  Component.options.__i18nBridge = Component.options.__i18nBridge || []
-  Component.options.__i18nBridge.push('{
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('{
   \\"hi\\": \\"hi there!\\",
   \\"nested\\": {
     \\"hello\\": \\"hello world!\\",
@@ -313,7 +317,7 @@ exports[`bridge: code 1`] = `
   }
 }
 ')
-  delete Component.options._Ctor
+  delete _Component._Ctor
   
 }"
 `;
@@ -542,8 +546,9 @@ complex:
 
 exports[`useClassComponent: code 1`] = `
 "export default function (Component) {
-  Component.__o.__i18n = Component.__o.__i18n || []
-  Component.__o.__i18n.push({
+  const _Component = Component.__o || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
     \\"locale\\": \\"\\",
     \\"resource\\": {
       \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),

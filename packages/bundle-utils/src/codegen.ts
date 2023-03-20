@@ -40,6 +40,7 @@ export interface SourceLocationable {
  */
 export interface CodeGenOptions {
   type?: 'plain' | 'sfc' | 'bare'
+  legacy?: boolean
   bridge?: boolean
   exportESM?: boolean
   source?: string

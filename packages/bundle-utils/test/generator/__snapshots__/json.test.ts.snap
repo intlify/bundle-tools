@@ -659,6 +659,59 @@ Object {
 }
 `;
 
+exports[`legacy: code 1`] = `
+"export default function (Component) {
+  Component.options.__i18n = Component.options.__i18n || []
+  Component.options.__i18n.push(\\"{\\\\\\"hi\\\\\\":\\\\\\"hi there!\\\\\\",\\\\\\"nested\\\\\\":{\\\\\\"hello\\\\\\":\\\\\\"hello world!\\\\\\",\\\\\\"more\\\\\\":{\\\\\\"plural\\\\\\":\\\\\\"@.caml:{\\\\\\\\u0027no apples\\\\\\\\u0027} | {0} apple | {n} apples\\\\\\"},\\\\\\"list\\\\\\":\\\\\\"hi, {0} !\\\\\\"},\\\\\\"こんにちは\\\\\\":\\\\\\"こんにちは！\\\\\\",\\\\\\"single-quote\\\\\\":\\\\\\"I don\\\\\\\\u0027t know!\\\\\\",\\\\\\"emoji\\\\\\":\\\\\\"😺\\\\\\",\\\\\\"unicode\\\\\\":\\\\\\"A\\\\\\",\\\\\\"unicode-escape\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\",\\\\\\"backslash-single-quote\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\",\\\\\\"backslash-backslash\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\"errors\\\\\\":[\\\\\\"ERROR1001\\\\\\",\\\\\\"ERROR1002\\\\\\"],\\\\\\"complex\\\\\\":{\\\\\\"warnings\\\\\\":[\\\\\\"NOTE: This is warning\\\\\\",{\\\\\\"named-waring\\\\\\":\\\\\\"this is {type} warining\\\\\\"}]}}\\")
+  delete Component.options._Ctor
+}"
+`;
+
+exports[`legacy: map 1`] = `
+SourceMap {
+  "file": "vue-i18n-loader.json",
+  "mappings": "AAAA;AACA;AACA;AACA;AACA",
+  "names": Array [],
+  "sources": Array [
+    "{
+  \\"hi\\": \\"hi there!\\",
+  \\"nested\\": {
+    \\"hello\\": \\"hello world!\\",
+    \\"more\\": {
+      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+    },
+    \\"list\\": \\"hi, {0} !\\"
+  },
+  \\"こんにちは\\": \\"こんにちは！\\",
+  \\"single-quote\\": \\"I don't know!\\",
+  \\"emoji\\": \\"😺\\",
+  \\"unicode\\": \\"/u0041\\",
+  \\"unicode-escape\\": \\"//u0041\\",
+  \\"backslash-single-quote\\": \\"//'\\",
+  \\"backslash-backslash\\": \\"////\\",
+  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
+  \\"complex\\": {
+    \\"warnings\\": [
+      \\"NOTE: This is warning\\",
+      {
+        \\"named-waring\\": \\"this is {type} warining\\"
+      }
+    ]
+  }
+}
+",
+  ],
+  "sourcesContent": Array [
+    "export default function (Component) {
+  Component.options.__i18n = Component.options.__i18n || []
+  Component.options.__i18n.push(\\"{\\\\\\"hi\\\\\\":\\\\\\"hi there!\\\\\\",\\\\\\"nested\\\\\\":{\\\\\\"hello\\\\\\":\\\\\\"hello world!\\\\\\",\\\\\\"more\\\\\\":{\\\\\\"plural\\\\\\":\\\\\\"@.caml:{\\\\\\\\u0027no apples\\\\\\\\u0027} | {0} apple | {n} apples\\\\\\"},\\\\\\"list\\\\\\":\\\\\\"hi, {0} !\\\\\\"},\\\\\\"こんにちは\\\\\\":\\\\\\"こんにちは！\\\\\\",\\\\\\"single-quote\\\\\\":\\\\\\"I don\\\\\\\\u0027t know!\\\\\\",\\\\\\"emoji\\\\\\":\\\\\\"😺\\\\\\",\\\\\\"unicode\\\\\\":\\\\\\"A\\\\\\",\\\\\\"unicode-escape\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\",\\\\\\"backslash-single-quote\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\",\\\\\\"backslash-backslash\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\"errors\\\\\\":[\\\\\\"ERROR1001\\\\\\",\\\\\\"ERROR1002\\\\\\"],\\\\\\"complex\\\\\\":{\\\\\\"warnings\\\\\\":[\\\\\\"NOTE: This is warning\\\\\\",{\\\\\\"named-waring\\\\\\":\\\\\\"this is {type} warining\\\\\\"}]}}\\")
+  delete Component.options._Ctor
+}",
+  ],
+  "version": 3,
+}
+`;
+
 exports[`simple: code 1`] = `
 "export default {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),

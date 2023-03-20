@@ -2,14 +2,20 @@
  * Code generator for i18n yaml resource
  */
 
-import { isString } from '@intlify/shared'
+import { isString, friendlyJSONstringify } from '@intlify/shared'
 import {
   createCodeGenerator,
   generateMessageFunction,
   mapLinesColumns
 } from './codegen'
-import { parseYAML, traverseNodes } from 'yaml-eslint-parser'
+import {
+  parseYAML,
+  traverseNodes,
+  getStaticYAMLValue
+} from 'yaml-eslint-parser'
+import { generateLegacyCode } from './legacy'
 import { RawSourceMap } from 'source-map'
+import MagicString from 'magic-string'
 
 import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
 import type { CodeGenOptions, CodeGenerator, CodeGenResult } from './codegen'
@@ -21,6 +27,7 @@ export function generate(
   targetSource: string | Buffer,
   {
     type = 'plain',
+    legacy = false,
     bridge = false,
     exportESM = false,
     useClassComponent = false,
@@ -57,6 +64,23 @@ export function generate(
   const generator = createCodeGenerator(options)
 
   const ast = parseYAML(value, { filePath: filename })
+
+  // for vue 2.x
+  if (legacy && type === 'sfc') {
+    const gen = () => friendlyJSONstringify(getStaticYAMLValue(ast))
+    const code = generateLegacyCode(options, gen)
+    const s = new MagicString(code)
+    return {
+      ast,
+      code: s.toString(),
+      map: s.generateMap({
+        file: filename,
+        source: value,
+        includeContent: true
+      }) as unknown as RawSourceMap
+    }
+  }
+
   const codeMaps = generateNode(generator, ast, options, injector)
 
   const { code, map } = generator.context()

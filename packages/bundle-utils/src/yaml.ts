@@ -116,12 +116,7 @@ function generateNode(
     useClassComponent
   } = options
 
-  // prettier-ignore
-  const componentNamespace = bridge
-    ? `Component.options`
-    : useClassComponent
-      ? `Component.__o`
-      : `Component`
+  const componentNamespace = '_Component'
 
   traverseNodes(node, {
     enterNode(node: YAMLNode, parent: YAMLNode) {
@@ -141,6 +136,14 @@ function generateNode(
               : `export default`
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
+            // prettier-ignore
+            const componentVariable = bridge
+              ? `Component.options || Component`
+              : useClassComponent
+                ? `Component.__o || Component`
+                : `Component`
+            // prettier-ignore
+            generator.pushline(`const ${componentNamespace} = ${componentVariable}`)
             generator.pushline(
               `${componentNamespace}.${variableName} = ${componentNamespace}.${variableName} || []`
             )

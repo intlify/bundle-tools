@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@5.3.0 (2023-03-20)
+
+#### :star: Features
+* [#242](https://github.com/intlify/bundle-tools/pull/242) feat(bundle-utils): support sfc custom block code generation for vue-i18n v8.x legacy options api ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 
 
 ## @intlify/bundle-utils@5.1.2 (2023-03-13)

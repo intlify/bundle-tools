@@ -1,21 +1,5 @@
-import { readFile } from '../utils'
+import { readFile, validateSyntax } from '../utils'
 import { generate } from '../../src/js'
-import { parse } from 'acorn'
-
-function validateSyntax(code: string): boolean {
-  let ret = false
-  try {
-    parse(code, {
-      ecmaVersion: 'latest',
-      sourceType: 'module'
-    })
-    ret = true
-  } catch (e) {
-    console.log(`invalid sytanx on \n${code}`)
-    console.error(e)
-  }
-  return ret
-}
 
 test('simple', async () => {
   const { source } = await readFile('./fixtures/codegen/simple.js')

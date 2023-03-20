@@ -2,14 +2,20 @@
  * Code generator for i18n json/json5 resource
  */
 
-import { parseJSON, traverseNodes } from 'jsonc-eslint-parser'
-import { isString } from '@intlify/shared'
+import {
+  parseJSON,
+  traverseNodes,
+  getStaticJSONValue
+} from 'jsonc-eslint-parser'
+import { isString, friendlyJSONstringify } from '@intlify/shared'
 import {
   createCodeGenerator,
   generateMessageFunction,
   mapLinesColumns
 } from './codegen'
+import { generateLegacyCode } from './legacy'
 import { RawSourceMap } from 'source-map'
+import MagicString from 'magic-string'
 
 import type { JSONProgram, JSONNode } from 'jsonc-eslint-parser/lib/parser/ast'
 import type { CodeGenOptions, CodeGenerator, CodeGenResult } from './codegen'
@@ -21,6 +27,7 @@ export function generate(
   targetSource: string | Buffer,
   {
     type = 'plain',
+    legacy = false,
     bridge = false,
     exportESM = false,
     filename = 'vue-i18n-loader.json',
@@ -61,6 +68,23 @@ export function generate(
   const generator = createCodeGenerator(options)
 
   const ast = parseJSON(value, { filePath: filename })
+
+  // for vue 2.x
+  if (legacy && type === 'sfc') {
+    const gen = () => friendlyJSONstringify(getStaticJSONValue(ast))
+    const code = generateLegacyCode(options, gen)
+    const s = new MagicString(code)
+    return {
+      ast,
+      code: s.toString(),
+      map: s.generateMap({
+        file: filename,
+        source: value,
+        includeContent: true
+      }) as unknown as RawSourceMap
+    }
+  }
+
   const codeMaps = generateNode(generator, ast, options, injector)
 
   const { code, map } = generator.context()

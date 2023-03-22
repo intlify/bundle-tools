@@ -1,4 +1,16 @@
 
+## @intlify/bundle-utils@5.4.0 (2023-03-22)
+
+#### :star: Features
+* [#247](https://github.com/intlify/bundle-tools/pull/247) feat(bundle-utils): support strictly message transform ([@kazupon](https://github.com/kazupon))
+
+#### :bug: Bug Fixes
+* [#248](https://github.com/intlify/bundle-tools/pull/248) fix(bundle-utils): existing functions not being generated ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.3.1 (2023-03-20)
 
 #### :bug: Bug Fixes

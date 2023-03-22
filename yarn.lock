@@ -1113,7 +1113,7 @@ __metadata:
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
     "@intlify/bundle-utils": ^5.3.1
-    "@intlify/shared": next
+    "@intlify/shared": 9.3.0-beta.17
     "@rollup/pluginutils": ^5.0.2
     "@vue/compiler-sfc": ^3.2.47
     debug: ^4.3.3

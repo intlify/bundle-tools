@@ -261,3 +261,14 @@ describe(`'allowDynamic' option`, () => {
     expect(map).toMatchSnapshot('map')
   })
 })
+
+test('include function', async () => {
+  const { source } = await readFile('./fixtures/codegen/functions.js')
+  const { code, map } = generate(source, {
+    sourceMap: true,
+    env: 'development'
+  })
+
+  expect(code).toMatchSnapshot('code')
+  expect(map).toMatchSnapshot('map')
+})

@@ -439,6 +439,10 @@ exports[`force stringify: code 1`] = `
   \\"falseValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"false\\"])};fn.source=\\"false\\";return fn;})(),
   \\"nullValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"null\\"])};fn.source=\\"null\\";return fn;})(),
   \\"numberValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"1\\"])};fn.source=\\"1\\";return fn;})(),
+  \\"funcValue1\\": function () {
+},
+  \\"funcValue2\\": () => {
+},
   \\"items\\": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"null\\"])};fn.source=\\"null\\";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"1\\"])};fn.source=\\"1\\";return fn;})(),
@@ -481,6 +485,28 @@ Array [
     "source": "<script>window.alert('hi there!')</script>",
   },
 ]
+`;
+
+exports[`include function: code 1`] = `
+"export default {
+  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})(),
+  \\"pagination\\": {
+    \\"pages\\": ({named}) => \`\${ named('number') }/page\`,
+    \\"total\\": ({named}) => \`\${ named('number') } records in total\`
+  },
+  \\"foo\\": {
+    \\"bar\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})()
+  }
+}"
+`;
+
+exports[`include function: map 1`] = `
+Object {
+  "mappings": "",
+  "names": Array [],
+  "sources": Array [],
+  "version": 3,
+}
 `;
 
 exports[`invalid message syntax: code 1`] = `
@@ -614,6 +640,10 @@ exports[`unhandling: code 1`] = `
   \\"falseValue\\": false,
   \\"nullValue\\": null,
   \\"numberValue\\": 1,
+  \\"funcValue1\\": function () {
+},
+  \\"funcValue2\\": () => {
+},
   \\"items\\": [
     null,
     1,

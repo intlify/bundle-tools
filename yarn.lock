@@ -975,8 +975,10 @@ __metadata:
   dependencies:
     "@intlify/message-compiler": 9.3.0-beta.17
     "@intlify/shared": 9.3.0-beta.17
+    "@types/escodegen": ^0.0.7
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
+    escodegen: ^2.0.0
     estree-walker: ^2.0.2
     jsonc-eslint-parser: ^1.0.1
     magic-string: ^0.30.0
@@ -2261,6 +2263,13 @@ __metadata:
   dependencies:
     "@types/ms": "*"
   checksum: 0a7b89d8ed72526858f0b61c6fd81f477853e8c4415bb97f48b1b5545248d2ae389931680b94b393b993a7cfe893537a200647d93defe6d87159b96812305adc
+  languageName: node
+  linkType: hard
+
+"@types/escodegen@npm:^0.0.7":
+  version: 0.0.7
+  resolution: "@types/escodegen@npm:0.0.7"
+  checksum: 19625e3f61096e989c851e5db9758636618fb841d6adb295494a46613f68b025cb79474401e7b25508506799f94adcb17bb04b4f355862671caf8002ca77af0d
   languageName: node
   linkType: hard
 

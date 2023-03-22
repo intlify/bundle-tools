@@ -4,6 +4,7 @@
 
 import { isString, isBoolean, isNumber } from '@intlify/shared'
 import { parse as parseJavaScript } from 'acorn'
+import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
 import {
   createCodeGenerator,
@@ -223,69 +224,86 @@ function generateNode(
           }
           break
         case 'Property':
-          if (node != null) {
-            if (
-              isJSONablePrimitiveLiteral(node.value) &&
-              (node.key.type === 'Literal' || node.key.type === 'Identifier')
-            ) {
-              // prettier-ignore
-              const name = node.key.type === 'Literal'
+          if (parent != null && parent.type === 'ObjectExpression') {
+            if (node != null) {
+              if (
+                isJSONablePrimitiveLiteral(node.value) &&
+                (node.key.type === 'Literal' || node.key.type === 'Identifier')
+              ) {
+                // prettier-ignore
+                const name = node.key.type === 'Literal'
                 ? String(node.key.value)
                 : node.key.name
-              if (
-                (node.value.type === 'Literal' && isString(node.value.value)) ||
-                node.value.type === 'TemplateLiteral'
-              ) {
-                const value = getValue(node.value) as string
-                generator.push(`${JSON.stringify(name)}: `)
-                pathStack.push(name)
-                const { code, map } = generateMessageFunction(
-                  value,
-                  options,
-                  pathStack
-                )
-                sourceMap && map != null && codeMaps.set(value, map)
-                generator.push(`${code}`, node.value, value)
-                skipStack.push(false)
-              } else {
-                const value = getValue(node.value)
-                if (forceStringify) {
-                  const strValue = JSON.stringify(value)
+                if (
+                  (node.value.type === 'Literal' &&
+                    isString(node.value.value)) ||
+                  node.value.type === 'TemplateLiteral'
+                ) {
+                  const value = getValue(node.value) as string
                   generator.push(`${JSON.stringify(name)}: `)
                   pathStack.push(name)
                   const { code, map } = generateMessageFunction(
-                    strValue,
+                    value,
                     options,
                     pathStack
                   )
-                  sourceMap && map != null && codeMaps.set(strValue, map)
-                  generator.push(`${code}`, node.value, strValue)
+                  sourceMap && map != null && codeMaps.set(value, map)
+                  generator.push(`${code}`, node.value, value)
+                  skipStack.push(false)
                 } else {
-                  generator.push(
-                    `${JSON.stringify(name)}: ${JSON.stringify(value)}`
-                  )
-                  pathStack.push(name)
+                  const value = getValue(node.value)
+                  if (forceStringify) {
+                    const strValue = JSON.stringify(value)
+                    generator.push(`${JSON.stringify(name)}: `)
+                    pathStack.push(name)
+                    const { code, map } = generateMessageFunction(
+                      strValue,
+                      options,
+                      pathStack
+                    )
+                    sourceMap && map != null && codeMaps.set(strValue, map)
+                    generator.push(`${code}`, node.value, strValue)
+                  } else {
+                    generator.push(
+                      `${JSON.stringify(name)}: ${JSON.stringify(value)}`
+                    )
+                    pathStack.push(name)
+                  }
+                  skipStack.push(false)
                 }
-                skipStack.push(false)
-              }
-            } else if (
-              (node.value.type === 'ObjectExpression' ||
-                node.value.type === 'ArrayExpression') &&
-              (node.key.type === 'Literal' || node.key.type === 'Identifier')
-            ) {
-              // prettier-ignore
-              const name = node.key.type === 'Literal'
+              } else if (
+                (node.value.type === 'FunctionExpression' ||
+                  node.value.type === 'ArrowFunctionExpression') &&
+                (node.key.type === 'Literal' || node.key.type === 'Identifier')
+              ) {
+                // prettier-ignore
+                const name = node.key.type === 'Literal'
                 ? String(node.key.value)
                 : node.key.name
-              generator.push(`${JSON.stringify(name)}: `)
-              pathStack.push(name)
-            } else {
-              // for Regex, function, etc.
-              skipStack.push(true)
+                generator.push(`${JSON.stringify(name)}: `)
+                pathStack.push(name)
+                const code = generateJavaScript(node.value)
+                generator.push(`${code}`, node.value, code)
+                skipStack.push(false)
+              } else if (
+                (node.value.type === 'ObjectExpression' ||
+                  node.value.type === 'ArrayExpression') &&
+                (node.key.type === 'Literal' || node.key.type === 'Identifier')
+              ) {
+                // prettier-ignore
+                const name = node.key.type === 'Literal'
+                ? String(node.key.value)
+                : node.key.name
+                generator.push(`${JSON.stringify(name)}: `)
+                pathStack.push(name)
+              } else {
+                // for Regex, function, etc.
+                skipStack.push(true)
+              }
             }
+            const lastIndex = propsCountStack.length - 1
+            propsCountStack[lastIndex] = --propsCountStack[lastIndex]
           }
-          const lastIndex = propsCountStack.length - 1
-          propsCountStack[lastIndex] = --propsCountStack[lastIndex]
           break
         case 'ArrayExpression':
           generator.push(`[`)
@@ -389,10 +407,12 @@ function generateNode(
           }
           break
         case 'Property':
-          if (propsCountStack[propsCountStack.length - 1] !== 0) {
-            pathStack.pop()
-            if (!skipStack.pop()) {
-              generator.pushline(`,`)
+          if (parent != null && parent.type === 'ObjectExpression') {
+            if (propsCountStack[propsCountStack.length - 1] !== 0) {
+              pathStack.pop()
+              if (!skipStack.pop()) {
+                generator.pushline(`,`)
+              }
             }
           }
           break

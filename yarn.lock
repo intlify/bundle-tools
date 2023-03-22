@@ -992,25 +992,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@npm:3.1.2":
-  version: 3.1.2
-  resolution: "@intlify/bundle-utils@npm:3.1.2"
-  dependencies:
-    "@intlify/message-compiler": next
-    "@intlify/shared": next
-    jsonc-eslint-parser: ^1.0.1
-    source-map: 0.6.1
-    yaml-eslint-parser: ^0.3.2
-  peerDependenciesMeta:
-    petite-vue-i18n:
-      optional: true
-    vue-i18n:
-      optional: true
-  checksum: 7334d568a2f763a79c50d20030c4f1705fa9febee07dc64ca6304dbcf845ae0c853c7afe0f937431dae5846372e6de6bd1c93eef561b8a4e22c29c3baeca246b
-  languageName: node
-  linkType: hard
-
-"@intlify/bundle-utils@npm:3.4.0":
+"@intlify/bundle-utils@npm:3.4.0, @intlify/bundle-utils@npm:^3.1.2":
   version: 3.4.0
   resolution: "@intlify/bundle-utils@npm:3.4.0"
   dependencies:
@@ -1164,7 +1146,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/vite-plugin-vue-i18n@workspace:packages/vite-plugin-vue-i18n"
   dependencies:
-    "@intlify/bundle-utils": 3.1.2
+    "@intlify/bundle-utils": ^3.1.2
     "@intlify/shared": next
     "@rollup/pluginutils": ^4.2.0
     debug: ^4.3.1

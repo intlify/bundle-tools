@@ -32,6 +32,8 @@ export function generate(
     env = 'development',
     forceStringify = false,
     onError = undefined,
+    strictMessage = true,
+    escapeHtml = false,
     useClassComponent = false,
     allowDynamic = false
   }: CodeGenOptions,
@@ -55,6 +57,8 @@ export function generate(
     filename,
     forceStringify,
     onError,
+    strictMessage,
+    escapeHtml,
     useClassComponent
   } as CodeGenOptions
   const generator = createCodeGenerator(options)

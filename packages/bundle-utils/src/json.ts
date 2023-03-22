@@ -38,6 +38,8 @@ export function generate(
     env = 'development',
     forceStringify = false,
     onError = undefined,
+    strictMessage = true,
+    escapeHtml = false,
     useClassComponent = false
   }: CodeGenOptions,
   injector?: () => string
@@ -63,6 +65,8 @@ export function generate(
     filename,
     forceStringify,
     onError,
+    strictMessage,
+    escapeHtml,
     useClassComponent
   } as CodeGenOptions
   const generator = createCodeGenerator(options)

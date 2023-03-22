@@ -3,7 +3,8 @@ import {
   baseCompile,
   CompileError,
   ResourceNode,
-  CompileOptions
+  CompileOptions,
+  detectHtmlTag
 } from '@intlify/message-compiler'
 import {
   SourceMapGenerator,
@@ -11,6 +12,7 @@ import {
   MappedPosition,
   MappingItem
 } from 'source-map'
+import { format, escapeHtml as sanitizeHtml, isBoolean } from '@intlify/shared'
 
 import type { RawSourceMap } from 'source-map'
 
@@ -53,6 +55,8 @@ export interface CodeGenOptions {
   forceStringify?: boolean
   useClassComponent?: boolean
   allowDynamic?: boolean
+  strictMessage?: boolean
+  escapeHtml?: boolean
   onWarn?: (msg: string) => void
   onError?: (
     msg: string,
@@ -228,20 +232,46 @@ function advancePositionWithSource(
   return pos
 }
 
+const DETECT_MESSAGE = `Detected HTML in '{msg}' message.`
+const ON_ERROR_NOOP = () => {} // eslint-disable-line @typescript-eslint/no-empty-function
+
+function parsePath(path?: string[]): string {
+  return path ? path.join('.') : ''
+}
+
 export function generateMessageFunction(
   msg: string,
   options: CodeGenOptions,
   path?: string[]
 ): CodeGenResult<ResourceNode> {
   const env = options.env != null ? options.env : 'development'
-  const onError = options.onError
+  const strictMessage = isBoolean(options.strictMessage)
+    ? options.strictMessage
+    : true
+  const escapeHtml = !!options.escapeHtml
+  const onError = options.onError || ON_ERROR_NOOP
   const errors = [] as CompileError[]
+
+  let detecteHtmlInMsg = false
+  if (detectHtmlTag(msg)) {
+    detecteHtmlInMsg = true
+    if (strictMessage) {
+      const errMsg = format(DETECT_MESSAGE, { msg })
+      onError(format(errMsg), {
+        source: msg,
+        path: parsePath(path)
+      })
+    }
+  }
+
+  const _msg = detecteHtmlInMsg && escapeHtml ? sanitizeHtml(msg) : msg
+
   const newOptions = Object.assign({ mode: 'arrow' }, options) as CompileOptions
   newOptions.onError = (err: CompileError): void => {
     if (onError) {
       const extra: Parameters<Required<CodeGenOptions>['onError']>[1] = {
         source: msg,
-        path: path ? path.join('.') : '',
+        path: parsePath(path),
         code: err.code,
         domain: err.domain,
         location: err.location
@@ -250,14 +280,14 @@ export function generateMessageFunction(
       errors.push(err)
     }
   }
-  const { code, ast, map } = baseCompile(msg, newOptions)
+  const { code, ast, map } = baseCompile(_msg, newOptions)
   const occured = errors.length > 0
   const genCode = !occured
     ? env === 'development'
       ? `(()=>{const fn=${code};fn.source=${JSON.stringify(msg)};return fn;})()`
       : `${code}`
-    : msg
-  return { code: genCode, ast, map }
+    : _msg
+  return { code: genCode, ast, map, errors }
 }
 
 export function mapLinesColumns(

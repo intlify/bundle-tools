@@ -380,6 +380,28 @@ complex:
 }
 `;
 
+exports[`html tag in message: code 1`] = `
+"{
+  \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hi there!&lt;/p&gt;\\"])};fn.source=\\"<p>hi there!</p>\\";return fn;})(),
+  \\"alert\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;\\"])};fn.source=\\"<script>window.alert('hi there!')</script>\\";return fn;})()
+}"
+`;
+
+exports[`html tag in message: errors 1`] = `
+Array [
+  Object {
+    "msg": "Detected HTML in '<p>hi there!</p>' message.",
+    "path": "hi",
+    "source": "<p>hi there!</p>",
+  },
+  Object {
+    "msg": "Detected HTML in '<script>window.alert('hi there!')</script>' message.",
+    "path": "alert",
+    "source": "<script>window.alert('hi there!')</script>",
+  },
+]
+`;
+
 exports[`invalid message syntax: code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),

@@ -973,8 +973,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
-    "@intlify/message-compiler": next
-    "@intlify/shared": next
+    "@intlify/message-compiler": 9.3.0-beta.17
+    "@intlify/shared": 9.3.0-beta.17
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
     estree-walker: ^2.0.2
@@ -1057,6 +1057,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intlify/message-compiler@npm:9.3.0-beta.17":
+  version: 9.3.0-beta.17
+  resolution: "@intlify/message-compiler@npm:9.3.0-beta.17"
+  dependencies:
+    "@intlify/shared": 9.3.0-beta.17
+    source-map: 0.6.1
+  checksum: 4062096fd5b70994e22997ff8a7a103dfcea5ef4bd78ef49fe833b066f40b78fdbbeacf704c0093a388b4bbba62016fc15d73ea63e726469e854665aed46329c
+  languageName: node
+  linkType: hard
+
 "@intlify/rollup-plugin-vue-i18n@workspace:packages/rollup-plugin-vue-i18n":
   version: 0.0.0-use.local
   resolution: "@intlify/rollup-plugin-vue-i18n@workspace:packages/rollup-plugin-vue-i18n"
@@ -1081,6 +1091,13 @@ __metadata:
   version: 9.2.0-beta.35
   resolution: "@intlify/shared@npm:9.2.0-beta.35"
   checksum: 10e05c54265360b8ff5e9d0cdcd95fa6ec7313d37ec73b248a4a0955fcceca1e9ba3bc654bffb950804a874538dfa767a8952c395471e59a99bb68a622ab755a
+  languageName: node
+  linkType: hard
+
+"@intlify/shared@npm:9.3.0-beta.17":
+  version: 9.3.0-beta.17
+  resolution: "@intlify/shared@npm:9.3.0-beta.17"
+  checksum: a5cad72936ee102550f54aef1eb68c7bc54fd922fd73911d75d2c3b49a3bf5b13c074fa7fe9069a7b912de5fe4c4ee0b5152a7f321715e68ce49881efb75ea7f
   languageName: node
   linkType: hard
 

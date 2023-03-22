@@ -6,7 +6,7 @@ exports[`json5: code 1`] = `
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
     \\"more\\": {
-      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
     },
     \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
   },
@@ -35,7 +35,7 @@ exports[`json5: code 1`] = `
 
 exports[`json5: map 1`] = `
 Object {
-  "mappings": ";wEACKA;;6EAEKC;;0LAEGC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;;6EAGCC;oFACOC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;;sEAErBC,aAAaC;;;;wEAIXC;;oIAEkBC,YAAAC,8BAAAC",
+  "mappings": ";wEACKA;;6EAEKC;;uMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;;6EAGCC;oFACOC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;;sEAErBC,aAAaC;;;;wEAIXC;;oIAEkBC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",

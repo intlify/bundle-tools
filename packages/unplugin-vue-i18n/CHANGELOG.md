@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.10.0 (2023-03-22)
+
+#### :star: Features
+* [#249](https://github.com/intlify/bundle-tools/pull/249) feat(unplugin-vue-i18n): support strict message and escape html ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.9.3 (2023-03-20)
 
 #### :bug: Bug Fixes

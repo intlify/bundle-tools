@@ -184,6 +184,23 @@ test('invalid message syntax', async () => {
   expect(map).toMatchSnapshot('map')
 })
 
+test('html tag in message', async () => {
+  const { source } = await readFile('./fixtures/codegen/html.js')
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const errors = [] as any
+  const { code } = generate(source, {
+    type: 'bare',
+    escapeHtml: true,
+    env: 'development',
+    onError(msg, extra) {
+      errors.push(Object.assign({ msg }, extra || {}))
+    }
+  })
+
+  expect(errors).toMatchSnapshot('errors')
+  expect(code).toMatchSnapshot('code')
+})
+
 test('no export default with object', async () => {
   const { source } = await readFile(
     './fixtures/codegen/no-export-default-with-object.js'

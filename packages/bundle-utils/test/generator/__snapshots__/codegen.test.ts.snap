@@ -61,6 +61,7 @@ Object {
     "type": 0,
   },
   "code": "(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})()",
+  "errors": Array [],
   "map": Object {
     "mappings": "mEAAAA",
     "names": Array [
@@ -76,6 +77,10 @@ Object {
   },
 }
 `;
+
+exports[`generateMessageFunction escapeHtml default: should not be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"<p>hello</p>\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
+
+exports[`generateMessageFunction escapeHtml true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hello&lt;/p&gt;\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
 
 exports[`generateMessageFunction production 1`] = `
 Object {
@@ -138,6 +143,7 @@ Object {
     "type": 0,
   },
   "code": "(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])}",
+  "errors": Array [],
   "map": undefined,
 }
 `;

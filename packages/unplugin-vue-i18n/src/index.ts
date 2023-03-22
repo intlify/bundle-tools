@@ -121,6 +121,15 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('esm', esm)
 
   const allowDynamic = !!options.allowDynamic
+  debug('allowDynamic', allowDynamic)
+
+  const strictMessage = isBoolean(options.strictMessage)
+    ? options.strictMessage
+    : true
+  debug('strictMessage', strictMessage)
+
+  const escapeHtml = !!options.escapeHtml
+  debug('escapeHtml', escapeHtml)
 
   let isProduction = false
   let sourceMap = false
@@ -294,6 +303,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   isGlobal: globalSFCScope,
                   useClassComponent,
                   allowDynamic,
+                  strictMessage,
+                  escapeHtml,
                   bridge,
                   exportESM: esm,
                   forceStringify
@@ -449,6 +460,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           {
             forceStringify,
             bridge,
+            strictMessage,
+            escapeHtml,
             exportESM: esm,
             useClassComponent
           }
@@ -500,6 +513,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               allowDynamic,
+              strictMessage,
+              escapeHtml,
               bridge,
               exportESM: esm,
               forceStringify
@@ -555,6 +570,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               bridge,
+              strictMessage,
+              escapeHtml,
               exportESM: esm,
               forceStringify
             }
@@ -644,12 +661,16 @@ async function generateBundleResources(
     isGlobal = false,
     bridge = false,
     exportESM = true,
+    strictMessage = true,
+    escapeHtml = false,
     useClassComponent = false
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
     exportESM?: boolean
+    strictMessage?: boolean
+    escapeHtml?: boolean
     useClassComponent?: boolean
   }
 ) {
@@ -666,6 +687,8 @@ async function generateBundleResources(
         useClassComponent,
         bridge,
         exportESM,
+        strictMessage,
+        escapeHtml,
         forceStringify
       }) as CodeGenOptions
       parseOptions.type = 'bare'
@@ -743,7 +766,9 @@ function getOptions(
     bridge = false,
     exportESM = true,
     useClassComponent = false,
-    allowDynamic = false
+    allowDynamic = false,
+    strictMessage = true,
+    escapeHtml = false
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
@@ -752,6 +777,8 @@ function getOptions(
     exportESM?: boolean
     useClassComponent?: boolean
     allowDynamic?: boolean
+    strictMessage?: boolean
+    escapeHtml?: boolean
   }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -763,6 +790,8 @@ function getOptions(
     forceStringify,
     useClassComponent,
     allowDynamic,
+    strictMessage,
+    escapeHtml,
     bridge,
     exportESM,
     env: mode,

@@ -16,6 +16,7 @@ import { createMessageContext } from '@intlify/core-base'
   test(testcase, async () => {
     const options = {
       input,
+      strictMessage: false,
       include: [resolve(__dirname, '../fixtures/locales/**')]
     }
     const { exports: messages } = await bundleAndRun(

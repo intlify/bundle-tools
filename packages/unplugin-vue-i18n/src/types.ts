@@ -12,4 +12,6 @@ export interface PluginOptions {
   bridge?: boolean
   useClassComponent?: boolean
   useVueI18nImportName?: boolean
+  strictMessage?: boolean
+  escapeHtml?: boolean
 }

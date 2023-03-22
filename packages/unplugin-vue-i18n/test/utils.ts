@@ -38,6 +38,10 @@ export async function bundleVite(
       ? 'info'
       : 'silent'
     : 'silent'
+  options.strictMessage = isBoolean(options.strictMessage)
+    ? options.strictMessage
+    : true
+  options.escapeHtml = !!options.escapeHtml
 
   const alias: Record<string, string> = {
     vue: 'vue/dist/vue.runtime.esm-browser.js'
@@ -154,6 +158,10 @@ export async function bundleAndRun(
   options.useClassComponent = isBoolean(options.useClassComponent) || false
   options.bridge = isBoolean(options.bridge) || false
   options.allowDynamic = isBoolean(options.allowDynamic) || false
+  options.strictMessage = isBoolean(options.strictMessage)
+    ? options.strictMessage
+    : true
+  options.escapeHtml = !!options.escapeHtml
 
   const { code, map } = await bundler(fixture, options)
 

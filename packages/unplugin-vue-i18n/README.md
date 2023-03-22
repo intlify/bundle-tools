@@ -300,6 +300,31 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   > ⚠️ NOTE: 
   If you use the `js` and `ts` resources formats, set the paths, so your application code is not targeted. We recommend that resources be isolated from the application code.
 
+
+### `strictMessage`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Strictly checks that the locale message does not contain html tags.
+
+  If html tags are included, an error is thrown.
+
+  If you would not the error to be thrown, you can work around it by setting it to `false`, but **it means that the locale message might cause security problems with XSS**.
+
+  In that case, we recommend setting the `escapeHtml` option to `true`.
+
+
+### `escapeHtml`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether to escape html tags if they are included in the locale message.
+
+  If `strictMessage` is disabled by `false`, we recommend this option be enabled.
+
+
 ### `allowDynamic`
 
 - **Type:** `boolean`

@@ -135,7 +135,7 @@ exports[`bridge with ESM exporting: code 1`] = `
       \\"nested\\": {
         \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
         \\"more\\": {
-          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
         },
         \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
       },
@@ -196,7 +196,7 @@ exports[`bridge with ESM exporting: code 1`] = `
 
 exports[`bridge with ESM exporting: map 1`] = `
 Object {
-  "mappings": "sEAAGA;;6EAEOC;;wLAECC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
+  "mappings": "sEAAGA;;6EAEOC;;qMAECC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -263,7 +263,7 @@ exports[`bridge: code 1`] = `
       \\"nested\\": {
         \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
         \\"more\\": {
-          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
         },
         \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
       },
@@ -324,7 +324,7 @@ exports[`bridge: code 1`] = `
 
 exports[`bridge: map 1`] = `
 Object {
-  "mappings": "sEAAGA;;6EAEOC;;wLAECC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
+  "mappings": "sEAAGA;;6EAEOC;;qMAECC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -477,7 +477,7 @@ Array [
 
 exports[`invalid message syntax: map 1`] = `
 Object {
-  "mappings": "yEAAMA;2GACSC;;;iHAGMA",
+  "mappings": "yEAAMA;wHACSC;;;8HAGMA",
   "names": Array [
     "こんにちは",
     "",
@@ -555,7 +555,7 @@ exports[`useClassComponent: code 1`] = `
       \\"nested\\": {
         \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
         \\"more\\": {
-          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
         },
         \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
       },
@@ -586,7 +586,7 @@ exports[`useClassComponent: code 1`] = `
 
 exports[`useClassComponent: map 1`] = `
 Object {
-  "mappings": "sEAAGA;;6EAEOC;;wLAECC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
+  "mappings": "sEAAGA;;6EAEOC;;qMAECC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -648,7 +648,7 @@ exports[`yaml: code 1`] = `
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
     \\"more\\": {
-      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
     },
     \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
   },
@@ -677,7 +677,7 @@ exports[`yaml: code 1`] = `
 
 exports[`yaml: map 1`] = `
 Object {
-  "mappings": "sEAAGA;;6EAEOC;;wLAECC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
+  "mappings": "sEAAGA;;6EAEOC;;qMAECC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",
@@ -739,7 +739,7 @@ exports[`yml: code 1`] = `
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
     \\"more\\": {
-      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\")]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
     },
     \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
   },
@@ -768,7 +768,7 @@ exports[`yml: code 1`] = `
 
 exports[`yml: map 1`] = `
 Object {
-  "mappings": "sEAAGA;;6EAEOC;;wLAECC,aAAAC,uBAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
+  "mappings": "sEAAGA;;6EAEOC;;qMAECC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;kHACJC,QAAAJ,wBAAAK;yEACDC;gFACOC;yEACPC;2EACEC;kFACOC;0FACQC;uFACHC;;sEAEjBC;sEACAC;;;wEAGEC;gIACcC,YAAAC,8BAAAC",
   "names": Array [
     "hi there!",
     "hello world!",

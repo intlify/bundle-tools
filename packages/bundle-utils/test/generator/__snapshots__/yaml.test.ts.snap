@@ -665,7 +665,7 @@ complex:
 `;
 
 exports[`yaml: code 1`] = `
-"export default {
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -694,7 +694,8 @@ exports[`yaml: code 1`] = `
       }
     ]
   }
-}"
+}
+export default resource"
 `;
 
 exports[`yaml: map 1`] = `
@@ -756,7 +757,7 @@ complex:
 `;
 
 exports[`yml: code 1`] = `
-"export default {
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -785,7 +786,8 @@ exports[`yml: code 1`] = `
       }
     ]
   }
-}"
+}
+export default resource"
 `;
 
 exports[`yml: map 1`] = `

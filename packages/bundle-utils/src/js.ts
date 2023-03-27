@@ -180,7 +180,7 @@ function generateNode(
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
-            generator.push(`export default `)
+            generator.push(`const resource = `)
           } else if (type === 'sfc') {
             // for 'sfc'
             const variableName =
@@ -390,6 +390,9 @@ function generateNode(
             }
             generator.deindent()
             generator.pushline(`}`)
+          } else if (type === 'plain') {
+            generator.push(`\n`)
+            generator.push('export default resource')
           }
           break
         case 'ObjectExpression':

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`json5: code 1`] = `
-"export default {
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -30,7 +30,8 @@ exports[`json5: code 1`] = `
       }
     ]
   }
-}"
+}
+export default resource"
 `;
 
 exports[`json5: map 1`] = `

@@ -127,7 +127,7 @@ function generateNode(
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
-            generator.push(`export default `)
+            generator.push(`const resource = `)
           } else if (type === 'sfc') {
             const variableName =
               type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
@@ -289,6 +289,9 @@ function generateNode(
             }
             generator.deindent()
             generator.push(`}`)
+          } else if (type === 'plain') {
+            generator.push(`\n`)
+            generator.push('export default resource')
           }
           break
         case 'YAMLMapping':

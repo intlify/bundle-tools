@@ -1,9 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`'allowDynamic' option generate: code 1`] = `
-"export default {
+"const resource = {
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})()
-}"
+}
+export default resource"
 `;
 
 exports[`'allowDynamic' option generate: map 1`] = `
@@ -391,7 +392,7 @@ Object {
 `;
 
 exports[`complex: code 1`] = `
-"export default {
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -421,7 +422,8 @@ exports[`complex: code 1`] = `
       }
     ]
   }
-}"
+}
+export default resource"
 `;
 
 exports[`complex: map 1`] = `
@@ -434,7 +436,7 @@ Object {
 `;
 
 exports[`force stringify: code 1`] = `
-"export default {
+"const resource = {
   \\"trueValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"true\\"])};fn.source=\\"true\\";return fn;})(),
   \\"falseValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"false\\"])};fn.source=\\"false\\";return fn;})(),
   \\"nullValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"null\\"])};fn.source=\\"null\\";return fn;})(),
@@ -453,7 +455,8 @@ exports[`force stringify: code 1`] = `
     },
     
   ]
-}"
+}
+export default resource"
 `;
 
 exports[`force stringify: map 1`] = `
@@ -488,7 +491,7 @@ Array [
 `;
 
 exports[`include function: code 1`] = `
-"export default {
+"const resource = {
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})(),
   \\"pagination\\": {
     \\"pages\\": ({named}) => \`\${ named('number') }/page\`,
@@ -497,7 +500,8 @@ exports[`include function: code 1`] = `
   \\"foo\\": {
     \\"bar\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})()
   }
-}"
+}
+export default resource"
 `;
 
 exports[`include function: map 1`] = `
@@ -614,7 +618,7 @@ Object {
 `;
 
 exports[`simple: code 1`] = `
-"export default {
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
   \\"named\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"hi, \\", _interpolate(_named(\\"name\\")), \\" !\\"])};fn.source=\\"hi, {name} !\\";return fn;})(),
@@ -622,7 +626,8 @@ exports[`simple: code 1`] = `
   \\"literal\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi, \\", \\"kazupon\\", \\" !\\"])};fn.source=\\"hi, {  'kazupon'  } !\\";return fn;})(),
   \\"linked\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type } = ctx;return _normalize([\\"hi, \\", _linked(\\"name\\", undefined, _type), \\" !\\"])};fn.source=\\"hi, @:name !\\";return fn;})(),
   \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
-}"
+}
+export default resource"
 `;
 
 exports[`simple: map 1`] = `
@@ -635,7 +640,7 @@ Object {
 `;
 
 exports[`unhandling: code 1`] = `
-"export default {
+"const resource = {
   \\"trueValue\\": true,
   \\"falseValue\\": false,
   \\"nullValue\\": null,
@@ -654,7 +659,8 @@ exports[`unhandling: code 1`] = `
     },
     
   ]
-}"
+}
+export default resource"
 `;
 
 exports[`unhandling: map 1`] = `

@@ -67,19 +67,19 @@
   "types": "./index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "require": "./lib/index.cjs",
-      "import": "./lib/index.mjs",
-      "types": "./index.d.ts"
+      "import": "./lib/index.mjs"
     },
     "./vite": {
+      "types": "./vite.d.ts",
       "require": "./lib/vite.cjs",
-      "import": "./lib/vite.mjs",
-      "types": "./vite.d.ts"
+      "import": "./lib/vite.mjs"
     },
     "./webpack": {
+      "types": "./webpack.d.ts",
       "require": "./lib/webpack.cjs",
-      "import": "./lib/webpack.mjs",
-      "types": "./webpack.d.ts"
+      "import": "./lib/webpack.mjs"
     },
     "./types": {
       "types": "./types.d.ts"

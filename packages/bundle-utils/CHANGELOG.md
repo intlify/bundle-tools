@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@5.5.0 (2023-03-27)
+
+#### :zap: Improvement Features
+* [#254](https://github.com/intlify/bundle-tools/pull/254) fix(bundle-utils): improve plain code generation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.4.0 (2023-03-22)
 
 #### :star: Features

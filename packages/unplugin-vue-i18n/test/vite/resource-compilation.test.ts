@@ -1,3 +1,4 @@
+import { vi } from 'vitest'
 import { resolve } from 'pathe'
 import { bundleVite, bundleAndRun } from '../utils'
 import { isFunction, assign } from '@intlify/shared'
@@ -6,7 +7,9 @@ import { createMessageContext } from '@intlify/core-base'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let spyConsoleError: any
 beforeEach(() => {
-  spyConsoleError = jest.spyOn(global.console, 'error').mockImplementation()
+  spyConsoleError = vi
+    .spyOn(global.console, 'error')
+    .mockImplementation(() => {}) // eslint-disable-line @typescript-eslint/no-empty-function
 })
 
 afterEach(() => {

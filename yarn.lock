@@ -975,7 +975,65 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@^5.4.0, @intlify/bundle-utils@workspace:packages/bundle-utils":
+"@intlify/bundle-utils@npm:3.4.0, @intlify/bundle-utils@npm:^3.1.2":
+  version: 3.4.0
+  resolution: "@intlify/bundle-utils@npm:3.4.0"
+  dependencies:
+    "@intlify/message-compiler": next
+    "@intlify/shared": next
+    jsonc-eslint-parser: ^1.0.1
+    source-map: 0.6.1
+    yaml-eslint-parser: ^0.3.2
+  peerDependenciesMeta:
+    petite-vue-i18n:
+      optional: true
+    vue-i18n:
+      optional: true
+  checksum: eb8bcec99fea495ac1011867f23e7a05aa2ba9b89366c6a1a8b7ecb0f1c4ef551e68aeabeb43bb01353a36a87791805c48290d0b847989cfb0c8fc07e2969b2e
+  languageName: node
+  linkType: hard
+
+"@intlify/bundle-utils@npm:^5.4.0":
+  version: 5.5.0
+  resolution: "@intlify/bundle-utils@npm:5.5.0"
+  dependencies:
+    "@intlify/message-compiler": 9.3.0-beta.17
+    "@intlify/shared": 9.3.0-beta.17
+    acorn: ^8.8.2
+    escodegen: ^2.0.0
+    estree-walker: ^2.0.2
+    jsonc-eslint-parser: ^1.0.1
+    magic-string: ^0.30.0
+    source-map: 0.6.1
+    yaml-eslint-parser: ^0.3.2
+  peerDependenciesMeta:
+    petite-vue-i18n:
+      optional: true
+    vue-i18n:
+      optional: true
+  checksum: 35550b7f06ea2061d168baba7f0f91498a16da3e1e258ce8571f1f8b2b6db59aa072261cbb1d0e58a785159415126ed005c06f4843ab1ba855de03bb2d200d36
+  languageName: node
+  linkType: hard
+
+"@intlify/bundle-utils@npm:next":
+  version: 3.1.0
+  resolution: "@intlify/bundle-utils@npm:3.1.0"
+  dependencies:
+    "@intlify/message-compiler": next
+    "@intlify/shared": next
+    jsonc-eslint-parser: ^1.0.1
+    source-map: 0.6.1
+    yaml-eslint-parser: ^0.3.2
+  peerDependenciesMeta:
+    petite-vue-i18n:
+      optional: true
+    vue-i18n:
+      optional: true
+  checksum: 708f071736e5ae2f55929b9561b5488c4bb087a46e7e75208e181ef3e6fea66c283a2cd47027df7bb2b2d7dbcc9792bdbe9bd94753400b8f18ea86c057f2bdd2
+  languageName: node
+  linkType: hard
+
+"@intlify/bundle-utils@workspace:packages/bundle-utils":
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
@@ -999,42 +1057,6 @@ __metadata:
       optional: true
   languageName: unknown
   linkType: soft
-
-"@intlify/bundle-utils@npm:3.4.0, @intlify/bundle-utils@npm:^3.1.2":
-  version: 3.4.0
-  resolution: "@intlify/bundle-utils@npm:3.4.0"
-  dependencies:
-    "@intlify/message-compiler": next
-    "@intlify/shared": next
-    jsonc-eslint-parser: ^1.0.1
-    source-map: 0.6.1
-    yaml-eslint-parser: ^0.3.2
-  peerDependenciesMeta:
-    petite-vue-i18n:
-      optional: true
-    vue-i18n:
-      optional: true
-  checksum: eb8bcec99fea495ac1011867f23e7a05aa2ba9b89366c6a1a8b7ecb0f1c4ef551e68aeabeb43bb01353a36a87791805c48290d0b847989cfb0c8fc07e2969b2e
-  languageName: node
-  linkType: hard
-
-"@intlify/bundle-utils@npm:next":
-  version: 3.1.0
-  resolution: "@intlify/bundle-utils@npm:3.1.0"
-  dependencies:
-    "@intlify/message-compiler": next
-    "@intlify/shared": next
-    jsonc-eslint-parser: ^1.0.1
-    source-map: 0.6.1
-    yaml-eslint-parser: ^0.3.2
-  peerDependenciesMeta:
-    petite-vue-i18n:
-      optional: true
-    vue-i18n:
-      optional: true
-  checksum: 708f071736e5ae2f55929b9561b5488c4bb087a46e7e75208e181ef3e6fea66c283a2cd47027df7bb2b2d7dbcc9792bdbe9bd94753400b8f18ea86c057f2bdd2
-  languageName: node
-  linkType: hard
 
 "@intlify/core-base@npm:9.2.0-beta.35, @intlify/core-base@npm:beta":
   version: 9.2.0-beta.35

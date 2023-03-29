@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@6.0.0 (2023-03-29)
+
+#### :zap: Improvement Features
+* [#255](https://github.com/intlify/bundle-tools/pull/255) feat(bundle-utils): support esm/cjs dual package ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.5.0 (2023-03-27)
 
 #### :zap: Improvement Features

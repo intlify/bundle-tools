@@ -42,6 +42,9 @@
   "devDependencies": {
     "unbuild": "^1.1.2"
   },
+  "installConfig": {
+    "hoistingLimits": "workspaces"
+  },
   "engines": {
     "node": ">= 14.16"
   },

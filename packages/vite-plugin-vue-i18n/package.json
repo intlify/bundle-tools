@@ -34,7 +34,7 @@
     "source-map": "0.6.1"
   },
   "devDependencies": {
-    "unbuild": "^0.8.11"
+    "unbuild": "^1.1.2"
   },
   "engines": {
     "node": ">= 14.6"

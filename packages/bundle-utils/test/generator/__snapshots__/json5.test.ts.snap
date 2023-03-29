@@ -1,6 +1,6 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`json5: code 1`] = `
+exports[`json5 > code 1`] = `
 "const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
@@ -34,10 +34,10 @@ exports[`json5: code 1`] = `
 export default resource"
 `;
 
-exports[`json5: map 1`] = `
-Object {
+exports[`json5 > map 1`] = `
+{
   "mappings": ";wEACKA;;6EAEKC;;uMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;;6EAGCC;oFACOC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;;sEAErBC,aAAaC;;;;wEAIXC;;oIAEkBC,YAAAC,8BAAAC",
-  "names": Array [
+  "names": [
     "hi there!",
     "hello world!",
     "no apples",
@@ -62,10 +62,10 @@ Object {
     "type",
     " warining",
   ],
-  "sources": Array [
+  "sources": [
     "vue-i18n-loader.json",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "{
   hi: \\"hi there!\\",
   nested: {

@@ -1,11 +1,4 @@
-import {
-  LocationStub,
-  baseCompile,
-  CompileError,
-  ResourceNode,
-  CompileOptions,
-  detectHtmlTag
-} from '@intlify/message-compiler'
+import module from 'node:module'
 import {
   SourceMapGenerator,
   SourceMapConsumer,
@@ -15,6 +8,19 @@ import {
 import { format, escapeHtml as sanitizeHtml, isBoolean } from '@intlify/shared'
 
 import type { RawSourceMap } from 'source-map'
+import type {
+  CompileError,
+  ResourceNode,
+  CompileOptions
+} from '@intlify/message-compiler'
+
+// NOTE: use sourcemap (currently, `@intlify/message-compiler` support cjs pkg only)
+const require = module.createRequire(import.meta.url)
+const {
+  baseCompile,
+  detectHtmlTag,
+  LocationStub
+} = require('@intlify/message-compiler')
 
 /**
  * Compilation dev environments

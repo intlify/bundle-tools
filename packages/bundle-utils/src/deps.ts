@@ -1,4 +1,8 @@
+import module from 'node:module'
+
 export type InstalledPackage = 'vue-i18n' | 'petite-vue-i18n'
+
+const _require = module.createRequire(import.meta.url)
 
 // eslint-disable-next-line @typescript-eslint/ban-types
 export function checkInstallPackage(
@@ -7,7 +11,7 @@ export function checkInstallPackage(
 ): InstalledPackage {
   let installedVueI18n = false
   try {
-    debug(`vue-i18n load path: ${require.resolve('vue-i18n')}`)
+    debug(`vue-i18n load path: ${_require.resolve('vue-i18n')}`)
     installedVueI18n = true
   } catch (e) {
     debug(`cannot find 'vue-i18n'`, e)
@@ -15,7 +19,7 @@ export function checkInstallPackage(
 
   let installedPetiteVueI18n = false
   try {
-    debug(`petite-vue-i18n load path: ${require.resolve('petite-vue-i18n')}`)
+    debug(`petite-vue-i18n load path: ${_require.resolve('petite-vue-i18n')}`)
     installedPetiteVueI18n = true
   } catch (e) {
     debug(`cannot find 'petite-vue-i18n'`, e)
@@ -36,7 +40,7 @@ export function checkInstallPackage(
 export function checkVueI18nBridgeInstallPackage(debug: Function): boolean {
   let ret = false
   try {
-    debug(`vue-i18n-bridge load path: ${require.resolve('vue-i18n-bridge')}`)
+    debug(`vue-i18n-bridge load path: ${_require.resolve('vue-i18n-bridge')}`)
     ret = true
   } catch (e) {
     debug(`cannot find 'vue-i18n-bridge'`, e)
@@ -63,7 +67,7 @@ export function getVueI18nVersion(debug: Function): VueI18nVersion {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function loadModule(moduleName: string, debug: Function): any {
   try {
-    return require(moduleName)
+    return _require(moduleName)
   } catch (e) {
     debug(`cannot load '${moduleName}'`, e)
     return null

@@ -1,20 +1,20 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`generateMessageFunction development 1`] = `
-Object {
-  "ast": Object {
-    "body": Object {
+exports[`generateMessageFunction > development 1`] = `
+{
+  "ast": {
+    "body": {
       "end": 5,
-      "items": Array [
-        Object {
+      "items": [
+        {
           "end": 5,
-          "loc": Object {
-            "end": Object {
+          "loc": {
+            "end": {
               "column": 6,
               "line": 1,
               "offset": 5,
             },
-            "start": Object {
+            "start": {
               "column": 1,
               "line": 1,
               "offset": 0,
@@ -25,13 +25,13 @@ Object {
           "value": "hello",
         },
       ],
-      "loc": Object {
-        "end": Object {
+      "loc": {
+        "end": {
           "column": 6,
           "line": 1,
           "offset": 5,
         },
-        "start": Object {
+        "start": {
           "column": 1,
           "line": 1,
           "offset": 0,
@@ -41,17 +41,17 @@ Object {
       "type": 2,
     },
     "end": 5,
-    "helpers": Array [
+    "helpers": [
       "normalize",
     ],
-    "loc": Object {
-      "end": Object {
+    "loc": {
+      "end": {
         "column": 6,
         "line": 1,
         "offset": 5,
       },
       "source": "hello",
-      "start": Object {
+      "start": {
         "column": 1,
         "line": 1,
         "offset": 0,
@@ -61,16 +61,16 @@ Object {
     "type": 0,
   },
   "code": "(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})()",
-  "errors": Array [],
-  "map": Object {
+  "errors": [],
+  "map": {
     "mappings": "mEAAAA",
-    "names": Array [
+    "names": [
       "hello",
     ],
-    "sources": Array [
+    "sources": [
       "message.intl",
     ],
-    "sourcesContent": Array [
+    "sourcesContent": [
       "hello",
     ],
     "version": 3,
@@ -78,25 +78,25 @@ Object {
 }
 `;
 
-exports[`generateMessageFunction escapeHtml default: should not be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"<p>hello</p>\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
+exports[`generateMessageFunction > escapeHtml > default: should not be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"<p>hello</p>\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
 
-exports[`generateMessageFunction escapeHtml true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hello&lt;/p&gt;\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
+exports[`generateMessageFunction > escapeHtml > true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hello&lt;/p&gt;\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
 
-exports[`generateMessageFunction production 1`] = `
-Object {
-  "ast": Object {
-    "body": Object {
+exports[`generateMessageFunction > production 1`] = `
+{
+  "ast": {
+    "body": {
       "end": 5,
-      "items": Array [
-        Object {
+      "items": [
+        {
           "end": 5,
-          "loc": Object {
-            "end": Object {
+          "loc": {
+            "end": {
               "column": 6,
               "line": 1,
               "offset": 5,
             },
-            "start": Object {
+            "start": {
               "column": 1,
               "line": 1,
               "offset": 0,
@@ -107,13 +107,13 @@ Object {
           "value": "hello",
         },
       ],
-      "loc": Object {
-        "end": Object {
+      "loc": {
+        "end": {
           "column": 6,
           "line": 1,
           "offset": 5,
         },
-        "start": Object {
+        "start": {
           "column": 1,
           "line": 1,
           "offset": 0,
@@ -123,17 +123,17 @@ Object {
       "type": 2,
     },
     "end": 5,
-    "helpers": Array [
+    "helpers": [
       "normalize",
     ],
-    "loc": Object {
-      "end": Object {
+    "loc": {
+      "end": {
         "column": 6,
         "line": 1,
         "offset": 5,
       },
       "source": "hello",
-      "start": Object {
+      "start": {
         "column": 1,
         "line": 1,
         "offset": 0,
@@ -143,7 +143,7 @@ Object {
     "type": 0,
   },
   "code": "(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])}",
-  "errors": Array [],
+  "errors": [],
   "map": undefined,
 }
 `;

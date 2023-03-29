@@ -25,15 +25,17 @@
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^1.0.1",
     "magic-string": "^0.30.0",
+    "mlly": "^1.2.0",
     "source-map": "0.6.1",
     "yaml-eslint-parser": "^0.3.2"
   },
   "devDependencies": {
     "@types/escodegen": "^0.0.7",
-    "@types/estree": "^1.0.0"
+    "@types/estree": "^1.0.0",
+    "unbuild": "^1.1.2"
   },
   "engines": {
-    "node": ">= 12"
+    "node": ">= 14.16"
   },
   "files": [
     "lib",
@@ -41,14 +43,14 @@
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",
-  "main": "lib/index.js",
-  "module": "./index.mjs",
+  "main": "lib/index.cjs",
+  "module": "lib/index.mjs",
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "import": "./index.mjs",
-      "require": "./lib/index.js",
-      "types": "./lib/index.d.ts"
+      "types": "./lib/index.d.ts",
+      "import": "./lib/index.mjs",
+      "require": "./lib/index.cjs"
     },
     "./lib/*": "./lib/*",
     "./package.json": "./package.json"
@@ -59,10 +61,9 @@
     "directory": "packages/bundle-utils"
   },
   "scripts": {
-    "build": "tsc -p .",
+    "build": "unbuild",
     "clean": "npm-run-all \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
-    "watch": "tsc -p . --watch",
     "changelog": "jiti ../../scripts/changelog.ts",
     "release": "jiti ../../scripts/release.ts"
   }

@@ -1,5 +1,5 @@
 hello: こんにちは
-this-is-ivalid: '@' # is this ivalid?
+this-is-invalid: '@' # is this invalid?
 nested:
   array:
-    - this-is-ivalid: '@'
+    - this-is-invalid: '@'

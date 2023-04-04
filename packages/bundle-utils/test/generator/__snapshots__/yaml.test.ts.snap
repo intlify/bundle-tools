@@ -405,11 +405,11 @@ exports[`html tag in message > errors 1`] = `
 exports[`invalid message syntax > code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
-  \\"this-is-ivalid\\": @,
+  \\"this-is-invalid\\": '@',
   \\"nested\\": {
     \\"array\\": [
       {
-        \\"this-is-ivalid\\": @
+        \\"this-is-invalid\\": '@'
       }
     ]
   }
@@ -434,7 +434,7 @@ exports[`invalid message syntax > errors 1`] = `
       },
     },
     "msg": "Unexpected lexical analysis in token: 'EOF'",
-    "path": "this-is-ivalid",
+    "path": "this-is-invalid",
     "source": "@",
   },
   {
@@ -453,7 +453,7 @@ exports[`invalid message syntax > errors 1`] = `
       },
     },
     "msg": "Unexpected empty linked key",
-    "path": "this-is-ivalid",
+    "path": "this-is-invalid",
     "source": "@",
   },
   {
@@ -472,7 +472,7 @@ exports[`invalid message syntax > errors 1`] = `
       },
     },
     "msg": "Unexpected lexical analysis in token: 'EOF'",
-    "path": "nested.array.0.this-is-ivalid",
+    "path": "nested.array.0.this-is-invalid",
     "source": "@",
   },
   {
@@ -491,7 +491,7 @@ exports[`invalid message syntax > errors 1`] = `
       },
     },
     "msg": "Unexpected empty linked key",
-    "path": "nested.array.0.this-is-ivalid",
+    "path": "nested.array.0.this-is-invalid",
     "source": "@",
   },
 ]
@@ -499,7 +499,7 @@ exports[`invalid message syntax > errors 1`] = `
 
 exports[`invalid message syntax > map 1`] = `
 {
-  "mappings": "yEAAMA;wHACSC;;;8HAGMA",
+  "mappings": "yEAAMA;yHACUC;;;+HAGMA",
   "names": [
     "こんにちは",
     "",
@@ -509,10 +509,10 @@ exports[`invalid message syntax > map 1`] = `
   ],
   "sourcesContent": [
     "hello: こんにちは
-this-is-ivalid: '@' # is this ivalid?
+this-is-invalid: '@' # is this invalid?
 nested:
   array:
-    - this-is-ivalid: '@'
+    - this-is-invalid: '@'
 ",
   ],
   "version": 3,

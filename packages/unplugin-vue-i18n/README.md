@@ -213,7 +213,7 @@ const app = createApp()
 app.use(i18n).mount('#app')
 ```
 
-Change your vite.config.ts file accordingly to import all the files from locales folder on the root. Change `'./locales/**'` to path of your locales.
+Change your vite.config.ts file accordingly to import all the files from locales folder on the root. Change `'./src/locales/**'` to path of your locales.
 ```ts
 // vite.config.ts
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
@@ -222,7 +222,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     VueI18nPlugin({
-      include: [path.resolve(__dirname, './locales/**')],
+      include: [path.resolve(__dirname, './src/locales/**')],
     }),
   ],
 })

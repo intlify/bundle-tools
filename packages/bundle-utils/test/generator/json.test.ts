@@ -139,9 +139,7 @@ test('useClassComponent', async () => {
 
   expect(validateSyntax(code)).toBe(true)
   expect(code).toMatchSnapshot('code')
-  expect(code).toContain(
-    'Component.__o || Component.__vccOpts || Component.__vfdConstructor || Component'
-  )
+  expect(code).toContain('Component.__o || Component.__vccOpts || Component')
   expect(code).toContain('_Component.__i18n')
   expect(map).toMatchSnapshot('map')
 })

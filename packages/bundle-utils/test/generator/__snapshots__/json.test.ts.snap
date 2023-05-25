@@ -810,7 +810,7 @@ exports[`unhandling > map 1`] = `
 
 exports[`useClassComponent > code 1`] = `
 "export default function (Component) {
-  const _Component = Component.__o || Component.__vccOpts || Component.__vfdConstructor || Component
+  const _Component = Component.__o || Component.__vccOpts || Component
   _Component.__i18n = _Component.__i18n || []
   _Component.__i18n.push({
     \\"locale\\": \\"\\",

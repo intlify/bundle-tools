@@ -144,7 +144,7 @@ function generateNode(
             const componentVariable = bridge
               ? `Component.options || Component`
               : useClassComponent
-                ? `Component.__o || Component.__vccOpts || Component.__vfdConstructor || Component`
+                ? `Component.__o || Component.__vccOpts || Component`
                 : `Component`
             // prettier-ignore
             generator.pushline(`const ${componentNamespace} = ${componentVariable}`)

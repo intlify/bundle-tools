@@ -516,11 +516,11 @@ exports[`include function > map 1`] = `
 exports[`invalid message syntax > code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
-  \\"this-is-invalid\\": '@',
+  \\"this-is-invalid\\": \`@\`,
   \\"nested\\": {
     \\"array\\": [
       {
-        \\"this-is-invalid\\": '@'
+        \\"this-is-invalid\\": \`@\`
       }
     ]
   }

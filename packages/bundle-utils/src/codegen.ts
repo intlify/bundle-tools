@@ -292,7 +292,7 @@ export function generateMessageFunction(
     ? env === 'development'
       ? `(()=>{const fn=${code};fn.source=${JSON.stringify(msg)};return fn;})()`
       : `${code}`
-    : _msg
+    : `\`${_msg}\``
   return { code: genCode, ast, map, errors }
 }
 

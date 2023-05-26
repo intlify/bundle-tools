@@ -1,10 +1,10 @@
 export default {
   hello: 'こんにちは',
-  'this-is-ivalid': '@',
+  'this-is-invalid': '@',
   nested: {
     array: [
       {
-        'this-is-ivalid': '@'
+        'this-is-invalid': '@'
       }
     ]
   }

@@ -23,7 +23,7 @@ describe('generateMessageFunction', () => {
       }
     })
     expect(errors.length).toBe(1)
-    expect(code).toBe(`|`)
+    expect(code).toBe('`|`')
   })
 
   describe('strictMessage', () => {

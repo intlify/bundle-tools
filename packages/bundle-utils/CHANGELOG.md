@@ -1,4 +1,17 @@
 
+## @intlify/bundle-utils@6.0.1 (2023-05-26)
+
+#### :bug: Bug Fixes
+* [#270](https://github.com/intlify/bundle-tools/pull/270) fix: escape string, when there's a syntax failure ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#269](https://github.com/intlify/bundle-tools/pull/269) fix(vue-facing-decorator): useClassComponent option ([@rdhainaut](https://github.com/rdhainaut))
+
+#### Committers: 2
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+- rdhainaut ([@rdhainaut](https://github.com/rdhainaut))
+
+
 ## @intlify/bundle-utils@6.0.0 (2023-03-29)
 
 #### :zap: Improvement Features

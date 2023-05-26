@@ -1,4 +1,28 @@
 
+## @intlify/unplugin-vue-i18n@0.10.1 (2023-05-26)
+
+#### :bug: Bug Fixes
+* [#270](https://github.com/intlify/bundle-tools/pull/270) fix: escape string, when there's a syntax failure ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#261](https://github.com/intlify/bundle-tools/pull/261) fix: default plugin locale path ([@akires47](https://github.com/akires47))
+
+#### Committers: 2
+- Tomas Barrera ([@akires47](https://github.com/akires47))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@0.10.1 (2023-03-28)
+
+#### :zap: Improvement Features
+* [#254](https://github.com/intlify/bundle-tools/pull/254) fix(bundle-utils): improve plain code generation ([@kazupon](https://github.com/kazupon))
+* [#253](https://github.com/intlify/bundle-tools/pull/253) fix: types exports for "moduleResolution": "node16" ([@RebeccaStevens](https://github.com/RebeccaStevens))
+
+#### Committers: 2
+- Rebecca Stevens ([@RebeccaStevens](https://github.com/RebeccaStevens))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.10.0 (2023-03-22)
 
 #### :star: Features

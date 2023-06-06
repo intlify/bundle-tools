@@ -1,5 +1,6 @@
 declare module '@intlify/unplugin-vue-i18n/messages' {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const messages: any
+  import type { I18nOptions } from 'vue-i18n'
+
+  const messages: I18nOptions['messages']
   export default messages
 }

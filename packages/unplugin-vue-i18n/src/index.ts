@@ -703,9 +703,11 @@ async function generateBundleResources(
     }
   }
 
-  return `export default {
-  ${codes.join(`,\n`)}
-}`
+  return `import merge from 'lodash.merge'
+
+export default merge({},
+  ${codes.map(code => `{${code}}`).join(',\n')}
+)`
 }
 
 async function getCode(

@@ -1,5 +1,39 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`AST code generation > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+  \\"nested\\": {
+    \\"hello\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+    \\"more\\": {
+      \\"plural\\": {\\"type\\":0,\\"body\\":{\\"type\\":1,\\"cases\\":[{\\"type\\":2,\\"items\\":[{\\"type\\":6,\\"modifier\\":{\\"type\\":8,\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"items\\":[{\\"type\\":5,\\"index\\":0},{\\"type\\":3,\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"items\\":[{\\"type\\":4,\\"key\\":\\"n\\"},{\\"type\\":3,\\"value\\":\\" apples\\"}]}]}}
+    },
+    \\"list\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"index\\":0},{\\"type\\":3,\\"value\\":\\" !\\"}]}}
+  },
+  \\"こんにちは\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"こんにちは！\\"}],\\"static\\":\\"こんにちは！\\"}},
+  \\"single-quote\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"I don\\\\u0027t know!\\"}],\\"static\\":\\"I don\\\\u0027t know!\\"}},
+  \\"emoji\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"😺\\"}],\\"static\\":\\"😺\\"}},
+  \\"unicode\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"A\\"}],\\"static\\":\\"A\\"}},
+  \\"unicode-escape\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"\\\\\\\\u0041\\"}],\\"static\\":\\"\\\\\\\\u0041\\"}},
+  \\"backslash-single-quote\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"\\\\\\\\\\\\u0027\\"}],\\"static\\":\\"\\\\\\\\\\\\u0027\\"}},
+  \\"backslash-backslash\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"\\\\\\\\\\\\\\\\\\"}],\\"static\\":\\"\\\\\\\\\\\\\\\\\\"}},
+  \\"errors\\": [
+    {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"ERROR1001\\"}],\\"static\\":\\"ERROR1001\\"}},
+    {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"ERROR1002\\"}],\\"static\\":\\"ERROR1002\\"}},
+    
+  ],
+  \\"complex\\": {
+    \\"warnings\\": [
+      {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"NOTE: This is warning\\"}],\\"static\\":\\"NOTE: This is warning\\"}},
+      {
+        \\"named-waring\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"this is \\"},{\\"type\\":4,\\"key\\":\\"type\\"},{\\"type\\":3,\\"value\\":\\" warining\\"}]}}
+      }
+    ]
+  }
+}
+export default resource"
+`;
+
 exports[`array basic > code 1`] = `
 "export default function (Component) {
   const _Component = Component

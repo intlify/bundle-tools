@@ -18,8 +18,8 @@
     }
   },
   "dependencies": {
-    "@intlify/message-compiler": "9.3.0-beta.17",
-    "@intlify/shared": "9.3.0-beta.17",
+    "@intlify/message-compiler": "9.3.0-beta.20",
+    "@intlify/shared": "9.3.0-beta.20",
     "acorn": "^8.8.2",
     "escodegen": "^2.0.0",
     "estree-walker": "^2.0.2",

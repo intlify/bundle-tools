@@ -192,6 +192,19 @@ Node {
 }
 `;
 
+exports[`AST code generation > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+  \\"hello\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+  \\"named\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":4,\\"key\\":\\"name\\"},{\\"type\\":3,\\"value\\":\\" !\\"}]}},
+  \\"list\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"index\\":0},{\\"type\\":3,\\"value\\":\\" !\\"}]}},
+  \\"literal\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":9,\\"value\\":\\"kazupon\\"},{\\"type\\":3,\\"value\\":\\" !\\"}],\\"static\\":\\"hi, kazupon !\\"}},
+  \\"linked\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":6,\\"key\\":{\\"type\\":7,\\"value\\":\\"name\\"}},{\\"type\\":3,\\"value\\":\\" !\\"}]}},
+  \\"plural\\": {\\"type\\":0,\\"body\\":{\\"type\\":1,\\"cases\\":[{\\"type\\":2,\\"items\\":[{\\"type\\":6,\\"modifier\\":{\\"type\\":8,\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"items\\":[{\\"type\\":5,\\"index\\":0},{\\"type\\":3,\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"items\\":[{\\"type\\":4,\\"key\\":\\"n\\"},{\\"type\\":3,\\"value\\":\\" apples\\"}]}]}}
+}
+export default resource"
+`;
+
 exports[`array basic > code 1`] = `
 "export default function (Component) {
   const _Component = Component

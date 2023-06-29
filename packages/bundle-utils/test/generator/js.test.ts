@@ -272,3 +272,14 @@ test('include function', async () => {
   expect(code).toMatchSnapshot('code')
   expect(map).toMatchSnapshot('map')
 })
+
+test('AST code generation', async () => {
+  const { source } = await readFile('./fixtures/codegen/simple.js')
+  const { code } = generate(source, {
+    jit: true,
+    env: 'production'
+  })
+
+  expect(validateSyntax(code)).toBe(true)
+  expect(code).toMatchSnapshot('code')
+})

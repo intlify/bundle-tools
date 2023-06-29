@@ -38,12 +38,10 @@ exports[`generateMessageFunction > development 1`] = `
         },
       },
       "start": 0,
+      "static": "hello",
       "type": 2,
     },
     "end": 5,
-    "helpers": [
-      "normalize",
-    ],
     "loc": {
       "end": {
         "column": 6,
@@ -120,12 +118,10 @@ exports[`generateMessageFunction > production 1`] = `
         },
       },
       "start": 0,
+      "static": "hello",
       "type": 2,
     },
     "end": 5,
-    "helpers": [
-      "normalize",
-    ],
     "loc": {
       "end": {
         "column": 6,
@@ -143,6 +139,91 @@ exports[`generateMessageFunction > production 1`] = `
     "type": 0,
   },
   "code": "(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])}",
+  "errors": [],
+  "map": undefined,
+}
+`;
+
+exports[`generateResourceAst > development 1`] = `
+{
+  "ast": {
+    "body": {
+      "end": 5,
+      "items": [
+        {
+          "end": 5,
+          "loc": {
+            "end": {
+              "column": 6,
+              "line": 1,
+              "offset": 5,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 3,
+          "value": "hello",
+        },
+      ],
+      "loc": {
+        "end": {
+          "column": 6,
+          "line": 1,
+          "offset": 5,
+        },
+        "start": {
+          "column": 1,
+          "line": 1,
+          "offset": 0,
+        },
+      },
+      "start": 0,
+      "static": "hello",
+      "type": 2,
+    },
+    "end": 5,
+    "loc": {
+      "end": {
+        "column": 6,
+        "line": 1,
+        "offset": 5,
+      },
+      "source": "hello",
+      "start": {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "start": 0,
+    "type": 0,
+  },
+  "code": "{\\"type\\":0,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5},\\"source\\":\\"hello\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"value\\":\\"hello\\"}],\\"static\\":\\"hello\\"}}",
+  "errors": [],
+  "map": undefined,
+}
+`;
+
+exports[`generateResourceAst > production 1`] = `
+{
+  "ast": {
+    "body": {
+      "items": [
+        {
+          "type": 3,
+          "value": "hello",
+        },
+      ],
+      "static": "hello",
+      "type": 2,
+    },
+    "type": 0,
+  },
+  "code": "{\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hello\\"}],\\"static\\":\\"hello\\"}}",
   "errors": [],
   "map": undefined,
 }

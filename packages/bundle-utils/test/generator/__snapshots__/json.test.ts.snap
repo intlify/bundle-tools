@@ -1,6 +1,455 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`array basic > code 1`] = `
+exports[`AST code generation > array basic > code 1`] = `
+"export default function (Component) {
+  const _Component = Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"foo\\": [
+        [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"bar\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"bar\\"}],\\"static\\":\\"bar\\"}},
+          
+        ],
+        [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"baz\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"baz\\"}],\\"static\\":\\"baz\\"}},
+          
+        ]
+      ]
+    }
+  })
+}
+"
+`;
+
+exports[`AST code generation > array basic > map 1`] = `undefined`;
+
+exports[`AST code generation > array mixed > code 1`] = `
+"export default function (Component) {
+  const _Component = Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"foo\\": [
+        {
+          \\"foo\\": {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"foo\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"foo\\"}],\\"static\\":\\"foo\\"}}
+        },
+        [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"bar\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"bar\\"}],\\"static\\":\\"bar\\"}},
+          [
+            {
+              \\"foo\\": {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"foo\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"foo\\"}],\\"static\\":\\"foo\\"}}
+            },
+            {\\"type\\":0,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"source\\":\\"hoge\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hoge\\"}],\\"static\\":\\"hoge\\"}},
+            
+          ]
+        ],
+        {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"baz\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"baz\\"}],\\"static\\":\\"baz\\"}},
+        [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"buz\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"value\\":\\"buz\\"}],\\"static\\":\\"buz\\"}},
+          
+        ]
+      ]
+    }
+  })
+}
+"
+`;
+
+exports[`AST code generation > array mixed > map 1`] = `undefined`;
+
+exports[`AST code generation > bare > code 1`] = `
+"{
+  \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}}
+}"
+`;
+
+exports[`AST code generation > bridge > code 1`] = `
+"module.exports = function (Component) {
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+      \\"nested\\": {
+        \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+        \\"more\\": {
+          \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+        },
+        \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}}
+      },
+      \\"こんにちは\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"こんにちは！\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"こんにちは！\\"}],\\"static\\":\\"こんにちは！\\"}},
+      \\"single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13},\\"source\\":\\"I don\\\\u0027t know!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"value\\":\\"I don\\\\u0027t know!\\"}],\\"static\\":\\"I don\\\\u0027t know!\\"}},
+      \\"emoji\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"😺\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"😺\\"}],\\"static\\":\\"😺\\"}},
+      \\"unicode\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"A\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"value\\":\\"A\\"}],\\"static\\":\\"A\\"}},
+      \\"unicode-escape\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"\\\\\\\\u0041\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"\\\\\\\\u0041\\"}],\\"static\\":\\"\\\\\\\\u0041\\"}},
+      \\"backslash-single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\u0027\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\u0027\\"}],\\"static\\":\\"\\\\\\\\\\\\u0027\\"}},
+      \\"backslash-backslash\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\\\\\\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\\\\\\\"}],\\"static\\":\\"\\\\\\\\\\\\\\\\\\"}},
+      \\"errors\\": [
+        {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1001\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1001\\"}],\\"static\\":\\"ERROR1001\\"}},
+        {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1002\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1002\\"}],\\"static\\":\\"ERROR1002\\"}},
+        
+      ],
+      \\"complex\\": {
+        \\"warnings\\": [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"NOTE: This is warning\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"value\\":\\"NOTE: This is warning\\"}],\\"static\\":\\"NOTE: This is warning\\"}},
+          {
+            \\"named-waring\\": {\\"type\\":0,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"source\\":\\"this is {type} warining\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":8,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8}},\\"value\\":\\"this is \\"},{\\"type\\":4,\\"start\\":8,\\"end\\":14,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8},\\"end\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14}},\\"key\\":\\"type\\"},{\\"type\\":3,\\"start\\":14,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"value\\":\\" warining\\"}]}}
+          }
+        ]
+      }
+    }
+  })
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('{
+  \\"hi\\": \\"hi there!\\",
+  \\"nested\\": {
+    \\"hello\\": \\"hello world!\\",
+    \\"more\\": {
+      \\"plural\\": \\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"
+    },
+    \\"list\\": \\"hi, {0} !\\"
+  },
+  \\"こんにちは\\": \\"こんにちは！\\",
+  \\"single-quote\\": \\"I don\\\\u0027t know!\\",
+  \\"emoji\\": \\"😺\\",
+  \\"unicode\\": \\"\\\\\\\\u0041\\",
+  \\"unicode-escape\\": \\"\\\\\\\\\\\\\\\\u0041\\",
+  \\"backslash-single-quote\\": \\"\\\\\\\\\\\\\\\\\\\\u0027\\",
+  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",
+  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
+  \\"complex\\": {
+    \\"warnings\\": [
+      \\"NOTE: This is warning\\",
+      {
+        \\"named-waring\\": \\"this is {type} warining\\"
+      }
+    ]
+  }
+}
+')
+  delete _Component._Ctor
+  
+}
+"
+`;
+
+exports[`AST code generation > bridge with ESM exporting > code 1`] = `
+"export default function (Component) {
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+      \\"nested\\": {
+        \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+        \\"more\\": {
+          \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+        },
+        \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}}
+      },
+      \\"こんにちは\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"こんにちは！\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"こんにちは！\\"}],\\"static\\":\\"こんにちは！\\"}},
+      \\"single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13},\\"source\\":\\"I don\\\\u0027t know!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"value\\":\\"I don\\\\u0027t know!\\"}],\\"static\\":\\"I don\\\\u0027t know!\\"}},
+      \\"emoji\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"😺\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"😺\\"}],\\"static\\":\\"😺\\"}},
+      \\"unicode\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"A\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"value\\":\\"A\\"}],\\"static\\":\\"A\\"}},
+      \\"unicode-escape\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"\\\\\\\\u0041\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"\\\\\\\\u0041\\"}],\\"static\\":\\"\\\\\\\\u0041\\"}},
+      \\"backslash-single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\u0027\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\u0027\\"}],\\"static\\":\\"\\\\\\\\\\\\u0027\\"}},
+      \\"backslash-backslash\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\\\\\\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\\\\\\\"}],\\"static\\":\\"\\\\\\\\\\\\\\\\\\"}},
+      \\"errors\\": [
+        {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1001\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1001\\"}],\\"static\\":\\"ERROR1001\\"}},
+        {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1002\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1002\\"}],\\"static\\":\\"ERROR1002\\"}},
+        
+      ],
+      \\"complex\\": {
+        \\"warnings\\": [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"NOTE: This is warning\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"value\\":\\"NOTE: This is warning\\"}],\\"static\\":\\"NOTE: This is warning\\"}},
+          {
+            \\"named-waring\\": {\\"type\\":0,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"source\\":\\"this is {type} warining\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":8,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8}},\\"value\\":\\"this is \\"},{\\"type\\":4,\\"start\\":8,\\"end\\":14,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8},\\"end\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14}},\\"key\\":\\"type\\"},{\\"type\\":3,\\"start\\":14,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"value\\":\\" warining\\"}]}}
+          }
+        ]
+      }
+    }
+  })
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('{
+  \\"hi\\": \\"hi there!\\",
+  \\"nested\\": {
+    \\"hello\\": \\"hello world!\\",
+    \\"more\\": {
+      \\"plural\\": \\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"
+    },
+    \\"list\\": \\"hi, {0} !\\"
+  },
+  \\"こんにちは\\": \\"こんにちは！\\",
+  \\"single-quote\\": \\"I don\\\\u0027t know!\\",
+  \\"emoji\\": \\"😺\\",
+  \\"unicode\\": \\"\\\\\\\\u0041\\",
+  \\"unicode-escape\\": \\"\\\\\\\\\\\\\\\\u0041\\",
+  \\"backslash-single-quote\\": \\"\\\\\\\\\\\\\\\\\\\\u0027\\",
+  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",
+  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
+  \\"complex\\": {
+    \\"warnings\\": [
+      \\"NOTE: This is warning\\",
+      {
+        \\"named-waring\\": \\"this is {type} warining\\"
+      }
+    ]
+  }
+}
+')
+  delete _Component._Ctor
+  
+}
+"
+`;
+
+exports[`AST code generation > complex > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+  \\"nested\\": {
+    \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+    \\"more\\": {
+      \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+    },
+    \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}}
+  },
+  \\"こんにちは\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"こんにちは！\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"こんにちは！\\"}],\\"static\\":\\"こんにちは！\\"}},
+  \\"single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13},\\"source\\":\\"I don\\\\u0027t know!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"value\\":\\"I don\\\\u0027t know!\\"}],\\"static\\":\\"I don\\\\u0027t know!\\"}},
+  \\"emoji\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"😺\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"😺\\"}],\\"static\\":\\"😺\\"}},
+  \\"unicode\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"A\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"value\\":\\"A\\"}],\\"static\\":\\"A\\"}},
+  \\"unicode-escape\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"\\\\\\\\u0041\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"\\\\\\\\u0041\\"}],\\"static\\":\\"\\\\\\\\u0041\\"}},
+  \\"backslash-single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\u0027\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\u0027\\"}],\\"static\\":\\"\\\\\\\\\\\\u0027\\"}},
+  \\"backslash-backslash\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\\\\\\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\\\\\\\"}],\\"static\\":\\"\\\\\\\\\\\\\\\\\\"}},
+  \\"errors\\": [
+    {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1001\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1001\\"}],\\"static\\":\\"ERROR1001\\"}},
+    {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1002\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1002\\"}],\\"static\\":\\"ERROR1002\\"}},
+    
+  ],
+  \\"complex\\": {
+    \\"warnings\\": [
+      {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"NOTE: This is warning\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"value\\":\\"NOTE: This is warning\\"}],\\"static\\":\\"NOTE: This is warning\\"}},
+      {
+        \\"named-waring\\": {\\"type\\":0,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"source\\":\\"this is {type} warining\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":8,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8}},\\"value\\":\\"this is \\"},{\\"type\\":4,\\"start\\":8,\\"end\\":14,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8},\\"end\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14}},\\"key\\":\\"type\\"},{\\"type\\":3,\\"start\\":14,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"value\\":\\" warining\\"}]}}
+      }
+    ]
+  }
+}
+export default resource"
+`;
+
+exports[`AST code generation > force stringify > code 1`] = `
+"const resource = {
+  \\"trueValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"source\\":\\"true\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"true\\"}],\\"static\\":\\"true\\"}},
+  \\"falseValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5},\\"source\\":\\"false\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"value\\":\\"false\\"}],\\"static\\":\\"false\\"}},
+  \\"nullValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"source\\":\\"null\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"null\\"}],\\"static\\":\\"null\\"}},
+  \\"numberValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"1\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"value\\":\\"1\\"}],\\"static\\":\\"1\\"}}
+}
+export default resource"
+`;
+
+exports[`AST code generation > html tag in message > errors 1`] = `
+[
+  {
+    "msg": "Detected HTML in '<p>hi there!</p>' message.",
+    "path": "hi",
+    "source": "<p>hi there!</p>",
+  },
+  {
+    "msg": "Detected HTML in '<script>window.alert('hi there!')</script>' message.",
+    "path": "alert",
+    "source": "<script>window.alert('hi there!')</script>",
+  },
+]
+`;
+
+exports[`AST code generation > invalid message syntax > code 1`] = `
+"{
+  \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5},\\"source\\":\\"こんにちは\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"value\\":\\"こんにちは\\"}],\\"static\\":\\"こんにちは\\"}},
+  \\"this-is-invalid\\": \`@\`,
+  \\"nested\\": {
+    \\"array\\": [
+      {
+        \\"this-is-invalid\\": \`@\`
+      }
+    ]
+  }
+}"
+`;
+
+exports[`AST code generation > invalid message syntax > errors 1`] = `
+[
+  {
+    "code": 14,
+    "domain": "parser",
+    "location": {
+      "end": {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "msg": "Unexpected lexical analysis in token: 'EOF'",
+    "path": "this-is-invalid",
+    "source": "@",
+  },
+  {
+    "code": 13,
+    "domain": "parser",
+    "location": {
+      "end": {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+    },
+    "msg": "Unexpected empty linked key",
+    "path": "this-is-invalid",
+    "source": "@",
+  },
+  {
+    "code": 14,
+    "domain": "parser",
+    "location": {
+      "end": {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": {
+        "column": 1,
+        "line": 1,
+        "offset": 0,
+      },
+    },
+    "msg": "Unexpected lexical analysis in token: 'EOF'",
+    "path": "nested.array.0.this-is-invalid",
+    "source": "@",
+  },
+  {
+    "code": 13,
+    "domain": "parser",
+    "location": {
+      "end": {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+      "start": {
+        "column": 2,
+        "line": 1,
+        "offset": 1,
+      },
+    },
+    "msg": "Unexpected empty linked key",
+    "path": "nested.array.0.this-is-invalid",
+    "source": "@",
+  },
+]
+`;
+
+exports[`AST code generation > invalid message syntax > map 1`] = `undefined`;
+
+exports[`AST code generation > legacy > code 1`] = `
+"export default function (Component) {
+  Component.options.__i18n = Component.options.__i18n || []
+  Component.options.__i18n.push(\\"{\\\\\\"hi\\\\\\":\\\\\\"hi there!\\\\\\",\\\\\\"nested\\\\\\":{\\\\\\"hello\\\\\\":\\\\\\"hello world!\\\\\\",\\\\\\"more\\\\\\":{\\\\\\"plural\\\\\\":\\\\\\"@.caml:{\\\\\\\\u0027no apples\\\\\\\\u0027} | {0} apple | {n} apples\\\\\\"},\\\\\\"list\\\\\\":\\\\\\"hi, {0} !\\\\\\"},\\\\\\"こんにちは\\\\\\":\\\\\\"こんにちは！\\\\\\",\\\\\\"single-quote\\\\\\":\\\\\\"I don\\\\\\\\u0027t know!\\\\\\",\\\\\\"emoji\\\\\\":\\\\\\"😺\\\\\\",\\\\\\"unicode\\\\\\":\\\\\\"A\\\\\\",\\\\\\"unicode-escape\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\",\\\\\\"backslash-single-quote\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\",\\\\\\"backslash-backslash\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\"errors\\\\\\":[\\\\\\"ERROR1001\\\\\\",\\\\\\"ERROR1002\\\\\\"],\\\\\\"complex\\\\\\":{\\\\\\"warnings\\\\\\":[\\\\\\"NOTE: This is warning\\\\\\",{\\\\\\"named-waring\\\\\\":\\\\\\"this is {type} warining\\\\\\"}]}}\\")
+  delete Component.options._Ctor
+}"
+`;
+
+exports[`AST code generation > production > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+  \\"hello\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+  \\"named\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":4,\\"key\\":\\"name\\"},{\\"type\\":3,\\"value\\":\\" !\\"}]}},
+  \\"list\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"index\\":0},{\\"type\\":3,\\"value\\":\\" !\\"}]}},
+  \\"literal\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":9,\\"value\\":\\"kazupon\\"},{\\"type\\":3,\\"value\\":\\" !\\"}],\\"static\\":\\"hi, kazupon !\\"}},
+  \\"linked\\": {\\"type\\":0,\\"body\\":{\\"type\\":2,\\"items\\":[{\\"type\\":3,\\"value\\":\\"hi, \\"},{\\"type\\":6,\\"key\\":{\\"type\\":7,\\"value\\":\\"name\\"}},{\\"type\\":3,\\"value\\":\\" !\\"}]}},
+  \\"plural\\": {\\"type\\":0,\\"body\\":{\\"type\\":1,\\"cases\\":[{\\"type\\":2,\\"items\\":[{\\"type\\":6,\\"modifier\\":{\\"type\\":8,\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"items\\":[{\\"type\\":5,\\"index\\":0},{\\"type\\":3,\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"items\\":[{\\"type\\":4,\\"key\\":\\"n\\"},{\\"type\\":3,\\"value\\":\\" apples\\"}]}]}}
+}
+export default resource"
+`;
+
+exports[`AST code generation > simple > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+  \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+  \\"named\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hi, {name} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":4,\\"start\\":4,\\"end\\":10,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10}},\\"key\\":\\"name\\"},{\\"type\\":3,\\"start\\":10,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\" !\\"}]}},
+  \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}},
+  \\"literal\\": {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"hi, {  \\\\u0027kazupon\\\\u0027  } !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":9,\\"start\\":4,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":20,\\"offset\\":19}},\\"value\\":\\"kazupon\\"},{\\"type\\":3,\\"start\\":19,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":20,\\"offset\\":19},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"value\\":\\" !\\"}],\\"static\\":\\"hi, kazupon !\\"}},
+  \\"linked\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hi, @:name !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":6,\\"start\\":4,\\"end\\":10,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10}},\\"key\\":{\\"type\\":7,\\"start\\":6,\\"end\\":10,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"end\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10}},\\"value\\":\\"name\\"}},{\\"type\\":3,\\"start\\":10,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\" !\\"}]}},
+  \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+}
+export default resource"
+`;
+
+exports[`AST code generation > unhandling > code 1`] = `
+"const resource = {
+  \\"trueValue\\": true,
+  \\"falseValue\\": false,
+  \\"nullValue\\": null,
+  \\"numberValue\\": 1
+}
+export default resource"
+`;
+
+exports[`AST code generation > useClassComponent > code 1`] = `
+"export default function (Component) {
+  const _Component = Component.__o || Component.__vccOpts || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"hi there!\\"}],\\"static\\":\\"hi there!\\"}},
+      \\"nested\\": {
+        \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\"hello world!\\"}],\\"static\\":\\"hello world!\\"}},
+        \\"more\\": {
+          \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+        },
+        \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}}
+      },
+      \\"こんにちは\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"こんにちは！\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"こんにちは！\\"}],\\"static\\":\\"こんにちは！\\"}},
+      \\"single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13},\\"source\\":\\"I don\\\\u0027t know!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"value\\":\\"I don\\\\u0027t know!\\"}],\\"static\\":\\"I don\\\\u0027t know!\\"}},
+      \\"emoji\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"😺\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"😺\\"}],\\"static\\":\\"😺\\"}},
+      \\"unicode\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"A\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"value\\":\\"A\\"}],\\"static\\":\\"A\\"}},
+      \\"unicode-escape\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"\\\\\\\\u0041\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"\\\\\\\\u0041\\"}],\\"static\\":\\"\\\\\\\\u0041\\"}},
+      \\"backslash-single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\u0027\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\u0027\\"}],\\"static\\":\\"\\\\\\\\\\\\u0027\\"}},
+      \\"backslash-backslash\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\\\\\\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"value\\":\\"\\\\\\\\\\\\\\\\\\"}],\\"static\\":\\"\\\\\\\\\\\\\\\\\\"}},
+      \\"errors\\": [
+        {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1001\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1001\\"}],\\"static\\":\\"ERROR1001\\"}},
+        {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1002\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\"ERROR1002\\"}],\\"static\\":\\"ERROR1002\\"}},
+        
+      ],
+      \\"complex\\": {
+        \\"warnings\\": [
+          {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"NOTE: This is warning\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"value\\":\\"NOTE: This is warning\\"}],\\"static\\":\\"NOTE: This is warning\\"}},
+          {
+            \\"named-waring\\": {\\"type\\":0,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"source\\":\\"this is {type} warining\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":8,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8}},\\"value\\":\\"this is \\"},{\\"type\\":4,\\"start\\":8,\\"end\\":14,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8},\\"end\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14}},\\"key\\":\\"type\\"},{\\"type\\":3,\\"start\\":14,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"value\\":\\" warining\\"}]}}
+          }
+        ]
+      }
+    }
+  })
+}
+"
+`;
+
+exports[`code generation > array basic > code 1`] = `
 "export default function (Component) {
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
@@ -23,7 +472,7 @@ exports[`array basic > code 1`] = `
 "
 `;
 
-exports[`array basic > map 1`] = `
+exports[`code generation > array basic > map 1`] = `
 {
   "mappings": ";6EACUA,SAASC",
   "names": [
@@ -43,7 +492,7 @@ exports[`array basic > map 1`] = `
 }
 `;
 
-exports[`array mixed > code 1`] = `
+exports[`code generation > array mixed > code 1`] = `
 "export default function (Component) {
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
@@ -76,7 +525,7 @@ exports[`array mixed > code 1`] = `
 "
 `;
 
-exports[`array mixed > map 1`] = `
+exports[`code generation > array mixed > map 1`] = `
 {
   "mappings": ";;;+EAGYA;;;wEAGPC;;;mFAGWD;;0EAETE;;;sEAGJC;uEACCC",
   "names": [
@@ -114,13 +563,13 @@ exports[`array mixed > map 1`] = `
 }
 `;
 
-exports[`bare > code 1`] = `
+exports[`code generation > bare > code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})()
 }"
 `;
 
-exports[`bare > map 1`] = `
+exports[`code generation > bare > map 1`] = `
 {
   "mappings": ";6EACUA",
   "names": [
@@ -139,7 +588,7 @@ exports[`bare > map 1`] = `
 }
 `;
 
-exports[`bridge > code 1`] = `
+exports[`code generation > bridge > code 1`] = `
 "module.exports = function (Component) {
   const _Component = Component.options || Component
   _Component.__i18n = _Component.__i18n || []
@@ -210,7 +659,7 @@ exports[`bridge > code 1`] = `
 "
 `;
 
-exports[`bridge > map 1`] = `
+exports[`code generation > bridge > map 1`] = `
 {
   "mappings": ";0EACOA;;+EAEKC;;yMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;6EAEDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": [
@@ -274,7 +723,7 @@ exports[`bridge > map 1`] = `
 }
 `;
 
-exports[`bridge with ESM exporting > code 1`] = `
+exports[`code generation > bridge with ESM exporting > code 1`] = `
 "export default function (Component) {
   const _Component = Component.options || Component
   _Component.__i18n = _Component.__i18n || []
@@ -345,7 +794,7 @@ exports[`bridge with ESM exporting > code 1`] = `
 "
 `;
 
-exports[`bridge with ESM exporting > map 1`] = `
+exports[`code generation > bridge with ESM exporting > map 1`] = `
 {
   "mappings": ";0EACOA;;+EAEKC;;yMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;6EAEDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": [
@@ -409,7 +858,7 @@ exports[`bridge with ESM exporting > map 1`] = `
 }
 `;
 
-exports[`complex > code 1`] = `
+exports[`code generation > complex > code 1`] = `
 "const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
@@ -443,7 +892,7 @@ exports[`complex > code 1`] = `
 export default resource"
 `;
 
-exports[`complex > map 1`] = `
+exports[`code generation > complex > map 1`] = `
 {
   "mappings": ";0EACOA;;+EAEKC;;yMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;6EAEDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": [
@@ -507,7 +956,7 @@ exports[`complex > map 1`] = `
 }
 `;
 
-exports[`force stringify > code 1`] = `
+exports[`code generation > force stringify > code 1`] = `
 "const resource = {
   \\"trueValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"true\\"])};fn.source=\\"true\\";return fn;})(),
   \\"falseValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"false\\"])};fn.source=\\"false\\";return fn;})(),
@@ -517,7 +966,7 @@ exports[`force stringify > code 1`] = `
 export default resource"
 `;
 
-exports[`force stringify > map 1`] = `
+exports[`code generation > force stringify > map 1`] = `
 {
   "mappings": ";iFACcA;kFACCC;iFACDC;mFACEC",
   "names": [
@@ -542,14 +991,14 @@ exports[`force stringify > map 1`] = `
 }
 `;
 
-exports[`html tag in message > code 1`] = `
+exports[`code generation > html tag in message > code 1`] = `
 "{
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hi there!&lt;/p&gt;\\"])};fn.source=\\"<p>hi there!</p>\\";return fn;})(),
   \\"alert\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;\\"])};fn.source=\\"<script>window.alert('hi there!')</script>\\";return fn;})()
 }"
 `;
 
-exports[`html tag in message > errors 1`] = `
+exports[`code generation > html tag in message > errors 1`] = `
 [
   {
     "msg": "Detected HTML in '<p>hi there!</p>' message.",
@@ -564,7 +1013,7 @@ exports[`html tag in message > errors 1`] = `
 ]
 `;
 
-exports[`invalid message syntax > code 1`] = `
+exports[`code generation > invalid message syntax > code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
   \\"this-is-invalid\\": \`@\`,
@@ -578,7 +1027,7 @@ exports[`invalid message syntax > code 1`] = `
 }"
 `;
 
-exports[`invalid message syntax > errors 1`] = `
+exports[`code generation > invalid message syntax > errors 1`] = `
 [
   {
     "code": 14,
@@ -659,7 +1108,7 @@ exports[`invalid message syntax > errors 1`] = `
 ]
 `;
 
-exports[`invalid message syntax > map 1`] = `
+exports[`code generation > invalid message syntax > map 1`] = `
 {
   "mappings": ";6EACUA;6HACUC;;;;mIAIMA",
   "names": [
@@ -687,7 +1136,7 @@ exports[`invalid message syntax > map 1`] = `
 }
 `;
 
-exports[`legacy > code 1`] = `
+exports[`code generation > legacy > code 1`] = `
 "export default function (Component) {
   Component.options.__i18n = Component.options.__i18n || []
   Component.options.__i18n.push(\\"{\\\\\\"hi\\\\\\":\\\\\\"hi there!\\\\\\",\\\\\\"nested\\\\\\":{\\\\\\"hello\\\\\\":\\\\\\"hello world!\\\\\\",\\\\\\"more\\\\\\":{\\\\\\"plural\\\\\\":\\\\\\"@.caml:{\\\\\\\\u0027no apples\\\\\\\\u0027} | {0} apple | {n} apples\\\\\\"},\\\\\\"list\\\\\\":\\\\\\"hi, {0} !\\\\\\"},\\\\\\"こんにちは\\\\\\":\\\\\\"こんにちは！\\\\\\",\\\\\\"single-quote\\\\\\":\\\\\\"I don\\\\\\\\u0027t know!\\\\\\",\\\\\\"emoji\\\\\\":\\\\\\"😺\\\\\\",\\\\\\"unicode\\\\\\":\\\\\\"A\\\\\\",\\\\\\"unicode-escape\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\",\\\\\\"backslash-single-quote\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\",\\\\\\"backslash-backslash\\\\\\":\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\"errors\\\\\\":[\\\\\\"ERROR1001\\\\\\",\\\\\\"ERROR1002\\\\\\"],\\\\\\"complex\\\\\\":{\\\\\\"warnings\\\\\\":[\\\\\\"NOTE: This is warning\\\\\\",{\\\\\\"named-waring\\\\\\":\\\\\\"this is {type} warining\\\\\\"}]}}\\")
@@ -695,7 +1144,7 @@ exports[`legacy > code 1`] = `
 }"
 `;
 
-exports[`legacy > map 1`] = `
+exports[`code generation > legacy > map 1`] = `
 SourceMap {
   "file": "vue-i18n-loader.json",
   "mappings": "AAAA;AACA;AACA;AACA;AACA",
@@ -740,7 +1189,7 @@ SourceMap {
 }
 `;
 
-exports[`simple > code 1`] = `
+exports[`code generation > simple > code 1`] = `
 "const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -753,7 +1202,7 @@ exports[`simple > code 1`] = `
 export default resource"
 `;
 
-exports[`simple > map 1`] = `
+exports[`code generation > simple > map 1`] = `
 {
   "mappings": ";0EACOA;6EACGC;uHACAC,QAAAC,8BAAAC;oHACDF,QAAAG,wBAAAD;+EACGF,QAAAI,WAAAF;4GACDF,gBAAAC,2BAAAC;qMACAG,aAAAC,8BAAAH,wBAAAI,wBAAAC,2BAAAC",
   "names": [
@@ -789,7 +1238,7 @@ exports[`simple > map 1`] = `
 }
 `;
 
-exports[`unhandling > code 1`] = `
+exports[`code generation > unhandling > code 1`] = `
 "const resource = {
   \\"trueValue\\": true,
   \\"falseValue\\": false,
@@ -799,7 +1248,7 @@ exports[`unhandling > code 1`] = `
 export default resource"
 `;
 
-exports[`unhandling > map 1`] = `
+exports[`code generation > unhandling > map 1`] = `
 {
   "mappings": "",
   "names": [],
@@ -808,7 +1257,7 @@ exports[`unhandling > map 1`] = `
 }
 `;
 
-exports[`useClassComponent > code 1`] = `
+exports[`code generation > useClassComponent > code 1`] = `
 "export default function (Component) {
   const _Component = Component.__o || Component.__vccOpts || Component
   _Component.__i18n = _Component.__i18n || []
@@ -849,7 +1298,7 @@ exports[`useClassComponent > code 1`] = `
 "
 `;
 
-exports[`useClassComponent > map 1`] = `
+exports[`code generation > useClassComponent > map 1`] = `
 {
   "mappings": ";0EACOA;;+EAEKC;;yMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;sHAEJC,QAAAJ,wBAAAK;;6EAEDC;oFACOC;6EACPC;+EACEC;sFACOC;8FACQC;2FACHC;+EACZC,aAAaC;;;wEAGpBC;;oIAEkBC,YAAAC,8BAAAC",
   "names": [

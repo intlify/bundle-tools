@@ -979,8 +979,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
-    "@intlify/message-compiler": 9.3.0-beta.17
-    "@intlify/shared": 9.3.0-beta.17
+    "@intlify/message-compiler": 9.3.0-beta.20
+    "@intlify/shared": 9.3.0-beta.20
     "@types/escodegen": ^0.0.7
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
@@ -1067,13 +1067,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/message-compiler@npm:9.3.0-beta.17":
-  version: 9.3.0-beta.17
-  resolution: "@intlify/message-compiler@npm:9.3.0-beta.17"
+"@intlify/message-compiler@npm:9.3.0-beta.20":
+  version: 9.3.0-beta.20
+  resolution: "@intlify/message-compiler@npm:9.3.0-beta.20"
   dependencies:
-    "@intlify/shared": 9.3.0-beta.17
-    source-map: 0.6.1
-  checksum: 4062096fd5b70994e22997ff8a7a103dfcea5ef4bd78ef49fe833b066f40b78fdbbeacf704c0093a388b4bbba62016fc15d73ea63e726469e854665aed46329c
+    "@intlify/shared": 9.3.0-beta.20
+    source-map-js: ^1.0.2
+  checksum: 985072f500555e327c3bda931dc4020eef65577de771dcfb9b9a49417ed702d34cb35c6c696442bd986451da2be79fdba2679c9387c874dd4496717429fd3266
   languageName: node
   linkType: hard
 
@@ -1108,6 +1108,13 @@ __metadata:
   version: 9.3.0-beta.17
   resolution: "@intlify/shared@npm:9.3.0-beta.17"
   checksum: a5cad72936ee102550f54aef1eb68c7bc54fd922fd73911d75d2c3b49a3bf5b13c074fa7fe9069a7b912de5fe4c4ee0b5152a7f321715e68ce49881efb75ea7f
+  languageName: node
+  linkType: hard
+
+"@intlify/shared@npm:9.3.0-beta.20":
+  version: 9.3.0-beta.20
+  resolution: "@intlify/shared@npm:9.3.0-beta.20"
+  checksum: 9932c5c1beb2278677d8923ff9826461ddc1c91854caecc44f13bcbc9874030514f1963f88b941accf662d11fb96a83c44f192663f2274635a55a8a073cb4cc4
   languageName: node
   linkType: hard
 

@@ -6,6 +6,7 @@ import { isString, friendlyJSONstringify } from '@intlify/shared'
 import {
   createCodeGenerator,
   generateMessageFunction,
+  generateResourceAst,
   mapLinesColumns
 } from './codegen'
 import {
@@ -18,7 +19,12 @@ import { RawSourceMap } from 'source-map'
 import MagicString from 'magic-string'
 
 import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
-import type { CodeGenOptions, CodeGenerator, CodeGenResult } from './codegen'
+import type {
+  CodeGenOptions,
+  CodeGenerator,
+  CodeGenResult,
+  CodeGenFunction
+} from './codegen'
 
 /**
  * @internal
@@ -40,7 +46,8 @@ export function generate(
     forceStringify = false,
     onError = undefined,
     strictMessage = true,
-    escapeHtml = false
+    escapeHtml = false,
+    jit = false
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<YAMLProgram> {
@@ -63,7 +70,8 @@ export function generate(
     onError,
     strictMessage,
     escapeHtml,
-    useClassComponent
+    useClassComponent,
+    jit
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
@@ -85,7 +93,7 @@ export function generate(
     }
   }
 
-  const codeMaps = generateNode(generator, ast, options, injector)
+  const codeMaps = _generate(generator, ast, options, injector)
 
   const { code, map } = generator.context()
   // prettier-ignore
@@ -99,10 +107,10 @@ export function generate(
   }
 }
 
-function generateNode(
+function _generate(
   generator: CodeGenerator,
   node: YAMLProgram,
-  options: CodeGenOptions,
+  options: CodeGenOptions = {},
   injector?: () => string
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
@@ -117,8 +125,13 @@ function generateNode(
     sourceMap,
     isGlobal,
     locale,
-    useClassComponent
+    useClassComponent,
+    jit
   } = options
+
+  const codegenFn: CodeGenFunction = jit
+    ? generateResourceAst
+    : generateMessageFunction
 
   const componentNamespace = '_Component'
 
@@ -181,11 +194,7 @@ function generateNode(
             if (isString(value)) {
               generator.push(`${JSON.stringify(name)}: `)
               name && pathStack.push(name.toString())
-              const { code, map } = generateMessageFunction(
-                value,
-                options,
-                pathStack
-              )
+              const { code, map } = codegenFn(value, options, pathStack)
               sourceMap && map != null && codeMaps.set(value, map)
               generator.push(`${code}`, node.value, value)
             } else {
@@ -193,11 +202,7 @@ function generateNode(
                 const strValue = JSON.stringify(value)
                 generator.push(`${JSON.stringify(name)}: `)
                 name && pathStack.push(name.toString())
-                const { code, map } = generateMessageFunction(
-                  strValue,
-                  options,
-                  pathStack
-                )
+                const { code, map } = codegenFn(strValue, options, pathStack)
                 sourceMap && map != null && codeMaps.set(strValue, map)
                 generator.push(`${code}`, node.value, strValue)
               } else {
@@ -242,21 +247,13 @@ function generateNode(
             if (node.type === 'YAMLScalar') {
               const value = node.value
               if (isString(value)) {
-                const { code, map } = generateMessageFunction(
-                  value,
-                  options,
-                  pathStack
-                )
+                const { code, map } = codegenFn(value, options, pathStack)
                 sourceMap && map != null && codeMaps.set(value, map)
                 generator.push(`${code}`, node, value)
               } else {
                 if (forceStringify) {
                   const strValue = JSON.stringify(value)
-                  const { code, map } = generateMessageFunction(
-                    strValue,
-                    options,
-                    pathStack
-                  )
+                  const { code, map } = codegenFn(strValue, options, pathStack)
                   sourceMap && map != null && codeMaps.set(strValue, map)
                   generator.push(`${code}`, node, strValue)
                 } else {

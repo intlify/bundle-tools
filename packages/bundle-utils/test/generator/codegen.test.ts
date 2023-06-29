@@ -1,4 +1,25 @@
-import { generateMessageFunction } from '../../src/codegen'
+import { generateMessageFunction, generateResourceAst } from '../../src/codegen'
+
+describe('generateResourceAst', () => {
+  test('development', () => {
+    expect(generateResourceAst('hello')).toMatchSnapshot()
+  })
+  test('production', () => {
+    expect(
+      generateResourceAst('hello', { env: 'production' })
+    ).toMatchSnapshot()
+  })
+  test('syntax error', () => {
+    const errors: string[] = []
+    const { code } = generateMessageFunction(`|`, {
+      onError(msg) {
+        errors.push(msg)
+      }
+    })
+    expect(errors.length).toBe(1)
+    expect(code).toBe('`|`')
+  })
+})
 
 describe('generateMessageFunction', () => {
   test('development', () => {

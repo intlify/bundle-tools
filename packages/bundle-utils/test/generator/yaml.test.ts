@@ -178,3 +178,13 @@ test('html tag in message', async () => {
   expect(errors).toMatchSnapshot('errors')
   expect(code).toMatchSnapshot('code')
 })
+
+test('AST code generation', async () => {
+  const { source } = await readFile(`./fixtures/codegen/complex.yaml`)
+  const { code } = generate(source, {
+    jit: true,
+    env: 'production'
+  })
+
+  expect(code).toMatchSnapshot('code')
+})

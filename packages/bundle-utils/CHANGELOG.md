@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@7.0.0 (2023-06-29)
+
+#### :star: Features
+* [#276](https://github.com/intlify/bundle-tools/pull/276) feat(bundle-utils): support AST generation for JIT compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@6.0.1 (2023-05-26)
 
 #### :bug: Bug Fixes

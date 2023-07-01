@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.12.0 (2023-07-01)
+
+#### :star: Features
+* [#277](https://github.com/intlify/bundle-tools/pull/277) feat(unplugin-vue-i18n): support jit compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.11.0 (2023-05-26)
 
 #### :zap: Improvement Features

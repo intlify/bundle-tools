@@ -42,6 +42,7 @@ export async function bundleVite(
     ? options.strictMessage
     : true
   options.escapeHtml = !!options.escapeHtml
+  options.jitCompilation = !!options.jitCompilation
 
   const alias: Record<string, string> = {
     vue: 'vue/dist/vue.runtime.esm-browser.js'
@@ -162,6 +163,7 @@ export async function bundleAndRun(
     ? options.strictMessage
     : true
   options.escapeHtml = !!options.escapeHtml
+  options.jitCompilation = !!options.jitCompilation
 
   const { code, map } = await bundler(fixture, options)
 

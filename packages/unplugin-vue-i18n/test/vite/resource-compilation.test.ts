@@ -98,3 +98,13 @@ test('escape message', async () => {
     `&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;`
   )
 })
+
+test('jitCompilation', async () => {
+  const { module } = await bundleAndRun('ja.json', bundleVite, {
+    jitCompilation: true,
+    ...options
+  })
+  const fn = module.message
+  // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
+  expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
+})

@@ -141,7 +141,7 @@
     "lint:eslint:fix": "yarn lint:eslint --fix",
     "lint:secret": "npx secretlint \"**/*\"",
     "test": "yarn test:unit && yarn test:e2e",
-    "test:e2e": "npm-run-all \"test:e2e:*\"",
+    "test:e2e": "npm-run-all test:e2e:rollup test:e2e:vite test:e2e:unplugin",
     "test:e2e:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n test:e2e",
     "test:e2e:vite": "yarn workspace @intlify/vite-plugin-vue-i18n test:e2e",
     "test:e2e:webpack": "yarn workspace @intlify/vue-i18n-loader test:e2e",

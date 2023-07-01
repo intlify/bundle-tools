@@ -8,6 +8,7 @@
 unplugin for Vue I18n
 
 ## 🌟 Features
+
 - i18n resource pre-compilation
 - i18n custom block
   - i18n resource definition
@@ -84,14 +85,11 @@ export default defineNuxtConfig({
 
 ## 🚀 Usage
 
-### i18n resources pre-compilation
+### locale messages pre-compilation
 
-Since `vue-i18n@v9.x`, the locale messages are handled with message compiler, which converts them to javascript functions after compiling. After compiling, message compiler converts them into javascript functions, which can improve the performance of the application.
+Since `vue-i18n@v9.x`, the locale messages are handled with message compiler, which transform them to javascript functions or AST objects after compiling, so these can improve the performance of the application.
 
-However, with the message compiler, the javascript function conversion will not work in some environments (e.g. CSP). For this reason, `vue-i18n@v9.x` and later offer a full version that includes compiler and runtime, and a runtime only version.
-
-If you are using the runtime version, you will need to compile before importing locale messages by managing them in a file such as `.json`.
-
+If you want to maximize the performance of vue-i18n, we recommend using unplugin-vue-i18n for locale messages.
 
 ### i18n custom block
 
@@ -241,7 +239,9 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
 
 
 ## 📦 Automatic bundling
+
 ### For Vue I18n
+
 As noted [here](https://vue-i18n.intlify.dev/guide/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
 
 This plugin will automatically select and bundle Vue I18n build according to the following behavior:
@@ -345,6 +345,22 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 
   If you fetch some resources from the backend, the data **must be pre-compiled** for production. exmaple is [here](https://github.com/intlify/vue-i18n-next/tree/master/examples/backend).
 
+### `jitCompilation`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
+
+  > ⚠️ NOTE: 
+  This option works with vue-i18n v9.3 and later.
+
+  JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale mesages with programatic.
+
+  > ⚠️ NOTE: 
+  Enabling JIT compilation causes the message compiler to generate AST objects for locale mesages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
+
+  About JIT compilation, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#jit-compilation)
 
 ### `runtimeOnly`
 
@@ -359,6 +375,8 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
   ```
 
   If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
+
+  **If you want to dynamically handle with locale mesages, such as fetch from back-end DB, set this option to `false`**.
 
   For more details, See [here](#-automatic-bundling)
 

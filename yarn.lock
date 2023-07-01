@@ -1000,7 +1000,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@npm:^3.1.2":
+"@intlify/bundle-utils@npm:3.4.0, @intlify/bundle-utils@npm:^3.1.2":
   version: 3.4.0
   resolution: "@intlify/bundle-utils@npm:3.4.0"
   dependencies:
@@ -1111,6 +1111,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intlify/shared@npm:^9.2.2":
+  version: 9.2.2
+  resolution: "@intlify/shared@npm:9.2.2"
+  checksum: 3aad616c66c6ec479f78750e32a6f2d2f20fb7a32b4b634c2c81c58de52ca4f9c5ebfcb347411f5a719e08bd80cbcb86f13a66ad7a1a3faae45877d7ba789250
+  languageName: node
+  linkType: hard
+
 "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n":
   version: 0.0.0-use.local
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
@@ -1181,15 +1188,15 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/vue-i18n-loader@workspace:packages/vue-i18n-loader"
   dependencies:
-    "@intlify/bundle-utils": next
-    "@intlify/shared": beta
+    "@intlify/bundle-utils": 3.4.0
+    "@intlify/shared": ^9.2.2
     js-yaml: ^4.1.0
     json5: ^2.2.0
     loader-utils: ^2.0.0
   peerDependencies:
-    petite-vue-i18n: ^9.0.0
+    petite-vue-i18n: "*"
     vue: ^3.0.0
-    vue-i18n: ^9.0.0
+    vue-i18n: "*"
   peerDependenciesMeta:
     petite-vue-i18n:
       optional: true

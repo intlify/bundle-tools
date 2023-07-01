@@ -1,4 +1,4 @@
-import { createUnplugin, TransformResult } from 'unplugin'
+import { createUnplugin } from 'unplugin'
 import { normalize, parse as parsePath } from 'pathe'
 import createDebug from 'debug'
 import fg from 'fast-glob'
@@ -21,13 +21,17 @@ import {
   checkVueI18nBridgeInstallPackage,
   getVueI18nVersion
 } from '@intlify/bundle-utils'
-import { RawSourceMap } from 'source-map'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
 import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
 
-import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
+import type { RawSourceMap } from 'source-map-js'
+import type {
+  UnpluginContextMeta,
+  UnpluginOptions,
+  TransformResult
+} from 'unplugin'
 import type { PluginOptions } from './types'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 
@@ -78,6 +82,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     ? options.runtimeOnly
     : true
   debug('runtimeOnly', runtimeOnly)
+
+  const jitCompilation = !!options.jitCompilation
+  debug('jitCompilation', jitCompilation)
 
   // prettier-ignore
   const compositionOnly = installedPkg === 'vue-i18n'
@@ -221,6 +228,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         debug(
           `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
         )
+        config.define['__INTLIFY_JIT_COMPILATION__'] = jitCompilation
+        debug(
+          `set __INTLIFY_JIT_COMPILATION__ is '${config.define['__INTLIFY_JIT_COMPILATION__']}'`
+        )
 
         config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
       },
@@ -306,6 +317,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   strictMessage,
                   escapeHtml,
                   bridge,
+                  jit: jitCompilation,
                   exportESM: esm,
                   forceStringify
                 }
@@ -516,6 +528,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               strictMessage,
               escapeHtml,
               bridge,
+              jit: jitCompilation,
               exportESM: esm,
               forceStringify
             }
@@ -570,6 +583,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               bridge,
+              jit: jitCompilation,
               strictMessage,
               escapeHtml,
               exportESM: esm,
@@ -663,7 +677,8 @@ async function generateBundleResources(
     exportESM = true,
     strictMessage = true,
     escapeHtml = false,
-    useClassComponent = false
+    useClassComponent = false,
+    jit = false
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
@@ -672,6 +687,7 @@ async function generateBundleResources(
     strictMessage?: boolean
     escapeHtml?: boolean
     useClassComponent?: boolean
+    jit?: boolean
   }
 ) {
   const codes = []
@@ -686,6 +702,7 @@ async function generateBundleResources(
         isGlobal,
         useClassComponent,
         bridge,
+        jit,
         exportESM,
         strictMessage,
         escapeHtml,
@@ -768,7 +785,8 @@ function getOptions(
     useClassComponent = false,
     allowDynamic = false,
     strictMessage = true,
-    escapeHtml = false
+    escapeHtml = false,
+    jit = false
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
@@ -779,6 +797,7 @@ function getOptions(
     allowDynamic?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
+    jit?: boolean
   }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -793,6 +812,7 @@ function getOptions(
     strictMessage,
     escapeHtml,
     bridge,
+    jit,
     exportESM,
     env: mode,
     onWarn: (msg: string): void => {

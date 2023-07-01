@@ -1,5 +1,5 @@
 import { bundleVite, bundleAndRun } from '../utils'
-import { createMessageContext } from '@intlify/core-base'
+import { createMessageContext, isMessageAST } from '@intlify/core-base'
 
 test('basic', async () => {
   const { module } = await bundleAndRun('basic.vue', bundleVite)
@@ -144,4 +144,15 @@ test('array', async () => {
   expect(i18n.locale).toEqual('')
   expect(i18n.resource.en.foo[0][0](createMessageContext())).toEqual('bar')
   expect(i18n.resource.en.foo[1](createMessageContext())).toEqual('baz')
+})
+
+test('jitCompilation', async () => {
+  const { module } = await bundleAndRun('basic.vue', bundleVite, {
+    jitCompilation: true,
+    env: 'production'
+  })
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.locale).toEqual('')
+  expect(isMessageAST(i18n.resource.en.hello)).toBe(true)
 })

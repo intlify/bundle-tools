@@ -107,6 +107,31 @@ exports[`import 1`] = `
 ]
 `;
 
+exports[`jitCompilation 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {
+      "en": {
+        "hello": {
+          "body": {
+            "items": [
+              {
+                "type": 3,
+                "value": "hello world!",
+              },
+            ],
+            "static": "hello world!",
+            "type": 2,
+          },
+          "type": 0,
+        },
+      },
+    },
+  },
+]
+`;
+
 exports[`json5 1`] = `
 [
   {

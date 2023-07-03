@@ -376,8 +376,6 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 
   If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.
 
-  **If you want to dynamically handle with locale mesages, such as fetch from back-end DB, set this option to `false`**.
-
   For more details, See [here](#-automatic-bundling)
 
 ### `compositionOnly`

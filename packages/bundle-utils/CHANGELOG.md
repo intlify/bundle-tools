@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@7.0.1 (2023-07-02)
+
+#### :star: Features
+* [#277](https://github.com/intlify/bundle-tools/pull/277) feat(unplugin-vue-i18n): support jit compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@7.0.0 (2023-06-29)
 
 #### :star: Features

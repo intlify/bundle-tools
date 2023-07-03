@@ -15,9 +15,9 @@ import {
   getStaticYAMLValue
 } from 'yaml-eslint-parser'
 import { generateLegacyCode } from './legacy'
-import { RawSourceMap } from 'source-map'
 import MagicString from 'magic-string'
 
+import type { RawSourceMap } from 'source-map'
 import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
 import type {
   CodeGenOptions,

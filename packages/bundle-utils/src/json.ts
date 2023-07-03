@@ -15,9 +15,9 @@ import {
   mapLinesColumns
 } from './codegen'
 import { generateLegacyCode } from './legacy'
-import { RawSourceMap } from 'source-map'
 import MagicString from 'magic-string'
 
+import type { RawSourceMap } from 'source-map-js'
 import type { JSONProgram, JSONNode } from 'jsonc-eslint-parser/lib/parser/ast'
 import type {
   CodeGenOptions,

@@ -12,8 +12,8 @@ import {
   generateResourceAst,
   mapLinesColumns
 } from './codegen'
-import { RawSourceMap } from 'source-map'
 
+import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
 import type {
   CodeGenOptions,

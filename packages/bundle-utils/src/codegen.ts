@@ -1,10 +1,5 @@
 import module from 'node:module'
-import {
-  SourceMapGenerator,
-  SourceMapConsumer,
-  MappedPosition,
-  MappingItem
-} from 'source-map'
+import { SourceMapGenerator, SourceMapConsumer } from 'source-map-js'
 import {
   format,
   escapeHtml as sanitizeHtml,
@@ -12,7 +7,7 @@ import {
   friendlyJSONstringify
 } from '@intlify/shared'
 
-import type { RawSourceMap } from 'source-map'
+import type { RawSourceMap, MappedPosition, MappingItem } from 'source-map-js'
 import type {
   CompileError,
   ResourceNode,

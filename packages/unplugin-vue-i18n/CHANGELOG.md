@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.12.1 (2023-07-07)
+
+#### :bug: Bug Fixes
+* [#279](https://github.com/intlify/bundle-tools/pull/279) fix(unplugin-vue-i18n): sourcemap warning ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.12.0 (2023-07-01)
 
 #### :star: Features

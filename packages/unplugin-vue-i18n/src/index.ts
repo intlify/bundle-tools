@@ -336,7 +336,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
               return {
                 code: generatedCode,
-                map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+                // prettier-ignore
+                map: (jitCompilation
+                  ? { mappings: '' }
+                  : sourceMap
+                    ? map
+                    : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
               }
             } else {
               return result
@@ -547,7 +552,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
           return {
             code: generatedCode,
-            map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+            // prettier-ignore
+            map: (jitCompilation
+              ? { mappings: '' }
+              : sourceMap
+                ? map
+                : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
           }
         } else {
           // TODO: support virtual import identifier
@@ -611,7 +621,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
           return {
             code: generatedCode,
-            map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+            // prettier-ignore
+            map: (jitCompilation
+              ? { mappings: '' }
+              : sourceMap
+                ? map
+                : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
           }
         }
       }

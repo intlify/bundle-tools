@@ -1,4 +1,6 @@
 
+
+
 ## @intlify/unplugin-vue-i18n@0.12.1 (2023-07-07)
 
 #### :bug: Bug Fixes

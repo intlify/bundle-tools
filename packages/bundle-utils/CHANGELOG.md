@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@7.0.2 (2023-07-08)
+
+#### :bug: Bug Fixes
+* [#280](https://github.com/intlify/bundle-tools/pull/280) fix(unplugin-vue-i18n): support esm fully ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@7.0.1 (2023-07-02)
 
 #### :star: Features

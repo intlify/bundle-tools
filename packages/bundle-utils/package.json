@@ -18,8 +18,8 @@
     }
   },
   "dependencies": {
-    "@intlify/message-compiler": "9.3.0-beta.20",
-    "@intlify/shared": "9.3.0-beta.20",
+    "@intlify/message-compiler": "9.3.0-beta.22",
+    "@intlify/shared": "9.3.0-beta.22",
     "acorn": "^8.8.2",
     "escodegen": "^2.0.0",
     "estree-walker": "^2.0.2",
@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.7",
     "@types/estree": "^1.0.0",
-    "unbuild": "^1.1.2"
+    "unbuild": "^1.2.1"
   },
   "engines": {
     "node": ">= 14.16"

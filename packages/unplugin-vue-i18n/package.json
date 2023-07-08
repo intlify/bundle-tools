@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@intlify/bundle-utils": "^7.0.0",
-    "@intlify/shared": "9.3.0-beta.20",
+    "@intlify/shared": "9.3.0-beta.22",
     "@rollup/pluginutils": "^5.0.2",
     "@vue/compiler-sfc": "^3.2.47",
     "debug": "^4.3.3",
@@ -40,7 +40,7 @@
     "unplugin": "^1.1.0"
   },
   "devDependencies": {
-    "unbuild": "^1.1.2"
+    "unbuild": "^1.2.1"
   },
   "engines": {
     "node": ">= 14.16"

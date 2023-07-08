@@ -118,7 +118,6 @@ exports[`jitCompilation 1`] = `
             "items": [
               {
                 "type": 3,
-                "value": "hello world!",
               },
             ],
             "static": "hello world!",

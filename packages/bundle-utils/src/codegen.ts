@@ -1,4 +1,3 @@
-import module from 'node:module'
 import { SourceMapGenerator, SourceMapConsumer } from 'source-map-js'
 import {
   format,
@@ -6,6 +5,11 @@ import {
   isBoolean,
   friendlyJSONstringify
 } from '@intlify/shared'
+import {
+  baseCompile,
+  detectHtmlTag,
+  LOCATION_STUB
+} from '@intlify/message-compiler'
 
 import type { RawSourceMap, MappedPosition, MappingItem } from 'source-map-js'
 import type {
@@ -13,14 +17,6 @@ import type {
   ResourceNode,
   CompileOptions
 } from '@intlify/message-compiler'
-
-// NOTE: use sourcemap (currently, `@intlify/message-compiler` support cjs pkg only)
-const require = module.createRequire(import.meta.url)
-const {
-  baseCompile,
-  detectHtmlTag,
-  LocationStub
-} = require('@intlify/message-compiler')
 
 /**
  * Compilation dev environments
@@ -150,7 +146,7 @@ export function createCodeGenerator(
   ): void {
     _context.code += code
     if (_context.map && node) {
-      if (node.loc && node.loc !== LocationStub) {
+      if (node.loc && node.loc !== LOCATION_STUB) {
         addMapping(node.loc.start, name)
       }
       advancePositionWithSource(_context as Position, code)

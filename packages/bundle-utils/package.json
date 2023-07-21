@@ -23,11 +23,11 @@
     "acorn": "^8.8.2",
     "escodegen": "^2.0.0",
     "estree-walker": "^2.0.2",
-    "jsonc-eslint-parser": "^1.0.1",
+    "jsonc-eslint-parser": "^2.3.0",
     "magic-string": "^0.30.0",
     "mlly": "^1.2.0",
     "source-map-js": "^1.0.1",
-    "yaml-eslint-parser": "^0.3.2"
+    "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
     "@types/escodegen": "^0.0.7",

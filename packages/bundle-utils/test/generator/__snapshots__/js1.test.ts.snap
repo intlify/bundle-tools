@@ -1,0 +1,21 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`import > code 1`] = `
+"const resource = {
+  \\"foo\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"foo\\"])};fn.source=\\"foo\\";return fn;})(),
+  \\"nest\\": {
+    \\"bar\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})(),
+    
+  }
+}
+export default resource"
+`;
+
+exports[`import > map 1`] = `
+{
+  "mappings": "",
+  "names": [],
+  "sources": [],
+  "version": 3,
+}
+`;

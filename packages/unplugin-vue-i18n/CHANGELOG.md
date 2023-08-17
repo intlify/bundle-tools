@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@0.12.3 (2023-08-17)
+
+#### :zap: Improvement Features
+* [#272](https://github.com/intlify/bundle-tools/pull/272) Set `messages` type to the vue-i18n type instead of any ([@ferferga](https://github.com/ferferga))
+
+#### Committers: 1
+- Fernando Fernández ([@ferferga](https://github.com/ferferga))
+
+
 
 
 ## @intlify/unplugin-vue-i18n@0.12.1 (2023-07-07)

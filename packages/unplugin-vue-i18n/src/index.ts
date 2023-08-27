@@ -570,7 +570,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             langInfo = (
               query.src
                 ? query.lang === 'i18n'
-                  ? 'json'
+                  ? defaultSFCLang
                   : query.lang
                 : query.lang
             ) as Required<PluginOptions>['defaultSFCLang']

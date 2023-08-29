@@ -60,6 +60,7 @@ export interface CodeGenOptions {
   strictMessage?: boolean
   escapeHtml?: boolean
   jit?: boolean
+  minify?: boolean
   onWarn?: (msg: string) => void
   onError?: (
     msg: string,
@@ -418,7 +419,10 @@ export function generateResourceAst(
   const _msg = detecteHtmlInMsg && escapeHtml ? sanitizeHtml(msg) : msg
 
   const newOptions = Object.assign(
-    { location: env === 'development' },
+    {
+      location: env === 'development',
+      minify: isBoolean(options.minify) ? options.minify : env === 'production'
+    },
     options
   ) as CompileOptions
 

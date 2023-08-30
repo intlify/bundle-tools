@@ -114,16 +114,16 @@ exports[`jitCompilation 1`] = `
     "resource": {
       "en": {
         "hello": {
-          "body": {
-            "items": [
+          "b": {
+            "i": [
               {
-                "type": 3,
+                "t": 3,
               },
             ],
-            "static": "hello world!",
-            "type": 2,
+            "s": "hello world!",
+            "t": 2,
           },
-          "type": 0,
+          "t": 0,
         },
       },
     },

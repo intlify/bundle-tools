@@ -6,7 +6,11 @@ describe('generateResourceAst', () => {
   })
   test('production', () => {
     expect(
-      generateResourceAst('hello', { env: 'production' })
+      generateResourceAst('hello', {
+        env: 'production',
+        jit: true,
+        minify: true
+      })
     ).toMatchSnapshot()
   })
   test('syntax error', () => {

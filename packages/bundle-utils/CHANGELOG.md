@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@7.1.0 (2023-08-30)
+
+#### :star: Features
+* [#287](https://github.com/intlify/bundle-tools/pull/287) feat(bundle-utils): support AST minify option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@7.0.2 (2023-07-08)
 
 #### :bug: Bug Fixes

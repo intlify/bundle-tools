@@ -1,4 +1,26 @@
 
+## @intlify/unplugin-vue-i18n@0.13.0 (2023-08-30)
+
+#### :star: Features
+* [#288](https://github.com/intlify/bundle-tools/pull/288) feat(unplugin-vue-i18n): support `dropMessageCompiler` option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@0.13.0 (2023-08-30)
+
+#### :star: Features
+* [#287](https://github.com/intlify/bundle-tools/pull/287) feat(bundle-utils): support AST minify option ([@kazupon](https://github.com/kazupon))
+
+#### :bug: Bug Fixes
+* [#286](https://github.com/intlify/bundle-tools/pull/286) fix: Use `defaultSFCLang` setting for src files instead of falling back to json ([@Lutymane](https://github.com/Lutymane))
+
+#### Committers: 2
+- [@Lutymane](https://github.com/Lutymane)
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@0.12.3 (2023-08-17)
 
 #### :zap: Improvement Features

@@ -85,6 +85,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   const jitCompilation = !!options.jitCompilation
   debug('jitCompilation', jitCompilation)
+  const dropMessageCompiler = jitCompilation
+    ? !!options.dropMessageCompiler
+    : false
+  debug('dropMessageCompiler', dropMessageCompiler)
 
   // prettier-ignore
   const compositionOnly = installedPkg === 'vue-i18n'
@@ -231,6 +235,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         config.define['__INTLIFY_JIT_COMPILATION__'] = jitCompilation
         debug(
           `set __INTLIFY_JIT_COMPILATION__ is '${config.define['__INTLIFY_JIT_COMPILATION__']}'`
+        )
+        config.define['__INTLIFY_DROP_MESSAGE_COMPILER__'] = dropMessageCompiler
+        debug(
+          `set __INTLIFY_DROP_MESSAGE_COMPILER__ is '${config.define['__INTLIFY_DROP_MESSAGE_COMPILER__']}'`
         )
 
         config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false

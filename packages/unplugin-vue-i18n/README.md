@@ -362,6 +362,21 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 
   About JIT compilation, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#jit-compilation)
 
+### `dropMessageCompiler`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+Whether to tree-shake message compiler when we will be bundling.
+
+If do you will use this option, you need to enable `jitCompilation` option.
+
+> ⚠️ NOTE: 
+This option works with vue-i18n v9.3 and later.
+
+> ⚠️ NOTE: 
+If you enable this option, **you should check  resources in your application are pre-compiled with this plugin.** If you will be loading resources dynamically from the back-end via the API, enabling this option do not work because there is not message compiler.
+
 ### `runtimeOnly`
 
 - **Type:** `boolean`

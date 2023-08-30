@@ -1129,7 +1129,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@^7.0.2, @intlify/bundle-utils@workspace:packages/bundle-utils":
+"@intlify/bundle-utils@^7.1.0, @intlify/bundle-utils@workspace:packages/bundle-utils":
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
@@ -1258,13 +1258,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/shared@npm:9.3.0-beta.24":
-  version: 9.3.0-beta.24
-  resolution: "@intlify/shared@npm:9.3.0-beta.24"
-  checksum: be23a68c5d5674defef43f98eb264f5878431ac38fae81f71be059b178adf4095de7b9f0d4935e001033a7450bacebc0aacf27f5904eadd8ff71ec4ff6a7ad1e
-  languageName: node
-  linkType: hard
-
 "@intlify/shared@npm:9.3.0-beta.27":
   version: 9.3.0-beta.27
   resolution: "@intlify/shared@npm:9.3.0-beta.27"
@@ -1279,12 +1272,19 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intlify/shared@npm:^9.3.0-beta.27":
+  version: 9.3.0-beta.14-77e850b
+  resolution: "@intlify/shared@npm:9.3.0-beta.14-77e850b"
+  checksum: 5de09845fb003603956116e77e67398bccc890ac136d1c4fcc95178ce458058784abf7fc9da15de902a7383edafddc20479d0be3b3d410c084b03f9082b3d771
+  languageName: node
+  linkType: hard
+
 "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n":
   version: 0.0.0-use.local
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
-    "@intlify/bundle-utils": ^7.0.2
-    "@intlify/shared": 9.3.0-beta.24
+    "@intlify/bundle-utils": ^7.1.0
+    "@intlify/shared": ^9.3.0-beta.27
     "@rollup/pluginutils": ^5.0.2
     "@vue/compiler-sfc": ^3.2.47
     debug: ^4.3.3

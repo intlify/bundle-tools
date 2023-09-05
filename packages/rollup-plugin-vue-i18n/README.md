@@ -6,10 +6,12 @@
 
 Rollup plugin for Vue I18n
 
+## ⚠⚠️⚠️⚠️⚠️️ IMPORTANT NOTICE ⚠⚠️⚠️⚠️⚠️
+THIS PACKAGE IS DEPRECATED (MOVE TO [`@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n))
 
 ## ⚠️ Notice
 
-This package of `@intlify/bundle-tools` is for Vue I18n v9 or later!
+This package of `@intlify/rollup-plugin-vue-i18n` is for Vue I18n v9 or later!
 
 The version for Vue I18n v8.x is now in [`@intlify/rollup-plugin-vue-i18n`](https://github.com/intlify/rollup-plugin-vue-i18n/tree/master) repo!
 

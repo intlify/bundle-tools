@@ -7,7 +7,7 @@
 
 Vite plugin for Vue I18n
 
-## ⚠⚠️⚠️⚠️⚠️️ IMPORTANT NOTICE ⚠⚠️⚠️⚠️⚠️
+## ⚠️⚠️⚠️⚠️️ IMPORTANT NOTICE ⚠️⚠️⚠️⚠️
 THIS PACKAGE IS DEPRECATED (MOVE TO [`@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n))
 
 ## ⚠️ DEPRECATED

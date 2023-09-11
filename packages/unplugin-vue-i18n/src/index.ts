@@ -275,6 +275,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             }
 
             debug('org json plugin')
+            // @ts-expect-error
             return orgTransform!.apply(this, [code, id])
           }
         }
@@ -292,6 +293,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
           // @ts-ignore
           esbuildPlugin.transform = async function (code: string, id: string) {
+            // @ts-expect-error
             const result = (await orgTransform!.apply(this, [
               code,
               id

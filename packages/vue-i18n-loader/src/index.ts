@@ -1,5 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import path from 'path'
-import webpack from 'webpack'
 import loaderUtils from 'loader-utils'
 import { parse, ParsedUrlQuery } from 'querystring'
 import { RawSourceMap } from 'source-map'
@@ -9,13 +10,15 @@ import { createBridgeCodeGenerator } from './legacy'
 
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type { VueI18nLoaderOptions } from './options'
+import type { LoaderDefinitionFunction } from 'webpack'
 
-const loader: webpack.loader.Loader = function (
+// @ts-ignore
+const loader: LoaderDefinitionFunction = function (
   source: string | Buffer,
   sourceMap: RawSourceMap | undefined
 ): void {
   const loaderContext = this // eslint-disable-line @typescript-eslint/no-this-alias
-  const loaderOptions = loaderUtils.getOptions(loaderContext) || {}
+  const loaderOptions = loaderUtils.getOptions(loaderContext as any) || {}
   const { bridge } = loaderOptions as VueI18nLoaderOptions
 
   const query = parse(loaderContext.resourceQuery)
@@ -46,14 +49,15 @@ const loader: webpack.loader.Loader = function (
       bridge ? createBridgeCodeGenerator(source, query) : undefined
     )
     // console.log('code', code)
-    this.callback(null, code, map)
-  } catch (err) {
+    this.callback(null, code, map as any)
+  } catch (err: any) {
+    // @ts-ignore
     this.emitError(`[vue-i18n-loader]: ${(err as Error).message}`)
   }
 }
 
 function getOptions(
-  loaderContext: webpack.loader.LoaderContext,
+  loaderContext: any, // webpack.loader.LoaderContext,
   query: ParsedUrlQuery,
   inSourceMap?: RawSourceMap
 ): Record<string, unknown> {
@@ -97,3 +101,5 @@ function getOptions(
 }
 
 export default loader
+
+/* eslint-enable @typescript-eslint/no-explicit-any */

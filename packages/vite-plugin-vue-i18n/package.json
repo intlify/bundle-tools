@@ -27,7 +27,7 @@
   },
   "dependencies": {
     "@intlify/bundle-utils": "^3.1.2",
-    "@intlify/shared": "next",
+    "@intlify/shared": "^9.4.0",
     "@rollup/pluginutils": "^4.2.0",
     "debug": "^4.3.1",
     "fast-glob": "^3.2.5",

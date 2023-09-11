@@ -30,7 +30,10 @@ if (webpack.version && webpack.version[0] > '4') {
   Plugin = require('./pluginWebpack5').default // eslint-disable-line @typescript-eslint/no-var-requires
 } else {
   // webpack4 and lower
-  Plugin = require('./pluginWebpack4').default // eslint-disable-line @typescript-eslint/no-var-requires
+  throw new Error(
+    '[@intlify/vue-i18n-loader] webpack4 and lower is not supported!'
+  )
+  // Plugin = require('./pluginWebpack4').default // eslint-disable-line @typescript-eslint/no-var-requires
 }
 
 export default Plugin

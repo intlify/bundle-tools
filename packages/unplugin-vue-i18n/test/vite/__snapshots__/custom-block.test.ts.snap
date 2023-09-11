@@ -114,16 +114,59 @@ exports[`jitCompilation 1`] = `
     "resource": {
       "en": {
         "hello": {
-          "b": {
-            "i": [
+          "body": {
+            "end": 12,
+            "items": [
               {
-                "t": 3,
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
               },
             ],
-            "s": "hello world!",
-            "t": 2,
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
           },
-          "t": 0,
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
         },
       },
     },

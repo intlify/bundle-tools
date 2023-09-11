@@ -26,8 +26,8 @@
     }
   },
   "dependencies": {
-    "@intlify/bundle-utils": "^7.2.0",
-    "@intlify/shared": "^9.3.0",
+    "@intlify/bundle-utils": "^7.3.0",
+    "@intlify/shared": "^9.4.0",
     "@rollup/pluginutils": "^5.0.2",
     "@vue/compiler-sfc": "^3.2.47",
     "debug": "^4.3.3",
@@ -40,7 +40,7 @@
     "unplugin": "^1.1.0"
   },
   "devDependencies": {
-    "unbuild": "^1.2.1"
+    "unbuild": "^2.0.0"
   },
   "engines": {
     "node": ">= 14.16"
@@ -96,7 +96,7 @@
   },
   "scripts": {
     "dev:vite": "vite examples/vite --config ./examples/vite/vite.config.ts",
-    "dev:webpack": "yarn build && webpack-dev-server --config ./examples/webpack/webpack.config.js --inline --hot",
+    "dev:webpack": "yarn build && webpack serve --config ./examples/webpack/webpack.config.js",
     "build": "unbuild",
     "build:example": "npm-run-all \"build:example:*\"",
     "build:example:vite": "vite build --config ./examples/vite/vite.config.ts --outDir ./examples/vite/dist",

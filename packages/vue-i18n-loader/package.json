@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@intlify/bundle-utils": "3.4.0",
-    "@intlify/shared": "^9.2.2",
+    "@intlify/shared": "^9.4.0",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.0",
     "loader-utils": "^2.0.0"

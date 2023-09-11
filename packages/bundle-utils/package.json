@@ -32,7 +32,7 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.7",
     "@types/estree": "^1.0.0",
-    "unbuild": "^1.2.1"
+    "unbuild": "^2.0.0"
   },
   "engines": {
     "node": ">= 14.16"

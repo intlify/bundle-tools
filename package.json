@@ -23,7 +23,7 @@
     }
   },
   "devDependencies": {
-    "@intlify/core-base": "^9.3.0",
+    "@intlify/core-base": "^9.4.0",
     "@kazupon/lerna-changelog": "^4.3.0",
     "@octokit/rest": "^18.6.0",
     "@rollup/plugin-alias": "^3.1.5",

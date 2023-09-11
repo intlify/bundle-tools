@@ -1129,7 +1129,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/bundle-utils@^7.2.0, @intlify/bundle-utils@workspace:packages/bundle-utils":
+"@intlify/bundle-utils@^7.3.0, @intlify/bundle-utils@workspace:packages/bundle-utils":
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
@@ -1285,7 +1285,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/shared@npm:9.4.0, @intlify/shared@npm:^9.3.0, @intlify/shared@npm:^9.4.0":
+"@intlify/shared@npm:9.4.0, @intlify/shared@npm:^9.4.0":
   version: 9.4.0
   resolution: "@intlify/shared@npm:9.4.0"
   checksum: 617c0f02bbad0b5c65ed134a587d0931308bcd71ba05d598fd5513b56d0a2cc6c82724d754f1648f8869136125e30d5c227e9fcc3aa7310366666c3cab7cef2c
@@ -1303,8 +1303,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
-    "@intlify/bundle-utils": ^7.2.0
-    "@intlify/shared": ^9.3.0
+    "@intlify/bundle-utils": ^7.3.0
+    "@intlify/shared": ^9.4.0
     "@rollup/pluginutils": ^5.0.2
     "@vue/compiler-sfc": ^3.2.47
     debug: ^4.3.3

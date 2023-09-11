@@ -26,8 +26,8 @@
     }
   },
   "dependencies": {
-    "@intlify/bundle-utils": "^7.2.0",
-    "@intlify/shared": "^9.3.0",
+    "@intlify/bundle-utils": "^7.3.0",
+    "@intlify/shared": "^9.4.0",
     "@rollup/pluginutils": "^5.0.2",
     "@vue/compiler-sfc": "^3.2.47",
     "debug": "^4.3.3",

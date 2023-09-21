@@ -47,6 +47,7 @@ export interface CodeGenOptions {
   legacy?: boolean
   bridge?: boolean
   exportESM?: boolean
+  onlyLocales?: string[]
   source?: string
   sourceMap?: boolean
   filename?: string

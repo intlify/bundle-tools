@@ -35,6 +35,7 @@ export function generate(
     type = 'plain',
     legacy = false,
     bridge = false,
+    onlyLocales = [],
     exportESM = false,
     useClassComponent = false,
     filename = 'vue-i18n-loader.yaml',
@@ -51,7 +52,7 @@ export function generate(
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<YAMLProgram> {
-  const value = Buffer.isBuffer(targetSource)
+  let value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
     : targetSource
 
@@ -75,7 +76,20 @@ export function generate(
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
-  const ast = parseYAML(value, { filePath: filename })
+  let ast = parseYAML(value, { filePath: filename })
+
+  if (!locale && type === 'sfc' && onlyLocales?.length) {
+    const messages = getStaticYAMLValue(ast) as any
+
+    Object.keys(messages).forEach(locale => {
+      if (!onlyLocales.includes(locale)) {
+        delete messages[locale]
+      }
+    })
+
+    value = JSON.stringify(messages)
+    ast = parseYAML(value, { filePath: filename })
+  }
 
   // for vue 2.x
   if (legacy && type === 'sfc') {

@@ -32,6 +32,7 @@ export function generate(
     type = 'plain',
     legacy = false,
     bridge = false,
+    onlyLocales = [],
     exportESM = false,
     filename = 'vue-i18n-loader.json',
     inSourceMap = undefined,
@@ -48,13 +49,12 @@ export function generate(
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<JSONProgram> {
-  const target = Buffer.isBuffer(targetSource)
+  let value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
     : targetSource
   // const value = JSON.stringify(JSON.parse(target))
   //   .replace(/\u2028/g, '\\u2028') // line separator
   //   .replace(/\u2029/g, '\\u2029') // paragraph separator
-  const value = target
 
   const options = {
     type,
@@ -76,7 +76,20 @@ export function generate(
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
-  const ast = parseJSON(value, { filePath: filename })
+  let ast = parseJSON(value, { filePath: filename })
+
+  if (!locale && type === 'sfc' && onlyLocales?.length) {
+    const messages = getStaticJSONValue(ast) as any
+
+    Object.keys(messages).forEach(locale => {
+      if (!onlyLocales.includes(locale)) {
+        delete messages[locale]
+      }
+    })
+
+    value = JSON.stringify(messages)
+    ast = parseJSON(value, { filePath: filename })
+  }
 
   // for vue 2.x
   if (legacy && type === 'sfc') {
@@ -104,9 +117,10 @@ export function generate(
   //   })
   // }
   // prettier-ignore
-  const newMap = map && !jit
-    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null // eslint-disable-line @typescript-eslint/no-explicit-any
-    : null
+  const newMap =
+    map && !jit
+      ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null // eslint-disable-line @typescript-eslint/no-explicit-any
+      : null
   return {
     ast,
     code,

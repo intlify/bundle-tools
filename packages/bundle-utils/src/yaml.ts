@@ -5,6 +5,7 @@
 import { isString, friendlyJSONstringify } from '@intlify/shared'
 import {
   createCodeGenerator,
+  excludeLocales,
   generateMessageFunction,
   generateResourceAst,
   mapLinesColumns
@@ -79,15 +80,14 @@ export function generate(
   let ast = parseYAML(value, { filePath: filename })
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {
-    const messages = getStaticYAMLValue(ast) as any
+    const messages = getStaticYAMLValue(ast) as Record<string, unknown>
 
-    Object.keys(messages).forEach(locale => {
-      if (!onlyLocales.includes(locale)) {
-        delete messages[locale]
-      }
-    })
-
-    value = JSON.stringify(messages)
+    value = JSON.stringify(
+      excludeLocales({
+        messages,
+        onlyLocales
+      })
+    )
     ast = parseYAML(value, { filePath: filename })
   }
 

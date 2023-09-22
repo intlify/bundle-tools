@@ -449,3 +449,21 @@ export function generateResourceAst(
   const code = !occured ? `${friendlyJSONstringify(ast)}` : `\`${_msg}\``
   return { code, ast, map, errors }
 }
+
+export function excludeLocales({
+  messages,
+  onlyLocales
+}: {
+  messages: Record<string, unknown>
+  onlyLocales: string[]
+}) {
+  const _messages = { ...messages }
+
+  Object.keys(_messages).forEach(locale => {
+    if (!onlyLocales.includes(locale)) {
+      delete _messages[locale]
+    }
+  })
+
+  return _messages
+}

@@ -12,7 +12,8 @@ import {
   createCodeGenerator,
   generateMessageFunction,
   generateResourceAst,
-  mapLinesColumns
+  mapLinesColumns,
+  excludeLocales
 } from './codegen'
 import { generateLegacyCode } from './legacy'
 import MagicString from 'magic-string'
@@ -79,15 +80,14 @@ export function generate(
   let ast = parseJSON(value, { filePath: filename })
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {
-    const messages = getStaticJSONValue(ast) as any
+    const messages = getStaticJSONValue(ast) as Record<string, unknown>
 
-    Object.keys(messages).forEach(locale => {
-      if (!onlyLocales.includes(locale)) {
-        delete messages[locale]
-      }
-    })
-
-    value = JSON.stringify(messages)
+    value = JSON.stringify(
+      excludeLocales({
+        messages,
+        onlyLocales
+      })
+    )
     ast = parseJSON(value, { filePath: filename })
   }
 

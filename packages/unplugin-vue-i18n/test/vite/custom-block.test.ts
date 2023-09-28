@@ -9,6 +9,33 @@ test('basic', async () => {
   expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
 })
 
+test('json: exclude locales', async () => {
+  const { module } = await bundleAndRun('basic.vue', bundleVite, {
+    onlyLocales: ['ja']
+  })
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.resource.en).toBeUndefined()
+})
+
+test('yaml: exclude locales', async () => {
+  const { module } = await bundleAndRun('yaml.vue', bundleVite, {
+    onlyLocales: ['ja']
+  })
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.resource.en).toBeUndefined()
+})
+
+test('json5: exclude locales', async () => {
+  const { module } = await bundleAndRun('json5.vue', bundleVite, {
+    onlyLocales: ['ja']
+  })
+  expect(module.__i18n).toMatchSnapshot()
+  const i18n = module.__i18n.pop()
+  expect(i18n.resource.en).toBeUndefined()
+})
+
 test('yaml', async () => {
   const { module } = await bundleAndRun('yaml.vue', bundleVite)
   expect(module.__i18n).toMatchSnapshot()

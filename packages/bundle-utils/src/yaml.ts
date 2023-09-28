@@ -5,6 +5,7 @@
 import { isString, friendlyJSONstringify } from '@intlify/shared'
 import {
   createCodeGenerator,
+  excludeLocales,
   generateMessageFunction,
   generateResourceAst,
   mapLinesColumns
@@ -35,6 +36,7 @@ export function generate(
     type = 'plain',
     legacy = false,
     bridge = false,
+    onlyLocales = [],
     exportESM = false,
     useClassComponent = false,
     filename = 'vue-i18n-loader.yaml',
@@ -51,7 +53,7 @@ export function generate(
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<YAMLProgram> {
-  const value = Buffer.isBuffer(targetSource)
+  let value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
     : targetSource
 
@@ -75,7 +77,19 @@ export function generate(
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
-  const ast = parseYAML(value, { filePath: filename })
+  let ast = parseYAML(value, { filePath: filename })
+
+  if (!locale && type === 'sfc' && onlyLocales?.length) {
+    const messages = getStaticYAMLValue(ast) as Record<string, unknown>
+
+    value = JSON.stringify(
+      excludeLocales({
+        messages,
+        onlyLocales
+      })
+    )
+    ast = parseYAML(value, { filePath: filename })
+  }
 
   // for vue 2.x
   if (legacy && type === 'sfc') {

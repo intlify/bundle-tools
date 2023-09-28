@@ -47,6 +47,7 @@ export interface CodeGenOptions {
   legacy?: boolean
   bridge?: boolean
   exportESM?: boolean
+  onlyLocales?: string[]
   source?: string
   sourceMap?: boolean
   filename?: string
@@ -447,4 +448,22 @@ export function generateResourceAst(
   const occured = errors.length > 0
   const code = !occured ? `${friendlyJSONstringify(ast)}` : `\`${_msg}\``
   return { code, ast, map, errors }
+}
+
+export function excludeLocales({
+  messages,
+  onlyLocales
+}: {
+  messages: Record<string, unknown>
+  onlyLocales: string[]
+}) {
+  const _messages = { ...messages }
+
+  Object.keys(_messages).forEach(locale => {
+    if (!onlyLocales.includes(locale)) {
+      delete _messages[locale]
+    }
+  })
+
+  return _messages
 }

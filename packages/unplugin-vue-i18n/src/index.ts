@@ -54,6 +54,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     raiseError(`This plugin is supported 'vite' and 'webpack' only`)
   }
 
+  // normalize for `options.onlyLocales`
+  let onlyLocales: string[] = []
+  if (options.onlyLocales) {
+    onlyLocales = Array.isArray(options.onlyLocales)
+      ? options.onlyLocales
+      : [options.onlyLocales]
+  }
+
   // normalize for `options.include`
   let include = options.include
   let exclude = null
@@ -328,6 +336,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   escapeHtml,
                   bridge,
                   jit: jitCompilation,
+                  onlyLocales,
                   exportESM: esm,
                   forceStringify
                 }
@@ -544,6 +553,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               escapeHtml,
               bridge,
               jit: jitCompilation,
+              onlyLocales,
               exportESM: esm,
               forceStringify
             }
@@ -606,6 +616,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               jit: jitCompilation,
               strictMessage,
               escapeHtml,
+              onlyLocales,
               exportESM: esm,
               forceStringify
             }
@@ -699,6 +710,7 @@ async function generateBundleResources(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    onlyLocales = [],
     exportESM = true,
     strictMessage = true,
     escapeHtml = false,
@@ -708,6 +720,7 @@ async function generateBundleResources(
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    onlyLocales?: string[]
     exportESM?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
@@ -728,6 +741,7 @@ async function generateBundleResources(
         useClassComponent,
         bridge,
         jit,
+        onlyLocales,
         exportESM,
         strictMessage,
         escapeHtml,
@@ -806,6 +820,7 @@ function getOptions(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    onlyLocales = [],
     exportESM = true,
     useClassComponent = false,
     allowDynamic = false,
@@ -817,6 +832,7 @@ function getOptions(
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    onlyLocales?: string[]
     exportESM?: boolean
     useClassComponent?: boolean
     allowDynamic?: boolean
@@ -838,6 +854,7 @@ function getOptions(
     escapeHtml,
     bridge,
     jit,
+    onlyLocales,
     exportESM,
     env: mode,
     onWarn: (msg: string): void => {

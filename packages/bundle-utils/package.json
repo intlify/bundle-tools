@@ -30,7 +30,7 @@
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
-    "@types/escodegen": "^0.0.7",
+    "@types/escodegen": "^0.0.8",
     "@types/estree": "^1.0.0",
     "unbuild": "^2.0.0"
   },

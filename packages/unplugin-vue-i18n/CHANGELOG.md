@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@1.3.0 (2023-09-29)
+
+#### :star: Features
+* [#301](https://github.com/intlify/bundle-tools/pull/301) feat(unplugin-vue-i18n): exclude unused locales from the bundle ([@imslepov](https://github.com/imslepov))
+
+#### Committers: 1
+- Daniel Slepov ([@imslepov](https://github.com/imslepov))
+
+
 
 
 

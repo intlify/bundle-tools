@@ -549,6 +549,13 @@ If you enable this option, **you should check  resources in your application are
 
   This option that to use i18n custom blocks in `vue-class-component`.
 
+### `onlyLocales`
+
+- **Type:** `string | string[]`
+- **Default:** `[]`
+
+  By using it you can exclude from the bundle those localizations that are not specified in this option.
+
 ### `useVueI18nImportName` (Experimental)
 
 - **Type:** `boolean`

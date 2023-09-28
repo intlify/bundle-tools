@@ -1212,7 +1212,7 @@ __metadata:
     eslint-plugin-prettier: ^4.0.0
     eslint-plugin-vue: ^7.18.0
     eslint-plugin-vue-libs: ^4.0.0
-    esno: ^0.7.3
+    esno: ^0.17.0
     execa: ^5.1.1
     jest: ^27.2.3
     jest-puppeteer: ^6.0.0
@@ -5972,34 +5972,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild-node-loader@npm:^0.1.1":
-  version: 0.1.1
-  resolution: "esbuild-node-loader@npm:0.1.1"
-  dependencies:
-    esbuild: ^0.12.6
-  checksum: 40ada55e327ab2bec95c42b5302101f6cf111b53f8ed60ee014a3847968c5fdc1585eed6731694837a40e3ca2fe6f106b06d1ca97f4d78f723719d993a761cb8
-  languageName: node
-  linkType: hard
-
-"esbuild-register@npm:^2.6.0":
-  version: 2.6.0
-  resolution: "esbuild-register@npm:2.6.0"
-  dependencies:
-    esbuild: ^0.12.8
-    jsonc-parser: ^3.0.0
-  checksum: c4d0102adf40f7285898d05b2de717baebf059cb1ac50354bb31c4c583bdcdbad4502d941eb20b676fd83f526877daf7f0c66375a1f2cd69508e9b196d916ef6
-  languageName: node
-  linkType: hard
-
-"esbuild@npm:^0.12.6, esbuild@npm:^0.12.8":
-  version: 0.12.29
-  resolution: "esbuild@npm:0.12.29"
-  bin:
-    esbuild: bin/esbuild
-  checksum: 06a6e84eff02899b45c7d4441199f7bbc824a9f5a2d0332bfe9873963751213c71bcb03b8db96babbc45ef31c140580ff64317ee7600983fc88b84c2d9788bbf
-  languageName: node
-  linkType: hard
-
 "esbuild@npm:^0.17.5":
   version: 0.17.14
   resolution: "esbuild@npm:0.17.14"
@@ -6077,7 +6049,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.10, esbuild@npm:^0.18.14":
+"esbuild@npm:^0.18.10, esbuild@npm:^0.18.14, esbuild@npm:~0.18.20":
   version: 0.18.20
   resolution: "esbuild@npm:0.18.20"
   dependencies:
@@ -6475,18 +6447,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esno@npm:^0.7.3":
-  version: 0.7.3
-  resolution: "esno@npm:0.7.3"
+"esno@npm:^0.17.0":
+  version: 0.17.0
+  resolution: "esno@npm:0.17.0"
   dependencies:
-    cross-spawn: ^7.0.3
-    esbuild: ^0.12.8
-    esbuild-node-loader: ^0.1.1
-    esbuild-register: ^2.6.0
+    tsx: ^3.12.7
   bin:
-    esmo: esmo.mjs
     esno: esno.js
-  checksum: a974c2db94bd4a6fab510ed2134d02456f1b4ae5f850b1b150a674a40e1ab0b5c8f20524168dfa8a58659e9bd512996505c9b385854133a22b4939268cb4196a
+  checksum: f0d452a66b54fe64258c6354519321791496291e814563cf87f20ec9eef2d1390c435a2db9cf250a52aca74137350eed4a83268e4c12390d3fce2e8376d5e25f
   languageName: node
   linkType: hard
 
@@ -7156,9 +7124,28 @@ __metadata:
   languageName: node
   linkType: hard
 
+"fsevents@npm:~2.3.3":
+  version: 2.3.3
+  resolution: "fsevents@npm:2.3.3"
+  dependencies:
+    node-gyp: latest
+  checksum: 11e6ea6fea15e42461fc55b4b0e4a0a3c654faa567f1877dbd353f39156f69def97a69936d1746619d656c4b93de2238bf731f6085a03a50cabf287c9d024317
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
 "fsevents@patch:fsevents@^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
   resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
+  dependencies:
+    node-gyp: latest
+  conditions: os=darwin
+  languageName: node
+  linkType: hard
+
+"fsevents@patch:fsevents@~2.3.3#~builtin<compat/fsevents>":
+  version: 2.3.3
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.3#~builtin<compat/fsevents>::version=2.3.3&hash=18f3a7"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -7283,6 +7270,15 @@ __metadata:
     call-bind: ^1.0.2
     get-intrinsic: ^1.1.1
   checksum: 9ceff8fe968f9270a37a1f73bf3f1f7bda69ca80f4f80850670e0e7b9444ff99323f7ac52f96567f8b5f5fbe7ac717a0d81d3407c7313e82810c6199446a5247
+  languageName: node
+  linkType: hard
+
+"get-tsconfig@npm:^4.7.2":
+  version: 4.7.2
+  resolution: "get-tsconfig@npm:4.7.2"
+  dependencies:
+    resolve-pkg-maps: ^1.0.0
+  checksum: 172358903250eff0103943f816e8a4e51d29b8e5449058bdf7266714a908a48239f6884308bd3a6ff28b09f692b9533dbebfd183ab63e4e14f073cda91f1bca9
   languageName: node
   linkType: hard
 
@@ -9180,13 +9176,6 @@ __metadata:
     espree: ^9.0.0
     semver: ^7.3.5
   checksum: e9343fee870a16f04fdb811b58a9469134c54a03edd58aa5654a888ebae63952cbff3ea3dcad3973465009a275282c6c0dd513e8c3850f7f485a164180085a8b
-  languageName: node
-  linkType: hard
-
-"jsonc-parser@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "jsonc-parser@npm:3.0.0"
-  checksum: 1df2326f1f9688de30c70ff19c5b2a83ba3b89a1036160da79821d1361090775e9db502dc57a67c11b56e1186fc1ed70b887f25c5febf9a3ec4f91435836c99d
   languageName: node
   linkType: hard
 
@@ -11377,6 +11366,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"resolve-pkg-maps@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "resolve-pkg-maps@npm:1.0.0"
+  checksum: 1012afc566b3fdb190a6309cc37ef3b2dcc35dff5fa6683a9d00cd25c3247edfbc4691b91078c97adc82a29b77a2660c30d791d65dab4fc78bfc473f60289977
+  languageName: node
+  linkType: hard
+
 "resolve.exports@npm:^1.1.0":
   version: 1.1.0
   resolution: "resolve.exports@npm:1.1.0"
@@ -12138,7 +12134,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"source-map-support@npm:^0.5.6, source-map-support@npm:~0.5.20":
+"source-map-support@npm:^0.5.21, source-map-support@npm:^0.5.6, source-map-support@npm:~0.5.20":
   version: 0.5.21
   resolution: "source-map-support@npm:0.5.21"
   dependencies:
@@ -13020,6 +13016,23 @@ __metadata:
   peerDependencies:
     typescript: ">=2.8.0 || >= 3.2.0-dev || >= 3.3.0-dev || >= 3.4.0-dev || >= 3.5.0-dev || >= 3.6.0-dev || >= 3.6.0-beta || >= 3.7.0-dev || >= 3.7.0-beta"
   checksum: 1843f4c1b2e0f975e08c4c21caa4af4f7f65a12ac1b81b3b8489366826259323feb3fc7a243123453d2d1a02314205a7634e048d4a8009921da19f99755cdc48
+  languageName: node
+  linkType: hard
+
+"tsx@npm:^3.12.7":
+  version: 3.13.0
+  resolution: "tsx@npm:3.13.0"
+  dependencies:
+    esbuild: ~0.18.20
+    fsevents: ~2.3.3
+    get-tsconfig: ^4.7.2
+    source-map-support: ^0.5.21
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    tsx: dist/cli.mjs
+  checksum: ef858574e110d16a7ca9bbb3a5edeeafd37026ebed6cdd390c4707ad64005024c55fd3142a8f89732c79176196afa7d27073f586966ff0cae0126159ebd58be4
   languageName: node
   linkType: hard
 

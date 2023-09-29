@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@1.4.0 (2023-09-29)
+
+#### :star: Features
+* [#315](https://github.com/intlify/bundle-tools/pull/315) feat: `ssr` option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@1.3.0 (2023-09-29)
 
 #### :star: Features

@@ -7,6 +7,7 @@ export interface PluginOptions {
   dropMessageCompiler?: boolean
   runtimeOnly?: boolean
   compositionOnly?: boolean
+  ssr?: boolean
   fullInstall?: boolean
   esm?: boolean
   forceStringify?: boolean

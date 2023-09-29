@@ -114,6 +114,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     : false
   debug('fullInstall', fullInstall)
 
+  const ssrBuild = !!options.ssr
+  debug('ssr', ssrBuild)
+
   const useVueI18nImportName = options.useVueI18nImportName
   if (useVueI18nImportName != null) {
     warn(`'useVueI18nImportName' option is experimental`)
@@ -131,10 +134,16 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const getVueI18nBridgeAliasPath = () =>
     `vue-i18n-bridge/dist/vue-i18n-bridge.runtime.esm-bundler.js`
 
-  const getVueI18nAliasPath = (aliasName: string) =>
-    vueI18nVersion === '8'
+  const getVueI18nAliasPath = (
+    aliasName: string,
+    { ssr = false, runtimeOnly = false }
+  ) => {
+    return vueI18nVersion === '8'
       ? `${aliasName}/dist/${aliasName}.esm.js` // for vue-i18n@8
-      : `${aliasName}/dist/${installedPkg}.runtime.esm-bundler.js`
+      : `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
+          !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
+        }`
+  }
 
   const esm = isBoolean(options.esm) ? options.esm : true
   debug('esm', esm)
@@ -175,12 +184,15 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           meta.framework
         )
 
-        if (command === 'build' && runtimeOnly) {
+        if (command === 'build') {
           debug(`vue-i18n alias name: ${vueI18nAliasName}`)
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
               find: vueI18nAliasName,
-              replacement: getVueI18nAliasPath(vueI18nAliasName)
+              replacement: getVueI18nAliasPath(vueI18nAliasName, {
+                ssr: ssrBuild,
+                runtimeOnly
+              })
             })
             if (installedVueI18nBridge) {
               config.resolve!.alias.push({
@@ -191,7 +203,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[vueI18nAliasName] =
-              getVueI18nAliasPath(vueI18nAliasName)
+              getVueI18nAliasPath(vueI18nAliasName, {
+                ssr: ssrBuild,
+                runtimeOnly
+              })
             if (installedVueI18nBridge) {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ;(config.resolve!.alias as any)['vue-i18n-bridge'] =
@@ -200,7 +215,11 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           }
           debug(
             `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
-              vueI18nAliasName
+              vueI18nAliasName,
+              {
+                ssr: ssrBuild,
+                runtimeOnly
+              }
             )}`
           )
           if (installedVueI18nBridge) {
@@ -392,19 +411,23 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         meta.framework
       )
 
-      if (isProduction && runtimeOnly) {
+      if (isProduction) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-          getVueI18nAliasPath(vueI18nAliasName)
+          getVueI18nAliasPath(vueI18nAliasName, {
+            ssr: ssrBuild,
+            runtimeOnly
+          })
         if (installedVueI18nBridge) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(compiler.options.resolve!.alias as any)['vue-i18n-bridge'] =
             getVueI18nBridgeAliasPath()
         }
         debug(
-          `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
-            vueI18nAliasName
-          )}`
+          `set ${vueI18nAliasName}: ${getVueI18nAliasPath(vueI18nAliasName, {
+            ssr: ssrBuild,
+            runtimeOnly
+          })}`
         )
         if (installedVueI18nBridge) {
           debug(

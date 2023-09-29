@@ -1241,7 +1241,7 @@ __metadata:
     vue-i18n: 9.4.1
     vue-loader: ^16.3.0
     vue-loader15: "npm:vue-loader@15.10.2"
-    vue-loader17: "npm:vue-loader@17.0.0"
+    vue-loader17: "npm:vue-loader@17.2.2"
     vue-template-compiler: ^2.6.14
     vue3: "npm:vue@3.2.23"
     webpack: ^5.88.2
@@ -13613,16 +13613,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-loader17@npm:vue-loader@17.0.0":
-  version: 17.0.0
-  resolution: "vue-loader@npm:17.0.0"
+"vue-loader17@npm:vue-loader@17.2.2":
+  version: 17.2.2
+  resolution: "vue-loader@npm:17.2.2"
   dependencies:
     chalk: ^4.1.0
     hash-sum: ^2.0.0
-    loader-utils: ^2.0.0
+    watchpack: ^2.4.0
   peerDependencies:
     webpack: ^4.1.0 || ^5.0.0-0
-  checksum: a6eb675f07357a7d7181b78549e342c444b4e28896f84444506f940c14bdd7833276f50d645efcdc742ba987218745f965361921f99012fecf184e0aae67a4a0
+  peerDependenciesMeta:
+    "@vue/compiler-sfc":
+      optional: true
+    vue:
+      optional: true
+  checksum: 54ea380e63bf9bf3e0a6229023f26aa7be934dc3ef424c455906f3047a9fd890c1ac60a61e72a7db9a2274712e6958bdaad123b9235fec003681990e71610db7
   languageName: node
   linkType: hard
 

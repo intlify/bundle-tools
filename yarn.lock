@@ -1185,7 +1185,7 @@ __metadata:
     "@rollup/plugin-node-resolve": ^13.0.0
     "@rollup/plugin-replace": ^2.4.2
     "@rollup/pluginutils": ^4.1.0
-    "@secretlint/secretlint-rule-preset-recommend": ^3.1.0
+    "@secretlint/secretlint-rule-preset-recommend": ^7.0.0
     "@types/debug": ^4.1.5
     "@types/eslint": ^8.4.1
     "@types/eslint-visitor-keys": ^1.0.0
@@ -2175,100 +2175,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@secretlint/secretlint-rule-aws@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-aws@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-    regx: ^1.0.4
-  checksum: e0b3eb3c925670a2ae0803fb9c82665970e269908d101c74a8ffccc11fed6e0f5e88291d6bfe173a86fe15c70b5845db0b845c6bdefdec53871ccc2d682d1b8f
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-basicauth@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-basicauth@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-  checksum: 25fdd1289798b1dcae1b4395fc6d98036eeacf069e33523ab4bf6b794d2769f25c1b9a4c6b05ff4f1e6ef01dc39fbde4f0074cfe57f5a87e9547d8f17c38111d
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-gcp@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-gcp@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-    node-forge: ^0.10.0
-  checksum: 903ef35c574461e6e9c1ba56186a5b019865863d14b9129e7d44cb7ab3727a6aef7d207d5ebaa9bc8dc89f90fdfdbd343a3d4f1f67437be7958608db237ecc17
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-github@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-github@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-  checksum: 98c221be4b1601288090c5bafcb69e24d6f99863aa44dbcbf73f90a087e52de5878cf354936a232d385a1381a378d00afd416ff0c782ed6fd6d3ab47dac18994
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-npm@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-npm@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-  checksum: 69a53f249230b2abca2589bb7b121c5bc058049b2187133f341e65b829af6fafc8315e278a537b929cefaa04c4c183ed7af9669c463b19b8efb7949b46d3fa08
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-preset-recommend@npm:^3.1.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-preset-recommend@npm:3.3.0"
-  dependencies:
-    "@secretlint/secretlint-rule-aws": ^3.3.0
-    "@secretlint/secretlint-rule-basicauth": ^3.3.0
-    "@secretlint/secretlint-rule-gcp": ^3.3.0
-    "@secretlint/secretlint-rule-github": ^3.3.0
-    "@secretlint/secretlint-rule-npm": ^3.3.0
-    "@secretlint/secretlint-rule-privatekey": ^3.3.0
-    "@secretlint/secretlint-rule-sendgrid": ^3.3.0
-    "@secretlint/secretlint-rule-slack": ^3.3.0
-  checksum: 67249b2a146f71ca481de8315e9f0f723df3ec26e164cf2bf5cd534940b830e96db30c012b038e8c8c7e726de8465fe739de39ab6007dc4d8a2db93df07a40fe
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-privatekey@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-privatekey@npm:3.3.0"
-  dependencies:
-    "@textlint/regexp-string-matcher": ^1.1.0
-  checksum: dbf7954819ec6f6206198a8ca0fcd800ad10c6036b3563f581b0e2ff4a60168f2acca1ada1d8cf90889e6946060056fe92fe953e65d717a01123af7d4a8bd913
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-sendgrid@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-sendgrid@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-  checksum: f5089083e14d747924fc649e3bac2afcdc3323a46bc05999c7810e997f29dfbee15dbac29275086f9ec1cd8df2fc26c18b1958616a118f86ff3d0a8f6c6469b0
-  languageName: node
-  linkType: hard
-
-"@secretlint/secretlint-rule-slack@npm:^3.3.0":
-  version: 3.3.0
-  resolution: "@secretlint/secretlint-rule-slack@npm:3.3.0"
-  dependencies:
-    "@secretlint/types": ^3.3.0
-    "@textlint/regexp-string-matcher": ^1.1.0
-  checksum: 1d4a7b176a6f1ac26b4494768b6b4c98ffdef5ca0d197c1f6c0d8b656c2d11ce440a722c9a37fde6ff3e0c473f1b5dcc411a5ef6ca73db02781c9b8b9d307297
+"@secretlint/secretlint-rule-preset-recommend@npm:^7.0.0":
+  version: 7.0.7
+  resolution: "@secretlint/secretlint-rule-preset-recommend@npm:7.0.7"
+  checksum: 2b302ce1801d12697f44dafbd1abd27eced406d9ebad8fc7b0912de24b73d06d60f73d6e822aec6b09032f75cdf8ca99b42f181814c388b75a9f6ad90553bce6
   languageName: node
   linkType: hard
 
@@ -2368,20 +2278,6 @@ __metadata:
   version: 1.2.5
   resolution: "@textlint/module-interop@npm:1.2.5"
   checksum: 3de37bb90a336ce16738b8136cd3cb731ee93e5f1526a6d1630d2f3a631691ac0f6a3b0dfd2dbbeb660a40e3a99cb6824b4e5bf17321537b91d0fdf8dbe55884
-  languageName: node
-  linkType: hard
-
-"@textlint/regexp-string-matcher@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "@textlint/regexp-string-matcher@npm:1.1.0"
-  dependencies:
-    escape-string-regexp: ^1.0.5
-    execall: ^1.0.0
-    lodash.sortby: ^4.7.0
-    lodash.uniq: ^4.5.0
-    lodash.uniqwith: ^4.5.0
-    to-regex: ^3.0.2
-  checksum: a80c209695f5141fa930f12b57ecd1daae1e03e907e282c34ea5541fe1e0bb0f6734ad5bb9effd1bc8e66beb46216e59c6008145f452e377e1d2e8ee578ec1b4
   languageName: node
   linkType: hard
 
@@ -4293,13 +4189,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"assign-symbols@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "assign-symbols@npm:1.0.0"
-  checksum: c0eb895911d05b6b2d245154f70461c5e42c107457972e5ebba38d48967870dee53bcdf6c7047990586daa80fab8dab3cc6300800fbd47b454247fdedd859a2c
-  languageName: node
-  linkType: hard
-
 "astral-regex@npm:^2.0.0":
   version: 2.0.0
   resolution: "astral-regex@npm:2.0.0"
@@ -5064,16 +4953,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"clone-regexp@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "clone-regexp@npm:1.0.1"
-  dependencies:
-    is-regexp: ^1.0.0
-    is-supported-regexp-flag: ^1.0.0
-  checksum: 3b342e5d9d95dcfa9e53e6487d7d7e69d8f9beb27032e4866446333796c1d4a963bdb08586c21478be0bbaaee4b91ff4915d03f0709ac1b26487f707e1d71043
-  languageName: node
-  linkType: hard
-
 "co@npm:^4.6.0":
   version: 4.6.0
   resolution: "co@npm:4.6.0"
@@ -5600,16 +5479,6 @@ __metadata:
     has-property-descriptors: ^1.0.0
     object-keys: ^1.1.1
   checksum: ce0aef3f9eb193562b5cfb79b2d2c86b6a109dfc9fdcb5f45d680631a1a908c06824ddcdb72b7573b54e26ace07f0a23420aaba0d5c627b34d2c1de8ef527e2b
-  languageName: node
-  linkType: hard
-
-"define-property@npm:^2.0.2":
-  version: 2.0.2
-  resolution: "define-property@npm:2.0.2"
-  dependencies:
-    is-descriptor: ^1.0.2
-    isobject: ^3.0.1
-  checksum: 3217ed53fc9eed06ba8da6f4d33e28c68a82e2f2a8ab4d562c4920d8169a166fe7271453675e6c69301466f36a65d7f47edf0cf7f474b9aa52a5ead9c1b13c99
   languageName: node
   linkType: hard
 
@@ -6640,15 +6509,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"execall@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "execall@npm:1.0.0"
-  dependencies:
-    clone-regexp: ^1.0.0
-  checksum: 3801e15635071fe12aa4ec6075b7706ed1dd8c3a3968022436ac116a8c359d14ec0ac53c37adf2831f2acb5c9e8ae2cd5695c05202cef07b1b34e7509c02bf92
-  languageName: node
-  linkType: hard
-
 "exit@npm:^0.1.2":
   version: 0.1.2
   resolution: "exit@npm:0.1.2"
@@ -6720,16 +6580,6 @@ __metadata:
     utils-merge: 1.0.1
     vary: ~1.1.2
   checksum: 3c4b9b076879442f6b968fe53d85d9f1eeacbb4f4c41e5f16cc36d77ce39a2b0d81b3f250514982110d815b2f7173f5561367f9110fcc541f9371948e8c8b037
-  languageName: node
-  linkType: hard
-
-"extend-shallow@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "extend-shallow@npm:3.0.2"
-  dependencies:
-    assign-symbols: ^1.0.0
-    is-extendable: ^1.0.1
-  checksum: a920b0cd5838a9995ace31dfd11ab5e79bf6e295aa566910ce53dff19f4b1c0fda2ef21f26b28586c7a2450ca2b42d97bd8c0f5cec9351a819222bf861e02461
   languageName: node
   linkType: hard
 
@@ -7935,15 +7785,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-accessor-descriptor@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "is-accessor-descriptor@npm:1.0.0"
-  dependencies:
-    kind-of: ^6.0.0
-  checksum: 8e475968e9b22f9849343c25854fa24492dbe8ba0dea1a818978f9f1b887339190b022c9300d08c47fe36f1b913d70ce8cbaca00369c55a56705fdb7caed37fe
-  languageName: node
-  linkType: hard
-
 "is-arrayish@npm:^0.2.1":
   version: 0.2.1
   resolution: "is-arrayish@npm:0.2.1"
@@ -8040,32 +7881,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"is-data-descriptor@npm:^1.0.0":
-  version: 1.0.0
-  resolution: "is-data-descriptor@npm:1.0.0"
-  dependencies:
-    kind-of: ^6.0.0
-  checksum: e705e6816241c013b05a65dc452244ee378d1c3e3842bd140beabe6e12c0d700ef23c91803f971aa7b091fb0573c5da8963af34a2b573337d87bc3e1f53a4e6d
-  languageName: node
-  linkType: hard
-
 "is-date-object@npm:^1.0.1":
   version: 1.0.5
   resolution: "is-date-object@npm:1.0.5"
   dependencies:
     has-tostringtag: ^1.0.0
   checksum: baa9077cdf15eb7b58c79398604ca57379b2fc4cf9aa7a9b9e295278648f628c9b201400c01c5e0f7afae56507d741185730307cbe7cad3b9f90a77e5ee342fc
-  languageName: node
-  linkType: hard
-
-"is-descriptor@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "is-descriptor@npm:1.0.2"
-  dependencies:
-    is-accessor-descriptor: ^1.0.0
-    is-data-descriptor: ^1.0.0
-    kind-of: ^6.0.2
-  checksum: 2ed623560bee035fb67b23e32ce885700bef8abe3fbf8c909907d86507b91a2c89a9d3a4d835a4d7334dd5db0237a0aeae9ca109c1e4ef1c0e7b577c0846ab5a
   languageName: node
   linkType: hard
 
@@ -8082,15 +7903,6 @@ __metadata:
   version: 0.1.1
   resolution: "is-extendable@npm:0.1.1"
   checksum: 3875571d20a7563772ecc7a5f36cb03167e9be31ad259041b4a8f73f33f885441f778cee1f1fe0085eb4bc71679b9d8c923690003a36a6a5fdf8023e6e3f0672
-  languageName: node
-  linkType: hard
-
-"is-extendable@npm:^1.0.1":
-  version: 1.0.1
-  resolution: "is-extendable@npm:1.0.1"
-  dependencies:
-    is-plain-object: ^2.0.4
-  checksum: db07bc1e9de6170de70eff7001943691f05b9d1547730b11be01c0ebfe67362912ba743cf4be6fd20a5e03b4180c685dad80b7c509fe717037e3eee30ad8e84f
   languageName: node
   linkType: hard
 
@@ -8297,13 +8109,6 @@ __metadata:
   dependencies:
     has-tostringtag: ^1.0.0
   checksum: 323b3d04622f78d45077cf89aab783b2f49d24dc641aa89b5ad1a72114cfeff2585efc8c12ef42466dff32bde93d839ad321b26884cf75e5a7892a938b089989
-  languageName: node
-  linkType: hard
-
-"is-supported-regexp-flag@npm:^1.0.0":
-  version: 1.0.1
-  resolution: "is-supported-regexp-flag@npm:1.0.1"
-  checksum: b14f219ec11d246e41b249bbff17b29f85d274215b7ce8fb695789aa9ba877e761f6cee8d839d6270d38a60873450e1137d5eb24e4c45a61532b2ea4f417584f
   languageName: node
   linkType: hard
 
@@ -9224,7 +9029,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"kind-of@npm:^6.0.0, kind-of@npm:^6.0.2, kind-of@npm:^6.0.3":
+"kind-of@npm:^6.0.2, kind-of@npm:^6.0.3":
   version: 6.0.3
   resolution: "kind-of@npm:6.0.3"
   checksum: 3ab01e7b1d440b22fe4c31f23d8d38b4d9b91d9f291df683476576493d5dfd2e03848a8b05813dd0c3f0e835bc63f433007ddeceb71f05cb25c45ae1b19c6d3b
@@ -9432,20 +9237,6 @@ __metadata:
   version: 4.4.2
   resolution: "lodash.truncate@npm:4.4.2"
   checksum: b463d8a382cfb5f0e71c504dcb6f807a7bd379ff1ea216669aa42c52fc28c54e404bfbd96791aa09e6df0de2c1d7b8f1b7f4b1a61f324d38fe98bc535aeee4f5
-  languageName: node
-  linkType: hard
-
-"lodash.uniq@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.uniq@npm:4.5.0"
-  checksum: a4779b57a8d0f3c441af13d9afe7ecff22dd1b8ce1129849f71d9bbc8e8ee4e46dfb4b7c28f7ad3d67481edd6e51126e4e2a6ee276e25906d10f7140187c392d
-  languageName: node
-  linkType: hard
-
-"lodash.uniqwith@npm:^4.5.0":
-  version: 4.5.0
-  resolution: "lodash.uniqwith@npm:4.5.0"
-  checksum: d49a4565ed64efd86674127d321622673c29cde3e060baebc0f30372f22886c61b2ead44709db8c890053db1b9660e8ed689689812c1a485eb5703caa94d1150
   languageName: node
   linkType: hard
 
@@ -10166,13 +9957,6 @@ __metadata:
     encoding:
       optional: true
   checksum: 8d816ffd1ee22cab8301c7756ef04f3437f18dace86a1dae22cf81db8ef29c0bf6655f3215cb0cdb22b420b6fe141e64b26905e7f33f9377a7fa59135ea3e10b
-  languageName: node
-  linkType: hard
-
-"node-forge@npm:^0.10.0":
-  version: 0.10.0
-  resolution: "node-forge@npm:0.10.0"
-  checksum: 5aa6dc9922e424a20ef101d2f517418e2bc9cfc0255dd22e0701c0fad1568445f510ee67f6f3fcdf085812c4ca1b847b8ba45683b34776828e41f5c1794e42e1
   languageName: node
   linkType: hard
 
@@ -11258,16 +11042,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"regex-not@npm:^1.0.2":
-  version: 1.0.2
-  resolution: "regex-not@npm:1.0.2"
-  dependencies:
-    extend-shallow: ^3.0.2
-    safe-regex: ^1.1.0
-  checksum: 3081403de79559387a35ef9d033740e41818a559512668cef3d12da4e8a29ef34ee13c8ed1256b07e27ae392790172e8a15c8a06b72962fd4550476cde3d8f77
-  languageName: node
-  linkType: hard
-
 "regexp.prototype.flags@npm:^1.4.1":
   version: 1.4.3
   resolution: "regexp.prototype.flags@npm:1.4.3"
@@ -11302,13 +11076,6 @@ __metadata:
   dependencies:
     rc: ^1.0.1
   checksum: 6d223da41b04e1824f5faa63905c6f2e43b216589d72794111573f017352b790aef42cd1f826463062f89d804abb2027e3d9665d2a9a0426a11eedd04d470af3
-  languageName: node
-  linkType: hard
-
-"regx@npm:^1.0.4":
-  version: 1.0.4
-  resolution: "regx@npm:1.0.4"
-  checksum: 5a48497bd4a69b5070dda22e1743834a38b6183e38d26596d58240871f410e2b9fdee7828fb5eb7691ce1ddc6cdb42bced5f5acbab812a4b9b308cf23beecb79
   languageName: node
   linkType: hard
 
@@ -11439,13 +11206,6 @@ __metadata:
     onetime: ^5.1.0
     signal-exit: ^3.0.2
   checksum: f877dd8741796b909f2a82454ec111afb84eb45890eb49ac947d87991379406b3b83ff9673a46012fca0d7844bb989f45cc5b788254cf1a39b6b5a9659de0630
-  languageName: node
-  linkType: hard
-
-"ret@npm:~0.1.10":
-  version: 0.1.15
-  resolution: "ret@npm:0.1.15"
-  checksum: d76a9159eb8c946586567bd934358dfc08a36367b3257f7a3d7255fdd7b56597235af23c6afa0d7f0254159e8051f93c918809962ebd6df24ca2a83dbe4d4151
   languageName: node
   linkType: hard
 
@@ -11624,15 +11384,6 @@ __metadata:
   version: 5.2.1
   resolution: "safe-buffer@npm:5.2.1"
   checksum: b99c4b41fdd67a6aaf280fcd05e9ffb0813654894223afb78a31f14a19ad220bba8aba1cb14eddce1fcfb037155fe6de4e861784eb434f7d11ed58d1e70dd491
-  languageName: node
-  linkType: hard
-
-"safe-regex@npm:^1.1.0":
-  version: 1.1.0
-  resolution: "safe-regex@npm:1.1.0"
-  dependencies:
-    ret: ~0.1.10
-  checksum: 9a8bba57c87a841f7997b3b951e8e403b1128c1a4fd1182f40cc1a20e2d490593d7c2a21030fadfea320c8e859219019e136f678c6689ed5960b391b822f01d5
   languageName: node
   linkType: hard
 
@@ -12880,18 +12631,6 @@ __metadata:
   dependencies:
     is-number: ^7.0.0
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
-  languageName: node
-  linkType: hard
-
-"to-regex@npm:^3.0.2":
-  version: 3.0.2
-  resolution: "to-regex@npm:3.0.2"
-  dependencies:
-    define-property: ^2.0.2
-    extend-shallow: ^3.0.2
-    regex-not: ^1.0.2
-    safe-regex: ^1.1.0
-  checksum: 4ed4a619059b64e204aad84e4e5f3ea82d97410988bcece7cf6cbfdbf193d11bff48cf53842d88b8bb00b1bfc0d048f61f20f0709e6f393fd8fe0122662d9db4
   languageName: node
   linkType: hard
 

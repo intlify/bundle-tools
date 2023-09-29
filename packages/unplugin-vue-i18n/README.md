@@ -377,6 +377,16 @@ This option works with vue-i18n v9.3 and later.
 > ⚠️ NOTE: 
 If you enable this option, **you should check  resources in your application are pre-compiled with this plugin.** If you will be loading resources dynamically from the back-end via the API, enabling this option do not work because there is not message compiler.
 
+### `ssr`
+
+- **Type:** `boolean`
+- **Default:** `false`
+
+  Whether to bundle vue-i18n module for SSR at build time
+
+  > ⚠️ NOTE: 
+  This option works with vue-i18n v9.4 and later.
+
 ### `runtimeOnly`
 
 - **Type:** `boolean`

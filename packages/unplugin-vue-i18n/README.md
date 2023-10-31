@@ -227,6 +227,8 @@ export default defineConfig({
   ],
 })
 ```
+unplugin-vue-i18n will automatically merge locale files into `@intlify/unplugin-vue-i18n/messages`. This allows locales to be split across multiple files, for example `src/locales/fruits/en.json` and `src/locales/vegetables/en.json`.
+
 ### Types
 
 If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplugin-vue-i18n/messages` to `compilerOptions.types` of your tsconfig:

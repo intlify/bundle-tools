@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@1.5.0 (2023-11-02)
+
+#### :star: Features
+* [#274](https://github.com/intlify/bundle-tools/pull/274) feat: merging of locale files with the same name for `@intlify/unplugin-vue-i18n/messages` ([@DanielleHuisman](https://github.com/DanielleHuisman))
+
+#### Committers: 1
+- Daniëlle Huisman ([@DanielleHuisman](https://github.com/DanielleHuisman))
+
+
 ## @intlify/unplugin-vue-i18n@1.4.0 (2023-09-29)
 
 #### :star: Features

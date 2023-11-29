@@ -1267,7 +1267,7 @@ __metadata:
   dependencies:
     "@intlify/message-compiler": ^9.4.0
     "@intlify/shared": ^9.4.0
-    "@types/escodegen": ^0.0.8
+    "@types/escodegen": ^0.0.10
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
     escodegen: ^2.0.0
@@ -2528,10 +2528,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/escodegen@npm:^0.0.8":
-  version: 0.0.8
-  resolution: "@types/escodegen@npm:0.0.8"
-  checksum: 751cc74625107f38525f4df10a752bd5f1197bdce7c9d63568395ac8824d5bf6b425698d615537f2e2b0a597fd4dc6107205f4def072f3f9dcebbd63e3250750
+"@types/escodegen@npm:^0.0.10":
+  version: 0.0.10
+  resolution: "@types/escodegen@npm:0.0.10"
+  checksum: 270fb286cc2a901963ecab0273435ca30dbd1cbd69c9562be9826342888a938e30fd8446af0cd1c0a679420f5923d1ef10696c6fbad2a1e249d5f04a5ee43729
   languageName: node
   linkType: hard
 

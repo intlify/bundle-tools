@@ -171,10 +171,6 @@ export async function bundleAndRun(
 
   const { code, map } = await bundler(fixture, options)
 
-  if (options.legacy) {
-    console.log('sfsdfsf', code)
-  }
-
   let dom: JSDOM | null = null
   let jsdomError
   try {

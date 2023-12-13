@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@7.5.0 (2023-12-13)
+
+#### :star: Features
+* [#331](https://github.com/intlify/bundle-tools/pull/331) feat(bundle-utils): support vue 2.7 custom block ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@7.4.0 (2023-09-28)
 
 #### :star: Features

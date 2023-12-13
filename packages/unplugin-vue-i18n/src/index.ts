@@ -86,6 +86,13 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const bridge = !!options.bridge
   debug('bridge', bridge)
 
+  const legacy = !!options.legacy
+  debug('legacy', legacy)
+
+  const vueVersion = isString(options.vueVersion)
+    ? options.vueVersion
+    : undefined
+
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
     : true
@@ -354,6 +361,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   strictMessage,
                   escapeHtml,
                   bridge,
+                  legacy,
+                  vueVersion,
                   jit: jitCompilation,
                   onlyLocales,
                   exportESM: esm,
@@ -636,6 +645,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               bridge,
+              legacy,
+              vueVersion,
               jit: jitCompilation,
               strictMessage,
               escapeHtml,
@@ -863,6 +874,8 @@ function getOptions(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    legacy = false,
+    vueVersion = 'v2.6',
     onlyLocales = [],
     exportESM = true,
     useClassComponent = false,
@@ -875,6 +888,8 @@ function getOptions(
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    legacy?: boolean
+    vueVersion?: CodeGenOptions['vueVersion']
     onlyLocales?: string[]
     exportESM?: boolean
     useClassComponent?: boolean
@@ -896,6 +911,8 @@ function getOptions(
     strictMessage,
     escapeHtml,
     bridge,
+    legacy,
+    vueVersion,
     jit,
     onlyLocales,
     exportESM,

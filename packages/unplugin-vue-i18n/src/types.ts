@@ -1,3 +1,5 @@
+import { CodeGenOptions } from '@intlify/bundle-utils'
+
 export type SFCLangFormat = 'json' | 'json5' | 'yml' | 'yaml'
 export interface PluginOptions {
   include?: string | string[]
@@ -14,6 +16,8 @@ export interface PluginOptions {
   defaultSFCLang?: SFCLangFormat
   globalSFCScope?: boolean
   bridge?: boolean
+  legacy?: boolean
+  vueVersion?: CodeGenOptions['vueVersion']
   useClassComponent?: boolean
   useVueI18nImportName?: boolean
   strictMessage?: boolean

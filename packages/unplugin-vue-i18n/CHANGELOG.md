@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@1.6.0 (2023-12-13)
+
+#### :star: Features
+* [#332](https://github.com/intlify/bundle-tools/pull/332) feat(unplugin-vue-i18n): support compatibility i18n custom blocks for legacy vue-i18n v8.x ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@1.5.0 (2023-11-02)
 
 #### :star: Features

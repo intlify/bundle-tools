@@ -35,6 +35,7 @@ export function generate(
   {
     type = 'plain',
     legacy = false,
+    vueVersion = 'v2.6',
     bridge = false,
     onlyLocales = [],
     exportESM = false,
@@ -94,7 +95,7 @@ export function generate(
   // for vue 2.x
   if (legacy && type === 'sfc') {
     const gen = () => friendlyJSONstringify(getStaticYAMLValue(ast))
-    const code = generateLegacyCode(options, gen)
+    const code = generateLegacyCode({ isGlobal, vueVersion }, gen)
     const s = new MagicString(code)
     return {
       ast,

@@ -1,0 +1,9 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`global 1`] = `
+"export default function (Component) {
+  Component.options.__i18nGlobal = Component.options.__i18nGlobal || []
+  Component.options.__i18nGlobal.push(\\"{\\\\\\"foo\\\\\\":\\\\\\"bar\\\\\\"}\\")
+  delete Component.options._Ctor
+}"
+`;

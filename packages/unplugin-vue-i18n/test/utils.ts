@@ -158,6 +158,10 @@ export async function bundleAndRun(
   options.sourcemap = isBoolean(options.sourcemap) || false
   options.useClassComponent = isBoolean(options.useClassComponent) || false
   options.bridge = isBoolean(options.bridge) || false
+  options.legacy = isBoolean(options.legacy) || false
+  options.vueVersion = isString(options.vueVersion)
+    ? options.vueVersion
+    : 'v2.6'
   options.allowDynamic = isBoolean(options.allowDynamic) || false
   options.strictMessage = isBoolean(options.strictMessage)
     ? options.strictMessage

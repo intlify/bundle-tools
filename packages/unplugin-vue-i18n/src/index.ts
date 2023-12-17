@@ -817,7 +817,7 @@ const mergeDeep = (target, ...sources) => {
 
 export default mergeDeep({},
   ${codes.map(code => `{${code}}`).join(',\n')}
-}
+);
 export const SUPPORTED_LOCALES = ${JSON.stringify(locales)};`
 }
 

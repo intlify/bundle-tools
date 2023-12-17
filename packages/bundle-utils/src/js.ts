@@ -9,12 +9,18 @@ import { walk } from 'estree-walker'
 import {
   createCodeGenerator,
   generateMessageFunction,
+  generateResourceAst,
   mapLinesColumns
 } from './codegen'
-import { RawSourceMap } from 'source-map'
 
+import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
-import type { CodeGenOptions, CodeGenerator, CodeGenResult } from './codegen'
+import type {
+  CodeGenOptions,
+  CodeGenerator,
+  CodeGenResult,
+  CodeGenFunction
+} from './codegen'
 
 /**
  * @internal
@@ -36,7 +42,8 @@ export function generate(
     strictMessage = true,
     escapeHtml = false,
     useClassComponent = false,
-    allowDynamic = false
+    allowDynamic = false,
+    jit = false
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<Node> {
@@ -60,7 +67,8 @@ export function generate(
     onError,
     strictMessage,
     escapeHtml,
-    useClassComponent
+    useClassComponent,
+    jit
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
@@ -101,7 +109,7 @@ export function generate(
     }
   }
 
-  const codeMaps = generateNode(generator, ast, options, injector)
+  const codeMaps = _generate(generator, ast, options, injector)
 
   const { code, map } = generator.context()
   // if (map) {
@@ -144,10 +152,10 @@ function scanAst(ast: Node) {
   return ret
 }
 
-function generateNode(
+function _generate(
   generator: CodeGenerator,
   node: Node,
-  options: CodeGenOptions,
+  options: CodeGenOptions = {},
   injector?: () => string
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
@@ -163,8 +171,13 @@ function generateNode(
     sourceMap,
     isGlobal,
     locale,
-    useClassComponent
+    useClassComponent,
+    jit
   } = options
+
+  const codegenFn: CodeGenFunction = jit
+    ? generateResourceAst
+    : generateMessageFunction
 
   const componentNamespace = '_Component'
 
@@ -180,7 +193,7 @@ function generateNode(
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
-            generator.push(`export default `)
+            generator.push(`const resource = `)
           } else if (type === 'sfc') {
             // for 'sfc'
             const variableName =
@@ -198,7 +211,7 @@ function generateNode(
             const componentVariable = bridge
               ? `Component.options || Component`
               : useClassComponent
-                ? `Component.__o || Component`
+                ? `Component.__o || Component.__vccOpts || Component`
                 : `Component`
             // prettier-ignore
             generator.pushline(`const ${componentNamespace} = ${componentVariable}`)
@@ -242,11 +255,7 @@ function generateNode(
                   const value = getValue(node.value) as string
                   generator.push(`${JSON.stringify(name)}: `)
                   pathStack.push(name)
-                  const { code, map } = generateMessageFunction(
-                    value,
-                    options,
-                    pathStack
-                  )
+                  const { code, map } = codegenFn(value, options, pathStack)
                   sourceMap && map != null && codeMaps.set(value, map)
                   generator.push(`${code}`, node.value, value)
                   skipStack.push(false)
@@ -256,7 +265,7 @@ function generateNode(
                     const strValue = JSON.stringify(value)
                     generator.push(`${JSON.stringify(name)}: `)
                     pathStack.push(name)
-                    const { code, map } = generateMessageFunction(
+                    const { code, map } = codegenFn(
                       strValue,
                       options,
                       pathStack
@@ -330,18 +339,14 @@ function generateNode(
                   node.type === 'TemplateLiteral'
                 ) {
                   const value = getValue(node) as string
-                  const { code, map } = generateMessageFunction(
-                    value,
-                    options,
-                    pathStack
-                  )
+                  const { code, map } = codegenFn(value, options, pathStack)
                   sourceMap && map != null && codeMaps.set(value, map)
                   generator.push(`${code}`, node, value)
                 } else {
                   const value = getValue(node)
                   if (forceStringify) {
                     const strValue = JSON.stringify(value)
-                    const { code, map } = generateMessageFunction(
+                    const { code, map } = codegenFn(
                       strValue,
                       options,
                       pathStack
@@ -390,6 +395,9 @@ function generateNode(
             }
             generator.deindent()
             generator.pushline(`}`)
+          } else if (type === 'plain') {
+            generator.push(`\n`)
+            generator.push('export default resource')
           }
           break
         case 'ObjectExpression':

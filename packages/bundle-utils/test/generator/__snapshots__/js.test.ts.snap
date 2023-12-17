@@ -1,30 +1,31 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`'allowDynamic' option generate: code 1`] = `
-"export default {
+exports[`'allowDynamic' option > generate > code 1`] = `
+"const resource = {
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})()
-}"
+}
+export default resource"
 `;
 
-exports[`'allowDynamic' option generate: map 1`] = `
-Object {
+exports[`'allowDynamic' option > generate > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`'allowDynamic' option no generate 1`] = `
+exports[`'allowDynamic' option > no generate 1`] = `
 Node {
-  "body": Array [
+  "body": [
     Node {
       "declaration": Node {
         "async": true,
         "body": Node {
-          "body": Array [
+          "body": [
             Node {
-              "declarations": Array [
+              "declarations": [
                 Node {
                   "end": 115,
                   "id": Node {
@@ -35,11 +36,11 @@ Node {
                   },
                   "init": Node {
                     "argument": Node {
-                      "arguments": Array [
+                      "arguments": [
                         Node {
                           "async": false,
                           "body": Node {
-                            "arguments": Array [],
+                            "arguments": [],
                             "callee": Node {
                               "computed": false,
                               "end": 112,
@@ -68,7 +69,7 @@ Node {
                           "expression": true,
                           "generator": false,
                           "id": null,
-                          "params": Array [
+                          "params": [
                             Node {
                               "end": 95,
                               "name": "response",
@@ -84,7 +85,7 @@ Node {
                         "computed": false,
                         "end": 86,
                         "object": Node {
-                          "arguments": Array [
+                          "arguments": [
                             Node {
                               "end": 80,
                               "name": "url",
@@ -134,7 +135,7 @@ Node {
             Node {
               "argument": Node {
                 "end": 136,
-                "properties": Array [
+                "properties": [
                   Node {
                     "argument": Node {
                       "end": 134,
@@ -168,7 +169,7 @@ Node {
           "start": 30,
           "type": "Identifier",
         },
-        "params": Array [
+        "params": [
           Node {
             "end": 46,
             "name": "url",
@@ -191,7 +192,20 @@ Node {
 }
 `;
 
-exports[`array basic: code 1`] = `
+exports[`AST code generation > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hi there!\\"}},
+  \\"hello\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hello world!\\"}},
+  \\"named\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":4,\\"k\\":\\"name\\"},{\\"t\\":3,\\"v\\":\\" !\\"}]}},
+  \\"list\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":5,\\"i\\":0},{\\"t\\":3,\\"v\\":\\" !\\"}]}},
+  \\"literal\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3},{\\"t\\":9},{\\"t\\":3}],\\"s\\":\\"hi, kazupon !\\"}},
+  \\"linked\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":6,\\"k\\":{\\"t\\":7,\\"v\\":\\"name\\"}},{\\"t\\":3,\\"v\\":\\" !\\"}]}},
+  \\"plural\\": {\\"t\\":0,\\"b\\":{\\"t\\":1,\\"c\\":[{\\"t\\":2,\\"i\\":[{\\"t\\":6,\\"k\\":{\\"t\\":9,\\"v\\":\\"no apples\\"},\\"m\\":{\\"t\\":8,\\"v\\":\\"caml\\"}}]},{\\"t\\":2,\\"i\\":[{\\"t\\":5,\\"i\\":0},{\\"t\\":3,\\"v\\":\\" apple\\"}]},{\\"t\\":2,\\"i\\":[{\\"t\\":4,\\"k\\":\\"n\\"},{\\"t\\":3,\\"v\\":\\" apples\\"}]}]}}
+}
+export default resource"
+`;
+
+exports[`array basic > code 1`] = `
 "export default function (Component) {
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
@@ -214,16 +228,16 @@ exports[`array basic: code 1`] = `
 "
 `;
 
-exports[`array basic: map 1`] = `
-Object {
+exports[`array basic > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`array mixed: code 1`] = `
+exports[`array mixed > code 1`] = `
 "export default function (Component) {
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
@@ -256,86 +270,31 @@ exports[`array mixed: code 1`] = `
 "
 `;
 
-exports[`array mixed: map 1`] = `
-Object {
+exports[`array mixed > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`bare: code 1`] = `
+exports[`bare > code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})()
 }"
 `;
 
-exports[`bare: map 1`] = `
-Object {
+exports[`bare > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`bridge with ESM exporting: code 1`] = `
-"export default function (Component) {
-  const _Component = Component.options || Component
-  _Component.__i18n = _Component.__i18n || []
-  _Component.__i18n.push({
-    \\"locale\\": \\"\\",
-    \\"resource\\": {
-      \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
-      \\"nested\\": {
-        \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
-        \\"more\\": {
-          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
-        },
-        \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
-      },
-      \\"template\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello  world!\\"])};fn.source=\\"hello  world!\\";return fn;})(),
-      \\"こんにちは\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは！\\"])};fn.source=\\"こんにちは！\\";return fn;})(),
-      \\"single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"I don't know!\\"])};fn.source=\\"I don't know!\\";return fn;})(),
-      \\"emoji\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"😺\\"])};fn.source=\\"😺\\";return fn;})(),
-      \\"unicode\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"A\\"])};fn.source=\\"A\\";return fn;})(),
-      \\"unicode-escape\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\u0041\\"])};fn.source=\\"\\\\\\\\u0041\\";return fn;})(),
-      \\"backslash-single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\'\\"])};fn.source=\\"\\\\\\\\'\\";return fn;})(),
-      \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
-      \\"errors\\": [
-        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
-        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})(),
-        
-      ],
-      \\"complex\\": {
-        \\"warnings\\": [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"NOTE: This is warning\\"])};fn.source=\\"NOTE: This is warning\\";return fn;})(),
-          {
-            \\"named-waring\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"this is \\", _interpolate(_named(\\"type\\")), \\" warining\\"])};fn.source=\\"this is {type} warining\\";return fn;})()
-          }
-        ]
-      }
-    }
-  })
-  _Component.__i18nBridge = _Component.__i18nBridge || []
-  _Component.__i18nBridge.push('\\"{\\\\\\\\n  \\\\\\\\\\"hi\\\\\\\\\\": \\\\\\\\\\"hi there!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"nested\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"hello\\\\\\\\\\": \\\\\\\\\\"hello world!\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\"more\\\\\\\\\\": {\\\\\\\\n      \\\\\\\\\\"plural\\\\\\\\\\": \\\\\\\\\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\"list\\\\\\\\\\": \\\\\\\\\\"hi, {0} !\\\\\\\\\\"\\\\\\\\n  },\\\\\\\\n  \\\\\\\\\\"こんにちは\\\\\\\\\\": \\\\\\\\\\"こんにちは！\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"single-quote\\\\\\\\\\": \\\\\\\\\\"I don\\\\u0027t know!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"emoji\\\\\\\\\\": \\\\\\\\\\"😺\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode-escape\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-single-quote\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-backslash\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"errors\\\\\\\\\\": [\\\\\\\\\\"ERROR1001\\\\\\\\\\", \\\\\\\\\\"ERROR1002\\\\\\\\\\"],\\\\\\\\n  \\\\\\\\\\"complex\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"warnings\\\\\\\\\\": [\\\\\\\\n      \\\\\\\\\\"NOTE: This is warning\\\\\\\\\\",\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\"named-waring\\\\\\\\\\": \\\\\\\\\\"this is {type} warining\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\"')
-  delete _Component._Ctor
-  
-}
-"
-`;
-
-exports[`bridge with ESM exporting: map 1`] = `
-Object {
-  "mappings": "",
-  "names": Array [],
-  "sources": Array [],
-  "version": 3,
-}
-`;
-
-exports[`bridge: code 1`] = `
+exports[`bridge > code 1`] = `
 "module.exports = function (Component) {
   const _Component = Component.options || Component
   _Component.__i18n = _Component.__i18n || []
@@ -381,17 +340,72 @@ exports[`bridge: code 1`] = `
 "
 `;
 
-exports[`bridge: map 1`] = `
-Object {
+exports[`bridge > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`complex: code 1`] = `
-"export default {
+exports[`bridge with ESM exporting > code 1`] = `
+"export default function (Component) {
+  const _Component = Component.options || Component
+  _Component.__i18n = _Component.__i18n || []
+  _Component.__i18n.push({
+    \\"locale\\": \\"\\",
+    \\"resource\\": {
+      \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
+      \\"nested\\": {
+        \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
+        \\"more\\": {
+          \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+        },
+        \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
+      },
+      \\"template\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello  world!\\"])};fn.source=\\"hello  world!\\";return fn;})(),
+      \\"こんにちは\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは！\\"])};fn.source=\\"こんにちは！\\";return fn;})(),
+      \\"single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"I don't know!\\"])};fn.source=\\"I don't know!\\";return fn;})(),
+      \\"emoji\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"😺\\"])};fn.source=\\"😺\\";return fn;})(),
+      \\"unicode\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"A\\"])};fn.source=\\"A\\";return fn;})(),
+      \\"unicode-escape\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\u0041\\"])};fn.source=\\"\\\\\\\\u0041\\";return fn;})(),
+      \\"backslash-single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\'\\"])};fn.source=\\"\\\\\\\\'\\";return fn;})(),
+      \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
+      \\"errors\\": [
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})(),
+        
+      ],
+      \\"complex\\": {
+        \\"warnings\\": [
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"NOTE: This is warning\\"])};fn.source=\\"NOTE: This is warning\\";return fn;})(),
+          {
+            \\"named-waring\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"this is \\", _interpolate(_named(\\"type\\")), \\" warining\\"])};fn.source=\\"this is {type} warining\\";return fn;})()
+          }
+        ]
+      }
+    }
+  })
+  _Component.__i18nBridge = _Component.__i18nBridge || []
+  _Component.__i18nBridge.push('\\"{\\\\\\\\n  \\\\\\\\\\"hi\\\\\\\\\\": \\\\\\\\\\"hi there!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"nested\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"hello\\\\\\\\\\": \\\\\\\\\\"hello world!\\\\\\\\\\",\\\\\\\\n    \\\\\\\\\\"more\\\\\\\\\\": {\\\\\\\\n      \\\\\\\\\\"plural\\\\\\\\\\": \\\\\\\\\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\\\\\\\\\"\\\\\\\\n    },\\\\\\\\n    \\\\\\\\\\"list\\\\\\\\\\": \\\\\\\\\\"hi, {0} !\\\\\\\\\\"\\\\\\\\n  },\\\\\\\\n  \\\\\\\\\\"こんにちは\\\\\\\\\\": \\\\\\\\\\"こんにちは！\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"single-quote\\\\\\\\\\": \\\\\\\\\\"I don\\\\u0027t know!\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"emoji\\\\\\\\\\": \\\\\\\\\\"😺\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"unicode-escape\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0041\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-single-quote\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\u0027\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"backslash-backslash\\\\\\\\\\": \\\\\\\\\\"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\",\\\\\\\\n  \\\\\\\\\\"errors\\\\\\\\\\": [\\\\\\\\\\"ERROR1001\\\\\\\\\\", \\\\\\\\\\"ERROR1002\\\\\\\\\\"],\\\\\\\\n  \\\\\\\\\\"complex\\\\\\\\\\": {\\\\\\\\n    \\\\\\\\\\"warnings\\\\\\\\\\": [\\\\\\\\n      \\\\\\\\\\"NOTE: This is warning\\\\\\\\\\",\\\\\\\\n      {\\\\\\\\n        \\\\\\\\\\"named-waring\\\\\\\\\\": \\\\\\\\\\"this is {type} warining\\\\\\\\\\"\\\\\\\\n      }\\\\\\\\n    ]\\\\\\\\n  }\\\\\\\\n}\\\\\\\\n\\"')
+  delete _Component._Ctor
+  
+}
+"
+`;
+
+exports[`bridge with ESM exporting > map 1`] = `
+{
+  "mappings": "",
+  "names": [],
+  "sources": [],
+  "version": 3,
+}
+`;
+
+exports[`complex > code 1`] = `
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -421,20 +435,21 @@ exports[`complex: code 1`] = `
       }
     ]
   }
-}"
+}
+export default resource"
 `;
 
-exports[`complex: map 1`] = `
-Object {
+exports[`complex > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`force stringify: code 1`] = `
-"export default {
+exports[`force stringify > code 1`] = `
+"const resource = {
   \\"trueValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"true\\"])};fn.source=\\"true\\";return fn;})(),
   \\"falseValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"false\\"])};fn.source=\\"false\\";return fn;})(),
   \\"nullValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"null\\"])};fn.source=\\"null\\";return fn;})(),
@@ -453,33 +468,34 @@ exports[`force stringify: code 1`] = `
     },
     
   ]
-}"
+}
+export default resource"
 `;
 
-exports[`force stringify: map 1`] = `
-Object {
+exports[`force stringify > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`html tag in message: code 1`] = `
+exports[`html tag in message > code 1`] = `
 "{
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hi there!&lt;/p&gt;\\"])};fn.source=\\"<p>hi there!</p>\\";return fn;})(),
   \\"alert\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;\\"])};fn.source=\\"<script>window.alert('hi there!')</script>\\";return fn;})()
 }"
 `;
 
-exports[`html tag in message: errors 1`] = `
-Array [
-  Object {
+exports[`html tag in message > errors 1`] = `
+[
+  {
     "msg": "Detected HTML in '<p>hi there!</p>' message.",
     "path": "hi",
     "source": "<p>hi there!</p>",
   },
-  Object {
+  {
     "msg": "Detected HTML in '<script>window.alert('hi there!')</script>' message.",
     "path": "alert",
     "source": "<script>window.alert('hi there!')</script>",
@@ -487,8 +503,8 @@ Array [
 ]
 `;
 
-exports[`include function: code 1`] = `
-"export default {
+exports[`include function > code 1`] = `
+"const resource = {
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})(),
   \\"pagination\\": {
     \\"pages\\": ({named}) => \`\${ named('number') }/page\`,
@@ -497,124 +513,125 @@ exports[`include function: code 1`] = `
   \\"foo\\": {
     \\"bar\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})()
   }
-}"
+}
+export default resource"
 `;
 
-exports[`include function: map 1`] = `
-Object {
+exports[`include function > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`invalid message syntax: code 1`] = `
+exports[`invalid message syntax > code 1`] = `
 "{
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
-  \\"this-is-ivalid\\": @,
+  \\"this-is-invalid\\": \`@\`,
   \\"nested\\": {
     \\"array\\": [
       {
-        \\"this-is-ivalid\\": @
+        \\"this-is-invalid\\": \`@\`
       }
     ]
   }
 }"
 `;
 
-exports[`invalid message syntax: errors 1`] = `
-Array [
-  Object {
+exports[`invalid message syntax > errors 1`] = `
+[
+  {
     "code": 14,
     "domain": "parser",
-    "location": Object {
-      "end": Object {
+    "location": {
+      "end": {
         "column": 2,
         "line": 1,
         "offset": 1,
       },
-      "start": Object {
+      "start": {
         "column": 1,
         "line": 1,
         "offset": 0,
       },
     },
     "msg": "Unexpected lexical analysis in token: 'EOF'",
-    "path": "this-is-ivalid",
+    "path": "this-is-invalid",
     "source": "@",
   },
-  Object {
+  {
     "code": 13,
     "domain": "parser",
-    "location": Object {
-      "end": Object {
+    "location": {
+      "end": {
         "column": 2,
         "line": 1,
         "offset": 1,
       },
-      "start": Object {
+      "start": {
         "column": 2,
         "line": 1,
         "offset": 1,
       },
     },
     "msg": "Unexpected empty linked key",
-    "path": "this-is-ivalid",
+    "path": "this-is-invalid",
     "source": "@",
   },
-  Object {
+  {
     "code": 14,
     "domain": "parser",
-    "location": Object {
-      "end": Object {
+    "location": {
+      "end": {
         "column": 2,
         "line": 1,
         "offset": 1,
       },
-      "start": Object {
+      "start": {
         "column": 1,
         "line": 1,
         "offset": 0,
       },
     },
     "msg": "Unexpected lexical analysis in token: 'EOF'",
-    "path": "nested.array.0.this-is-ivalid",
+    "path": "nested.array.0.this-is-invalid",
     "source": "@",
   },
-  Object {
+  {
     "code": 13,
     "domain": "parser",
-    "location": Object {
-      "end": Object {
+    "location": {
+      "end": {
         "column": 2,
         "line": 1,
         "offset": 1,
       },
-      "start": Object {
+      "start": {
         "column": 2,
         "line": 1,
         "offset": 1,
       },
     },
     "msg": "Unexpected empty linked key",
-    "path": "nested.array.0.this-is-ivalid",
+    "path": "nested.array.0.this-is-invalid",
     "source": "@",
   },
 ]
 `;
 
-exports[`invalid message syntax: map 1`] = `
-Object {
+exports[`invalid message syntax > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`simple: code 1`] = `
-"export default {
+exports[`simple > code 1`] = `
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
   \\"named\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"hi, \\", _interpolate(_named(\\"name\\")), \\" !\\"])};fn.source=\\"hi, {name} !\\";return fn;})(),
@@ -622,20 +639,21 @@ exports[`simple: code 1`] = `
   \\"literal\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi, \\", \\"kazupon\\", \\" !\\"])};fn.source=\\"hi, {  'kazupon'  } !\\";return fn;})(),
   \\"linked\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type } = ctx;return _normalize([\\"hi, \\", _linked(\\"name\\", undefined, _type), \\" !\\"])};fn.source=\\"hi, @:name !\\";return fn;})(),
   \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
-}"
+}
+export default resource"
 `;
 
-exports[`simple: map 1`] = `
-Object {
+exports[`simple > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`unhandling: code 1`] = `
-"export default {
+exports[`unhandling > code 1`] = `
+"const resource = {
   \\"trueValue\\": true,
   \\"falseValue\\": false,
   \\"nullValue\\": null,
@@ -654,21 +672,22 @@ exports[`unhandling: code 1`] = `
     },
     
   ]
-}"
+}
+export default resource"
 `;
 
-exports[`unhandling: map 1`] = `
-Object {
+exports[`unhandling > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;
 
-exports[`useClassComponent: code 1`] = `
+exports[`useClassComponent > code 1`] = `
 "export default function (Component) {
-  const _Component = Component.__o || Component
+  const _Component = Component.__o || Component.__vccOpts || Component
   _Component.__i18n = _Component.__i18n || []
   _Component.__i18n.push({
     \\"locale\\": \\"\\",
@@ -708,11 +727,11 @@ exports[`useClassComponent: code 1`] = `
 "
 `;
 
-exports[`useClassComponent: map 1`] = `
-Object {
+exports[`useClassComponent > map 1`] = `
+{
   "mappings": "",
-  "names": Array [],
-  "sources": Array [],
+  "names": [],
+  "sources": [],
   "version": 3,
 }
 `;

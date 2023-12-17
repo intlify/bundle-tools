@@ -1,11 +1,11 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`bridge 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "backslash-backslash": [Function],
         "backslash-single-quote": [Function],
         "emoji": [Function],
@@ -15,7 +15,7 @@ Array [
         "list": [Function],
         "literal": [Function],
         "named": [Function],
-        "nest": Object {
+        "nest": {
           "lieteral": [Function],
         },
         "plural": [Function],
@@ -24,7 +24,7 @@ Array [
         "unicode-escape": [Function],
         "こんにちは": [Function],
       },
-      "ja": Object {
+      "ja": {
         "hello": [Function],
       },
     },
@@ -33,7 +33,7 @@ Array [
 `;
 
 exports[`bridge 2`] = `
-Array [
+[
   "{\\"en\\":{\\"hello\\":\\"hello world!\\",\\"named\\":\\"hi, {name} !\\",\\"list\\":\\"hi, {0} !\\",\\"literal\\":\\"hi, {  'kazupon'  } !\\",\\"linked\\":\\"hi, @:name !\\",\\"plural\\":\\"@.caml:{'no apples'} | {0} apple | {n} apples\\",\\"nest\\":{\\"lieteral\\":\\"hi, kazupon !\\"},\\"hi, {name} !\\":\\"hi hi!\\",\\"こんにちは\\":\\"こんにちは！\\",\\"single-quote\\":\\"I don't know!\\",\\"emoji\\":\\"😺\\",\\"unicode\\":\\"A\\",\\"unicode-escape\\":\\"\\\\\\\\u0041\\",\\"backslash-single-quote\\":\\"\\\\\\\\'\\",\\"backslash-backslash\\":\\"\\\\\\\\\\\\\\\\\\"},\\"ja\\":{\\"hello\\":\\"こんにちは！\\"}}",
 ]
 `;

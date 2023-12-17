@@ -27,14 +27,14 @@
   },
   "dependencies": {
     "@intlify/bundle-utils": "^3.1.2",
-    "@intlify/shared": "next",
+    "@intlify/shared": "^9.4.0",
     "@rollup/pluginutils": "^4.2.0",
     "debug": "^4.3.1",
     "fast-glob": "^3.2.5",
     "source-map": "0.6.1"
   },
   "devDependencies": {
-    "unbuild": "^0.8.11"
+    "unbuild": "^1.1.2"
   },
   "engines": {
     "node": ">= 14.6"

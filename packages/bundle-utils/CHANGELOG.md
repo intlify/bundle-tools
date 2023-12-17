@@ -1,4 +1,93 @@
 
+## @intlify/bundle-utils@7.5.0 (2023-12-13)
+
+#### :star: Features
+* [#331](https://github.com/intlify/bundle-tools/pull/331) feat(bundle-utils): support vue 2.7 custom block ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@7.4.0 (2023-09-28)
+
+#### :star: Features
+* [#301](https://github.com/intlify/bundle-tools/pull/301) feat(unplugin-vue-i18n): exclude unused locales from the bundle ([@imslepov](https://github.com/imslepov))
+
+#### Committers: 1
+- Daniel Slepov ([@imslepov](https://github.com/imslepov))
+
+
+
+
+
+
+## @intlify/bundle-utils@7.1.0 (2023-08-30)
+
+#### :star: Features
+* [#287](https://github.com/intlify/bundle-tools/pull/287) feat(bundle-utils): support AST minify option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@7.0.2 (2023-07-08)
+
+#### :bug: Bug Fixes
+* [#280](https://github.com/intlify/bundle-tools/pull/280) fix(unplugin-vue-i18n): support esm fully ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@7.0.1 (2023-07-02)
+
+#### :star: Features
+* [#277](https://github.com/intlify/bundle-tools/pull/277) feat(unplugin-vue-i18n): support jit compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@7.0.0 (2023-06-29)
+
+#### :star: Features
+* [#276](https://github.com/intlify/bundle-tools/pull/276) feat(bundle-utils): support AST generation for JIT compilation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@6.0.1 (2023-05-26)
+
+#### :bug: Bug Fixes
+* [#270](https://github.com/intlify/bundle-tools/pull/270) fix: escape string, when there's a syntax failure ([@kazupon](https://github.com/kazupon))
+
+#### :zap: Improvement Features
+* [#269](https://github.com/intlify/bundle-tools/pull/269) fix(vue-facing-decorator): useClassComponent option ([@rdhainaut](https://github.com/rdhainaut))
+
+#### Committers: 2
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+- rdhainaut ([@rdhainaut](https://github.com/rdhainaut))
+
+
+## @intlify/bundle-utils@6.0.0 (2023-03-29)
+
+#### :zap: Improvement Features
+* [#255](https://github.com/intlify/bundle-tools/pull/255) feat(bundle-utils): support esm/cjs dual package ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/bundle-utils@5.5.0 (2023-03-27)
+
+#### :zap: Improvement Features
+* [#254](https://github.com/intlify/bundle-tools/pull/254) fix(bundle-utils): improve plain code generation ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@5.4.0 (2023-03-22)
 
 #### :star: Features

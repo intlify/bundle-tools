@@ -1,20 +1,22 @@
+import { SourceMapGenerator, SourceMapConsumer } from 'source-map-js'
 import {
-  LocationStub,
+  format,
+  escapeHtml as sanitizeHtml,
+  isBoolean,
+  friendlyJSONstringify
+} from '@intlify/shared'
+import {
   baseCompile,
+  detectHtmlTag,
+  LOCATION_STUB
+} from '@intlify/message-compiler'
+
+import type { RawSourceMap, MappedPosition, MappingItem } from 'source-map-js'
+import type {
   CompileError,
   ResourceNode,
-  CompileOptions,
-  detectHtmlTag
+  CompileOptions
 } from '@intlify/message-compiler'
-import {
-  SourceMapGenerator,
-  SourceMapConsumer,
-  MappedPosition,
-  MappingItem
-} from 'source-map'
-import { format, escapeHtml as sanitizeHtml, isBoolean } from '@intlify/shared'
-
-import type { RawSourceMap } from 'source-map'
 
 /**
  * Compilation dev environments
@@ -43,8 +45,10 @@ export interface SourceLocationable {
 export interface CodeGenOptions {
   type?: 'plain' | 'sfc' | 'bare'
   legacy?: boolean
+  vueVersion?: 'v2.6' | 'v2.7'
   bridge?: boolean
   exportESM?: boolean
+  onlyLocales?: string[]
   source?: string
   sourceMap?: boolean
   filename?: string
@@ -57,6 +61,8 @@ export interface CodeGenOptions {
   allowDynamic?: boolean
   strictMessage?: boolean
   escapeHtml?: boolean
+  jit?: boolean
+  minify?: boolean
   onWarn?: (msg: string) => void
   onError?: (
     msg: string,
@@ -100,15 +106,18 @@ export interface CodeGenerator {
   ): void
 }
 
-/**
- * @internal
- */
 export interface CodeGenResult<ASTNode, CodeGenError extends Error = Error> {
   code: string
   ast: ASTNode
   errors?: CodeGenError[]
   map?: RawSourceMap
 }
+
+export type CodeGenFunction = (
+  msg: string,
+  options: CodeGenOptions,
+  path?: string[]
+) => CodeGenResult<ResourceNode>
 
 export function createCodeGenerator(
   options: CodeGenOptions = {
@@ -140,7 +149,7 @@ export function createCodeGenerator(
   ): void {
     _context.code += code
     if (_context.map && node) {
-      if (node.loc && node.loc !== LocationStub) {
+      if (node.loc && node.loc !== LOCATION_STUB) {
         addMapping(node.loc.start, name)
       }
       advancePositionWithSource(_context as Position, code)
@@ -241,7 +250,7 @@ function parsePath(path?: string[]): string {
 
 export function generateMessageFunction(
   msg: string,
-  options: CodeGenOptions,
+  options: CodeGenOptions = {},
   path?: string[]
 ): CodeGenResult<ResourceNode> {
   const env = options.env != null ? options.env : 'development'
@@ -286,7 +295,7 @@ export function generateMessageFunction(
     ? env === 'development'
       ? `(()=>{const fn=${code};fn.source=${JSON.stringify(msg)};return fn;})()`
       : `${code}`
-    : _msg
+    : `\`${_msg}\``
   return { code: genCode, ast, map, errors }
 }
 
@@ -382,4 +391,80 @@ export function mapLinesColumns(
   generator._file = inSourceMap ? inSourceMap.file : resMap.file
 
   return generator.toJSON()
+}
+
+export function generateResourceAst(
+  msg: string,
+  options: CodeGenOptions = {},
+  path?: string[]
+): CodeGenResult<ResourceNode> {
+  const env = options.env != null ? options.env : 'development'
+  const strictMessage = isBoolean(options.strictMessage)
+    ? options.strictMessage
+    : true
+  const escapeHtml = !!options.escapeHtml
+  const onError = options.onError || ON_ERROR_NOOP
+  const errors = [] as CompileError[]
+
+  let detecteHtmlInMsg = false
+  if (detectHtmlTag(msg)) {
+    detecteHtmlInMsg = true
+    if (strictMessage) {
+      const errMsg = format(DETECT_MESSAGE, { msg })
+      onError(format(errMsg), {
+        source: msg,
+        path: parsePath(path)
+      })
+    }
+  }
+
+  const _msg = detecteHtmlInMsg && escapeHtml ? sanitizeHtml(msg) : msg
+
+  const newOptions = Object.assign(
+    {
+      location: env === 'development',
+      minify: isBoolean(options.minify) ? options.minify : env === 'production'
+    },
+    options
+  ) as CompileOptions
+
+  if (newOptions.jit != null) {
+    newOptions.jit = true
+  }
+
+  newOptions.onError = (err: CompileError): void => {
+    if (onError) {
+      const extra: Parameters<Required<CodeGenOptions>['onError']>[1] = {
+        source: msg,
+        path: parsePath(path),
+        code: err.code,
+        domain: err.domain,
+        location: err.location
+      }
+      onError(err.message, extra)
+      errors.push(err)
+    }
+  }
+  const { ast, map } = baseCompile(_msg, newOptions)
+  const occured = errors.length > 0
+  const code = !occured ? `${friendlyJSONstringify(ast)}` : `\`${_msg}\``
+  return { code, ast, map, errors }
+}
+
+export function excludeLocales({
+  messages,
+  onlyLocales
+}: {
+  messages: Record<string, unknown>
+  onlyLocales: string[]
+}) {
+  const _messages = { ...messages }
+
+  Object.keys(_messages).forEach(locale => {
+    if (!onlyLocales.includes(locale)) {
+      delete _messages[locale]
+    }
+  })
+
+  return _messages
 }

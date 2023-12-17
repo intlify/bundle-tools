@@ -1,4 +1,4 @@
-import { createUnplugin, TransformResult } from 'unplugin'
+import { createUnplugin } from 'unplugin'
 import { normalize, parse as parsePath } from 'pathe'
 import createDebug from 'debug'
 import fg from 'fast-glob'
@@ -21,13 +21,17 @@ import {
   checkVueI18nBridgeInstallPackage,
   getVueI18nVersion
 } from '@intlify/bundle-utils'
-import { RawSourceMap } from 'source-map'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
 import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
 
-import type { UnpluginContextMeta, UnpluginOptions } from 'unplugin'
+import type { RawSourceMap } from 'source-map-js'
+import type {
+  UnpluginContextMeta,
+  UnpluginOptions,
+  TransformResult
+} from 'unplugin'
 import type { PluginOptions } from './types'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 
@@ -48,6 +52,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   // check bundler type
   if (!['vite', 'webpack'].includes(meta.framework)) {
     raiseError(`This plugin is supported 'vite' and 'webpack' only`)
+  }
+
+  // normalize for `options.onlyLocales`
+  let onlyLocales: string[] = []
+  if (options.onlyLocales) {
+    onlyLocales = Array.isArray(options.onlyLocales)
+      ? options.onlyLocales
+      : [options.onlyLocales]
   }
 
   // normalize for `options.include`
@@ -74,10 +86,24 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const bridge = !!options.bridge
   debug('bridge', bridge)
 
+  const legacy = !!options.legacy
+  debug('legacy', legacy)
+
+  const vueVersion = isString(options.vueVersion)
+    ? options.vueVersion
+    : undefined
+
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
     : true
   debug('runtimeOnly', runtimeOnly)
+
+  const jitCompilation = !!options.jitCompilation
+  debug('jitCompilation', jitCompilation)
+  const dropMessageCompiler = jitCompilation
+    ? !!options.dropMessageCompiler
+    : false
+  debug('dropMessageCompiler', dropMessageCompiler)
 
   // prettier-ignore
   const compositionOnly = installedPkg === 'vue-i18n'
@@ -94,6 +120,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       : true
     : false
   debug('fullInstall', fullInstall)
+
+  const ssrBuild = !!options.ssr
+  debug('ssr', ssrBuild)
 
   const useVueI18nImportName = options.useVueI18nImportName
   if (useVueI18nImportName != null) {
@@ -112,10 +141,16 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const getVueI18nBridgeAliasPath = () =>
     `vue-i18n-bridge/dist/vue-i18n-bridge.runtime.esm-bundler.js`
 
-  const getVueI18nAliasPath = (aliasName: string) =>
-    vueI18nVersion === '8'
+  const getVueI18nAliasPath = (
+    aliasName: string,
+    { ssr = false, runtimeOnly = false }
+  ) => {
+    return vueI18nVersion === '8'
       ? `${aliasName}/dist/${aliasName}.esm.js` // for vue-i18n@8
-      : `${aliasName}/dist/${installedPkg}.runtime.esm-bundler.js`
+      : `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
+          !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
+        }`
+  }
 
   const esm = isBoolean(options.esm) ? options.esm : true
   debug('esm', esm)
@@ -156,12 +191,15 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           meta.framework
         )
 
-        if (command === 'build' && runtimeOnly) {
+        if (command === 'build') {
           debug(`vue-i18n alias name: ${vueI18nAliasName}`)
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
               find: vueI18nAliasName,
-              replacement: getVueI18nAliasPath(vueI18nAliasName)
+              replacement: getVueI18nAliasPath(vueI18nAliasName, {
+                ssr: ssrBuild,
+                runtimeOnly
+              })
             })
             if (installedVueI18nBridge) {
               config.resolve!.alias.push({
@@ -172,7 +210,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[vueI18nAliasName] =
-              getVueI18nAliasPath(vueI18nAliasName)
+              getVueI18nAliasPath(vueI18nAliasName, {
+                ssr: ssrBuild,
+                runtimeOnly
+              })
             if (installedVueI18nBridge) {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
               ;(config.resolve!.alias as any)['vue-i18n-bridge'] =
@@ -181,7 +222,11 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           }
           debug(
             `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
-              vueI18nAliasName
+              vueI18nAliasName,
+              {
+                ssr: ssrBuild,
+                runtimeOnly
+              }
             )}`
           )
           if (installedVueI18nBridge) {
@@ -221,6 +266,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         debug(
           `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
         )
+        config.define['__INTLIFY_JIT_COMPILATION__'] = jitCompilation
+        debug(
+          `set __INTLIFY_JIT_COMPILATION__ is '${config.define['__INTLIFY_JIT_COMPILATION__']}'`
+        )
+        config.define['__INTLIFY_DROP_MESSAGE_COMPILER__'] = dropMessageCompiler
+        debug(
+          `set __INTLIFY_DROP_MESSAGE_COMPILER__ is '${config.define['__INTLIFY_DROP_MESSAGE_COMPILER__']}'`
+        )
 
         config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
       },
@@ -256,6 +309,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             }
 
             debug('org json plugin')
+            // @ts-expect-error
             return orgTransform!.apply(this, [code, id])
           }
         }
@@ -273,6 +327,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
           // @ts-ignore
           esbuildPlugin.transform = async function (code: string, id: string) {
+            // @ts-expect-error
             const result = (await orgTransform!.apply(this, [
               code,
               id
@@ -306,6 +361,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   strictMessage,
                   escapeHtml,
                   bridge,
+                  legacy,
+                  vueVersion,
+                  jit: jitCompilation,
+                  onlyLocales,
                   exportESM: esm,
                   forceStringify
                 }
@@ -324,7 +383,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
               return {
                 code: generatedCode,
-                map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+                // prettier-ignore
+                map: (jitCompilation
+                  ? { mappings: '' }
+                  : sourceMap
+                    ? map
+                    : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
               }
             } else {
               return result
@@ -356,19 +420,23 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         meta.framework
       )
 
-      if (isProduction && runtimeOnly) {
+      if (isProduction) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-          getVueI18nAliasPath(vueI18nAliasName)
+          getVueI18nAliasPath(vueI18nAliasName, {
+            ssr: ssrBuild,
+            runtimeOnly
+          })
         if (installedVueI18nBridge) {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(compiler.options.resolve!.alias as any)['vue-i18n-bridge'] =
             getVueI18nBridgeAliasPath()
         }
         debug(
-          `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
-            vueI18nAliasName
-          )}`
+          `set ${vueI18nAliasName}: ${getVueI18nAliasPath(vueI18nAliasName, {
+            ssr: ssrBuild,
+            runtimeOnly
+          })}`
         )
         if (installedVueI18nBridge) {
           debug(
@@ -516,6 +584,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               strictMessage,
               escapeHtml,
               bridge,
+              jit: jitCompilation,
+              onlyLocales,
               exportESM: esm,
               forceStringify
             }
@@ -534,7 +604,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
           return {
             code: generatedCode,
-            map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+            // prettier-ignore
+            map: (jitCompilation
+              ? { mappings: '' }
+              : sourceMap
+                ? map
+                : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
           }
         } else {
           // TODO: support virtual import identifier
@@ -547,7 +622,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             langInfo = (
               query.src
                 ? query.lang === 'i18n'
-                  ? 'json'
+                  ? defaultSFCLang
                   : query.lang
                 : query.lang
             ) as Required<PluginOptions>['defaultSFCLang']
@@ -570,8 +645,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               isGlobal: globalSFCScope,
               useClassComponent,
               bridge,
+              legacy,
+              vueVersion,
+              jit: jitCompilation,
               strictMessage,
               escapeHtml,
+              onlyLocales,
               exportESM: esm,
               forceStringify
             }
@@ -597,7 +676,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
           return {
             code: generatedCode,
-            map: (sourceMap ? map : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+            // prettier-ignore
+            map: (jitCompilation
+              ? { mappings: '' }
+              : sourceMap
+                ? map
+                : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
           }
         }
       }
@@ -660,18 +744,22 @@ async function generateBundleResources(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    onlyLocales = [],
     exportESM = true,
     strictMessage = true,
     escapeHtml = false,
-    useClassComponent = false
+    useClassComponent = false,
+    jit = false
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    onlyLocales?: string[]
     exportESM?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
     useClassComponent?: boolean
+    jit?: boolean
   }
 ) {
   const codes = []
@@ -687,6 +775,8 @@ async function generateBundleResources(
         isGlobal,
         useClassComponent,
         bridge,
+        jit,
+        onlyLocales,
         exportESM,
         strictMessage,
         escapeHtml,
@@ -705,10 +795,30 @@ async function generateBundleResources(
     }
   }
 
-  return `export default {
-  ${codes.join(`,\n`)}
+  return `const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
+
+const mergeDeep = (target, ...sources) => {
+  if (!sources.length) return target;
+  const source = sources.shift();
+
+  if (isObject(target) && isObject(source)) {
+    for (const key in source) {
+      if (isObject(source[key])) {
+        if (!target[key]) Object.assign(target, { [key]: {} });
+        mergeDeep(target[key], source[key]);
+      } else {
+        Object.assign(target, { [key]: source[key] });
+      }
+    }
+  }
+
+  return mergeDeep(target, ...sources);
 }
-export const SUPPORTED_LOCALES = ${JSON.stringify(locales)}`
+
+export default mergeDeep({},
+  ${codes.map(code => `{${code}}`).join(',\n')}
+}
+export const SUPPORTED_LOCALES = ${JSON.stringify(locales)};`
 }
 
 async function getCode(
@@ -767,21 +877,29 @@ function getOptions(
     forceStringify = false,
     isGlobal = false,
     bridge = false,
+    legacy = false,
+    vueVersion = 'v2.6',
+    onlyLocales = [],
     exportESM = true,
     useClassComponent = false,
     allowDynamic = false,
     strictMessage = true,
-    escapeHtml = false
+    escapeHtml = false,
+    jit = false
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
     isGlobal?: boolean
     bridge?: boolean
+    legacy?: boolean
+    vueVersion?: CodeGenOptions['vueVersion']
+    onlyLocales?: string[]
     exportESM?: boolean
     useClassComponent?: boolean
     allowDynamic?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
+    jit?: boolean
   }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -796,6 +914,10 @@ function getOptions(
     strictMessage,
     escapeHtml,
     bridge,
+    legacy,
+    vueVersion,
+    jit,
+    onlyLocales,
     exportESM,
     env: mode,
     onWarn: (msg: string): void => {

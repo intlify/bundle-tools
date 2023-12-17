@@ -1,13 +1,13 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`array 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
-        "foo": Array [
-          Array [
+    "resource": {
+      "en": {
+        "foo": [
+          [
             [Function],
           ],
           [Function],
@@ -19,11 +19,11 @@ Array [
 `;
 
 exports[`basic 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -32,11 +32,11 @@ Array [
 `;
 
 exports[`default lang 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -45,11 +45,11 @@ Array [
 `;
 
 exports[`default lang and global scope 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -58,10 +58,10 @@ Array [
 `;
 
 exports[`global 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "ja",
-    "resource": Object {
+    "resource": {
       "hello": [Function],
     },
   },
@@ -69,11 +69,11 @@ Array [
 `;
 
 exports[`global 2`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -82,11 +82,11 @@ Array [
 `;
 
 exports[`global scope and import 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -95,24 +95,100 @@ Array [
 `;
 
 exports[`import 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
+  },
+]
+`;
+
+exports[`jitCompilation 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {
+      "en": {
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
+      },
+    },
+  },
+]
+`;
+
+exports[`json: exclude locales 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {},
   },
 ]
 `;
 
 exports[`json5 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -120,11 +196,40 @@ Array [
 ]
 `;
 
+exports[`json5: exclude locales 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {},
+  },
+]
+`;
+
+exports[`legacy for Vue 2.6 and before 1`] = `
+"function block0(Component) {
+  Component.options.__i18n = Component.options.__i18n || [];
+  Component.options.__i18n.push('{\\"en\\":{\\"hello\\":\\"hello world!\\"}}');
+  delete Component.options._Ctor;
+}
+const _sfc_main = {};
+if (typeof block0 === \\"function\\")
+  block0(_sfc_main);
+const exports = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
+  __proto__: null,
+  default: _sfc_main
+}, Symbol.toStringTag, { value: \\"Module\\" }));
+if (typeof window !== \\"undefined\\") {
+  window.module = _sfc_main;
+  window.exports = exports;
+}
+"
+`;
+
 exports[`locale attr 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "ja",
-    "resource": Object {
+    "resource": {
       "hello": [Function],
     },
   },
@@ -132,18 +237,18 @@ Array [
 `;
 
 exports[`locale attr and basic 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
   },
-  Object {
+  {
     "locale": "ja",
-    "resource": Object {
+    "resource": {
       "hello": [Function],
     },
   },
@@ -151,10 +256,10 @@ Array [
 `;
 
 exports[`locale attr and import 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "en",
-    "resource": Object {
+    "resource": {
       "hello": [Function],
     },
   },
@@ -162,19 +267,19 @@ Array [
 `;
 
 exports[`multiple 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
   },
-  Object {
+  {
     "locale": "",
-    "resource": Object {
-      "ja": Object {
+    "resource": {
+      "ja": {
         "hello": [Function],
       },
     },
@@ -183,11 +288,11 @@ Array [
 `;
 
 exports[`special characters 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "",
-    "resource": Object {
-      "en": Object {
+    "resource": {
+      "en": {
         "hello": [Function],
       },
     },
@@ -196,16 +301,33 @@ Array [
 `;
 
 exports[`yaml 1`] = `
-Array [
-  Object {
+[
+  {
     "locale": "en",
-    "resource": Object {
+    "resource": {
       "hello": [Function],
     },
   },
-  Object {
+  {
     "locale": "ja",
-    "resource": Object {
+    "resource": {
+      "hello": [Function],
+    },
+  },
+]
+`;
+
+exports[`yaml: exclude locales 1`] = `
+[
+  {
+    "locale": "en",
+    "resource": {
+      "hello": [Function],
+    },
+  },
+  {
+    "locale": "ja",
+    "resource": {
       "hello": [Function],
     },
   },

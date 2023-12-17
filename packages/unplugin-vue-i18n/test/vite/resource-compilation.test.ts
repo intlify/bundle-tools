@@ -1,3 +1,4 @@
+import { vi } from 'vitest'
 import { resolve } from 'pathe'
 import { bundleVite, bundleAndRun } from '../utils'
 import { isFunction, assign } from '@intlify/shared'
@@ -6,7 +7,9 @@ import { createMessageContext } from '@intlify/core-base'
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 let spyConsoleError: any
 beforeEach(() => {
-  spyConsoleError = jest.spyOn(global.console, 'error').mockImplementation()
+  spyConsoleError = vi
+    .spyOn(global.console, 'error')
+    .mockImplementation(() => {}) // eslint-disable-line @typescript-eslint/no-empty-function
 })
 
 afterEach(() => {
@@ -94,4 +97,14 @@ test('escape message', async () => {
   expect(module.alert(createMessageContext())).toBe(
     `&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;`
   )
+})
+
+test('jitCompilation', async () => {
+  const { module } = await bundleAndRun('ja.json', bundleVite, {
+    jitCompilation: true,
+    ...options
+  })
+  const fn = module.message
+  // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
+  expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })

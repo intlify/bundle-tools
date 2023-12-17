@@ -1,15 +1,15 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`custom blocks: json 1`] = `";;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`custom blocks: json 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`custom blocks: json5 1`] = `";;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`custom blocks: json5 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`custom blocks: yaml 1`] = `";AACOA,QAAAA,aAAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ACEP,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASC;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`custom blocks: yaml 1`] = `";AACOA,QAAAA,aAAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;ACEP,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASC;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`custom blocks: yml 1`] = `";;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`custom blocks: yml 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`resource files: json 1`] = `";;;wCACYA,aAAAA,QAAAA,KAAAA,CAAAA,CAAAA,GAAAA,WAAAC,CAAAC,aAAAA,MAAAA,CAAAA,CAAAA,GAAAA,QAAAA,CAAAA,GAAAA,WAAAC,CAAAC,aAAAA,OAAAA,GAAAA,CAAAA,GAAAA,SAAAA,CAAAA,CAAAA,CAAAA;AAAAA,EAAAA;AAAAA;IAEAC,SAAAA,CAAAA,QAAAA;AAAAA,YAAAA,EAAAA,WAAAA,YAAAA,aAAAA,cAAAA,OAAAA,OAAAA,IAAAA;AAAAA,aAAAA,WAAAA,CAAAA,UAAAC,aAAAA,OAAAA,MAAAA,CAAAA,GAAAA,GAAAA,CAAAA;AAAAA,IAAAA;AAAAA;;;;;;;;;;;;;;;;;;;ACAZ,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`resource files: json 1`] = `";;;;iCACYA,CAAAA,QAAAA,aAAAA,QAAAA,KAAAA,CAAAC,CAAAC,GAAAA,WAAAA,CAAAA,aAAAA,MAAAA,CAAAA,CAAAA,GAAAA,QAAAC,CAAAC,GAAAA,WAAAA,CAAAA,aAAAA,OAAAA,GAAAA,CAAAA,GAAAA,SAAAA,CAAAA,CAAAA,CAAAA;AAAAA,IAAAA;AAAAA,OAAAA,SAAAA;AAAAA,WAAAA;AAAAA,EAAAA,GAAAA;AAAAA;IAEAC,UAAAA,MAAAA;AAAAA,YAAAA,KAAAA,CAAAA,QAAAA;AAAAA,cAAAA,EAAAA,WAAAA,YAAAA,aAAAA,cAAAA,OAAAA,OAAAA,IAAAA;AAAAA,eAAAA,WAAAC,CAAAA,UAAAA,aAAAA,OAAAA,MAAAA,CAAAA,GAAAA,GAAAA,CAAAA;AAAAA,MAAAA;AAAAA,SAAAA,SAAAA;AAAAA,aAAAA;AAAAA,IAAAA,GAAAA;AAAAA;;;;;;;;;;;;;;;;;;;;;;;;;;;ACAZ,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASC;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`resource files: json5 1`] = `";;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`resource files: json5 1`] = `";;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
 
-exports[`resource files: yaml 1`] = `";;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+exports[`resource files: yaml 1`] = `";;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;

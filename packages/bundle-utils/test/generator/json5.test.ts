@@ -11,3 +11,13 @@ test('json5', async () => {
   expect(code).toMatchSnapshot('code')
   expect(map).toMatchSnapshot('map')
 })
+
+test('AST code generation', async () => {
+  const { source } = await readFile('./fixtures/codegen/complex.json5')
+  const { code } = generate(source, {
+    jit: true,
+    env: 'production'
+  })
+
+  expect(code).toMatchSnapshot('code')
+})

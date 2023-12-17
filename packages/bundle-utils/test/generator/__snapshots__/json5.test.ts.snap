@@ -1,7 +1,41 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`json5: code 1`] = `
-"export default {
+exports[`AST code generation > code 1`] = `
+"const resource = {
+  \\"hi\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hi there!\\"}},
+  \\"nested\\": {
+    \\"hello\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hello world!\\"}},
+    \\"more\\": {
+      \\"plural\\": {\\"t\\":0,\\"b\\":{\\"t\\":1,\\"c\\":[{\\"t\\":2,\\"i\\":[{\\"t\\":6,\\"k\\":{\\"t\\":9,\\"v\\":\\"no apples\\"},\\"m\\":{\\"t\\":8,\\"v\\":\\"caml\\"}}]},{\\"t\\":2,\\"i\\":[{\\"t\\":5,\\"i\\":0},{\\"t\\":3,\\"v\\":\\" apple\\"}]},{\\"t\\":2,\\"i\\":[{\\"t\\":4,\\"k\\":\\"n\\"},{\\"t\\":3,\\"v\\":\\" apples\\"}]}]}}
+    },
+    \\"list\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":5,\\"i\\":0},{\\"t\\":3,\\"v\\":\\" !\\"}]}}
+  },
+  \\"こんにちは\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"こんにちは！\\"}},
+  \\"single-quote\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"I don\\\\u0027t know!\\"}},
+  \\"emoji\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"😺\\"}},
+  \\"unicode\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"A\\"}},
+  \\"unicode-escape\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"\\\\\\\\u0041\\"}},
+  \\"backslash-single-quote\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"\\\\\\\\\\\\u0027\\"}},
+  \\"backslash-backslash\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"\\\\\\\\\\\\\\\\\\"}},
+  \\"errors\\": [
+    {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"ERROR1001\\"}},
+    {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"ERROR1002\\"}},
+    
+  ],
+  \\"complex\\": {
+    \\"warnings\\": [
+      {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"NOTE: This is warning\\"}},
+      {
+        \\"named-waring\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"this is \\"},{\\"t\\":4,\\"k\\":\\"type\\"},{\\"t\\":3,\\"v\\":\\" warining\\"}]}}
+      }
+    ]
+  }
+}
+export default resource"
+`;
+
+exports[`json5 > code 1`] = `
+"const resource = {
   \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
   \\"nested\\": {
     \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
@@ -30,13 +64,14 @@ exports[`json5: code 1`] = `
       }
     ]
   }
-}"
+}
+export default resource"
 `;
 
-exports[`json5: map 1`] = `
-Object {
+exports[`json5 > map 1`] = `
+{
   "mappings": ";wEACKA;;6EAEKC;;uMAEGC,aAAAC,8BAAAC,wBAAAC,wBAAAC,2BAAAC;;oHAEJC,QAAAJ,wBAAAK;;;6EAGCC;oFACOC;2EACTC;6EACEC;sFACSC;8FACQC;2FACHC;;sEAErBC,aAAaC;;;;wEAIXC;;oIAEkBC,YAAAC,8BAAAC",
-  "names": Array [
+  "names": [
     "hi there!",
     "hello world!",
     "no apples",
@@ -61,10 +96,10 @@ Object {
     "type",
     " warining",
   ],
-  "sources": Array [
+  "sources": [
     "vue-i18n-loader.json",
   ],
-  "sourcesContent": Array [
+  "sourcesContent": [
     "{
   hi: \\"hi there!\\",
   nested: {

@@ -5,7 +5,9 @@
 import { isString, friendlyJSONstringify } from '@intlify/shared'
 import {
   createCodeGenerator,
+  excludeLocales,
   generateMessageFunction,
+  generateResourceAst,
   mapLinesColumns
 } from './codegen'
 import {
@@ -14,11 +16,16 @@ import {
   getStaticYAMLValue
 } from 'yaml-eslint-parser'
 import { generateLegacyCode } from './legacy'
-import { RawSourceMap } from 'source-map'
 import MagicString from 'magic-string'
 
+import type { RawSourceMap } from 'source-map'
 import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
-import type { CodeGenOptions, CodeGenerator, CodeGenResult } from './codegen'
+import type {
+  CodeGenOptions,
+  CodeGenerator,
+  CodeGenResult,
+  CodeGenFunction
+} from './codegen'
 
 /**
  * @internal
@@ -28,7 +35,9 @@ export function generate(
   {
     type = 'plain',
     legacy = false,
+    vueVersion = 'v2.6',
     bridge = false,
+    onlyLocales = [],
     exportESM = false,
     useClassComponent = false,
     filename = 'vue-i18n-loader.yaml',
@@ -40,11 +49,12 @@ export function generate(
     forceStringify = false,
     onError = undefined,
     strictMessage = true,
-    escapeHtml = false
+    escapeHtml = false,
+    jit = false
   }: CodeGenOptions,
   injector?: () => string
 ): CodeGenResult<YAMLProgram> {
-  const value = Buffer.isBuffer(targetSource)
+  let value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
     : targetSource
 
@@ -63,16 +73,29 @@ export function generate(
     onError,
     strictMessage,
     escapeHtml,
-    useClassComponent
+    useClassComponent,
+    jit
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
-  const ast = parseYAML(value, { filePath: filename })
+  let ast = parseYAML(value, { filePath: filename })
+
+  if (!locale && type === 'sfc' && onlyLocales?.length) {
+    const messages = getStaticYAMLValue(ast) as Record<string, unknown>
+
+    value = JSON.stringify(
+      excludeLocales({
+        messages,
+        onlyLocales
+      })
+    )
+    ast = parseYAML(value, { filePath: filename })
+  }
 
   // for vue 2.x
   if (legacy && type === 'sfc') {
     const gen = () => friendlyJSONstringify(getStaticYAMLValue(ast))
-    const code = generateLegacyCode(options, gen)
+    const code = generateLegacyCode({ isGlobal, vueVersion }, gen)
     const s = new MagicString(code)
     return {
       ast,
@@ -85,7 +108,7 @@ export function generate(
     }
   }
 
-  const codeMaps = generateNode(generator, ast, options, injector)
+  const codeMaps = _generate(generator, ast, options, injector)
 
   const { code, map } = generator.context()
   // prettier-ignore
@@ -99,10 +122,10 @@ export function generate(
   }
 }
 
-function generateNode(
+function _generate(
   generator: CodeGenerator,
   node: YAMLProgram,
-  options: CodeGenOptions,
+  options: CodeGenOptions = {},
   injector?: () => string
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
@@ -117,8 +140,13 @@ function generateNode(
     sourceMap,
     isGlobal,
     locale,
-    useClassComponent
+    useClassComponent,
+    jit
   } = options
+
+  const codegenFn: CodeGenFunction = jit
+    ? generateResourceAst
+    : generateMessageFunction
 
   const componentNamespace = '_Component'
 
@@ -127,7 +155,7 @@ function generateNode(
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
-            generator.push(`export default `)
+            generator.push(`const resource = `)
           } else if (type === 'sfc') {
             const variableName =
               type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
@@ -144,7 +172,7 @@ function generateNode(
             const componentVariable = bridge
               ? `Component.options || Component`
               : useClassComponent
-                ? `Component.__o || Component`
+                ? `Component.__o || Component.__vccOpts || Component`
                 : `Component`
             // prettier-ignore
             generator.pushline(`const ${componentNamespace} = ${componentVariable}`)
@@ -181,11 +209,7 @@ function generateNode(
             if (isString(value)) {
               generator.push(`${JSON.stringify(name)}: `)
               name && pathStack.push(name.toString())
-              const { code, map } = generateMessageFunction(
-                value,
-                options,
-                pathStack
-              )
+              const { code, map } = codegenFn(value, options, pathStack)
               sourceMap && map != null && codeMaps.set(value, map)
               generator.push(`${code}`, node.value, value)
             } else {
@@ -193,11 +217,7 @@ function generateNode(
                 const strValue = JSON.stringify(value)
                 generator.push(`${JSON.stringify(name)}: `)
                 name && pathStack.push(name.toString())
-                const { code, map } = generateMessageFunction(
-                  strValue,
-                  options,
-                  pathStack
-                )
+                const { code, map } = codegenFn(strValue, options, pathStack)
                 sourceMap && map != null && codeMaps.set(strValue, map)
                 generator.push(`${code}`, node.value, strValue)
               } else {
@@ -242,21 +262,13 @@ function generateNode(
             if (node.type === 'YAMLScalar') {
               const value = node.value
               if (isString(value)) {
-                const { code, map } = generateMessageFunction(
-                  value,
-                  options,
-                  pathStack
-                )
+                const { code, map } = codegenFn(value, options, pathStack)
                 sourceMap && map != null && codeMaps.set(value, map)
                 generator.push(`${code}`, node, value)
               } else {
                 if (forceStringify) {
                   const strValue = JSON.stringify(value)
-                  const { code, map } = generateMessageFunction(
-                    strValue,
-                    options,
-                    pathStack
-                  )
+                  const { code, map } = codegenFn(strValue, options, pathStack)
                   sourceMap && map != null && codeMaps.set(strValue, map)
                   generator.push(`${code}`, node, strValue)
                 } else {
@@ -289,6 +301,9 @@ function generateNode(
             }
             generator.deindent()
             generator.push(`}`)
+          } else if (type === 'plain') {
+            generator.push(`\n`)
+            generator.push('export default resource')
           }
           break
         case 'YAMLMapping':

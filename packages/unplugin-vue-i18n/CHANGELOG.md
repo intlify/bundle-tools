@@ -1,4 +1,16 @@
 
+## @intlify/unplugin-vue-i18n@2.0.0 (2023-12-20)
+
+#### :boom: Breaking Change
+* [#334](https://github.com/intlify/bundle-tools/pull/334) BREAKING CHANGE: drop `@intlify/vite-plugin-vue-i18n/messages` virtual module ID ([@kazupon](https://github.com/kazupon))
+
+#### :warning: Deprecated Features
+* [#334](https://github.com/intlify/bundle-tools/pull/334) BREAKING CHANGE: drop `@intlify/vite-plugin-vue-i18n/messages` virtual module ID ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@1.6.0 (2023-12-13)
 
 #### :star: Features

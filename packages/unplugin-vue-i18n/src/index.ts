@@ -36,8 +36,6 @@ import type { PluginOptions } from './types'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
-const INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID =
-  '@intlify/vite-plugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 
 const debug = createDebug('unplugin-vue-i18n')
@@ -491,13 +489,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
     resolveId(id: string, importer: string) {
       debug('resolveId', id, importer)
-      if (id === INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID) {
-        warn(
-          `deprected '${INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID}', you should switch to '${INTLIFY_BUNDLE_IMPORT_ID}'`
-        )
-        return asVirtualId(id, meta.framework)
-      }
-
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
         return asVirtualId(id, meta.framework)
       }
@@ -508,9 +499,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       debug('load', id)
       const { query } = parseVueRequest(id)
       if (
-        [INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID, INTLIFY_BUNDLE_IMPORT_ID].includes(
-          getVirtualId(id, meta.framework)
-        ) &&
+        INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
         include
       ) {
         let resourcePaths = [] as string[]
@@ -552,7 +541,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         return (
           filename.endsWith('vue') ||
           filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
-          filename.endsWith(INTLIFY_BUNDLE_IMPORT_DEPRECTED_ID) ||
           (/\.(json5?|ya?ml)$/.test(filename) && filter(filename))
         )
       }

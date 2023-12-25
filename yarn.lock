@@ -1249,7 +1249,7 @@ __metadata:
     vue: ^2.6.14
     vue-i18n: 9.8.0
     vue-loader: ^16.3.0
-    vue-loader15: "npm:vue-loader@15.10.2"
+    vue-loader15: "npm:vue-loader@15.11.1"
     vue-loader17: "npm:vue-loader@17.2.2"
     vue-template-compiler: ^2.6.14
     vue3: "npm:vue@3.3.4"
@@ -13599,9 +13599,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-loader15@npm:vue-loader@15.10.2":
-  version: 15.10.2
-  resolution: "vue-loader@npm:15.10.2"
+"vue-loader15@npm:vue-loader@15.11.1":
+  version: 15.11.1
+  resolution: "vue-loader@npm:15.11.1"
   dependencies:
     "@vue/component-compiler-utils": ^3.1.0
     hash-sum: ^1.0.2
@@ -13618,7 +13618,7 @@ __metadata:
       optional: true
     vue-template-compiler:
       optional: true
-  checksum: 3f4bfd100967af90ad5bd37de9a1dc2ca2f04b1bd7e695772a960186d74c51e161c89c08dd8623062b9151bd2f0bf493d2bbcd381214fa189977e0d379519b57
+  checksum: 509a816d45d4f3de6fbe8aed2267e3113637950e61597bb7647cd43328d4eab9c70235f5161ab761f0a2162471f69271ae54b2a806663c2094a10266434fa6a3
   languageName: node
   linkType: hard
 

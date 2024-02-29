@@ -28,7 +28,7 @@
   "dependencies": {
     "@intlify/bundle-utils": "^7.4.0",
     "@intlify/shared": "^9.4.0",
-    "@rollup/pluginutils": "^5.0.2",
+    "@rollup/pluginutils": "^5.1.0",
     "@vue/compiler-sfc": "^3.2.47",
     "debug": "^4.3.3",
     "fast-glob": "^3.2.12",

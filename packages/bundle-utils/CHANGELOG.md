@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@7.5.1 (2024-02-29)
+
+#### :zap: Improvement Features
+* [#348](https://github.com/intlify/bundle-tools/pull/348) fix(bundle-utils): upgrade escodegen ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@7.5.0 (2023-12-13)
 
 #### :star: Features

@@ -21,7 +21,7 @@
     "@intlify/message-compiler": "^9.4.0",
     "@intlify/shared": "^9.4.0",
     "acorn": "^8.8.2",
-    "escodegen": "^2.0.0",
+    "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",
     "magic-string": "^0.30.0",

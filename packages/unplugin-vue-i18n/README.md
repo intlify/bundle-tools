@@ -354,13 +354,13 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 
   Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
 
-  > [!NOTE]
-  > This option works with vue-i18n v9.3 and later.
+> [!NOTE]
+  This option works with vue-i18n v9.3 and later.
 
   JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale mesages with programatic.
 
-  > [!WARNING]
-  > Enabling JIT compilation causes the message compiler to generate AST objects for locale mesages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
+> [!WARNING]
+  Enabling JIT compilation causes the message compiler to generate AST objects for locale mesages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
 
   About JIT compilation, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#jit-compilation)
 
@@ -386,8 +386,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   Whether to bundle vue-i18n module for SSR at build time
 
-  > [!WARNING]
-  > This option works with vue-i18n v9.4 and later.
+> [!NOTE]
+  This option works with vue-i18n v9.4 and later.
 
 ### `runtimeOnly`
 
@@ -545,8 +545,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   To support in a smooth transition from vue-i18n@v8.x to vue-i18n@v9.x, we provide a mode that bundles the i18n custom block to be available in either version.
 
-  > [!WARNING]
-  > ⚠️ Note that if you set `bridge: true`, the bundle size will increase. It is recommended to disable this mode after the migration from vue-i18n@v8.26 to vue-i18n@v9.x is completed.
+> [!WARNING]
+   Note that if you set `bridge: true`, the bundle size will increase. It is recommended to disable this mode after the migration from vue-i18n@v8.26 to vue-i18n@v9.x is completed.
 
 ### `legacy`
 
@@ -555,8 +555,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option supports Vue I18n v8.x compatibility for resources in i18n custom blocks.
 
-  > [!WARNING]
-  > ⚠️ To work for Vue 2.7, the value of `vueVersion` must be set to `'v2.7'`.
+> [!NOTE]
+  To work for Vue 2.7, the value of `vueVersion` must be set to `'v2.7'`.
 
 ### `vueVersion`
 

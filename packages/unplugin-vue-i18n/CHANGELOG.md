@@ -1,4 +1,25 @@
 
+## @intlify/unplugin-vue-i18n@3.0.0 (2024-03-07)
+
+#### :zap: Improvement Features
+* [#349](https://github.com/intlify/bundle-tools/pull/349) breaking(unplugin-vue-i18n): deprecate around some options for Vue 2 ([@kazupon](https://github.com/kazupon))
+
+#### :warning: Deprecated Features
+* [#349](https://github.com/intlify/bundle-tools/pull/349) breaking(unplugin-vue-i18n): deprecate around some options for Vue 2 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@3.0.0 (2024-02-29)
+
+#### :zap: Improvement Features
+* [#347](https://github.com/intlify/bundle-tools/pull/347) fix(unplugn-vue-i18n): support rollup v4 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@2.0.0 (2023-12-20)
 
 #### :boom: Breaking Change

@@ -350,7 +350,10 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 ### `jitCompilation`
 
 - **Type:** `boolean`
-- **Default:** `false`
+- **Default:** `true`
+
+> [!IMPORTANT]
+  'jitCompilation' option now defaults to `true` from 3.0.
 
   Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
 
@@ -374,10 +377,10 @@ Whether to tree-shake message compiler when we will be bundling.
 If do you will use this option, you need to enable `jitCompilation` option.
 
 > [!NOTE]
-> This option works with vue-i18n v9.3 and later.
+  This option works with vue-i18n v9.3 and later.
 
 > [!WARNING]
-> If you enable this option, **you should check  resources in your application are pre-compiled with this plugin.** If you will be loading resources dynamically from the back-end via the API, enabling this option do not work because there is not message compiler.
+  If you enable this option, **you should check resources in your application are pre-compiled with this plugin.** If you will be loading resources dynamically from the back-end via the API, enabling this option do not work because there is not message compiler.
 
 ### `ssr`
 
@@ -541,6 +544,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 - **Type:** `boolean`
 - **Default:** `false`
 
+> [!WARNING]
+  'bridge' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+
   The mode to birdge the i18n custom block to work in both vue-i18n@v8.x and vue-i18n@v9.x environments.
 
   To support in a smooth transition from vue-i18n@v8.x to vue-i18n@v9.x, we provide a mode that bundles the i18n custom block to be available in either version.
@@ -553,6 +559,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 - **Type:** `boolean`
 - **Default:** `false`
 
+> [!WARNING]
+  'legacy' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+
   This option supports Vue I18n v8.x compatibility for resources in i18n custom blocks.
 
 > [!NOTE]
@@ -562,6 +571,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
 - **Type:** `string`
 - **Default:** `undefined`
+
+> [!WARNING]
+  'vueVersion' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
 
   The version of Vue that will be used by Vue I18n. This option is enabled when the `legacy` option is `true`.
 

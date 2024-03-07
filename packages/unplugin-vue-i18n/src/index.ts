@@ -44,6 +44,10 @@ const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
 const installedVueI18nBridge = checkVueI18nBridgeInstallPackage(debug)
 const vueI18nVersion = getVueI18nVersion(debug)
 
+if (vueI18nVersion === '8') {
+  warn(`vue-i18n@8 is not supported, since sinece Vue 2 was EOL on 2023.`)
+}
+
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
 
@@ -83,21 +87,39 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   const bridge = !!options.bridge
   debug('bridge', bridge)
+  if (bridge) {
+    warn(
+      `'bridge' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+    )
+  }
 
   const legacy = !!options.legacy
   debug('legacy', legacy)
+  if (legacy) {
+    warn(
+      `'legacy' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+    )
+  }
 
   const vueVersion = isString(options.vueVersion)
     ? options.vueVersion
     : undefined
+  if (!vueVersion) {
+    warn(
+      `'vueVersion' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+    )
+  }
 
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
     : true
   debug('runtimeOnly', runtimeOnly)
 
-  const jitCompilation = !!options.jitCompilation
+  const jitCompilation = isBoolean(options.jitCompilation)
+    ? options.jitCompilation
+    : true
   debug('jitCompilation', jitCompilation)
+
   const dropMessageCompiler = jitCompilation
     ? !!options.dropMessageCompiler
     : false

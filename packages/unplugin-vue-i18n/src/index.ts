@@ -104,7 +104,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const vueVersion = isString(options.vueVersion)
     ? options.vueVersion
     : undefined
-  if (!vueVersion) {
+  if (vueVersion) {
     warn(
       `'vueVersion' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
     )

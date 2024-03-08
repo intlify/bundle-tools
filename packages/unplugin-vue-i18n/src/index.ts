@@ -89,7 +89,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('bridge', bridge)
   if (bridge) {
     warn(
-      `'bridge' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+      `'bridge' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
     )
   }
 
@@ -97,7 +97,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('legacy', legacy)
   if (legacy) {
     warn(
-      `'legacy' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+      `'legacy' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
     )
   }
 
@@ -106,7 +106,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     : undefined
   if (vueVersion) {
     warn(
-      `'vueVersion' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
+      `'vueVersion' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
     )
   }
 

@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@3.0.1 (2024-03-08)
+
+#### :bug: Bug Fixes
+* [#350](https://github.com/intlify/bundle-tools/pull/350) Fix vueVersion warning ([@yenche123](https://github.com/yenche123))
+
+#### Committers: 1
+- Tsui Yen-Che ([@yenche123](https://github.com/yenche123))
+
+
 ## @intlify/unplugin-vue-i18n@3.0.0 (2024-03-07)
 
 #### :zap: Improvement Features

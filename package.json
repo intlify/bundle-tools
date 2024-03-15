@@ -25,7 +25,7 @@
   "devDependencies": {
     "@intlify/core-base": "^9.4.0",
     "@kazupon/lerna-changelog": "^4.3.0",
-    "@octokit/rest": "^18.6.0",
+    "@octokit/rest": "^20.0.0",
     "@rollup/plugin-alias": "^3.1.5",
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",

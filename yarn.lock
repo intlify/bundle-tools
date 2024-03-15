@@ -1189,7 +1189,7 @@ __metadata:
     "@intlify/core-base": ^9.4.0
     "@kazupon/lerna-changelog": ^4.3.0
     "@octokit/rest": ^18.6.0
-    "@rollup/plugin-alias": ^3.1.5
+    "@rollup/plugin-alias": ^5.0.0
     "@rollup/plugin-commonjs": ^19.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
     "@rollup/plugin-replace": ^2.4.2
@@ -1903,17 +1903,6 @@ __metadata:
   dependencies:
     "@octokit/openapi-types": ^11.2.0
   checksum: f122b9aee8f6baddd515e34a0913e73b21d4bc82d6ee59d77a8aaf01b4a02c10867dd013003d087a83dc96db23511893669015af6d30c27cece185e21cf1df89
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-alias@npm:^3.1.5":
-  version: 3.1.9
-  resolution: "@rollup/plugin-alias@npm:3.1.9"
-  dependencies:
-    slash: ^3.0.0
-  peerDependencies:
-    rollup: ^1.20.0||^2.0.0
-  checksum: cefae9dfb7c30f0dc78d24f4ad9ccb8a0878397b313c0fa9d0f519667394941c58a930d968d841e25aee43b0fb892d1e3f7edbb55e8197f191cce7da6a50b882
   languageName: node
   linkType: hard
 

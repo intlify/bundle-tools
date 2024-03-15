@@ -1192,7 +1192,7 @@ __metadata:
     "@rollup/plugin-alias": ^3.1.5
     "@rollup/plugin-commonjs": ^19.0.0
     "@rollup/plugin-node-resolve": ^13.0.0
-    "@rollup/plugin-replace": ^2.4.2
+    "@rollup/plugin-replace": ^5.0.0
     "@rollup/pluginutils": ^4.1.0
     "@secretlint/secretlint-rule-preset-recommend": ^3.1.0
     "@types/debug": ^4.1.5
@@ -2016,19 +2016,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rollup/plugin-replace@npm:^2.4.2":
-  version: 2.4.2
-  resolution: "@rollup/plugin-replace@npm:2.4.2"
-  dependencies:
-    "@rollup/pluginutils": ^3.1.0
-    magic-string: ^0.25.7
-  peerDependencies:
-    rollup: ^1.20.0 || ^2.0.0
-  checksum: b2f1618ee5526d288e2f8ae328dcb326e20e8dc8bd1f60d3e14d6708a5832e4aa44811f7d493f4aed2deeadca86e3b6b0503cd39bf50cfb4b595bb9da027fad0
-  languageName: node
-  linkType: hard
-
-"@rollup/plugin-replace@npm:^5.0.2":
+"@rollup/plugin-replace@npm:^5.0.0, @rollup/plugin-replace@npm:^5.0.2":
   version: 5.0.2
   resolution: "@rollup/plugin-replace@npm:5.0.2"
   dependencies:

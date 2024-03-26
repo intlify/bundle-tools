@@ -15,7 +15,6 @@ export interface PluginOptions {
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat
   globalSFCScope?: boolean
-  bridge?: boolean
   legacy?: boolean
   vueVersion?: CodeGenOptions['vueVersion']
   useClassComponent?: boolean

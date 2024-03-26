@@ -1,17 +1,8 @@
 import { vi } from 'vitest'
-import {
-  checkInstallPackage,
-  checkVueI18nBridgeInstallPackage,
-  loadModule,
-  getVueI18nVersion
-} from '../src/deps'
+import { checkInstallPackage, loadModule, getVueI18nVersion } from '../src/deps'
 
 test.skip('vue-i18n', () => {
   expect(checkInstallPackage('vue-i18n', vi.fn())).toBe('vue-i18n')
-})
-
-test.skip('vue-i18n-bridge', () => {
-  expect(checkVueI18nBridgeInstallPackage(vi.fn())).toBe(false)
 })
 
 test.skip('loadModule', () => {

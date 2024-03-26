@@ -29,8 +29,6 @@ export function generate(
   targetSource: string | Buffer,
   {
     type = 'plain',
-    bridge = false,
-    exportESM = false,
     filename = 'vue-i18n-loader.js',
     inSourceMap = undefined,
     locale = '',
@@ -44,8 +42,7 @@ export function generate(
     useClassComponent = false,
     allowDynamic = false,
     jit = false
-  }: CodeGenOptions,
-  injector?: () => string
+  }: CodeGenOptions
 ): CodeGenResult<Node> {
   const target = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
@@ -54,8 +51,6 @@ export function generate(
 
   const options = {
     type,
-    bridge,
-    exportESM,
     source: value,
     sourceMap,
     locale,
@@ -109,7 +104,7 @@ export function generate(
     }
   }
 
-  const codeMaps = _generate(generator, ast, options, injector)
+  const codeMaps = _generate(generator, ast, options)
 
   const { code, map } = generator.context()
   // if (map) {
@@ -155,8 +150,7 @@ function scanAst(ast: Node) {
 function _generate(
   generator: CodeGenerator,
   node: Node,
-  options: CodeGenOptions = {},
-  injector?: () => string
+  options: CodeGenOptions = {}
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
   const pathStack = [] as string[]
@@ -164,16 +158,7 @@ function _generate(
   const skipStack = [] as boolean[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
-  const {
-    type,
-    bridge,
-    exportESM,
-    sourceMap,
-    isGlobal,
-    locale,
-    useClassComponent,
-    jit
-  } = options
+  const { type, sourceMap, isGlobal, locale, useClassComponent, jit } = options
 
   const codegenFn: CodeGenFunction = jit
     ? generateResourceAst
@@ -200,17 +185,11 @@ function _generate(
               type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
             const localeName =
               type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            const exportSyntax = bridge
-              ? exportESM
-                ? `export default`
-                : `module.exports =`
-              : `export default`
+            const exportSyntax = 'export default'
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
             // prettier-ignore
-            const componentVariable = bridge
-              ? `Component.options || Component`
-              : useClassComponent
+            const componentVariable = useClassComponent
                 ? `Component.__o || Component.__vccOpts || Component`
                 : `Component`
             // prettier-ignore
@@ -383,16 +362,6 @@ function _generate(
           if (type === 'sfc') {
             generator.deindent()
             generator.push(`})`)
-            if (bridge && injector) {
-              generator.newline()
-              generator.pushline(
-                `${componentNamespace}.__i18nBridge = ${componentNamespace}.__i18nBridge || []`
-              )
-              generator.pushline(
-                `${componentNamespace}.__i18nBridge.push('${injector()}')`
-              )
-              generator.pushline(`delete ${componentNamespace}._Ctor`)
-            }
             generator.deindent()
             generator.pushline(`}`)
           } else if (type === 'plain') {

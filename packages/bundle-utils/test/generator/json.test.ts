@@ -59,84 +59,14 @@ describe('code generation', () => {
     expect(map).toMatchSnapshot('map')
   })
 
-  test('legacy', async () => {
+  test('useClassComponent', async () => {
     const { source } = await readFile('./fixtures/codegen/complex.json')
     const { code, map } = generate(source, {
       type: 'sfc',
-      legacy: true,
-      sourceMap: true
+      useClassComponent: true,
+      sourceMap: true,
+      env: 'development'
     })
-
-    expect(validateSyntax(code)).toBe(true)
-    expect(code).toMatchSnapshot('code')
-    expect(map).toMatchSnapshot('map')
-  })
-
-  test('bridge', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(
-      source,
-      {
-        type: 'sfc',
-        bridge: true,
-        sourceMap: true,
-        env: 'development'
-      },
-      () => {
-        return source
-          .replace(/\u2028/g, '\\u2028')
-          .replace(/\u2029/g, '\\u2029')
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0027/g, '\\u0027')
-      }
-    )
-
-    expect(code).toMatchSnapshot('code')
-    expect(map).toMatchSnapshot('map')
-  })
-
-  test('bridge with ESM exporting', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(
-      source,
-      {
-        type: 'sfc',
-        bridge: true,
-        exportESM: true,
-        sourceMap: true,
-        env: 'development'
-      },
-      () => {
-        return source
-          .replace(/\u2028/g, '\\u2028')
-          .replace(/\u2029/g, '\\u2029')
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0027/g, '\\u0027')
-      }
-    )
-
-    expect(code).toMatchSnapshot('code')
-    expect(map).toMatchSnapshot('map')
-  })
-
-  test('useClassComponent', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(
-      source,
-      {
-        type: 'sfc',
-        useClassComponent: true,
-        sourceMap: true,
-        env: 'development'
-      },
-      () => {
-        return source
-          .replace(/\u2028/g, '\\u2028')
-          .replace(/\u2029/g, '\\u2029')
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0027/g, '\\u0027')
-      }
-    )
 
     expect(validateSyntax(code)).toBe(true)
     expect(code).toMatchSnapshot('code')
@@ -275,83 +205,14 @@ describe('AST code generation', () => {
     expect(map).toBeUndefined()
   })
 
-  test('legacy', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code } = generate(source, {
-      jit: true,
-      type: 'sfc',
-      legacy: true
-    })
-
-    expect(validateSyntax(code)).toBe(true)
-    expect(code).toMatchSnapshot('code')
-  })
-
-  test('bridge', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(
-      source,
-      {
-        jit: true,
-        type: 'sfc',
-        bridge: true,
-        env: 'development'
-      },
-      () => {
-        return source
-          .replace(/\u2028/g, '\\u2028')
-          .replace(/\u2029/g, '\\u2029')
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0027/g, '\\u0027')
-      }
-    )
-
-    expect(code).toMatchSnapshot('code')
-    expect(map).toBeUndefined()
-  })
-
-  test('bridge with ESM exporting', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(
-      source,
-      {
-        jit: true,
-        type: 'sfc',
-        bridge: true,
-        exportESM: true,
-        env: 'development'
-      },
-      () => {
-        return source
-          .replace(/\u2028/g, '\\u2028')
-          .replace(/\u2029/g, '\\u2029')
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0027/g, '\\u0027')
-      }
-    )
-
-    expect(code).toMatchSnapshot('code')
-    expect(map).toBeUndefined()
-  })
-
   test('useClassComponent', async () => {
     const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(
-      source,
-      {
-        jit: true,
-        type: 'sfc',
-        useClassComponent: true,
-        env: 'development'
-      },
-      () => {
-        return source
-          .replace(/\u2028/g, '\\u2028')
-          .replace(/\u2029/g, '\\u2029')
-          .replace(/\\/g, '\\\\')
-          .replace(/\u0027/g, '\\u0027')
-      }
-    )
+    const { code, map } = generate(source, {
+      jit: true,
+      type: 'sfc',
+      useClassComponent: true,
+      env: 'development'
+    })
 
     expect(validateSyntax(code)).toBe(true)
     expect(code).toMatchSnapshot('code')

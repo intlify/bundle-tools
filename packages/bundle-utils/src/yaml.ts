@@ -2,7 +2,7 @@
  * Code generator for i18n yaml resource
  */
 
-import { isString, friendlyJSONstringify } from '@intlify/shared'
+import { isString } from '@intlify/shared'
 import {
   createCodeGenerator,
   excludeLocales,
@@ -15,8 +15,6 @@ import {
   traverseNodes,
   getStaticYAMLValue
 } from 'yaml-eslint-parser'
-import { generateLegacyCode } from './legacy'
-import MagicString from 'magic-string'
 
 import type { RawSourceMap } from 'source-map'
 import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
@@ -34,11 +32,7 @@ export function generate(
   targetSource: string | Buffer,
   {
     type = 'plain',
-    legacy = false,
-    vueVersion = 'v2.6',
-    bridge = false,
     onlyLocales = [],
-    exportESM = false,
     useClassComponent = false,
     filename = 'vue-i18n-loader.yaml',
     inSourceMap = undefined,
@@ -51,8 +45,7 @@ export function generate(
     strictMessage = true,
     escapeHtml = false,
     jit = false
-  }: CodeGenOptions,
-  injector?: () => string
+  }: CodeGenOptions
 ): CodeGenResult<YAMLProgram> {
   let value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
@@ -60,8 +53,6 @@ export function generate(
 
   const options = {
     type,
-    bridge,
-    exportESM,
     source: value,
     sourceMap,
     locale,
@@ -92,23 +83,7 @@ export function generate(
     ast = parseYAML(value, { filePath: filename })
   }
 
-  // for vue 2.x
-  if (legacy && type === 'sfc') {
-    const gen = () => friendlyJSONstringify(getStaticYAMLValue(ast))
-    const code = generateLegacyCode({ isGlobal, vueVersion }, gen)
-    const s = new MagicString(code)
-    return {
-      ast,
-      code: s.toString(),
-      map: s.generateMap({
-        file: filename,
-        source: value,
-        includeContent: true
-      }) as unknown as RawSourceMap
-    }
-  }
-
-  const codeMaps = _generate(generator, ast, options, injector)
+  const codeMaps = _generate(generator, ast, options)
 
   const { code, map } = generator.context()
   // prettier-ignore
@@ -125,24 +100,14 @@ export function generate(
 function _generate(
   generator: CodeGenerator,
   node: YAMLProgram,
-  options: CodeGenOptions = {},
-  injector?: () => string
+  options: CodeGenOptions = {}
 ): Map<string, RawSourceMap> {
   const propsCountStack = [] as number[]
   const pathStack = [] as string[]
   const itemsCountStack = [] as number[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
-  const {
-    type,
-    bridge,
-    exportESM,
-    sourceMap,
-    isGlobal,
-    locale,
-    useClassComponent,
-    jit
-  } = options
+  const { type, sourceMap, isGlobal, locale, useClassComponent, jit } = options
 
   const codegenFn: CodeGenFunction = jit
     ? generateResourceAst
@@ -161,17 +126,11 @@ function _generate(
               type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
             const localeName =
               type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            const exportSyntax = bridge
-              ? exportESM
-                ? `export default`
-                : `module.exports =`
-              : `export default`
+            const exportSyntax = 'export default'
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
             // prettier-ignore
-            const componentVariable = bridge
-              ? `Component.options || Component`
-              : useClassComponent
+            const componentVariable = useClassComponent
                 ? `Component.__o || Component.__vccOpts || Component`
                 : `Component`
             // prettier-ignore
@@ -289,16 +248,6 @@ function _generate(
           if (type === 'sfc') {
             generator.deindent()
             generator.push(`})`)
-            if (bridge && injector) {
-              generator.newline()
-              generator.pushline(
-                `${componentNamespace}.__i18nBridge = ${componentNamespace}.__i18nBridge || []`
-              )
-              generator.pushline(
-                `${componentNamespace}.__i18nBridge.push('${injector()}')`
-              )
-              generator.pushline(`delete ${componentNamespace}._Ctor`)
-            }
             generator.deindent()
             generator.push(`}`)
           } else if (type === 'plain') {

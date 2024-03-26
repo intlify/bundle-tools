@@ -63,75 +63,14 @@ test('bare', async () => {
   expect(map).toMatchSnapshot('map')
 })
 
-test('bridge', async () => {
-  const { source } = await readFile('./fixtures/codegen/complex.js')
-  const { source: json } = await readFile('./fixtures/codegen/complex.json')
-  const { code, map } = generate(
-    source,
-    {
-      type: 'sfc',
-      bridge: true,
-      sourceMap: true,
-      env: 'development'
-    },
-    () => {
-      return JSON.stringify(json)
-        .replace(/\u2028/g, '\\u2028')
-        .replace(/\u2029/g, '\\u2029')
-        .replace(/\\/g, '\\\\')
-        .replace(/\u0027/g, '\\u0027')
-    }
-  )
-
-  expect(validateSyntax(code)).toBe(true)
-  expect(code).toMatchSnapshot('code')
-  expect(map).toMatchSnapshot('map')
-})
-
-test('bridge with ESM exporting', async () => {
-  const { source } = await readFile('./fixtures/codegen/complex.js')
-  const { source: json } = await readFile('./fixtures/codegen/complex.json')
-  const { code, map } = generate(
-    source,
-    {
-      type: 'sfc',
-      bridge: true,
-      exportESM: true,
-      sourceMap: true,
-      env: 'development'
-    },
-    () => {
-      return JSON.stringify(json)
-        .replace(/\u2028/g, '\\u2028')
-        .replace(/\u2029/g, '\\u2029')
-        .replace(/\\/g, '\\\\')
-        .replace(/\u0027/g, '\\u0027')
-    }
-  )
-
-  expect(validateSyntax(code)).toBe(true)
-  expect(code).toMatchSnapshot('code')
-  expect(map).toMatchSnapshot('map')
-})
-
 test('useClassComponent', async () => {
   const { source } = await readFile('./fixtures/codegen/complex.js')
-  const { code, map } = generate(
-    source,
-    {
-      type: 'sfc',
-      useClassComponent: true,
-      sourceMap: true,
-      env: 'development'
-    },
-    () => {
-      return source
-        .replace(/\u2028/g, '\\u2028')
-        .replace(/\u2029/g, '\\u2029')
-        .replace(/\\/g, '\\\\')
-        .replace(/\u0027/g, '\\u0027')
-    }
-  )
+  const { code, map } = generate(source, {
+    type: 'sfc',
+    useClassComponent: true,
+    sourceMap: true,
+    env: 'development'
+  })
 
   expect(validateSyntax(code)).toBe(true)
   expect(code).toMatchSnapshot('code')

@@ -36,18 +36,6 @@ export function checkInstallPackage(
   )
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-types
-export function checkVueI18nBridgeInstallPackage(debug: Function): boolean {
-  let ret = false
-  try {
-    debug(`vue-i18n-bridge load path: ${_require.resolve('vue-i18n-bridge')}`)
-    ret = true
-  } catch (e) {
-    debug(`cannot find 'vue-i18n-bridge'`, e)
-  }
-  return ret
-}
-
 type VueI18nVersion = '8' | '9' | 'unknown' | ''
 
 export function getVueI18nVersion(debug: Function): VueI18nVersion {

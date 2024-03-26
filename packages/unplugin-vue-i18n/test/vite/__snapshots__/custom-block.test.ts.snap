@@ -205,26 +205,6 @@ exports[`json5: exclude locales 1`] = `
 ]
 `;
 
-exports[`legacy for Vue 2.6 and before 1`] = `
-"function block0(Component) {
-  Component.options.__i18n = Component.options.__i18n || [];
-  Component.options.__i18n.push('{\\"en\\":{\\"hello\\":\\"hello world!\\"}}');
-  delete Component.options._Ctor;
-}
-const _sfc_main = {};
-if (typeof block0 === \\"function\\")
-  block0(_sfc_main);
-const exports = /* @__PURE__ */ Object.freeze(/* @__PURE__ */ Object.defineProperty({
-  __proto__: null,
-  default: _sfc_main
-}, Symbol.toStringTag, { value: \\"Module\\" }));
-if (typeof window !== \\"undefined\\") {
-  window.module = _sfc_main;
-  window.exports = exports;
-}
-"
-`;
-
 exports[`locale attr 1`] = `
 [
   {

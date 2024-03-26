@@ -267,7 +267,7 @@ describe('AST code generation', () => {
     const { source } = await readFile('./fixtures/codegen/html.json')
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const errors = [] as any
-    const { code, map } = generate(source, {
+    const { map } = generate(source, {
       jit: true,
       type: 'bare',
       escapeHtml: true,

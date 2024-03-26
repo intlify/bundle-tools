@@ -1,5 +1,3 @@
-import { CodeGenOptions } from '@intlify/bundle-utils'
-
 export type SFCLangFormat = 'json' | 'json5' | 'yml' | 'yaml'
 export interface PluginOptions {
   include?: string | string[]

@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@8.0.0 (2024-03-26)
+
+#### :boom: Breaking Change
+* [#354](https://github.com/intlify/bundle-tools/pull/354) breaking: drop legacy compatible features for Vue 2 ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@7.5.1 (2024-02-29)
 
 #### :zap: Improvement Features

@@ -82,23 +82,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const globalSFCScope = !!options.globalSFCScope
   const useClassComponent = !!options.useClassComponent
 
-  const legacy = !!options.legacy
-  debug('legacy', legacy)
-  if (legacy) {
-    warn(
-      `'legacy' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-    )
-  }
-
-  const vueVersion = isString(options.vueVersion)
-    ? options.vueVersion
-    : undefined
-  if (vueVersion) {
-    warn(
-      `'vueVersion' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-    )
-  }
-
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
     : true
@@ -141,7 +124,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   // prettier-ignore
   const getVueI18nAliasName = () =>
-    vueI18nVersion === '9' || vueI18nVersion === '8'
+    vueI18nVersion === '9'
       ? 'vue-i18n'
       : vueI18nVersion === 'unknown' && installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) && useVueI18nImportName
         ? 'vue-i18n'
@@ -151,11 +134,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     aliasName: string,
     { ssr = false, runtimeOnly = false }
   ) => {
-    return vueI18nVersion === '8'
-      ? `${aliasName}/dist/${aliasName}.esm.js` // for vue-i18n@8
-      : `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
-          !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
-        }`
+    return `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
+      !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
+    }`
   }
 
   const esm = isBoolean(options.esm) ? options.esm : true
@@ -350,8 +331,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   allowDynamic,
                   strictMessage,
                   escapeHtml,
-                  legacy,
-                  vueVersion,
                   jit: jitCompilation,
                   onlyLocales,
                   exportESM: esm,
@@ -603,8 +582,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               inSourceMap,
               isGlobal: globalSFCScope,
               useClassComponent,
-              legacy,
-              vueVersion,
               jit: jitCompilation,
               strictMessage,
               escapeHtml,
@@ -822,8 +799,6 @@ function getOptions(
     inSourceMap = undefined,
     forceStringify = false,
     isGlobal = false,
-    legacy = false,
-    vueVersion = 'v2.6',
     onlyLocales = [],
     exportESM = true,
     useClassComponent = false,
@@ -835,8 +810,6 @@ function getOptions(
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
     isGlobal?: boolean
-    legacy?: boolean
-    vueVersion?: CodeGenOptions['vueVersion']
     onlyLocales?: string[]
     exportESM?: boolean
     useClassComponent?: boolean
@@ -857,8 +830,6 @@ function getOptions(
     allowDynamic,
     strictMessage,
     escapeHtml,
-    legacy,
-    vueVersion,
     jit,
     onlyLocales,
     exportESM,

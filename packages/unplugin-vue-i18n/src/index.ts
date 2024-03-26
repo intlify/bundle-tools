@@ -18,12 +18,10 @@ import {
   generateYAML,
   generateJavaScript,
   checkInstallPackage,
-  checkVueI18nBridgeInstallPackage,
   getVueI18nVersion
 } from '@intlify/bundle-utils'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
-import { createBridgeCodeGenerator } from './legacy'
 import { getRaw, warn, error, raiseError } from './utils'
 
 import type { RawSourceMap } from 'source-map-js'
@@ -41,7 +39,6 @@ const VIRTUAL_PREFIX = '\0'
 const debug = createDebug('unplugin-vue-i18n')
 
 const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
-const installedVueI18nBridge = checkVueI18nBridgeInstallPackage(debug)
 const vueI18nVersion = getVueI18nVersion(debug)
 
 if (vueI18nVersion === '8') {
@@ -85,31 +82,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const globalSFCScope = !!options.globalSFCScope
   const useClassComponent = !!options.useClassComponent
 
-  const bridge = !!options.bridge
-  debug('bridge', bridge)
-  if (bridge) {
-    warn(
-      `'bridge' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-    )
-  }
-
-  const legacy = !!options.legacy
-  debug('legacy', legacy)
-  if (legacy) {
-    warn(
-      `'legacy' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-    )
-  }
-
-  const vueVersion = isString(options.vueVersion)
-    ? options.vueVersion
-    : undefined
-  if (vueVersion) {
-    warn(
-      `'vueVersion' option is deprecated, since Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-    )
-  }
-
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
     : true
@@ -152,28 +124,20 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   // prettier-ignore
   const getVueI18nAliasName = () =>
-    vueI18nVersion === '9' || vueI18nVersion === '8'
+    vueI18nVersion === '9'
       ? 'vue-i18n'
       : vueI18nVersion === 'unknown' && installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) && useVueI18nImportName
         ? 'vue-i18n'
         : installedPkg
 
-  const getVueI18nBridgeAliasPath = () =>
-    `vue-i18n-bridge/dist/vue-i18n-bridge.runtime.esm-bundler.js`
-
   const getVueI18nAliasPath = (
     aliasName: string,
     { ssr = false, runtimeOnly = false }
   ) => {
-    return vueI18nVersion === '8'
-      ? `${aliasName}/dist/${aliasName}.esm.js` // for vue-i18n@8
-      : `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
-          !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
-        }`
+    return `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
+      !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
+    }`
   }
-
-  const esm = isBoolean(options.esm) ? options.esm : true
-  debug('esm', esm)
 
   const allowDynamic = !!options.allowDynamic
   debug('allowDynamic', allowDynamic)
@@ -221,12 +185,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                 runtimeOnly
               })
             })
-            if (installedVueI18nBridge) {
-              config.resolve!.alias.push({
-                find: 'vue-i18n-bridge',
-                replacement: getVueI18nBridgeAliasPath()
-              })
-            }
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[vueI18nAliasName] =
@@ -234,11 +192,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                 ssr: ssrBuild,
                 runtimeOnly
               })
-            if (installedVueI18nBridge) {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              ;(config.resolve!.alias as any)['vue-i18n-bridge'] =
-                getVueI18nBridgeAliasPath()
-            }
           }
           debug(
             `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
@@ -249,11 +202,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               }
             )}`
           )
-          if (installedVueI18nBridge) {
-            debug(
-              `set vue-i18n-bridge runtime only: ${getVueI18nBridgeAliasPath()}`
-            )
-          }
         } else if (
           command === 'serve' &&
           installedPkg === 'petite-vue-i18n' &&
@@ -380,22 +328,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   allowDynamic,
                   strictMessage,
                   escapeHtml,
-                  bridge,
-                  legacy,
-                  vueVersion,
                   jit: jitCompilation,
                   onlyLocales,
-                  exportESM: esm,
                   forceStringify
                 }
               ) as CodeGenOptions
               debug('parseOptions', parseOptions)
 
-              const { code: generatedCode, map } = generate(
-                _code,
-                parseOptions,
-                bridge ? createBridgeCodeGenerator(_code, query) : undefined
-              )
+              const { code: generatedCode, map } = generate(_code, parseOptions)
               debug('generated code', generatedCode)
               debug('sourcemap', map, sourceMap)
 
@@ -447,22 +387,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             ssr: ssrBuild,
             runtimeOnly
           })
-        if (installedVueI18nBridge) {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ;(compiler.options.resolve!.alias as any)['vue-i18n-bridge'] =
-            getVueI18nBridgeAliasPath()
-        }
         debug(
           `set ${vueI18nAliasName}: ${getVueI18nAliasPath(vueI18nAliasName, {
             ssr: ssrBuild,
             runtimeOnly
           })}`
         )
-        if (installedVueI18nBridge) {
-          debug(
-            `set vue-i18n-bridge runtime only: ${getVueI18nBridgeAliasPath()}`
-          )
-        }
       } else if (
         !isProduction &&
         installedPkg === 'petite-vue-i18n' &&
@@ -538,10 +468,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           isProduction,
           {
             forceStringify,
-            bridge,
             strictMessage,
             escapeHtml,
-            exportESM: esm,
             useClassComponent
           }
         )
@@ -593,20 +521,14 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               allowDynamic,
               strictMessage,
               escapeHtml,
-              bridge,
               jit: jitCompilation,
               onlyLocales,
-              exportESM: esm,
               forceStringify
             }
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
-          const { code: generatedCode, map } = generate(
-            code,
-            parseOptions,
-            bridge ? createBridgeCodeGenerator(code, query) : undefined
-          )
+          const { code: generatedCode, map } = generate(code, parseOptions)
           debug('generated code', generatedCode)
           debug('sourcemap', map, sourceMap)
 
@@ -654,14 +576,10 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               inSourceMap,
               isGlobal: globalSFCScope,
               useClassComponent,
-              bridge,
-              legacy,
-              vueVersion,
               jit: jitCompilation,
               strictMessage,
               escapeHtml,
               onlyLocales,
-              exportESM: esm,
               forceStringify
             }
           ) as CodeGenOptions
@@ -674,11 +592,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             query,
             meta.framework
           )
-          const { code: generatedCode, map } = generate(
-            source,
-            parseOptions,
-            bridge ? createBridgeCodeGenerator(source, query) : undefined
-          )
+          const { code: generatedCode, map } = generate(source, parseOptions)
           debug('generated code', generatedCode)
           debug('sourcemap', map, sourceMap)
 
@@ -753,9 +667,7 @@ async function generateBundleResources(
   {
     forceStringify = false,
     isGlobal = false,
-    bridge = false,
     onlyLocales = [],
-    exportESM = true,
     strictMessage = true,
     escapeHtml = false,
     useClassComponent = false,
@@ -763,9 +675,7 @@ async function generateBundleResources(
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
-    bridge?: boolean
     onlyLocales?: string[]
-    exportESM?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
     useClassComponent?: boolean
@@ -783,20 +693,14 @@ async function generateBundleResources(
       const parseOptions = getOptions(res, isProduction, {}, false, {
         isGlobal,
         useClassComponent,
-        bridge,
         jit,
         onlyLocales,
-        exportESM,
         strictMessage,
         escapeHtml,
         forceStringify
       }) as CodeGenOptions
       parseOptions.type = 'bare'
-      const { code } = generate(
-        source,
-        parseOptions,
-        bridge ? createBridgeCodeGenerator(source, query) : undefined
-      )
+      const { code } = generate(source, parseOptions)
 
       debug('generated code', code)
       codes.push(`${JSON.stringify(name)}: ${code}`)
@@ -883,11 +787,7 @@ function getOptions(
     inSourceMap = undefined,
     forceStringify = false,
     isGlobal = false,
-    bridge = false,
-    legacy = false,
-    vueVersion = 'v2.6',
     onlyLocales = [],
-    exportESM = true,
     useClassComponent = false,
     allowDynamic = false,
     strictMessage = true,
@@ -897,11 +797,7 @@ function getOptions(
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
     isGlobal?: boolean
-    bridge?: boolean
-    legacy?: boolean
-    vueVersion?: CodeGenOptions['vueVersion']
     onlyLocales?: string[]
-    exportESM?: boolean
     useClassComponent?: boolean
     allowDynamic?: boolean
     strictMessage?: boolean
@@ -920,12 +816,8 @@ function getOptions(
     allowDynamic,
     strictMessage,
     escapeHtml,
-    bridge,
-    legacy,
-    vueVersion,
     jit,
     onlyLocales,
-    exportESM,
     env: mode,
     onWarn: (msg: string): void => {
       warn(`${filename} ${msg}`)

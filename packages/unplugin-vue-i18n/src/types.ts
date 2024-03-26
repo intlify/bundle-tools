@@ -11,13 +11,9 @@ export interface PluginOptions {
   compositionOnly?: boolean
   ssr?: boolean
   fullInstall?: boolean
-  esm?: boolean
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat
   globalSFCScope?: boolean
-  bridge?: boolean
-  legacy?: boolean
-  vueVersion?: CodeGenOptions['vueVersion']
   useClassComponent?: boolean
   useVueI18nImportName?: boolean
   strictMessage?: boolean

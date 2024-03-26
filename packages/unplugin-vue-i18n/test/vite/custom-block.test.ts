@@ -164,23 +164,6 @@ test('global scope and import', async () => {
   expect(g.resource.en.hello(createMessageContext())).toEqual('hello world!')
 })
 
-test('legacy for Vue 2.6 and before', async () => {
-  const { code } = await bundleAndRun('basic.vue', bundleVite, {
-    legacy: true
-  })
-  expect(code).toMatchSnapshot()
-  expect(code).toMatch('Component.options.__i18n =')
-})
-
-test('legacy for Vue 2.7', async () => {
-  const { module } = await bundleAndRun('basic.vue', bundleVite, {
-    legacy: true,
-    vueVersion: 'v2.7'
-  })
-  const i18n = JSON.parse(module.__i18n.pop())
-  expect(i18n.en.hello).toEqual('hello world!')
-})
-
 test('array', async () => {
   const { module } = await bundleAndRun('array.vue', bundleVite)
   expect(module.__i18n).toMatchSnapshot()

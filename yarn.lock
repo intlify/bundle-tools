@@ -1273,7 +1273,6 @@ __metadata:
     escodegen: ^2.1.0
     estree-walker: ^2.0.2
     jsonc-eslint-parser: ^2.3.0
-    magic-string: ^0.30.0
     mlly: ^1.2.0
     source-map-js: ^1.0.1
     unbuild: ^2.0.0

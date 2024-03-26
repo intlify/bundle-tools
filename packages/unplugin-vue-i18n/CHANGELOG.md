@@ -1,4 +1,22 @@
 
+## @intlify/unplugin-vue-i18n@4.0.0 (2024-03-26)
+
+#### :zap: Improvement Features
+* [#355](https://github.com/intlify/bundle-tools/pull/355) fix: upgrade bundle/utils deps version ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@4.0.0 (2024-03-26)
+
+#### :boom: Breaking Change
+* [#353](https://github.com/intlify/bundle-tools/pull/353) breaking: drop deprecation options (`brdige`, `legacy`, `vueVersion`, and `esm`) ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@3.0.1 (2024-03-08)
 
 #### :bug: Bug Fixes

@@ -539,53 +539,6 @@ If do you will use this option, you need to enable `jitCompilation` option.
   </i18n>
   ```
 
-### `bridge`
-
-- **Type:** `boolean`
-- **Default:** `false`
-
-> [!WARNING]
-  'bridge' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-
-  The mode to birdge the i18n custom block to work in both vue-i18n@v8.x and vue-i18n@v9.x environments.
-
-  To support in a smooth transition from vue-i18n@v8.x to vue-i18n@v9.x, we provide a mode that bundles the i18n custom block to be available in either version.
-
-> [!WARNING]
-   Note that if you set `bridge: true`, the bundle size will increase. It is recommended to disable this mode after the migration from vue-i18n@v8.26 to vue-i18n@v9.x is completed.
-
-### `legacy`
-
-- **Type:** `boolean`
-- **Default:** `false`
-
-> [!WARNING]
-  'legacy' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-
-  This option supports Vue I18n v8.x compatibility for resources in i18n custom blocks.
-
-> [!NOTE]
-  To work for Vue 2.7, the value of `vueVersion` must be set to `'v2.7'`.
-
-### `vueVersion`
-
-- **Type:** `string`
-- **Default:** `undefined`
-
-> [!WARNING]
-  'vueVersion' option is deprecated, sinece Vue 2 was EOL on 2023. that option will be removed in 4.0.`
-
-  The version of Vue that will be used by Vue I18n. This option is enabled when the `legacy` option is `true`.
-
-  Available values are `'v2.6'` and `'v2.7'`.
-
-### `esm`
-
-- **Type:** `boolean`
-- **Default:** `true`
-
-  For `bridge` option is `true`, whether to bundle locale resources with ESM. By default ESM, if you need to bundl with commonjs for especialy webpack, you need to set `false`
-
 ### `useClassComponent`
 
 - **Type:** `boolean`

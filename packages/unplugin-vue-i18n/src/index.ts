@@ -139,9 +139,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     }`
   }
 
-  const esm = isBoolean(options.esm) ? options.esm : true
-  debug('esm', esm)
-
   const allowDynamic = !!options.allowDynamic
   debug('allowDynamic', allowDynamic)
 
@@ -333,7 +330,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   escapeHtml,
                   jit: jitCompilation,
                   onlyLocales,
-                  exportESM: esm,
                   forceStringify
                 }
               ) as CodeGenOptions
@@ -474,7 +470,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             forceStringify,
             strictMessage,
             escapeHtml,
-            exportESM: esm,
             useClassComponent
           }
         )
@@ -528,7 +523,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               escapeHtml,
               jit: jitCompilation,
               onlyLocales,
-              exportESM: esm,
               forceStringify
             }
           ) as CodeGenOptions
@@ -586,7 +580,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               strictMessage,
               escapeHtml,
               onlyLocales,
-              exportESM: esm,
               forceStringify
             }
           ) as CodeGenOptions
@@ -674,9 +667,7 @@ async function generateBundleResources(
   {
     forceStringify = false,
     isGlobal = false,
-    bridge = false,
     onlyLocales = [],
-    exportESM = true,
     strictMessage = true,
     escapeHtml = false,
     useClassComponent = false,
@@ -684,9 +675,7 @@ async function generateBundleResources(
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
-    bridge?: boolean
     onlyLocales?: string[]
-    exportESM?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
     useClassComponent?: boolean
@@ -706,7 +695,6 @@ async function generateBundleResources(
         useClassComponent,
         jit,
         onlyLocales,
-        exportESM,
         strictMessage,
         escapeHtml,
         forceStringify
@@ -800,7 +788,6 @@ function getOptions(
     forceStringify = false,
     isGlobal = false,
     onlyLocales = [],
-    exportESM = true,
     useClassComponent = false,
     allowDynamic = false,
     strictMessage = true,
@@ -811,7 +798,6 @@ function getOptions(
     forceStringify?: boolean
     isGlobal?: boolean
     onlyLocales?: string[]
-    exportESM?: boolean
     useClassComponent?: boolean
     allowDynamic?: boolean
     strictMessage?: boolean
@@ -832,7 +818,6 @@ function getOptions(
     escapeHtml,
     jit,
     onlyLocales,
-    exportESM,
     env: mode,
     onWarn: (msg: string): void => {
       warn(`${filename} ${msg}`)

@@ -374,7 +374,7 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 
 Whether to tree-shake message compiler when we will be bundling.
 
-If do you will use this option, you need to enable `jitCompilation` option.
+If you chose to use this option, you will need to enable `jitCompilation` option.
 
 > [!NOTE]
   This option works with vue-i18n v9.3 and later.

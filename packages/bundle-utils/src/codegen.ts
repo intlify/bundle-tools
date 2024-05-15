@@ -45,7 +45,6 @@ export interface SourceLocationable {
 export interface CodeGenOptions {
   type?: 'plain' | 'sfc' | 'bare'
   legacy?: boolean
-  vueVersion?: 'v2.6' | 'v2.7'
   bridge?: boolean
   exportESM?: boolean
   onlyLocales?: string[]

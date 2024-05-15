@@ -20,8 +20,7 @@ export default defineConfig({
   plugins: [
     vue(),
     vueI18n({
-      include: path.resolve(__dirname, './src/locales/**'),
-      jitCompilation: true
+      include: path.resolve(__dirname, './src/locales/**')
     })
   ]
 })

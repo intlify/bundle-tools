@@ -1211,7 +1211,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-tools@workspace:."
   dependencies:
-    "@intlify/core-base": ^9.13.1
+    "@intlify/core-base": ^10.0.0-alpha.4
     "@kazupon/lerna-changelog": ^4.3.0
     "@octokit/rest": ^18.6.0
     "@rollup/plugin-alias": ^3.1.5
@@ -1309,13 +1309,33 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/core-base@npm:9.13.1, @intlify/core-base@npm:^9.13.1":
+"@intlify/core-base@npm:9.13.1":
   version: 9.13.1
   resolution: "@intlify/core-base@npm:9.13.1"
   dependencies:
     "@intlify/message-compiler": 9.13.1
     "@intlify/shared": 9.13.1
   checksum: afca8308829efdadb14555da05c7cb12277a829606236833254f35aac2118912e1b3c20e2e0a86a9af3769975a8d6526dcd30b690843bfb7216817cb3a594c43
+  languageName: node
+  linkType: hard
+
+"@intlify/core-base@npm:^10.0.0-alpha.4":
+  version: 10.0.0-alpha.4
+  resolution: "@intlify/core-base@npm:10.0.0-alpha.4"
+  dependencies:
+    "@intlify/message-compiler": 10.0.0-alpha.4
+    "@intlify/shared": 10.0.0-alpha.4
+  checksum: 7ef4558ea35c244911477b5e21be69792a4c86876dc28f35b6e68611fd70b6337449b497f955eac750adf43370bf8f6cdcc4af09afeff28b8ee8576edfe8bdb0
+  languageName: node
+  linkType: hard
+
+"@intlify/message-compiler@npm:10.0.0-alpha.4":
+  version: 10.0.0-alpha.4
+  resolution: "@intlify/message-compiler@npm:10.0.0-alpha.4"
+  dependencies:
+    "@intlify/shared": 10.0.0-alpha.4
+    source-map-js: ^1.0.2
+  checksum: e97c55d478e4837889b9f8dee854196693c7d734e273e94753a961522b8b1932d410fe3fc908ededd38681c13eab0b59fa3385e90ffaa472080480fda4778e30
   languageName: node
   linkType: hard
 
@@ -1339,6 +1359,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@intlify/shared@npm:10.0.0-alpha.4, @intlify/shared@npm:^10.0.0-alpha.4":
+  version: 10.0.0-alpha.4
+  resolution: "@intlify/shared@npm:10.0.0-alpha.4"
+  checksum: 7453a199fa7f0f2be2e14485e376254320ffe130a6608341c94a08eb4a0705edfcabcde82847b5f2c78ad155f1165f3a042a59ad0719d3dda2f4df5c5e16ea60
+  languageName: node
+  linkType: hard
+
 "@intlify/shared@npm:9.13.1":
   version: 9.13.1
   resolution: "@intlify/shared@npm:9.13.1"
@@ -1358,7 +1385,7 @@ __metadata:
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
     "@intlify/bundle-utils": ^8.0.0
-    "@intlify/shared": ^9.4.0
+    "@intlify/shared": ^10.0.0-alpha.4
     "@rollup/pluginutils": ^5.1.0
     "@vue/compiler-sfc": ^3.2.47
     debug: ^4.3.3

@@ -1,5 +1,72 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
+exports[`AST 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {
+      "en": {
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
+      },
+    },
+  },
+]
+`;
+
 exports[`array 1`] = `
 [
   {
@@ -8,9 +75,117 @@ exports[`array 1`] = `
       "en": {
         "foo": [
           [
-            [Function],
+            {
+              "body": {
+                "end": 3,
+                "items": [
+                  {
+                    "end": 3,
+                    "loc": {
+                      "end": {
+                        "column": 4,
+                        "line": 1,
+                        "offset": 3,
+                      },
+                      "start": {
+                        "column": 1,
+                        "line": 1,
+                        "offset": 0,
+                      },
+                    },
+                    "start": 0,
+                    "type": 3,
+                  },
+                ],
+                "loc": {
+                  "end": {
+                    "column": 4,
+                    "line": 1,
+                    "offset": 3,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "static": "bar",
+                "type": 2,
+              },
+              "end": 3,
+              "loc": {
+                "end": {
+                  "column": 4,
+                  "line": 1,
+                  "offset": 3,
+                },
+                "source": "bar",
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 0,
+            },
           ],
-          [Function],
+          {
+            "body": {
+              "end": 3,
+              "items": [
+                {
+                  "end": 3,
+                  "loc": {
+                    "end": {
+                      "column": 4,
+                      "line": 1,
+                      "offset": 3,
+                    },
+                    "start": {
+                      "column": 1,
+                      "line": 1,
+                      "offset": 0,
+                    },
+                  },
+                  "start": 0,
+                  "type": 3,
+                },
+              ],
+              "loc": {
+                "end": {
+                  "column": 4,
+                  "line": 1,
+                  "offset": 3,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "static": "baz",
+              "type": 2,
+            },
+            "end": 3,
+            "loc": {
+              "end": {
+                "column": 4,
+                "line": 1,
+                "offset": 3,
+              },
+              "source": "baz",
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "type": 0,
+          },
         ],
       },
     },
@@ -24,7 +199,61 @@ exports[`basic 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -37,7 +266,61 @@ exports[`default lang 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 20,
+            "items": [
+              {
+                "end": 20,
+                "loc": {
+                  "end": {
+                    "column": 21,
+                    "line": 1,
+                    "offset": 20,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 21,
+                "line": 1,
+                "offset": 20,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello from defaults!",
+            "type": 2,
+          },
+          "end": 20,
+          "loc": {
+            "end": {
+              "column": 21,
+              "line": 1,
+              "offset": 20,
+            },
+            "source": "hello from defaults!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -50,7 +333,61 @@ exports[`default lang and global scope 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 20,
+            "items": [
+              {
+                "end": 20,
+                "loc": {
+                  "end": {
+                    "column": 21,
+                    "line": 1,
+                    "offset": 20,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 21,
+                "line": 1,
+                "offset": 20,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello from defaults!",
+            "type": 2,
+          },
+          "end": 20,
+          "loc": {
+            "end": {
+              "column": 21,
+              "line": 1,
+              "offset": 20,
+            },
+            "source": "hello from defaults!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -62,7 +399,61 @@ exports[`global 1`] = `
   {
     "locale": "ja",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 12,
+          "items": [
+            {
+              "end": 12,
+              "loc": {
+                "end": {
+                  "column": 13,
+                  "line": 1,
+                  "offset": 12,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "hello local!",
+          "type": 2,
+        },
+        "end": 12,
+        "loc": {
+          "end": {
+            "column": 13,
+            "line": 1,
+            "offset": 12,
+          },
+          "source": "hello local!",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
 ]
@@ -74,7 +465,61 @@ exports[`global 2`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 13,
+            "items": [
+              {
+                "end": 13,
+                "loc": {
+                  "end": {
+                    "column": 14,
+                    "line": 1,
+                    "offset": 13,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 14,
+                "line": 1,
+                "offset": 13,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello global!",
+            "type": 2,
+          },
+          "end": 13,
+          "loc": {
+            "end": {
+              "column": 14,
+              "line": 1,
+              "offset": 13,
+            },
+            "source": "hello global!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -87,7 +532,61 @@ exports[`global scope and import 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -95,19 +594,6 @@ exports[`global scope and import 1`] = `
 `;
 
 exports[`import 1`] = `
-[
-  {
-    "locale": "",
-    "resource": {
-      "en": {
-        "hello": [Function],
-      },
-    },
-  },
-]
-`;
-
-exports[`jitCompilation 1`] = `
 [
   {
     "locale": "",
@@ -189,7 +675,61 @@ exports[`json5 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -210,7 +750,61 @@ exports[`locale attr 1`] = `
   {
     "locale": "ja",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 9,
+          "items": [
+            {
+              "end": 9,
+              "loc": {
+                "end": {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 9,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "こんにちは、世界！",
+          "type": 2,
+        },
+        "end": 9,
+        "loc": {
+          "end": {
+            "column": 10,
+            "line": 1,
+            "offset": 9,
+          },
+          "source": "こんにちは、世界！",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
 ]
@@ -222,14 +816,122 @@ exports[`locale attr and basic 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
   {
     "locale": "ja",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 9,
+          "items": [
+            {
+              "end": 9,
+              "loc": {
+                "end": {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 9,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "こんにちは、世界！",
+          "type": 2,
+        },
+        "end": 9,
+        "loc": {
+          "end": {
+            "column": 10,
+            "line": 1,
+            "offset": 9,
+          },
+          "source": "こんにちは、世界！",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
 ]
@@ -240,7 +942,61 @@ exports[`locale attr and import 1`] = `
   {
     "locale": "en",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 12,
+          "items": [
+            {
+              "end": 12,
+              "loc": {
+                "end": {
+                  "column": 13,
+                  "line": 1,
+                  "offset": 12,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "hello world!",
+          "type": 2,
+        },
+        "end": 12,
+        "loc": {
+          "end": {
+            "column": 13,
+            "line": 1,
+            "offset": 12,
+          },
+          "source": "hello world!",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
 ]
@@ -252,7 +1008,61 @@ exports[`multiple 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -260,7 +1070,61 @@ exports[`multiple 1`] = `
     "locale": "",
     "resource": {
       "ja": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 9,
+            "items": [
+              {
+                "end": 9,
+                "loc": {
+                  "end": {
+                    "column": 10,
+                    "line": 1,
+                    "offset": 9,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 10,
+                "line": 1,
+                "offset": 9,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "こんにちは、世界！",
+            "type": 2,
+          },
+          "end": 9,
+          "loc": {
+            "end": {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "source": "こんにちは、世界！",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -273,7 +1137,63 @@ exports[`special characters 1`] = `
     "locale": "",
     "resource": {
       "en": {
-        "hello": [Function],
+        "hello": {
+          "body": {
+            "end": 19,
+            "items": [
+              {
+                "end": 19,
+                "loc": {
+                  "end": {
+                    "column": 14,
+                    "line": 2,
+                    "offset": 19,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 14,
+                "line": 2,
+                "offset": 19,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello
+great	\\"world\\"",
+            "type": 2,
+          },
+          "end": 19,
+          "loc": {
+            "end": {
+              "column": 14,
+              "line": 2,
+              "offset": 19,
+            },
+            "source": "hello
+great	\\"world\\"",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
       },
     },
   },
@@ -285,13 +1205,121 @@ exports[`yaml 1`] = `
   {
     "locale": "en",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 12,
+          "items": [
+            {
+              "end": 12,
+              "loc": {
+                "end": {
+                  "column": 13,
+                  "line": 1,
+                  "offset": 12,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "hello world!",
+          "type": 2,
+        },
+        "end": 12,
+        "loc": {
+          "end": {
+            "column": 13,
+            "line": 1,
+            "offset": 12,
+          },
+          "source": "hello world!",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
   {
     "locale": "ja",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 9,
+          "items": [
+            {
+              "end": 9,
+              "loc": {
+                "end": {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 9,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "こんにちは、世界！",
+          "type": 2,
+        },
+        "end": 9,
+        "loc": {
+          "end": {
+            "column": 10,
+            "line": 1,
+            "offset": 9,
+          },
+          "source": "こんにちは、世界！",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
 ]
@@ -302,13 +1330,121 @@ exports[`yaml: exclude locales 1`] = `
   {
     "locale": "en",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 12,
+          "items": [
+            {
+              "end": 12,
+              "loc": {
+                "end": {
+                  "column": 13,
+                  "line": 1,
+                  "offset": 12,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "hello world!",
+          "type": 2,
+        },
+        "end": 12,
+        "loc": {
+          "end": {
+            "column": 13,
+            "line": 1,
+            "offset": 12,
+          },
+          "source": "hello world!",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
   {
     "locale": "ja",
     "resource": {
-      "hello": [Function],
+      "hello": {
+        "body": {
+          "end": 9,
+          "items": [
+            {
+              "end": 9,
+              "loc": {
+                "end": {
+                  "column": 10,
+                  "line": 1,
+                  "offset": 9,
+                },
+                "start": {
+                  "column": 1,
+                  "line": 1,
+                  "offset": 0,
+                },
+              },
+              "start": 0,
+              "type": 3,
+            },
+          ],
+          "loc": {
+            "end": {
+              "column": 10,
+              "line": 1,
+              "offset": 9,
+            },
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "static": "こんにちは、世界！",
+          "type": 2,
+        },
+        "end": 9,
+        "loc": {
+          "end": {
+            "column": 10,
+            "line": 1,
+            "offset": 9,
+          },
+          "source": "こんにちは、世界！",
+          "start": {
+            "column": 1,
+            "line": 1,
+            "offset": 0,
+          },
+        },
+        "start": 0,
+        "type": 0,
+      },
     },
   },
 ]

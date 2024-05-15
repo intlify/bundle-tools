@@ -353,12 +353,10 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 - **Default:** `true`
 
 > [!IMPORTANT]
-  'jitCompilation' option now defaults to `true` from 3.0.
+  'jitCompilation' option is deprected in v5.
+  This option will be supported with vue-i18n until v9 latest version.
 
   Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
-
-> [!NOTE]
-  This option works with vue-i18n v9.3 and later.
 
   JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale mesages with programatic.
 
@@ -374,7 +372,10 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 
 Whether to tree-shake message compiler when we will be bundling.
 
-If you chose to use this option, you will need to enable `jitCompilation` option.
+If do you will use this option, you need to enable `jitCompilation` option.
+
+> [NOTE]
+> After v5 or later, this option can be set with or without `jitCompilation`.
 
 > [!NOTE]
   This option works with vue-i18n v9.3 and later.

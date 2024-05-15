@@ -3,7 +3,6 @@ export interface PluginOptions {
   include?: string | string[]
   onlyLocales?: string | string[]
   allowDynamic?: boolean
-  jitCompilation?: boolean
   dropMessageCompiler?: boolean
   runtimeOnly?: boolean
   compositionOnly?: boolean

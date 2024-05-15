@@ -87,14 +87,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     : true
   debug('runtimeOnly', runtimeOnly)
 
-  const jitCompilation = isBoolean(options.jitCompilation)
-    ? options.jitCompilation
-    : true
-  debug('jitCompilation', jitCompilation)
-
-  const dropMessageCompiler = jitCompilation
-    ? !!options.dropMessageCompiler
-    : false
+  const dropMessageCompiler = !!options.dropMessageCompiler
   debug('dropMessageCompiler', dropMessageCompiler)
 
   // prettier-ignore
@@ -233,10 +226,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         debug(
           `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
         )
-        config.define['__INTLIFY_JIT_COMPILATION__'] = jitCompilation
-        debug(
-          `set __INTLIFY_JIT_COMPILATION__ is '${config.define['__INTLIFY_JIT_COMPILATION__']}'`
-        )
         config.define['__INTLIFY_DROP_MESSAGE_COMPILER__'] = dropMessageCompiler
         debug(
           `set __INTLIFY_DROP_MESSAGE_COMPILER__ is '${config.define['__INTLIFY_DROP_MESSAGE_COMPILER__']}'`
@@ -327,7 +316,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                   allowDynamic,
                   strictMessage,
                   escapeHtml,
-                  jit: jitCompilation,
+                  jit: true,
                   onlyLocales,
                   forceStringify
                 }
@@ -342,12 +331,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
               return {
                 code: generatedCode,
-                // prettier-ignore
-                map: (jitCompilation
-                  ? { mappings: '' }
-                  : sourceMap
-                    ? map
-                    : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+                map: { mappings: '' }
               }
             } else {
               return result
@@ -519,7 +503,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               allowDynamic,
               strictMessage,
               escapeHtml,
-              jit: jitCompilation,
+              jit: true,
               onlyLocales,
               forceStringify
             }
@@ -535,11 +519,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           return {
             code: generatedCode,
             // prettier-ignore
-            map: (jitCompilation
-              ? { mappings: '' }
-              : sourceMap
-                ? map
-                : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+            map: { mappings: '' }
           }
         } else {
           // TODO: support virtual import identifier
@@ -574,7 +554,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
               inSourceMap,
               isGlobal: globalSFCScope,
               useClassComponent,
-              jit: jitCompilation,
+              jit: true,
               strictMessage,
               escapeHtml,
               onlyLocales,
@@ -599,11 +579,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           return {
             code: generatedCode,
             // prettier-ignore
-            map: (jitCompilation
-              ? { mappings: '' }
-              : sourceMap
-                ? map
-                : { mappings: '' }) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+            map: { mappings: '' }
           }
         }
       }
@@ -669,7 +645,7 @@ async function generateBundleResources(
     strictMessage = true,
     escapeHtml = false,
     useClassComponent = false,
-    jit = false
+    jit = true
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
@@ -790,7 +766,7 @@ function getOptions(
     allowDynamic = false,
     strictMessage = true,
     escapeHtml = false,
-    jit = false
+    jit = true
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean

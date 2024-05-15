@@ -1,108 +1,141 @@
 import { bundleWebpack, bundleAndRun } from '../utils'
-import { createMessageContext } from '@intlify/core-base'
+import { createMessageContext, compile } from '@intlify/core-base'
+import type { MessageCompilerContext } from '@intlify/core-base'
 
 test('basic', async () => {
   const { module } = await bundleAndRun('basic.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const fn = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello world!')
 })
 
 test('yaml', async () => {
   const { module } = await bundleAndRun('yaml.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   let i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('ja')
-  expect(i18n.resource.hello(createMessageContext())).toEqual(
-    'こんにちは、世界！'
-  )
+  const fn1 = compile(i18n.resource.hello, {
+    locale: i18n.locale
+  } as MessageCompilerContext)
+  expect(fn1(createMessageContext())).toEqual('こんにちは、世界！')
+
   i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('en')
-  expect(i18n.resource.hello(createMessageContext())).toEqual('hello world!')
+  const fn2 = compile(i18n.resource.hello, {
+    locale: i18n.locale
+  } as MessageCompilerContext)
+  expect(fn2(createMessageContext())).toEqual('hello world!')
 })
 
 test('json5', async () => {
   const { module } = await bundleAndRun('json5.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const fn = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello world!')
 })
 
 test('import', async () => {
   const { module } = await bundleAndRun('import.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const fn = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello world!')
 })
 
 test('multiple', async () => {
   const { module } = await bundleAndRun('multiple.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
   expect(module.__i18n.length).toEqual(2)
+
   let i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.ja.hello(createMessageContext())).toEqual(
-    'こんにちは、世界！'
-  )
+  const fn1 = compile(i18n.resource.ja.hello, {} as MessageCompilerContext)
+  expect(fn1(createMessageContext())).toEqual('こんにちは、世界！')
+
   i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const fn2 = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn2(createMessageContext())).toEqual('hello world!')
 })
 
 test('locale attr', async () => {
   const { module } = await bundleAndRun('locale.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('ja')
-  expect(i18n.resource.hello(createMessageContext())).toEqual(
-    'こんにちは、世界！'
-  )
+  const fn = compile(i18n.resource.hello, {
+    locale: i18n.locale
+  } as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('こんにちは、世界！')
 })
 
 test('locale attr and basic', async () => {
   const { module } = await bundleAndRun('locale-mix.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   let i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('ja')
-  expect(i18n.resource.hello(createMessageContext())).toEqual(
-    'こんにちは、世界！'
-  )
+  const fn1 = compile(i18n.resource.hello, {
+    locale: i18n.locale
+  } as MessageCompilerContext)
+  expect(fn1(createMessageContext())).toEqual('こんにちは、世界！')
+
   i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const fn2 = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn2(createMessageContext())).toEqual('hello world!')
 })
 
 test('locale attr and import', async () => {
   const { module } = await bundleAndRun('locale-import.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('en')
-  expect(i18n.resource.hello(createMessageContext())).toEqual('hello world!')
+  const fn = compile(i18n.resource.hello, {
+    locale: i18n.locale
+  } as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello world!')
 })
 
 test('special characters', async () => {
   const { module } = await bundleAndRun('special-char.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.hello(createMessageContext())).toEqual(
-    'hello\ngreat\t"world"'
-  )
+  const fn = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello\ngreat\t"world"')
 })
 
 test('global', async () => {
   const { module } = await bundleAndRun('global-mix.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
   expect(module.__i18nGlobal).toMatchSnapshot()
+
   const l = module.__i18n.pop()
   expect(l.locale).toEqual('ja')
-  expect(l.resource.hello(createMessageContext())).toEqual('hello local!')
+  const fn1 = compile(l.resource.hello, {
+    locale: l.locale
+  } as MessageCompilerContext)
+  expect(fn1(createMessageContext())).toEqual('hello local!')
+
   const g = module.__i18nGlobal.pop()
   expect(g.locale).toEqual('')
-  expect(g.resource.en.hello(createMessageContext())).toEqual('hello global!')
+  const fn2 = compile(g.resource.en.hello, {
+    locale: g.locale
+  } as MessageCompilerContext)
+  expect(fn2(createMessageContext())).toEqual('hello global!')
 })
 
 test('default lang', async () => {
@@ -111,9 +144,8 @@ test('default lang', async () => {
   })
   expect(module.__i18n).toMatchSnapshot()
   const l = module.__i18n.pop()
-  expect(l.resource.en.hello(createMessageContext())).toEqual(
-    'hello from defaults!'
-  )
+  const fn = compile(l.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello from defaults!')
 })
 
 test('default lang and global scope', async () => {
@@ -123,9 +155,8 @@ test('default lang and global scope', async () => {
   })
   expect(module.__i18nGlobal).toMatchSnapshot()
   const g = module.__i18nGlobal.pop()
-  expect(g.resource.en.hello(createMessageContext())).toEqual(
-    'hello from defaults!'
-  )
+  const fn = compile(g.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello from defaults!')
 })
 
 test('global scope and import', async () => {
@@ -138,14 +169,18 @@ test('global scope and import', async () => {
   )
   expect(module.__i18nGlobal).toMatchSnapshot()
   const g = module.__i18nGlobal.pop()
-  expect(g.resource.en.hello(createMessageContext())).toEqual('hello world!')
+  const fn = compile(g.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello world!')
 })
 
 test('array', async () => {
   const { module } = await bundleAndRun('array.vue', bundleWebpack)
   expect(module.__i18n).toMatchSnapshot()
+
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
-  expect(i18n.resource.en.foo[0][0](createMessageContext())).toEqual('bar')
-  expect(i18n.resource.en.foo[1](createMessageContext())).toEqual('baz')
+  const fn1 = compile(i18n.resource.en.foo[0][0], {} as MessageCompilerContext)
+  const fn2 = compile(i18n.resource.en.foo[1], {} as MessageCompilerContext)
+  expect(fn1(createMessageContext())).toEqual('bar')
+  expect(fn2(createMessageContext())).toEqual('baz')
 })

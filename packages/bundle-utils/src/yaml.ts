@@ -67,7 +67,6 @@ export function generate(
     useClassComponent,
     jit
   } as CodeGenOptions
-  const generator = createCodeGenerator(options)
 
   let ast = parseYAML(value, { filePath: filename })
 
@@ -83,6 +82,14 @@ export function generate(
     ast = parseYAML(value, { filePath: filename })
   }
 
+  if (locale && onlyLocales?.length && !onlyLocales.includes(locale)) {
+    value = JSON.stringify({})
+    ast = parseYAML(value, { filePath: filename })
+    options.locale = ''
+    options.source = undefined
+  }
+
+  const generator = createCodeGenerator(options)
   const codeMaps = _generate(generator, ast, options)
 
   const { code, map } = generator.context()

@@ -42,6 +42,42 @@ test('json5: exclude locales', async () => {
   expect(i18n.resource.en).toBeUndefined()
 })
 
+test('json: exclude locales when using mixed locales', async () => {
+  const { module } = await bundleAndRun('locale-mix-json.vue', bundleVite, {
+    onlyLocales: ['en']
+  })
+  expect(module.__i18n).toMatchSnapshot()
+
+  module.__i18n.forEach(i18n => {
+    expect(i18n.resource.ja).toBeUndefined()
+    expect(i18n.locale).not.toBe('ja')
+  })
+})
+
+test('yaml: exclude locales when using mixed locales', async () => {
+  const { module } = await bundleAndRun('locale-mix-yaml.vue', bundleVite, {
+    onlyLocales: ['en']
+  })
+  expect(module.__i18n).toMatchSnapshot()
+
+  module.__i18n.forEach(i18n => {
+    expect(i18n.resource.ja).toBeUndefined()
+    expect(i18n.locale).not.toBe('ja')
+  })
+})
+
+test('json5: exclude locales when using mixed locales', async () => {
+  const { module } = await bundleAndRun('locale-mix.vue', bundleVite, {
+    onlyLocales: ['en']
+  })
+  expect(module.__i18n).toMatchSnapshot()
+
+  module.__i18n.forEach(i18n => {
+    expect(i18n.resource.ja).toBeUndefined()
+    expect(i18n.locale).not.toBe('ja')
+  })
+})
+
 test('yaml', async () => {
   const { module } = await bundleAndRun('yaml.vue', bundleVite)
   expect(module.__i18n).toMatchSnapshot()

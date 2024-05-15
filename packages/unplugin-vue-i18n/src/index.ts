@@ -218,9 +218,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             })
           } else {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ;(config.resolve!.alias as any)[
-              vueI18nAliasName
-            ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+            ;(config.resolve!.alias as any)[vueI18nAliasName] =
+              `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
           }
           debug(`petite-vue-i18n alias name: ${vueI18nAliasName}`)
         }
@@ -399,9 +398,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         useVueI18nImportName
       ) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(compiler.options.resolve!.alias as any)[
-          vueI18nAliasName
-        ] = `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
+        ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
+          `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
         debug(`petite-vue-i18n alias name: ${vueI18nAliasName}`)
       }
 

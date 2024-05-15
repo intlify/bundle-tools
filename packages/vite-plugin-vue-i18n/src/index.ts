@@ -120,9 +120,8 @@ function pluginI18n(
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ;(config.resolve!.alias as any)[
-            getAliasName()
-          ] = `${installedPkg}/dist/${runtimeModule}`
+          ;(config.resolve!.alias as any)[getAliasName()] =
+            `${installedPkg}/dist/${runtimeModule}`
         }
         debug(`alias name: ${getAliasName()}`)
         debug(
@@ -141,9 +140,8 @@ function pluginI18n(
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          ;(config.resolve!.alias as any)[
-            'vue-i18n'
-          ] = `petite-vue-i18n/dist/petite-vue-i18n.mjs`
+          ;(config.resolve!.alias as any)['vue-i18n'] =
+            `petite-vue-i18n/dist/petite-vue-i18n.mjs`
         }
         debug(`alias name: ${getAliasName()}`)
       }

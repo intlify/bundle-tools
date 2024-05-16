@@ -1,4 +1,4 @@
-import { readFile, validateSyntax } from '../utils'
+import { readFile } from '../utils'
 import { generate } from '../../src/json'
 
 describe('code generation', () => {

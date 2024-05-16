@@ -155,7 +155,6 @@ export async function bundleAndRun(
     ? options.globalSFCScope
     : undefined
   options.sourcemap = isBoolean(options.sourcemap) || false
-  options.useClassComponent = isBoolean(options.useClassComponent) || false
   options.bridge = isBoolean(options.bridge) || false
   options.legacy = isBoolean(options.legacy) || false
   options.vueVersion = isString(options.vueVersion)

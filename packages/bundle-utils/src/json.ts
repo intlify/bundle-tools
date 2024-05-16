@@ -65,7 +65,6 @@ export function generate(
     escapeHtml,
     jit
   } as CodeGenOptions
-  const generator = createCodeGenerator(options)
 
   let ast = parseJSON(value, { filePath: filename })
 
@@ -81,6 +80,14 @@ export function generate(
     ast = parseJSON(value, { filePath: filename })
   }
 
+  if (locale && onlyLocales?.length && !onlyLocales.includes(locale)) {
+    value = JSON.stringify({})
+    ast = parseJSON(value, { filePath: filename })
+    options.locale = ''
+    options.source = undefined
+  }
+
+  const generator = createCodeGenerator(options)
   const codeMaps = _generate(generator, ast, options)
 
   const { code, map } = generator.context()

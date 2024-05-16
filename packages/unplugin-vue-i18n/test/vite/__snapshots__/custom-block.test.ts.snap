@@ -669,6 +669,77 @@ exports[`json: exclude locales 1`] = `
 ]
 `;
 
+exports[`json: exclude locales when using mixed locales 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {
+      "en": {
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
+      },
+    },
+  },
+  {
+    "locale": "",
+    "resource": {},
+  },
+]
+`;
+
 exports[`json5 1`] = `
 [
   {
@@ -738,6 +809,77 @@ exports[`json5 1`] = `
 
 exports[`json5: exclude locales 1`] = `
 [
+  {
+    "locale": "",
+    "resource": {},
+  },
+]
+`;
+
+exports[`json5: exclude locales when using mixed locales 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {
+      "en": {
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
+      },
+    },
+  },
   {
     "locale": "",
     "resource": {},
@@ -1328,64 +1470,8 @@ exports[`yaml 1`] = `
 exports[`yaml: exclude locales 1`] = `
 [
   {
-    "locale": "en",
-    "resource": {
-      "hello": {
-        "body": {
-          "end": 12,
-          "items": [
-            {
-              "end": 12,
-              "loc": {
-                "end": {
-                  "column": 13,
-                  "line": 1,
-                  "offset": 12,
-                },
-                "start": {
-                  "column": 1,
-                  "line": 1,
-                  "offset": 0,
-                },
-              },
-              "start": 0,
-              "type": 3,
-            },
-          ],
-          "loc": {
-            "end": {
-              "column": 13,
-              "line": 1,
-              "offset": 12,
-            },
-            "start": {
-              "column": 1,
-              "line": 1,
-              "offset": 0,
-            },
-          },
-          "start": 0,
-          "static": "hello world!",
-          "type": 2,
-        },
-        "end": 12,
-        "loc": {
-          "end": {
-            "column": 13,
-            "line": 1,
-            "offset": 12,
-          },
-          "source": "hello world!",
-          "start": {
-            "column": 1,
-            "line": 1,
-            "offset": 0,
-          },
-        },
-        "start": 0,
-        "type": 0,
-      },
-    },
+    "locale": "",
+    "resource": {},
   },
   {
     "locale": "ja",
@@ -1446,6 +1532,77 @@ exports[`yaml: exclude locales 1`] = `
         "type": 0,
       },
     },
+  },
+]
+`;
+
+exports[`yaml: exclude locales when using mixed locales 1`] = `
+[
+  {
+    "locale": "",
+    "resource": {
+      "en": {
+        "hello": {
+          "body": {
+            "end": 12,
+            "items": [
+              {
+                "end": 12,
+                "loc": {
+                  "end": {
+                    "column": 13,
+                    "line": 1,
+                    "offset": 12,
+                  },
+                  "start": {
+                    "column": 1,
+                    "line": 1,
+                    "offset": 0,
+                  },
+                },
+                "start": 0,
+                "type": 3,
+              },
+            ],
+            "loc": {
+              "end": {
+                "column": 13,
+                "line": 1,
+                "offset": 12,
+              },
+              "start": {
+                "column": 1,
+                "line": 1,
+                "offset": 0,
+              },
+            },
+            "start": 0,
+            "static": "hello world!",
+            "type": 2,
+          },
+          "end": 12,
+          "loc": {
+            "end": {
+              "column": 13,
+              "line": 1,
+              "offset": 12,
+            },
+            "source": "hello world!",
+            "start": {
+              "column": 1,
+              "line": 1,
+              "offset": 0,
+            },
+          },
+          "start": 0,
+          "type": 0,
+        },
+      },
+    },
+  },
+  {
+    "locale": "",
+    "resource": {},
   },
 ]
 `;

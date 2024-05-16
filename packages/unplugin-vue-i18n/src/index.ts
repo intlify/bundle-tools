@@ -80,7 +80,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     ? options.defaultSFCLang
     : 'json'
   const globalSFCScope = !!options.globalSFCScope
-  const useClassComponent = !!options.useClassComponent
 
   const runtimeOnly = isBoolean(options.runtimeOnly)
     ? options.runtimeOnly
@@ -312,7 +311,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
                 {
                   inSourceMap,
                   isGlobal: globalSFCScope,
-                  useClassComponent,
                   allowDynamic,
                   strictMessage,
                   escapeHtml,
@@ -451,8 +449,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           {
             forceStringify,
             strictMessage,
-            escapeHtml,
-            useClassComponent
+            escapeHtml
           }
         )
         // TODO: support virtual import identifier
@@ -499,7 +496,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             {
               inSourceMap,
               isGlobal: globalSFCScope,
-              useClassComponent,
               allowDynamic,
               strictMessage,
               escapeHtml,
@@ -553,7 +549,6 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
             {
               inSourceMap,
               isGlobal: globalSFCScope,
-              useClassComponent,
               jit: true,
               strictMessage,
               escapeHtml,
@@ -644,7 +639,6 @@ async function generateBundleResources(
     onlyLocales = [],
     strictMessage = true,
     escapeHtml = false,
-    useClassComponent = false,
     jit = true
   }: {
     forceStringify?: boolean
@@ -652,7 +646,6 @@ async function generateBundleResources(
     onlyLocales?: string[]
     strictMessage?: boolean
     escapeHtml?: boolean
-    useClassComponent?: boolean
     jit?: boolean
   }
 ) {
@@ -666,7 +659,6 @@ async function generateBundleResources(
       const generate = /json5?/.test(ext) ? generateJSON : generateYAML
       const parseOptions = getOptions(res, isProduction, {}, false, {
         isGlobal,
-        useClassComponent,
         jit,
         onlyLocales,
         strictMessage,
@@ -762,7 +754,6 @@ function getOptions(
     forceStringify = false,
     isGlobal = false,
     onlyLocales = [],
-    useClassComponent = false,
     allowDynamic = false,
     strictMessage = true,
     escapeHtml = false,
@@ -772,7 +763,6 @@ function getOptions(
     forceStringify?: boolean
     isGlobal?: boolean
     onlyLocales?: string[]
-    useClassComponent?: boolean
     allowDynamic?: boolean
     strictMessage?: boolean
     escapeHtml?: boolean
@@ -786,7 +776,6 @@ function getOptions(
     sourceMap,
     inSourceMap,
     forceStringify,
-    useClassComponent,
     allowDynamic,
     strictMessage,
     escapeHtml,

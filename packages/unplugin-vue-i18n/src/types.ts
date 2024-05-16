@@ -11,7 +11,6 @@ export interface PluginOptions {
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat
   globalSFCScope?: boolean
-  useClassComponent?: boolean
   useVueI18nImportName?: boolean
   strictMessage?: boolean
   escapeHtml?: boolean

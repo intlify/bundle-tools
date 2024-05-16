@@ -1,4 +1,4 @@
-import { readFile, validateSyntax } from '../utils'
+import { readFile } from '../utils'
 import { generate } from '../../src/json'
 
 describe('code generation', () => {
@@ -56,22 +56,6 @@ describe('code generation', () => {
     })
 
     expect(code).toMatchSnapshot('code')
-    expect(map).toMatchSnapshot('map')
-  })
-
-  test('useClassComponent', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(source, {
-      type: 'sfc',
-      useClassComponent: true,
-      sourceMap: true,
-      env: 'development'
-    })
-
-    expect(validateSyntax(code)).toBe(true)
-    expect(code).toMatchSnapshot('code')
-    expect(code).toContain('Component.__o || Component.__vccOpts || Component')
-    expect(code).toContain('_Component.__i18n')
     expect(map).toMatchSnapshot('map')
   })
 
@@ -202,22 +186,6 @@ describe('AST code generation', () => {
     })
 
     expect(code).toMatchSnapshot('code')
-    expect(map).toBeUndefined()
-  })
-
-  test('useClassComponent', async () => {
-    const { source } = await readFile('./fixtures/codegen/complex.json')
-    const { code, map } = generate(source, {
-      jit: true,
-      type: 'sfc',
-      useClassComponent: true,
-      env: 'development'
-    })
-
-    expect(validateSyntax(code)).toBe(true)
-    expect(code).toMatchSnapshot('code')
-    expect(code).toContain('Component.__o || Component.__vccOpts || Component')
-    expect(code).toContain('_Component.__i18n')
     expect(map).toBeUndefined()
   })
 

@@ -40,7 +40,6 @@ export function generate(
     onError = undefined,
     strictMessage = true,
     escapeHtml = false,
-    useClassComponent = false,
     jit = false
   }: CodeGenOptions
 ): CodeGenResult<JSONProgram> {
@@ -64,7 +63,6 @@ export function generate(
     onError,
     strictMessage,
     escapeHtml,
-    useClassComponent,
     jit
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
@@ -114,7 +112,7 @@ function _generate(
   const itemsCountStack = [] as number[]
   const { forceStringify } = generator.context()
   const codeMaps = new Map<string, RawSourceMap>()
-  const { type, sourceMap, isGlobal, locale, useClassComponent, jit } = options
+  const { type, sourceMap, isGlobal, locale, jit } = options
 
   const codegenFn: CodeGenFunction = jit
     ? generateResourceAst
@@ -137,12 +135,10 @@ function _generate(
             const exportSyntax = 'export default'
             generator.push(`${exportSyntax} function (Component) {`)
             generator.indent()
-            // prettier-ignore
-            const componentVariable = useClassComponent
-                ? `Component.__o || Component.__vccOpts || Component`
-                : `Component`
-            // prettier-ignore
-            generator.pushline(`const ${componentNamespace} = ${componentVariable}`)
+            const componentVariable = `Component`
+            generator.pushline(
+              `const ${componentNamespace} = ${componentVariable}`
+            )
             generator.pushline(
               `${componentNamespace}.${variableName} = ${componentNamespace}.${variableName} || []`
             )

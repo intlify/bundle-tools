@@ -56,7 +56,6 @@ export interface CodeGenOptions {
   locale?: string
   env?: DevEnv
   forceStringify?: boolean
-  useClassComponent?: boolean
   allowDynamic?: boolean
   strictMessage?: boolean
   escapeHtml?: boolean

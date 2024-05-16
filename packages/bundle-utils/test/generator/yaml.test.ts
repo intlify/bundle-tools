@@ -25,23 +25,6 @@ test('bare', async () => {
   expect(map).toMatchSnapshot('map')
 })
 
-test('useClassComponent', async () => {
-  const { source } = await readFile('./fixtures/codegen/complex.yaml')
-  await readFile('./fixtures/codegen/complex.json')
-  const { code, map } = generate(source, {
-    type: 'sfc',
-    useClassComponent: true,
-    sourceMap: true,
-    env: 'development'
-  })
-
-  expect(validateSyntax(code)).toBe(true)
-  expect(code).toMatchSnapshot('code')
-  expect(code).toContain('Component.__o || Component.__vccOpts || Component')
-  expect(code).toContain('_Component.__i18n')
-  expect(map).toMatchSnapshot('map')
-})
-
 test('array basic', async () => {
   const { source } = await readFile('./fixtures/codegen/array-basic.yml')
   const { code, map } = generate(source, {

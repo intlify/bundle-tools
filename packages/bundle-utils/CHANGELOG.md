@@ -1,4 +1,22 @@
 
+## @intlify/bundle-utils@9.0.0-beta.0 (2024-05-17)
+
+#### :star: Features
+* [#369](https://github.com/intlify/bundle-tools/pull/369) feat(bundle-utils,unplugin-vue-i18n): pkg option for `getVueI18nVersion` ([@kazupon](https://github.com/kazupon))
+
+#### :bug: Bug Fixes
+* [#366](https://github.com/intlify/bundle-tools/pull/366) fix(bundle-utils,unplugin-vue-i18n): exclude locales when using mixed locales #329 ([@imslepov](https://github.com/imslepov))
+
+#### :boom: Breaking Change
+* [#367](https://github.com/intlify/bundle-tools/pull/367) breaking(bundle-utils): drop `useClassComponent` option ([@kazupon](https://github.com/kazupon))
+* [#365](https://github.com/intlify/bundle-tools/pull/365) breaking(bundle-utils): drop unnecessary `vueVersion` option ([@kazupon](https://github.com/kazupon))
+* [#363](https://github.com/intlify/bundle-tools/pull/363) breaking(bundle-utils): drop node v18 lower ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 2
+- Daniel Slepov ([@imslepov](https://github.com/imslepov))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@8.0.0 (2024-03-26)
 
 #### :boom: Breaking Change

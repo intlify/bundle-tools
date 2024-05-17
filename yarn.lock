@@ -1211,7 +1211,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-tools@workspace:."
   dependencies:
-    "@intlify/core-base": 10.0.0-alpha.5
+    "@intlify/core-base": next
     "@kazupon/lerna-changelog": ^4.3.0
     "@octokit/rest": ^18.6.0
     "@rollup/plugin-alias": ^3.1.5
@@ -1271,7 +1271,7 @@ __metadata:
     vite: ^4.4.9
     vitest: ^0.29.8
     vue: ^2.6.14
-    vue-i18n: 10.0.0-alpha.5
+    vue-i18n: next
     vue-loader: ^16.3.0
     vue-loader15: "npm:vue-loader@15.11.1"
     vue-loader17: "npm:vue-loader@17.4.2"
@@ -1289,8 +1289,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@intlify/bundle-utils@workspace:packages/bundle-utils"
   dependencies:
-    "@intlify/message-compiler": ^9.4.0
-    "@intlify/shared": ^9.4.0
+    "@intlify/message-compiler": next
+    "@intlify/shared": next
     "@types/escodegen": ^0.0.10
     "@types/estree": ^1.0.0
     acorn: ^8.8.2
@@ -1309,7 +1309,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@intlify/core-base@npm:10.0.0-alpha.5":
+"@intlify/core-base@npm:10.0.0-alpha.5, @intlify/core-base@npm:next":
   version: 10.0.0-alpha.5
   resolution: "@intlify/core-base@npm:10.0.0-alpha.5"
   dependencies:
@@ -1319,7 +1319,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/message-compiler@npm:10.0.0-alpha.5":
+"@intlify/message-compiler@npm:10.0.0-alpha.5, @intlify/message-compiler@npm:next":
   version: 10.0.0-alpha.5
   resolution: "@intlify/message-compiler@npm:10.0.0-alpha.5"
   dependencies:
@@ -1329,27 +1329,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@intlify/message-compiler@npm:^9.4.0":
-  version: 9.4.0
-  resolution: "@intlify/message-compiler@npm:9.4.0"
-  dependencies:
-    "@intlify/shared": 9.4.0
-    source-map-js: ^1.0.2
-  checksum: 4393bd722c9b9440819770e6b28b913751242e7c7498c4191715e744413a068101496371202e52fb80cecfe1d3490d2244077df8f53b83e15dd9e720b095eb58
-  languageName: node
-  linkType: hard
-
-"@intlify/shared@npm:10.0.0-alpha.5, @intlify/shared@npm:^10.0.0-alpha.5":
+"@intlify/shared@npm:10.0.0-alpha.5, @intlify/shared@npm:next":
   version: 10.0.0-alpha.5
   resolution: "@intlify/shared@npm:10.0.0-alpha.5"
   checksum: e70aa77783957b8bd09251eada879afbc71019bb98f94e7c2e4471534019d9ac0a0c6c0a14ae75ba09d38a230d3c9ef67389eb490e158aaa309037e3e863775e
-  languageName: node
-  linkType: hard
-
-"@intlify/shared@npm:9.4.0, @intlify/shared@npm:^9.4.0":
-  version: 9.4.0
-  resolution: "@intlify/shared@npm:9.4.0"
-  checksum: 617c0f02bbad0b5c65ed134a587d0931308bcd71ba05d598fd5513b56d0a2cc6c82724d754f1648f8869136125e30d5c227e9fcc3aa7310366666c3cab7cef2c
   languageName: node
   linkType: hard
 
@@ -1358,7 +1341,7 @@ __metadata:
   resolution: "@intlify/unplugin-vue-i18n@workspace:packages/unplugin-vue-i18n"
   dependencies:
     "@intlify/bundle-utils": ^8.0.0
-    "@intlify/shared": ^10.0.0-alpha.5
+    "@intlify/shared": next
     "@rollup/pluginutils": ^5.1.0
     "@vue/compiler-sfc": ^3.2.47
     debug: ^4.3.3
@@ -13208,7 +13191,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vue-i18n@npm:10.0.0-alpha.5":
+"vue-i18n@npm:next":
   version: 10.0.0-alpha.5
   resolution: "vue-i18n@npm:10.0.0-alpha.5"
   dependencies:

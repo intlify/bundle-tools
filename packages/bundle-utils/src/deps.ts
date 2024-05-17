@@ -36,7 +36,7 @@ export function checkInstallPackage(
   )
 }
 
-type VueI18nVersion = '9' | 'unknown' | ''
+type VueI18nVersion = '9' | '10' | 'unknown' | ''
 
 export function getVueI18nVersion(
   debug: Function,
@@ -48,6 +48,9 @@ export function getVueI18nVersion(
   }
   if (VueI18n.VERSION && VueI18n.VERSION.startsWith('9.')) {
     return '9'
+  }
+  if (VueI18n.VERSION && VueI18n.VERSION.startsWith('10.')) {
+    return '10'
   }
   return 'unknown'
 }

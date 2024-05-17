@@ -17,8 +17,7 @@ import {
   generateJSON,
   generateYAML,
   generateJavaScript,
-  checkInstallPackage,
-  getVueI18nVersion
+  checkInstallPackage
 } from '@intlify/bundle-utils'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
@@ -39,7 +38,6 @@ const VIRTUAL_PREFIX = '\0'
 const debug = createDebug('unplugin-vue-i18n')
 
 const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
-const vueI18nVersion = getVueI18nVersion(debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
@@ -112,17 +110,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   // prettier-ignore
   const getVueI18nAliasName = () =>
-    vueI18nVersion === '9'
+    installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) && useVueI18nImportName
       ? 'vue-i18n'
-      : vueI18nVersion === 'unknown' && installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) && useVueI18nImportName
-        ? 'vue-i18n'
-        : installedPkg
+      : installedPkg
 
-  const getVueI18nAliasPath = (
-    aliasName: string,
-    { ssr = false, runtimeOnly = false }
-  ) => {
-    return `${aliasName}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
+  const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
+    return `${installedPkg}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
       !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
     }`
   }
@@ -168,7 +161,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           if (isArray(config.resolve!.alias)) {
             config.resolve!.alias.push({
               find: vueI18nAliasName,
-              replacement: getVueI18nAliasPath(vueI18nAliasName, {
+              replacement: getVueI18nAliasPath({
                 ssr: ssrBuild,
                 runtimeOnly
               })
@@ -176,19 +169,16 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
           } else if (isObject(config.resolve!.alias)) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             ;(config.resolve!.alias as any)[vueI18nAliasName] =
-              getVueI18nAliasPath(vueI18nAliasName, {
+              getVueI18nAliasPath({
                 ssr: ssrBuild,
                 runtimeOnly
               })
           }
           debug(
-            `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath(
-              vueI18nAliasName,
-              {
-                ssr: ssrBuild,
-                runtimeOnly
-              }
-            )}`
+            `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath({
+              ssr: ssrBuild,
+              runtimeOnly
+            })}`
           )
         } else if (
           command === 'serve' &&
@@ -360,12 +350,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
       if (isProduction) {
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-          getVueI18nAliasPath(vueI18nAliasName, {
+          getVueI18nAliasPath({
             ssr: ssrBuild,
             runtimeOnly
           })
         debug(
-          `set ${vueI18nAliasName}: ${getVueI18nAliasPath(vueI18nAliasName, {
+          `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
             ssr: ssrBuild,
             runtimeOnly
           })}`

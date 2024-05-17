@@ -36,15 +36,15 @@ export function checkInstallPackage(
   )
 }
 
-type VueI18nVersion = '8' | '9' | 'unknown' | ''
+type VueI18nVersion = '9' | 'unknown' | ''
 
-export function getVueI18nVersion(debug: Function): VueI18nVersion {
-  const VueI18n = loadModule('vue-i18n', debug)
+export function getVueI18nVersion(
+  debug: Function,
+  pkg = 'vue-i18n'
+): VueI18nVersion {
+  const VueI18n = loadModule(pkg, debug)
   if (VueI18n == null) {
     return ''
-  }
-  if (VueI18n.version && VueI18n.version.startsWith('8.')) {
-    return '8'
   }
   if (VueI18n.VERSION && VueI18n.VERSION.startsWith('9.')) {
     return '9'

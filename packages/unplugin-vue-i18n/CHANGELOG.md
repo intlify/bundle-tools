@@ -1,4 +1,26 @@
 
+## @intlify/unplugin-vue-i18n@5.0.0-beta.0 (2024-05-17)
+
+#### :star: Features
+* [#369](https://github.com/intlify/bundle-tools/pull/369) feat(bundle-utils,unplugin-vue-i18n): pkg option for `getVueI18nVersion` ([@kazupon](https://github.com/kazupon))
+
+#### :bug: Bug Fixes
+* [#366](https://github.com/intlify/bundle-tools/pull/366) fix(bundle-utils,unplugin-vue-i18n): exclude locales when using mixed locales #329 ([@imslepov](https://github.com/imslepov))
+
+#### :boom: Breaking Change
+* [#368](https://github.com/intlify/bundle-tools/pull/368) fix(unplugin-vue-i18n): drop `useClassComponent` option ([@kazupon](https://github.com/kazupon))
+* [#364](https://github.com/intlify/bundle-tools/pull/364) breaking(unplugin-vue-i18n): drop node v18 lower ([@kazupon](https://github.com/kazupon))
+* [#362](https://github.com/intlify/bundle-tools/pull/362) breaking(unplugin-vue-i18n): drop `jitCompilation` option ([@kazupon](https://github.com/kazupon))
+
+#### :pencil: Documentation
+* [#358](https://github.com/intlify/bundle-tools/pull/358) docs: Fix wording of dropMessageCompiler ([@Lilja](https://github.com/Lilja))
+
+#### Committers: 3
+- Daniel Slepov ([@imslepov](https://github.com/imslepov))
+- Erik Lilja ([@Lilja](https://github.com/Lilja))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@4.0.0 (2024-03-26)
 
 #### :zap: Improvement Features

@@ -41,10 +41,6 @@ const debug = createDebug('unplugin-vue-i18n')
 const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
 const vueI18nVersion = getVueI18nVersion(debug)
 
-if (vueI18nVersion === '8') {
-  warn(`vue-i18n@8 is not supported, since sinece Vue 2 was EOL on 2023.`)
-}
-
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
 

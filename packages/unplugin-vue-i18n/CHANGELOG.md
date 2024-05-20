@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@5.0.0-beta.1 (2024-05-20)
+
+#### :boom: Breaking Change
+* [#372](https://github.com/intlify/bundle-tools/pull/372) breaking: drop `useVueI18nImportName` option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@5.0.0-beta.0 (2024-05-17)
 
 #### :star: Features

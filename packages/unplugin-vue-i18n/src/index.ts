@@ -4,7 +4,6 @@ import createDebug from 'debug'
 import fg from 'fast-glob'
 import {
   isArray,
-  isObject,
   isEmptyObject,
   isString,
   isNumber,
@@ -16,12 +15,11 @@ import { createFilter } from '@rollup/pluginutils'
 import {
   generateJSON,
   generateYAML,
-  generateJavaScript,
-  checkInstallPackage
+  generateJavaScript
 } from '@intlify/bundle-utils'
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
-import { getRaw, warn, error, raiseError } from './utils'
+import { getRaw, warn, error, raiseError, checkInstallPackage } from './utils'
 
 import type { RawSourceMap } from 'source-map-js'
 import type {
@@ -37,7 +35,7 @@ const VIRTUAL_PREFIX = '\0'
 
 const debug = createDebug('unplugin-vue-i18n')
 
-const installedPkg = checkInstallPackage('@intlify/unplugin-vue-i18n', debug)
+const installedPkgInfo = checkInstallPackage(debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('plugin options:', options, meta.framework)
@@ -84,7 +82,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('dropMessageCompiler', dropMessageCompiler)
 
   // prettier-ignore
-  const compositionOnly = installedPkg === 'vue-i18n'
+  const compositionOnly = installedPkgInfo.pkg === 'vue-i18n'
     ? isBoolean(options.compositionOnly)
       ? options.compositionOnly
       : true
@@ -92,7 +90,7 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   debug('compositionOnly', compositionOnly)
 
   // prettier-ignore
-  const fullInstall = installedPkg === 'vue-i18n'
+  const fullInstall = installedPkgInfo.pkg === 'vue-i18n'
     ? isBoolean(options.fullInstall)
       ? options.fullInstall
       : true
@@ -102,20 +100,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const ssrBuild = !!options.ssr
   debug('ssr', ssrBuild)
 
-  const useVueI18nImportName = options.useVueI18nImportName
-  if (useVueI18nImportName != null) {
-    warn(`'useVueI18nImportName' option is experimental`)
-  }
-  debug('useVueI18nImportName', useVueI18nImportName)
-
-  // prettier-ignore
-  const getVueI18nAliasName = () =>
-    installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) && useVueI18nImportName
-      ? 'vue-i18n'
-      : installedPkg
-
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
-    return `${installedPkg}/dist/${installedPkg}${runtimeOnly ? '.runtime' : ''}.${
+    return `${installedPkgInfo.alias}/dist/${installedPkgInfo.pkg}${runtimeOnly ? '.runtime' : ''}.${
       !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
     }`
   }
@@ -134,7 +120,8 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   let isProduction = false
   let sourceMap = false
 
-  const vueI18nAliasName = getVueI18nAliasName()
+  const vueI18nAliasName = installedPkgInfo.alias
+  debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
   return {
     name: 'unplugin-vue-i18n',
@@ -150,73 +137,30 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
     enforce: meta.framework === 'vite' ? 'pre' : 'post',
 
     vite: {
-      config(config, { command }) {
-        config.resolve = normalizeConfigResolveAlias(
-          config.resolve,
-          meta.framework
-        )
-
-        if (command === 'build') {
-          debug(`vue-i18n alias name: ${vueI18nAliasName}`)
-          if (isArray(config.resolve!.alias)) {
-            config.resolve!.alias.push({
-              find: vueI18nAliasName,
-              replacement: getVueI18nAliasPath({
-                ssr: ssrBuild,
-                runtimeOnly
-              })
-            })
-          } else if (isObject(config.resolve!.alias)) {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ;(config.resolve!.alias as any)[vueI18nAliasName] =
-              getVueI18nAliasPath({
-                ssr: ssrBuild,
-                runtimeOnly
-              })
+      config() {
+        const defineConfig = {
+          define: {
+            __VUE_I18N_LEGACY_API__: !compositionOnly,
+            __VUE_I18N_FULL_INSTALL__: fullInstall,
+            __INTLIFY_DROP_MESSAGE_COMPILER__: dropMessageCompiler,
+            __VUE_I18N_PROD_DEVTOOLS__: false
           }
-          debug(
-            `set ${vueI18nAliasName} runtime only: ${getVueI18nAliasPath({
-              ssr: ssrBuild,
-              runtimeOnly
-            })}`
-          )
-        } else if (
-          command === 'serve' &&
-          installedPkg === 'petite-vue-i18n' &&
-          useVueI18nImportName
-        ) {
-          config.resolve = normalizeConfigResolveAlias(
-            config.resolve,
-            meta.framework
-          )
-          if (isArray(config.resolve!.alias)) {
-            config.resolve!.alias.push({
-              find: vueI18nAliasName,
-              replacement: `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
-            })
-          } else {
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            ;(config.resolve!.alias as any)[vueI18nAliasName] =
-              `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
-          }
-          debug(`petite-vue-i18n alias name: ${vueI18nAliasName}`)
         }
+        debug('define Config:', defineConfig)
 
-        config.define = config.define || {}
-        config.define['__VUE_I18N_LEGACY_API__'] = !compositionOnly
-        debug(
-          `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
-        )
-        config.define['__VUE_I18N_FULL_INSTALL__'] = fullInstall
-        debug(
-          `set __VUE_I18N_FULL_INSTALL__ is '${config.define['__VUE_I18N_FULL_INSTALL__']}'`
-        )
-        config.define['__INTLIFY_DROP_MESSAGE_COMPILER__'] = dropMessageCompiler
-        debug(
-          `set __INTLIFY_DROP_MESSAGE_COMPILER__ is '${config.define['__INTLIFY_DROP_MESSAGE_COMPILER__']}'`
-        )
+        const aliasConfig = {
+          resolve: {
+            alias: {
+              [vueI18nAliasName]: getVueI18nAliasPath({
+                ssr: ssrBuild,
+                runtimeOnly
+              })
+            }
+          }
+        }
+        debug('alias Config:', aliasConfig)
 
-        config.define['__VUE_I18N_PROD_DEVTOOLS__'] = false
+        return assign(defineConfig, aliasConfig)
       },
 
       configResolved(config) {
@@ -346,30 +290,18 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
         compiler.options.resolve,
         meta.framework
       )
-
-      if (isProduction) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-          getVueI18nAliasPath({
-            ssr: ssrBuild,
-            runtimeOnly
-          })
-        debug(
-          `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
-            ssr: ssrBuild,
-            runtimeOnly
-          })}`
-        )
-      } else if (
-        !isProduction &&
-        installedPkg === 'petite-vue-i18n' &&
-        useVueI18nImportName
-      ) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-          `petite-vue-i18n/dist/petite-vue-i18n.esm-bundler.js`
-        debug(`petite-vue-i18n alias name: ${vueI18nAliasName}`)
-      }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
+        getVueI18nAliasPath({
+          ssr: ssrBuild,
+          runtimeOnly
+        })
+      debug(
+        `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
+          ssr: ssrBuild,
+          runtimeOnly
+        })}`
+      )
 
       loadWebpack().then(webpack => {
         if (webpack) {

@@ -568,6 +568,7 @@ async function generateBundleResources(
   }
 ) {
   const codes = []
+  const locales = []
   for (const res of resources) {
     debug(`${res} bundle loading ...`)
 
@@ -588,6 +589,7 @@ async function generateBundleResources(
 
       debug('generated code', code)
       codes.push(`${JSON.stringify(name)}: ${code}`)
+      locales.push(name)
     }
   }
 
@@ -613,7 +615,8 @@ const mergeDeep = (target, ...sources) => {
 
 export default mergeDeep({},
   ${codes.map(code => `{${code}}`).join(',\n')}
-);`
+);
+export const SUPPORTED_LOCALES = ${JSON.stringify(locales)};`
 }
 
 async function getCode(

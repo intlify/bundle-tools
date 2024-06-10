@@ -82,3 +82,5 @@ export function resolveOptions(
     escapeHtml
   }
 }
+
+export type ResolvedOptions = ReturnType<typeof resolveOptions>

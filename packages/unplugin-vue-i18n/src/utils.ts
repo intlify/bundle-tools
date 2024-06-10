@@ -59,6 +59,10 @@ function resolvePkgPath(
   }
 }
 
+export function resolvePluginName(name: string): string {
+  return `unplugin-vue-i18n:${name}`
+}
+
 export function warn(...args: unknown[]) {
   console.warn(pc.yellow(pc.bold(`[unplugin-vue-i18n] `)), ...args)
 }

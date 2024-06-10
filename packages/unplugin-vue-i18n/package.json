@@ -11,8 +11,7 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "*",
-    "vue-i18n": "*",
-    "vue-i18n-bridge": "*"
+    "vue-i18n": "*"
   },
   "peerDependenciesMeta": {
     "petite-vue-i18n": {
@@ -20,15 +19,12 @@
     },
     "vue-i18n": {
       "optional": true
-    },
-    "vue-i18n-bridge": {
-      "optional": true
     }
   },
   "dependencies": {
     "@intlify/bundle-utils": "^9.0.0-beta.0",
     "@intlify/shared": "next",
-    "@intlify/vue-i18n-extensions": "^6.0.1",
+    "@intlify/vue-i18n-extensions": "^6.0.5",
     "@rollup/pluginutils": "^5.1.0",
     "@vue/compiler-sfc": "^3.2.47",
     "debug": "^4.3.3",

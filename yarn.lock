@@ -1378,7 +1378,7 @@ __metadata:
   dependencies:
     "@intlify/bundle-utils": ^9.0.0-beta.0
     "@intlify/shared": next
-    "@intlify/vue-i18n-extensions": ^6.0.1
+    "@intlify/vue-i18n-extensions": ^6.0.5
     "@rollup/pluginutils": ^5.1.0
     "@vue/compiler-sfc": ^3.2.47
     debug: ^4.3.3
@@ -1393,30 +1393,27 @@ __metadata:
   peerDependencies:
     petite-vue-i18n: "*"
     vue-i18n: "*"
-    vue-i18n-bridge: "*"
   peerDependenciesMeta:
     petite-vue-i18n:
       optional: true
     vue-i18n:
       optional: true
-    vue-i18n-bridge:
-      optional: true
   languageName: unknown
   linkType: soft
 
-"@intlify/vue-i18n-extensions@npm:^6.0.1":
-  version: 6.0.1
-  resolution: "@intlify/vue-i18n-extensions@npm:6.0.1"
+"@intlify/vue-i18n-extensions@npm:^6.0.5":
+  version: 6.0.5
+  resolution: "@intlify/vue-i18n-extensions@npm:6.0.5"
   dependencies:
     "@babel/parser": ^7.24.6
     "@intlify/shared": ^9.0.0
     "@vue/compiler-dom": ^3.2.45
     vue-i18n: ^9.0.0
   peerDependencies:
-    "@intlify/shared": ^9.0.0
+    "@intlify/shared": ^9.0.0 || ^10.0.0
     "@vue/compiler-dom": ^3.0.0
     vue: ^3.0.0
-    vue-i18n: ^9.0.0
+    vue-i18n: ^9.0.0 || ^10.0.0
   peerDependenciesMeta:
     "@intlify/shared":
       optional: true
@@ -1426,7 +1423,7 @@ __metadata:
       optional: true
     vue-i18n:
       optional: true
-  checksum: 3788c0e8f2c60b4258ade2d884d8c007efe40df6b0a77aa0808fe6a4cd4b7dff0e9bb711a13e65ec2097103dcbf885af250036a6c8d1c3605087cf38f29ef5ee
+  checksum: 1aaa7432782c3dc0b0eb025f03d7450ebb01966abf265a8d4e5bfe7f6fe503dc627b70e6b84d76e199058e630ae729ab1caf7ef278f5024c8b6afb7b8da1c517
   languageName: node
   linkType: hard
 

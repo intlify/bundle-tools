@@ -571,12 +571,12 @@ If do you will use this option, you need to enable `jitCompilation` option.
   `useVueI18nImportName` option is deprecated in v5.
   This option will be supported with vue-i18n until v9 latest version.
 
-### `enableSsrTranslationDirective`
+### `optimizeTranslationDirective`
 
 - **Type**: `boolean` | `string` | `string[]`
 - **Default:** `false`
 
-  Whether to enable the `v-t` directive for SSR. If set to `true`, this plugin's transform will automatically translate to vue-i18n's translation function.
+  Whether to optimize `v-t` directive. If set to `true`, this plugin's transform will automatically translate to vue-i18n's translation function. If you need SSR, you must activate this option.
 
   If you want to put it manually, you can specify the signature of the translation function as a string or a string array.
 

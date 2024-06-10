@@ -374,7 +374,7 @@ Whether to tree-shake message compiler when we will be bundling.
 
 If do you will use this option, you need to enable `jitCompilation` option.
 
-> [NOTE]
+> [!NOTE]
 > After v5 or later, this option can be set with or without `jitCompilation`.
 
 > [!NOTE]
@@ -570,6 +570,18 @@ If do you will use this option, you need to enable `jitCompilation` option.
   > [!IMPORTANT]
   `useVueI18nImportName` option is deprecated in v5.
   This option will be supported with vue-i18n until v9 latest version.
+
+### `enableSsrTranslationDirective`
+
+- **Type**: `boolean` | `string` | `string[]`
+- **Default:** `false`
+
+  Whether to enable the `v-t` directive for SSR. If set to `true`, this plugin's transform will automatically translate to vue-i18n's translation function.
+
+  If you want to put it manually, you can specify the signature of the translation function as a string or a string array.
+
+  > [!WARNING]
+  About for manually signature, see the details [vue-i18n-extensions API docs](https://github.com/intlify/vue-i18n-extensions/blob/next/docs/%40intlify/vue-i18n-extensions-api.md#translationsignatures) and [usecase from vue-i18n-extensions PR](https://github.com/intlify/vue-i18n-extensions/pull/217/files#diff-3fb9543f91e011d4b0dc9beff44082fe1a99c9eab70c1afab23c3c34352b7c38R121-R200)
 
 ## 📜 Changelog
 

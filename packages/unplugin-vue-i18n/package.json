@@ -28,6 +28,7 @@
   "dependencies": {
     "@intlify/bundle-utils": "^9.0.0-beta.0",
     "@intlify/shared": "next",
+    "@intlify/vue-i18n-extensions": "^6.0.1",
     "@rollup/pluginutils": "^5.1.0",
     "@vue/compiler-sfc": "^3.2.47",
     "debug": "^4.3.3",

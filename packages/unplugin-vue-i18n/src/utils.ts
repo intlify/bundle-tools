@@ -9,7 +9,7 @@ const SUPPORT_PACKAGES = ['vue-i18n', 'petite-vue-i18n'] as const
 
 type SupportPackage = (typeof SUPPORT_PACKAGES)[number]
 
-type InstalledPackageInfo = {
+export type InstalledPackageInfo = {
   alias: string
   pkg: SupportPackage
 }

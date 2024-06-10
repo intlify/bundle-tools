@@ -1,5 +1,5 @@
 import { createUnplugin } from 'unplugin'
-import { normalize, parse as parsePath } from 'pathe'
+import { parse as parsePath } from 'pathe'
 import createDebug from 'debug'
 import fg from 'fast-glob'
 import {
@@ -7,7 +7,6 @@ import {
   isEmptyObject,
   isString,
   isNumber,
-  isBoolean,
   assign,
   generateCodeFrame
 } from '@intlify/shared'
@@ -20,6 +19,7 @@ import {
 import { parse } from '@vue/compiler-sfc'
 import { parseVueRequest, VueQuery } from './query'
 import { getRaw, warn, error, raiseError, checkInstallPackage } from './utils'
+import { resolveOptions } from './core/options'
 
 import type { RawSourceMap } from 'source-map-js'
 import type {
@@ -38,88 +38,40 @@ const debug = createDebug('unplugin-vue-i18n')
 const installedPkgInfo = checkInstallPackage(debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
-  debug('plugin options:', options, meta.framework)
-
+  debug('meta framework', meta.framework)
   // check bundler type
   if (!['vite', 'webpack'].includes(meta.framework)) {
     raiseError(`This plugin is supported 'vite' and 'webpack' only`)
   }
 
-  // normalize for `options.onlyLocales`
-  let onlyLocales: string[] = []
-  if (options.onlyLocales) {
-    onlyLocales = Array.isArray(options.onlyLocales)
-      ? options.onlyLocales
-      : [options.onlyLocales]
-  }
-
-  // normalize for `options.include`
-  let include = options.include
-  let exclude = null
-  if (include) {
-    if (isArray(include)) {
-      include = include.map(item => normalize(item))
-    } else if (isString(include)) {
-      include = normalize(include)
-    }
-  } else {
-    exclude = '**/**'
-  }
+  debug('plugin options (resolving ...):', options)
+  const resolvedOptions = resolveOptions(options, installedPkgInfo)
+  debug('plugin options (... resolved):', resolvedOptions)
+  const {
+    onlyLocales,
+    include,
+    exclude,
+    forceStringify,
+    defaultSFCLang,
+    globalSFCScope,
+    runtimeOnly,
+    dropMessageCompiler,
+    compositionOnly,
+    fullInstall,
+    ssrBuild,
+    strictMessage,
+    allowDynamic,
+    escapeHtml
+  } = resolvedOptions
 
   const filter = createFilter(include, exclude)
-  const forceStringify = !!options.forceStringify
-  const defaultSFCLang = isString(options.defaultSFCLang)
-    ? options.defaultSFCLang
-    : 'json'
-  const globalSFCScope = !!options.globalSFCScope
-
-  const runtimeOnly = isBoolean(options.runtimeOnly)
-    ? options.runtimeOnly
-    : true
-  debug('runtimeOnly', runtimeOnly)
-
-  const dropMessageCompiler = !!options.dropMessageCompiler
-  debug('dropMessageCompiler', dropMessageCompiler)
-
-  // prettier-ignore
-  const compositionOnly = installedPkgInfo.pkg === 'vue-i18n'
-    ? isBoolean(options.compositionOnly)
-      ? options.compositionOnly
-      : true
-    : true
-  debug('compositionOnly', compositionOnly)
-
-  // prettier-ignore
-  const fullInstall = installedPkgInfo.pkg === 'vue-i18n'
-    ? isBoolean(options.fullInstall)
-      ? options.fullInstall
-      : true
-    : false
-  debug('fullInstall', fullInstall)
-
-  const ssrBuild = !!options.ssr
-  debug('ssr', ssrBuild)
-
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
     return `${installedPkgInfo.alias}/dist/${installedPkgInfo.pkg}${runtimeOnly ? '.runtime' : ''}.${
       !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
     }`
   }
-
-  const allowDynamic = !!options.allowDynamic
-  debug('allowDynamic', allowDynamic)
-
-  const strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
-  debug('strictMessage', strictMessage)
-
-  const escapeHtml = !!options.escapeHtml
-  debug('escapeHtml', escapeHtml)
-
   let isProduction = false
   let sourceMap = false
-
   const vueI18nAliasName = installedPkgInfo.alias
   debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 

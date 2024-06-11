@@ -1,3 +1,4 @@
+<template></template>
 <i18n locale="ja">
 {
   "hello": "こんにちは、世界！"

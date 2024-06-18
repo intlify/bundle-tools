@@ -153,12 +153,12 @@ async function updateVersion(
 }
 
 async function publishPackage(version: string, pkgName: string, runIfNotDry) {
-  const publicArgs = ['publish', '--access', 'public']
+  const publicArgs = ['publish', '--access', 'public', '--no-git-checks']
   if (args.tag) {
     publicArgs.push(`--tag`, args.tag)
   }
   try {
-    await runIfNotDry('npm', publicArgs)
+    await runIfNotDry('pnpm', publicArgs)
     console.log(chalk.green(`Successfully published ${pkgName}@${version}`))
   } catch (e) {
     console.error(e)

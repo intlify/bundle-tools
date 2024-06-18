@@ -78,7 +78,7 @@ async function releasePackage(log: Logger) {
 
   log('Building package...')
   if (!skipBuild && !isDryRun) {
-    await run('yarn', ['build'])
+    await run('pnpm', ['build'])
   } else {
     console.log(`(skipped)`)
   }

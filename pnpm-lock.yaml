@@ -27,8 +27,8 @@ importers:
         specifier: ^13.0.0
         version: 13.3.0(rollup@2.79.1)
       '@rollup/plugin-replace':
-        specifier: ^2.4.2
-        version: 2.4.2(rollup@2.79.1)
+        specifier: ^5.0.0
+        version: 5.0.7(rollup@2.79.1)
       '@rollup/pluginutils':
         specifier: ^4.1.0
         version: 4.2.1
@@ -1212,11 +1212,6 @@ packages:
     peerDependenciesMeta:
       rollup:
         optional: true
-
-  '@rollup/plugin-replace@2.4.2':
-    resolution: {integrity: sha512-IGcu+cydlUMZ5En85jxHH4qj2hta/11BHq95iHEyb2sbgiN0eCdzvUcHw5gt9pBL5lTi4JDYJ1acCoMGpTvEZg==}
-    peerDependencies:
-      rollup: ^1.20.0 || ^2.0.0
 
   '@rollup/plugin-replace@5.0.7':
     resolution: {integrity: sha512-PqxSfuorkHz/SPpyngLyg5GCEkOcee9M1bkxiVDr41Pd61mqP1PLOoDPbpl44SB2mQGKwV/In74gqQmGITOhEQ==}
@@ -4956,6 +4951,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rollup-plugin-dts@6.1.1:
@@ -6918,10 +6914,11 @@ snapshots:
     optionalDependencies:
       rollup: 3.29.4
 
-  '@rollup/plugin-replace@2.4.2(rollup@2.79.1)':
+  '@rollup/plugin-replace@5.0.7(rollup@2.79.1)':
     dependencies:
-      '@rollup/pluginutils': 3.1.0(rollup@2.79.1)
-      magic-string: 0.25.9
+      '@rollup/pluginutils': 5.1.0(rollup@2.79.1)
+      magic-string: 0.30.10
+    optionalDependencies:
       rollup: 2.79.1
 
   '@rollup/plugin-replace@5.0.7(rollup@3.29.4)':
@@ -6942,6 +6939,14 @@ snapshots:
     dependencies:
       estree-walker: 2.0.2
       picomatch: 2.3.1
+
+  '@rollup/pluginutils@5.1.0(rollup@2.79.1)':
+    dependencies:
+      '@types/estree': 1.0.5
+      estree-walker: 2.0.2
+      picomatch: 2.3.1
+    optionalDependencies:
+      rollup: 2.79.1
 
   '@rollup/pluginutils@5.1.0(rollup@3.29.4)':
     dependencies:

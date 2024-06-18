@@ -96,16 +96,9 @@
     "directory": "packages/unplugin-vue-i18n"
   },
   "scripts": {
-    "dev:vite": "vite examples/vite --config ./examples/vite/vite.config.ts",
-    "dev:webpack": "pnpm build && webpack serve --config ./examples/webpack/webpack.config.js",
     "build": "unbuild",
-    "build:example": "npm-run-all \"build:example:*\"",
-    "build:example:vite": "vite build --config ./examples/vite/vite.config.ts --outDir ./examples/vite/dist",
-    "build:example:webpack": "pnpm build && webpack --config ./examples/webpack/webpack.config.js",
     "clean": "run-p \"clean:*\"",
     "clean:lib": "rm -rf ./lib",
-    "test": "pnpm test:e2e",
-    "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",
     "changelog": "jiti ../../scripts/changelog.ts",
     "release": "jiti ../../scripts/release.ts"
   }

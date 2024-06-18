@@ -1,10 +1,7 @@
-/**
- * Vue SFC Query, forked from the below:
- * - original repository url: https://github.com/vitejs/vite/tree/main/packages/plugin-vue
- * - code url: https://github.com/vitejs/vite/blob/main/packages/plugin-vue/src/utils/query.ts
- * - author: Evan You (https://github.com/yyx990803)
- * - license: MIT
- */
+// SPDX-License-Identifier: MIT
+// Modified by: kazuya kawaguchi (a.k.a. kazupon)
+// Auther: Evan You (https://github.com/yyx990803)
+// Forked from: https://github.com/vitejs/vite/tree/main/packages/plugin-vue
 
 export interface VueQuery {
   vue?: boolean

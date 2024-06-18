@@ -5,6 +5,8 @@ import pc from 'picocolors'
 import module from 'node:module'
 import path from 'node:path'
 
+import type { VitePlugin, RollupPlugin } from 'unplugin'
+
 const SUPPORT_PACKAGES = ['vue-i18n', 'petite-vue-i18n'] as const
 
 type SupportPackage = (typeof SUPPORT_PACKAGES)[number]
@@ -59,7 +61,7 @@ function resolvePkgPath(
   }
 }
 
-export function resolvePluginName(name: string): string {
+export function resolveNamespace(name: string): string {
   return `unplugin-vue-i18n:${name}`
 }
 
@@ -77,4 +79,36 @@ export async function getRaw(path: string): Promise<string> {
 
 export function raiseError(message: string) {
   throw new Error(`[unplugin-vue-i18n] ${message}`)
+}
+
+// @ts-expect-error -- FIXME: plugin type
+type UserConfig = Parameters<VitePlugin['configResolved']>[0]
+
+export function getVitePlugin(
+  config: UserConfig,
+  name: string
+): RollupPlugin | null {
+  // vite plugin has compoaibility for rollup plugin
+  return config.plugins.find(p => p.name === name) as RollupPlugin
+}
+
+export function checkVuePlugin(vuePlugin: RollupPlugin | null): boolean {
+  if (vuePlugin == null || !vuePlugin.api) {
+    error(
+      '`@vitejs/plugin-vue` plugin is not found or invalid version. Please install `@vitejs/plugin-vue` v4.3.4 or later version.'
+    )
+    return false
+  }
+  return true
+}
+
+const isWindows = typeof process !== 'undefined' && process.platform === 'win32'
+
+const windowsSlashRE = /\\/g
+function slash(p: string): string {
+  return p.replace(windowsSlashRE, '/')
+}
+
+export function normalizePath(id: string): string {
+  return path.posix.normalize(isWindows ? slash(id) : id)
 }

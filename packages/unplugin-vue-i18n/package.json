@@ -11,6 +11,7 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "*",
+    "vue": "^3.2.25",
     "vue-i18n": "*"
   },
   "peerDependenciesMeta": {
@@ -22,11 +23,13 @@
     }
   },
   "dependencies": {
+    "@eslint-community/eslint-utils": "^4.4.0",
     "@intlify/bundle-utils": "^9.0.0-beta.0",
     "@intlify/shared": "next",
-    "@intlify/vue-i18n-extensions": "^6.0.5",
+    "@intlify/vue-i18n-extensions": "^6.2.0",
     "@rollup/pluginutils": "^5.1.0",
-    "@vue/compiler-sfc": "^3.2.47",
+    "@typescript-eslint/scope-manager": "^7.13.0",
+    "@typescript-eslint/typescript-estree": "^7.13.0",
     "debug": "^4.3.3",
     "fast-glob": "^3.2.12",
     "js-yaml": "^4.1.0",
@@ -34,7 +37,8 @@
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "source-map-js": "^1.0.2",
-    "unplugin": "^1.1.0"
+    "unplugin": "^1.1.0",
+    "vue": "^3.4"
   },
   "devDependencies": {
     "unbuild": "^2.0.0"

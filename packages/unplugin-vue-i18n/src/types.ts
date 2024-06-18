@@ -13,4 +13,5 @@ export interface PluginOptions {
   globalSFCScope?: boolean
   strictMessage?: boolean
   escapeHtml?: boolean
+  optimizeTranslationDirective?: boolean | string | string[]
 }

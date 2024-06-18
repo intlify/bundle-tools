@@ -1,12 +1,13 @@
 import { createUnplugin } from 'unplugin'
 import createDebug from 'debug'
-import { raiseError, checkInstallPackage } from './utils'
+import { raiseError, checkInstallPackage, resolveNamespace } from './utils'
 import { resolveOptions } from './core/options'
 import { resourcePlugin } from './core/resource'
+import { directivePlugin } from './core/directive'
 
 import type { PluginOptions } from './types'
 
-const debug = createDebug('unplugin-vue-i18n:root')
+const debug = createDebug(resolveNamespace('root'))
 const installedPkgInfo = checkInstallPackage(debug)
 
 export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
@@ -20,7 +21,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   const resolvedOptions = resolveOptions(options, installedPkgInfo)
   debug('plugin options (resolved):', resolvedOptions)
 
-  return [resourcePlugin(resolvedOptions, meta, installedPkgInfo)]
+  const plugins = [resourcePlugin(resolvedOptions, meta, installedPkgInfo)]
+  if (resolvedOptions.optimizeTranslationDirective) {
+    plugins.push(directivePlugin(resolvedOptions))
+  }
+
+  return plugins
 })
 
 export default unplugin

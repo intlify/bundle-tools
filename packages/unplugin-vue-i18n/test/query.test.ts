@@ -1,4 +1,4 @@
-import { parseVueRequest } from '../src/query'
+import { parseVueRequest } from '../src/vue'
 
 test('parse', () => {
   const id =

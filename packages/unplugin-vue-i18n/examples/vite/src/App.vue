@@ -7,6 +7,7 @@
     </select>
   </form>
   <p>{{ t('hello') }}</p>
+  <p v-t="'hi'"></p>
   <Banana />
 </template>
 
@@ -29,15 +30,17 @@ export default {
 }
 </script>
 
-<i18n>
+<i18n lang="json">
 {
   "en": {
     "language": "Language",
-    "hello": "hello, world!"
+    "hello": "hello, world!",
+    "hi": "Hi!"
   },
   "ja": {
     "language": "言語",
-    "hello": "こんにちは、世界！"
+    "hello": "こんにちは、世界！",
+    "hi": "やあ！"
   }
 }
 </i18n>

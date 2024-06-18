@@ -42,9 +42,10 @@ export async function bundleVite(
     ? options.strictMessage
     : true
   options.escapeHtml = !!options.escapeHtml
+  options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
   const alias: Record<string, string> = {
-    vue: 'vue/dist/vue.runtime.esm-browser.js'
+    vue: 'vue/dist/vue.esm-bundler.js'
   }
   if (!fixture.startsWith('@')) {
     alias['~target'] = resolve(__dirname, target, fixture)
@@ -165,6 +166,7 @@ export async function bundleAndRun(
     ? options.strictMessage
     : true
   options.escapeHtml = !!options.escapeHtml
+  options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
   const { code, map } = await bundler(fixture, options)
 

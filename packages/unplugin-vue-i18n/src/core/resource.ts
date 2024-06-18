@@ -15,33 +15,38 @@ import {
   generateYAML,
   generateJavaScript
 } from '@intlify/bundle-utils'
-import { parse } from '@vue/compiler-sfc'
-import { parseVueRequest } from '../query'
-import { getRaw, warn, error, raiseError, resolvePluginName } from '../utils'
+import { parse } from 'vue/compiler-sfc'
+import { parseVueRequest, getVueCompiler } from '../vue'
+import {
+  getRaw,
+  warn,
+  error,
+  raiseError,
+  resolveNamespace,
+  getVitePlugin,
+  checkVuePlugin
+} from '../utils'
 
 import type { RawSourceMap } from 'source-map-js'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type {
   UnpluginOptions,
   UnpluginContextMeta,
+  RollupPlugin,
   TransformResult
 } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
 import type { InstalledPackageInfo } from '../utils'
-import type { VueQuery } from '../query'
+import type { VueQuery } from '../vue'
 import type { PluginOptions } from '../types'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 
-const debug = createDebug('unplugin-vue-i18n:resource')
+const debug = createDebug(resolveNamespace('resource'))
 
 export function resourcePlugin(
-  options: ResolvedOptions,
-  meta: UnpluginContextMeta,
-  installedPkgInfo: InstalledPackageInfo
-): UnpluginOptions {
-  const {
+  {
     onlyLocales,
     include,
     exclude,
@@ -56,8 +61,10 @@ export function resourcePlugin(
     strictMessage,
     allowDynamic,
     escapeHtml
-  } = options
-
+  }: ResolvedOptions,
+  meta: UnpluginContextMeta,
+  installedPkgInfo: InstalledPackageInfo
+): UnpluginOptions {
   const filter = createFilter(include, exclude)
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
     return `${installedPkgInfo.alias}/dist/${installedPkgInfo.pkg}${runtimeOnly ? '.runtime' : ''}.${
@@ -69,8 +76,15 @@ export function resourcePlugin(
   const vueI18nAliasName = installedPkgInfo.alias
   debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
+  let vuePlugin: RollupPlugin | null = null
+  // NOTE:
+  // webpack cannot dynamically resolve vue compiler, so use the compiler statically with import syntax
+  const getSfcParser = () => {
+    return vuePlugin ? getVueCompiler(vuePlugin).parse : parse
+  }
+
   return {
-    name: resolvePluginName('resource'),
+    name: resolveNamespace('resource'),
 
     /**
      * NOTE:
@@ -110,6 +124,11 @@ export function resourcePlugin(
       },
 
       configResolved(config) {
+        vuePlugin = getVitePlugin(config, 'vite:vue')
+        if (!checkVuePlugin(vuePlugin)) {
+          return
+        }
+
         isProduction = config.isProduction
         sourceMap =
           config.command === 'build' ? !!config.build.sourcemap : false
@@ -118,7 +137,7 @@ export function resourcePlugin(
         )
 
         // json transform handling
-        const jsonPlugin = config.plugins.find(p => p.name === 'vite:json')
+        const jsonPlugin = getVitePlugin(config, 'vite:json')
         if (jsonPlugin) {
           const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
           jsonPlugin.transform = async function (code: string, id: string) {
@@ -151,9 +170,7 @@ export function resourcePlugin(
          * NOTE:
          *  Typescript resources are handled using the already existing `vite:esbuild` plugin.
          */
-        const esbuildPlugin = config.plugins.find(
-          p => p.name === 'vite:esbuild'
-        )
+        const esbuildPlugin = getVitePlugin(config, 'vite:esbuild')
         if (esbuildPlugin) {
           const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
           // @ts-ignore
@@ -293,7 +310,6 @@ export function resourcePlugin(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async load(id: string) {
       debug('load', id)
-      // const { query } = parseVueRequest(id)
       if (
         INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
         include
@@ -426,6 +442,7 @@ export function resourcePlugin(
             filename,
             sourceMap,
             query,
+            getSfcParser(),
             meta.framework
           )
           const { code: generatedCode, map } = generate(source, parseOptions)
@@ -565,6 +582,7 @@ async function getCode(
   filename: string,
   sourceMap: boolean,
   query: VueQuery,
+  parser: ReturnType<typeof getVueCompiler>['parse'],
   framework: UnpluginContextMeta['framework'] = 'vite'
 ): Promise<string> {
   const { index, issuerPath } = query
@@ -578,7 +596,7 @@ async function getCode(
       debug(`getCode (webpack) ${index} via issuerPath`, issuerPath)
       return await getRaw(filename)
     } else {
-      const result = parse(await getRaw(filename), {
+      const result = parser(await getRaw(filename), {
         sourceMap,
         filename
       })

@@ -2,6 +2,7 @@ import { normalize } from 'pathe'
 import { isString, isBoolean, isArray } from '@intlify/shared'
 
 import type { PluginOptions } from '../types'
+import type { TranslationDirectiveResolveIndetifier } from '../vue'
 import type { InstalledPackageInfo } from '../utils'
 
 export function resolveOptions(
@@ -65,6 +66,17 @@ export function resolveOptions(
 
   const escapeHtml = !!options.escapeHtml
 
+  const optimizeTranslationDirective =
+    isString(options.optimizeTranslationDirective) ||
+    isArray(options.optimizeTranslationDirective)
+      ? options.optimizeTranslationDirective
+      : !!options.optimizeTranslationDirective
+
+  const translationIdentifiers = new Map<
+    string,
+    TranslationDirectiveResolveIndetifier
+  >()
+
   return {
     include,
     exclude,
@@ -79,7 +91,9 @@ export function resolveOptions(
     ssrBuild,
     allowDynamic,
     strictMessage,
-    escapeHtml
+    escapeHtml,
+    optimizeTranslationDirective,
+    translationIdentifiers
   }
 }
 

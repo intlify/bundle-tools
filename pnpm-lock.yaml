@@ -42,8 +42,8 @@ importers:
         specifier: ^8.56.10
         version: 8.56.10
       '@types/eslint-visitor-keys':
-        specifier: ^1.0.0
-        version: 1.0.0
+        specifier: ^3.0.0
+        version: 3.3.0
       '@types/jest':
         specifier: ^27.0.2
         version: 27.5.2
@@ -1382,8 +1382,9 @@ packages:
   '@types/eslint-scope@3.7.7':
     resolution: {integrity: sha512-MzMFlSLBqNF2gcHWO0G1vP/YQyfvrxZ0bF+u7mzUdZ1/xK4A4sru+nraZz5i3iEIk1l1uyicaDVTB4QbbEkAYg==}
 
-  '@types/eslint-visitor-keys@1.0.0':
-    resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
+  '@types/eslint-visitor-keys@3.3.0':
+    resolution: {integrity: sha512-Occsmzv0PEJYna7gJdHg28/LNm/Ur+ivQRqvN12bfUiAuNKtUzMzGl/nzc59IJfjRbng4eul/0mEYyMDpaWKBw==}
+    deprecated: This is a stub types definition. eslint-visitor-keys provides its own type definitions, so you do not need this installed.
 
   '@types/eslint@8.56.10':
     resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
@@ -4956,6 +4957,7 @@ packages:
 
   rimraf@3.0.2:
     resolution: {integrity: sha512-JZkJMZkAGFFPP2YqXZXPbMlMBgsxzE8ILs4lMIX/2o0L9UBw9O/Y3o6wFw/i9YLapcUJWwqbi3kdxIPdC62TIA==}
+    deprecated: Rimraf versions prior to v4 are no longer supported
     hasBin: true
 
   rollup-plugin-dts@6.1.1:
@@ -7186,7 +7188,9 @@ snapshots:
       '@types/eslint': 8.56.10
       '@types/estree': 1.0.5
 
-  '@types/eslint-visitor-keys@1.0.0': {}
+  '@types/eslint-visitor-keys@3.3.0':
+    dependencies:
+      eslint-visitor-keys: 3.4.3
 
   '@types/eslint@8.56.10':
     dependencies:

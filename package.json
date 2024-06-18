@@ -50,7 +50,7 @@
     "@vitejs/plugin-vue": "^5.0.5",
     "@vue/compiler-sfc": "^3.2.25",
     "babel-loader": "^8.2.2",
-    "chalk": "^4.1.1",
+    "chalk": "^5.0.0",
     "cross-env": "^7.0.3",
     "debug": "^4.1.1",
     "eslint": "^8.57.0",

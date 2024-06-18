@@ -23,6 +23,12 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
 
   const plugins = [resourcePlugin(resolvedOptions, meta, installedPkgInfo)]
   if (resolvedOptions.optimizeTranslationDirective) {
+    if (meta.framework === 'webpack') {
+      raiseError(
+        `The 'optimizeTranslationDirective' option still is not supported for webpack.\n` +
+          `We are waiting for your Pull Request 🙂.`
+      )
+    }
     plugins.push(directivePlugin(resolvedOptions))
   }
 

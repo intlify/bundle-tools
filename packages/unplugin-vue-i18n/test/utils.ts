@@ -9,8 +9,11 @@ import webpack from 'webpack'
 import merge from 'webpack-merge'
 import memoryfs from 'memory-fs'
 import { VueLoaderPlugin } from 'vue-loader'
+import fg from 'fast-glob'
 
 import type { PluginOptions } from '../src/types'
+
+let ignoreIds: string[] | null = null
 
 type BundleResolve = {
   type: 'vite' | 'webpack'
@@ -51,6 +54,10 @@ export async function bundleVite(
     alias['~target'] = resolve(__dirname, target, fixture)
   }
 
+  if (ignoreIds == null) {
+    ignoreIds = await fg(resolve(__dirname, './fixtures/directives/*.vue'))
+  }
+
   // @ts-ignore
   const plugins = [vue(), vitePlugin({ include, ...options })]
   const result = await build({
@@ -64,7 +71,17 @@ export async function bundleVite(
       write: false,
       minify: false,
       rollupOptions: {
-        input: resolve(__dirname, input)
+        input: resolve(__dirname, input),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        onLog: (level: any, log: any) => {
+          // NOTE:
+          // ignore the following messages
+          // - "Error when using sourcemap for reporting an error: Can't resolve original location of error.",
+          // - '"undefined" is not exported by "node_modules/vue/dist/vue.esm-bundler.js", imported by "packages/unplugin-vue-i18n/test/fixtures/directives/xxx.vue".'
+          if (ignoreIds?.includes(log.id)) {
+            return // ignore
+          }
+        }
       }
     }
   })
@@ -127,7 +144,8 @@ export function bundleWebpack(
   compiler.outputFileSystem = mfs
 
   return new Promise((resolve, reject) => {
-    compiler.run((err, stats) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    compiler.run((err, stats: any) => {
       if (err) {
         return reject(err)
       }

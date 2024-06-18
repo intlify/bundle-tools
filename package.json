@@ -142,7 +142,7 @@
     "test:e2e:vite": "pnpm --filter @intlify/vite-plugin-vue-i18n test:e2e",
     "test:e2e:webpack": "pnpm --filter @intlify/vue-i18n-loader test:e2e",
     "test:e2e:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n test:e2e",
-    "test:unit": "run-s \"test:unit:utils\" \"test:unit:unplugin\"",
+    "test:unit": "run-s \"test:unit:utils {@}\" \"test:unit:unplugin {@}\" --",
     "test:unit:utils": "pnpm build:utils && vitest run packages/bundle-utils",
     "test:unit:rollup": "vitest run packages/rollup-plugin-vue-i18n/test",
     "test:unit:unplugin": "vitest run packages/unplugin-vue-i18n/test",

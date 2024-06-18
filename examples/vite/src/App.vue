@@ -1,13 +1,13 @@
 <template>
-  <form>
+  <form id="lang">
     <label>{{ t('language') }}</label>
     <select v-model="locale">
       <option value="en">en</option>
       <option value="ja">ja</option>
     </select>
   </form>
-  <p>{{ t('hello') }}</p>
-  <p v-t="'hi'"></p>
+  <p id="msg">{{ t('hello') }}</p>
+  <p id="custom-directive" v-t="'hi'"></p>
   <Banana />
 </template>
 

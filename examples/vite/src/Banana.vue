@@ -8,7 +8,7 @@
       <option value="3">3</option>
     </select>
   </form>
-  <p>{{ t('fruits.banana', select, { n: select }) }}</p>
+  <p id="banana">{{ t('fruits.banana', select, { n: select }) }}</p>
 </template>
 
 <script setup lang="ts">

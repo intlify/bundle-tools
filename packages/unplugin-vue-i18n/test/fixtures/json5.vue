@@ -1,3 +1,4 @@
+<template></template>
 <i18n lang="json5">
 {
   "en": {

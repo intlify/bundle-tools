@@ -1,3 +1,4 @@
+<template></template>
 <i18n locale="en" lang="yaml">
   hello: "hello world!"
 </i18n>

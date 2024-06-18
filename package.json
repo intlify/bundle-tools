@@ -92,11 +92,7 @@
     "webpack": "^5.88.2",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
-    "webpack-merge": "^5.9.0",
-    "yorkie": "^2.0.0"
-  },
-  "gitHooks": {
-    "pre-commit": "lint-staged"
+    "webpack-merge": "^5.9.0"
   },
   "license": "MIT",
   "lint-staged": {
@@ -116,6 +112,7 @@
     "url": "git+https://github.com/intlify/bundle-tools.git"
   },
   "scripts": {
+    "prepare": "git config --local core.hooksPath .githooks",
     "build": "npm-run-all -s \"build:utils\" \"build:unplugin\"",
     "build:utils": "yarn workspace @intlify/bundle-utils build",
     "build:rollup": "yarn workspace @intlify/rollup-plugin-vue-i18n build",

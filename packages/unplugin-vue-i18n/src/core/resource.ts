@@ -1,6 +1,7 @@
 import { parse as parsePath } from 'pathe'
 import createDebug from 'debug'
 import fg from 'fast-glob'
+import { promises as fs } from 'node:fs'
 import {
   isArray,
   isEmptyObject,
@@ -18,7 +19,6 @@ import {
 import { parse } from 'vue/compiler-sfc'
 import { parseVueRequest, getVueCompiler } from '../vue'
 import {
-  getRaw,
   warn,
   error,
   raiseError,
@@ -716,4 +716,8 @@ function asVirtualId(
   framework: UnpluginContextMeta['framework'] = 'vite'
 ) {
   return framework === 'vite' ? VIRTUAL_PREFIX + id : id
+}
+
+async function getRaw(path: string): Promise<string> {
+  return fs.readFile(path, { encoding: 'utf-8' })
 }

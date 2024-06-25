@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@5.0.0-beta.3 (2024-06-25)
+
+#### :bug: Bug Fixes
+* [#385](https://github.com/intlify/bundle-tools/pull/385) fix: cannot resolve vue-i18n and petite-vue-i18n in monorepo ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@5.0.0-beta.2 (2024-06-18)
 
 #### :star: Features

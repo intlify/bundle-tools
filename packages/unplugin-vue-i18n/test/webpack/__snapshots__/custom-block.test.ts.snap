@@ -1088,7 +1088,7 @@ exports[`special characters 1`] = `
             },
             "start": 0,
             "static": "hello
-great	\\"world\\"",
+great	"world"",
             "type": 2,
           },
           "end": 19,
@@ -1099,7 +1099,7 @@ great	\\"world\\"",
               "offset": 19,
             },
             "source": "hello
-great	\\"world\\"",
+great	"world"",
             "start": {
               "column": 1,
               "line": 1,

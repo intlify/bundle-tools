@@ -1,7 +1,6 @@
 import fs from 'node:fs'
 import createDebug from 'debug'
 import module from 'node:module'
-import path from 'node:path'
 import { resolvePackageJSON } from './pkg'
 
 const SUPPORT_PACKAGES = ['vue-i18n', 'petite-vue-i18n'] as const

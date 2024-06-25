@@ -57,7 +57,7 @@ exports[`generateMessageFunction > development 1`] = `
     "start": 0,
     "type": 0,
   },
-  "code": "(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])};fn.source=\\"hello\\";return fn;})()",
+  "code": "(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello"])};fn.source="hello";return fn;})()",
   "errors": [],
   "map": {
     "mappings": "mEAAAA",
@@ -75,9 +75,9 @@ exports[`generateMessageFunction > development 1`] = `
 }
 `;
 
-exports[`generateMessageFunction > escapeHtml > default: should not be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"<p>hello</p>\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
+exports[`generateMessageFunction > escapeHtml > default: should not be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["<p>hello</p>"])};fn.source="<p>hello</p>";return fn;})()"`;
 
-exports[`generateMessageFunction > escapeHtml > true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hello&lt;/p&gt;\\"])};fn.source=\\"<p>hello</p>\\";return fn;})()"`;
+exports[`generateMessageFunction > escapeHtml > true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hello&lt;/p&gt;"])};fn.source="<p>hello</p>";return fn;})()"`;
 
 exports[`generateMessageFunction > production 1`] = `
 {
@@ -136,7 +136,7 @@ exports[`generateMessageFunction > production 1`] = `
     "start": 0,
     "type": 0,
   },
-  "code": "(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello\\"])}",
+  "code": "(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello"])}",
   "errors": [],
   "map": undefined,
 }
@@ -199,7 +199,7 @@ exports[`generateResourceAst > development 1`] = `
     "start": 0,
     "type": 0,
   },
-  "code": "{\\"type\\":0,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5},\\"source\\":\\"hello\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"value\\":\\"hello\\"}]}}",
+  "code": "{"type":0,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5},"source":"hello"},"body":{"type":2,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5}},"items":[{"type":3,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5}},"value":"hello"}]}}",
   "errors": [],
   "map": undefined,
 }
@@ -219,7 +219,7 @@ exports[`generateResourceAst > production 1`] = `
     },
     "t": 0,
   },
-  "code": "{\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hello\\"}}",
+  "code": "{"t":0,"b":{"t":2,"i":[{"t":3}],"s":"hello"}}",
   "errors": [],
   "map": undefined,
 }

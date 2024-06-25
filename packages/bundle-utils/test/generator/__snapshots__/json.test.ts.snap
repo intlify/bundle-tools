@@ -5,15 +5,15 @@ exports[`AST code generation > array basic > code 1`] = `
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
   _Component.__i18n.push({
-    \\"locale\\": \\"\\",
-    \\"resource\\": {
-      \\"foo\\": [
+    "locale": "",
+    "resource": {
+      "foo": [
         [
-          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"bar\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"bar\\"}},
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"bar"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"bar"}},
           
         ],
         [
-          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"baz\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"baz\\"}},
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"baz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"baz"}},
           
         ]
       ]
@@ -30,25 +30,25 @@ exports[`AST code generation > array mixed > code 1`] = `
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
   _Component.__i18n.push({
-    \\"locale\\": \\"\\",
-    \\"resource\\": {
-      \\"foo\\": [
+    "locale": "",
+    "resource": {
+      "foo": [
         {
-          \\"foo\\": {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"foo\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"foo\\"}}
+          "foo": {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"foo"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"foo"}}
         },
         [
-          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"bar\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"bar\\"}},
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"bar"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"bar"}},
           [
             {
-              \\"foo\\": {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"foo\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"foo\\"}}
+              "foo": {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"foo"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"foo"}}
             },
-            {\\"type\\":0,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"source\\":\\"hoge\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}}}],\\"static\\":\\"hoge\\"}},
+            {"type":0,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"source":"hoge"},"body":{"type":2,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}}}],"static":"hoge"}},
             
           ]
         ],
-        {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"baz\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"baz\\"}},
+        {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"baz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"baz"}},
         [
-          {\\"type\\":0,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3},\\"source\\":\\"buz\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":3,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":4,\\"offset\\":3}}}],\\"static\\":\\"buz\\"}},
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"buz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"buz"}},
           
         ]
       ]
@@ -62,37 +62,37 @@ exports[`AST code generation > array mixed > map 1`] = `undefined`;
 
 exports[`AST code generation > bare > code 1`] = `
 "{
-  \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}}}],\\"static\\":\\"hello world!\\"}}
+  "hello": {"type":0,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12},"source":"hello world!"},"body":{"type":2,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}},"items":[{"type":3,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}}}],"static":"hello world!"}}
 }"
 `;
 
 exports[`AST code generation > complex > code 1`] = `
 "const resource = {
-  \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}}}],\\"static\\":\\"hi there!\\"}},
-  \\"nested\\": {
-    \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}}}],\\"static\\":\\"hello world!\\"}},
-    \\"more\\": {
-      \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+  "hi": {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"hi there!"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"hi there!"}},
+  "nested": {
+    "hello": {"type":0,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12},"source":"hello world!"},"body":{"type":2,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}},"items":[{"type":3,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}}}],"static":"hello world!"}},
+    "more": {
+      "plural": {"type":0,"start":0,"end":45,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":46,"offset":45},"source":"@.caml:{\\u0027no apples\\u0027} | {0} apple | {n} apples"},"body":{"type":1,"start":0,"end":45,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":46,"offset":45}},"cases":[{"type":2,"start":0,"end":19,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":21,"offset":20}},"items":[{"type":6,"start":0,"end":20,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":21,"offset":20}},"modifier":{"type":8,"start":1,"end":6,"loc":{"start":{"line":1,"column":2,"offset":1},"end":{"line":1,"column":7,"offset":6}},"value":"caml"},"key":{"type":9,"start":7,"end":20,"loc":{"start":{"line":1,"column":8,"offset":7},"end":{"line":1,"column":21,"offset":20}},"value":"no apples"}}]},{"type":2,"start":23,"end":26,"loc":{"start":{"line":1,"column":24,"offset":23},"end":{"line":1,"column":33,"offset":32}},"items":[{"type":5,"start":23,"end":26,"loc":{"start":{"line":1,"column":24,"offset":23},"end":{"line":1,"column":27,"offset":26}},"index":0},{"type":3,"start":26,"end":32,"loc":{"start":{"line":1,"column":27,"offset":26},"end":{"line":1,"column":33,"offset":32}},"value":" apple"}]},{"type":2,"start":35,"end":45,"loc":{"start":{"line":1,"column":36,"offset":35},"end":{"line":1,"column":46,"offset":45}},"items":[{"type":4,"start":35,"end":38,"loc":{"start":{"line":1,"column":36,"offset":35},"end":{"line":1,"column":39,"offset":38}},"key":"n"},{"type":3,"start":38,"end":45,"loc":{"start":{"line":1,"column":39,"offset":38},"end":{"line":1,"column":46,"offset":45}},"value":" apples"}]}]}}
     },
-    \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}}
+    "list": {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"hi, {0} !"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"value":"hi, "},{"type":5,"start":4,"end":7,"loc":{"start":{"line":1,"column":5,"offset":4},"end":{"line":1,"column":8,"offset":7}},"index":0},{"type":3,"start":7,"end":9,"loc":{"start":{"line":1,"column":8,"offset":7},"end":{"line":1,"column":10,"offset":9}},"value":" !"}]}}
   },
-  \\"こんにちは\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"こんにちは！\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}}}],\\"static\\":\\"こんにちは！\\"}},
-  \\"single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13},\\"source\\":\\"I don\\\\u0027t know!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":13,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":14,\\"offset\\":13}}}],\\"static\\":\\"I don\\\\u0027t know!\\"}},
-  \\"emoji\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"😺\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}}}],\\"static\\":\\"😺\\"}},
-  \\"unicode\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"A\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}}}],\\"static\\":\\"A\\"}},
-  \\"unicode-escape\\": {\\"type\\":0,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"source\\":\\"\\\\\\\\u0041\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}}}],\\"static\\":\\"\\\\\\\\u0041\\"}},
-  \\"backslash-single-quote\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\u0027\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}}}],\\"static\\":\\"\\\\\\\\\\\\u0027\\"}},
-  \\"backslash-backslash\\": {\\"type\\":0,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2},\\"source\\":\\"\\\\\\\\\\\\\\\\\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":2,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":3,\\"offset\\":2}}}],\\"static\\":\\"\\\\\\\\\\\\\\\\\\"}},
-  \\"errors\\": [
-    {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1001\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}}}],\\"static\\":\\"ERROR1001\\"}},
-    {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"ERROR1002\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}}}],\\"static\\":\\"ERROR1002\\"}},
+  "こんにちは": {"type":0,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6},"source":"こんにちは！"},"body":{"type":2,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6}},"items":[{"type":3,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6}}}],"static":"こんにちは！"}},
+  "single-quote": {"type":0,"start":0,"end":13,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":14,"offset":13},"source":"I don\\u0027t know!"},"body":{"type":2,"start":0,"end":13,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":14,"offset":13}},"items":[{"type":3,"start":0,"end":13,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":14,"offset":13}}}],"static":"I don\\u0027t know!"}},
+  "emoji": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"😺"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"😺"}},
+  "unicode": {"type":0,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1},"source":"A"},"body":{"type":2,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1}},"items":[{"type":3,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1}}}],"static":"A"}},
+  "unicode-escape": {"type":0,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6},"source":"\\\\u0041"},"body":{"type":2,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6}},"items":[{"type":3,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6}}}],"static":"\\\\u0041"}},
+  "backslash-single-quote": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"\\\\\\u0027"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"\\\\\\u0027"}},
+  "backslash-backslash": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"\\\\\\\\"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"\\\\\\\\"}},
+  "errors": [
+    {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1001"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1001"}},
+    {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1002"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1002"}},
     
   ],
-  \\"complex\\": {
-    \\"warnings\\": [
-      {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"NOTE: This is warning\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}}}],\\"static\\":\\"NOTE: This is warning\\"}},
+  "complex": {
+    "warnings": [
+      {"type":0,"start":0,"end":21,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":22,"offset":21},"source":"NOTE: This is warning"},"body":{"type":2,"start":0,"end":21,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":22,"offset":21}},"items":[{"type":3,"start":0,"end":21,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":22,"offset":21}}}],"static":"NOTE: This is warning"}},
       {
-        \\"named-waring\\": {\\"type\\":0,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"source\\":\\"this is {type} warining\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":8,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8}},\\"value\\":\\"this is \\"},{\\"type\\":4,\\"start\\":8,\\"end\\":14,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":9,\\"offset\\":8},\\"end\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14}},\\"key\\":\\"type\\"},{\\"type\\":3,\\"start\\":14,\\"end\\":23,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":15,\\"offset\\":14},\\"end\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23}},\\"value\\":\\" warining\\"}]}}
+        "named-waring": {"type":0,"start":0,"end":23,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":24,"offset":23},"source":"this is {type} warining"},"body":{"type":2,"start":0,"end":23,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":24,"offset":23}},"items":[{"type":3,"start":0,"end":8,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":9,"offset":8}},"value":"this is "},{"type":4,"start":8,"end":14,"loc":{"start":{"line":1,"column":9,"offset":8},"end":{"line":1,"column":15,"offset":14}},"key":"type"},{"type":3,"start":14,"end":23,"loc":{"start":{"line":1,"column":15,"offset":14},"end":{"line":1,"column":24,"offset":23}},"value":" warining"}]}}
       }
     ]
   }
@@ -102,10 +102,10 @@ export default resource"
 
 exports[`AST code generation > force stringify > code 1`] = `
 "const resource = {
-  \\"trueValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"source\\":\\"true\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}}}],\\"static\\":\\"true\\"}},
-  \\"falseValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5},\\"source\\":\\"false\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}}}],\\"static\\":\\"false\\"}},
-  \\"nullValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"source\\":\\"null\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}}}],\\"static\\":\\"null\\"}},
-  \\"numberValue\\": {\\"type\\":0,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"source\\":\\"1\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":1,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1}}}],\\"static\\":\\"1\\"}}
+  "trueValue": {"type":0,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"source":"true"},"body":{"type":2,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}}}],"static":"true"}},
+  "falseValue": {"type":0,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5},"source":"false"},"body":{"type":2,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5}},"items":[{"type":3,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5}}}],"static":"false"}},
+  "nullValue": {"type":0,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"source":"null"},"body":{"type":2,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}}}],"static":"null"}},
+  "numberValue": {"type":0,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1},"source":"1"},"body":{"type":2,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1}},"items":[{"type":3,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1}}}],"static":"1"}}
 }
 export default resource"
 `;
@@ -127,12 +127,12 @@ exports[`AST code generation > html tag in message > errors 1`] = `
 
 exports[`AST code generation > invalid message syntax > code 1`] = `
 "{
-  \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5},\\"source\\":\\"こんにちは\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":5,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":6,\\"offset\\":5}}}],\\"static\\":\\"こんにちは\\"}},
-  \\"this-is-invalid\\": \`@\`,
-  \\"nested\\": {
-    \\"array\\": [
+  "hello": {"type":0,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5},"source":"こんにちは"},"body":{"type":2,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5}},"items":[{"type":3,"start":0,"end":5,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":6,"offset":5}}}],"static":"こんにちは"}},
+  "this-is-invalid": \`@\`,
+  "nested": {
+    "array": [
       {
-        \\"this-is-invalid\\": \`@\`
+        "this-is-invalid": \`@\`
       }
     ]
   }
@@ -224,36 +224,36 @@ exports[`AST code generation > invalid message syntax > map 1`] = `undefined`;
 
 exports[`AST code generation > production > code 1`] = `
 "const resource = {
-  \\"hi\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hi there!\\"}},
-  \\"hello\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3}],\\"s\\":\\"hello world!\\"}},
-  \\"named\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":4,\\"k\\":\\"name\\"},{\\"t\\":3,\\"v\\":\\" !\\"}]}},
-  \\"list\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":5,\\"i\\":0},{\\"t\\":3,\\"v\\":\\" !\\"}]}},
-  \\"literal\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3},{\\"t\\":9},{\\"t\\":3}],\\"s\\":\\"hi, kazupon !\\"}},
-  \\"linked\\": {\\"t\\":0,\\"b\\":{\\"t\\":2,\\"i\\":[{\\"t\\":3,\\"v\\":\\"hi, \\"},{\\"t\\":6,\\"k\\":{\\"t\\":7,\\"v\\":\\"name\\"}},{\\"t\\":3,\\"v\\":\\" !\\"}]}},
-  \\"plural\\": {\\"t\\":0,\\"b\\":{\\"t\\":1,\\"c\\":[{\\"t\\":2,\\"i\\":[{\\"t\\":6,\\"k\\":{\\"t\\":9,\\"v\\":\\"no apples\\"},\\"m\\":{\\"t\\":8,\\"v\\":\\"caml\\"}}]},{\\"t\\":2,\\"i\\":[{\\"t\\":5,\\"i\\":0},{\\"t\\":3,\\"v\\":\\" apple\\"}]},{\\"t\\":2,\\"i\\":[{\\"t\\":4,\\"k\\":\\"n\\"},{\\"t\\":3,\\"v\\":\\" apples\\"}]}]}}
+  "hi": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"hi there!"}},
+  "hello": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"hello world!"}},
+  "named": {"t":0,"b":{"t":2,"i":[{"t":3,"v":"hi, "},{"t":4,"k":"name"},{"t":3,"v":" !"}]}},
+  "list": {"t":0,"b":{"t":2,"i":[{"t":3,"v":"hi, "},{"t":5,"i":0},{"t":3,"v":" !"}]}},
+  "literal": {"t":0,"b":{"t":2,"i":[{"t":3},{"t":9},{"t":3}],"s":"hi, kazupon !"}},
+  "linked": {"t":0,"b":{"t":2,"i":[{"t":3,"v":"hi, "},{"t":6,"k":{"t":7,"v":"name"}},{"t":3,"v":" !"}]}},
+  "plural": {"t":0,"b":{"t":1,"c":[{"t":2,"i":[{"t":6,"k":{"t":9,"v":"no apples"},"m":{"t":8,"v":"caml"}}]},{"t":2,"i":[{"t":5,"i":0},{"t":3,"v":" apple"}]},{"t":2,"i":[{"t":4,"k":"n"},{"t":3,"v":" apples"}]}]}}
 }
 export default resource"
 `;
 
 exports[`AST code generation > simple > code 1`] = `
 "const resource = {
-  \\"hi\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi there!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}}}],\\"static\\":\\"hi there!\\"}},
-  \\"hello\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hello world!\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}}}],\\"static\\":\\"hello world!\\"}},
-  \\"named\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hi, {name} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":4,\\"start\\":4,\\"end\\":10,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10}},\\"key\\":\\"name\\"},{\\"type\\":3,\\"start\\":10,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\" !\\"}]}},
-  \\"list\\": {\\"type\\":0,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9},\\"source\\":\\"hi, {0} !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":5,\\"start\\":4,\\"end\\":7,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7}},\\"index\\":0},{\\"type\\":3,\\"start\\":7,\\"end\\":9,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":10,\\"offset\\":9}},\\"value\\":\\" !\\"}]}},
-  \\"literal\\": {\\"type\\":0,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21},\\"source\\":\\"hi, {  \\\\u0027kazupon\\\\u0027  } !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}}},{\\"type\\":9,\\"start\\":4,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":20,\\"offset\\":19}}},{\\"type\\":3,\\"start\\":19,\\"end\\":21,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":20,\\"offset\\":19},\\"end\\":{\\"line\\":1,\\"column\\":22,\\"offset\\":21}}}],\\"static\\":\\"hi, kazupon !\\"}},
-  \\"linked\\": {\\"type\\":0,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12},\\"source\\":\\"hi, @:name !\\"},\\"body\\":{\\"type\\":2,\\"start\\":0,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"items\\":[{\\"type\\":3,\\"start\\":0,\\"end\\":4,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4}},\\"value\\":\\"hi, \\"},{\\"type\\":6,\\"start\\":4,\\"end\\":10,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":5,\\"offset\\":4},\\"end\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10}},\\"key\\":{\\"type\\":7,\\"start\\":6,\\"end\\":10,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6},\\"end\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10}},\\"value\\":\\"name\\"}},{\\"type\\":3,\\"start\\":10,\\"end\\":12,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":11,\\"offset\\":10},\\"end\\":{\\"line\\":1,\\"column\\":13,\\"offset\\":12}},\\"value\\":\\" !\\"}]}},
-  \\"plural\\": {\\"type\\":0,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45},\\"source\\":\\"@.caml:{\\\\u0027no apples\\\\u0027} | {0} apple | {n} apples\\"},\\"body\\":{\\"type\\":1,\\"start\\":0,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"cases\\":[{\\"type\\":2,\\"start\\":0,\\"end\\":19,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"items\\":[{\\"type\\":6,\\"start\\":0,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":1,\\"offset\\":0},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"modifier\\":{\\"type\\":8,\\"start\\":1,\\"end\\":6,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":2,\\"offset\\":1},\\"end\\":{\\"line\\":1,\\"column\\":7,\\"offset\\":6}},\\"value\\":\\"caml\\"},\\"key\\":{\\"type\\":9,\\"start\\":7,\\"end\\":20,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":8,\\"offset\\":7},\\"end\\":{\\"line\\":1,\\"column\\":21,\\"offset\\":20}},\\"value\\":\\"no apples\\"}}]},{\\"type\\":2,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"items\\":[{\\"type\\":5,\\"start\\":23,\\"end\\":26,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":24,\\"offset\\":23},\\"end\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26}},\\"index\\":0},{\\"type\\":3,\\"start\\":26,\\"end\\":32,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":27,\\"offset\\":26},\\"end\\":{\\"line\\":1,\\"column\\":33,\\"offset\\":32}},\\"value\\":\\" apple\\"}]},{\\"type\\":2,\\"start\\":35,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"items\\":[{\\"type\\":4,\\"start\\":35,\\"end\\":38,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":36,\\"offset\\":35},\\"end\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38}},\\"key\\":\\"n\\"},{\\"type\\":3,\\"start\\":38,\\"end\\":45,\\"loc\\":{\\"start\\":{\\"line\\":1,\\"column\\":39,\\"offset\\":38},\\"end\\":{\\"line\\":1,\\"column\\":46,\\"offset\\":45}},\\"value\\":\\" apples\\"}]}]}}
+  "hi": {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"hi there!"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"hi there!"}},
+  "hello": {"type":0,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12},"source":"hello world!"},"body":{"type":2,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}},"items":[{"type":3,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}}}],"static":"hello world!"}},
+  "named": {"type":0,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12},"source":"hi, {name} !"},"body":{"type":2,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"value":"hi, "},{"type":4,"start":4,"end":10,"loc":{"start":{"line":1,"column":5,"offset":4},"end":{"line":1,"column":11,"offset":10}},"key":"name"},{"type":3,"start":10,"end":12,"loc":{"start":{"line":1,"column":11,"offset":10},"end":{"line":1,"column":13,"offset":12}},"value":" !"}]}},
+  "list": {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"hi, {0} !"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"value":"hi, "},{"type":5,"start":4,"end":7,"loc":{"start":{"line":1,"column":5,"offset":4},"end":{"line":1,"column":8,"offset":7}},"index":0},{"type":3,"start":7,"end":9,"loc":{"start":{"line":1,"column":8,"offset":7},"end":{"line":1,"column":10,"offset":9}},"value":" !"}]}},
+  "literal": {"type":0,"start":0,"end":21,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":22,"offset":21},"source":"hi, {  \\u0027kazupon\\u0027  } !"},"body":{"type":2,"start":0,"end":21,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":22,"offset":21}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}}},{"type":9,"start":4,"end":19,"loc":{"start":{"line":1,"column":5,"offset":4},"end":{"line":1,"column":20,"offset":19}}},{"type":3,"start":19,"end":21,"loc":{"start":{"line":1,"column":20,"offset":19},"end":{"line":1,"column":22,"offset":21}}}],"static":"hi, kazupon !"}},
+  "linked": {"type":0,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12},"source":"hi, @:name !"},"body":{"type":2,"start":0,"end":12,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":13,"offset":12}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"value":"hi, "},{"type":6,"start":4,"end":10,"loc":{"start":{"line":1,"column":5,"offset":4},"end":{"line":1,"column":11,"offset":10}},"key":{"type":7,"start":6,"end":10,"loc":{"start":{"line":1,"column":7,"offset":6},"end":{"line":1,"column":11,"offset":10}},"value":"name"}},{"type":3,"start":10,"end":12,"loc":{"start":{"line":1,"column":11,"offset":10},"end":{"line":1,"column":13,"offset":12}},"value":" !"}]}},
+  "plural": {"type":0,"start":0,"end":45,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":46,"offset":45},"source":"@.caml:{\\u0027no apples\\u0027} | {0} apple | {n} apples"},"body":{"type":1,"start":0,"end":45,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":46,"offset":45}},"cases":[{"type":2,"start":0,"end":19,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":21,"offset":20}},"items":[{"type":6,"start":0,"end":20,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":21,"offset":20}},"modifier":{"type":8,"start":1,"end":6,"loc":{"start":{"line":1,"column":2,"offset":1},"end":{"line":1,"column":7,"offset":6}},"value":"caml"},"key":{"type":9,"start":7,"end":20,"loc":{"start":{"line":1,"column":8,"offset":7},"end":{"line":1,"column":21,"offset":20}},"value":"no apples"}}]},{"type":2,"start":23,"end":26,"loc":{"start":{"line":1,"column":24,"offset":23},"end":{"line":1,"column":33,"offset":32}},"items":[{"type":5,"start":23,"end":26,"loc":{"start":{"line":1,"column":24,"offset":23},"end":{"line":1,"column":27,"offset":26}},"index":0},{"type":3,"start":26,"end":32,"loc":{"start":{"line":1,"column":27,"offset":26},"end":{"line":1,"column":33,"offset":32}},"value":" apple"}]},{"type":2,"start":35,"end":45,"loc":{"start":{"line":1,"column":36,"offset":35},"end":{"line":1,"column":46,"offset":45}},"items":[{"type":4,"start":35,"end":38,"loc":{"start":{"line":1,"column":36,"offset":35},"end":{"line":1,"column":39,"offset":38}},"key":"n"},{"type":3,"start":38,"end":45,"loc":{"start":{"line":1,"column":39,"offset":38},"end":{"line":1,"column":46,"offset":45}},"value":" apples"}]}]}}
 }
 export default resource"
 `;
 
 exports[`AST code generation > unhandling > code 1`] = `
 "const resource = {
-  \\"trueValue\\": true,
-  \\"falseValue\\": false,
-  \\"nullValue\\": null,
-  \\"numberValue\\": 1
+  "trueValue": true,
+  "falseValue": false,
+  "nullValue": null,
+  "numberValue": 1
 }
 export default resource"
 `;
@@ -263,15 +263,15 @@ exports[`code generation > array basic > code 1`] = `
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
   _Component.__i18n.push({
-    \\"locale\\": \\"\\",
-    \\"resource\\": {
-      \\"foo\\": [
+    "locale": "",
+    "resource": {
+      "foo": [
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})(),
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
           
         ],
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"baz\\"])};fn.source=\\"baz\\";return fn;})(),
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})(),
           
         ]
       ]
@@ -293,7 +293,7 @@ exports[`code generation > array basic > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"foo\\": [[\\"bar\\"], [\\"baz\\"]]
+  "foo": [["bar"], ["baz"]]
 }
 ",
   ],
@@ -306,25 +306,25 @@ exports[`code generation > array mixed > code 1`] = `
   const _Component = Component
   _Component.__i18n = _Component.__i18n || []
   _Component.__i18n.push({
-    \\"locale\\": \\"\\",
-    \\"resource\\": {
-      \\"foo\\": [
+    "locale": "",
+    "resource": {
+      "foo": [
         {
-          \\"foo\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"foo\\"])};fn.source=\\"foo\\";return fn;})()
+          "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})()
         },
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})(),
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
           [
             {
-              \\"foo\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"foo\\"])};fn.source=\\"foo\\";return fn;})()
+              "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})()
             },
-            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hoge\\"])};fn.source=\\"hoge\\";return fn;})(),
+            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hoge"])};fn.source="hoge";return fn;})(),
             
           ]
         ],
-        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"baz\\"])};fn.source=\\"baz\\";return fn;})(),
+        (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})(),
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"buz\\"])};fn.source=\\"buz\\";return fn;})(),
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["buz"])};fn.source="buz";return fn;})(),
           
         ]
       ]
@@ -349,21 +349,21 @@ exports[`code generation > array mixed > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"foo\\": [
+  "foo": [
     {
-      \\"foo\\": \\"foo\\"
+      "foo": "foo"
     },
     [
-      \\"bar\\",
+      "bar",
       [
         {
-          \\"foo\\": \\"foo\\"
+          "foo": "foo"
         },
-        \\"hoge\\"
+        "hoge"
       ]
     ],
-    \\"baz\\",
-    [\\"buz\\"]
+    "baz",
+    ["buz"]
   ]
 }
 ",
@@ -374,7 +374,7 @@ exports[`code generation > array mixed > map 1`] = `
 
 exports[`code generation > bare > code 1`] = `
 "{
-  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})()
+  "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello world!"])};fn.source="hello world!";return fn;})()
 }"
 `;
 
@@ -389,7 +389,7 @@ exports[`code generation > bare > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"hello\\": \\"hello world!\\"
+  "hello": "hello world!"
 }
 ",
   ],
@@ -399,31 +399,31 @@ exports[`code generation > bare > map 1`] = `
 
 exports[`code generation > complex > code 1`] = `
 "const resource = {
-  \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
-  \\"nested\\": {
-    \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
-    \\"more\\": {
-      \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hi there!"])};fn.source="hi there!";return fn;})(),
+  "nested": {
+    "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello world!"])};fn.source="hello world!";return fn;})(),
+    "more": {
+      "plural": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked("no apples", "caml", _type)]), _normalize([_interpolate(_list(0)), " apple"]), _normalize([_interpolate(_named("n")), " apples"])])};fn.source="@.caml:{'no apples'} | {0} apple | {n} apples";return fn;})()
     },
-    \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})()
+    "list": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize(["hi, ", _interpolate(_list(0)), " !"])};fn.source="hi, {0} !";return fn;})()
   },
-  \\"こんにちは\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは！\\"])};fn.source=\\"こんにちは！\\";return fn;})(),
-  \\"single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"I don't know!\\"])};fn.source=\\"I don't know!\\";return fn;})(),
-  \\"emoji\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"😺\\"])};fn.source=\\"😺\\";return fn;})(),
-  \\"unicode\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"A\\"])};fn.source=\\"A\\";return fn;})(),
-  \\"unicode-escape\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\u0041\\"])};fn.source=\\"\\\\\\\\u0041\\";return fn;})(),
-  \\"backslash-single-quote\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\'\\"])};fn.source=\\"\\\\\\\\'\\";return fn;})(),
-  \\"backslash-backslash\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"\\\\\\\\\\\\\\\\\\"])};fn.source=\\"\\\\\\\\\\\\\\\\\\";return fn;})(),
-  \\"errors\\": [
-    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1001\\"])};fn.source=\\"ERROR1001\\";return fn;})(),
-    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"ERROR1002\\"])};fn.source=\\"ERROR1002\\";return fn;})(),
+  "こんにちは": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["こんにちは！"])};fn.source="こんにちは！";return fn;})(),
+  "single-quote": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["I don't know!"])};fn.source="I don't know!";return fn;})(),
+  "emoji": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["😺"])};fn.source="😺";return fn;})(),
+  "unicode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["A"])};fn.source="A";return fn;})(),
+  "unicode-escape": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\u0041"])};fn.source="\\\\u0041";return fn;})(),
+  "backslash-single-quote": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\'"])};fn.source="\\\\'";return fn;})(),
+  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
+  "errors": [
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})(),
     
   ],
-  \\"complex\\": {
-    \\"warnings\\": [
-      (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"NOTE: This is warning\\"])};fn.source=\\"NOTE: This is warning\\";return fn;})(),
+  "complex": {
+    "warnings": [
+      (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["NOTE: This is warning"])};fn.source="NOTE: This is warning";return fn;})(),
       {
-        \\"named-waring\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"this is \\", _interpolate(_named(\\"type\\")), \\" warining\\"])};fn.source=\\"this is {type} warining\\";return fn;})()
+        "named-waring": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize(["this is ", _interpolate(_named("type")), " warining"])};fn.source="this is {type} warining";return fn;})()
       }
     ]
   }
@@ -449,9 +449,9 @@ exports[`code generation > complex > map 1`] = `
     "I don't know!",
     "😺",
     "A",
-    "\\\\u0041",
-    "\\\\'",
-    "\\\\\\\\",
+    "\\u0041",
+    "\\'",
+    "\\\\",
     "ERROR1001",
     "ERROR1002",
     "NOTE: This is warning",
@@ -464,27 +464,27 @@ exports[`code generation > complex > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"hi\\": \\"hi there!\\",
-  \\"nested\\": {
-    \\"hello\\": \\"hello world!\\",
-    \\"more\\": {
-      \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+  "hi": "hi there!",
+  "nested": {
+    "hello": "hello world!",
+    "more": {
+      "plural": "@.caml:{'no apples'} | {0} apple | {n} apples"
     },
-    \\"list\\": \\"hi, {0} !\\"
+    "list": "hi, {0} !"
   },
-  \\"こんにちは\\": \\"こんにちは！\\",
-  \\"single-quote\\": \\"I don't know!\\",
-  \\"emoji\\": \\"😺\\",
-  \\"unicode\\": \\"\\\\u0041\\",
-  \\"unicode-escape\\": \\"\\\\\\\\u0041\\",
-  \\"backslash-single-quote\\": \\"\\\\\\\\'\\",
-  \\"backslash-backslash\\": \\"\\\\\\\\\\\\\\\\\\",
-  \\"errors\\": [\\"ERROR1001\\", \\"ERROR1002\\"],
-  \\"complex\\": {
-    \\"warnings\\": [
-      \\"NOTE: This is warning\\",
+  "こんにちは": "こんにちは！",
+  "single-quote": "I don't know!",
+  "emoji": "😺",
+  "unicode": "\\u0041",
+  "unicode-escape": "\\\\u0041",
+  "backslash-single-quote": "\\\\'",
+  "backslash-backslash": "\\\\\\\\",
+  "errors": ["ERROR1001", "ERROR1002"],
+  "complex": {
+    "warnings": [
+      "NOTE: This is warning",
       {
-        \\"named-waring\\": \\"this is {type} warining\\"
+        "named-waring": "this is {type} warining"
       }
     ]
   }
@@ -497,10 +497,10 @@ exports[`code generation > complex > map 1`] = `
 
 exports[`code generation > force stringify > code 1`] = `
 "const resource = {
-  \\"trueValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"true\\"])};fn.source=\\"true\\";return fn;})(),
-  \\"falseValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"false\\"])};fn.source=\\"false\\";return fn;})(),
-  \\"nullValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"null\\"])};fn.source=\\"null\\";return fn;})(),
-  \\"numberValue\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"1\\"])};fn.source=\\"1\\";return fn;})()
+  "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
+  "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
+  "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
+  "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})()
 }
 export default resource"
 `;
@@ -519,10 +519,10 @@ exports[`code generation > force stringify > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"trueValue\\": true,
-  \\"falseValue\\": false,
-  \\"nullValue\\": null,
-  \\"numberValue\\": 1
+  "trueValue": true,
+  "falseValue": false,
+  "nullValue": null,
+  "numberValue": 1
 }
 ",
   ],
@@ -532,8 +532,8 @@ exports[`code generation > force stringify > map 1`] = `
 
 exports[`code generation > html tag in message > code 1`] = `
 "{
-  \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;p&gt;hi there!&lt;/p&gt;\\"])};fn.source=\\"<p>hi there!</p>\\";return fn;})(),
-  \\"alert\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;\\"])};fn.source=\\"<script>window.alert('hi there!')</script>\\";return fn;})()
+  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hi there!&lt;/p&gt;"])};fn.source="<p>hi there!</p>";return fn;})(),
+  "alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;"])};fn.source="<script>window.alert('hi there!')</script>";return fn;})()
 }"
 `;
 
@@ -554,12 +554,12 @@ exports[`code generation > html tag in message > errors 1`] = `
 
 exports[`code generation > invalid message syntax > code 1`] = `
 "{
-  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"こんにちは\\"])};fn.source=\\"こんにちは\\";return fn;})(),
-  \\"this-is-invalid\\": \`@\`,
-  \\"nested\\": {
-    \\"array\\": [
+  "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["こんにちは"])};fn.source="こんにちは";return fn;})(),
+  "this-is-invalid": \`@\`,
+  "nested": {
+    "array": [
       {
-        \\"this-is-invalid\\": \`@\`
+        "this-is-invalid": \`@\`
       }
     ]
   }
@@ -659,12 +659,12 @@ exports[`code generation > invalid message syntax > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"hello\\": \\"こんにちは\\",
-  \\"this-is-invalid\\": \\"@\\",
-  \\"nested\\": {
-    \\"array\\": [
+  "hello": "こんにちは",
+  "this-is-invalid": "@",
+  "nested": {
+    "array": [
       {
-        \\"this-is-invalid\\": \\"@\\"
+        "this-is-invalid": "@"
       }
     ]
   }
@@ -677,13 +677,13 @@ exports[`code generation > invalid message syntax > map 1`] = `
 
 exports[`code generation > simple > code 1`] = `
 "const resource = {
-  \\"hi\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi there!\\"])};fn.source=\\"hi there!\\";return fn;})(),
-  \\"hello\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hello world!\\"])};fn.source=\\"hello world!\\";return fn;})(),
-  \\"named\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize([\\"hi, \\", _interpolate(_named(\\"name\\")), \\" !\\"])};fn.source=\\"hi, {name} !\\";return fn;})(),
-  \\"list\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize([\\"hi, \\", _interpolate(_list(0)), \\" !\\"])};fn.source=\\"hi, {0} !\\";return fn;})(),
-  \\"literal\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"hi, \\", \\"kazupon\\", \\" !\\"])};fn.source=\\"hi, {  'kazupon'  } !\\";return fn;})(),
-  \\"linked\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type } = ctx;return _normalize([\\"hi, \\", _linked(\\"name\\", undefined, _type), \\" !\\"])};fn.source=\\"hi, @:name !\\";return fn;})(),
-  \\"plural\\": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked(\\"no apples\\", \\"caml\\", _type)]), _normalize([_interpolate(_list(0)), \\" apple\\"]), _normalize([_interpolate(_named(\\"n\\")), \\" apples\\"])])};fn.source=\\"@.caml:{'no apples'} | {0} apple | {n} apples\\";return fn;})()
+  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hi there!"])};fn.source="hi there!";return fn;})(),
+  "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello world!"])};fn.source="hello world!";return fn;})(),
+  "named": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, named: _named } = ctx;return _normalize(["hi, ", _interpolate(_named("name")), " !"])};fn.source="hi, {name} !";return fn;})(),
+  "list": (()=>{const fn=(ctx) => {const { normalize: _normalize, interpolate: _interpolate, list: _list } = ctx;return _normalize(["hi, ", _interpolate(_list(0)), " !"])};fn.source="hi, {0} !";return fn;})(),
+  "literal": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hi, ", "kazupon", " !"])};fn.source="hi, {  'kazupon'  } !";return fn;})(),
+  "linked": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type } = ctx;return _normalize(["hi, ", _linked("name", undefined, _type), " !"])};fn.source="hi, @:name !";return fn;})(),
+  "plural": (()=>{const fn=(ctx) => {const { normalize: _normalize, linked: _linked, type: _type, interpolate: _interpolate, list: _list, named: _named, plural: _plural } = ctx;return _plural([_normalize([_linked("no apples", "caml", _type)]), _normalize([_interpolate(_list(0)), " apple"]), _normalize([_interpolate(_named("n")), " apples"])])};fn.source="@.caml:{'no apples'} | {0} apple | {n} apples";return fn;})()
 }
 export default resource"
 `;
@@ -710,13 +710,13 @@ exports[`code generation > simple > map 1`] = `
   ],
   "sourcesContent": [
     "{
-  \\"hi\\": \\"hi there!\\",
-  \\"hello\\": \\"hello world!\\",
-  \\"named\\": \\"hi, {name} !\\",
-  \\"list\\": \\"hi, {0} !\\",
-  \\"literal\\": \\"hi, {  'kazupon'  } !\\",
-  \\"linked\\": \\"hi, @:name !\\",
-  \\"plural\\": \\"@.caml:{'no apples'} | {0} apple | {n} apples\\"
+  "hi": "hi there!",
+  "hello": "hello world!",
+  "named": "hi, {name} !",
+  "list": "hi, {0} !",
+  "literal": "hi, {  'kazupon'  } !",
+  "linked": "hi, @:name !",
+  "plural": "@.caml:{'no apples'} | {0} apple | {n} apples"
 }
 ",
   ],
@@ -726,10 +726,10 @@ exports[`code generation > simple > map 1`] = `
 
 exports[`code generation > unhandling > code 1`] = `
 "const resource = {
-  \\"trueValue\\": true,
-  \\"falseValue\\": false,
-  \\"nullValue\\": null,
-  \\"numberValue\\": 1
+  "trueValue": true,
+  "falseValue": false,
+  "nullValue": null,
+  "numberValue": 1
 }
 export default resource"
 `;

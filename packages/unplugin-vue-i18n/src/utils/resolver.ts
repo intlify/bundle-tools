@@ -1,7 +1,7 @@
 import fs from 'node:fs'
 import createDebug from 'debug'
 import module from 'node:module'
-import path from 'node:path'
+import { resolvePackageJSON } from './pkg'
 
 const SUPPORT_PACKAGES = ['vue-i18n', 'petite-vue-i18n'] as const
 
@@ -40,11 +40,13 @@ function resolvePkgPath(
      *  Assuming the case of using npm alias `npm:`,
      *  get the installed package name from `package.json`
      */
-    const resolvedPath = _require.resolve(id)
-    const pkgPath = path.dirname(resolvedPath)
-    const pkgJson = JSON.parse(
-      fs.readFileSync(path.join(pkgPath, 'package.json'), 'utf-8')
-    ) as { name: string }
+    const modPath = _require.resolve(id)
+    debug('modPath:', modPath, id)
+    const pkgJsonPath = resolvePackageJSON(modPath)
+    debug('pkgJsonPath:', pkgJsonPath)
+    const pkgJson = JSON.parse(fs.readFileSync(pkgJsonPath, 'utf-8')) as {
+      name: string
+    }
     const pkgName: string = pkgJson.name.startsWith('vue-i18n')
       ? 'vue-i18n'
       : pkgJson.name.startsWith('petite-vue-i18n')

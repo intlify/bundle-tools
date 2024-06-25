@@ -34,6 +34,7 @@
     "fast-glob": "^3.2.12",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.3",
+    "mlly": "^1.7.1",
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "source-map-js": "^1.0.2",

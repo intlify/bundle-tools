@@ -1,9 +1,7 @@
 import { createUnplugin } from 'unplugin'
 import createDebug from 'debug'
 import { raiseError, checkInstallPackage, resolveNamespace } from './utils'
-import { resolveOptions } from './core/options'
-import { resourcePlugin } from './core/resource'
-import { directivePlugin } from './core/directive'
+import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
 import type { PluginOptions } from './types'
 

@@ -40,7 +40,8 @@ export function generate(
     onError = undefined,
     strictMessage = true,
     escapeHtml = false,
-    jit = false
+    jit = false,
+    transformI18nBlock = undefined
   }: CodeGenOptions
 ): CodeGenResult<JSONProgram> {
   let value = Buffer.isBuffer(targetSource)
@@ -63,9 +64,13 @@ export function generate(
     onError,
     strictMessage,
     escapeHtml,
-    jit
+    jit,
+    transformI18nBlock
   } as CodeGenOptions
 
+  if (transformI18nBlock) {
+    transformI18nBlock(value)
+  }
   let ast = parseJSON(value, { filePath: filename })
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {

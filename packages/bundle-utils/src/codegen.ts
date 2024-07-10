@@ -61,6 +61,7 @@ export interface CodeGenOptions {
   escapeHtml?: boolean
   jit?: boolean
   minify?: boolean
+  transformI18nBlock?: (source: string | Buffer) => string
   onWarn?: (msg: string) => void
   onError?: (
     msg: string,

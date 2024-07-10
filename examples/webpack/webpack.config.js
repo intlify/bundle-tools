@@ -2,6 +2,28 @@ const path = require('path')
 const { VueLoaderPlugin } = require('vue-loader')
 const VueI18nPlugin = require('../../packages/unplugin-vue-i18n/lib/webpack.cjs')
 
+function transformI18nBlock(source) {
+  debugger
+  const sourceCopy = source
+  const block = JSON.parse(
+    sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']')
+  )
+  if (Array.isArray(block)) {
+    const transformedBlock = JSON.stringify({
+      en: {
+        language: 'Language',
+        hello: 'hello, world!'
+      },
+      ja: {
+        language: '言語',
+        hello: 'こんにちは、世界！'
+      }
+    })
+    return transformedBlock
+  }
+  return source
+}
+
 module.exports = {
   mode: 'development',
   devtool: 'source-map',
@@ -39,7 +61,8 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     VueI18nPlugin({
-      include: [path.resolve(__dirname, './src/locales/**')]
+      include: [path.resolve(__dirname, './src/locales/**')],
+      transformI18nBlock: transformI18nBlock
     })
   ]
 }

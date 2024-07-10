@@ -14,4 +14,5 @@ export interface PluginOptions {
   strictMessage?: boolean
   escapeHtml?: boolean
   optimizeTranslationDirective?: boolean | string | string[]
+  transformI18nBlock?: (src: string | Buffer) => string
 }

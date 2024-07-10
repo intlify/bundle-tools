@@ -3,7 +3,6 @@ const { VueLoaderPlugin } = require('vue-loader')
 const VueI18nPlugin = require('../../packages/unplugin-vue-i18n/lib/webpack.cjs')
 
 function transformI18nBlock(source) {
-  debugger
   const sourceCopy = source
   const block = JSON.parse(
     sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']')

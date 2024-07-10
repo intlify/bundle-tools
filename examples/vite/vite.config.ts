@@ -3,6 +3,27 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueI18n from '../../packages/unplugin-vue-i18n/src/vite'
 
+function transformI18nBlock(source) {
+  const sourceCopy = source
+  const block = JSON.parse(
+    sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']')
+  )
+  if (Array.isArray(block)) {
+    const transformedBlock = JSON.stringify({
+      en: {
+        language: 'Language',
+        hello: 'hello, world!'
+      },
+      ja: {
+        language: '言語',
+        hello: 'こんにちは、世界！'
+      }
+    })
+    return transformedBlock
+  }
+  return source
+}
+
 export default defineConfig({
   resolve: {
     alias: {
@@ -21,7 +42,8 @@ export default defineConfig({
     vue(),
     vueI18n({
       include: path.resolve(__dirname, './src/locales/**'),
-      optimizeTranslationDirective: true
+      optimizeTranslationDirective: true,
+      transformI18nBlock: transformI18nBlock
     })
   ]
 })

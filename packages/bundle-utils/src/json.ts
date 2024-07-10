@@ -64,13 +64,9 @@ export function generate(
     onError,
     strictMessage,
     escapeHtml,
-    jit,
-    transformI18nBlock
+    jit
   } as CodeGenOptions
 
-  if (transformI18nBlock) {
-    transformI18nBlock(value)
-  }
   let ast = parseJSON(value, { filePath: filename })
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {

@@ -530,7 +530,7 @@ async function generateBundleResources(
     strictMessage = true,
     escapeHtml = false,
     jit = true,
-    transformI18nBlock = null
+    transformI18nBlock = undefined
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
@@ -549,7 +549,6 @@ async function generateBundleResources(
       const { ext, name } = parsePath(res)
       const source = await getRaw(res)
       const generate = /json5?/.test(ext) ? generateJSON : generateYAML
-      debugger
       const parseOptions = getOptions(res, isProduction, {}, false, {
         isGlobal,
         jit,

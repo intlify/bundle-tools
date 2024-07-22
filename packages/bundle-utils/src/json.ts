@@ -40,8 +40,7 @@ export function generate(
     onError = undefined,
     strictMessage = true,
     escapeHtml = false,
-    jit = false,
-    transformI18nBlock = undefined
+    jit = false
   }: CodeGenOptions
 ): CodeGenResult<JSONProgram> {
   let value = Buffer.isBuffer(targetSource)

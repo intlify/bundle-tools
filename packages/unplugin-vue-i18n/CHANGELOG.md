@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@5.0.0-beta.4 (2024-07-23)
+
+#### :star: Features
+* [#387](https://github.com/intlify/bundle-tools/pull/387) feat(unplugin-vue-i18n): allow for a custom i18n block transform hook ([@dgautsch](https://github.com/dgautsch))
+
+#### Committers: 1
+- Dan Gautsch ([@dgautsch](https://github.com/dgautsch))
+
+
 ## @intlify/unplugin-vue-i18n@5.0.0-beta.3 (2024-06-25)
 
 #### :bug: Bug Fixes

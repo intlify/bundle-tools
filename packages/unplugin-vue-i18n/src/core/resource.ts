@@ -60,7 +60,8 @@ export function resourcePlugin(
     ssrBuild,
     strictMessage,
     allowDynamic,
-    escapeHtml
+    escapeHtml,
+    transformI18nBlock
   }: ResolvedOptions,
   meta: UnpluginContextMeta,
   installedPkgInfo: InstalledPackageInfo
@@ -437,7 +438,7 @@ export function resourcePlugin(
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
-          const source = await getCode(
+          let source = await getCode(
             code,
             filename,
             sourceMap,
@@ -445,6 +446,16 @@ export function resourcePlugin(
             getSfcParser(),
             meta.framework
           )
+
+          if (typeof transformI18nBlock === 'function') {
+            const modifiedSource = transformI18nBlock(source)
+            if (modifiedSource && typeof modifiedSource === 'string') {
+              source = modifiedSource
+            } else {
+              warn('transformI18nBlock should return a string')
+            }
+          }
+
           const { code: generatedCode, map } = generate(source, parseOptions)
           debug('generated code', generatedCode)
           debug('sourcemap', map, sourceMap)
@@ -518,7 +529,8 @@ async function generateBundleResources(
     onlyLocales = [],
     strictMessage = true,
     escapeHtml = false,
-    jit = true
+    jit = true,
+    transformI18nBlock = undefined
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
@@ -526,6 +538,7 @@ async function generateBundleResources(
     strictMessage?: boolean
     escapeHtml?: boolean
     jit?: boolean
+    transformI18nBlock?: PluginOptions['transformI18nBlock']
   }
 ) {
   const codes = []
@@ -542,7 +555,8 @@ async function generateBundleResources(
         onlyLocales,
         strictMessage,
         escapeHtml,
-        forceStringify
+        forceStringify,
+        transformI18nBlock
       }) as CodeGenOptions
       parseOptions.type = 'bare'
       const { code } = generate(source, parseOptions)
@@ -637,7 +651,8 @@ function getOptions(
     allowDynamic = false,
     strictMessage = true,
     escapeHtml = false,
-    jit = true
+    jit = true,
+    transformI18nBlock = null
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
@@ -647,6 +662,7 @@ function getOptions(
     strictMessage?: boolean
     escapeHtml?: boolean
     jit?: boolean
+    transformI18nBlock?: PluginOptions['transformI18nBlock'] | null
   }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -662,6 +678,7 @@ function getOptions(
     jit,
     onlyLocales,
     env: mode,
+    transformI18nBlock,
     onWarn: (msg: string): void => {
       warn(`${filename} ${msg}`)
     },

@@ -9,15 +9,18 @@
   <p id="msg">{{ t('hello') }}</p>
   <p id="custom-directive" v-t="'hi'"></p>
   <Banana />
+  <Apple />
 </template>
 
 <script>
 import { useI18n } from 'vue-i18n'
+import Apple from './Apple.vue'
 import Banana from './Banana.vue'
 
 export default {
   name: 'App',
   components: {
+    Apple,
     Banana
   },
   setup() {

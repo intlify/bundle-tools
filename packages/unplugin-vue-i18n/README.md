@@ -583,6 +583,53 @@ If do you will use this option, you need to enable `jitCompilation` option.
   > [!WARNING]
   About for manually signature, see the details [vue-i18n-extensions API docs](https://github.com/intlify/vue-i18n-extensions/blob/next/docs/%40intlify/vue-i18n-extensions-api.md#translationsignatures) and [usecase from vue-i18n-extensions PR](https://github.com/intlify/vue-i18n-extensions/pull/217/files#diff-3fb9543f91e011d4b0dc9beff44082fe1a99c9eab70c1afab23c3c34352b7c38R121-R200)
 
+### `transformI18nBlock`
+
+- **Type**: `function`
+- **Default:** `undefined`
+
+  This hook allows a user to modify the `<i18n>` block before the plugin generates the translations. The hook is passed the source of the `<ii8n>` block as a `string` after the SFC is read from disk.
+
+  **Plugin**
+  ```javascript
+  function transformI18nBlock(source) {
+    // transformation logic
+  }
+
+  // Plugin
+  vueI18n({
+    transformI18nBlock
+  })
+  ```
+
+  **Before**
+  ```html
+  <i18n>
+  [
+      'slug-one',
+      'slug-two'
+  ]
+  <i18n>
+  ```
+
+  **After**
+  ```html
+  <i18n>
+  {
+      'en': {
+        'slug-one': 'foo',
+        'slug-two': 'bar'
+      },
+      ja: {
+        'slug-one': 'foo',
+        'slug-two': 'bar'
+      }
+  }
+  </i18n>
+  ```
+  > [!IMPORTANT]
+  The function **must** return a string or the build will fail.
+
 ## 📜 Changelog
 
 Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/unplugin-vue-i18n/CHANGELOG.md)

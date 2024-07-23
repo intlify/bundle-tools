@@ -77,6 +77,11 @@ export function resolveOptions(
     TranslationDirectiveResolveIndetifier
   >()
 
+  const transformI18nBlock =
+    typeof options.transformI18nBlock === 'function'
+      ? options.transformI18nBlock
+      : null
+
   return {
     include,
     exclude,
@@ -93,7 +98,8 @@ export function resolveOptions(
     strictMessage,
     escapeHtml,
     optimizeTranslationDirective,
-    translationIdentifiers
+    translationIdentifiers,
+    transformI18nBlock
   }
 }
 

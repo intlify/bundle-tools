@@ -3,12 +3,18 @@ import createDebug from 'debug'
 import { raiseError, checkInstallPackage, resolveNamespace } from './utils'
 import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
+import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
 import type { PluginOptions } from './types'
 
 const debug = createDebug(resolveNamespace('root'))
 const installedPkgInfo = checkInstallPackage(debug)
 
-export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
+export * from './types'
+
+export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
+  options = {},
+  meta
+) => {
   debug('meta framework', meta.framework)
   // check bundler type
   if (!['vite', 'webpack'].includes(meta.framework)) {
@@ -31,8 +37,9 @@ export const unplugin = createUnplugin<PluginOptions>((options = {}, meta) => {
   }
 
   return plugins
-})
+}
+
+export const unplugin: UnpluginInstance<PluginOptions | undefined, boolean> =
+  /* #__PURE__ */ createUnplugin(unpluginFactory)
 
 export default unplugin
-
-export * from './types'

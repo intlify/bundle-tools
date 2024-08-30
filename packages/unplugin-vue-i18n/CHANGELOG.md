@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@5.0.0-beta.5 (2024-08-30)
+
+#### :zap: Improvement Features
+* [#390](https://github.com/intlify/bundle-tools/pull/390) fix(unplugin-vue-i18n): plugin option made be optional ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@5.0.0-beta.4 (2024-07-23)
 
 #### :star: Features

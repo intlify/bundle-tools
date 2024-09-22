@@ -1,6 +1,8 @@
 
 
 
+
+
 ## @intlify/unplugin-vue-i18n@5.0.0-beta.5 (2024-08-30)
 
 #### :zap: Improvement Features

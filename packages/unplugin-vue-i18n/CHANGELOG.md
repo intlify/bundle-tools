@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@5.1.0 (2024-09-22)
+
+#### :star: Features
+* [#394](https://github.com/intlify/bundle-tools/pull/394) feat(unplugin-vue-i18n): support `module` option ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 
 
 ## @intlify/unplugin-vue-i18n@5.0.0-beta.5 (2024-08-30)

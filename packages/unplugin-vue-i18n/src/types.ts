@@ -1,8 +1,11 @@
 export type SFCLangFormat = 'json' | 'json5' | 'yml' | 'yaml'
+export type VueI18nModule = 'vue-i18n' | 'petite-vue-i18n'
+
 export interface PluginOptions {
   include?: string | string[]
   onlyLocales?: string | string[]
   allowDynamic?: boolean
+  module?: VueI18nModule
   dropMessageCompiler?: boolean
   runtimeOnly?: boolean
   compositionOnly?: boolean

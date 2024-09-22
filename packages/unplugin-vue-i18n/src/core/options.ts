@@ -3,12 +3,10 @@ import { isString, isBoolean, isArray } from '@intlify/shared'
 
 import type { PluginOptions } from '../types'
 import type { TranslationDirectiveResolveIndetifier } from '../vue'
-import type { InstalledPackageInfo } from '../utils'
 
-export function resolveOptions(
-  options: PluginOptions,
-  installedPkgInfo: InstalledPackageInfo
-) {
+export function resolveOptions(options: PluginOptions) {
+  const moduleType = (options.module || 'vue-i18n') as string
+
   // normalize for `options.onlyLocales`
   let onlyLocales: string[] = []
   if (options.onlyLocales) {
@@ -43,14 +41,14 @@ export function resolveOptions(
   const dropMessageCompiler = !!options.dropMessageCompiler
 
   // prettier-ignore
-  const compositionOnly = installedPkgInfo.pkg === 'vue-i18n'
+  const compositionOnly = moduleType === 'vue-i18n'
       ? isBoolean(options.compositionOnly)
         ? options.compositionOnly
         : true
       : true
 
   // prettier-ignore
-  const fullInstall = installedPkgInfo.pkg === 'vue-i18n'
+  const fullInstall = moduleType === 'vue-i18n'
     ? isBoolean(options.fullInstall)
       ? options.fullInstall
       : true
@@ -85,6 +83,7 @@ export function resolveOptions(
   return {
     include,
     exclude,
+    module: moduleType,
     onlyLocales,
     forceStringify,
     defaultSFCLang,

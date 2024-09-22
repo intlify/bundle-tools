@@ -1,13 +1,12 @@
 import { createUnplugin } from 'unplugin'
 import createDebug from 'debug'
-import { raiseError, checkInstallPackage, resolveNamespace } from './utils'
+import { raiseError, resolveNamespace } from './utils'
 import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
 import type { PluginOptions } from './types'
 
 const debug = createDebug(resolveNamespace('root'))
-const installedPkgInfo = checkInstallPackage(debug)
 
 export * from './types'
 
@@ -22,10 +21,10 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
   }
 
   debug('plugin options (resolving):', options)
-  const resolvedOptions = resolveOptions(options, installedPkgInfo)
+  const resolvedOptions = resolveOptions(options)
   debug('plugin options (resolved):', resolvedOptions)
 
-  const plugins = [resourcePlugin(resolvedOptions, meta, installedPkgInfo)]
+  const plugins = [resourcePlugin(resolvedOptions, meta)]
   if (resolvedOptions.optimizeTranslationDirective) {
     if (meta.framework === 'webpack') {
       raiseError(

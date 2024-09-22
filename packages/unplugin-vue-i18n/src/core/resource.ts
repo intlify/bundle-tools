@@ -36,7 +36,6 @@ import type {
   TransformResult
 } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
-import type { InstalledPackageInfo } from '../utils'
 import type { VueQuery } from '../vue'
 import type { PluginOptions } from '../types'
 
@@ -50,6 +49,7 @@ export function resourcePlugin(
     onlyLocales,
     include,
     exclude,
+    module,
     forceStringify,
     defaultSFCLang,
     globalSFCScope,
@@ -63,18 +63,17 @@ export function resourcePlugin(
     escapeHtml,
     transformI18nBlock
   }: ResolvedOptions,
-  meta: UnpluginContextMeta,
-  installedPkgInfo: InstalledPackageInfo
+  meta: UnpluginContextMeta
 ): UnpluginOptions {
   const filter = createFilter(include, exclude)
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
-    return `${installedPkgInfo.alias}/dist/${installedPkgInfo.pkg}${runtimeOnly ? '.runtime' : ''}.${
+    return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${
       !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
     }`
   }
   let isProduction = false
   let sourceMap = false
-  const vueI18nAliasName = installedPkgInfo.alias
+  const vueI18nAliasName = module
   debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
   let vuePlugin: RollupPlugin | null = null

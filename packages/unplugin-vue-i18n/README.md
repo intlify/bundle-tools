@@ -253,13 +253,6 @@ This plugin will automatically select and bundle Vue I18n build according to the
 
 About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
 
-### For `petite-vue-i18n`
-
-This plugin will automatically select and bundle `petite-vue-i18n` build according to the following vite behavior:
-
-- vite dev: `petite-vue-i18n.esm-bundler.js`
-- vite build: `petite-vue-i18n.runtime.esm-bundler.js`
-
 
 ## 🔧 Options
 
@@ -302,6 +295,27 @@ This plugin will automatically select and bundle `petite-vue-i18n` build accordi
 > [!WARNING]
   If you use the `js` and `ts` resources formats, set the paths, so your application code is not targeted. We recommend that resources be isolated from the application code.
 
+### `module`
+
+- **Type:** `string`
+- **Default:** `'vue-i18n'`
+
+  > [!NOTE]
+  This options is supported from v5.1.0, and works with vue-i18n v10 and later.
+
+  Bundle target vue-i18n module. You can specify either `‘vue-i18n’` or `‘petite-vue-i18n’`.
+
+  The default is `'vue-i18n'`, and the following installed in node_modules will be bundled.
+
+  - development: `vue-i18n.esm-bundler.js`
+  - production: `vue-i18n.runtime.esm-bundler.js`
+
+  In the case of `‘petite-vue-i18n’`, the following installed in node_modules will be bundled.
+
+  - development: `petite-vue-i18n.esm-bundler.js`
+  - production: `petite-vue-i18n.runtime.esm-bundler.js`
+
+  If you are using petite-vue-i18n, you will need to set this value.
 
 ### `strictMessage`
 

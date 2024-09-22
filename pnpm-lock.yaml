@@ -300,9 +300,6 @@ importers:
       json5:
         specifier: ^2.2.3
         version: 2.2.3
-      mlly:
-        specifier: ^1.7.1
-        version: 1.7.1
       pathe:
         specifier: ^1.0.0
         version: 1.1.2

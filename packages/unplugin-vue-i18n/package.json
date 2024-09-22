@@ -26,7 +26,7 @@
     "@eslint-community/eslint-utils": "^4.4.0",
     "@intlify/bundle-utils": "^9.0.0-beta.0",
     "@intlify/shared": "next",
-    "@intlify/vue-i18n-extensions": "^6.2.0",
+    "@intlify/vue-i18n-extensions": "^7.0.0",
     "@rollup/pluginutils": "^5.1.0",
     "@typescript-eslint/scope-manager": "^7.13.0",
     "@typescript-eslint/typescript-estree": "^7.13.0",

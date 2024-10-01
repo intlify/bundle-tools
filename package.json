@@ -37,7 +37,7 @@
     "@types/eslint-visitor-keys": "^1.0.0",
     "@types/jest": "^27.0.2",
     "@types/js-yaml": "^4.0.3",
-    "@types/jsdom": "^16.2.5",
+    "@types/jsdom": "^21.0.0",
     "@types/json5": "^2.2.0",
     "@types/loader-utils": "^2.0.0",
     "@types/memory-fs": "^0.3.2",

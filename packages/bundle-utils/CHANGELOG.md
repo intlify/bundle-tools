@@ -1,4 +1,22 @@
 
+## @intlify/bundle-utils@9.0.0 (2024-07-23)
+
+#### :star: Features
+* [#387](https://github.com/intlify/bundle-tools/pull/387) feat(unplugin-vue-i18n): allow for a custom i18n block transform hook ([@dgautsch](https://github.com/dgautsch))
+
+#### Committers: 1
+- Dan Gautsch ([@dgautsch](https://github.com/dgautsch))
+
+
+## @intlify/bundle-utils@9.0.0 (2024-06-25)
+
+#### :bug: Bug Fixes
+* [#385](https://github.com/intlify/bundle-tools/pull/385) fix: cannot resolve vue-i18n and petite-vue-i18n in monorepo ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/bundle-utils@9.0.0-beta.0 (2024-05-17)
 
 #### :star: Features

@@ -1,8 +1,8 @@
 <i18n lang="json5">
 {
-  "en": {
+  en: {
     // comments
-    "hello": "hello world!"
+    hello: 'hello world!'
   }
 }
 </i18n>

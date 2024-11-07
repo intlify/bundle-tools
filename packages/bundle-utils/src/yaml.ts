@@ -93,7 +93,7 @@ export function generate(
   const { code, map } = generator.context()
   // prettier-ignore
   const newMap = map
-    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null // eslint-disable-line @typescript-eslint/no-explicit-any
+    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null  
     : null
   return {
     ast,

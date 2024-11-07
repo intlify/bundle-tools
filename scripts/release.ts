@@ -1,25 +1,25 @@
-import path from 'path'
+import { Octokit } from '@octokit/rest'
+import chalk from 'chalk'
 import fs from 'fs/promises'
 import minimist from 'minimist'
-import semver from 'semver'
+import path from 'path'
 import prompts from 'prompts'
-import chalk from 'chalk'
-import { Octokit } from '@octokit/rest'
+import semver from 'semver'
+import { execute } from './runner'
 import {
-  run,
-  getRootPath,
-  getRelativePath,
-  readPackageJson,
-  getRepoName,
-  getTags,
   getIncrementer,
+  getRelativePath,
+  getRepoName,
+  getRootPath,
+  getTags,
   getTargetVersion,
+  readPackageJson,
   renderChangelog,
+  run,
   writeChangelog
 } from './utils'
-import { execute } from './runner'
 
-import type { PackageJson, Logger } from './utils'
+import type { Logger, PackageJson } from './utils'
 
 const args = minimist(process.argv.slice(2))
 const isDryRun = args.dry

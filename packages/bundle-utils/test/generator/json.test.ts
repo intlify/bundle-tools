@@ -85,7 +85,7 @@ describe('code generation', () => {
 
   test('invalid message syntax', async () => {
     const { source } = await readFile('./fixtures/codegen/invalid-message.json')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const errors = [] as any
     const { code, map } = generate(source, {
       type: 'bare',
@@ -103,7 +103,7 @@ describe('code generation', () => {
 
   test('html tag in message', async () => {
     const { source } = await readFile('./fixtures/codegen/html.json')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const errors = [] as any
     const { code } = generate(source, {
       type: 'bare',
@@ -215,7 +215,7 @@ describe('AST code generation', () => {
 
   test('invalid message syntax', async () => {
     const { source } = await readFile('./fixtures/codegen/invalid-message.json')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const errors = [] as any
     const { code, map } = generate(source, {
       jit: true,
@@ -233,7 +233,7 @@ describe('AST code generation', () => {
 
   test('html tag in message', async () => {
     const { source } = await readFile('./fixtures/codegen/html.json')
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     const errors = [] as any
     const { map } = generate(source, {
       jit: true,

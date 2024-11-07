@@ -1,43 +1,43 @@
-import { parse as parsePath } from 'pathe'
+import {
+  generateJavaScript,
+  generateJSON,
+  generateYAML
+} from '@intlify/bundle-utils'
+import {
+  assign,
+  generateCodeFrame,
+  isArray,
+  isEmptyObject,
+  isNumber,
+  isString
+} from '@intlify/shared'
+import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
-import {
-  isArray,
-  isEmptyObject,
-  isString,
-  isNumber,
-  assign,
-  generateCodeFrame
-} from '@intlify/shared'
-import { createFilter } from '@rollup/pluginutils'
-import {
-  generateJSON,
-  generateYAML,
-  generateJavaScript
-} from '@intlify/bundle-utils'
+import { parse as parsePath } from 'pathe'
 import { parse } from 'vue/compiler-sfc'
-import { parseVueRequest, getVueCompiler } from '../vue'
 import {
-  warn,
+  checkVuePlugin,
   error,
+  getVitePlugin,
   raiseError,
   resolveNamespace,
-  getVitePlugin,
-  checkVuePlugin
+  warn
 } from '../utils'
+import { getVueCompiler, parseVueRequest } from '../vue'
 
-import type { RawSourceMap } from 'source-map-js'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
+import type { RawSourceMap } from 'source-map-js'
 import type {
-  UnpluginOptions,
-  UnpluginContextMeta,
   RollupPlugin,
-  TransformResult
+  TransformResult,
+  UnpluginContextMeta,
+  UnpluginOptions
 } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
-import type { VueQuery } from '../vue'
 import type { PluginOptions } from '../types'
+import type { VueQuery } from '../vue'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
@@ -253,7 +253,6 @@ export function resourcePlugin(
         compiler.options.resolve,
         meta.framework
       )
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
         getVueI18nAliasPath({
           ssr: ssrBuild,
@@ -307,7 +306,6 @@ export function resourcePlugin(
       }
     },
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     async load(id: string) {
       debug('load', id)
       if (
@@ -484,9 +482,8 @@ function getGenerator(ext: string, defaultGen = generateJSON) {
 }
 
 function normalizeConfigResolveAlias(
-  resolve: any, // eslint-disable-line @typescript-eslint/no-explicit-any
+  resolve: any,
   framework: UnpluginContextMeta['framework']
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
   if (resolve && resolve.alias) {
     return resolve
@@ -513,7 +510,7 @@ async function loadWebpack() {
   let webpack = null
   try {
     webpack = await import('webpack').then(m => m.default || m)
-  } catch (e) {
+  } catch (_e) {
     warn(`webpack not found, please install webpack.`)
   }
   return webpack

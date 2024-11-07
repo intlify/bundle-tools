@@ -365,11 +365,11 @@ exports[`yaml > map 1`] = `
   "sourcesContent": [
     "hi: hi there!
 nested:
-  "hello": "hello world!"
+  'hello': 'hello world!'
   more:
     plural: "@.caml:{'no apples'} | {0} apple | {n} apples"
   list: hi, {0} !
-こんにちは: "こんにちは！"
+こんにちは: 'こんにちは！'
 single-quote: "I don't know!"
 emoji: 😺
 unicode: "\\u0041"
@@ -382,7 +382,7 @@ errors:
 complex:
   warnings:
     - 'NOTE: This is warning'
-    - named-waring: "this is {type} warining"
+    - named-waring: 'this is {type} warining'
 ",
   ],
   "version": 3,
@@ -457,11 +457,11 @@ exports[`yml > map 1`] = `
   "sourcesContent": [
     "hi: hi there!
 nested:
-  "hello": "hello world!"
+  'hello': 'hello world!'
   more:
     plural: "@.caml:{'no apples'} | {0} apple | {n} apples"
   list: hi, {0} !
-こんにちは: "こんにちは！"
+こんにちは: 'こんにちは！'
 single-quote: "I don't know!"
 emoji: 😺
 unicode: "\\u0041"
@@ -474,7 +474,7 @@ errors:
 complex:
   warnings:
     - 'NOTE: This is warning'
-    - named-waring: "this is {type} warining"
+    - named-waring: 'this is {type} warining'
 ",
   ],
   "version": 3,

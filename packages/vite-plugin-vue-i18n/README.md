@@ -4,16 +4,15 @@
 [![Test](https://github.com/intlify/bundle-tools/actions/workflows/test.yml/badge.svg)](https://github.com/intlify/bundle-tools/actions/workflows/test.yml)
 [![npm](https://img.shields.io/npm/v/@intlify/vite-plugin-vue-i18n.svg?color=blueviolet)](https://www.npmjs.com/package/@intlify/vite-plugin-vue-i18n)
 
-
 Vite plugin for Vue I18n
 
 ## ⚠️⚠️⚠️⚠️️ IMPORTANT NOTICE ⚠️⚠️⚠️⚠️
+
 THIS PACKAGE IS DEPRECATED (MOVE TO [`@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n))
 
 ## ⚠️ DEPRECATED
 
 This plugin support until Vite 3. If you would like to use on Vite 4, please use [@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n)
-
 
 ## 🌟 Features
 
@@ -69,7 +68,10 @@ export default defineConfig({
       // compositionOnly: false,
 
       // you need to set i18n resource including paths !
-      include: resolve(dirname(fileURLToPath(import.meta.url)), './path/to/src/locales/**'),
+      include: resolve(
+        dirname(fileURLToPath(import.meta.url)),
+        './path/to/src/locales/**'
+      )
     })
   ]
 })
@@ -215,7 +217,9 @@ vite-plugin-vue-i18n plugin provides several dedicated options for `petite-vue-i
 Note that it is as experimental as `Petite-vue-i18n`.
 
 ## 📦 Automatic bundling
+
 ### For Vue I18n
+
 As noted [here](https://vue-i18n.intlify.dev/installation.html#explanation-of-different-builds), NPM provides many different builds of Vue I18n.
 
 vite-plugin-vue-i18n will automatically select and bundle Vue I18n build according to the following vite behavior:
@@ -362,23 +366,15 @@ About details, See the below section
   On inlined `i18n` custom blocks that have specified the `lang` attribute, the `defaultSFCLang` is not applied.
 
   For example, with `defaultSFCLang: "yaml"` or `defaultSFCLang: "yml"`, this custom block:
+
   ```html
-  <i18n lang="yaml">
-  en:
-    hello: Hello
-  es:
-    hello: Hola
-  </i18n>
+  <i18n lang="yaml"> en: hello: Hello es: hello: Hola </i18n>
   ```
 
   and this another one, are equivalent:
+
   ```html
-  <i18n>
-  en:
-    hello: Hello
-  es:
-    hello: Hola
-  </i18n>
+  <i18n> en: hello: Hello es: hello: Hola </i18n>
   ```
 
 ### `globalSFCScope`
@@ -395,34 +391,19 @@ About details, See the below section
   For example, with `globalSFCScope: true`, this custom block:
 
   ```html
-  <i18n lang="yaml" global>
-  en:
-    hello: Hello
-  es:
-    hello: Hola
-  </i18n>
+  <i18n lang="yaml" global> en: hello: Hello es: hello: Hola </i18n>
   ```
 
   and this another one, are equivalent:
 
   ```html
-  <i18n lang="yaml">
-  en:
-    hello: Hello
-  es:
-    hello: Hola
-  </i18n>
+  <i18n lang="yaml"> en: hello: Hello es: hello: Hola </i18n>
   ```
 
   You can also use `defaultSFCLang: "yaml"`, following with previous example, this another is also equivalent to previous ones:
 
   ```html
-  <i18n>
-  en:
-    hello: Hello
-  es:
-    hello: Hola
-  </i18n>
+  <i18n> en: hello: Hello es: hello: Hola </i18n>
   ```
 
 ### `useVueI18nImportName` (Experimental)
@@ -433,7 +414,6 @@ About details, See the below section
   Whether to use the import name of `petite-vue-i18n` with the same import name as vue-i18n (`import { xxx } from 'vue-i18n'`).
 
   This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
-
 
 ## 📜 Changelog
 

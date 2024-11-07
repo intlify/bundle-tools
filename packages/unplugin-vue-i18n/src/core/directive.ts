@@ -98,7 +98,6 @@ function resolveVueOptions(
   vuePlugin: RollupPlugin,
   optimizeTranslationDirective: ResolvedOptions['optimizeTranslationDirective'],
   translationIdentifiers: ResolvedOptions['translationIdentifiers']
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ): any {
   const vueOptions = vuePlugin.api.options
   vueOptions.template ||= {}

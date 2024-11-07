@@ -15,6 +15,14 @@
     "@rollup/pluginutils": "^4.2.0",
     "debug": "^4.3.1"
   },
+  "devDependencies": {
+    "@types/jest": "^27.0.2",
+    "ts-jest": "^27.0.5",
+    "jest": "^27.2.3",
+    "jest-puppeteer": "^6.0.0",
+    "jest-watch-typeahead": "^0.6.4",
+    "puppeteer": "^10.4.0"
+  },
   "peerDependencies": {
     "petite-vue-i18n": "^9.0.0",
     "vue": "^3.0.0",

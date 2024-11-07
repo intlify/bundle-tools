@@ -13,8 +13,8 @@ export type PackageJson = {
 }
 
 export type Mode = 'single' | 'batch'
-export type Logger = (...args: any[]) => void // eslint-disable-line @typescript-eslint/no-explicit-any
-export type Incrementer = (i: any) => string // eslint-disable-line @typescript-eslint/no-explicit-any
+export type Logger = (...args: any[]) => void
+export type Incrementer = (i: any) => string
 
 const VersionIncrements = [
   'patch',
@@ -59,7 +59,6 @@ export async function readPackageJson(path: string) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isPackageJson(pkg: any): pkg is PackageJson {
   return pkg && typeof pkg === 'object' && pkg.name
 }

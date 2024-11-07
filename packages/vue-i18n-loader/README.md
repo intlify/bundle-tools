@@ -13,6 +13,7 @@
 <br/>
 
 ## ⚠️⚠️⚠️⚠️️ IMPORTANT NOTICE ⚠️⚠️⚠️⚠️
+
 THIS PACKAGE IS DEPRECATED (MOVE TO [`@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n))
 
 ## ⚠️ Notice
@@ -21,8 +22,8 @@ This package of `@intlify/bundle-tools` is for **Vue I18n v9 or later**!
 
 The version **for Vue I18n v8.x** is now in [`@intlify/vue-i18n-loader`](https://github.com/intlify/vue-i18n-loader/tree/master) **v1.x!**
 
-
 ## 🌟 Features
+
 - i18n resource pre-compilation
 - i18n custom block
   - i18n resource definition
@@ -31,7 +32,6 @@ The version **for Vue I18n v8.x** is now in [`@intlify/vue-i18n-loader`](https:/
   - Locale of i18n resource definition for global scope
   - i18n resource formatting
 - i18n custom block birdge mode
-
 
 ## 💿 Installation
 
@@ -109,10 +109,11 @@ module.exports = {
         test: /\.(json5?|ya?ml)$/, // target json, json5, yaml and yml files
         type: 'javascript/auto',
         loader: '@intlify/vue-i18n-loader',
-        include: [ // Use `Rule.include` to specify the files of locale messages to be pre-compiled
+        include: [
+          // Use `Rule.include` to specify the files of locale messages to be pre-compiled
           path.resolve(__dirname, 'src/locales')
         ]
-      },
+      }
       // ...
     ]
   }
@@ -120,7 +121,6 @@ module.exports = {
 ```
 
 The above uses webpack's `Rule.include` to specify the i18n resources to be precompiled. You can also use [`Rule.exclude`](https://webpack.js.org/configuration/module/#ruleexclude) to set the target.
-
 
 ## 🚀 i18n custom block
 
@@ -181,11 +181,11 @@ You also can use `src` attribute:
 ```json5
 // ./myLang.json
 {
-  "en": {
-    "hello": "hello world!"
+  en: {
+    hello: 'hello world!'
   },
-  "ja": {
-    "hello": "こんにちは、世界!"
+  ja: {
+    hello: 'こんにちは、世界!'
   }
 }
 ```
@@ -235,11 +235,11 @@ example yaml foramt:
 
 ```vue
 <i18n locale="en" lang="yaml">
-  hello: "hello world!"
+hello: 'hello world!'
 </i18n>
 
 <i18n locale="ja" lang="yml">
-  hello: "こんにちは、世界！"
+hello: 'こんにちは、世界！'
 </i18n>
 ```
 
@@ -248,9 +248,9 @@ example json5 format:
 ```vue
 <i18n lang="json5">
 {
-  "en": {
+  en: {
     // comments
-    "hello": "hello world!"
+    hello: 'hello world!'
   }
 }
 </i18n>
@@ -295,12 +295,13 @@ module.exports = {
         resourceQuery: /blockType=i18n/,
         type: 'javascript/auto',
         loader: '@intlify/vue-i18n-loader'
-      },
+      }
       // ...
     ]
   }
 }
 ```
+
 ## i18n custom block bridge mode
 
 To support in a smooth transition from vue-i18n@v8.x to vue-i18n@v9.x, we provide a mode that bundles the i18n custom block to be available in either version.
@@ -333,10 +334,38 @@ About details, See here.
 
   ```js
   export default {
-    "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
-    "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
-    "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
-    "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})()
+    trueValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['true'])
+      }
+      fn.source = 'true'
+      return fn
+    })(),
+    falseValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['false'])
+      }
+      fn.source = 'false'
+      return fn
+    })(),
+    nullValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['null'])
+      }
+      fn.source = 'null'
+      return fn
+    })(),
+    numberValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['1'])
+      }
+      fn.source = '1'
+      return fn
+    })()
   }
   ```
 
@@ -359,7 +388,7 @@ About details, See here.
               }
             }
           ]
-        },
+        }
         // ...
       ]
     }
@@ -372,7 +401,6 @@ About details, See here.
 - **Default:** `false`
 
   Whether to generate source map.
-
 
 ### `bridge`
 

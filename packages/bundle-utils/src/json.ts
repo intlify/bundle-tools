@@ -100,7 +100,7 @@ export function generate(
   // prettier-ignore
   const newMap =
     map && !jit
-      ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null // eslint-disable-line @typescript-eslint/no-explicit-any
+      ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null  
       : null
   return {
     ast,

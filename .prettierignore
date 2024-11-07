@@ -2,7 +2,9 @@ packages/**/lib
 coverage
 tsconfig.json
 dist
+pnpm-lock.yaml
 packages/**/examples/dist
+packages/**/CHANGELOG.md
 packages/rollup-plugin-vue-i18n/examples/composition/index.js
 packages/rollup-plugin-vue-i18n/examples/global/index.js
 packages/rollup-plugin-vue-i18n/examples/legacy/index.js

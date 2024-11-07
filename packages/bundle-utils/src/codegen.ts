@@ -241,7 +241,7 @@ function advancePositionWithSource(
 }
 
 const DETECT_MESSAGE = `Detected HTML in '{msg}' message.`
-const ON_ERROR_NOOP = () => {} // eslint-disable-line @typescript-eslint/no-empty-function
+const ON_ERROR_NOOP = () => {}
 
 function parsePath(path?: string[]): string {
   return path ? path.join('.') : ''
@@ -371,11 +371,10 @@ export function mapLinesColumns(
     })
   })
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const generator = mergedMapGenerator as any
   // const targetConsumer = inMapConsumer || resMapConsumer
   const targetConsumer = inMapConsumer || resMapConsumer
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   ;(targetConsumer as any).sources.forEach((sourceFile: string) => {
     generator._sources.add(sourceFile)
     const sourceContent = targetConsumer.sourceContentFor(sourceFile)

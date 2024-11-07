@@ -1,16 +1,15 @@
-import { vi } from 'vitest'
-import { resolve } from 'pathe'
-import { bundleVite, bundleAndRun } from '../utils'
-import { isFunction, assign } from '@intlify/shared'
-import { createMessageContext, compile } from '@intlify/core-base'
 import type { MessageCompilerContext } from '@intlify/core-base'
+import { compile, createMessageContext } from '@intlify/core-base'
+import { assign, isFunction } from '@intlify/shared'
+import { resolve } from 'pathe'
+import { vi } from 'vitest'
+import { bundleAndRun, bundleVite } from '../utils'
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 let spyConsoleError: any
 beforeEach(() => {
   spyConsoleError = vi
     .spyOn(global.console, 'error')
-    .mockImplementation(() => {}) // eslint-disable-line @typescript-eslint/no-empty-function
+    .mockImplementation(() => {})
 })
 
 afterEach(() => {
@@ -79,7 +78,7 @@ test('strict message', async () => {
     await bundleAndRun('html.json', bundleVite, {
       ...options
     })
-  } catch (e) {
+  } catch (_e) {
     occured = true
   }
   expect(occured).toBe(true)

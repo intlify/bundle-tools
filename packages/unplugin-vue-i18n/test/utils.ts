@@ -1,15 +1,15 @@
 import { isBoolean, isString } from '@intlify/shared'
+import vue from '@vitejs/plugin-vue'
+import fg from 'fast-glob'
+import { JSDOM, VirtualConsole } from 'jsdom'
+import memoryfs from 'memory-fs'
 import { resolve } from 'pathe'
 import { build } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import { JSDOM, VirtualConsole } from 'jsdom'
-import vitePlugin from '../src/vite'
-import webpackPlugin from '../src/webpack'
+import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
-import memoryfs from 'memory-fs'
-import { VueLoaderPlugin } from 'vue-loader'
-import fg from 'fast-glob'
+import vitePlugin from '../src/vite'
+import webpackPlugin from '../src/webpack'
 
 import type { PluginOptions } from '../src/types'
 
@@ -18,7 +18,7 @@ let ignoreIds: string[] | null = null
 type BundleResolve = {
   type: 'vite' | 'webpack'
   code: string
-  map?: any // eslint-disable-line @typescript-eslint/no-explicit-any
+  map?: any
   stats?: webpack.Stats
 }
 
@@ -72,8 +72,8 @@ export async function bundleVite(
       minify: false,
       rollupOptions: {
         input: resolve(__dirname, input),
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onLog: (level: any, log: any) => {
+
+        onLog: (_level: any, log: any) => {
           // NOTE:
           // ignore the following messages
           // - "Error when using sourcemap for reporting an error: Can't resolve original location of error.",
@@ -87,9 +87,9 @@ export async function bundleVite(
   })
   return {
     type: 'vite',
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     code: (result as any).output[0].code,
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
     map: (result as any).output[0].map
   }
 }
@@ -100,7 +100,7 @@ export function bundleWebpack(
 ): Promise<BundleResolve> {
   const VueLoader = (
     options.vueLoader ? options.vueLoader : VueLoaderPlugin
-  ) as any // eslint-disable-line @typescript-eslint/no-explicit-any
+  ) as any
   const vueLoaderPath = (
     options.vueLoaderPath ? options.vueLoaderPath : 'vue-loader'
   ) as string
@@ -140,11 +140,10 @@ export function bundleWebpack(
   // @ts-ignore
   const compiler = webpack(config)
 
-  const mfs = new memoryfs() // eslint-disable-line
+  const mfs = new memoryfs()
   compiler.outputFileSystem = mfs
 
   return new Promise((resolve, reject) => {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     compiler.run((err, stats: any) => {
       if (err) {
         return reject(err)
@@ -196,7 +195,6 @@ export async function bundleAndRun(
       virtualConsole: new VirtualConsole()
     })
     dom.window.eval(code)
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (e: any) {
     console.error(`JSDOM error:\n${e.stack}`)
     jsdomError = e

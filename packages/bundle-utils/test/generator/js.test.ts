@@ -91,7 +91,7 @@ test('array mixed', async () => {
 
 test('invalid message syntax', async () => {
   const { source } = await readFile('./fixtures/codegen/invalid-message.js')
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const errors = [] as any
   const { code, map } = generate(source, {
     type: 'bare',
@@ -109,7 +109,7 @@ test('invalid message syntax', async () => {
 
 test('html tag in message', async () => {
   const { source } = await readFile('./fixtures/codegen/html.js')
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+
   const errors = [] as any
   const { code } = generate(source, {
     type: 'bare',

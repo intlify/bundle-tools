@@ -12,6 +12,7 @@ Hi! We are really excited that you are interested in contributing to `@intlify/b
 - Submit a pull request to `main` branch of `@intlify/bundle-tools` repository !
 
 ## Development Setup
+
 You will need [Node.js](http://nodejs.org) **version 12+**, and [Yarn v1](https://classic.yarnpkg.com/).
 
 After cloning the repo, run:
@@ -19,7 +20,6 @@ After cloning the repo, run:
 ```sh
 $ yarn # install the dependencies of the project
 ```
-
 
 A high level overview of tools used:
 
@@ -31,7 +31,6 @@ A high level overview of tools used:
 - [Puppeteer](https://pptr.dev/) for e2e testing
 - [ESLint](https://eslint.org/) for code linting
 - [Prettier](https://prettier.io/) for code formatting
-
 
 ## Scripts
 

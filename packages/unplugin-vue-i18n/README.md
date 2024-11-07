@@ -4,7 +4,6 @@
 [![Test](https://github.com/intlify/bundle-tools/actions/workflows/test.yml/badge.svg)](https://github.com/intlify/bundle-tools/actions/workflows/test.yml)
 [![npm](https://img.shields.io/npm/v/@intlify/unplugin-vue-i18n.svg?color=yellow)](https://www.npmjs.com/package/@intlify/unplugin-vue-i18n)
 
-
 unplugin for Vue I18n
 
 ## 🌟 Features
@@ -16,7 +15,6 @@ unplugin for Vue I18n
   - Locale of i18n resource definition
   - Locale of i18n resource definition for global scope
   - i18n resource formatting
-
 
 ## 💿 Installation
 
@@ -33,8 +31,10 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
 
 export default defineConfig({
   plugins: [
-    VueI18nPlugin({ /* options */ }),
-  ],
+    VueI18nPlugin({
+      /* options */
+    })
+  ]
 })
 ```
 
@@ -50,7 +50,9 @@ const VueI18nPlugin = require('@intlify/unplugin-vue-i18n/webpack')
 module.exports = {
   /* ... */
   plugins: [
-    VueI18nPlugin({ /* options */ })
+    VueI18nPlugin({
+      /* options */
+    })
   ]
 }
 ```
@@ -68,14 +70,18 @@ import VueI18nPlugin from '@intlify/unplugin-vue-i18n'
 export default defineNuxtConfig({
   vite: {
     plugins: [
-      VueI18nPlugin.vite({ /* options */ }),
-    ],
+      VueI18nPlugin.vite({
+        /* options */
+      })
+    ]
   },
   // When using Webpack
   // builder: '@nuxt/webpack-builder',
   webpack: {
     plugins: [
-      VueI18nPlugin.webpack({ /* options */ }),
+      VueI18nPlugin.webpack({
+        /* options */
+      })
     ]
   }
 })
@@ -212,6 +218,7 @@ app.use(i18n).mount('#app')
 ```
 
 Change your vite.config.ts file accordingly to import all the files from locales folder on the root. Change `'./src/locales/**'` to path of your locales.
+
 ```ts
 // vite.config.ts
 import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
@@ -220,11 +227,12 @@ import path from 'path'
 export default defineConfig({
   plugins: [
     VueI18nPlugin({
-      include: [path.resolve(__dirname, './src/locales/**')],
-    }),
-  ],
+      include: [path.resolve(__dirname, './src/locales/**')]
+    })
+  ]
 })
 ```
+
 unplugin-vue-i18n will automatically merge locale files into `@intlify/unplugin-vue-i18n/messages`. This allows locales to be split across multiple files, for example `src/locales/fruits/en.json` and `src/locales/vegetables/en.json`.
 
 ### Types
@@ -239,7 +247,6 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
 }
 ```
 
-
 ## 📦 Automatic bundling
 
 ### For Vue I18n
@@ -252,7 +259,6 @@ This plugin will automatically select and bundle Vue I18n build according to the
 - production: `vue-i18n.runtime.esm-bundler.js`
 
 About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#improve-performance-and-reduce-bundle-size-with-runtime-build-only)
-
 
 ## 🔧 Options
 
@@ -274,26 +280,23 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
 
-> [!WARNING]
-  `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+> [!WARNING] > `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+
+> [!WARNING] > `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
+
+> [!WARNING] > `js` and `ts` resources are set **simple export (`export default`) as locale messages object, as default**.
+
+```js
+export default {
+  hello: 'Hello, {name}!'
+  // ...
+}
+```
+
+If you need to use programmatically dynamic resource construction, you would be enable `allowDynamic` option. about details, see the section.
 
 > [!WARNING]
-  `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
-
-> [!WARNING]
-  `js` and `ts` resources are set **simple export (`export default`) as locale messages object, as default**.
-
-  ```js
-  export default {
-    hello: 'Hello, {name}!',
-    // ...
-  }
-  ```
-
-  If you need to use programmatically dynamic resource construction, you would be enable `allowDynamic` option. about details, see the section.
-
-> [!WARNING]
-  If you use the `js` and `ts` resources formats, set the paths, so your application code is not targeted. We recommend that resources be isolated from the application code.
+> If you use the `js` and `ts` resources formats, set the paths, so your application code is not targeted. We recommend that resources be isolated from the application code.
 
 ### `module`
 
@@ -301,7 +304,7 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 - **Default:** `'vue-i18n'`
 
   > [!NOTE]
-  This options is supported from v5.1.0, and works with vue-i18n v10 and later.
+  > This options is supported from v5.1.0, and works with vue-i18n v10 and later.
 
   Bundle target vue-i18n module. You can specify either `‘vue-i18n’` or `‘petite-vue-i18n’`.
 
@@ -330,7 +333,6 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   In that case, we recommend setting the `escapeHtml` option to `true`.
 
-
 ### `escapeHtml`
 
 - **Type:** `boolean`
@@ -339,7 +341,6 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
   Whether to escape html tags if they are included in the locale message.
 
   If `strictMessage` is disabled by `false`, we recommend this option be enabled.
-
 
 ### `allowDynamic`
 
@@ -367,17 +368,17 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 - **Default:** `true`
 
 > [!IMPORTANT]
-  'jitCompilation' option is deprected in v5.
-  This option will be supported with vue-i18n until v9 latest version.
+> 'jitCompilation' option is deprected in v5.
+> This option will be supported with vue-i18n until v9 latest version.
 
-  Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
+Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
 
-  JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale mesages with programatic.
+JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale mesages with programatic.
 
 > [!WARNING]
-  Enabling JIT compilation causes the message compiler to generate AST objects for locale mesages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
+> Enabling JIT compilation causes the message compiler to generate AST objects for locale mesages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
 
-  About JIT compilation, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#jit-compilation)
+About JIT compilation, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#jit-compilation)
 
 ### `dropMessageCompiler`
 
@@ -392,10 +393,10 @@ If do you will use this option, you need to enable `jitCompilation` option.
 > After v5 or later, this option can be set with or without `jitCompilation`.
 
 > [!NOTE]
-  This option works with vue-i18n v9.3 and later.
+> This option works with vue-i18n v9.3 and later.
 
 > [!WARNING]
-  If you enable this option, **you should check resources in your application are pre-compiled with this plugin.** If you will be loading resources dynamically from the back-end via the API, enabling this option do not work because there is not message compiler.
+> If you enable this option, **you should check resources in your application are pre-compiled with this plugin.** If you will be loading resources dynamically from the back-end via the API, enabling this option do not work because there is not message compiler.
 
 ### `ssr`
 
@@ -405,7 +406,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
   Whether to bundle vue-i18n module for SSR at build time
 
 > [!NOTE]
-  This option works with vue-i18n v9.4 and later.
+> This option works with vue-i18n v9.4 and later.
 
 ### `runtimeOnly`
 
@@ -465,10 +466,38 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   ```js
   export default {
-    "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
-    "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
-    "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
-    "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})()
+    trueValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['true'])
+      }
+      fn.source = 'true'
+      return fn
+    })(),
+    falseValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['false'])
+      }
+      fn.source = 'false'
+      return fn
+    })(),
+    nullValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['null'])
+      }
+      fn.source = 'null'
+      return fn
+    })(),
+    numberValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['1'])
+      }
+      fn.source = '1'
+      return fn
+    })()
   }
   ```
 
@@ -491,6 +520,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
   On inlined `i18n` custom blocks that have specified the `lang` attribute, the `defaultSFCLang` is not applied.
 
   For example, with `defaultSFCLang: "yaml"` or `defaultSFCLang: "yml"`, this custom block:
+
+  <!-- prettier-ignore -->
   ```html
   <i18n lang="yaml">
   en:
@@ -501,6 +532,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
   ```
 
   and this another one, are equivalent:
+
+  <!-- prettier-ignore -->
   ```html
   <i18n>
   en:
@@ -523,6 +556,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   For example, with `globalSFCScope: true`, this custom block:
 
+  <!-- prettier-ignore -->
   ```html
   <i18n lang="yaml" global>
   en:
@@ -534,6 +568,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   and this another one, are equivalent:
 
+  <!-- prettier-ignore -->
   ```html
   <i18n lang="yaml">
   en:
@@ -545,8 +580,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   You can also use `defaultSFCLang: "yaml"`, following with previous example, this another is also equivalent to previous ones:
 
+  <!-- prettier-ignore -->
   ```html
-  <i18n>
+   <i18n>
   en:
     hello: Hello
   es:
@@ -561,9 +597,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option that to use i18n custom blocks in `vue-class-component`.
 
-  > [!IMPORTANT]
-  `useClassComponent` option is deprecated in v5.
-  This option will be supported with vue-i18n until v9 latest version.
+  > [!IMPORTANT] > `useClassComponent` option is deprecated in v5.
+  > This option will be supported with vue-i18n until v9 latest version.
 
 ### `onlyLocales`
 
@@ -581,9 +616,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
 
-  > [!IMPORTANT]
-  `useVueI18nImportName` option is deprecated in v5.
-  This option will be supported with vue-i18n until v9 latest version.
+  > [!IMPORTANT] > `useVueI18nImportName` option is deprecated in v5.
+  > This option will be supported with vue-i18n until v9 latest version.
 
 ### `optimizeTranslationDirective`
 
@@ -595,7 +629,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
   If you want to put it manually, you can specify the signature of the translation function as a string or a string array.
 
   > [!WARNING]
-  About for manually signature, see the details [vue-i18n-extensions API docs](https://github.com/intlify/vue-i18n-extensions/blob/next/docs/%40intlify/vue-i18n-extensions-api.md#translationsignatures) and [usecase from vue-i18n-extensions PR](https://github.com/intlify/vue-i18n-extensions/pull/217/files#diff-3fb9543f91e011d4b0dc9beff44082fe1a99c9eab70c1afab23c3c34352b7c38R121-R200)
+  > About for manually signature, see the details [vue-i18n-extensions API docs](https://github.com/intlify/vue-i18n-extensions/blob/next/docs/%40intlify/vue-i18n-extensions-api.md#translationsignatures) and [usecase from vue-i18n-extensions PR](https://github.com/intlify/vue-i18n-extensions/pull/217/files#diff-3fb9543f91e011d4b0dc9beff44082fe1a99c9eab70c1afab23c3c34352b7c38R121-R200)
 
 ### `transformI18nBlock`
 
@@ -605,6 +639,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
   This hook allows a user to modify the `<i18n>` block before the plugin generates the translations. The hook is passed the source of the `<ii8n>` block as a `string` after the SFC is read from disk.
 
   **Plugin**
+
   ```javascript
   function transformI18nBlock(source) {
     // transformation logic
@@ -617,32 +652,37 @@ If do you will use this option, you need to enable `jitCompilation` option.
   ```
 
   **Before**
+
+  <!-- prettier-ignore -->
   ```html
   <i18n>
   [
-      'slug-one',
-      'slug-two'
+    'slug-one',
+    'slug-two'
   ]
-  <i18n>
+  </i18n>
   ```
 
   **After**
+
+  <!-- prettier-ignore -->
   ```html
   <i18n>
   {
-      'en': {
-        'slug-one': 'foo',
-        'slug-two': 'bar'
-      },
-      ja: {
-        'slug-one': 'foo',
-        'slug-two': 'bar'
-      }
+    'en': {
+      'slug-one': 'foo',
+      'slug-two': 'bar'
+    },
+    ja: {
+      'slug-one': 'foo',
+      'slug-two': 'bar'
+    }
   }
   </i18n>
   ```
+
   > [!IMPORTANT]
-  The function **must** return a string or the build will fail.
+  > The function **must** return a string or the build will fail.
 
 ## 📜 Changelog
 

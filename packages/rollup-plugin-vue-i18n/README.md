@@ -7,6 +7,7 @@
 Rollup plugin for Vue I18n
 
 ## ⚠️⚠️⚠️⚠️️ IMPORTANT NOTICE ⚠️⚠️⚠️⚠️
+
 THIS PACKAGE IS DEPRECATED (MOVE TO [`@intlify/unplugin-vue-i18n](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n))
 
 ## ⚠️ Notice
@@ -14,7 +15,6 @@ THIS PACKAGE IS DEPRECATED (MOVE TO [`@intlify/unplugin-vue-i18n](https://github
 This package of `@intlify/rollup-plugin-vue-i18n` is for Vue I18n v9 or later!
 
 The version for Vue I18n v8.x is now in [`@intlify/rollup-plugin-vue-i18n`](https://github.com/intlify/rollup-plugin-vue-i18n/tree/master) repo!
-
 
 ## ❗ Requirement
 
@@ -24,11 +24,10 @@ You need to install the follwoing:
 
 If you use rollup-plugin-vue, We recommend you should read the [docs](https://rollup-plugin-vue.vuejs.org/)
 
-
 ## 🌟 Features
+
 - i18n resources pre-compilation
 - i18n custom block
-
 
 ## 💿 Installation
 
@@ -91,7 +90,6 @@ export default [
 
 If you use the plugin like `@rollup/plugin-json`, make sure that the i18n resource to be pre-compiled with `rollup-plugin-vue-i18n` is not loaded. you need to filter with the plugin options.
 
-
 ### `i18n` custom block
 
 the below example that `examples/composition/App.vue` have `i18n` custom block:
@@ -140,7 +138,6 @@ export default {
   }
 }
 </i18n>
-
 ```
 
 ### Locale Messages formatting
@@ -156,9 +153,9 @@ example `yaml` foramt:
 ```vue
 <i18n lang="yaml">
 en:
-  hello: "Hello World!"
+  hello: 'Hello World!'
 ja:
-  hello: "こんにちは、世界！"
+  hello: 'こんにちは、世界！'
 </i18n>
 ```
 
@@ -177,7 +174,6 @@ ja:
   - yaml
   - yml
   ```
-
 
 ### `forceStringify`
 
@@ -201,10 +197,38 @@ ja:
 
   ```js
   export default {
-    "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
-    "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
-    "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
-    "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})()
+    trueValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['true'])
+      }
+      fn.source = 'true'
+      return fn
+    })(),
+    falseValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['false'])
+      }
+      fn.source = 'false'
+      return fn
+    })(),
+    nullValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['null'])
+      }
+      fn.source = 'null'
+      return fn
+    })(),
+    numberValue: (() => {
+      const fn = ctx => {
+        const { normalize: _normalize } = ctx
+        return _normalize(['1'])
+      }
+      fn.source = '1'
+      return fn
+    })()
   }
   ```
 
@@ -239,8 +263,8 @@ ja:
   ```
 
 ## 📜 Changelog
-Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/rollup-plugin-vue-i18n/CHANGELOG.md)
 
+Details changes for each release are documented in the [CHANGELOG.md](https://github.com/intlify/bundle-tools/blob/main/packages/rollup-plugin-vue-i18n/CHANGELOG.md)
 
 ## ©️ License
 

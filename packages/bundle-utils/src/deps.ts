@@ -4,7 +4,6 @@ export type InstalledPackage = 'vue-i18n' | 'petite-vue-i18n'
 
 const _require = module.createRequire(import.meta.url)
 
-// eslint-disable-next-line @typescript-eslint/ban-types
 export function checkInstallPackage(
   pkg: string,
   debug: Function
@@ -55,7 +54,6 @@ export function getVueI18nVersion(
   return 'unknown'
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function loadModule(moduleName: string, debug: Function): any {
   try {
     return _require(moduleName)

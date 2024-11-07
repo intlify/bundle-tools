@@ -521,14 +521,26 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   For example, with `defaultSFCLang: "yaml"` or `defaultSFCLang: "yml"`, this custom block:
 
+  <!-- prettier-ignore -->
   ```html
-  <i18n lang="yaml"> en: hello: Hello es: hello: Hola </i18n>
+  <i18n lang="yaml">
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
   ```
 
   and this another one, are equivalent:
 
+  <!-- prettier-ignore -->
   ```html
-  <i18n> en: hello: Hello es: hello: Hola </i18n>
+  <i18n>
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
   ```
 
 ### `globalSFCScope`
@@ -544,20 +556,38 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   For example, with `globalSFCScope: true`, this custom block:
 
+  <!-- prettier-ignore -->
   ```html
-  <i18n lang="yaml" global> en: hello: Hello es: hello: Hola </i18n>
+  <i18n lang="yaml" global>
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
   ```
 
   and this another one, are equivalent:
 
+  <!-- prettier-ignore -->
   ```html
-  <i18n lang="yaml"> en: hello: Hello es: hello: Hola </i18n>
+  <i18n lang="yaml">
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
   ```
 
   You can also use `defaultSFCLang: "yaml"`, following with previous example, this another is also equivalent to previous ones:
 
+  <!-- prettier-ignore -->
   ```html
-  <i18n> en: hello: Hello es: hello: Hola </i18n>
+   <i18n>
+  en:
+    hello: Hello
+  es:
+    hello: Hola
+  </i18n>
   ```
 
 ### `useClassComponent`
@@ -623,19 +653,31 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   **Before**
 
+  <!-- prettier-ignore -->
   ```html
   <i18n>
-    [ 'slug-one', 'slug-two' ]
-    <i18n></i18n
-  ></i18n>
+  [
+    'slug-one',
+    'slug-two'
+  ]
+  </i18n>
   ```
 
   **After**
 
+  <!-- prettier-ignore -->
   ```html
   <i18n>
-    { 'en': { 'slug-one': 'foo', 'slug-two': 'bar' }, ja: { 'slug-one': 'foo',
-    'slug-two': 'bar' } }
+  {
+    'en': {
+      'slug-one': 'foo',
+      'slug-two': 'bar'
+    },
+    ja: {
+      'slug-one': 'foo',
+      'slug-two': 'bar'
+    }
+  }
   </i18n>
   ```
 

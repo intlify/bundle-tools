@@ -33,7 +33,7 @@
     "@rollup/pluginutils": "^4.1.0",
     "@types/debug": "^4.1.5",
     "@types/eslint": "^8.56.10",
-    "@types/eslint-visitor-keys": "^1.0.0",
+    "@types/eslint-visitor-keys": "^3.0.0",
     "@types/js-yaml": "^4.0.3",
     "@types/jsdom": "^16.2.5",
     "@types/json5": "^2.2.0",

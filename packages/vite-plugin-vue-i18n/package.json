@@ -34,7 +34,13 @@
     "source-map": "0.6.1"
   },
   "devDependencies": {
-    "unbuild": "^1.1.2"
+    "unbuild": "^1.1.2",
+    "@types/jest": "^27.0.2",
+    "ts-jest": "^27.0.5",
+    "jest": "^27.2.3",
+    "jest-puppeteer": "^6.0.0",
+    "jest-watch-typeahead": "^0.6.4",
+    "puppeteer": "^10.4.0"
   },
   "engines": {
     "node": ">= 14.6"

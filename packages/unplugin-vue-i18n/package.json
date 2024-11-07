@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
-    "@intlify/bundle-utils": "^9.0.0-beta.0",
-    "@intlify/shared": "next",
+    "@intlify/bundle-utils": "^9.0.0",
+    "@intlify/shared": "latest",
     "@intlify/vue-i18n-extensions": "^7.0.0",
     "@rollup/pluginutils": "^5.1.0",
     "@typescript-eslint/scope-manager": "^8.13.0",

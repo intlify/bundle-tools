@@ -10,7 +10,7 @@ importers:
     devDependencies:
       '@intlify/core-base':
         specifier: next
-        version: 10.0.0-beta.1
+        version: 10.0.0
       '@kazupon/lerna-changelog':
         specifier: ^4.3.0
         version: 4.3.0
@@ -36,8 +36,8 @@ importers:
         specifier: ^4.1.5
         version: 4.1.12
       '@types/eslint':
-        specifier: ^8.56.10
-        version: 8.56.10
+        specifier: ^9.0.0
+        version: 9.6.1
       '@types/eslint-visitor-keys':
         specifier: ^1.0.0
         version: 1.0.0
@@ -64,7 +64,7 @@ importers:
         version: 7.5.8
       '@types/webpack':
         specifier: ^5.28.2
-        version: 5.28.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))
+        version: 5.28.5(webpack-cli@5.1.4)
       '@types/webpack-merge':
         specifier: ^5.0.0
         version: 5.0.0
@@ -82,7 +82,7 @@ importers:
         version: 3.4.29
       babel-loader:
         specifier: ^8.2.2
-        version: 8.3.0(@babel/core@7.24.7)(webpack@5.92.0(webpack-cli@5.1.4))
+        version: 8.3.0(@babel/core@7.24.7)(webpack@5.92.0)
       chalk:
         specifier: ^5.3.0
         version: 5.3.0
@@ -97,7 +97,7 @@ importers:
         version: 9.1.0(eslint@8.57.0)
       eslint-plugin-prettier:
         specifier: ^5.1.3
-        version: 5.1.3(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2)
+        version: 5.1.3(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2)
       eslint-plugin-vue:
         specifier: ^9.26.0
         version: 9.26.0(eslint@8.57.0)
@@ -166,16 +166,16 @@ importers:
         version: 3.4.29(typescript@5.6.3)
       vue-i18n:
         specifier: next
-        version: 10.0.0-beta.1(vue@3.4.29(typescript@5.6.3))
+        version: 10.0.0(vue@3.4.29(typescript@5.6.3))
       vue-loader:
         specifier: ^16.3.0
-        version: 16.8.3(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0(webpack-cli@5.1.4))
+        version: 16.8.3(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0)
       vue-loader15:
         specifier: npm:vue-loader@15.11.1
-        version: vue-loader@15.11.1(@vue/compiler-sfc@3.4.29)(css-loader@7.1.2(webpack@5.92.0(webpack-cli@5.1.4)))(lodash@4.17.21)(prettier@3.3.2)(vue-template-compiler@2.7.16)(webpack@5.92.0(webpack-cli@5.1.4))
+        version: vue-loader@15.11.1(@vue/compiler-sfc@3.4.29)(css-loader@7.1.2(webpack@5.92.0))(lodash@4.17.21)(prettier@3.3.2)(vue-template-compiler@2.7.16)(webpack@5.92.0)
       vue-loader17:
         specifier: npm:vue-loader@17.4.2
-        version: vue-loader@17.4.2(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0(webpack-cli@5.1.4))
+        version: vue-loader@17.4.2(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0)
       vue-template-compiler:
         specifier: ^2.6.14
         version: 2.7.16
@@ -199,10 +199,10 @@ importers:
     dependencies:
       '@intlify/message-compiler':
         specifier: next
-        version: 10.0.0-beta.1
+        version: 10.0.0
       '@intlify/shared':
         specifier: next
-        version: 10.0.0-beta.1
+        version: 10.0.0
       acorn:
         specifier: ^8.8.2
         version: 8.12.0
@@ -245,10 +245,10 @@ importers:
         version: 9.0.0-beta.0(petite-vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))
       '@intlify/shared':
         specifier: next
-        version: 10.0.0-beta.1
+        version: 10.0.0
       '@intlify/vue-i18n-extensions':
         specifier: ^7.0.0
-        version: 7.0.0(@intlify/shared@10.0.0-beta.1)(@vue/compiler-dom@3.4.29)(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue@3.4.29(typescript@5.6.3))
+        version: 7.0.0(@intlify/shared@10.0.0)(@vue/compiler-dom@3.4.29)(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue@3.4.29(typescript@5.6.3))
       '@rollup/pluginutils':
         specifier: ^5.1.0
         version: 5.1.0(rollup@4.24.4)
@@ -854,24 +854,24 @@ packages:
       vue-i18n:
         optional: true
 
-  '@intlify/core-base@10.0.0-beta.1':
-    resolution: {integrity: sha512-eSjIKjIbDVGy/0yXAvL6O5LOVJ8E7jkbPUyQyM1vPVmu+5o05NNOTbZlsdOm9dDgXfXnFga4aUNWSkge7efe4Q==}
+  '@intlify/core-base@10.0.0':
+    resolution: {integrity: sha512-o4d4Nve7YzU1YMR5VMqgPr8jDGTgT2pOOUtZa3JwCAhFnm40JYxfHdWToT7OEx6oJCBs/Q8HosJOhsimlF0C0Q==}
     engines: {node: '>= 16'}
 
   '@intlify/core-base@9.13.1':
     resolution: {integrity: sha512-+bcQRkJO9pcX8d0gel9ZNfrzU22sZFSA0WVhfXrf5jdJOS24a+Bp8pozuS9sBI9Hk/tGz83pgKfmqcn/Ci7/8w==}
     engines: {node: '>= 16'}
 
-  '@intlify/message-compiler@10.0.0-beta.1':
-    resolution: {integrity: sha512-rBmXBZzDgq3yPkL/3/r9uK0nrsJOYHSpaW0mtGBxxjt9pY9vaPL0UAKbVAjFPRnfEY41ixgpkpTjai6IKZ+hvg==}
+  '@intlify/message-compiler@10.0.0':
+    resolution: {integrity: sha512-OcaWc63NC/9p1cMdgoNKBj4d61BH8sUW1Hfs6YijTd9656ZR4rNqXAlRnBrfS5ABq0vjQjpa8VnyvH9hK49yBw==}
     engines: {node: '>= 16'}
 
   '@intlify/message-compiler@9.13.1':
     resolution: {integrity: sha512-SKsVa4ajYGBVm7sHMXd5qX70O2XXjm55zdZB3VeMFCvQyvLew/dLvq3MqnaIsTMF1VkkOb9Ttr6tHcMlyPDL9w==}
     engines: {node: '>= 16'}
 
-  '@intlify/shared@10.0.0-beta.1':
-    resolution: {integrity: sha512-61MnYhgqS/TyAto9CXOltHlhK2WflLBcKpIkRhZCUL2IkiVvh7qKevsqZ3RYZylyC3q19ajLW6mB+iJtnbAOpg==}
+  '@intlify/shared@10.0.0':
+    resolution: {integrity: sha512-6ngLfI7DOTew2dcF9WMJx+NnMWghMBhIiHbGg+wRvngpzD5KZJZiJVuzMsUQE1a5YebEmtpTEfUrDp/NqVGdiw==}
     engines: {node: '>= 16'}
 
   '@intlify/shared@9.13.1':
@@ -1209,8 +1209,8 @@ packages:
   '@types/eslint-visitor-keys@1.0.0':
     resolution: {integrity: sha512-OCutwjDZ4aFS6PB1UZ988C4YgwlBHJd6wCeQqaLdmadZ/7e+w79+hbMUFC1QXDNCmdyoRfAFdm0RypzwR+Qpag==}
 
-  '@types/eslint@8.56.10':
-    resolution: {integrity: sha512-Shavhk87gCtY2fhXDctcfS3e6FdxWkCx1iUZ9eEUbh7rTqlZT0/IzOkCOVt0fCjcFuZ9FPYfuezTBImfHCDBGQ==}
+  '@types/eslint@9.6.1':
+    resolution: {integrity: sha512-FXx2pKgId/WyYo2jXw63kk7/+TY7u7AziEJxJAnSFzHlqTAS3Ync6SvgYAN/k4/PQpnnVuzoMuVnByKK2qp0ag==}
 
   '@types/estree@0.0.39':
     resolution: {integrity: sha512-EYNwp3bU+98cpU4lAWYYL7Zz+2gryWH1qbdDTidVd6hkiR6weksdbMadyXKXNPEkQFhXM+hVO9ZygomHXp+AIw==}
@@ -2481,6 +2481,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -4601,8 +4602,8 @@ packages:
   vue-hot-reload-api@2.3.4:
     resolution: {integrity: sha512-BXq3jwIagosjgNVae6tkHzzIk6a8MHFtzAdwhnV5VlvPTFxDCvIttgSiHWjdGoTJvXtmRu5HacExfdarRcFhog==}
 
-  vue-i18n@10.0.0-beta.1:
-    resolution: {integrity: sha512-bw2i2pQlYuwv9X7pAtLkC5UznmxzfQzzkC+FFxHs6owoAd/nlrvP1tGQv8+j1waZnOx7rFcXV17dco+a+VLEQA==}
+  vue-i18n@10.0.0:
+    resolution: {integrity: sha512-KxTfTEuZEGN5Bvgc9F49rgp94XyBFlSIszwF2SQlr3WoxOklySXdUuoVxIw5qPZthV0mJlGP8tjJR7loMJgKrQ==}
     engines: {node: '>= 16'}
     peerDependencies:
       vue: ^3.0.0
@@ -5279,8 +5280,8 @@ snapshots:
 
   '@intlify/bundle-utils@9.0.0-beta.0(petite-vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))':
     dependencies:
-      '@intlify/message-compiler': 10.0.0-beta.1
-      '@intlify/shared': 10.0.0-beta.1
+      '@intlify/message-compiler': 10.0.0
+      '@intlify/shared': 10.0.0
       acorn: 8.12.0
       escodegen: 2.1.0
       estree-walker: 2.0.2
@@ -5292,19 +5293,19 @@ snapshots:
       petite-vue-i18n: 9.13.1(vue@3.4.29(typescript@5.6.3))
       vue-i18n: 9.13.1(vue@3.4.29(typescript@5.6.3))
 
-  '@intlify/core-base@10.0.0-beta.1':
+  '@intlify/core-base@10.0.0':
     dependencies:
-      '@intlify/message-compiler': 10.0.0-beta.1
-      '@intlify/shared': 10.0.0-beta.1
+      '@intlify/message-compiler': 10.0.0
+      '@intlify/shared': 10.0.0
 
   '@intlify/core-base@9.13.1':
     dependencies:
       '@intlify/message-compiler': 9.13.1
       '@intlify/shared': 9.13.1
 
-  '@intlify/message-compiler@10.0.0-beta.1':
+  '@intlify/message-compiler@10.0.0':
     dependencies:
-      '@intlify/shared': 10.0.0-beta.1
+      '@intlify/shared': 10.0.0
       source-map-js: 1.2.0
 
   '@intlify/message-compiler@9.13.1':
@@ -5312,7 +5313,7 @@ snapshots:
       '@intlify/shared': 9.13.1
       source-map-js: 1.2.0
 
-  '@intlify/shared@10.0.0-beta.1': {}
+  '@intlify/shared@10.0.0': {}
 
   '@intlify/shared@9.13.1': {}
 
@@ -5321,11 +5322,11 @@ snapshots:
       '@intlify/core-base': 9.13.1
       '@intlify/shared': 9.13.1
 
-  '@intlify/vue-i18n-extensions@7.0.0(@intlify/shared@10.0.0-beta.1)(@vue/compiler-dom@3.4.29)(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue@3.4.29(typescript@5.6.3))':
+  '@intlify/vue-i18n-extensions@7.0.0(@intlify/shared@10.0.0)(@vue/compiler-dom@3.4.29)(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue@3.4.29(typescript@5.6.3))':
     dependencies:
       '@babel/parser': 7.24.7
     optionalDependencies:
-      '@intlify/shared': 10.0.0-beta.1
+      '@intlify/shared': 10.0.0
       '@vue/compiler-dom': 3.4.29
       vue: 3.4.29(typescript@5.6.3)
       vue-i18n: 9.13.1(vue@3.4.29(typescript@5.6.3))
@@ -5632,14 +5633,14 @@ snapshots:
 
   '@types/eslint-scope@3.7.7':
     dependencies:
-      '@types/eslint': 8.56.10
-      '@types/estree': 1.0.5
+      '@types/eslint': 9.6.1
+      '@types/estree': 1.0.6
 
   '@types/eslint-visitor-keys@1.0.0': {}
 
-  '@types/eslint@8.56.10':
+  '@types/eslint@9.6.1':
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.6
       '@types/json-schema': 7.0.15
 
   '@types/estree@0.0.39': {}
@@ -5767,7 +5768,7 @@ snapshots:
       anymatch: 3.1.3
       source-map: 0.6.1
 
-  '@types/webpack@5.28.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))':
+  '@types/webpack@5.28.5(webpack-cli@5.1.4)':
     dependencies:
       '@types/node': 20.14.5
       tapable: 2.2.1
@@ -6149,17 +6150,17 @@ snapshots:
       '@webassemblyjs/ast': 1.12.1
       '@xtuc/long': 4.2.2
 
-  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))(webpack@5.92.0(webpack-cli@5.1.4))':
+  '@webpack-cli/configtest@2.1.1(webpack-cli@5.1.4)(webpack@5.92.0)':
     dependencies:
       webpack: 5.92.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0)
 
-  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))(webpack@5.92.0(webpack-cli@5.1.4))':
+  '@webpack-cli/info@2.0.2(webpack-cli@5.1.4)(webpack@5.92.0)':
     dependencies:
       webpack: 5.92.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0)
 
-  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))(webpack-dev-server@4.15.2(debug@4.3.5)(webpack-cli@5.1.4)(webpack@5.92.0))(webpack@5.92.0(webpack-cli@5.1.4))':
+  '@webpack-cli/serve@2.0.5(webpack-cli@5.1.4)(webpack-dev-server@4.15.2)(webpack@5.92.0)':
     dependencies:
       webpack: 5.92.0(webpack-cli@5.1.4)
       webpack-cli: 5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0)
@@ -6304,7 +6305,7 @@ snapshots:
       postcss: 8.4.38
       postcss-value-parser: 4.2.0
 
-  babel-loader@8.3.0(@babel/core@7.24.7)(webpack@5.92.0(webpack-cli@5.1.4)):
+  babel-loader@8.3.0(@babel/core@7.24.7)(webpack@5.92.0):
     dependencies:
       '@babel/core': 7.24.7
       find-cache-dir: 3.3.2
@@ -6643,7 +6644,7 @@ snapshots:
     dependencies:
       postcss: 8.4.38
 
-  css-loader@7.1.2(webpack@5.92.0(webpack-cli@5.1.4)):
+  css-loader@7.1.2(webpack@5.92.0):
     dependencies:
       icss-utils: 5.1.0(postcss@8.4.47)
       postcss: 8.4.47
@@ -6973,14 +6974,14 @@ snapshots:
     dependencies:
       eslint: 8.57.0
 
-  eslint-plugin-prettier@5.1.3(@types/eslint@8.56.10)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2):
+  eslint-plugin-prettier@5.1.3(@types/eslint@9.6.1)(eslint-config-prettier@9.1.0(eslint@8.57.0))(eslint@8.57.0)(prettier@3.3.2):
     dependencies:
       eslint: 8.57.0
       prettier: 3.3.2
       prettier-linter-helpers: 1.0.0
       synckit: 0.8.8
     optionalDependencies:
-      '@types/eslint': 8.56.10
+      '@types/eslint': 9.6.1
       eslint-config-prettier: 9.1.0(eslint@8.57.0)
 
   eslint-plugin-vue@9.26.0(eslint@8.57.0):
@@ -7080,7 +7081,7 @@ snapshots:
 
   estree-walker@3.0.3:
     dependencies:
-      '@types/estree': 1.0.5
+      '@types/estree': 1.0.6
 
   esutils@2.0.3: {}
 
@@ -8957,7 +8958,7 @@ snapshots:
     dependencies:
       execa: 0.7.0
 
-  terser-webpack-plugin@5.3.10(webpack@5.92.0(webpack-cli@5.1.4)):
+  terser-webpack-plugin@5.3.10(webpack@5.92.0):
     dependencies:
       '@jridgewell/trace-mapping': 0.3.25
       jest-worker: 27.5.1
@@ -9216,10 +9217,10 @@ snapshots:
 
   vue-hot-reload-api@2.3.4: {}
 
-  vue-i18n@10.0.0-beta.1(vue@3.4.29(typescript@5.6.3)):
+  vue-i18n@10.0.0(vue@3.4.29(typescript@5.6.3)):
     dependencies:
-      '@intlify/core-base': 10.0.0-beta.1
-      '@intlify/shared': 10.0.0-beta.1
+      '@intlify/core-base': 10.0.0
+      '@intlify/shared': 10.0.0
       '@vue/devtools-api': 6.6.3
       vue: 3.4.29(typescript@5.6.3)
 
@@ -9230,10 +9231,10 @@ snapshots:
       '@vue/devtools-api': 6.6.3
       vue: 3.4.29(typescript@5.6.3)
 
-  vue-loader@15.11.1(@vue/compiler-sfc@3.4.29)(css-loader@7.1.2(webpack@5.92.0(webpack-cli@5.1.4)))(lodash@4.17.21)(prettier@3.3.2)(vue-template-compiler@2.7.16)(webpack@5.92.0(webpack-cli@5.1.4)):
+  vue-loader@15.11.1(@vue/compiler-sfc@3.4.29)(css-loader@7.1.2(webpack@5.92.0))(lodash@4.17.21)(prettier@3.3.2)(vue-template-compiler@2.7.16)(webpack@5.92.0):
     dependencies:
       '@vue/component-compiler-utils': 3.3.0(lodash@4.17.21)
-      css-loader: 7.1.2(webpack@5.92.0(webpack-cli@5.1.4))
+      css-loader: 7.1.2(webpack@5.92.0)
       hash-sum: 1.0.2
       loader-utils: 1.4.2
       vue-hot-reload-api: 2.3.4
@@ -9298,7 +9299,7 @@ snapshots:
       - walrus
       - whiskers
 
-  vue-loader@16.8.3(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0(webpack-cli@5.1.4)):
+  vue-loader@16.8.3(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
@@ -9308,7 +9309,7 @@ snapshots:
       '@vue/compiler-sfc': 3.4.29
       vue: 3.4.29(typescript@5.6.3)
 
-  vue-loader@17.4.2(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0(webpack-cli@5.1.4)):
+  vue-loader@17.4.2(@vue/compiler-sfc@3.4.29)(vue@3.4.29(typescript@5.6.3))(webpack@5.92.0):
     dependencies:
       chalk: 4.1.2
       hash-sum: 2.0.0
@@ -9363,9 +9364,9 @@ snapshots:
   webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0):
     dependencies:
       '@discoveryjs/json-ext': 0.5.7
-      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))(webpack@5.92.0(webpack-cli@5.1.4))
-      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))(webpack@5.92.0(webpack-cli@5.1.4))
-      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4(webpack-dev-server@4.15.2)(webpack@5.92.0))(webpack-dev-server@4.15.2(debug@4.3.5)(webpack-cli@5.1.4)(webpack@5.92.0))(webpack@5.92.0(webpack-cli@5.1.4))
+      '@webpack-cli/configtest': 2.1.1(webpack-cli@5.1.4)(webpack@5.92.0)
+      '@webpack-cli/info': 2.0.2(webpack-cli@5.1.4)(webpack@5.92.0)
+      '@webpack-cli/serve': 2.0.5(webpack-cli@5.1.4)(webpack-dev-server@4.15.2)(webpack@5.92.0)
       colorette: 2.0.20
       commander: 10.0.1
       cross-spawn: 7.0.3
@@ -9379,7 +9380,7 @@ snapshots:
     optionalDependencies:
       webpack-dev-server: 4.15.2(debug@4.3.5)(webpack-cli@5.1.4)(webpack@5.92.0)
 
-  webpack-dev-middleware@5.3.4(webpack@5.92.0(webpack-cli@5.1.4)):
+  webpack-dev-middleware@5.3.4(webpack@5.92.0):
     dependencies:
       colorette: 2.0.20
       memfs: 3.5.3
@@ -9418,7 +9419,7 @@ snapshots:
       serve-index: 1.9.1
       sockjs: 0.3.24
       spdy: 4.0.2
-      webpack-dev-middleware: 5.3.4(webpack@5.92.0(webpack-cli@5.1.4))
+      webpack-dev-middleware: 5.3.4(webpack@5.92.0)
       ws: 8.17.1
     optionalDependencies:
       webpack: 5.92.0(webpack-cli@5.1.4)
@@ -9462,7 +9463,7 @@ snapshots:
       neo-async: 2.6.2
       schema-utils: 3.3.0
       tapable: 2.2.1
-      terser-webpack-plugin: 5.3.10(webpack@5.92.0(webpack-cli@5.1.4))
+      terser-webpack-plugin: 5.3.10(webpack@5.92.0)
       watchpack: 2.4.1
       webpack-sources: 3.2.3
     optionalDependencies:

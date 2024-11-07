@@ -10,9 +10,6 @@ const __dirname = path.dirname(new URL(import.meta.url).pathname)
 
 export default defineConfig(
   javascript(),
-  // comments(),
-  // promise(),
-  // unicorn(),
   typescript({
     parserOptions: {
       project: [
@@ -20,34 +17,7 @@ export default defineConfig(
         path.join(__dirname, './packages/unplugin-vue-i18n/tsconfig.json')
       ]
     }
-    // extraFileExtensions: ['.vue'],
   }),
-  // imports({
-  //   typescript: true,
-  //   rules: {
-  //     'import/extensions': ['error', 'always', { ignorePackages: true }]
-  //   }
-  // }),
-  // regexp(),
-  // jsonc({
-  //   json: true,
-  //   json5: true,
-  //   jsonc: true,
-  //   prettier: true,
-  // }),
-  // yml({
-  //   prettier: true
-  // }),
-  // vue({
-  //   typescript: true,
-  //   // composable: true,
-  //   // scopedCss: true,
-  //   // a11y: true
-  // }),
-  // vitest({
-  //   typeTesting: true
-  // }),
-  // markdown(),
   prettier(),
   {
     name: 'ignores',

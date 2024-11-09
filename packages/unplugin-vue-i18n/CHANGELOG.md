@@ -1,4 +1,14 @@
 
+## @intlify/unplugin-vue-i18n@5.3.0 (2024-11-09)
+
+#### :bug: Bug Fixes
+* [#413](https://github.com/intlify/bundle-tools/pull/413) fix(unplugin-vue-i18n): remove directives plugin warnings on SSR build ([@userquin](https://github.com/userquin))
+
+#### Committers: 2
+- Joaquín Sánchez ([@userquin](https://github.com/userquin))
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@5.2.0 (2024-09-22)
 
 #### :star: Features

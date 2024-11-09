@@ -89,7 +89,10 @@ export function directivePlugin({
         )
       }
 
-      return code
+      return {
+        code,
+        map: { version: 3, mappings: '', sources: [] } as any
+      }
     }
   }
 }

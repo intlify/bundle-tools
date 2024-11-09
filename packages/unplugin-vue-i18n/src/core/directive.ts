@@ -44,6 +44,8 @@ export function directivePlugin({
   let vuePlugin: RollupPlugin | null = null
   let vuePluginOptions: VuePluginResolvedOptions | null = null
 
+  const excludeLangs = ['pug', 'jsx', 'tsx']
+
   return {
     name: resolveNamespace('directive'),
     enforce: 'pre',
@@ -74,19 +76,19 @@ export function directivePlugin({
     },
 
     async transform(code, id) {
-      const { filename } = parseVueRequest(id)
-
-      // lazy load vue plugin options
-      if (vuePluginOptions == null) {
-        vuePluginOptions = getVuePluginOptions(vuePlugin!)
-      }
-
       if (id.endsWith('.vue')) {
-        analyzeIdentifiers(
-          getDescriptor(filename, code, vuePluginOptions!),
-          vuePluginOptions,
-          translationIdentifiers
-        )
+        const { filename, query } = parseVueRequest(id)
+        if (!excludeLangs.includes(query.lang ?? '')) {
+          // lazy load vue plugin options
+          if (vuePluginOptions == null) {
+            vuePluginOptions = getVuePluginOptions(vuePlugin!)
+          }
+          analyzeIdentifiers(
+            getDescriptor(filename, code, vuePluginOptions),
+            vuePluginOptions,
+            translationIdentifiers
+          )
+        }
       }
 
       return {

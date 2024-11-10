@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@5.3.1 (2024-11-10)
+
+#### :bug: Bug Fixes
+* [#414](https://github.com/intlify/bundle-tools/pull/414) fix(unplugin-vue-i18n): don't analyze identifiers in vue files when using `pug/jsx/tsx` languages ([@userquin](https://github.com/userquin))
+
+#### Committers: 1
+- Joaquín Sánchez ([@userquin](https://github.com/userquin))
+
+
 ## @intlify/unplugin-vue-i18n@5.3.0 (2024-11-09)
 
 #### :bug: Bug Fixes

@@ -286,6 +286,9 @@ importers:
         specifier: '*'
         version: 9.13.1(vue@3.4.29(typescript@5.6.3))
     devDependencies:
+      '@types/node':
+        specifier: ^20.14.8
+        version: 20.17.6
       unbuild:
         specifier: ^2.0.0
         version: 2.0.0(typescript@5.6.3)
@@ -1397,6 +1400,9 @@ packages:
 
   '@types/node@20.14.5':
     resolution: {integrity: sha512-aoRR+fJkZT2l0aGOJhuA8frnCSoNX6W7U2mpNq63+BxBIj5BQFt8rHy627kijCmm63ijdSdwvGgpUsU6MBsZZA==}
+
+  '@types/node@20.17.6':
+    resolution: {integrity: sha512-VEI7OdvK2wP7XHnsuXbAJnEpEkF6NjSN45QJlL4VGqZSXsnicpesdTWsg9RISeSdYd3yeRj/y3k5KGjUXYnFwQ==}
 
   '@types/normalize-package-data@2.4.4':
     resolution: {integrity: sha512-37i+OaWTh9qeK4LSHPsyRC7NahnGotNuZvjLSgcPzblpHB3rrCJxAOgI5gCdKm7coonsaX1Of0ILiTcnZjbfxA==}
@@ -5252,6 +5258,9 @@ packages:
   undici-types@5.26.5:
     resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
+  undici-types@6.19.8:
+    resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
+
   unicorn-magic@0.1.0:
     resolution: {integrity: sha512-lRfVq8fE8gz6QMBuDM6a+LO3IAzTi05H6gCVaUpir2E1Rwpo4ZUog45KpNXKC/Mn3Yb9UDuHumeFTo9iV/D9FQ==}
     engines: {node: '>=18'}
@@ -6498,20 +6507,20 @@ snapshots:
   '@types/body-parser@1.19.5':
     dependencies:
       '@types/connect': 3.4.38
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/bonjour@3.5.13':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/connect-history-api-fallback@1.5.4':
     dependencies:
       '@types/express-serve-static-core': 4.19.3
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/connect@3.4.38':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/debug@4.1.12':
     dependencies:
@@ -6537,7 +6546,7 @@ snapshots:
 
   '@types/express-serve-static-core@4.19.3':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
       '@types/qs': 6.9.15
       '@types/range-parser': 1.2.7
       '@types/send': 0.17.4
@@ -6553,7 +6562,7 @@ snapshots:
 
   '@types/http-proxy@1.17.14':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/js-yaml@4.0.9': {}
 
@@ -6592,11 +6601,15 @@ snapshots:
 
   '@types/node-forge@1.3.11':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/node@20.14.5':
     dependencies:
       undici-types: 5.26.5
+
+  '@types/node@20.17.6':
+    dependencies:
+      undici-types: 6.19.8
 
   '@types/normalize-package-data@2.4.4':
     optional: true
@@ -6609,7 +6622,7 @@ snapshots:
 
   '@types/resolve@1.17.1':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/resolve@1.20.2': {}
 
@@ -6620,7 +6633,7 @@ snapshots:
   '@types/send@0.17.4':
     dependencies:
       '@types/mime': 1.3.5
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/serve-index@1.9.4':
     dependencies:
@@ -6629,12 +6642,12 @@ snapshots:
   '@types/serve-static@1.15.7':
     dependencies:
       '@types/http-errors': 2.0.4
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
       '@types/send': 0.17.4
 
   '@types/sockjs@0.3.36':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@types/source-list-map@0.1.6': {}
 
@@ -6655,13 +6668,13 @@ snapshots:
 
   '@types/webpack-sources@3.2.3':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
       '@types/source-list-map': 0.1.6
       source-map: 0.7.4
 
   '@types/webpack@4.41.38':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
       '@types/tapable': 1.0.12
       '@types/uglify-js': 3.17.5
       '@types/webpack-sources': 3.2.3
@@ -6681,7 +6694,7 @@ snapshots:
 
   '@types/ws@8.5.10':
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
 
   '@typescript-eslint/eslint-plugin@8.13.0(@typescript-eslint/parser@8.13.0(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3))(eslint@9.14.0(jiti@2.4.0))(typescript@5.6.3)':
     dependencies:
@@ -9042,7 +9055,7 @@ snapshots:
 
   jest-worker@27.5.1:
     dependencies:
-      '@types/node': 20.14.5
+      '@types/node': 20.17.6
       merge-stream: 2.0.0
       supports-color: 8.1.1
 
@@ -11117,6 +11130,8 @@ snapshots:
       - vue-tsc
 
   undici-types@5.26.5: {}
+
+  undici-types@6.19.8: {}
 
   unicorn-magic@0.1.0: {}
 

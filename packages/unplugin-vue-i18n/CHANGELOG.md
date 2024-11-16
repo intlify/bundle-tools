@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@6.0.0 (2024-11-16)
+
+#### :star: Features
+* [#418](https://github.com/intlify/bundle-tools/pull/418) feat!: move packages to ESM first ([@userquin](https://github.com/userquin))
+
+#### Committers: 1
+- Joaquín Sánchez ([@userquin](https://github.com/userquin))
+
+
 ## @intlify/unplugin-vue-i18n@5.3.1 (2024-11-10)
 
 #### :bug: Bug Fixes

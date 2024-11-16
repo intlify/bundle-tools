@@ -1,5 +1,6 @@
 {
   "name": "@intlify/bundle-utils",
+  "type": "module",
   "description": "Bundle utilities for Intlify project",
   "version": "9.0.0",
   "author": {
@@ -47,7 +48,6 @@
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
-      "types": "./lib/index.d.ts",
       "import": "./lib/index.mjs",
       "require": "./lib/index.cjs"
     },

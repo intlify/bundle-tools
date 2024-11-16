@@ -2,7 +2,7 @@
   "name": "@intlify/bundle-utils",
   "type": "module",
   "description": "Bundle utilities for Intlify project",
-  "version": "9.0.0",
+  "version": "10.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"

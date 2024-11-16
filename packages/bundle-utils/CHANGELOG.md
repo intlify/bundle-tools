@@ -1,4 +1,13 @@
 
+## @intlify/bundle-utils@10.0.0 (2024-11-16)
+
+#### :star: Features
+* [#418](https://github.com/intlify/bundle-tools/pull/418) feat!: move packages to ESM first ([@userquin](https://github.com/userquin))
+
+#### Committers: 1
+- Joaquín Sánchez ([@userquin](https://github.com/userquin))
+
+
 ## @intlify/bundle-utils@9.0.0 (2024-07-23)
 
 #### :star: Features

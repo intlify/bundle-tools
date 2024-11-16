@@ -4,17 +4,18 @@ import {
   prettier,
   typescript
 } from '@kazupon/eslint-config'
-import path from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { resolve } from 'node:path'
 
-const __dirname = path.dirname(new URL(import.meta.url).pathname)
+const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
 export default defineConfig(
   javascript(),
   typescript({
     parserOptions: {
       project: [
-        path.join(__dirname, './tsconfig.json'),
-        path.join(__dirname, './packages/unplugin-vue-i18n/tsconfig.json')
+        resolve(__dirname, './tsconfig.json'),
+        resolve(__dirname, './packages/unplugin-vue-i18n/tsconfig.json')
       ]
     }
   }),

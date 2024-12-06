@@ -83,11 +83,13 @@ export function directivePlugin({
           if (vuePluginOptions == null) {
             vuePluginOptions = getVuePluginOptions(vuePlugin!)
           }
-          analyzeIdentifiers(
-            getDescriptor(filename, code, vuePluginOptions),
-            vuePluginOptions,
-            translationIdentifiers
-          )
+          if (vuePluginOptions?.compiler) {
+            analyzeIdentifiers(
+              getDescriptor(filename, code, vuePluginOptions),
+              vuePluginOptions,
+              translationIdentifiers
+            )
+          }
         }
       }
 

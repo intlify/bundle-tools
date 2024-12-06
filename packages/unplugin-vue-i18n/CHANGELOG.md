@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@6.0.1 (2024-12-06)
+
+#### :zap: Improvement Features
+* [#421](https://github.com/intlify/bundle-tools/pull/421) fix(unplugin-vue-i18n): check for vue compiler in directive transform hook ([@userquin](https://github.com/userquin))
+
+#### Committers: 1
+- Joaquín Sánchez ([@userquin](https://github.com/userquin))
+
+
 ## @intlify/unplugin-vue-i18n@6.0.0 (2024-11-16)
 
 #### :star: Features

@@ -91,11 +91,10 @@ export function directivePlugin({
             )
           }
         }
-      }
-
-      return {
-        code,
-        map: { version: 3, mappings: '', sources: [] } as any
+        return {
+          code,
+          map: { version: 3, mappings: '', sources: [] } as any
+        }
       }
     }
   }

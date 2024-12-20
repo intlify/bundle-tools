@@ -3,6 +3,7 @@ import { getText } from './helper'
 
 import type { ServerContext } from './setup-server'
 import type { Browser, Page } from 'playwright'
+import { describe, expect, test, beforeAll, afterAll } from 'vitest'
 
 // TODO: extract to shim.d.ts
 // eslint-disable-next-line @typescript-eslint/no-namespace

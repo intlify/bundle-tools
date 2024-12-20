@@ -1,4 +1,5 @@
 import { resolve } from 'pathe'
+import { expect, test } from 'vitest'
 import { bundleWebpack, bundleAndRun } from '../utils'
 import { createMessageContext, compile } from '@intlify/core-base'
 import type { MessageCompilerContext } from '@intlify/core-base'

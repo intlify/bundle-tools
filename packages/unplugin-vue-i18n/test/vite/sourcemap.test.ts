@@ -1,6 +1,6 @@
 import { resolve } from 'pathe'
+import { expect, test } from 'vitest'
 import { bundleVite, bundleAndRun } from '../utils'
-
 /**
  * TODO:
  *  custom blocks source map cannot confirm fully supporting

@@ -1,4 +1,5 @@
 import { resolve } from 'pathe'
+import { expect, test } from 'vitest'
 import { bundleWebpack, bundleAndRun } from '../utils'
 
 const options = {
@@ -59,7 +60,7 @@ test('resource files: yaml', async () => {
     }
   }
 ].forEach(item => {
-  !process.env.CI
-    ? test(item.subject, item.test)
-    : test.skip(item.subject, item.test)
+  // !process.env.CI
+  test(item.subject, item.test)
+  // : test.skip(item.subject, item.test)
 })

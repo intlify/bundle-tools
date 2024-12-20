@@ -1,6 +1,7 @@
 import { resolve } from 'pathe'
 import { bundleVite, bundleAndRun } from '../utils'
 import { createMessageContext, compile } from '@intlify/core-base'
+import { expect, test } from 'vitest'
 import type { MessageCompilerContext } from '@intlify/core-base'
 ;[
   {

@@ -1,3 +1,4 @@
+import { expect, test } from 'vitest'
 import { bundleVite, bundleAndRun } from '../utils'
 import { createMessageContext, isMessageAST, compile } from '@intlify/core-base'
 import type { MessageCompilerContext } from '@intlify/core-base'

@@ -1,5 +1,6 @@
 import fg from 'fast-glob'
 import path from 'node:path'
+import { describe, expect, test } from 'vitest'
 import { bundleVite, bundleAndRun } from '../utils'
 
 describe('translation directive', async () => {

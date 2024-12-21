@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@6.0.2 (2024-12-21)
+
+#### :zap: Improvement Features
+* [#428](https://github.com/intlify/bundle-tools/pull/428) fix: only return transform for vue files ([@BobbieGoede](https://github.com/BobbieGoede))
+
+#### Committers: 1
+- Bobbie Goede ([@BobbieGoede](https://github.com/BobbieGoede))
+
+
 ## @intlify/unplugin-vue-i18n@6.0.1 (2024-12-06)
 
 #### :zap: Improvement Features

@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@6.0.3 (2024-12-30)
+
+#### :zap: Improvement Features
+* [#432](https://github.com/intlify/bundle-tools/pull/432) fix(unplugin-vue-i18n): unmet peer `@intlify/shared` and `vue-i18n` ([@NaokiHaba](https://github.com/NaokiHaba))
+
+#### Committers: 1
+- Naoki Haba ([@NaokiHaba](https://github.com/NaokiHaba))
+
+
 ## @intlify/unplugin-vue-i18n@6.0.2 (2024-12-21)
 
 #### :zap: Improvement Features

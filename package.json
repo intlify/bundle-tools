@@ -40,7 +40,7 @@
     "@types/json5": "^2.2.0",
     "@types/loader-utils": "^2.0.0",
     "@types/memory-fs": "^0.3.2",
-    "@types/node": "^20.6.0",
+    "@types/node": "^22.0.0",
     "@types/semver": "^7.3.6",
     "@types/webpack": "^5.28.2",
     "@types/webpack-merge": "^5.0.0",

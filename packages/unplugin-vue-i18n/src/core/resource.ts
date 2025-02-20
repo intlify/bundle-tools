@@ -584,7 +584,19 @@ const mergeDeep = (target, ...sources) => {
 
 export default mergeDeep({},
   ${codes.map(code => `{${code}}`).join(',\n')}
-);`
+);
+
+if(import.meta.hot) {
+  import.meta.hot.accept(mod => {
+    // retrieve global i18n instance
+    const i18n = document.querySelector('#app').__vue_app__.__VUE_I18N__.global
+
+    // set locale messages per locale
+    for(const locale in mod.default){
+      i18n.setLocaleMessage(locale, mod.default[locale])
+    }
+  })
+}`
 }
 
 async function getCode(

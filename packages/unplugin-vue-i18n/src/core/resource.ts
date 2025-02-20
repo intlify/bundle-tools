@@ -68,7 +68,7 @@ export function resourcePlugin(
   const filter = createFilter(include, exclude)
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
     return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${
-      !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
+      !ssr ? 'esm-bundler.js' : 'node.js'
     }`
   }
   let isProduction = false

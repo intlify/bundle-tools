@@ -94,7 +94,7 @@ function pluginI18n(
         : `${installedPkg}`
   const runtimeModule = `${
     installedVueI18nBridge ? 'vue-i18n-bridge' : installedPkg
-  }.runtime.mjs`
+  }.runtime.js`
   const forceStringify = !!options.forceStringify
 
   let isProduction = false
@@ -136,12 +136,12 @@ function pluginI18n(
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: 'vue-i18n',
-            replacement: `petite-vue-i18n/dist/petite-vue-i18n.mjs`
+            replacement: `petite-vue-i18n/dist/petite-vue-i18n.js`
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(config.resolve!.alias as any)['vue-i18n'] =
-            `petite-vue-i18n/dist/petite-vue-i18n.mjs`
+            `petite-vue-i18n/dist/petite-vue-i18n.js`
         }
         debug(`alias name: ${getAliasName()}`)
       }
@@ -229,8 +229,8 @@ function pluginI18n(
        * NOTE:
        *  Vue SSR with Vite3 (esm) will be worked on `@vue/server-renderer` with cjs.
        *  This prevents the vue feature flag (`__VUE_PROD_DEVTOOLS__`)
-       *  and the vue-i18n feature flags used in `(petitle)-vue-i18n.runtime.mjs` from being set.
-       *  To work around this problem, proxy using the virutal module of vite (rollup)
+       *  and the vue-i18n feature flags used in `(petite)-vue-i18n.runtime.js` from being set.
+       *  To work around this problem, proxy using the virtual module of vite (rollup)
        */
       if (options?.ssr) {
         if (getVirtualId(id) === INTLIFY_FEATURE_FLAGS_ID) {

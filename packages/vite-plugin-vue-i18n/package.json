@@ -84,7 +84,6 @@
     "dev": "vite examples --config ./examples/vite.config.ts",
     "dev:composition": "vite examples/composition --config ./examples/composition/vite.config.ts",
     "dev:global": "vite examples/global --config ./examples/global/vite.config.ts",
-    "dev:legacy": "vite examples/legacy --config ./examples/legacy/vite.config.ts",
     "test": "yarn test:e2e",
     "test:e2e": "jest --runInBand --config ./jest.e2e.config.js",
     "watch": "tsc -p . --watch",

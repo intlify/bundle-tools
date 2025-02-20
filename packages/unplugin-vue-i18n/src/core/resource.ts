@@ -55,7 +55,6 @@ export function resourcePlugin(
     globalSFCScope,
     runtimeOnly,
     dropMessageCompiler,
-    compositionOnly,
     fullInstall,
     ssrBuild,
     strictMessage,
@@ -100,7 +99,6 @@ export function resourcePlugin(
       config() {
         const defineConfig = {
           define: {
-            __VUE_I18N_LEGACY_API__: !compositionOnly,
             __VUE_I18N_FULL_INSTALL__: fullInstall,
             __INTLIFY_DROP_MESSAGE_COMPILER__: dropMessageCompiler,
             __VUE_I18N_PROD_DEVTOOLS__: false
@@ -269,12 +267,10 @@ export function resourcePlugin(
         if (webpack) {
           compiler.options.plugins!.push(
             new webpack.DefinePlugin({
-              __VUE_I18N_LEGACY_API__: JSON.stringify(compositionOnly),
               __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
               __INTLIFY_PROD_DEVTOOLS__: 'false'
             })
           )
-          debug(`set __VUE_I18N_LEGACY_API__ is '${compositionOnly}'`)
           debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
         } else {
           debug('ignore vue-i18n feature flags with webpack.DefinePlugin')

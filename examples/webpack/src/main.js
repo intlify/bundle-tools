@@ -6,7 +6,6 @@ import ja from './locales/ja.json'
 import en from './locales/en.yaml'
 
 const i18n = createI18n({
-  legacy: false,
   locale: 'ja',
   messages: {
     en,

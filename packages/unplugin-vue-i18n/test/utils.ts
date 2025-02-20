@@ -174,7 +174,6 @@ export async function bundleAndRun(
     : undefined
   options.sourcemap = isBoolean(options.sourcemap) || false
   options.bridge = isBoolean(options.bridge) || false
-  options.legacy = isBoolean(options.legacy) || false
   options.vueVersion = isString(options.vueVersion)
     ? options.vueVersion
     : 'v2.6'

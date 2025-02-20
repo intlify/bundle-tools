@@ -63,12 +63,6 @@ function pluginI18n(
     ? options.runtimeOnly
     : true
   // prettier-ignore
-  const compositionOnly = installedPkg === 'vue-i18n'
-    ? isBoolean(options.compositionOnly)
-      ? options.compositionOnly
-      : true
-    : true
-  // prettier-ignore
   const fullInstall = installedPkg === 'vue-i18n'
     ? isBoolean(options.fullInstall)
       ? options.fullInstall
@@ -147,10 +141,6 @@ function pluginI18n(
       }
 
       config.define = config.define || {}
-      config.define['__VUE_I18N_LEGACY_API__'] = !compositionOnly
-      debug(
-        `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
-      )
 
       config.define['__VUE_I18N_FULL_INSTALL__'] = fullInstall
       debug(
@@ -235,7 +225,6 @@ function pluginI18n(
       if (options?.ssr) {
         if (getVirtualId(id) === INTLIFY_FEATURE_FLAGS_ID) {
           return `import { getGlobalThis } from '@intlify/shared';
-getGlobalThis().__VUE_I18N_LEGACY_API__ = ${JSON.stringify(!compositionOnly)};
 getGlobalThis().__VUE_I18N_FULL_INSTALL__ = ${JSON.stringify(fullInstall)};
 getGlobalThis().__VUE_I18N_PROD_DEVTOOLS__ = false;
 getGlobalThis().__VUE_PROD_DEVTOOLS__ = false;

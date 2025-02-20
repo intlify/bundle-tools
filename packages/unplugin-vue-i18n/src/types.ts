@@ -8,7 +8,6 @@ export interface PluginOptions {
   module?: VueI18nModule
   dropMessageCompiler?: boolean
   runtimeOnly?: boolean
-  compositionOnly?: boolean
   ssr?: boolean
   fullInstall?: boolean
   forceStringify?: boolean

@@ -6,7 +6,6 @@ module.exports = {
   devtool: 'source-map',
   entry: {
     composition: path.resolve(__dirname, './composition/main.js'),
-    legacy: path.resolve(__dirname, './legacy/main.js'),
     global: path.resolve(__dirname, './global/main.js')
   },
   output: {
@@ -41,10 +40,7 @@ module.exports = {
         test: /\.(json5?|ya?ml)$/, // target json, json5, yaml and yml files
         type: 'javascript/auto',
         // Use `Rule.include` to specify the files of locale messages to be pre-compiled
-        include: [
-          path.resolve(__dirname, './composition/locales'),
-          path.resolve(__dirname, './legacy/locales')
-        ],
+        include: [path.resolve(__dirname, './composition/locales')],
         use: [
           {
             loader: path.resolve(__dirname, '../lib/index.js'),

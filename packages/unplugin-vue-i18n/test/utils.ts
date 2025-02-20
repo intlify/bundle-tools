@@ -173,7 +173,6 @@ export async function bundleAndRun(
     ? options.globalSFCScope
     : undefined
   options.sourcemap = isBoolean(options.sourcemap) || false
-  options.bridge = isBoolean(options.bridge) || false
   options.vueVersion = isString(options.vueVersion)
     ? options.vueVersion
     : 'v2.6'

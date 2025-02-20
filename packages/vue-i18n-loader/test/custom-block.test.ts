@@ -118,29 +118,6 @@ test('global and local', async () => {
   expect(g.resource.en.hello(createMessageContext())).toEqual('hello global!')
 })
 
-test('bridge', async () => {
-  const { module } = await bundleAndRun(
-    'compile.vue',
-    bundle,
-    { bridge: true },
-    {
-      Plugin: VueLoaderPlugin,
-      loader: path.resolve(
-        __dirname,
-        '../../../node_modules/vue-loader15/lib/index.js'
-      )
-    }
-  )
-  expect(module.__i18n).toMatchSnapshot()
-  expect(module.__i18nBridge).toMatchSnapshot()
-  const l = module.__i18n.pop()
-  expect(l.locale).toEqual('')
-  expect(l.resource.en.hello(createMessageContext())).toEqual('hello world!')
-  const g = module.__i18nBridge.pop()
-  const bridgeResource = JSON.parse(g)
-  expect(bridgeResource.en.hello).toEqual('hello world!')
-})
-
 test('array', async () => {
   const { module } = await bundleAndRun('array.vue')
   expect(module.__i18n).toMatchSnapshot()

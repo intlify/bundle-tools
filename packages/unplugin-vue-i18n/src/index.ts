@@ -29,8 +29,8 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
   const resolvedOptions = resolveOptions(options)
   debug('plugin options (resolved):', resolvedOptions)
 
-  if (resolvedOptions.hot && meta.framework === 'webpack') {
-    warn(getWebpackNotSupportedMessage('hot'))
+  if (resolvedOptions.hmr && meta.framework === 'webpack') {
+    warn(getWebpackNotSupportedMessage('hmr'))
   }
 
   const plugins = [resourcePlugin(resolvedOptions, meta)]

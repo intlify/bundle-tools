@@ -10,7 +10,7 @@ export interface PluginOptions {
   runtimeOnly?: boolean
   compositionOnly?: boolean
   ssr?: boolean
-  hot?: boolean
+  hmr?: boolean
   fullInstall?: boolean
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat

@@ -61,7 +61,7 @@ export function resourcePlugin(
     strictMessage,
     allowDynamic,
     escapeHtml,
-    hot,
+    hmr,
     transformI18nBlock
   }: ResolvedOptions,
   meta: UnpluginContextMeta
@@ -328,7 +328,7 @@ export function resourcePlugin(
             forceStringify,
             strictMessage,
             escapeHtml,
-            hot
+            hmr
           }
         )
         // TODO: support virtual import identifier
@@ -528,7 +528,7 @@ async function generateBundleResources(
     strictMessage = true,
     escapeHtml = false,
     jit = true,
-    hot = false,
+    hmr = false,
     transformI18nBlock = undefined
   }: {
     forceStringify?: boolean
@@ -537,7 +537,7 @@ async function generateBundleResources(
     strictMessage?: boolean
     escapeHtml?: boolean
     jit?: boolean
-    hot?: boolean
+    hmr?: boolean
     transformI18nBlock?: PluginOptions['transformI18nBlock']
   }
 ) {
@@ -619,7 +619,7 @@ const merged = mergeDeep({},
 );
 export default merged
 
-${isProduction || !hot ? '' : hmrCode}
+${isProduction || !hmr ? '' : hmrCode}
 `
 }
 

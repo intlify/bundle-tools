@@ -616,6 +616,13 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   > [!IMPORTANT] > Vite support only
 
+### `appRootContainer`
+
+- **Type:** `string`
+- **Default:** `'#app'`
+
+  The selector used find the Vue app root container during HMR.
+
 ### `useVueI18nImportName` (Experimental)
 
 - **Type:** `boolean`

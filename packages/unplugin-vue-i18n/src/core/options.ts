@@ -58,6 +58,7 @@ export function resolveOptions(options: PluginOptions) {
 
   const allowDynamic = !!options.allowDynamic
   const hmr = !!options.hmr
+  const appRootContainer = options.appRootContainer ?? '#app'
 
   const strictMessage = isBoolean(options.strictMessage)
     ? options.strictMessage
@@ -85,6 +86,7 @@ export function resolveOptions(options: PluginOptions) {
     include,
     exclude,
     hmr,
+    appRootContainer,
     module: moduleType,
     onlyLocales,
     forceStringify,

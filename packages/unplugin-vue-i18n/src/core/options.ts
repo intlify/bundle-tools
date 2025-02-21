@@ -57,6 +57,7 @@ export function resolveOptions(options: PluginOptions) {
   const ssrBuild = !!options.ssr
 
   const allowDynamic = !!options.allowDynamic
+  const hmr = !!options.hmr
 
   const strictMessage = isBoolean(options.strictMessage)
     ? options.strictMessage
@@ -83,6 +84,7 @@ export function resolveOptions(options: PluginOptions) {
   return {
     include,
     exclude,
+    hmr,
     module: moduleType,
     onlyLocales,
     forceStringify,

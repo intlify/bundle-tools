@@ -280,11 +280,14 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
 
-> [!WARNING] > `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
+> [!WARNING]
+> `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
 
-> [!WARNING] > `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
+> [!WARNING]
+> `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
 
-> [!WARNING] > `js` and `ts` resources are set **simple export (`export default`) as locale messages object, as default**.
+> [!WARNING]
+> `js` and `ts` resources are set **simple export (`export default`) as locale messages object, as default**.
 
 ```js
 export default {
@@ -303,8 +306,8 @@ If you need to use programmatically dynamic resource construction, you would be 
 - **Type:** `string`
 - **Default:** `'vue-i18n'`
 
-  > [!NOTE]
-  > This options is supported from v5.1.0, and works with vue-i18n v10 and later.
+> [!NOTE]
+> This options is supported from v5.1.0, and works with vue-i18n v10 and later.
 
   Bundle target vue-i18n module. You can specify either `‘vue-i18n’` or `‘petite-vue-i18n’`.
 
@@ -597,7 +600,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option that to use i18n custom blocks in `vue-class-component`.
 
-  > [!IMPORTANT] > `useClassComponent` option is deprecated in v5.
+  > [!IMPORTANT]
+  > `useClassComponent` option is deprecated in v5.
   > This option will be supported with vue-i18n until v9 latest version.
 
 ### `onlyLocales`
@@ -616,7 +620,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
 
-  > [!IMPORTANT] > `useVueI18nImportName` option is deprecated in v5.
+  > [!IMPORTANT]
+  > `useVueI18nImportName` option is deprecated in v5.
   > This option will be supported with vue-i18n until v9 latest version.
 
 ### `optimizeTranslationDirective`
@@ -628,8 +633,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   If you want to put it manually, you can specify the signature of the translation function as a string or a string array.
 
-  > [!WARNING]
-  > About for manually signature, see the details [vue-i18n-extensions API docs](https://github.com/intlify/vue-i18n-extensions/blob/next/docs/%40intlify/vue-i18n-extensions-api.md#translationsignatures) and [usecase from vue-i18n-extensions PR](https://github.com/intlify/vue-i18n-extensions/pull/217/files#diff-3fb9543f91e011d4b0dc9beff44082fe1a99c9eab70c1afab23c3c34352b7c38R121-R200)
+> [!WARNING]
+> About for manually signature, see the details [vue-i18n-extensions API docs](https://github.com/intlify/vue-i18n-extensions/blob/next/docs/%40intlify/vue-i18n-extensions-api.md#translationsignatures) and [usecase from vue-i18n-extensions PR](https://github.com/intlify/vue-i18n-extensions/pull/217/files#diff-3fb9543f91e011d4b0dc9beff44082fe1a99c9eab70c1afab23c3c34352b7c38R121-R200)
 
 ### `transformI18nBlock`
 
@@ -681,8 +686,8 @@ If do you will use this option, you need to enable `jitCompilation` option.
   </i18n>
   ```
 
-  > [!IMPORTANT]
-  > The function **must** return a string or the build will fail.
+> [!IMPORTANT]
+> The function **must** return a string or the build will fail.
 
 ## 📜 Changelog
 

@@ -600,9 +600,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option that to use i18n custom blocks in `vue-class-component`.
 
-  > [!IMPORTANT]
-  > `useClassComponent` option is deprecated in v5.
-  > This option will be supported with vue-i18n until v9 latest version.
+> [!IMPORTANT]
+> `useClassComponent` option is deprecated in v5.
+> This option will be supported with vue-i18n until v9 latest version.
 
 ### `onlyLocales`
 
@@ -620,9 +620,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
 
-  > [!IMPORTANT]
-  > `useVueI18nImportName` option is deprecated in v5.
-  > This option will be supported with vue-i18n until v9 latest version.
+> [!IMPORTANT]
+> `useVueI18nImportName` option is deprecated in v5.
+> This option will be supported with vue-i18n until v9 latest version.
 
 ### `optimizeTranslationDirective`
 

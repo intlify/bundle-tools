@@ -1,6 +1,11 @@
 import { createUnplugin } from 'unplugin'
 import createDebug from 'debug'
-import { raiseError, resolveNamespace } from './utils'
+import {
+  getWebpackNotSupportedMessage,
+  raiseError,
+  resolveNamespace,
+  warn
+} from './utils'
 import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
@@ -24,13 +29,14 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
   const resolvedOptions = resolveOptions(options)
   debug('plugin options (resolved):', resolvedOptions)
 
+  if (options.hmr && meta.framework === 'webpack') {
+    warn(getWebpackNotSupportedMessage('hmr'))
+  }
+
   const plugins = [resourcePlugin(resolvedOptions, meta)]
   if (resolvedOptions.optimizeTranslationDirective) {
     if (meta.framework === 'webpack') {
-      raiseError(
-        `The 'optimizeTranslationDirective' option still is not supported for webpack.\n` +
-          `We are waiting for your Pull Request 🙂.`
-      )
+      raiseError(getWebpackNotSupportedMessage('optimizeTranslationDirective'))
     }
     plugins.push(directivePlugin(resolvedOptions))
   }

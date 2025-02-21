@@ -433,6 +433,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
+> [!NOTE]
+> This option will be removed in v7
+
 ### `fullInstall`
 
 - **Type:** `boolean`
@@ -440,7 +443,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   Whether to install the full set of APIs, components, etc. provided by Vue I18n. By default, all of them will be installed.
 
-  If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
+  If `false` is specified, **build-in components and directive will not be installed in vue and will be tree-shaken.**
 
   For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
@@ -614,7 +617,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   Whether to use the import name of `petite-vue-i18n` with the same import name as vue-i18n (`import { xxx } from 'vue-i18n'`).
 
-  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
+  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhancement.
 
   > [!IMPORTANT] > `useVueI18nImportName` option is deprecated in v5.
   > This option will be supported with vue-i18n until v9 latest version.

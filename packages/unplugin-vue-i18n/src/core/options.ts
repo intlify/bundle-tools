@@ -41,13 +41,6 @@ export function resolveOptions(options: PluginOptions) {
   const dropMessageCompiler = !!options.dropMessageCompiler
 
   // prettier-ignore
-  const compositionOnly = moduleType === 'vue-i18n'
-      ? isBoolean(options.compositionOnly)
-        ? options.compositionOnly
-        : true
-      : true
-
-  // prettier-ignore
   const fullInstall = moduleType === 'vue-i18n'
     ? isBoolean(options.fullInstall)
       ? options.fullInstall
@@ -90,7 +83,6 @@ export function resolveOptions(options: PluginOptions) {
     globalSFCScope,
     runtimeOnly,
     dropMessageCompiler,
-    compositionOnly,
     fullInstall,
     ssrBuild,
     allowDynamic,

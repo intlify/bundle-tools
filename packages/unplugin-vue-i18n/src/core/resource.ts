@@ -562,6 +562,34 @@ async function generateBundleResources(
     }
   }
 
+  const hmrCode = `
+if(import.meta.hot) {
+  function uniqueKeys(...objects) {
+    const keySet = new Set()
+
+    for (const obj of objects) {
+      for (const key of Object.keys(obj)) {
+        keySet.add(key)
+      }
+    }
+
+    return Array.from(keySet)
+  }
+
+  import.meta.hot.accept(mod => {
+    // retrieve global i18n instance
+    const i18n = document.querySelector('#app').__vue_app__.__VUE_I18N__.global
+
+    // locale keys of both original and updated merged messages
+    const localeKeys = uniqueKeys(merged, mod.default)
+
+    // set locale messages for each locale key or overwrite with empty object if deleted
+    for(const locale of localeKeys){
+      i18n.setLocaleMessage(locale, mod.default[locale] || {})
+    }
+  })
+}`
+
   return `const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
 
 const mergeDeep = (target, ...sources) => {
@@ -582,21 +610,13 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 }
 
-export default mergeDeep({},
+const merged = mergeDeep({},
   ${codes.map(code => `{${code}}`).join(',\n')}
 );
+export default merged
 
-if(import.meta.hot) {
-  import.meta.hot.accept(mod => {
-    // retrieve global i18n instance
-    const i18n = document.querySelector('#app').__vue_app__.__VUE_I18N__.global
-
-    // set locale messages per locale
-    for(const locale in mod.default){
-      i18n.setLocaleMessage(locale, mod.default[locale])
-    }
-  })
-}`
+${isProduction ? '' : hmrCode}
+`
 }
 
 async function getCode(

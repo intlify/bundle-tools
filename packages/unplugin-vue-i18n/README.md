@@ -607,7 +607,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   By using it you can exclude from the bundle those localizations that are not specified in this option.
 
-### `hot`
+### `hmr`
 
 - **Type:** `boolean`
 - **Default:** `false`

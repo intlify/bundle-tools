@@ -29,7 +29,7 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
   const resolvedOptions = resolveOptions(options)
   debug('plugin options (resolved):', resolvedOptions)
 
-  if (resolvedOptions.hmr && meta.framework === 'webpack') {
+  if (options.hmr && meta.framework === 'webpack') {
     warn(getWebpackNotSupportedMessage('hmr'))
   }
 

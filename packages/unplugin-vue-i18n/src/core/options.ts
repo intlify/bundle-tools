@@ -57,7 +57,7 @@ export function resolveOptions(options: PluginOptions) {
   const ssrBuild = !!options.ssr
 
   const allowDynamic = !!options.allowDynamic
-  const hmr = !!options.hmr
+  const hmr = options.hmr ?? true
   const appRootContainer = options.appRootContainer ?? '#app'
 
   const strictMessage = isBoolean(options.strictMessage)

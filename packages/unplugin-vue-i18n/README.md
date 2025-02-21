@@ -610,9 +610,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 ### `hmr`
 
 - **Type:** `boolean`
-- **Default:** `false`
+- **Default:** `true`
 
-  Enables HMR without page reload for bundled virtual messages `@intlify/unplugin-vue-i18n/messages`.
+  HMR without page reload for bundled virtual messages `@intlify/unplugin-vue-i18n/messages`.
 
   > [!IMPORTANT] > Vite support only
 

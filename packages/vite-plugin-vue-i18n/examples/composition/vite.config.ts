@@ -7,7 +7,8 @@ export default defineConfig({
   plugins: [
     vue(),
     vueI18n({
-      include: path.resolve(__dirname, './locales/**')
+      include: path.resolve(__dirname, './locales/**'),
+      compositionOnly: true
     })
   ]
 })

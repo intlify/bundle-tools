@@ -37,7 +37,9 @@ $ yarn add -D @intlify/vite-plugin-vue-i18n
 
 ## ⚠️ Notice
 
-If you do a production build with vite, Vue I18n will automatically bundle the runtime only module. If you need on-demand compilation with Message compiler, you need to set the `runtimeOnly` option to `false`.
+When this plugin is installed, Vue I18n can only use the Composition API, and if you want to use the Legacy API, you need to set the `compositionOnly` option to `false`.
+
+Also, if you do a production build with vite, Vue I18n will automatically bundle the runtime only module. If you need on-demand compilation with Message compiler, you need to set the `runtimeOnly` option to `false`.
 
 ## 🚀 Usage
 
@@ -62,6 +64,9 @@ export default defineConfig({
   plugins: [
     vue(), // you need to install `@vitejs/plugin-vue`
     vueI18n({
+      // if you want to use Vue I18n Legacy API, you need to set `compositionOnly: false`
+      // compositionOnly: false,
+
       // you need to set i18n resource including paths !
       include: resolve(
         dirname(fileURLToPath(import.meta.url)),
@@ -265,6 +270,15 @@ About details, See the below section
 
   For more details, See [here](#-automatic-bundling)
 
+### `compositionOnly`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether to make vue-i18n's API only composition API. **By default the legacy API is tree-shaken.**
+
+  For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+
 ### `fullInstall`
 
 - **Type:** `boolean`
@@ -272,7 +286,7 @@ About details, See the below section
 
   Whether to install the full set of APIs, components, etc. provided by Vue I18n. By default, all of them will be installed.
 
-  If `false` is specified, **build-in components and directive will not be installed in vue and will be tree-shaken.**
+  If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
 
   For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
@@ -399,7 +413,7 @@ About details, See the below section
 
   Whether to use the import name of `petite-vue-i18n` with the same import name as vue-i18n (`import { xxx } from 'vue-i18n'`).
 
-  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhancement.
+  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
 
 ## 📜 Changelog
 

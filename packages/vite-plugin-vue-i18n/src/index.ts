@@ -18,6 +18,7 @@ import createDebug from 'debug'
 import { normalizePath } from 'vite'
 import { RawSourceMap } from 'source-map'
 import { parseVueRequest } from './query'
+import { checkVueI18nBridgeInstallPackage } from './check'
 
 import type { Plugin, ResolvedConfig, UserConfig } from 'vite'
 import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
@@ -30,6 +31,7 @@ const INTLIFY_FEATURE_FLAGS_ID = '@intlify-feature-flags'
 const INTLIFY_FEATURE_PROXY_SUFFIX = 'inject-feature-proxy'
 
 const installedPkg = checkInstallPackage('@intlify/vite-plugin-vue-i18n', debug)
+const installedVueI18nBridge = checkVueI18nBridgeInstallPackage(debug)
 
 const VIRTUAL_PREFIX = '\0'
 
@@ -61,6 +63,12 @@ function pluginI18n(
     ? options.runtimeOnly
     : true
   // prettier-ignore
+  const compositionOnly = installedPkg === 'vue-i18n'
+    ? isBoolean(options.compositionOnly)
+      ? options.compositionOnly
+      : true
+    : true
+  // prettier-ignore
   const fullInstall = installedPkg === 'vue-i18n'
     ? isBoolean(options.fullInstall)
       ? options.fullInstall
@@ -78,11 +86,15 @@ function pluginI18n(
   }
   // prettier-ignore
   const getAliasName = () =>
-      installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) &&
+    installedVueI18nBridge && installedPkg === 'vue-i18n'
+      ? 'vue-i18n-bridge'
+      : installedPkg === 'petite-vue-i18n' && isBoolean(useVueI18nImportName) &&
         useVueI18nImportName
         ? 'vue-i18n'
         : `${installedPkg}`
-  const runtimeModule = `${installedPkg}.runtime.js`
+  const runtimeModule = `${
+    installedVueI18nBridge ? 'vue-i18n-bridge' : installedPkg
+  }.runtime.mjs`
   const forceStringify = !!options.forceStringify
 
   let isProduction = false
@@ -124,17 +136,21 @@ function pluginI18n(
         if (isArray(config.resolve!.alias)) {
           config.resolve!.alias.push({
             find: 'vue-i18n',
-            replacement: `petite-vue-i18n/dist/petite-vue-i18n.js`
+            replacement: `petite-vue-i18n/dist/petite-vue-i18n.mjs`
           })
         } else {
           // eslint-disable-next-line @typescript-eslint/no-explicit-any
           ;(config.resolve!.alias as any)['vue-i18n'] =
-            `petite-vue-i18n/dist/petite-vue-i18n.js`
+            `petite-vue-i18n/dist/petite-vue-i18n.mjs`
         }
         debug(`alias name: ${getAliasName()}`)
       }
 
       config.define = config.define || {}
+      config.define['__VUE_I18N_LEGACY_API__'] = !compositionOnly
+      debug(
+        `set __VUE_I18N_LEGACY_API__ is '${config.define['__VUE_I18N_LEGACY_API__']}'`
+      )
 
       config.define['__VUE_I18N_FULL_INSTALL__'] = fullInstall
       debug(
@@ -213,12 +229,13 @@ function pluginI18n(
        * NOTE:
        *  Vue SSR with Vite3 (esm) will be worked on `@vue/server-renderer` with cjs.
        *  This prevents the vue feature flag (`__VUE_PROD_DEVTOOLS__`)
-       *  and the vue-i18n feature flags used in `(petite)-vue-i18n.runtime.js` from being set.
-       *  To work around this problem, proxy using the virtual module of vite (rollup)
+       *  and the vue-i18n feature flags used in `(petitle)-vue-i18n.runtime.mjs` from being set.
+       *  To work around this problem, proxy using the virutal module of vite (rollup)
        */
       if (options?.ssr) {
         if (getVirtualId(id) === INTLIFY_FEATURE_FLAGS_ID) {
           return `import { getGlobalThis } from '@intlify/shared';
+getGlobalThis().__VUE_I18N_LEGACY_API__ = ${JSON.stringify(!compositionOnly)};
 getGlobalThis().__VUE_I18N_FULL_INSTALL__ = ${JSON.stringify(fullInstall)};
 getGlobalThis().__VUE_I18N_PROD_DEVTOOLS__ = false;
 getGlobalThis().__VUE_PROD_DEVTOOLS__ = false;

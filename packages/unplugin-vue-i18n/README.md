@@ -424,6 +424,18 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   For more details, See [here](#-automatic-bundling)
 
+### `compositionOnly`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  Whether to make vue-i18n API only composition API. **By default the legacy API is tree-shaken.**
+
+  For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
+
+> [!NOTE]
+> This option will be removed in v7
+
 ### `fullInstall`
 
 - **Type:** `boolean`

@@ -232,7 +232,7 @@ export function resourcePlugin(
       },
 
       async handleHotUpdate({ file, server }) {
-        if (/\.(json5?|ya?ml)$/.test(file)) {
+        if (/\.(json5?|ya?ml|([c|m]?js|[c|m]?ts))$/.test(file)) {
           const module = server.moduleGraph.getModuleById(
             asVirtualId(INTLIFY_BUNDLE_IMPORT_ID, meta.framework)
           )
@@ -544,7 +544,8 @@ async function generateBundleResources(
     if (/\.(json5?|ya?ml)$/.test(res)) {
       const { ext, name } = parsePath(res)
       const source = await getRaw(res)
-      const generate = /json5?/.test(ext) ? generateJSON : generateYAML
+      // TODO: const generate = /json5?/.test(ext) ? generateJSON : generateYAML
+      const generate = getGenerator(ext)
       const parseOptions = getOptions(res, isProduction, {}, false, {
         isGlobal,
         jit,

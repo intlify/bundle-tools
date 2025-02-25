@@ -4,7 +4,6 @@ import App from './App.vue'
 import messages from '@intlify/unplugin-vue-i18n/messages'
 
 const i18n = createI18n({
-  legacy: false,
   locale: 'ja',
   messages
 })

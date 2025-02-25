@@ -439,6 +439,9 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
+> [!CAUTION]
+> This option will be removed in v7
+
 ### `fullInstall`
 
 - **Type:** `boolean`

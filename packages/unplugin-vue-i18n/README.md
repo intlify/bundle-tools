@@ -366,7 +366,7 @@ If you are using petite-vue-i18n, you will need to set this value.
   }
   ```
 
-  If you fetch some resources from the backend, the data **must be pre-compiled** for production. exmaple is [here](https://github.com/intlify/vue-i18n-next/tree/master/examples/backend).
+  If you fetch some resources from the backend, the data **must be pre-compiled** for production. example is [here](https://github.com/intlify/vue-i18n-next/tree/master/examples/backend).
 
 ### `jitCompilation`
 
@@ -374,15 +374,15 @@ If you are using petite-vue-i18n, you will need to set this value.
 - **Default:** `true`
 
 > [!IMPORTANT]
-> 'jitCompilation' option is deprected in v5.
+> 'jitCompilation' option is deprecated in v5.
 > This option will be supported with vue-i18n until v9 latest version.
 
-Whether locale mesages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
+Whether locale messages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
 
-JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale mesages with programatic.
+JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale messages with programatic.
 
 > [!WARNING]
-> Enabling JIT compilation causes the message compiler to generate AST objects for locale mesages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
+> Enabling JIT compilation causes the message compiler to generate AST objects for locale messages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
 
 About JIT compilation, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#jit-compilation)
 
@@ -446,7 +446,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   Whether to install the full set of APIs, components, etc. provided by Vue I18n. By default, all of them will be installed.
 
-  If `false` is specified, **buld-in components and directive will not be installed in vue and will be tree-shaken.**
+  If `false` is specified, **build-in components and directive will not be installed in vue and will be tree-shaken.**
 
   For more details, See [here](https://vue-i18n.intlify.dev/guide/advanced/optimization.html#reduce-bundle-size-with-feature-build-flags)
 
@@ -622,7 +622,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   Whether to use the import name of `petite-vue-i18n` with the same import name as vue-i18n (`import { xxx } from 'vue-i18n'`).
 
-  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
+  This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhancement.
 
 > [!IMPORTANT]
 >

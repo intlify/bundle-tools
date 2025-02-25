@@ -281,12 +281,15 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
   If nothing is specified for this option, i.e. `undefined`, nothing is done to the resource in the above format.
 
 > [!WARNING]
+>
 > `json` resources matches this option, it will be handled **before the internal json plugin of bundler, and will not be processed afterwards**, else the option doesn't match, the bundler side will handle.
 
 > [!WARNING]
+>
 > `yaml` resources don't support multi documentation with `|`, alias with `&` and `*`, tags with `! `, `@`, etc. Only simple data structures.
 
 > [!WARNING]
+>
 > `js` and `ts` resources are set **simple export (`export default`) as locale messages object, as default**.
 
 ```js
@@ -309,19 +312,19 @@ If you need to use programmatically dynamic resource construction, you would be 
 > [!NOTE]
 > This options is supported from v5.1.0, and works with vue-i18n v10 and later.
 
-  Bundle target vue-i18n module. You can specify either `‘vue-i18n’` or `‘petite-vue-i18n’`.
+Bundle target vue-i18n module. You can specify either `‘vue-i18n’` or `‘petite-vue-i18n’`.
 
-  The default is `'vue-i18n'`, and the following installed in node_modules will be bundled.
+The default is `'vue-i18n'`, and the following installed in node_modules will be bundled.
 
-  - development: `vue-i18n.esm-bundler.js`
-  - production: `vue-i18n.runtime.esm-bundler.js`
+- development: `vue-i18n.esm-bundler.js`
+- production: `vue-i18n.runtime.esm-bundler.js`
 
-  In the case of `‘petite-vue-i18n’`, the following installed in node_modules will be bundled.
+In the case of `‘petite-vue-i18n’`, the following installed in node_modules will be bundled.
 
-  - development: `petite-vue-i18n.esm-bundler.js`
-  - production: `petite-vue-i18n.runtime.esm-bundler.js`
+- development: `petite-vue-i18n.esm-bundler.js`
+- production: `petite-vue-i18n.runtime.esm-bundler.js`
 
-  If you are using petite-vue-i18n, you will need to set this value.
+If you are using petite-vue-i18n, you will need to set this value.
 
 ### `strictMessage`
 
@@ -601,6 +604,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
   This option that to use i18n custom blocks in `vue-class-component`.
 
 > [!IMPORTANT]
+>
 > `useClassComponent` option is deprecated in v5.
 > This option will be supported with vue-i18n until v9 latest version.
 
@@ -621,6 +625,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
   This option allows a smooth migration from `petite-vue-i18n` to `vue-i18n` and allows progressive enhacement.
 
 > [!IMPORTANT]
+>
 > `useVueI18nImportName` option is deprecated in v5.
 > This option will be supported with vue-i18n until v9 latest version.
 

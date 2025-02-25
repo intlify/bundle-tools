@@ -2,7 +2,6 @@
   <form id="fruits">
     <label>{{ t('select') }}</label>
 
-
     <select v-model.number="select">
       <option value="0">0</option>
       <option value="1">1</option>
@@ -25,6 +24,6 @@
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 
-const { t,locale} = useI18n({ useScope: 'global' })
+const { t, locale } = useI18n({ useScope: 'global' })
 const select = ref(0)
 </script>

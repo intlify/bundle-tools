@@ -25,7 +25,7 @@
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@intlify/core-base": "next",
-    "@kazupon/eslint-config": "^0.18.0",
+    "@kazupon/eslint-config": "^0.22.0",
     "@kazupon/lerna-changelog": "^4.3.0",
     "@octokit/rest": "^20.0.0",
     "@rollup/plugin-alias": "^3.1.5",

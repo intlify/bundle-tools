@@ -51,6 +51,7 @@ export function resourcePlugin(
     exclude,
     module,
     forceStringify,
+    appRootContainer,
     defaultSFCLang,
     globalSFCScope,
     runtimeOnly,
@@ -60,6 +61,7 @@ export function resourcePlugin(
     strictMessage,
     allowDynamic,
     escapeHtml,
+    hmr,
     transformI18nBlock
   }: ResolvedOptions,
   meta: UnpluginContextMeta
@@ -228,6 +230,16 @@ export function resourcePlugin(
           }
         }
       },
+      configureServer(server) {
+        // client could not find vue app root during HMR
+        server.ws.on('unplugin-vue-i18n:app-root-missing', _ => {
+          console.error(
+            `[unplugin-vue-i18n] Unable to find vue-i18n instance on vue app root container with selector "${appRootContainer}" - skipping HMR and reloading page.\n` +
+              `The selector used can be configured using the \`appRootcontainer\` option.`
+          )
+          server.ws.send({ type: 'full-reload' })
+        })
+      },
 
       async handleHotUpdate({ file, server }) {
         if (/\.(json5?|ya?ml)$/.test(file)) {
@@ -322,7 +334,9 @@ export function resourcePlugin(
           {
             forceStringify,
             strictMessage,
-            escapeHtml
+            escapeHtml,
+            hmr,
+            appRootContainer
           }
         )
         // TODO: support virtual import identifier
@@ -522,6 +536,8 @@ async function generateBundleResources(
     strictMessage = true,
     escapeHtml = false,
     jit = true,
+    hmr = false,
+    appRootContainer,
     transformI18nBlock = undefined
   }: {
     forceStringify?: boolean
@@ -530,6 +546,8 @@ async function generateBundleResources(
     strictMessage?: boolean
     escapeHtml?: boolean
     jit?: boolean
+    hmr?: boolean
+    appRootContainer: string
     transformI18nBlock?: PluginOptions['transformI18nBlock']
   }
 ) {
@@ -558,6 +576,38 @@ async function generateBundleResources(
     }
   }
 
+  const hmrCode = `
+if(import.meta.hot) {
+  function uniqueKeys(...objects) {
+    const keySet = new Set()
+
+    for (const obj of objects) {
+      for (const key of Object.keys(obj)) {
+        keySet.add(key)
+      }
+    }
+
+    return Array.from(keySet)
+  }
+
+  import.meta.hot.accept(mod => {
+    // retrieve global i18n instance
+    const i18n = document.querySelector('${appRootContainer}')?.__vue_app__?.__VUE_I18N__?.global
+    if(i18n == null) {
+      import.meta.hot.send('unplugin-vue-i18n:app-root-missing', {})
+      return
+    }
+
+    // locale keys of both original and updated merged messages
+    const localeKeys = uniqueKeys(merged, mod.default)
+
+    // set locale messages for each locale key or overwrite with empty object if deleted
+    for(const locale of localeKeys){
+      i18n.setLocaleMessage(locale, mod.default[locale] || {})
+    }
+  })
+}`
+
   return `const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
 
 const mergeDeep = (target, ...sources) => {
@@ -578,9 +628,13 @@ const mergeDeep = (target, ...sources) => {
   return mergeDeep(target, ...sources);
 }
 
-export default mergeDeep({},
+const merged = mergeDeep({},
   ${codes.map(code => `{${code}}`).join(',\n')}
-);`
+);
+export default merged
+
+${isProduction || !hmr ? '' : hmrCode}
+`
 }
 
 async function getCode(

@@ -12,3 +12,11 @@ export function error(...args: unknown[]) {
 export function raiseError(message: string) {
   throw new Error(`[${PKG_NAME}] ${message}`)
 }
+
+// TODO: extract warn/error messages similar to vue-i18n structure
+export function getWebpackNotSupportedMessage(optionName: string) {
+  return (
+    `The '${optionName}' option still is not supported for webpack.\n` +
+    `We are waiting for your Pull Request 🙂.`
+  )
+}

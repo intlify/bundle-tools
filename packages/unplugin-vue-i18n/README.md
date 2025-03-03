@@ -618,6 +618,22 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   By using it you can exclude from the bundle those localizations that are not specified in this option.
 
+### `hmr`
+
+- **Type:** `boolean`
+- **Default:** `true`
+
+  HMR without page reload for bundled virtual messages `@intlify/unplugin-vue-i18n/messages`.
+
+  > [!IMPORTANT] > Vite support only
+
+### `appRootContainer`
+
+- **Type:** `string`
+- **Default:** `'#app'`
+
+  The selector used find the Vue app root container during HMR.
+
 ### `useVueI18nImportName` (Experimental)
 
 - **Type:** `boolean`

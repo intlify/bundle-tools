@@ -9,6 +9,8 @@ export interface PluginOptions {
   dropMessageCompiler?: boolean
   runtimeOnly?: boolean
   ssr?: boolean
+  hmr?: boolean
+  appRootContainer?: string
   fullInstall?: boolean
   forceStringify?: boolean
   defaultSFCLang?: SFCLangFormat

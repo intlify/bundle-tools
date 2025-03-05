@@ -1,6 +1,6 @@
 import { resolve } from 'pathe'
 import { expect, test } from 'vitest'
-import { bundleWebpack, bundleAndRun } from '../utils'
+import { bundleAndRun, bundleWebpack } from '../utils'
 
 const options = {
   sourcemap: true,
@@ -60,7 +60,6 @@ test('resource files: yaml', async () => {
     }
   }
 ].forEach(item => {
-  // !process.env.CI
-  test(item.subject, item.test)
-  // : test.skip(item.subject, item.test)
+  const _test = process.env.CI ? test : test.skip
+  _test(item.subject, item.test)
 })

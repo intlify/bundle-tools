@@ -1,7 +1,7 @@
+import { createMessageContext } from '@intlify/core-base'
 import { resolve } from 'pathe'
 import { expect, test } from 'vitest'
-import { bundleWebpack, bundleAndRun } from '../utils'
-import { createMessageContext } from '@intlify/core-base'
+import { bundleAndRun, bundleWebpack } from '../utils'
 ;[
   {
     testcase: 'import',

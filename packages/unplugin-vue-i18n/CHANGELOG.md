@@ -1,4 +1,19 @@
 
+## @intlify/unplugin-vue-i18n@7.0.0-beta.0 (2025-03-05)
+
+#### :star: Features
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### :boom: Breaking Change
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### :pencil: Documentation
+* [#439](https://github.com/intlify/bundle-tools/pull/439) docs: Fixed highlighting of alert syntax ([@babu-ch](https://github.com/babu-ch))
+
+#### Committers: 1
+- bab ([@babu-ch](https://github.com/babu-ch))
+
+
 ## @intlify/unplugin-vue-i18n@6.0.3 (2024-12-30)
 
 #### :zap: Improvement Features

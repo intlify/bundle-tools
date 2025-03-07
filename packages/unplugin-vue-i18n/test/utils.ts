@@ -163,7 +163,7 @@ export function bundleWebpackLike(
   compiler.outputFileSystem = mfs
 
   return new Promise((resolve, reject) => {
-    compiler.run((err, stats: any) => {
+    compiler.run((err: Error, stats: any) => {
       if (err) {
         return reject(err)
       }

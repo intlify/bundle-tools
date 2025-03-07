@@ -3,7 +3,7 @@ import { vi, expect, test, beforeEach, afterEach } from 'vitest'
 import { compile, createMessageContext } from '@intlify/core-base'
 import { assign, isFunction } from '@intlify/shared'
 import { resolve } from 'pathe'
-import { bundleAndRun, bundleVite } from '../utils'
+import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
 let spyConsoleError: any
 beforeEach(() => {
   spyConsoleError = vi
@@ -16,65 +16,67 @@ afterEach(() => {
   spyConsoleError.mockRestore()
 })
 
+const bundler = getCurrentTestBundler()
+
 const options = {
   target: './fixtures/locales/',
-  include: [resolve(__dirname, '../fixtures/locales/**')]
+  include: [resolve(__dirname, './fixtures/locales/**')]
 }
 
 test('json resource', async () => {
-  const { module } = await bundleAndRun('ja.json', bundleVite, options)
+  const { module } = await bundleAndRun('ja.json', bundler, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
 test('json5 resource', async () => {
-  const { module } = await bundleAndRun('en.json5', bundleVite, options)
+  const { module } = await bundleAndRun('en.json5', bundler, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
 test('yaml resource', async () => {
-  const { module } = await bundleAndRun('ko.yaml', bundleVite, options)
+  const { module } = await bundleAndRun('ko.yaml', bundler, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
 test('yml resource', async () => {
-  const { module } = await bundleAndRun('fr.yml', bundleVite, options)
+  const { module } = await bundleAndRun('fr.yml', bundler, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
 test('js resource', async () => {
-  const { module } = await bundleAndRun('en-KK.mjs', bundleVite, options)
+  const { module } = await bundleAndRun('en-KK.mjs', bundler, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
-test('ts resource', async () => {
-  const { module } = await bundleAndRun('en-GB.ts', bundleVite, options)
+test.skipIf(!isTestFramework('vite'))('ts resource', async () => {
+  const { module } = await bundleAndRun('en-GB.ts', bundler, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
 test('dynamical resource with js / ts', async () => {
-  const { module } = await bundleAndRun('ka-JP.ts', bundleVite, {
+  const { module } = await bundleAndRun('ka-JP.ts', bundler, {
     allowDynamic: true,
     ...options
   })
   expect(isFunction(module)).toBe(true)
 })
 
-test('strict message', async () => {
+test.skipIf(!isTestFramework('vite'))('strict message', async () => {
   let occured = false
   try {
-    await bundleAndRun('html.json', bundleVite, {
+    await bundleAndRun('html.json', bundler, {
       ...options
     })
   } catch (_e) {
@@ -86,7 +88,7 @@ test('strict message', async () => {
 test('escape message', async () => {
   const { module } = await bundleAndRun(
     'html.json',
-    bundleVite,
+    bundler,
     assign(options, {
       strictMessage: false,
       escapeHtml: true

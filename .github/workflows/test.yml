@@ -23,6 +23,7 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node: [18, 20, 22]
+        builder: ['vite', 'rspack', 'webpack']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -58,3 +59,5 @@ jobs:
 
       - name: Testing
         run: pnpm test
+        env:
+          TEST_BUILDER: ${{ matrix.builder }}

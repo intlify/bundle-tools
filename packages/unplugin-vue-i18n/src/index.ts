@@ -16,8 +16,8 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
 ) => {
   debug('meta framework', meta.framework)
   // check bundler type
-  if (!['vite', 'webpack'].includes(meta.framework)) {
-    raiseError(`This plugin is supported 'vite' and 'webpack' only`)
+  if (!['vite', 'webpack', 'rspack'].includes(meta.framework)) {
+    raiseError(`This plugin is supported 'vite', 'webpack' and 'rspack' only`)
   }
 
   debug('plugin options (resolving):', options)
@@ -26,9 +26,9 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
 
   const plugins = [resourcePlugin(resolvedOptions, meta)]
   if (resolvedOptions.optimizeTranslationDirective) {
-    if (meta.framework === 'webpack') {
+    if (meta.framework === 'webpack' || meta.framework === 'rspack') {
       raiseError(
-        `The 'optimizeTranslationDirective' option still is not supported for webpack.\n` +
+        `The 'optimizeTranslationDirective' option still is not supported for ${meta.framework}.\n` +
           `We are waiting for your Pull Request 🙂.`
       )
     }

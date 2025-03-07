@@ -1,11 +1,17 @@
 import { expect, test } from 'vitest'
-import { bundleVite, bundleAndRun } from '../utils'
+import {
+  bundleAndRun,
+  getCurrentTestBundler,
+  getCurrentTestFramework
+} from './utils'
 import { createMessageContext, isMessageAST, compile } from '@intlify/core-base'
 import type { MessageCompilerContext } from '@intlify/core-base'
 
+const bundler = getCurrentTestBundler()
+
 test('basic', async () => {
-  const { module } = await bundleAndRun('basic.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('basic.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
@@ -14,40 +20,40 @@ test('basic', async () => {
 })
 
 test('json: exclude locales', async () => {
-  const { module } = await bundleAndRun('basic.vue', bundleVite, {
+  const { module } = await bundleAndRun('basic.vue', bundler, {
     onlyLocales: ['ja']
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.resource.en).toBeUndefined()
 })
 
 test('yaml: exclude locales', async () => {
-  const { module } = await bundleAndRun('yaml.vue', bundleVite, {
+  const { module } = await bundleAndRun('yaml.vue', bundler, {
     onlyLocales: ['ja']
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.resource.en).toBeUndefined()
 })
 
 test('json5: exclude locales', async () => {
-  const { module } = await bundleAndRun('json5.vue', bundleVite, {
+  const { module } = await bundleAndRun('json5.vue', bundler, {
     onlyLocales: ['ja']
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.resource.en).toBeUndefined()
 })
 
 test('json: exclude locales when using mixed locales', async () => {
-  const { module } = await bundleAndRun('locale-mix-json.vue', bundleVite, {
+  const { module } = await bundleAndRun('locale-mix-json.vue', bundler, {
     onlyLocales: ['en']
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   module.__i18n.forEach(i18n => {
     expect(i18n.resource.ja).toBeUndefined()
@@ -56,10 +62,10 @@ test('json: exclude locales when using mixed locales', async () => {
 })
 
 test('yaml: exclude locales when using mixed locales', async () => {
-  const { module } = await bundleAndRun('locale-mix-yaml.vue', bundleVite, {
+  const { module } = await bundleAndRun('locale-mix-yaml.vue', bundler, {
     onlyLocales: ['en']
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   module.__i18n.forEach(i18n => {
     expect(i18n.resource.ja).toBeUndefined()
@@ -68,10 +74,10 @@ test('yaml: exclude locales when using mixed locales', async () => {
 })
 
 test('json5: exclude locales when using mixed locales', async () => {
-  const { module } = await bundleAndRun('locale-mix.vue', bundleVite, {
+  const { module } = await bundleAndRun('locale-mix.vue', bundler, {
     onlyLocales: ['en']
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   module.__i18n.forEach(i18n => {
     expect(i18n.resource.ja).toBeUndefined()
@@ -80,8 +86,8 @@ test('json5: exclude locales when using mixed locales', async () => {
 })
 
 test('yaml', async () => {
-  const { module } = await bundleAndRun('yaml.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('yaml.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   let i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('ja')
@@ -99,8 +105,8 @@ test('yaml', async () => {
 })
 
 test('json5', async () => {
-  const { module } = await bundleAndRun('json5.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('json5.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
@@ -109,8 +115,8 @@ test('json5', async () => {
 })
 
 test('import', async () => {
-  const { module } = await bundleAndRun('import.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('import.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
@@ -119,8 +125,8 @@ test('import', async () => {
 })
 
 test('multiple', async () => {
-  const { module } = await bundleAndRun('multiple.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('multiple.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
   expect(module.__i18n.length).toEqual(2)
 
   let i18n = module.__i18n.pop()
@@ -135,8 +141,8 @@ test('multiple', async () => {
 })
 
 test('locale attr', async () => {
-  const { module } = await bundleAndRun('locale.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('locale.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('ja')
@@ -147,8 +153,8 @@ test('locale attr', async () => {
 })
 
 test('locale attr and basic', async () => {
-  const { module } = await bundleAndRun('locale-mix.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('locale-mix.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   let i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('ja')
@@ -164,8 +170,8 @@ test('locale attr and basic', async () => {
 })
 
 test('locale attr and import', async () => {
-  const { module } = await bundleAndRun('locale-import.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('locale-import.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('en')
@@ -176,8 +182,8 @@ test('locale attr and import', async () => {
 })
 
 test('special characters', async () => {
-  const { module } = await bundleAndRun('special-char.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('special-char.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
@@ -186,9 +192,9 @@ test('special characters', async () => {
 })
 
 test('global', async () => {
-  const { module } = await bundleAndRun('global-mix.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
-  expect(module.__i18nGlobal).toMatchSnapshot()
+  const { module } = await bundleAndRun('global-mix.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
+  expect(module.__i18nGlobal).toMatchSnapshot(getCurrentTestFramework())
 
   const l = module.__i18n.pop()
   expect(l.locale).toEqual('ja')
@@ -204,10 +210,10 @@ test('global', async () => {
 })
 
 test('default lang', async () => {
-  const { module } = await bundleAndRun('default-lang.vue', bundleVite, {
+  const { module } = await bundleAndRun('default-lang.vue', bundler, {
     defaultSFCLang: 'yml'
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const l = module.__i18n.pop()
   const fn = compile(l.resource.en.hello, {} as MessageCompilerContext)
@@ -215,11 +221,11 @@ test('default lang', async () => {
 })
 
 test('default lang and global scope', async () => {
-  const { module } = await bundleAndRun('default-lang.vue', bundleVite, {
+  const { module } = await bundleAndRun('default-lang.vue', bundler, {
     defaultSFCLang: 'yml',
     globalSFCScope: true
   })
-  expect(module.__i18nGlobal).toMatchSnapshot()
+  expect(module.__i18nGlobal).toMatchSnapshot(getCurrentTestFramework())
 
   const g = module.__i18nGlobal.pop()
   const fn = compile(g.resource.en.hello, {} as MessageCompilerContext)
@@ -227,10 +233,10 @@ test('default lang and global scope', async () => {
 })
 
 test('global scope and import', async () => {
-  const { module } = await bundleAndRun('global-scope-import.vue', bundleVite, {
+  const { module } = await bundleAndRun('global-scope-import.vue', bundler, {
     globalSFCScope: true
   })
-  expect(module.__i18nGlobal).toMatchSnapshot()
+  expect(module.__i18nGlobal).toMatchSnapshot(getCurrentTestFramework())
 
   const g = module.__i18nGlobal.pop()
   const fn = compile(g.resource.en.hello, {} as MessageCompilerContext)
@@ -238,8 +244,8 @@ test('global scope and import', async () => {
 })
 
 test('array', async () => {
-  const { module } = await bundleAndRun('array.vue', bundleVite)
-  expect(module.__i18n).toMatchSnapshot()
+  const { module } = await bundleAndRun('array.vue', bundler)
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
@@ -250,10 +256,10 @@ test('array', async () => {
 })
 
 test('AST', async () => {
-  const { module } = await bundleAndRun('basic.vue', bundleVite, {
+  const { module } = await bundleAndRun('basic.vue', bundler, {
     env: 'production'
   })
-  expect(module.__i18n).toMatchSnapshot()
+  expect(module.__i18n).toMatchSnapshot(getCurrentTestFramework())
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')

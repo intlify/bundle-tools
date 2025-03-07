@@ -191,7 +191,7 @@ const bundlerMap = {
 }
 
 export function getCurrentTestFramework() {
-  return (process.env.TEST_BUILDER as keyof typeof bundlerMap) || 'vite'
+  return (process.env.TEST_FRAMEWORK as keyof typeof bundlerMap) || 'vite'
 }
 
 export function getCurrentTestBundler() {

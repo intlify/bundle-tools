@@ -17,13 +17,13 @@ env:
 
 jobs:
   test:
-    name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
+    name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}} (${{ matrix.framework }})'
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest]
         node: [18, 20, 22]
-        builder: ['vite', 'rspack', 'webpack']
+        framework: ['vite', 'rspack', 'webpack']
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -60,4 +60,4 @@ jobs:
       - name: Testing
         run: pnpm test
         env:
-          TEST_BUILDER: ${{ matrix.builder }}
+          TEST_FRAMEWORK: ${{ matrix.framework }}

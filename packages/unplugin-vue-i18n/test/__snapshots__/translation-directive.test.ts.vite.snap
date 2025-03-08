@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`translation directive > script-setup-alias > vite 1`] = `
+exports[`translation directive > script-setup-alias 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -27,7 +27,7 @@ exports[`translation directive > script-setup-alias > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > script-setup-global-option > vite 1`] = `
+exports[`translation directive > script-setup-global-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -54,7 +54,7 @@ exports[`translation directive > script-setup-global-option > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > script-setup-local-option > vite 1`] = `
+exports[`translation directive > script-setup-local-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -81,7 +81,7 @@ exports[`translation directive > script-setup-local-option > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > script-setup-no-option > vite 1`] = `
+exports[`translation directive > script-setup-no-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -108,7 +108,7 @@ exports[`translation directive > script-setup-no-option > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > script-setup-no-use > vite 1`] = `
+exports[`translation directive > script-setup-no-use 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -135,7 +135,7 @@ exports[`translation directive > script-setup-no-use > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > script-setup-obj > vite 1`] = `
+exports[`translation directive > script-setup-obj 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -162,7 +162,7 @@ exports[`translation directive > script-setup-obj > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-alias > vite 1`] = `
+exports[`translation directive > setup-alias 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -189,7 +189,7 @@ exports[`translation directive > setup-alias > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-global-option > vite 1`] = `
+exports[`translation directive > setup-global-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -216,7 +216,7 @@ exports[`translation directive > setup-global-option > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-local-option > vite 1`] = `
+exports[`translation directive > setup-local-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -243,7 +243,7 @@ exports[`translation directive > setup-local-option > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-no-option > vite 1`] = `
+exports[`translation directive > setup-no-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -270,7 +270,7 @@ exports[`translation directive > setup-no-option > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-no-use > vite 1`] = `
+exports[`translation directive > setup-no-use 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -297,7 +297,7 @@ exports[`translation directive > setup-no-use > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-return-alias > vite 1`] = `
+exports[`translation directive > setup-return-alias 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,
@@ -324,7 +324,7 @@ exports[`translation directive > setup-return-alias > vite 1`] = `
 }"
 `;
 
-exports[`translation directive > setup-return-alias-with-obj > vite 1`] = `
+exports[`translation directive > setup-return-alias-with-obj 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
   return openBlock(), createElementBlock(
     Fragment,

@@ -1,3 +1,4 @@
+import { basename, dirname, join } from 'node:path'
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -8,6 +9,13 @@ export default defineConfig({
     }
   },
   test: {
-    globals: true
+    globals: true,
+    resolveSnapshotPath(testPath, extension) {
+      const framework = '.' + process.env.TEST_FRAMEWORK || 'vite'
+      return join(
+        join(dirname(testPath), '__snapshots__'),
+        `${basename(testPath)}${framework}${extension}`
+      )
+    }
   }
 })

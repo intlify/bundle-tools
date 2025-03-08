@@ -1,12 +1,7 @@
 import fg from 'fast-glob'
 import path from 'node:path'
 import { describe, expect, test } from 'vitest'
-import {
-  bundleAndRun,
-  getCurrentTestBundler,
-  getCurrentTestFramework,
-  isTestFramework
-} from './utils'
+import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
 
 const bundler = getCurrentTestBundler()
 
@@ -24,7 +19,7 @@ describe.skipIf(!isTestFramework('vite'))('translation directive', async () => {
       }
       const mod = await bundleAndRun(filename, bundler, options)
       const renderString = mod.module.render.toString() as string
-      expect(renderString).toMatchSnapshot(getCurrentTestFramework())
+      expect(renderString).toMatchSnapshot()
     })
   })
 })

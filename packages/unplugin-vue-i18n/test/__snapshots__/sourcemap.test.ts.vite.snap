@@ -1,0 +1,15 @@
+// Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
+
+exports[`custom blocks: json 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+
+exports[`custom blocks: json5 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+
+exports[`custom blocks: yaml 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+
+exports[`custom blocks: yml 1`] = `";;;;;;;;;;;;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAAS;AAChB,SAAO,UAAU;AACnB;"`;
+
+exports[`resource files: json 1`] = `";;;;;;;;;;;;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
+
+exports[`resource files: json5 1`] = `";;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;
+
+exports[`resource files: yaml 1`] = `";;;;;;;AAGA,IAAI,OAAO,WAAW,aAAa;AACjC,SAAO,SAASA;AAChB,SAAO,UAAU;AACnB;"`;

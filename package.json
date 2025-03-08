@@ -114,7 +114,7 @@
     "build:example:rspack": "pnpm build && rspack --config ./examples/rspack/rsbuild.config.js",
     "play:vite": "vite examples/vite -c examples/vite/vite.config.ts",
     "play:webpack": "pnpm run build:unplugin && webpack serve --config ./examples/webpack/webpack.config.js",
-    "play:rspack": "rspack dev --config ./examples/rspack/rsbuild.config.js",
+    "play:rspack": "rspack dev --config ./examples/rspack/rspack.config.js",
     "preview:vite": "vite preview examples/vite --outDir dist",
     "check-install": "jiti scripts/playwright.ts",
     "clean": "run-p \"clean:*\"",

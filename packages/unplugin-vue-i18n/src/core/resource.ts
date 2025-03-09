@@ -243,56 +243,31 @@ export function resourcePlugin(
     },
 
     webpack(compiler) {
-      isProduction = compiler.options.mode !== 'development'
-      sourceMap = !!compiler.options.devtool
-      debug(`webpack: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
-
-      compiler.options.resolve = normalizeConfigResolveAlias(
-        compiler.options.resolve,
-        meta.framework
-      )
-      ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-        getVueI18nAliasPath({
-          ssr: ssrBuild,
-          runtimeOnly
-        })
-      debug(
-        `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
-          ssr: ssrBuild,
-          runtimeOnly
-        })}`
-      )
-
-      loadWebpack().then(webpack => {
-        if (webpack) {
-          compiler.options.plugins!.push(
-            new webpack.DefinePlugin({
-              __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
-              __INTLIFY_PROD_DEVTOOLS__: 'false'
-            })
-          )
-          debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
-        } else {
-          debug('ignore vue-i18n feature flags with webpack.DefinePlugin')
-        }
+      webpackLike(compiler, 'webpack', {
+        isProduction,
+        meta,
+        sourceMap,
+        getVueI18nAliasPath,
+        vueI18nAliasName,
+        ssrBuild,
+        runtimeOnly,
+        fullInstall,
+        filter
       })
+    },
 
-      /**
-       * NOTE:
-       * After i18n resources are transformed into javascript by transform, avoid further transforming by webpack.
-       */
-      if (compiler.options.module) {
-        compiler.options.module.rules.push({
-          test: /\.(json5?|ya?ml)$/,
-          type: 'javascript/auto',
-          include(resource: string) {
-            return filter(resource)
-          }
-        })
-      }
-
-      // TODO:
-      //  HMR for webpack
+    rspack(compiler) {
+      webpackLike(compiler, 'rspack', {
+        isProduction,
+        meta,
+        sourceMap,
+        getVueI18nAliasPath,
+        vueI18nAliasName,
+        ssrBuild,
+        runtimeOnly,
+        fullInstall,
+        filter
+      })
     },
 
     resolveId(id: string, importer: string) {
@@ -300,6 +275,10 @@ export function resourcePlugin(
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
         return asVirtualId(id, meta.framework)
       }
+    },
+
+    loadInclude(id: string) {
+      return INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)
     },
 
     async load(id: string) {
@@ -477,6 +456,90 @@ function getGenerator(ext: string, defaultGen = generateJSON) {
         : defaultGen
 }
 
+function webpackLike(
+  compiler:
+    | Parameters<NonNullable<UnpluginOptions['rspack']>>[0]
+    | Parameters<NonNullable<UnpluginOptions['webpack']>>[0],
+  framework: 'webpack' | 'rspack',
+  {
+    isProduction,
+    sourceMap,
+    meta,
+    getVueI18nAliasPath,
+    vueI18nAliasName,
+    ssrBuild,
+    runtimeOnly,
+    fullInstall,
+    filter
+  }: Pick<ResolvedOptions, 'ssrBuild' | 'runtimeOnly' | 'fullInstall'> & {
+    meta: UnpluginContextMeta
+    isProduction: boolean
+    sourceMap: boolean
+    vueI18nAliasName: string
+    getVueI18nAliasPath: (opts: {
+      ssr?: boolean | undefined
+      runtimeOnly?: boolean | undefined
+    }) => string
+    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
+    filter: (id: string | unknown) => boolean
+  }
+) {
+  isProduction = compiler.options.mode !== 'development'
+  sourceMap = !!compiler.options.devtool
+  debug(
+    `${framework}: isProduction = ${isProduction}, sourceMap = ${sourceMap}`
+  )
+
+  compiler.options.resolve = normalizeConfigResolveAlias(
+    compiler.options.resolve,
+    meta.framework
+  )
+  ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
+    getVueI18nAliasPath({
+      ssr: ssrBuild,
+      runtimeOnly
+    })
+  debug(
+    `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
+      ssr: ssrBuild,
+      runtimeOnly
+    })}`
+  )
+
+  const loader = framework === 'webpack' ? loadWebpack : loadRspack
+  loader().then(mod => {
+    if (mod) {
+      compiler.options.plugins!.push(
+        // @ts-expect-error type issue
+        new mod.DefinePlugin({
+          __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
+          __INTLIFY_PROD_DEVTOOLS__: 'false'
+        })
+      )
+      debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
+    } else {
+      debug(`ignore vue-i18n feature flags with ${framework}.DefinePlugin`)
+    }
+  })
+
+  /**
+   * NOTE:
+   * After i18n resources are transformed into javascript by transform, avoid further transforming by webpack.
+   */
+  if (compiler.options.module) {
+    compiler.options.module.rules.push({
+      test: /\.(json5?|ya?ml)$/,
+      type: 'javascript/auto',
+      include(resource: string) {
+        return filter(resource)
+      }
+    })
+  }
+
+  // TODO:
+  //  HMR for webpack
+}
+
 function normalizeConfigResolveAlias(
   resolve: any,
   framework: UnpluginContextMeta['framework']
@@ -485,17 +548,19 @@ function normalizeConfigResolveAlias(
     return resolve
   }
 
+  const webpackLike = framework === 'webpack' || framework === 'rspack'
+
   if (!resolve) {
     if (framework === 'vite') {
       return { alias: [] }
-    } else if (framework === 'webpack') {
+    } else if (webpackLike) {
       return { alias: {} }
     }
   } else if (!resolve.alias) {
     if (framework === 'vite') {
       resolve.alias = []
       return resolve
-    } else if (framework === 'webpack') {
+    } else if (webpackLike) {
       resolve.alias = {}
       return resolve
     }
@@ -503,13 +568,23 @@ function normalizeConfigResolveAlias(
 }
 
 async function loadWebpack() {
-  let webpack = null
   try {
-    webpack = await import('webpack').then(m => m.default || m)
+    const mod = await import('webpack')
+    return mod.default || mod
   } catch (_e) {
     warn(`webpack not found, please install webpack.`)
   }
-  return webpack
+  return null
+}
+
+async function loadRspack() {
+  try {
+    const { rspack } = await import('@rspack/core')
+    return rspack
+  } catch (_e) {
+    warn(`rspack not found, please install rspack.`)
+  }
+  return null
 }
 
 async function generateBundleResources(
@@ -596,10 +671,10 @@ async function getCode(
     raiseError(`unexpected index: ${index}`)
   }
 
-  if (framework === 'webpack') {
+  if (framework === 'webpack' || framework === 'rspack') {
     if (issuerPath) {
       // via `src=xxx` of SFC
-      debug(`getCode (webpack) ${index} via issuerPath`, issuerPath)
+      debug(`getCode (${framework}) ${index} via issuerPath`, issuerPath)
       return await getRaw(filename)
     } else {
       const result = parser(await getRaw(filename), {
@@ -609,7 +684,7 @@ async function getCode(
       const block = result.descriptor.customBlocks[index!]
       if (block) {
         const code = block.src ? await getRaw(block.src) : block.content
-        debug(`getCode (webpack) ${index} from SFC`, code)
+        debug(`getCode (${framework}) ${index} from SFC`, code)
         return code
       } else {
         return source

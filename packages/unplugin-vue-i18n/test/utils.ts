@@ -10,13 +10,15 @@ import webpack from 'webpack'
 import merge from 'webpack-merge'
 import vitePlugin from '../src/vite'
 import webpackPlugin from '../src/webpack'
+import rspackPlugin from '../src/rspack'
 
 import type { PluginOptions } from '../src/types'
+import rspack, { RspackOptions } from '@rspack/core'
 
 let ignoreIds: string[] | null = null
 
 type BundleResolve = {
-  type: 'vite' | 'webpack'
+  type: 'vite' | 'webpack' | 'rspack'
   code: string
   map?: any
   stats?: webpack.Stats
@@ -97,6 +99,23 @@ export async function bundleVite(
 export function bundleWebpack(
   fixture: string,
   options: Record<string, unknown> = {}
+) {
+  return bundleWebpackLike(fixture, webpackPlugin, webpack, 'webpack', options)
+}
+
+export function bundleRspack(
+  fixture: string,
+  options: Record<string, unknown> = {}
+) {
+  return bundleWebpackLike(fixture, rspackPlugin, rspack, 'rspack', options)
+}
+
+export function bundleWebpackLike(
+  fixture: string,
+  pluginFn: typeof rspackPlugin | typeof webpackPlugin,
+  compilerFn: typeof rspack | typeof webpack,
+  framework: 'webpack' | 'rspack',
+  options: Record<string, unknown> = {}
 ): Promise<BundleResolve> {
   const VueLoader = (
     options.vueLoader ? options.vueLoader : VueLoaderPlugin
@@ -111,7 +130,7 @@ export function bundleWebpack(
   ]
   const sourcemap = isBoolean(options.sourcemap) || true
 
-  const baseConfig: webpack.Configuration = {
+  const baseConfig: RspackOptions = {
     mode: 'development',
     devtool: sourcemap ? 'source-map' : false,
     entry: resolve(__dirname, input),
@@ -132,19 +151,19 @@ export function bundleWebpack(
         }
       ]
     },
-    plugins: [new VueLoader(), webpackPlugin({ include, ...options })]
+    plugins: [new VueLoader(), pluginFn({ include, ...options })]
   }
 
   // @ts-ignore
   const config = merge({}, baseConfig)
   // @ts-ignore
-  const compiler = webpack(config)
+  const compiler = compilerFn(config)
 
   const mfs = new memoryfs()
   compiler.outputFileSystem = mfs
 
   return new Promise((resolve, reject) => {
-    compiler.run((err, stats: any) => {
+    compiler.run((err: Error, stats: any) => {
       if (err) {
         return reject(err)
       }
@@ -152,13 +171,31 @@ export function bundleWebpack(
         return reject(new Error(stats.toJson().errors.join(' | ')))
       }
       resolve({
-        type: 'webpack',
+        type: framework,
         code: mfs.readFileSync('/bundle.js').toString(),
         map: JSON.parse(mfs.readFileSync('/bundle.js.map').toString()),
         stats
       })
     })
   })
+}
+
+export function isTestFramework(framework: 'vite' | 'webpack' | 'rspack') {
+  return getCurrentTestFramework() === framework
+}
+
+const bundlerMap = {
+  vite: bundleVite,
+  webpack: bundleWebpack,
+  rspack: bundleRspack
+}
+
+export function getCurrentTestFramework() {
+  return (process.env.TEST_FRAMEWORK as keyof typeof bundlerMap) || 'vite'
+}
+
+export function getCurrentTestBundler() {
+  return bundlerMap[getCurrentTestFramework()]
 }
 
 export async function bundleAndRun(

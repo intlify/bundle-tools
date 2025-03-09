@@ -38,12 +38,12 @@
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "source-map-js": "^1.0.2",
-    "unplugin": "^1.1.0",
+    "unplugin": "^2.2.0",
     "vue": "^3.4"
   },
   "devDependencies": {
-    "unbuild": "^2.0.0",
-    "@types/node": "^20.14.8"
+    "@types/node": "^20.14.8",
+    "unbuild": "^2.0.0"
   },
   "engines": {
     "node": ">= 18"
@@ -59,6 +59,7 @@
     "unplugin",
     "transform",
     "webpack",
+    "rspack",
     "vite",
     "vue",
     "vue-i18n"
@@ -79,6 +80,10 @@
     "./webpack": {
       "import": "./lib/webpack.mjs",
       "require": "./lib/webpack.cjs"
+    },
+    "./rspack": {
+      "import": "./lib/rspack.mjs",
+      "require": "./lib/rspack.cjs"
     },
     "./types": {
       "import": {

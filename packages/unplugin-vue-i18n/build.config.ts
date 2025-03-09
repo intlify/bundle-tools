@@ -24,18 +24,22 @@ export default defineBuildConfig({
     {
       name: 'webpack',
       input: 'src/webpack'
+    },
+    {
+      name: 'rspack',
+      input: 'src/rspack'
     }
   ],
   rollup: {
     emitCJS: true
   },
-  externals: ['vite', 'webpack'],
+  externals: ['vite', 'webpack', '@rspack/core'],
   hooks: {
     'build:done': async () => {
       await Promise.all([
         rm(resolve(lib, 'types.cjs')),
         rm(resolve(lib, 'types.mjs')),
-        ...['vite', 'webpack'].map(async name => {
+        ...['vite', 'webpack', 'rspack'].map(async name => {
           for (const ext of ['d.ts', 'd.cts']) {
             const path = resolve(lib, `${name}.${ext}`)
             const content = await readFile(path, 'utf-8')

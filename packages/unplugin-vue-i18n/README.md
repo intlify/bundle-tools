@@ -60,6 +60,25 @@ module.exports = {
 <br></details>
 
 <details>
+<summary>Rspack</summary><br>
+
+```ts
+const VueI18nPlugin = require('@intlify/unplugin-vue-i18n/rspack')
+
+// rspack.config.js
+module.exports = {
+  /* ... */
+  plugins: [
+    VueI18nPlugin({
+      /* options */
+    })
+  ]
+}
+```
+
+<br></details>
+
+<details>
 <summary>Nuxt</summary><br>
 
 ```ts
@@ -379,7 +398,7 @@ If you are using petite-vue-i18n, you will need to set this value.
 
 Whether locale messages should be compiled by JIT (Just in Time) compilation with vue-i18n's message compiler.
 
-JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale messages with programatic.
+JIT compilation has been supported since vue-i18n v9.3. This means that since v9 was released until now, the message compiler compiles to executable JavaScript code, however it did not work in the CSP environment. Also, since this was an AOT (Ahead of Time) compilation, it was not possible to dynamically retrieve locale messages from the back-end Database and compose locale messages with programmatic.
 
 > [!WARNING]
 > Enabling JIT compilation causes the message compiler to generate AST objects for locale messages instead of JavaScript code. If you pre-compile locale messages with a tool such as the [Intlify CLI](https://github.com/intlify/cli) and import them dynamically, you need to rebuild that resource.
@@ -424,6 +443,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
   ```
   - vite config: `resolve.alias`
   - webpack config: `resolve.alias`
+  - rspack config: `resolve.alias`
   ```
 
   If `false` is specified, Vue I18n (vue-i18n) package.json `module` field will be used.

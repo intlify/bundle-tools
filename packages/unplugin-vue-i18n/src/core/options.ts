@@ -5,7 +5,7 @@ import type { PluginOptions } from '../types'
 import type { TranslationDirectiveResolveIndetifier } from '../vue'
 
 export function resolveOptions(options: PluginOptions) {
-  const moduleType = (options.module || 'vue-i18n') as string
+  const moduleType = options.module || 'vue-i18n'
 
   // normalize for `options.onlyLocales`
   let onlyLocales: string[] = []

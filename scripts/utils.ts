@@ -2,7 +2,7 @@ import path from 'path'
 import fs from 'fs/promises'
 import semver from 'semver'
 import prompts from 'prompts'
-import execa from 'execa'
+import { exec, Options } from 'tinyexec'
 import { loadConfig, Changelog } from '@kazupon/lerna-changelog'
 
 export type PackageJson = {
@@ -14,7 +14,7 @@ export type PackageJson = {
 
 export type Mode = 'single' | 'batch'
 export type Logger = (...args: any[]) => void
-export type Incrementer = (i: any) => string
+export type Incrementer = (i: any) => string | null
 
 const VersionIncrements = [
   'patch',
@@ -26,8 +26,15 @@ const VersionIncrements = [
   'prerelease'
 ] as const
 
-export const run = (bin, args, opts = {}) =>
-  execa(bin, args, { stdio: 'inherit', ...opts })
+export const run = (
+  command: string,
+  args?: string[],
+  opts: Partial<Options['nodeOptions']> = {}
+) =>
+  exec(command, args, {
+    nodeOptions: { stdio: 'inherit', ...opts },
+    throwOnError: true
+  })
 
 export async function getRootPath() {
   const { stdout: rootPath } = await run(

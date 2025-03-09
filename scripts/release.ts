@@ -18,6 +18,7 @@ import {
   run,
   writeChangelog
 } from './utils'
+import { NonZeroExitError } from 'tinyexec'
 
 import type { Logger, PackageJson } from './utils'
 
@@ -26,8 +27,8 @@ const isDryRun = args.dry
 const skipBuild = args.skipBuild
 const skipChangelog = args.skipChangelog
 
-const dryRun = (bin, args, opts = {}) =>
-  console.log(chalk.yellow(`[dryrun] ${bin} ${args.join(' ')}`), opts)
+const dryRun = (command: string, args: string[] = [], opts = {}) =>
+  console.log(chalk.yellow(`[dryrun] ${command} ${args.join(' ')}`), opts)
 const runIfNotDry = isDryRun ? dryRun : run
 
 async function releasePackage(log: Logger) {
@@ -84,7 +85,7 @@ async function releasePackage(log: Logger) {
   }
 
   log('Generating changelog...')
-  let changelog: string | null = null
+  let changelog: string | undefined
   if (!skipChangelog) {
     changelog = await renderChangelog(fromTag, releaseVersion, pkgName)
     if (!isDryRun) {
@@ -106,7 +107,7 @@ async function releasePackage(log: Logger) {
   }
 
   log('Publishing package...')
-  await publishPackage(targetVersion, pkgName, runIfNotDry)
+  await publishPackage(targetVersion, pkgName)
 
   log('Pushing tag to GitHub...')
   await runIfNotDry('git', ['tag', tag])
@@ -120,7 +121,7 @@ async function releasePackage(log: Logger) {
       tag,
       releaseVersion,
       changelog,
-      isPrelease(targetVersion)
+      isPrerelease(targetVersion)
     )
   } else {
     console.log(`(skipped)`)
@@ -152,7 +153,7 @@ async function updateVersion(
   return await fs.writeFile(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
 }
 
-async function publishPackage(version: string, pkgName: string, runIfNotDry) {
+async function publishPackage(version: string, pkgName: string) {
   const publicArgs = ['publish', '--access', 'public', '--no-git-checks']
   if (args.tag) {
     publicArgs.push(`--tag`, args.tag)
@@ -162,7 +163,10 @@ async function publishPackage(version: string, pkgName: string, runIfNotDry) {
     console.log(chalk.green(`Successfully published ${pkgName}@${version}`))
   } catch (e) {
     console.error(e)
-    if (e.stderr.match(/previously published/)) {
+    if (
+      e instanceof NonZeroExitError &&
+      e.output?.stderr.match(/previously published/)
+    ) {
       console.log(chalk.red(`Skipping already published: ${pkgName}`))
     } else {
       throw e
@@ -170,7 +174,7 @@ async function publishPackage(version: string, pkgName: string, runIfNotDry) {
   }
 }
 
-function isPrelease(version: string) {
+function isPrerelease(version: string) {
   return (
     version.includes('beta') ||
     version.includes('alpha') ||

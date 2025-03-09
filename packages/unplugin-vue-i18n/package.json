@@ -42,7 +42,7 @@
     "vue": "^3.4"
   },
   "devDependencies": {
-    "@types/node": "^20.14.8",
+    "@types/node": "^22.0.0",
     "unbuild": "^2.0.0"
   },
   "engines": {

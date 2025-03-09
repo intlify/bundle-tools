@@ -7,7 +7,6 @@ import {
   assign,
   generateCodeFrame,
   isEmptyObject,
-  isNumber,
   isString
 } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
@@ -59,6 +58,15 @@ export function resourcePlugin(
   // webpack cannot dynamically resolve vue compiler, so use the compiler statically with import syntax
   const getSfcParser = () => {
     return vuePlugin ? getVueCompiler(vuePlugin).parse : parse
+  }
+
+  const resourcePaths = new Set<string>()
+  if (opts.include) {
+    for (const inc of opts.include) {
+      for (const resourcePath of fg.sync(inc)) {
+        resourcePaths.add(resourcePath)
+      }
+    }
   }
 
   return {
@@ -221,27 +229,26 @@ export function resourcePlugin(
       return INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)
     },
 
-    async load(id: string) {
+    load(id: string) {
       debug('load', id)
       if (
         INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
-        opts.include
+        resourcePaths.size > 0
       ) {
-        const resourcePaths = new Set<string>()
-        for (const inc of opts.include) {
-          for (const resourcePath of await fg(inc)) {
-            resourcePaths.add(resourcePath)
-          }
-        }
-
         const code = generateBundleResources(resourcePaths, prod, opts)
 
         // TODO: support virtual import identifier
         // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
-        return {
-          code,
-          map: { mappings: '' }
+        if (meta.framework === 'vite') {
+          return { code, map: { mappings: '' } }
         }
+
+        // watch resources to invalidate on change (webpack)
+        for (const p of resourcePaths) {
+          this.addWatchFile(p)
+        }
+
+        return { code }
       }
     },
 
@@ -285,11 +292,10 @@ export function resourcePlugin(
 
           if (code === generatedCode) return
 
-          return {
-            code: generatedCode,
-            // prettier-ignore
-            map: { mappings: '' }
+          if (meta.framework === 'vite') {
+            return { code: generatedCode, map: { mappings: '' } }
           }
+          return { code: generatedCode }
         } else {
           // TODO: support virtual import identifier
           // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
@@ -347,11 +353,10 @@ export function resourcePlugin(
 
           if (code === generatedCode) return
 
-          return {
-            code: generatedCode,
-            // prettier-ignore
-            map: { mappings: '' }
+          if (meta.framework === 'vite') {
+            return { code: generatedCode, map: { mappings: '' } }
           }
+          return { code: generatedCode }
         }
       }
     }
@@ -518,7 +523,7 @@ function getCode(
   parser: ReturnType<typeof getVueCompiler>['parse'],
   framework: UnpluginContextMeta['framework'] = 'vite'
 ): string {
-  if (!isNumber(index)) {
+  if (index == null) {
     raiseError(`unexpected index: ${index}`)
   }
 
@@ -566,30 +571,28 @@ function getOptions(
     filename,
     jit: true,
     env: mode,
-    onWarn: msg => {
-      warn(`${filename} ${msg}`)
-    },
+    onWarn: msg => warn(`${filename} ${msg}`),
     onError: (msg, extra) => {
       const codeFrame = generateCodeFrame(
         extra?.source || extra?.location?.source || '',
         extra?.location?.start.column,
         extra?.location?.end.column
       )
-      const errMssage = `${msg} (error code: ${extra?.code}) in ${filename}
+      const errMessage = `${msg} (error code: ${extra?.code}) in ${filename}
   target message: ${extra?.source}
   target message path: ${extra?.path}
 
   ${codeFrame}
 `
-      error(errMssage)
-      throw new Error(errMssage)
+      error(errMessage)
+      throw new Error(errMessage)
     }
   }
 
   if (isCustomBlock(query)) {
     return assign(baseOptions, {
       type: 'sfc' as const,
-      locale: isString(query.locale) ? query.locale : '',
+      locale: query.locale ?? '',
       isGlobal: opts.globalSFCScope || !!query.global
     })
   }

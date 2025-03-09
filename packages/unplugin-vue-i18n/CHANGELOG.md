@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@7.0.0-beta.1 (2025-03-09)
+
+#### :star: Features
+* [#444](https://github.com/intlify/bundle-tools/pull/444) feat: support rspack ([@BobbieGoede](https://github.com/BobbieGoede))
+
+#### Committers: 1
+- Bobbie Goede ([@BobbieGoede](https://github.com/BobbieGoede))
+
+
 ## @intlify/unplugin-vue-i18n@7.0.0-beta.0 (2025-03-05)
 
 #### :star: Features

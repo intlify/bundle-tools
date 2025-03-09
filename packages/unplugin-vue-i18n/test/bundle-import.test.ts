@@ -1,5 +1,5 @@
 import { resolve } from 'pathe'
-import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
+import { bundleAndRun, getCurrentTestBundler } from './utils'
 import { createMessageContext, compile } from '@intlify/core-base'
 import { expect, test } from 'vitest'
 import type { MessageCompilerContext } from '@intlify/core-base'
@@ -10,7 +10,7 @@ import type { MessageCompilerContext } from '@intlify/core-base'
     fixture: '@intlify/unplugin-vue-i18n/messages'
   }
 ].forEach(({ testcase, input, fixture }) => {
-  test.skipIf(!isTestFramework('vite'))(testcase, async () => {
+  test(testcase, async () => {
     const options = {
       input,
       strictMessage: false,

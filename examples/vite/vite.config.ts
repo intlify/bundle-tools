@@ -1,7 +1,10 @@
-import path from 'path'
+import path, { dirname } from 'path'
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import vueI18n from '../../packages/unplugin-vue-i18n/src/vite'
+import { fileURLToPath } from 'url'
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 function transformI18nBlock(source) {
   const sourceCopy = source

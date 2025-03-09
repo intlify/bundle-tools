@@ -1,96 +1,82 @@
+import defu from 'defu'
 import { normalize } from 'pathe'
-import { isString, isBoolean, isArray } from '@intlify/shared'
+import { toArray } from '../utils/misc'
 
 import type { PluginOptions } from '../types'
 import type { TranslationDirectiveResolveIndetifier } from '../vue'
 
+/**
+ * Creates a path to the correct vue-i18n build used as alias (e.g. `vue-i18n/dist/vue-i18n.runtime.node.js`)
+ */
+const getVueI18nAliasPath = (opts: {
+  runtimeOnly: boolean
+  ssr: boolean
+  module: string
+}) => {
+  const filename = [
+    opts.module,
+    opts.runtimeOnly ? 'runtime' : '',
+    !opts.ssr ? 'esm-bundler' : 'node',
+    'js'
+  ]
+    .filter(Boolean)
+    .join('.')
+
+  return `${opts.module}/dist/${filename}`
+}
+
+/**
+ * Applies default values to user options and normalizes to narrowed type
+ */
 export function resolveOptions(options: PluginOptions) {
-  const moduleType = options.module || 'vue-i18n'
+  const res = defu(options, {
+    ssr: false,
+    module: 'vue-i18n',
+    escapeHtml: false,
+    onlyLocales: [] as string[],
+    fullInstall: true,
+    runtimeOnly: true,
+    strictMessage: true,
+    allowDynamic: false,
+    globalSFCScope: false,
+    forceStringify: false,
+    defaultSFCLang: 'json',
+    dropMessageCompiler: false,
+    transformI18nBlock: undefined,
+    optimizeTranslationDirective: false
+  })
 
-  // normalize for `options.onlyLocales`
-  let onlyLocales: string[] = []
-  if (options.onlyLocales) {
-    onlyLocales = isArray(options.onlyLocales)
-      ? options.onlyLocales
-      : [options.onlyLocales]
-  }
+  const include = res.include
+    ? toArray(res.include).map(item => normalize(item))
+    : undefined
 
-  // normalize for `options.include`
-  let include = options.include
-  let exclude = undefined
-  if (include) {
-    if (isArray(include)) {
-      include = include.map(item => normalize(item))
-    } else if (isString(include)) {
-      include = normalize(include)
-    }
-  } else {
-    exclude = '**/**'
-  }
+  const exclude = res.include ? undefined : '**/**'
 
-  const forceStringify = !!options.forceStringify
-  const defaultSFCLang = isString(options.defaultSFCLang)
-    ? options.defaultSFCLang
-    : 'json'
-  const globalSFCScope = !!options.globalSFCScope
+  const onlyLocales = toArray(res.onlyLocales)
 
-  const runtimeOnly = isBoolean(options.runtimeOnly)
-    ? options.runtimeOnly
-    : true
-
-  const dropMessageCompiler = !!options.dropMessageCompiler
-
-  // prettier-ignore
-  const fullInstall = moduleType === 'vue-i18n'
-    ? isBoolean(options.fullInstall)
-      ? options.fullInstall
-      : true
-    : false
-
-  const ssrBuild = !!options.ssr
-
-  const allowDynamic = !!options.allowDynamic
-
-  const strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
-
-  const escapeHtml = !!options.escapeHtml
+  const fullInstall = res.module !== 'vue-i18n' ? false : res.fullInstall
 
   const optimizeTranslationDirective =
-    isString(options.optimizeTranslationDirective) ||
-    isArray(options.optimizeTranslationDirective)
-      ? options.optimizeTranslationDirective
-      : !!options.optimizeTranslationDirective
+    typeof res.optimizeTranslationDirective === 'boolean'
+      ? res.optimizeTranslationDirective
+      : toArray(res.optimizeTranslationDirective)
 
   const translationIdentifiers = new Map<
     string,
     TranslationDirectiveResolveIndetifier
   >()
 
-  const transformI18nBlock =
-    typeof options.transformI18nBlock === 'function'
-      ? options.transformI18nBlock
-      : null
+  const vueI18nAliasPath = getVueI18nAliasPath(res)
 
   return {
+    ...res,
     include,
     exclude,
-    module: moduleType,
-    onlyLocales,
-    forceStringify,
-    defaultSFCLang,
-    globalSFCScope,
-    runtimeOnly,
-    dropMessageCompiler,
     fullInstall,
-    ssrBuild,
-    allowDynamic,
-    strictMessage,
-    escapeHtml,
-    optimizeTranslationDirective,
+    onlyLocales,
+    vueI18nAliasPath,
     translationIdentifiers,
-    transformI18nBlock
+    optimizeTranslationDirective
   }
 }
 

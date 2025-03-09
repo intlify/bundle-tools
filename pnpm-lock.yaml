@@ -261,6 +261,9 @@ importers:
       debug:
         specifier: ^4.3.3
         version: 4.3.5
+      defu:
+        specifier: ^6.1.4
+        version: 6.1.4
       fast-glob:
         specifier: ^3.2.12
         version: 3.3.2

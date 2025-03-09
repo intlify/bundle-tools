@@ -13,7 +13,7 @@ import {
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
-import { promises as fs } from 'node:fs'
+import fs from 'node:fs'
 import { parse as parsePath } from 'pathe'
 import { parse } from 'vue/compiler-sfc'
 import {
@@ -30,13 +30,13 @@ import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
 import type { RawSourceMap } from 'source-map-js'
 import type {
   RollupPlugin,
-  TransformResult,
   UnpluginContextMeta,
   UnpluginOptions
 } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
-import type { PluginOptions } from '../types'
+import type { SFCLangFormat } from '../types'
 import type { VueQuery } from '../vue'
+import { MakeAsync, TransformHook } from 'rollup'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
@@ -47,12 +47,11 @@ export function resourcePlugin(
   opts: ResolvedOptions,
   meta: UnpluginContextMeta
 ): UnpluginOptions {
-  const vueI18nAliasPath = getVueI18nAliasPath(opts)
   const filter = createFilter(opts.include, opts.exclude)
 
   debug(`vue-i18n alias name: ${opts.module}`)
 
-  let isProduction = false
+  let prod = false
   let sourceMap = false
 
   let vuePlugin: RollupPlugin | null = null
@@ -89,7 +88,7 @@ export function resourcePlugin(
         const aliasConfig = {
           resolve: {
             alias: {
-              [opts.module]: vueI18nAliasPath
+              [opts.module]: opts.vueI18nAliasPath
             }
           }
         }
@@ -104,11 +103,11 @@ export function resourcePlugin(
           return
         }
 
-        isProduction = config.isProduction
+        prod = config.isProduction
         sourceMap =
           config.command === 'build' ? !!config.build.sourcemap : false
         debug(
-          `configResolved: isProduction = ${isProduction}, sourceMap = ${sourceMap}`
+          `configResolved: isProduction = ${prod}, sourceMap = ${sourceMap}`
         )
 
         // json transform handling
@@ -147,37 +146,30 @@ export function resourcePlugin(
          */
         const esbuildPlugin = getVitePlugin(config, 'vite:esbuild')
         if (esbuildPlugin) {
-          const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
-          // @ts-ignore
+          const orgTransform =
+            esbuildPlugin.transform! as MakeAsync<TransformHook> // backup @rollup/plugin-json
+
           esbuildPlugin.transform = async function (code: string, id: string) {
-            // @ts-expect-error
-            const result = (await orgTransform!.apply(this, [
-              code,
-              id
-            ])) as TransformResult
+            const result = await orgTransform!.apply(this, [code, id])
             if (result == null) {
               return result
             }
 
             const { filename, query } = parseVueRequest(id)
             if (!query.vue && filter(id) && /\.[c|m]?ts$/.test(id)) {
-              const [_code, inSourceMap]: [string, RawSourceMap | undefined] =
-                isString(result)
-                  ? [result, undefined]
-                  : [result.code, result.map as RawSourceMap]
+              const [_code, inSourceMap] = isString(result)
+                ? [result, undefined]
+                : [result.code!, result.map as RawSourceMap]
 
-              let langInfo = opts.defaultSFCLang
-              langInfo = parsePath(filename)
-                .ext as Required<PluginOptions>['defaultSFCLang']
+              const langInfo = parsePath(filename).ext as SFCLangFormat
 
               const generate = getGenerator(langInfo)
-              const parseOptions = getOptions(
-                filename,
-                isProduction,
-                query as Record<string, unknown>,
+              const parseOptions = getOptions(filename, prod, query, {
+                ...opts,
                 sourceMap,
-                { ...opts, jit: true, inSourceMap, transformI18nBlock: null }
-              ) as CodeGenOptions
+                inSourceMap,
+                transformI18nBlock: undefined
+              })
               debug('parseOptions', parseOptions)
 
               const { code: generatedCode, map } = generate(_code, parseOptions)
@@ -211,11 +203,11 @@ export function resourcePlugin(
     },
 
     webpack(compiler) {
-      webpackLike(compiler, { ...opts, meta, vueI18nAliasPath, filter })
+      webpackLike(compiler, { ...opts, meta, filter })
     },
 
     rspack(compiler) {
-      webpackLike(compiler, { ...opts, meta, vueI18nAliasPath, filter })
+      webpackLike(compiler, { ...opts, meta, filter })
     },
 
     resolveId(id: string, importer: string) {
@@ -235,19 +227,15 @@ export function resourcePlugin(
         INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
         opts.include
       ) {
-        let resourcePaths = [] as string[]
-        const includePaths = toArray(opts.include)
-        for (const inc of includePaths) {
-          resourcePaths = [...resourcePaths, ...(await fg(inc))]
+        const resourcePaths = new Set<string>()
+        for (const inc of opts.include) {
+          for (const resourcePath of await fg(inc)) {
+            resourcePaths.add(resourcePath)
+          }
         }
-        resourcePaths = resourcePaths.filter(
-          (el, pos) => resourcePaths.indexOf(el) === pos
-        )
-        const code = await generateBundleResources(
-          resourcePaths,
-          isProduction,
-          opts
-        )
+
+        const code = generateBundleResources(resourcePaths, prod, opts)
+
         // TODO: support virtual import identifier
         // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
         return {
@@ -280,17 +268,15 @@ export function resourcePlugin(
 
       if (!query.vue) {
         if (/\.(json5?|ya?ml|[c|m]?js)$/.test(id) && filter(id)) {
-          langInfo = parsePath(filename)
-            .ext as Required<PluginOptions>['defaultSFCLang']
+          langInfo = parsePath(filename).ext as SFCLangFormat
 
           const generate = getGenerator(langInfo)
-          const parseOptions = getOptions(
-            filename,
-            isProduction,
-            query as Record<string, unknown>,
+          const parseOptions = getOptions(filename, prod, query, {
+            ...opts,
             sourceMap,
-            { ...opts, inSourceMap, jit: true, transformI18nBlock: null }
-          ) as CodeGenOptions
+            inSourceMap,
+            transformI18nBlock: undefined
+          })
           debug('parseOptions', parseOptions)
 
           const { code: generatedCode, map } = generate(code, parseOptions)
@@ -311,14 +297,14 @@ export function resourcePlugin(
       } else {
         // for Vue SFC
         if (isCustomBlock(query)) {
-          if (isString(query.lang)) {
+          if (query.lang) {
             langInfo = (
               query.src
                 ? query.lang === 'i18n'
                   ? opts.defaultSFCLang
                   : query.lang
                 : query.lang
-            ) as Required<PluginOptions>['defaultSFCLang']
+            ) as SFCLangFormat
           } else if (opts.defaultSFCLang) {
             langInfo = opts.defaultSFCLang
           }
@@ -328,22 +314,16 @@ export function resourcePlugin(
             ? generateJSON
             : generateYAML
 
-          const parseOptions = getOptions(
-            filename,
-            isProduction,
-            query as Record<string, unknown>,
+          const parseOptions = getOptions(filename, prod, query, {
+            ...opts,
             sourceMap,
-            {
-              ...opts,
-              jit: true,
-              inSourceMap,
-              allowDynamic: false,
-              transformI18nBlock: null
-            }
-          ) as CodeGenOptions
+            inSourceMap,
+            allowDynamic: false,
+            transformI18nBlock: undefined
+          })
           debug('parseOptions', parseOptions)
 
-          let source = await getCode(
+          let source = getCode(
             code,
             filename,
             sourceMap,
@@ -378,33 +358,20 @@ export function resourcePlugin(
   } as UnpluginOptions
 }
 
-function getGenerator(ext: string, defaultGen = generateJSON) {
-  // prettier-ignore
-  return /\.?json5?$/.test(ext)
-    ? generateJSON
-    : /\.ya?ml$/.test(ext)
-      ? generateYAML
-      : /\.([c|m]?js|[c|m]?ts)$/.test(ext)
-        ? generateJavaScript
-        : defaultGen
-}
+function getGenerator(ext: string) {
+  if (/\.?json5?$/.test(ext)) {
+    return generateJSON
+  }
 
-/**
- * Creates a path to the correct vue-i18n build used as alias (e.g. `vue-i18n/dist/vue-i18n.runtime.node.js`)
- */
-const getVueI18nAliasPath = (opts: ResolvedOptions) => {
-  const runtime = opts.runtimeOnly ? 'runtime' : ''
-  const format = !opts.ssrBuild ? 'esm-bundler' : 'node'
+  if (/\.ya?ml$/.test(ext)) {
+    return generateYAML
+  }
 
-  const filename = [opts.module, runtime, format, 'js']
-    .filter(Boolean)
-    .join('.')
+  if (/\.([c|m]?js|[c|m]?ts)$/.test(ext)) {
+    return generateJavaScript
+  }
 
-  return `${opts.module}/dist/${filename}`
-}
-
-function toArray<T>(value: T | T[]): T[] {
-  return Array.isArray(value) ? value : [value]
+  return generateJSON
 }
 
 function webpackLike(
@@ -483,28 +450,33 @@ async function loadRspack() {
   return null
 }
 
-async function generateBundleResources(
-  resources: string[],
-  isProduction: boolean,
+function generateBundleResources(
+  resources: Set<string>,
+  prod: boolean,
   opts: Pick<ResolvedOptions, 'forceStringify' | 'strictMessage' | 'escapeHtml'>
 ) {
   const codes = []
-  for (const res of resources) {
-    debug(`${res} bundle loading ...`)
+  for (const filename of resources) {
+    debug(`${filename} bundle loading ...`)
 
-    if (/\.(json5?|ya?ml)$/.test(res)) {
-      const { ext, name } = parsePath(res)
-      const source = await getRaw(res)
+    if (/\.(json5?|ya?ml)$/.test(filename)) {
+      const { ext, name } = parsePath(filename)
+      const source = readFile(filename)
       const generate = /json5?/.test(ext) ? generateJSON : generateYAML
-      const parseOptions = getOptions(res, isProduction, {}, false, {
-        ...opts,
-        jit: true,
-        inSourceMap: undefined,
-        onlyLocales: [],
-        allowDynamic: false,
-        globalSFCScope: false,
-        transformI18nBlock: null
-      }) as CodeGenOptions
+      const parseOptions = getOptions(
+        filename,
+        prod,
+        {},
+        {
+          ...opts,
+          sourceMap: false,
+          inSourceMap: undefined,
+          onlyLocales: [],
+          allowDynamic: false,
+          globalSFCScope: false,
+          transformI18nBlock: undefined
+        }
+      )
       parseOptions.type = 'bare'
       const { code } = generate(source, parseOptions)
 
@@ -538,15 +510,14 @@ export default mergeDeep({},
 );`
 }
 
-async function getCode(
+function getCode(
   source: string,
   filename: string,
   sourceMap: boolean,
-  query: VueQuery,
+  { index, issuerPath }: VueQuery,
   parser: ReturnType<typeof getVueCompiler>['parse'],
   framework: UnpluginContextMeta['framework'] = 'vite'
-): Promise<string> {
-  const { index, issuerPath } = query
+): string {
   if (!isNumber(index)) {
     raiseError(`unexpected index: ${index}`)
   }
@@ -555,24 +526,21 @@ async function getCode(
     if (issuerPath) {
       // via `src=xxx` of SFC
       debug(`getCode (${framework}) ${index} via issuerPath`, issuerPath)
-      return await getRaw(filename)
-    } else {
-      const result = parser(await getRaw(filename), {
-        sourceMap,
-        filename
-      })
-      const block = result.descriptor.customBlocks[index!]
-      if (block) {
-        const code = block.src ? await getRaw(block.src) : block.content
-        debug(`getCode (${framework}) ${index} from SFC`, code)
-        return code
-      } else {
-        return source
-      }
+      return readFile(filename)
     }
-  } else {
+
+    const result = parser(readFile(filename), { sourceMap, filename })
+    const block = result.descriptor.customBlocks[index!]
+    if (block) {
+      const code = block.src ? readFile(block.src) : block.content
+      debug(`getCode (${framework}) ${index} from SFC`, code)
+      return code
+    }
+
     return source
   }
+
+  return source
 }
 
 function isCustomBlock(query: VueQuery): boolean {
@@ -587,40 +555,21 @@ function isCustomBlock(query: VueQuery): boolean {
 
 function getOptions(
   filename: string,
-  isProduction: boolean,
+  prod: boolean,
   query: VueQuery,
-  sourceMap: boolean,
-  {
-    jit,
-    transformI18nBlock,
-    ...opts
-  }: Pick<
-    ResolvedOptions,
-    | 'globalSFCScope'
-    | 'strictMessage'
-    | 'allowDynamic'
-    | 'escapeHtml'
-    | 'onlyLocales'
-    | 'forceStringify'
-    | 'transformI18nBlock'
-  > & { inSourceMap: RawSourceMap | undefined; jit: boolean }
-): Record<string, unknown> {
-  const mode: DevEnv = isProduction ? 'production' : 'development'
+  opts: CodeGenOptions & Pick<ResolvedOptions, 'globalSFCScope'>
+): CodeGenOptions {
+  const mode: DevEnv = prod ? 'production' : 'development'
 
-  const baseOptions = {
+  const baseOptions: CodeGenOptions = {
     ...opts,
     filename,
-    sourceMap,
-    jit,
+    jit: true,
     env: mode,
-    transformI18nBlock,
-    onWarn: (msg: string): void => {
+    onWarn: msg => {
       warn(`${filename} ${msg}`)
     },
-    onError: (
-      msg: string,
-      extra?: NonNullable<Parameters<NonNullable<CodeGenOptions['onError']>>>[1]
-    ): void => {
+    onError: (msg, extra) => {
       const codeFrame = generateCodeFrame(
         extra?.source || extra?.location?.source || '',
         extra?.location?.start.column,
@@ -639,16 +588,16 @@ function getOptions(
 
   if (isCustomBlock(query)) {
     return assign(baseOptions, {
-      type: 'sfc',
+      type: 'sfc' as const,
       locale: isString(query.locale) ? query.locale : '',
       isGlobal: opts.globalSFCScope || !!query.global
     })
-  } else {
-    return assign(baseOptions, {
-      type: 'plain',
-      isGlobal: false
-    })
   }
+
+  return assign(baseOptions, {
+    type: 'plain' as const,
+    isGlobal: false
+  })
 }
 
 function getVirtualId(
@@ -670,6 +619,6 @@ function asVirtualId(
   return framework === 'vite' ? VIRTUAL_PREFIX + id : id
 }
 
-async function getRaw(path: string): Promise<string> {
-  return fs.readFile(path, { encoding: 'utf-8' })
+function readFile(path: string): string {
+  return fs.readFileSync(path, 'utf-8')
 }

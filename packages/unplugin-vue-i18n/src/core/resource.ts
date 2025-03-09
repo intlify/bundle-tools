@@ -6,7 +6,6 @@ import {
 import {
   assign,
   generateCodeFrame,
-  isArray,
   isEmptyObject,
   isNumber,
   isString
@@ -45,35 +44,16 @@ const VIRTUAL_PREFIX = '\0'
 const debug = createDebug(resolveNamespace('resource'))
 
 export function resourcePlugin(
-  {
-    onlyLocales,
-    include,
-    exclude,
-    module,
-    forceStringify,
-    defaultSFCLang,
-    globalSFCScope,
-    runtimeOnly,
-    dropMessageCompiler,
-    fullInstall,
-    ssrBuild,
-    strictMessage,
-    allowDynamic,
-    escapeHtml,
-    transformI18nBlock
-  }: ResolvedOptions,
+  opts: ResolvedOptions,
   meta: UnpluginContextMeta
 ): UnpluginOptions {
-  const filter = createFilter(include, exclude)
-  const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
-    return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${
-      !ssr ? 'esm-bundler.js' : 'node.js'
-    }`
-  }
+  const vueI18nAliasPath = getVueI18nAliasPath(opts)
+  const filter = createFilter(opts.include, opts.exclude)
+
+  debug(`vue-i18n alias name: ${opts.module}`)
+
   let isProduction = false
   let sourceMap = false
-  const vueI18nAliasName = module
-  debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
   let vuePlugin: RollupPlugin | null = null
   // NOTE:
@@ -99,8 +79,8 @@ export function resourcePlugin(
       config() {
         const defineConfig = {
           define: {
-            __VUE_I18N_FULL_INSTALL__: fullInstall,
-            __INTLIFY_DROP_MESSAGE_COMPILER__: dropMessageCompiler,
+            __VUE_I18N_FULL_INSTALL__: opts.fullInstall,
+            __INTLIFY_DROP_MESSAGE_COMPILER__: opts.dropMessageCompiler,
             __VUE_I18N_PROD_DEVTOOLS__: false
           }
         }
@@ -109,10 +89,7 @@ export function resourcePlugin(
         const aliasConfig = {
           resolve: {
             alias: {
-              [vueI18nAliasName]: getVueI18nAliasPath({
-                ssr: ssrBuild,
-                runtimeOnly
-              })
+              [opts.module]: vueI18nAliasPath
             }
           }
         }
@@ -189,7 +166,7 @@ export function resourcePlugin(
                   ? [result, undefined]
                   : [result.code, result.map as RawSourceMap]
 
-              let langInfo = defaultSFCLang
+              let langInfo = opts.defaultSFCLang
               langInfo = parsePath(filename)
                 .ext as Required<PluginOptions>['defaultSFCLang']
 
@@ -199,16 +176,7 @@ export function resourcePlugin(
                 isProduction,
                 query as Record<string, unknown>,
                 sourceMap,
-                {
-                  inSourceMap,
-                  isGlobal: globalSFCScope,
-                  allowDynamic,
-                  strictMessage,
-                  escapeHtml,
-                  jit: true,
-                  onlyLocales,
-                  forceStringify
-                }
+                { ...opts, jit: true, inSourceMap, transformI18nBlock: null }
               ) as CodeGenOptions
               debug('parseOptions', parseOptions)
 
@@ -243,31 +211,11 @@ export function resourcePlugin(
     },
 
     webpack(compiler) {
-      webpackLike(compiler, 'webpack', {
-        isProduction,
-        meta,
-        sourceMap,
-        getVueI18nAliasPath,
-        vueI18nAliasName,
-        ssrBuild,
-        runtimeOnly,
-        fullInstall,
-        filter
-      })
+      webpackLike(compiler, { ...opts, meta, vueI18nAliasPath, filter })
     },
 
     rspack(compiler) {
-      webpackLike(compiler, 'rspack', {
-        isProduction,
-        meta,
-        sourceMap,
-        getVueI18nAliasPath,
-        vueI18nAliasName,
-        ssrBuild,
-        runtimeOnly,
-        fullInstall,
-        filter
-      })
+      webpackLike(compiler, { ...opts, meta, vueI18nAliasPath, filter })
     },
 
     resolveId(id: string, importer: string) {
@@ -285,10 +233,10 @@ export function resourcePlugin(
       debug('load', id)
       if (
         INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
-        include
+        opts.include
       ) {
         let resourcePaths = [] as string[]
-        const includePaths = isArray(include) ? include : [include]
+        const includePaths = toArray(opts.include)
         for (const inc of includePaths) {
           resourcePaths = [...resourcePaths, ...(await fg(inc))]
         }
@@ -298,11 +246,7 @@ export function resourcePlugin(
         const code = await generateBundleResources(
           resourcePaths,
           isProduction,
-          {
-            forceStringify,
-            strictMessage,
-            escapeHtml
-          }
+          opts
         )
         // TODO: support virtual import identifier
         // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
@@ -331,7 +275,7 @@ export function resourcePlugin(
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query), filename)
 
-      let langInfo = defaultSFCLang
+      let langInfo = opts.defaultSFCLang
       let inSourceMap: RawSourceMap | undefined
 
       if (!query.vue) {
@@ -345,16 +289,7 @@ export function resourcePlugin(
             isProduction,
             query as Record<string, unknown>,
             sourceMap,
-            {
-              inSourceMap,
-              isGlobal: globalSFCScope,
-              allowDynamic,
-              strictMessage,
-              escapeHtml,
-              jit: true,
-              onlyLocales,
-              forceStringify
-            }
+            { ...opts, inSourceMap, jit: true, transformI18nBlock: null }
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
@@ -380,12 +315,12 @@ export function resourcePlugin(
             langInfo = (
               query.src
                 ? query.lang === 'i18n'
-                  ? defaultSFCLang
+                  ? opts.defaultSFCLang
                   : query.lang
                 : query.lang
             ) as Required<PluginOptions>['defaultSFCLang']
-          } else if (defaultSFCLang) {
-            langInfo = defaultSFCLang
+          } else if (opts.defaultSFCLang) {
+            langInfo = opts.defaultSFCLang
           }
           debug('langInfo', langInfo)
 
@@ -399,13 +334,11 @@ export function resourcePlugin(
             query as Record<string, unknown>,
             sourceMap,
             {
-              inSourceMap,
-              isGlobal: globalSFCScope,
+              ...opts,
               jit: true,
-              strictMessage,
-              escapeHtml,
-              onlyLocales,
-              forceStringify
+              inSourceMap,
+              allowDynamic: false,
+              transformI18nBlock: null
             }
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
@@ -419,8 +352,8 @@ export function resourcePlugin(
             meta.framework
           )
 
-          if (typeof transformI18nBlock === 'function') {
-            const modifiedSource = transformI18nBlock(source)
+          if (typeof opts.transformI18nBlock === 'function') {
+            const modifiedSource = opts.transformI18nBlock(source)
             if (modifiedSource && typeof modifiedSource === 'string') {
               source = modifiedSource
             } else {
@@ -456,69 +389,59 @@ function getGenerator(ext: string, defaultGen = generateJSON) {
         : defaultGen
 }
 
+/**
+ * Creates a path to the correct vue-i18n build used as alias (e.g. `vue-i18n/dist/vue-i18n.runtime.node.js`)
+ */
+const getVueI18nAliasPath = (opts: ResolvedOptions) => {
+  const runtime = opts.runtimeOnly ? 'runtime' : ''
+  const format = !opts.ssrBuild ? 'esm-bundler' : 'node'
+
+  const filename = [opts.module, runtime, format, 'js']
+    .filter(Boolean)
+    .join('.')
+
+  return `${opts.module}/dist/${filename}`
+}
+
+function toArray<T>(value: T | T[]): T[] {
+  return Array.isArray(value) ? value : [value]
+}
+
 function webpackLike(
   compiler:
     | Parameters<NonNullable<UnpluginOptions['rspack']>>[0]
     | Parameters<NonNullable<UnpluginOptions['webpack']>>[0],
-  framework: 'webpack' | 'rspack',
-  {
-    isProduction,
-    sourceMap,
-    meta,
-    getVueI18nAliasPath,
-    vueI18nAliasName,
-    ssrBuild,
-    runtimeOnly,
-    fullInstall,
-    filter
-  }: Pick<ResolvedOptions, 'ssrBuild' | 'runtimeOnly' | 'fullInstall'> & {
+  opts: Pick<ResolvedOptions, 'fullInstall' | 'module'> & {
     meta: UnpluginContextMeta
-    isProduction: boolean
-    sourceMap: boolean
-    vueI18nAliasName: string
-    getVueI18nAliasPath: (opts: {
-      ssr?: boolean | undefined
-      runtimeOnly?: boolean | undefined
-    }) => string
+    vueI18nAliasPath: string
     // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
     filter: (id: string | unknown) => boolean
   }
 ) {
-  isProduction = compiler.options.mode !== 'development'
-  sourceMap = !!compiler.options.devtool
   debug(
-    `${framework}: isProduction = ${isProduction}, sourceMap = ${sourceMap}`
+    `${opts.meta.framework}: isProduction = ${compiler.options.mode !== 'development'}, sourceMap = ${!!compiler.options.devtool}`
   )
 
-  compiler.options.resolve = normalizeConfigResolveAlias(
-    compiler.options.resolve,
-    meta.framework
-  )
-  ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-    getVueI18nAliasPath({
-      ssr: ssrBuild,
-      runtimeOnly
-    })
-  debug(
-    `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
-      ssr: ssrBuild,
-      runtimeOnly
-    })}`
-  )
+  compiler.options.resolve.alias ||= {}
+  ;(compiler.options.resolve.alias as any)[opts.module] = opts.vueI18nAliasPath
 
-  const loader = framework === 'webpack' ? loadWebpack : loadRspack
+  debug(`set ${opts.module}: ${opts.vueI18nAliasPath}`)
+
+  const loader = opts.meta.framework === 'webpack' ? loadWebpack : loadRspack
   loader().then(mod => {
     if (mod) {
       compiler.options.plugins!.push(
         // @ts-expect-error type issue
         new mod.DefinePlugin({
-          __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
+          __VUE_I18N_FULL_INSTALL__: JSON.stringify(opts.fullInstall),
           __INTLIFY_PROD_DEVTOOLS__: 'false'
         })
       )
-      debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
+      debug(`set __VUE_I18N_FULL_INSTALL__ is '${opts.fullInstall}'`)
     } else {
-      debug(`ignore vue-i18n feature flags with ${framework}.DefinePlugin`)
+      debug(
+        `ignore vue-i18n feature flags with ${opts.meta.framework}.DefinePlugin`
+      )
     }
   })
 
@@ -531,40 +454,13 @@ function webpackLike(
       test: /\.(json5?|ya?ml)$/,
       type: 'javascript/auto',
       include(resource: string) {
-        return filter(resource)
+        return opts.filter(resource)
       }
     })
   }
 
   // TODO:
   //  HMR for webpack
-}
-
-function normalizeConfigResolveAlias(
-  resolve: any,
-  framework: UnpluginContextMeta['framework']
-): any {
-  if (resolve && resolve.alias) {
-    return resolve
-  }
-
-  const webpackLike = framework === 'webpack' || framework === 'rspack'
-
-  if (!resolve) {
-    if (framework === 'vite') {
-      return { alias: [] }
-    } else if (webpackLike) {
-      return { alias: {} }
-    }
-  } else if (!resolve.alias) {
-    if (framework === 'vite') {
-      resolve.alias = []
-      return resolve
-    } else if (webpackLike) {
-      resolve.alias = {}
-      return resolve
-    }
-  }
 }
 
 async function loadWebpack() {
@@ -590,23 +486,7 @@ async function loadRspack() {
 async function generateBundleResources(
   resources: string[],
   isProduction: boolean,
-  {
-    forceStringify = false,
-    isGlobal = false,
-    onlyLocales = [],
-    strictMessage = true,
-    escapeHtml = false,
-    jit = true,
-    transformI18nBlock = undefined
-  }: {
-    forceStringify?: boolean
-    isGlobal?: boolean
-    onlyLocales?: string[]
-    strictMessage?: boolean
-    escapeHtml?: boolean
-    jit?: boolean
-    transformI18nBlock?: PluginOptions['transformI18nBlock']
-  }
+  opts: Pick<ResolvedOptions, 'forceStringify' | 'strictMessage' | 'escapeHtml'>
 ) {
   const codes = []
   for (const res of resources) {
@@ -617,13 +497,13 @@ async function generateBundleResources(
       const source = await getRaw(res)
       const generate = /json5?/.test(ext) ? generateJSON : generateYAML
       const parseOptions = getOptions(res, isProduction, {}, false, {
-        isGlobal,
-        jit,
-        onlyLocales,
-        strictMessage,
-        escapeHtml,
-        forceStringify,
-        transformI18nBlock
+        ...opts,
+        jit: true,
+        inSourceMap: undefined,
+        onlyLocales: [],
+        allowDynamic: false,
+        globalSFCScope: false,
+        transformI18nBlock: null
       }) as CodeGenOptions
       parseOptions.type = 'bare'
       const { code } = generate(source, parseOptions)
@@ -711,39 +591,27 @@ function getOptions(
   query: VueQuery,
   sourceMap: boolean,
   {
-    inSourceMap = undefined,
-    forceStringify = false,
-    isGlobal = false,
-    onlyLocales = [],
-    allowDynamic = false,
-    strictMessage = true,
-    escapeHtml = false,
-    jit = true,
-    transformI18nBlock = null
-  }: {
-    inSourceMap?: RawSourceMap
-    forceStringify?: boolean
-    isGlobal?: boolean
-    onlyLocales?: string[]
-    allowDynamic?: boolean
-    strictMessage?: boolean
-    escapeHtml?: boolean
-    jit?: boolean
-    transformI18nBlock?: PluginOptions['transformI18nBlock'] | null
-  }
+    jit,
+    transformI18nBlock,
+    ...opts
+  }: Pick<
+    ResolvedOptions,
+    | 'globalSFCScope'
+    | 'strictMessage'
+    | 'allowDynamic'
+    | 'escapeHtml'
+    | 'onlyLocales'
+    | 'forceStringify'
+    | 'transformI18nBlock'
+  > & { inSourceMap: RawSourceMap | undefined; jit: boolean }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
 
   const baseOptions = {
+    ...opts,
     filename,
     sourceMap,
-    inSourceMap,
-    forceStringify,
-    allowDynamic,
-    strictMessage,
-    escapeHtml,
     jit,
-    onlyLocales,
     env: mode,
     transformI18nBlock,
     onWarn: (msg: string): void => {
@@ -773,7 +641,7 @@ function getOptions(
     return assign(baseOptions, {
       type: 'sfc',
       locale: isString(query.locale) ? query.locale : '',
-      isGlobal: isGlobal || !!query.global
+      isGlobal: opts.globalSFCScope || !!query.global
     })
   } else {
     return assign(baseOptions, {

@@ -2,7 +2,7 @@ import defu from 'defu'
 import { normalize } from 'pathe'
 import { toArray } from '../utils/misc'
 
-import type { PluginOptions } from '../types'
+import type { PluginOptions, SFCLangFormat } from '../types'
 import type { TranslationDirectiveResolveIndetifier } from '../vue'
 
 /**
@@ -40,7 +40,7 @@ export function resolveOptions(options: PluginOptions) {
     allowDynamic: false,
     globalSFCScope: false,
     forceStringify: false,
-    defaultSFCLang: 'json',
+    defaultSFCLang: 'json' as SFCLangFormat,
     dropMessageCompiler: false,
     transformI18nBlock: undefined,
     optimizeTranslationDirective: false

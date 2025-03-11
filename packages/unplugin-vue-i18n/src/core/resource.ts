@@ -25,7 +25,7 @@ import {
 } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
 
-import type { CodeGenOptions, DevEnv } from '@intlify/bundle-utils'
+import type { CodeGenOptions } from '@intlify/bundle-utils'
 import type { RawSourceMap } from 'source-map-js'
 import type {
   RollupPlugin,
@@ -34,13 +34,25 @@ import type {
 } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
 import type { SFCLangFormat } from '../types'
-import type { VueQuery } from '../vue'
+import type { VueCompilerParser, VueQuery } from '../vue'
 import { MakeAsync, TransformHook } from 'rollup'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 
 const debug = createDebug(resolveNamespace('resource'))
+
+/**
+ * Helper to handle both rspack/webpack due to similar API
+ */
+type WebpackLikeCompiler = Parameters<
+  NonNullable<UnpluginOptions['rspack'] | UnpluginOptions['webpack']>
+>[0]
+
+type PluginCtx = {
+  prod: boolean
+  sourceMap: boolean
+}
 
 export function resourcePlugin(
   opts: ResolvedOptions,
@@ -50,23 +62,78 @@ export function resourcePlugin(
 
   debug(`vue-i18n alias name: ${opts.module}`)
 
-  let prod = false
-  let sourceMap = false
-
-  let vuePlugin: RollupPlugin | null = null
-  // NOTE:
-  // webpack cannot dynamically resolve vue compiler, so use the compiler statically with import syntax
-  const getSfcParser = () => {
-    return vuePlugin ? getVueCompiler(vuePlugin).parse : parse
+  // updated during compiler configuration
+  const ctx: PluginCtx = {
+    prod: false,
+    sourceMap: false
   }
 
+  // NOTE: webpack cannot dynamically resolve vue compiler, so use the compiler statically with import syntax
+  let vuePlugin: RollupPlugin | null = null
+  const getSfcParser = () =>
+    vuePlugin ? getVueCompiler(vuePlugin).parse : parse
+
   const resourcePaths = new Set<string>()
-  if (opts.include) {
-    for (const inc of opts.include) {
-      for (const resourcePath of fg.sync(inc)) {
-        resourcePaths.add(resourcePath)
-      }
+  for (const inc of opts.include || []) {
+    for (const resourcePath of fg.sync(inc)) {
+      resourcePaths.add(resourcePath)
     }
+  }
+
+  function result(code: string) {
+    if (meta.framework === 'vite') {
+      return { code, map: { mappings: '' } }
+    }
+
+    // NOTE: `map` property breaks virtuals in webpack/rspack
+    return { code }
+  }
+
+  // webpack/rspack
+  function sharedWebpackLikePlugin(compiler: WebpackLikeCompiler) {
+    ctx.prod = compiler.options.mode !== 'development'
+    ctx.sourceMap = !!compiler.options.devtool
+    debug(
+      `${meta.framework}: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`
+    )
+
+    compiler.options.resolve.alias = {
+      ...compiler.options.resolve.alias,
+      [opts.module]: opts.vueI18nAliasPath
+    }
+    debug(`set ${opts.module}: ${opts.vueI18nAliasPath}`)
+
+    const loader = meta.framework === 'webpack' ? loadWebpack : loadRspack
+    loader()
+      .then(mod => {
+        if (mod) {
+          compiler.options.plugins.push(
+            // @ts-expect-error type issue
+            new mod.DefinePlugin({
+              __VUE_I18N_FULL_INSTALL__: JSON.stringify(opts.fullInstall),
+              __INTLIFY_PROD_DEVTOOLS__: 'false'
+            })
+          )
+          debug(`set __VUE_I18N_FULL_INSTALL__ is '${opts.fullInstall}'`)
+        } else {
+          debug(
+            `ignore vue-i18n feature flags with ${meta.framework}.DefinePlugin`
+          )
+        }
+      })
+      .catch(_e => {
+        warn(`${meta.framework} not found, please install ${meta.framework}.`)
+      })
+
+    // NOTE: avoid further transformation after i18n resources have been transformed into javascript.
+    compiler.options.module.rules.push({
+      test: /\.(json5?|ya?ml)$/,
+      type: 'javascript/auto',
+      include: resource => filter(resource)
+    })
+
+    // TODO:
+    //  HMR for webpack/rspack
   }
 
   return {
@@ -74,13 +141,15 @@ export function resourcePlugin(
 
     /**
      * NOTE:
+     * vite: early ('pre') transform for json and SFC's custom blocks
+     * because these are transformed into javascript code by `vite:json` plugin.
      *
-     * For vite, If we have json (including SFC's custom block),
-     * transform it first because it will be transformed into javascript code by `vite:json` plugin.
-     *
-     * For webpack, This plugin will handle with ‘post’, because vue-loader generate the request query.
+     * webpack/rspack: late ('post') transform because we rely on vue-loader to generate the request queries.
      */
     enforce: meta.framework === 'vite' ? 'pre' : 'post',
+
+    rspack: sharedWebpackLikePlugin,
+    webpack: sharedWebpackLikePlugin,
 
     vite: {
       config() {
@@ -111,17 +180,18 @@ export function resourcePlugin(
           return
         }
 
-        prod = config.isProduction
-        sourceMap =
+        ctx.prod = config.isProduction
+        ctx.sourceMap =
           config.command === 'build' ? !!config.build.sourcemap : false
         debug(
-          `configResolved: isProduction = ${prod}, sourceMap = ${sourceMap}`
+          `configResolved: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`
         )
 
         // json transform handling
         const jsonPlugin = getVitePlugin(config, 'vite:json')
         if (jsonPlugin) {
-          const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
+          // backup @rollup/plugin-json
+          const orgTransform = jsonPlugin.transform
           jsonPlugin.transform = async function (code: string, id: string) {
             if (!/\.json$/.test(id) || filter(id)) {
               return
@@ -149,13 +219,13 @@ export function resourcePlugin(
         /**
          * typescript transform handling
          *
-         * NOTE:
-         *  Typescript resources are handled using the already existing `vite:esbuild` plugin.
+         * NOTE: Typescript resources are handled using the already existing `vite:esbuild` plugin.
          */
         const esbuildPlugin = getVitePlugin(config, 'vite:esbuild')
         if (esbuildPlugin) {
+          // backup @rollup/plugin-json
           const orgTransform =
-            esbuildPlugin.transform! as MakeAsync<TransformHook> // backup @rollup/plugin-json
+            esbuildPlugin.transform! as MakeAsync<TransformHook>
 
           esbuildPlugin.transform = async function (code: string, id: string) {
             const result = await orgTransform!.apply(this, [code, id])
@@ -169,20 +239,19 @@ export function resourcePlugin(
                 ? [result, undefined]
                 : [result.code!, result.map as RawSourceMap]
 
-              const langInfo = parsePath(filename).ext as SFCLangFormat
-
-              const generate = getGenerator(langInfo)
-              const parseOptions = getOptions(filename, prod, query, {
+              const parseOptions = getOptions(filename, ctx, query, {
                 ...opts,
-                sourceMap,
                 inSourceMap,
                 transformI18nBlock: undefined
               })
               debug('parseOptions', parseOptions)
 
+              const langInfo = parsePath(filename).ext as SFCLangFormat
+              const generate = getGenerator(langInfo)
+
               const { code: generatedCode, map } = generate(_code, parseOptions)
               debug('generated code', generatedCode)
-              debug('sourcemap', map, sourceMap)
+              debug('sourcemap', map, ctx.sourceMap)
 
               if (_code === generatedCode) return
 
@@ -190,9 +259,9 @@ export function resourcePlugin(
                 code: generatedCode,
                 map: { mappings: '' }
               }
-            } else {
-              return result
             }
+
+            return result
           }
         }
       },
@@ -204,18 +273,10 @@ export function resourcePlugin(
           )
           if (module) {
             server.moduleGraph.invalidateModule(module)
-            return [module!]
+            return [module]
           }
         }
       }
-    },
-
-    webpack(compiler) {
-      webpackLike(compiler, { ...opts, meta, filter })
-    },
-
-    rspack(compiler) {
-      webpackLike(compiler, { ...opts, meta, filter })
     },
 
     resolveId(id: string, importer: string) {
@@ -235,20 +296,14 @@ export function resourcePlugin(
         INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
         resourcePaths.size > 0
       ) {
-        const code = generateBundleResources(resourcePaths, prod, opts)
-
-        // TODO: support virtual import identifier
-        // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
-        if (meta.framework === 'vite') {
-          return { code, map: { mappings: '' } }
-        }
+        const code = generateBundleResources(resourcePaths, ctx, opts)
 
         // watch resources to invalidate on change (webpack)
         for (const p of resourcePaths) {
           this.addWatchFile(p)
         }
 
-        return { code }
+        return result(code)
       }
     },
 
@@ -256,14 +311,14 @@ export function resourcePlugin(
       debug('transformInclude', id)
       if (meta.framework === 'vite') {
         return true
-      } else {
-        const { filename } = parseVueRequest(id)
-        return (
-          filename.endsWith('vue') ||
-          filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
-          (/\.(json5?|ya?ml)$/.test(filename) && filter(filename))
-        )
       }
+
+      const { filename } = parseVueRequest(id)
+      return (
+        filename.endsWith('vue') ||
+        filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
+        (/\.(json5?|ya?ml)$/.test(filename) && filter(filename))
+      )
     },
 
     async transform(code, id) {
@@ -271,99 +326,82 @@ export function resourcePlugin(
       debug('transform', id, JSON.stringify(query), filename)
 
       let langInfo = opts.defaultSFCLang
-      let inSourceMap: RawSourceMap | undefined
 
       if (!query.vue) {
         if (/\.(json5?|ya?ml|[c|m]?js)$/.test(id) && filter(id)) {
           langInfo = parsePath(filename).ext as SFCLangFormat
 
           const generate = getGenerator(langInfo)
-          const parseOptions = getOptions(filename, prod, query, {
+          const parseOptions = getOptions(filename, ctx, query, {
             ...opts,
-            sourceMap,
-            inSourceMap,
             transformI18nBlock: undefined
           })
           debug('parseOptions', parseOptions)
 
           const { code: generatedCode, map } = generate(code, parseOptions)
           debug('generated code', generatedCode)
-          debug('sourcemap', map, sourceMap)
+          debug('sourcemap', map, ctx.sourceMap)
 
           if (code === generatedCode) return
 
-          if (meta.framework === 'vite') {
-            return { code: generatedCode, map: { mappings: '' } }
-          }
-          return { code: generatedCode }
+          return result(generatedCode)
         } else {
           // TODO: support virtual import identifier
           // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
         }
-      } else {
-        // for Vue SFC
-        if (isCustomBlock(query)) {
-          if (query.lang) {
-            langInfo = (
-              query.src
-                ? query.lang === 'i18n'
-                  ? opts.defaultSFCLang
-                  : query.lang
-                : query.lang
-            ) as SFCLangFormat
-          } else if (opts.defaultSFCLang) {
-            langInfo = opts.defaultSFCLang
+      }
+
+      // for Vue SFC
+      if (isCustomBlock(query)) {
+        langInfo = opts.defaultSFCLang
+        if (query.lang && query.lang !== 'i18n') {
+          langInfo = query.lang as SFCLangFormat
+        }
+        debug('langInfo', langInfo)
+
+        const parseOptions = getOptions(filename, ctx, query, {
+          ...opts,
+          allowDynamic: false,
+          transformI18nBlock: undefined
+        })
+        debug('parseOptions', parseOptions)
+
+        let source = getCode(
+          code,
+          filename,
+          ctx.sourceMap,
+          query,
+          getSfcParser(),
+          meta
+        )
+
+        if (typeof opts.transformI18nBlock === 'function') {
+          const modifiedSource = opts.transformI18nBlock(source)
+          if (modifiedSource && typeof modifiedSource === 'string') {
+            source = modifiedSource
+          } else {
+            warn('transformI18nBlock should return a string')
           }
-          debug('langInfo', langInfo)
+        }
 
-          const generate = /\.?json5?/.test(langInfo)
-            ? generateJSON
-            : generateYAML
+        const generate = getGenerator(langInfo, generateYAML)
+        const { code: generatedCode, map } = generate(source, parseOptions)
+        debug('generated code', generatedCode)
+        debug('sourcemap', map, ctx.sourceMap)
 
-          const parseOptions = getOptions(filename, prod, query, {
-            ...opts,
-            sourceMap,
-            inSourceMap,
-            allowDynamic: false,
-            transformI18nBlock: undefined
-          })
-          debug('parseOptions', parseOptions)
-
-          let source = getCode(
-            code,
-            filename,
-            sourceMap,
-            query,
-            getSfcParser(),
-            meta.framework
-          )
-
-          if (typeof opts.transformI18nBlock === 'function') {
-            const modifiedSource = opts.transformI18nBlock(source)
-            if (modifiedSource && typeof modifiedSource === 'string') {
-              source = modifiedSource
-            } else {
-              warn('transformI18nBlock should return a string')
-            }
-          }
-
-          const { code: generatedCode, map } = generate(source, parseOptions)
-          debug('generated code', generatedCode)
-          debug('sourcemap', map, sourceMap)
-
-          if (code === generatedCode) return
-
-          if (meta.framework === 'vite') {
-            return { code: generatedCode, map: { mappings: '' } }
-          }
-          return { code: generatedCode }
+        if (code !== generatedCode) {
+          return result(generatedCode)
         }
       }
     }
   } as UnpluginOptions
 }
 
-function getGenerator(ext: string) {
+type GeneratorFn =
+  | typeof generateJSON
+  | typeof generateJavaScript
+  | typeof generateYAML
+function getGenerator(ext: string, fallback: GeneratorFn = generateJSON) {
   if (/\.?json5?$/.test(ext)) {
     return generateJSON
   }
@@ -376,88 +414,22 @@ function getGenerator(ext: string) {
     return generateJavaScript
   }
 
-  return generateJSON
-}
-
-function webpackLike(
-  compiler:
-    | Parameters<NonNullable<UnpluginOptions['rspack']>>[0]
-    | Parameters<NonNullable<UnpluginOptions['webpack']>>[0],
-  opts: Pick<ResolvedOptions, 'fullInstall' | 'module'> & {
-    meta: UnpluginContextMeta
-    vueI18nAliasPath: string
-    // eslint-disable-next-line @typescript-eslint/no-redundant-type-constituents
-    filter: (id: string | unknown) => boolean
-  }
-) {
-  debug(
-    `${opts.meta.framework}: isProduction = ${compiler.options.mode !== 'development'}, sourceMap = ${!!compiler.options.devtool}`
-  )
-
-  compiler.options.resolve.alias ||= {}
-  ;(compiler.options.resolve.alias as any)[opts.module] = opts.vueI18nAliasPath
-
-  debug(`set ${opts.module}: ${opts.vueI18nAliasPath}`)
-
-  const loader = opts.meta.framework === 'webpack' ? loadWebpack : loadRspack
-  loader().then(mod => {
-    if (mod) {
-      compiler.options.plugins!.push(
-        // @ts-expect-error type issue
-        new mod.DefinePlugin({
-          __VUE_I18N_FULL_INSTALL__: JSON.stringify(opts.fullInstall),
-          __INTLIFY_PROD_DEVTOOLS__: 'false'
-        })
-      )
-      debug(`set __VUE_I18N_FULL_INSTALL__ is '${opts.fullInstall}'`)
-    } else {
-      debug(
-        `ignore vue-i18n feature flags with ${opts.meta.framework}.DefinePlugin`
-      )
-    }
-  })
-
-  /**
-   * NOTE:
-   * After i18n resources are transformed into javascript by transform, avoid further transforming by webpack.
-   */
-  if (compiler.options.module) {
-    compiler.options.module.rules.push({
-      test: /\.(json5?|ya?ml)$/,
-      type: 'javascript/auto',
-      include(resource: string) {
-        return opts.filter(resource)
-      }
-    })
-  }
-
-  // TODO:
-  //  HMR for webpack
+  return fallback
 }
 
 async function loadWebpack() {
-  try {
-    const mod = await import('webpack')
-    return mod.default || mod
-  } catch (_e) {
-    warn(`webpack not found, please install webpack.`)
-  }
-  return null
+  const mod = await import('webpack')
+  return mod.default || mod
 }
 
 async function loadRspack() {
-  try {
-    const { rspack } = await import('@rspack/core')
-    return rspack
-  } catch (_e) {
-    warn(`rspack not found, please install rspack.`)
-  }
-  return null
+  const { rspack } = await import('@rspack/core')
+  return rspack
 }
 
 function generateBundleResources(
   resources: Set<string>,
-  prod: boolean,
+  ctx: PluginCtx,
   opts: Pick<ResolvedOptions, 'forceStringify' | 'strictMessage' | 'escapeHtml'>
 ) {
   const codes = []
@@ -470,12 +442,11 @@ function generateBundleResources(
       const generate = /json5?/.test(ext) ? generateJSON : generateYAML
       const parseOptions = getOptions(
         filename,
-        prod,
+        ctx,
         {},
         {
           ...opts,
           sourceMap: false,
-          inSourceMap: undefined,
           onlyLocales: [],
           allowDynamic: false,
           globalSFCScope: false,
@@ -519,30 +490,33 @@ function getCode(
   source: string,
   filename: string,
   sourceMap: boolean,
-  { index, issuerPath }: VueQuery,
-  parser: ReturnType<typeof getVueCompiler>['parse'],
-  framework: UnpluginContextMeta['framework'] = 'vite'
+  query: VueQuery,
+  parser: VueCompilerParser,
+  meta: UnpluginContextMeta
 ): string {
-  if (index == null) {
-    raiseError(`unexpected index: ${index}`)
+  if (query.index == null) {
+    raiseError(`unexpected index: ${query.index}`)
   }
 
-  if (framework === 'webpack' || framework === 'rspack') {
-    if (issuerPath) {
-      // via `src=xxx` of SFC
-      debug(`getCode (${framework}) ${index} via issuerPath`, issuerPath)
-      return readFile(filename)
-    }
-
-    const result = parser(readFile(filename), { sourceMap, filename })
-    const block = result.descriptor.customBlocks[index!]
-    if (block) {
-      const code = block.src ? readFile(block.src) : block.content
-      debug(`getCode (${framework}) ${index} from SFC`, code)
-      return code
-    }
-
+  if (meta.framework === 'vite') {
     return source
+  }
+
+  // via `src=xxx` of SFC
+  if (query.issuerPath) {
+    debug(
+      `getCode (${meta.framework}) ${query.index} via issuerPath`,
+      query.issuerPath
+    )
+    return readFile(filename)
+  }
+
+  const result = parser(readFile(filename), { sourceMap, filename })
+  const block = result.descriptor.customBlocks[query.index!]
+  if (block) {
+    const code = block.src ? readFile(block.src) : block.content
+    debug(`getCode (${meta.framework}) ${query.index} from SFC`, code)
+    return code
   }
 
   return source
@@ -560,17 +534,17 @@ function isCustomBlock(query: VueQuery): boolean {
 
 function getOptions(
   filename: string,
-  prod: boolean,
+  ctx: PluginCtx,
   query: VueQuery,
   opts: CodeGenOptions & Pick<ResolvedOptions, 'globalSFCScope'>
 ): CodeGenOptions {
-  const mode: DevEnv = prod ? 'production' : 'development'
-
   const baseOptions: CodeGenOptions = {
     ...opts,
     filename,
     jit: true,
-    env: mode,
+    // allow overriding ctx.sourceMap with opts
+    sourceMap: opts.sourceMap ?? ctx.sourceMap,
+    env: ctx.prod ? 'production' : 'development',
     onWarn: msg => warn(`${filename} ${msg}`),
     onError: (msg, extra) => {
       const codeFrame = generateCodeFrame(

@@ -4,6 +4,7 @@ import type { RollupPlugin } from 'unplugin'
 export function getVueCompiler(vuePlugin: RollupPlugin): typeof _compiler {
   return vuePlugin?.api?.options.compiler as typeof _compiler
 }
+export type VueCompilerParser = ReturnType<typeof getVueCompiler>['parse']
 
 export type VuePluginResolvedOptions = {
   isProduction: boolean

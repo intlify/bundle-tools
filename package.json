@@ -48,7 +48,7 @@
     "@types/webpack-merge": "^5.0.0",
     "@vitejs/plugin-vue": "^5.1.4",
     "@vue/compiler-sfc": "^3.2.25",
-    "babel-loader": "^8.2.2",
+    "babel-loader": "^10.0.0",
     "chalk": "^5.3.0",
     "debug": "^4.1.1",
     "eslint": "^9.14.0",

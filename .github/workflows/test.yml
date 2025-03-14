@@ -16,6 +16,37 @@ env:
   CI: true
 
 jobs:
+  build:
+    name: 'Build for tests on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [18, 20, 22]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build code
+        run: pnpm build
+
+      - name: Cache dist
+        uses: actions/cache@v4
+        with:
+          path: packages/*/dist
+          key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
   test:
     name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}} (${{ matrix.framework }})'
     runs-on: ${{ matrix.os }}
@@ -56,6 +87,12 @@ jobs:
       - name: Install Playwright
         # does not need to explicitly set chromium after https://github.com/microsoft/playwright/issues/14862 is solved
         run: pnpm playwright install chromium
+
+      - name: Restore dist cache
+        uses: actions/cache@v4
+        with:
+          path: packages/*/dist
+          key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
 
       - name: Testing
         run: pnpm test

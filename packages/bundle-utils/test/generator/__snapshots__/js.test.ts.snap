@@ -17,160 +17,160 @@ exports[`'allowDynamic' option > generate > map 1`] = `
 `;
 
 exports[`'allowDynamic' option > no generate 1`] = `
-Node {
+{
   "body": [
-    Node {
-      "declaration": Node {
+    {
+      "declaration": {
         "async": true,
-        "body": Node {
+        "body": {
           "body": [
-            Node {
+            {
               "declarations": [
-                Node {
-                  "end": 115,
-                  "id": Node {
-                    "end": 62,
+                {
+                  "end": 116,
+                  "id": {
+                    "end": 61,
                     "name": "json",
-                    "start": 58,
+                    "start": 57,
                     "type": "Identifier",
                   },
-                  "init": Node {
-                    "argument": Node {
+                  "init": {
+                    "argument": {
                       "arguments": [
-                        Node {
+                        {
                           "async": false,
-                          "body": Node {
+                          "body": {
                             "arguments": [],
-                            "callee": Node {
+                            "callee": {
                               "computed": false,
-                              "end": 112,
-                              "object": Node {
-                                "end": 107,
+                              "end": 113,
+                              "object": {
+                                "end": 108,
                                 "name": "response",
-                                "start": 99,
+                                "start": 100,
                                 "type": "Identifier",
                               },
                               "optional": false,
-                              "property": Node {
-                                "end": 112,
+                              "property": {
+                                "end": 113,
                                 "name": "json",
-                                "start": 108,
+                                "start": 109,
                                 "type": "Identifier",
                               },
-                              "start": 99,
+                              "start": 100,
                               "type": "MemberExpression",
                             },
-                            "end": 114,
+                            "end": 115,
                             "optional": false,
-                            "start": 99,
+                            "start": 100,
                             "type": "CallExpression",
                           },
-                          "end": 114,
+                          "end": 115,
                           "expression": true,
                           "generator": false,
                           "id": null,
                           "params": [
-                            Node {
+                            {
                               "end": 95,
                               "name": "response",
                               "start": 87,
                               "type": "Identifier",
                             },
                           ],
-                          "start": 87,
+                          "start": 86,
                           "type": "ArrowFunctionExpression",
                         },
                       ],
-                      "callee": Node {
+                      "callee": {
                         "computed": false,
-                        "end": 86,
-                        "object": Node {
+                        "end": 85,
+                        "object": {
                           "arguments": [
-                            Node {
-                              "end": 80,
+                            {
+                              "end": 79,
                               "name": "url",
-                              "start": 77,
+                              "start": 76,
                               "type": "Identifier",
                             },
                           ],
-                          "callee": Node {
-                            "end": 76,
+                          "callee": {
+                            "end": 75,
                             "name": "fetch",
-                            "start": 71,
+                            "start": 70,
                             "type": "Identifier",
                           },
-                          "end": 81,
+                          "end": 80,
                           "optional": false,
-                          "start": 71,
+                          "start": 70,
                           "type": "CallExpression",
                         },
                         "optional": false,
-                        "property": Node {
-                          "end": 86,
+                        "property": {
+                          "end": 85,
                           "name": "then",
-                          "start": 82,
+                          "start": 81,
                           "type": "Identifier",
                         },
-                        "start": 71,
+                        "start": 70,
                         "type": "MemberExpression",
                       },
-                      "end": 115,
+                      "end": 116,
                       "optional": false,
-                      "start": 71,
+                      "start": 70,
                       "type": "CallExpression",
                     },
-                    "end": 115,
-                    "start": 65,
+                    "end": 116,
+                    "start": 64,
                     "type": "AwaitExpression",
                   },
-                  "start": 58,
+                  "start": 57,
                   "type": "VariableDeclarator",
                 },
               ],
-              "end": 115,
+              "end": 117,
               "kind": "const",
-              "start": 52,
+              "start": 51,
               "type": "VariableDeclaration",
             },
-            Node {
-              "argument": Node {
-                "end": 136,
+            {
+              "argument": {
+                "end": 137,
                 "properties": [
-                  Node {
-                    "argument": Node {
-                      "end": 134,
+                  {
+                    "argument": {
+                      "end": 135,
                       "name": "json",
-                      "start": 130,
+                      "start": 131,
                       "type": "Identifier",
                     },
-                    "end": 134,
-                    "start": 127,
+                    "end": 135,
+                    "start": 128,
                     "type": "SpreadElement",
                   },
                 ],
-                "start": 125,
+                "start": 126,
                 "type": "ObjectExpression",
               },
-              "end": 136,
-              "start": 118,
+              "end": 138,
+              "start": 119,
               "type": "ReturnStatement",
             },
           ],
-          "end": 138,
+          "end": 140,
           "start": 48,
           "type": "BlockStatement",
         },
-        "end": 138,
+        "end": 140,
         "expression": false,
         "generator": false,
-        "id": Node {
+        "id": {
           "end": 42,
           "name": "loadResource",
           "start": 30,
           "type": "Identifier",
         },
         "params": [
-          Node {
+          {
             "end": 46,
             "name": "url",
             "start": 43,
@@ -180,12 +180,13 @@ Node {
         "start": 15,
         "type": "FunctionDeclaration",
       },
-      "end": 138,
+      "end": 140,
       "start": 0,
       "type": "ExportDefaultDeclaration",
     },
   ],
-  "end": 139,
+  "end": 141,
+  "hashbang": null,
   "sourceType": "module",
   "start": 0,
   "type": "Program",
@@ -295,7 +296,8 @@ exports[`bare > map 1`] = `
 `;
 
 exports[`complex > code 1`] = `
-"const resource = {
+"const val1 = 1;
+const resource = {
   "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hi there!"])};fn.source="hi there!";return fn;})(),
   "nested": {
     "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello world!"])};fn.source="hello world!";return fn;})(),
@@ -339,7 +341,10 @@ exports[`complex > map 1`] = `
 `;
 
 exports[`force stringify > code 1`] = `
-"const resource = {
+"const val2 = ["hello", "world"];
+const val1 = "hello";
+const resource = {
+  "val2": val2,
   "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
   "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
   "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
@@ -348,10 +353,12 @@ exports[`force stringify > code 1`] = `
 },
   "funcValue2": () => {
 },
+  "identifier": val1,
   "items": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})(),
     {
+      "identifier": val1,
       "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
       "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})(),
       
@@ -543,7 +550,10 @@ exports[`simple > map 1`] = `
 `;
 
 exports[`unhandling > code 1`] = `
-"const resource = {
+"const val2 = ["hello", "world"];
+const val1 = "hello";
+const resource = {
+  "val2": val2,
   "trueValue": true,
   "falseValue": false,
   "nullValue": null,
@@ -552,10 +562,12 @@ exports[`unhandling > code 1`] = `
 },
   "funcValue2": () => {
 },
+  "identifier": val1,
   "items": [
     null,
     1,
     {
+      "identifier": val1,
       "nullValue": null,
       "numberValue": 1,
       

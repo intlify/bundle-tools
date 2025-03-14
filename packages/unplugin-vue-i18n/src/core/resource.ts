@@ -3,17 +3,12 @@ import {
   generateJSON,
   generateYAML
 } from '@intlify/bundle-utils'
-import {
-  assign,
-  generateCodeFrame,
-  isEmptyObject,
-  isString
-} from '@intlify/shared'
+import { assign, generateCodeFrame, isEmptyObject } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
 import fs from 'node:fs'
-import { parse as parsePath } from 'pathe'
+import { parse as parsePath, resolve, dirname } from 'pathe'
 import { parse } from 'vue/compiler-sfc'
 import {
   checkVuePlugin,
@@ -24,9 +19,10 @@ import {
   warn
 } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
+import { genImport, genSafeVariableName } from 'knitwork'
+import { findStaticImports } from 'mlly'
 
 import type { CodeGenOptions } from '@intlify/bundle-utils'
-import type { RawSourceMap } from 'source-map-js'
 import type {
   RollupPlugin,
   UnpluginContextMeta,
@@ -35,7 +31,6 @@ import type {
 import type { ResolvedOptions } from '../core/options'
 import type { SFCLangFormat } from '../types'
 import type { VueCompilerParser, VueQuery } from '../vue'
-import { MakeAsync, TransformHook } from 'rollup'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
@@ -58,7 +53,9 @@ export function resourcePlugin(
   opts: ResolvedOptions,
   meta: UnpluginContextMeta
 ): UnpluginOptions {
-  const filter = createFilter(opts.include, opts.exclude)
+  const _filter = createFilter(opts.include, opts.exclude)
+  const importedResources = new Set<string>()
+  const filter = (val: string) => _filter(val) || importedResources.has(val)
 
   debug(`vue-i18n alias name: ${opts.module}`)
 
@@ -215,55 +212,6 @@ export function resourcePlugin(
             return orgTransform!.apply(this, [code, id])
           }
         }
-
-        /**
-         * typescript transform handling
-         *
-         * NOTE: Typescript resources are handled using the already existing `vite:esbuild` plugin.
-         */
-        const esbuildPlugin = getVitePlugin(config, 'vite:esbuild')
-        if (esbuildPlugin) {
-          // backup @rollup/plugin-json
-          const orgTransform =
-            esbuildPlugin.transform! as MakeAsync<TransformHook>
-
-          esbuildPlugin.transform = async function (code: string, id: string) {
-            const result = await orgTransform!.apply(this, [code, id])
-            if (result == null) {
-              return result
-            }
-
-            const { filename, query } = parseVueRequest(id)
-            if (!query.vue && filter(id) && /\.[c|m]?ts$/.test(id)) {
-              const [_code, inSourceMap] = isString(result)
-                ? [result, undefined]
-                : [result.code!, result.map as RawSourceMap]
-
-              const parseOptions = getOptions(filename, ctx, query, {
-                ...opts,
-                inSourceMap,
-                transformI18nBlock: undefined
-              })
-              debug('parseOptions', parseOptions)
-
-              const langInfo = parsePath(filename).ext as SFCLangFormat
-              const generate = getGenerator(langInfo)
-
-              const { code: generatedCode, map } = generate(_code, parseOptions)
-              debug('generated code', generatedCode)
-              debug('sourcemap', map, ctx.sourceMap)
-
-              if (_code === generatedCode) return
-
-              return {
-                code: generatedCode,
-                map: { mappings: '' }
-              }
-            }
-
-            return result
-          }
-        }
       },
 
       async handleHotUpdate({ file, server }) {
@@ -296,7 +244,7 @@ export function resourcePlugin(
         INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
         resourcePaths.size > 0
       ) {
-        const code = generateBundleResources(resourcePaths, ctx, opts)
+        const code = generateBundleResources(resourcePaths)
 
         // watch resources to invalidate on change (webpack)
         for (const p of resourcePaths) {
@@ -327,28 +275,37 @@ export function resourcePlugin(
 
       let langInfo = opts.defaultSFCLang
 
-      if (!query.vue) {
-        if (/\.(json5?|ya?ml|[c|m]?js)$/.test(id) && filter(id)) {
-          langInfo = parsePath(filename).ext as SFCLangFormat
-
-          const generate = getGenerator(langInfo)
-          const parseOptions = getOptions(filename, ctx, query, {
-            ...opts,
-            transformI18nBlock: undefined
-          })
-          debug('parseOptions', parseOptions)
-
-          const { code: generatedCode, map } = generate(code, parseOptions)
-          debug('generated code', generatedCode)
-          debug('sourcemap', map, ctx.sourceMap)
-
-          if (code === generatedCode) return
-
-          return result(generatedCode)
-        } else {
-          // TODO: support virtual import identifier
-          // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
+      if (filter(id)) {
+        const imports = findStaticImports(code)
+        for (const p of imports) {
+          const res = resolve(dirname(id), p.specifier)
+          importedResources.add(res)
         }
+      }
+
+      // virtual @intlify/unplugin-vue-i18n/messages
+      if (
+        !query.vue &&
+        /\.(json5?|ya?ml|[c|m]?js|[c|m]?ts)$/.test(id) &&
+        filter(id)
+      ) {
+        langInfo = parsePath(filename).ext as SFCLangFormat
+
+        const generate = getGenerator(langInfo)
+        const parseOptions = getOptions(filename, ctx, query, {
+          ...opts,
+          allowDynamic: true,
+          transformI18nBlock: undefined
+        })
+        debug('parseOptions', parseOptions)
+
+        const { code: generatedCode, map } = generate(code, parseOptions)
+        debug('generated code', generatedCode)
+        debug('sourcemap', map, ctx.sourceMap)
+
+        if (code === generatedCode) return
+
+        return result(generatedCode)
       }
 
       // for Vue SFC
@@ -427,41 +384,23 @@ async function loadRspack() {
   return rspack
 }
 
-function generateBundleResources(
-  resources: Set<string>,
-  ctx: PluginCtx,
-  opts: Pick<ResolvedOptions, 'forceStringify' | 'strictMessage' | 'escapeHtml'>
-) {
+function generateBundleResources(resources: Set<string>) {
   const codes = []
+  const imports: { statement: string; varName: string }[] = []
   for (const filename of resources) {
     debug(`${filename} bundle loading ...`)
-
-    if (/\.(json5?|ya?ml)$/.test(filename)) {
-      const { ext, name } = parsePath(filename)
-      const source = readFile(filename)
-      const generate = /json5?/.test(ext) ? generateJSON : generateYAML
-      const parseOptions = getOptions(
-        filename,
-        ctx,
-        {},
-        {
-          ...opts,
-          sourceMap: false,
-          onlyLocales: [],
-          allowDynamic: false,
-          globalSFCScope: false,
-          transformI18nBlock: undefined
-        }
-      )
-      parseOptions.type = 'bare'
-      const { code } = generate(source, parseOptions)
-
-      debug('generated code', code)
-      codes.push(`${JSON.stringify(name)}: ${code}`)
-    }
+    const { name } = parsePath(filename)
+    const varName = genSafeVariableName(filename)
+    imports.push({ statement: genImport(filename, varName), varName })
+    codes.push(`${JSON.stringify(name)}: ${varName}`)
   }
 
-  return `const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
+  const importStatements = imports.map(x => x.statement).join('\n')
+
+  return `
+${importStatements}
+
+const isObject = (item) => item && typeof item === 'object' && !Array.isArray(item);
 
 const mergeDeep = (target, ...sources) => {
   if (!sources.length) return target;

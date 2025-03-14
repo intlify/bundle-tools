@@ -36,6 +36,8 @@
     "fast-glob": "^3.2.12",
     "js-yaml": "^4.1.0",
     "json5": "^2.2.3",
+    "knitwork": "^1.2.0",
+    "mlly": "^1.2.0",
     "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
     "source-map-js": "^1.0.2",

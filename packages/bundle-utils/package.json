@@ -26,13 +26,16 @@
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",
     "mlly": "^1.2.0",
+    "oxc-parser": "^0.57.0",
+    "oxc-transform": "^0.57.0",
     "source-map-js": "^1.0.1",
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
-    "unbuild": "^2.0.0"
+    "unbuild": "^2.0.0",
+    "vitest": "^2.1.4"
   },
   "engines": {
     "node": ">= 18"

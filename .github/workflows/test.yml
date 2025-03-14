@@ -22,7 +22,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [18, 20, 22]
+        node: [18]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -45,8 +45,9 @@ jobs:
       - name: Cache dist
         uses: actions/cache@v4
         with:
-          path: packages/*/dist
+          path: packages/*/lib
           key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
+
   test:
     name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}} (${{ matrix.framework }})'
     runs-on: ${{ matrix.os }}
@@ -93,7 +94,7 @@ jobs:
       - name: Restore dist cache
         uses: actions/cache@v4
         with:
-          path: packages/*/dist
+          path: packages/*/lib
           key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
 
       - name: Testing

@@ -131,7 +131,7 @@
     "lint": "run-p \"lint:* {@}\" --",
     "lint:eslint": "eslint --flag unstable_ts_config .",
     "lint:prettier": "prettier . --check",
-    "test": "pnpm test:unit && pnpm test:e2e",
+    "test": "pnpm build && pnpm test:unit && pnpm test:e2e",
     "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",
     "test:e2e:rollup": "pnpm --filter @intlify/rollup-plugin-vue-i18n test:e2e",
     "test:e2e:vite": "pnpm --filter @intlify/vite-plugin-vue-i18n test:e2e",

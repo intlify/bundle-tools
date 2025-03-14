@@ -50,6 +50,8 @@ jobs:
   test:
     name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}} (${{ matrix.framework }})'
     runs-on: ${{ matrix.os }}
+    needs:
+      - build
     strategy:
       matrix:
         os: [ubuntu-latest]

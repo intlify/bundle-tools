@@ -295,7 +295,7 @@ export function resourcePlugin(
       // virtual @intlify/unplugin-vue-i18n/messages
       if (
         !query.vue &&
-        /\.(json5?|ya?ml|[c|m]?js|[c|m]?ts)$/.test(id) &&
+        /\.(json5?|ya?ml|[c|m]?[j|t]s)$/.test(id) &&
         filter(id)
       ) {
         langInfo = parsePath(filename).ext as SFCLangFormat
@@ -376,7 +376,7 @@ function getGenerator(ext: string, fallback: GeneratorFn = generateJSON) {
     return generateYAML
   }
 
-  if (/\.([c|m]?js|[c|m]?ts)$/.test(ext)) {
+  if (/\.[c|m]?[j|t]s$/.test(ext)) {
     return generateJavaScript
   }
 

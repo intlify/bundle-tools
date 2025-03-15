@@ -263,10 +263,11 @@ export function resourcePlugin(
 
       const { filename } = parseVueRequest(id)
       return (
-        resourcePaths.has(id) ||
         filename.endsWith('vue') ||
         filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
-        (/\.(json5?|ya?ml)$/.test(filename) && filter(filename))
+        (/\.(json5?|ya?ml)$/.test(filename) &&
+          filter(filename) &&
+          resourcePaths.has(id))
       )
     },
 

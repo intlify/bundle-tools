@@ -34,8 +34,7 @@
   "devDependencies": {
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
-    "unbuild": "^2.0.0",
-    "vitest": "^2.1.4"
+    "unbuild": "^2.0.0"
   },
   "engines": {
     "node": ">= 18"

@@ -96,6 +96,7 @@ jobs:
       - build
 
     strategy:
+      fail-fast: false
       matrix:
         os: [ubuntu-latest]
         node: [18, 20, 22]

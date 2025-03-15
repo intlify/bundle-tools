@@ -1,4 +1,4 @@
-name: Test
+name: Lint & Test
 on:
   push:
     branches-ignore:
@@ -47,6 +47,40 @@ jobs:
         with:
           path: packages/*/lib
           key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
+
+  lint:
+    name: 'Lint on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
+    runs-on: ${{ matrix.os }}
+    needs:
+      - build
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        node: [18]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Restore dist cache
+        uses: actions/cache@v4
+        with:
+          path: packages/*/lib
+          key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
+
+      - name: Linting
+        run: pnpm lint
 
   test:
     name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}} (${{ matrix.framework }})'

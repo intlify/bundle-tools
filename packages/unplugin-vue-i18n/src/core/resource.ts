@@ -133,6 +133,8 @@ export function resourcePlugin(
     //  HMR for webpack/rspack
   }
 
+  const supportedFileExtensionsRE = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
+
   return {
     name: resolveNamespace('resource'),
 
@@ -251,18 +253,25 @@ export function resourcePlugin(
 
       const { filename, query } = parseVueRequest(id)
 
+      // vue file or virtual bundle
+      if (
+        filename.endsWith('vue') ||
+        filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID)
+      ) {
+        return true
+      }
+
       // include imports by custom-blocks
       let isResourcePath = resourcePaths.has(id)
       if (!isResourcePath && 'issuerPath' in query) {
         isResourcePath = resourcePaths.has(query.issuerPath!)
       }
 
+      // locale resource
       return (
-        filename.endsWith('vue') ||
-        filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
-        (/\.(json5?|ya?ml|[c|m]?[j|t]s)$/.test(filename) &&
-          filter(filename) &&
-          isResourcePath)
+        supportedFileExtensionsRE.test(filename) &&
+        filter(filename) &&
+        isResourcePath
       )
     },
 
@@ -281,11 +290,7 @@ export function resourcePlugin(
       }
 
       // virtual @intlify/unplugin-vue-i18n/messages
-      if (
-        !query.vue &&
-        /\.(json5?|ya?ml|[c|m]?[j|t]s)$/.test(id) &&
-        filter(id)
-      ) {
+      if (!query.vue && supportedFileExtensionsRE.test(id) && filter(id)) {
         langInfo = parsePath(filename).ext as SFCLangFormat
 
         const generate = getGenerator(langInfo)

@@ -15,6 +15,10 @@ permissions:
 env:
   CI: true
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.sha }}
+  cancel-in-progress: ${{ github.event_name != 'push' }}
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}

@@ -212,18 +212,6 @@ export function resourcePlugin(
             return orgTransform!.apply(this, [code, id])
           }
         }
-      },
-
-      async handleHotUpdate({ file, server }) {
-        if (/\.(json5?|ya?ml)$/.test(file)) {
-          const module = server.moduleGraph.getModuleById(
-            asVirtualId(INTLIFY_BUNDLE_IMPORT_ID, meta.framework)
-          )
-          if (module) {
-            server.moduleGraph.invalidateModule(module)
-            return [module]
-          }
-        }
       }
     },
 

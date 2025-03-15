@@ -50,7 +50,11 @@ export function resolveOptions(options: PluginOptions) {
     ? toArray(res.include).map(item => normalize(item))
     : undefined
 
-  const exclude = res.include ? undefined : '**/**'
+  const _exclude = res.exclude
+    ? toArray(res.exclude).map(item => normalize(item))
+    : undefined
+
+  const exclude = res.include ? _exclude : ['**/**']
 
   const onlyLocales = toArray(res.onlyLocales)
 

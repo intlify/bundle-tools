@@ -72,7 +72,7 @@ export function resourcePlugin(
 
   const resourcePaths = new Set<string>()
   for (const inc of opts.include || []) {
-    for (const resourcePath of fg.sync(inc)) {
+    for (const resourcePath of fg.sync(inc, { ignore: opts.exclude })) {
       resourcePaths.add(resourcePath)
     }
   }

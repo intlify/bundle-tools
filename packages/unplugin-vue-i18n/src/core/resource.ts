@@ -261,13 +261,20 @@ export function resourcePlugin(
         return true
       }
 
-      const { filename } = parseVueRequest(id)
+      const { filename, query } = parseVueRequest(id)
+
+      // include imports by custom-blocks
+      let isResourcePath = resourcePaths.has(id)
+      if (!isResourcePath && 'issuerPath' in query) {
+        isResourcePath = resourcePaths.has(query.issuerPath!)
+      }
+
       return (
         filename.endsWith('vue') ||
         filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
         (/\.(json5?|ya?ml)$/.test(filename) &&
           filter(filename) &&
-          resourcePaths.has(id))
+          isResourcePath)
       )
     },
 

@@ -149,6 +149,9 @@ importers:
       tiny-glob:
         specifier: ^0.2.9
         version: 0.2.9
+      ts-loader:
+        specifier: ^9.5.2
+        version: 9.5.2(typescript@5.6.3)(webpack@5.92.0)
       typescript:
         specifier: ^5.6.3
         version: 5.6.3
@@ -5796,6 +5799,13 @@ packages:
     peerDependencies:
       typescript: '>=4.2.0'
 
+  ts-loader@9.5.2:
+    resolution: {integrity: sha512-Qo4piXvOTWcMGIgRiuFa6nHNm+54HbYaZCKqc9eeZCLRy3XqafQgwX2F7mofrbJG3g7EEb+lkiR+z2Lic2s3Zw==}
+    engines: {node: '>=12.0.0'}
+    peerDependencies:
+      typescript: '*'
+      webpack: ^5.0.0
+
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
 
@@ -10883,7 +10893,7 @@ snapshots:
       pkg-types: 1.1.1
       postcss: 8.4.38
       postcss-nested: 6.0.1(postcss@8.4.38)
-      semver: 7.6.2
+      semver: 7.6.3
     optionalDependencies:
       typescript: 5.6.3
 
@@ -12232,6 +12242,16 @@ snapshots:
   ts-api-utils@1.3.0(typescript@5.6.3):
     dependencies:
       typescript: 5.6.3
+
+  ts-loader@9.5.2(typescript@5.6.3)(webpack@5.92.0):
+    dependencies:
+      chalk: 4.1.2
+      enhanced-resolve: 5.17.0
+      micromatch: 4.0.7
+      semver: 7.6.3
+      source-map: 0.7.4
+      typescript: 5.6.3
+      webpack: 5.92.0(webpack-cli@5.1.4)
 
   tsconfig-paths@3.15.0:
     dependencies:

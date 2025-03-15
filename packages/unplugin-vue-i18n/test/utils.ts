@@ -148,7 +148,29 @@ export function bundleWebpackLike(
         {
           test: /\.vue$/,
           loader: vueLoaderPath
-        }
+        },
+        framework === 'rspack'
+          ? {
+              test: /\.ts$/,
+              exclude: [/node_modules/],
+              loader: 'builtin:swc-loader',
+              options: {
+                jsc: {
+                  parser: {
+                    syntax: 'typescript'
+                  }
+                }
+              },
+              type: 'javascript/auto'
+            }
+          : {
+              test: /\.tsx?$/,
+              loader: 'ts-loader',
+              exclude: /node_modules/,
+              options: {
+                transpileOnly: true
+              }
+            }
       ]
     },
     plugins: [new VueLoader(), pluginFn({ include, ...options })]

@@ -128,6 +128,9 @@ export function bundleWebpackLike(
   const include = (options.include as string[]) || [
     resolve(__dirname, './fixtures/**')
   ]
+  const exclude = (options.exclude as string[]) || [
+    resolve(__dirname, './fixtures/entry.*')
+  ]
   const sourcemap = isBoolean(options.sourcemap) || true
 
   const baseConfig: RspackOptions = {
@@ -173,7 +176,7 @@ export function bundleWebpackLike(
             }
       ]
     },
-    plugins: [new VueLoader(), pluginFn({ include, ...options })]
+    plugins: [new VueLoader(), pluginFn({ include, exclude, ...options })]
   }
 
   // @ts-ignore

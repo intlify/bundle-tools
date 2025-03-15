@@ -260,7 +260,7 @@ export function resourcePlugin(
       return (
         filename.endsWith('vue') ||
         filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID) ||
-        (/\.(json5?|ya?ml)$/.test(filename) &&
+        (/\.(json5?|ya?ml|[c|m]?[j|t]s)$/.test(filename) &&
           filter(filename) &&
           isResourcePath)
       )

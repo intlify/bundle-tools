@@ -1,4 +1,4 @@
-name: Lint & Test
+name: CI
 on:
   push:
     branches-ignore:
@@ -17,12 +17,13 @@ env:
 
 jobs:
   build:
-    name: 'Build for tests on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
     runs-on: ${{ matrix.os }}
+
     strategy:
       matrix:
         os: [ubuntu-latest]
         node: [18]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -49,14 +50,16 @@ jobs:
           key: build-intlify-bundle-tools-os-${{ matrix.os }}-${{ github.sha }}
 
   lint:
-    name: 'Lint on Node.js ${{ matrix.node }} OS: ${{matrix.os}}'
     runs-on: ${{ matrix.os }}
+
     needs:
       - build
+
     strategy:
       matrix:
         os: [ubuntu-latest]
         node: [18]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -83,15 +86,17 @@ jobs:
         run: pnpm lint
 
   test:
-    name: 'Test on Node.js ${{ matrix.node }} OS: ${{matrix.os}} (${{ matrix.framework }})'
     runs-on: ${{ matrix.os }}
+
     needs:
       - build
+
     strategy:
       matrix:
         os: [ubuntu-latest]
         node: [18, 20, 22]
         framework: ['vite', 'rspack', 'webpack']
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4

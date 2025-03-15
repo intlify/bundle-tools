@@ -1,5 +1,10 @@
 import { readFile, validateSyntax } from '../utils'
-import { generate } from '../../src/js'
+import { generate, initParser } from '../../src/js'
+import { beforeAll } from 'vitest'
+
+beforeAll(async () => {
+  await initParser()
+})
 
 test('simple', async () => {
   const { source } = await readFile('./fixtures/codegen/simple.js')

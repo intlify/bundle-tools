@@ -3,7 +3,6 @@
  */
 
 import { isString, isBoolean, isNumber } from '@intlify/shared'
-import { parseSync as parseJavaScript } from 'oxc-parser'
 import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
 import {
@@ -12,7 +11,7 @@ import {
   generateResourceAst,
   mapLinesColumns
 } from './codegen'
-import oxc from 'oxc-transform'
+import { transform } from 'oxc-transform'
 
 import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
@@ -22,6 +21,30 @@ import type {
   CodeGenResult,
   CodeGenFunction
 } from './codegen'
+
+// Adapted from https://github.com/nuxt/nuxt/blob/6d85c15fb1783b003bb5d7cdefdd22b54f871f9d/packages/nuxt/src/core/utils/parse.ts
+
+let parseJavaScript: typeof import('oxc-parser').parseSync
+
+export async function initParser() {
+  try {
+    parseJavaScript = await import('oxc-parser').then(r => r.parseSync)
+  } catch (_) {
+    console.warn(
+      '[intlify-bundle-utils]: Unable to import `oxc-parser`, falling back to `@oxc-parser/wasm`.'
+    )
+
+    const { parseSync: parse } = await import('@oxc-parser/wasm')
+    parseJavaScript = (filename, sourceText, options) =>
+      // @ts-expect-error sourceType property conflict
+      parse(sourceText, {
+        ...(options || {}),
+        sourceFilename:
+          filename.replace(/\?.*$/, '') + `.${options?.lang || 'ts'}`,
+        sourceType: 'module'
+      })
+  }
+}
 
 /**
  * @internal
@@ -68,7 +91,7 @@ export function generate(
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
-  const transformed = oxc.transform(filename, value, { sourceType: 'module' })
+  const transformed = transform(filename, value, { sourceType: 'module' })
   options.source = transformed.code
 
   const ast = parseJavaScript(filename, transformed.code, {

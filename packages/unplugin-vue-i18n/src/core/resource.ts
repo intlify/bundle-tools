@@ -1,7 +1,8 @@
 import {
   generateJavaScript,
   generateJSON,
-  generateYAML
+  generateYAML,
+  initJavascriptParser
 } from '@intlify/bundle-utils'
 import { assign, generateCodeFrame, isEmptyObject } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
@@ -133,6 +134,7 @@ export function resourcePlugin(
     //  HMR for webpack/rspack
   }
 
+  let initializedJSParser = false
   const supportedFileExtensionsRE = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
 
   return {
@@ -294,6 +296,10 @@ export function resourcePlugin(
         langInfo = parsePath(filename).ext as SFCLangFormat
 
         const generate = getGenerator(langInfo)
+        if (!initializedJSParser) {
+          await initJavascriptParser()
+          initializedJSParser = true
+        }
         const parseOptions = getOptions(filename, ctx, query, {
           ...opts,
           // FIXME: needs to be disabled?

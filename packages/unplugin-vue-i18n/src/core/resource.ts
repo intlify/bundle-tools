@@ -296,6 +296,7 @@ export function resourcePlugin(
         const generate = getGenerator(langInfo)
         const parseOptions = getOptions(filename, ctx, query, {
           ...opts,
+          // FIXME: needs to be disabled?
           allowDynamic: true,
           transformI18nBlock: undefined
         })

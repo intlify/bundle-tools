@@ -1,10 +1,5 @@
 import { readFile } from '../utils'
-import { generate, initParser } from '../../src/js'
-import { beforeAll } from 'vitest'
-
-beforeAll(async () => {
-  await initParser()
-})
+import { generate } from '../../src/js'
 
 test('import', async () => {
   const { source } = await readFile('./fixtures/codegen/import.js')

@@ -62,7 +62,7 @@
     "minimist": "^1.2.8",
     "npm-run-all2": "^7.0.1",
     "opener": "^1.5.2",
-    "playwright": "^1.44.0",
+    "playwright-core": "^1.51.0",
     "prettier": "^3.2.5",
     "prompts": "^2.4.2",
     "rollup": "^2.53.1",

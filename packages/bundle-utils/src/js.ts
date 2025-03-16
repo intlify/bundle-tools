@@ -332,7 +332,9 @@ function _generate(
                 : node.key.name
               generator.push(`${JSON.stringify(name)}: `)
               pathStack.push(name)
-              const code = generateJavaScript(node.value)
+              const code = generateJavaScript(node.value, {
+                format: { compact: true }
+              })
               generator.push(`${code}`, node.value, code)
               skipStack.push(false)
             } else if (
@@ -456,7 +458,9 @@ function _generate(
           if (parent?.type === 'ArrayExpression') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
               pathStack.pop()
-              generator.pushline(`,`)
+              if (!skipStack.pop()) {
+                generator.pushline(`,`)
+              }
             }
           }
           break

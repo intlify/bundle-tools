@@ -89,8 +89,8 @@ export function generate(
   }
 
   const ast = parseJavaScript(value, {
-    sourceType: 'module',
     ecmaVersion: 'latest',
+    sourceType: 'module',
     sourceFile: filename,
     allowImportExportEverywhere: true
   }) as Node
@@ -104,6 +104,7 @@ export function generate(
     }
 
     if (exportResult !== 'object') {
+      // using custom error to gracefully deal with error in virtual file
       throw new DynamicResourceError(
         `You need to define an object as the locale message with 'export default'.`
       )
@@ -216,7 +217,7 @@ function _generate(
 
           variableDeclarations.push(
             // @ts-expect-error mismatching types
-            ...node.declarations.map(x => '`' + x.id.name + '`')
+            ...node.declarations.map(x => `\`${x.id.name}\``)
           )
 
           break
@@ -452,7 +453,7 @@ function _generate(
           }
           generator.deindent()
           generator.push(`}`)
-          if (parent != null && parent.type === 'ArrayExpression') {
+          if (parent?.type === 'ArrayExpression') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
               pathStack.pop()
               generator.pushline(`,`)
@@ -460,7 +461,7 @@ function _generate(
           }
           break
         case 'Property':
-          if (parent != null && parent.type === 'ObjectExpression') {
+          if (parent?.type === 'ObjectExpression') {
             if (propsCountStack[propsCountStack.length - 1] !== 0) {
               pathStack.pop()
               if (!skipStack.pop()) {
@@ -476,7 +477,7 @@ function _generate(
           }
           generator.deindent()
           generator.push(`]`)
-          if (parent != null && parent.type === 'ArrayExpression') {
+          if (parent?.type === 'ArrayExpression') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
               pathStack.pop()
               if (!skipStack.pop()) {
@@ -486,7 +487,7 @@ function _generate(
           }
           break
         case 'Literal':
-          if (parent != null && parent.type === 'ArrayExpression') {
+          if (parent?.type === 'ArrayExpression') {
             if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
               pathStack.pop()
             }

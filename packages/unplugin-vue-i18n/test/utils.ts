@@ -128,6 +128,8 @@ export function bundleWebpackLike(
   const include = (options.include as string[]) || [
     resolve(__dirname, './fixtures/**')
   ]
+  // exclude the entry file, this is not a locale resource
+  // TODO: change test structure to make this exclusion implicit
   const exclude = (options.exclude as string[]) || [
     resolve(__dirname, './fixtures/entry.*')
   ]

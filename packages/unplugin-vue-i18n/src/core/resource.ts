@@ -1,4 +1,5 @@
 import {
+  DynamicResourceError,
   generateJavaScript,
   generateJSON,
   generateYAML
@@ -296,19 +297,32 @@ export function resourcePlugin(
         const generate = getGenerator(langInfo)
         const parseOptions = getOptions(filename, ctx, query, {
           ...opts,
-          // FIXME: needs to be disabled?
-          allowDynamic: true,
           transformI18nBlock: undefined
         })
+
         debug('parseOptions', parseOptions)
 
-        const { code: generatedCode, map } = generate(code, parseOptions)
-        debug('generated code', generatedCode)
-        debug('sourcemap', map, ctx.sourceMap)
+        try {
+          const { code: generatedCode, map } = generate(code, parseOptions)
 
-        if (code === generatedCode) return
+          debug('generated code', generatedCode)
+          debug('sourcemap', map, ctx.sourceMap)
 
-        return result(generatedCode)
+          if (code === generatedCode) return
+
+          return result(generatedCode)
+        } catch (err) {
+          if (err instanceof DynamicResourceError) {
+            console.error(
+              `Unable to precompile or optimize \`${filename}\`, excluding from virtual bundle \`${INTLIFY_BUNDLE_IMPORT_ID}\`.\n`,
+              err
+            )
+            // transform to empty resource to ensure a working merged bundle
+            return `export default {}`
+          } else {
+            throw err
+          }
+        }
       }
 
       // for Vue SFC

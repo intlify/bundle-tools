@@ -23,6 +23,8 @@ import type {
   CodeGenFunction
 } from './codegen'
 
+export class DynamicResourceError extends Error {}
+
 /**
  * @internal
  */
@@ -95,8 +97,14 @@ export function generate(
 
   const exportResult = scanAst(ast)
   if (!allowDynamic) {
-    if (!exportResult || exportResult !== 'object') {
+    if (!exportResult) {
       throw new Error(
+        `You need to define an object as the locale message with 'export default'.`
+      )
+    }
+
+    if (exportResult !== 'object') {
+      throw new DynamicResourceError(
         `You need to define an object as the locale message with 'export default'.`
       )
     }

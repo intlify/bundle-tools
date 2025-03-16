@@ -17,41 +17,41 @@ exports[`'allowDynamic' option > generate > map 1`] = `
 `;
 
 exports[`'allowDynamic' option > no generate 1`] = `
-{
+Node {
   "body": [
-    {
-      "declaration": {
+    Node {
+      "declaration": Node {
         "async": true,
-        "body": {
+        "body": Node {
           "body": [
-            {
+            Node {
               "declarations": [
-                {
+                Node {
                   "end": 116,
-                  "id": {
+                  "id": Node {
                     "end": 61,
                     "name": "json",
                     "start": 57,
                     "type": "Identifier",
                   },
-                  "init": {
-                    "argument": {
+                  "init": Node {
+                    "argument": Node {
                       "arguments": [
-                        {
+                        Node {
                           "async": false,
-                          "body": {
+                          "body": Node {
                             "arguments": [],
-                            "callee": {
+                            "callee": Node {
                               "computed": false,
                               "end": 113,
-                              "object": {
+                              "object": Node {
                                 "end": 108,
                                 "name": "response",
                                 "start": 100,
                                 "type": "Identifier",
                               },
                               "optional": false,
-                              "property": {
+                              "property": Node {
                                 "end": 113,
                                 "name": "json",
                                 "start": 109,
@@ -70,7 +70,7 @@ exports[`'allowDynamic' option > no generate 1`] = `
                           "generator": false,
                           "id": null,
                           "params": [
-                            {
+                            Node {
                               "end": 95,
                               "name": "response",
                               "start": 87,
@@ -81,19 +81,19 @@ exports[`'allowDynamic' option > no generate 1`] = `
                           "type": "ArrowFunctionExpression",
                         },
                       ],
-                      "callee": {
+                      "callee": Node {
                         "computed": false,
                         "end": 85,
-                        "object": {
+                        "object": Node {
                           "arguments": [
-                            {
+                            Node {
                               "end": 79,
                               "name": "url",
                               "start": 76,
                               "type": "Identifier",
                             },
                           ],
-                          "callee": {
+                          "callee": Node {
                             "end": 75,
                             "name": "fetch",
                             "start": 70,
@@ -105,7 +105,7 @@ exports[`'allowDynamic' option > no generate 1`] = `
                           "type": "CallExpression",
                         },
                         "optional": false,
-                        "property": {
+                        "property": Node {
                           "end": 85,
                           "name": "then",
                           "start": 81,
@@ -132,12 +132,12 @@ exports[`'allowDynamic' option > no generate 1`] = `
               "start": 51,
               "type": "VariableDeclaration",
             },
-            {
-              "argument": {
+            Node {
+              "argument": Node {
                 "end": 137,
                 "properties": [
-                  {
-                    "argument": {
+                  Node {
+                    "argument": Node {
                       "end": 135,
                       "name": "json",
                       "start": 131,
@@ -163,14 +163,14 @@ exports[`'allowDynamic' option > no generate 1`] = `
         "end": 140,
         "expression": false,
         "generator": false,
-        "id": {
+        "id": Node {
           "end": 42,
           "name": "loadResource",
           "start": 30,
           "type": "Identifier",
         },
         "params": [
-          {
+          Node {
             "end": 46,
             "name": "url",
             "start": 43,
@@ -186,7 +186,6 @@ exports[`'allowDynamic' option > no generate 1`] = `
     },
   ],
   "end": 141,
-  "hashbang": null,
   "sourceType": "module",
   "start": 0,
   "type": "Program",

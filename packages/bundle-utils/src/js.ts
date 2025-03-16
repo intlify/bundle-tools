@@ -5,6 +5,7 @@
 import { isString, isBoolean, isNumber } from '@intlify/shared'
 import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
+import { parse as parseJavaScript } from 'acorn'
 import {
   createCodeGenerator,
   generateMessageFunction,
@@ -21,30 +22,6 @@ import type {
   CodeGenResult,
   CodeGenFunction
 } from './codegen'
-
-// Adapted from https://github.com/nuxt/nuxt/blob/6d85c15fb1783b003bb5d7cdefdd22b54f871f9d/packages/nuxt/src/core/utils/parse.ts
-
-let parseJavaScript: typeof import('oxc-parser').parseSync
-
-export async function initParser() {
-  try {
-    parseJavaScript = await import('oxc-parser').then(r => r.parseSync)
-  } catch (_) {
-    console.warn(
-      '[intlify-bundle-utils]: Unable to import `oxc-parser`, falling back to `@oxc-parser/wasm`.'
-    )
-
-    const { parseSync: parse } = await import('@oxc-parser/wasm')
-    parseJavaScript = (filename, sourceText, options) =>
-      // @ts-expect-error sourceType property conflict
-      parse(sourceText, {
-        ...(options || {}),
-        sourceFilename:
-          filename.replace(/\?.*$/, '') + `.${options?.lang || 'ts'}`,
-        sourceType: 'module'
-      })
-  }
-}
 
 /**
  * @internal
@@ -94,10 +71,12 @@ export function generate(
   const transformed = transform(filename, value, { sourceType: 'module' })
   options.source = transformed.code
 
-  const ast = parseJavaScript(filename, transformed.code, {
-    astType: 'js',
-    sourceType: 'module'
-  }).program as Node
+  const ast = parseJavaScript(transformed.code, {
+    sourceType: 'module',
+    ecmaVersion: 'latest',
+    sourceFile: filename,
+    allowImportExportEverywhere: true
+  }) as Node
 
   const exportResult = scanAst(ast)
   if (!allowDynamic) {

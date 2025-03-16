@@ -22,6 +22,7 @@ import {
 import { getVueCompiler, parseVueRequest } from '../vue'
 import { genImport, genSafeVariableName } from 'knitwork'
 import { findStaticImports } from 'mlly'
+import { createHash } from 'node:crypto'
 
 import type { CodeGenOptions } from '@intlify/bundle-utils'
 import type {
@@ -407,7 +408,12 @@ function generateBundleResources(resources: Set<string>) {
   for (const filename of resources) {
     debug(`${filename} bundle loading ...`)
     const { name } = parsePath(filename)
-    const varName = genSafeVariableName(filename)
+    const varName = genSafeVariableName(
+      [
+        name,
+        createHash('sha256').update(filename).digest('hex').substring(0, 8)
+      ].join('_')
+    )
     imports.push({ statement: genImport(filename, varName), varName })
     codes.push(`${JSON.stringify(name)}: ${varName}`)
   }
@@ -438,7 +444,7 @@ const mergeDeep = (target, ...sources) => {
 }
 
 export default mergeDeep({},
-  ${codes.map(code => `{${code}}`).join(',\n')}
+  ${codes.map(code => `{ ${code} }`).join(',\n  ')}
 );`
 }
 

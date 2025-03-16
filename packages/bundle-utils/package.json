@@ -19,6 +19,8 @@
     }
   },
   "dependencies": {
+    "@babel/core": "^7.26.10",
+    "@babel/preset-typescript": "^7.26.0",
     "@intlify/message-compiler": "next",
     "@intlify/shared": "next",
     "acorn": "^8.8.2",
@@ -26,11 +28,11 @@
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",
     "mlly": "^1.2.0",
-    "oxc-transform": "^0.58.1",
     "source-map-js": "^1.0.1",
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
+    "@types/babel__core": "^7.20.5",
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
     "unbuild": "^2.0.0"

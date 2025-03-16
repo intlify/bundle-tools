@@ -27,11 +27,11 @@ Node {
             Node {
               "declarations": [
                 Node {
-                  "end": 116,
+                  "end": 115,
                   "id": Node {
-                    "end": 61,
+                    "end": 62,
                     "name": "json",
-                    "start": 57,
+                    "start": 58,
                     "type": "Identifier",
                   },
                   "init": Node {
@@ -43,29 +43,29 @@ Node {
                             "arguments": [],
                             "callee": Node {
                               "computed": false,
-                              "end": 113,
+                              "end": 112,
                               "object": Node {
-                                "end": 108,
+                                "end": 107,
                                 "name": "response",
-                                "start": 100,
+                                "start": 99,
                                 "type": "Identifier",
                               },
                               "optional": false,
                               "property": Node {
-                                "end": 113,
+                                "end": 112,
                                 "name": "json",
-                                "start": 109,
+                                "start": 108,
                                 "type": "Identifier",
                               },
-                              "start": 100,
+                              "start": 99,
                               "type": "MemberExpression",
                             },
-                            "end": 115,
+                            "end": 114,
                             "optional": false,
-                            "start": 100,
+                            "start": 99,
                             "type": "CallExpression",
                           },
-                          "end": 115,
+                          "end": 114,
                           "expression": true,
                           "generator": false,
                           "id": null,
@@ -77,90 +77,90 @@ Node {
                               "type": "Identifier",
                             },
                           ],
-                          "start": 86,
+                          "start": 87,
                           "type": "ArrowFunctionExpression",
                         },
                       ],
                       "callee": Node {
                         "computed": false,
-                        "end": 85,
+                        "end": 86,
                         "object": Node {
                           "arguments": [
                             Node {
-                              "end": 79,
+                              "end": 80,
                               "name": "url",
-                              "start": 76,
+                              "start": 77,
                               "type": "Identifier",
                             },
                           ],
                           "callee": Node {
-                            "end": 75,
+                            "end": 76,
                             "name": "fetch",
-                            "start": 70,
+                            "start": 71,
                             "type": "Identifier",
                           },
-                          "end": 80,
+                          "end": 81,
                           "optional": false,
-                          "start": 70,
+                          "start": 71,
                           "type": "CallExpression",
                         },
                         "optional": false,
                         "property": Node {
-                          "end": 85,
+                          "end": 86,
                           "name": "then",
-                          "start": 81,
+                          "start": 82,
                           "type": "Identifier",
                         },
-                        "start": 70,
+                        "start": 71,
                         "type": "MemberExpression",
                       },
-                      "end": 116,
+                      "end": 115,
                       "optional": false,
-                      "start": 70,
+                      "start": 71,
                       "type": "CallExpression",
                     },
-                    "end": 116,
-                    "start": 64,
+                    "end": 115,
+                    "start": 65,
                     "type": "AwaitExpression",
                   },
-                  "start": 57,
+                  "start": 58,
                   "type": "VariableDeclarator",
                 },
               ],
-              "end": 117,
+              "end": 115,
               "kind": "const",
-              "start": 51,
+              "start": 52,
               "type": "VariableDeclaration",
             },
             Node {
               "argument": Node {
-                "end": 137,
+                "end": 136,
                 "properties": [
                   Node {
                     "argument": Node {
-                      "end": 135,
+                      "end": 134,
                       "name": "json",
-                      "start": 131,
+                      "start": 130,
                       "type": "Identifier",
                     },
-                    "end": 135,
-                    "start": 128,
+                    "end": 134,
+                    "start": 127,
                     "type": "SpreadElement",
                   },
                 ],
-                "start": 126,
+                "start": 125,
                 "type": "ObjectExpression",
               },
-              "end": 138,
-              "start": 119,
+              "end": 136,
+              "start": 118,
               "type": "ReturnStatement",
             },
           ],
-          "end": 140,
+          "end": 138,
           "start": 48,
           "type": "BlockStatement",
         },
-        "end": 140,
+        "end": 138,
         "expression": false,
         "generator": false,
         "id": Node {
@@ -180,12 +180,12 @@ Node {
         "start": 15,
         "type": "FunctionDeclaration",
       },
-      "end": 140,
+      "end": 138,
       "start": 0,
       "type": "ExportDefaultDeclaration",
     },
   ],
-  "end": 141,
+  "end": 139,
   "sourceType": "module",
   "start": 0,
   "type": "Program",
@@ -295,7 +295,7 @@ exports[`bare > map 1`] = `
 `;
 
 exports[`complex > code 1`] = `
-"const val1 = 1;
+"const val1 = 1
 const resource = {
   "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hi there!"])};fn.source="hi there!";return fn;})(),
   "nested": {
@@ -340,8 +340,8 @@ exports[`complex > map 1`] = `
 `;
 
 exports[`force stringify > code 1`] = `
-"const val2 = ["hello", "world"];
-const val1 = "hello";
+"const val2 = ['hello', 'world']
+const val1 = 'hello'
 const resource = {
   "val2": val2,
   "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
@@ -549,8 +549,8 @@ exports[`simple > map 1`] = `
 `;
 
 exports[`unhandling > code 1`] = `
-"const val2 = ["hello", "world"];
-const val1 = "hello";
+"const val2 = ['hello', 'world']
+const val1 = 'hello'
 const resource = {
   "val2": val2,
   "trueValue": true,

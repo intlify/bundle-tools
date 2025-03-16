@@ -6,13 +6,13 @@ import { isString, isBoolean, isNumber } from '@intlify/shared'
 import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
 import { parse as parseJavaScript } from 'acorn'
+import { transform } from '@babel/core'
 import {
   createCodeGenerator,
   generateMessageFunction,
   generateResourceAst,
   mapLinesColumns
 } from './codegen'
-import { transform } from 'oxc-transform'
 
 import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
@@ -48,7 +48,7 @@ export function generate(
   const target = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
     : targetSource
-  const value = target
+  let value = target
 
   const options = {
     type,
@@ -68,10 +68,25 @@ export function generate(
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
 
-  const transformed = transform(filename, value, { sourceType: 'module' })
-  options.source = transformed.code
+  if (options.filename && /.[c|m]?ts$/.test(options.filename)) {
+    const transformed = transform(value, {
+      filename: options.filename,
+      sourceMaps: options.sourceMap,
+      babelrc: false,
+      configFile: false,
+      browserslistConfigFile: false,
+      comments: false,
+      envName: 'development',
+      presets: ['@babel/preset-typescript']
+    })
 
-  const ast = parseJavaScript(transformed.code, {
+    if (transformed && transformed.code) {
+      value = transformed.code
+      options.source = transformed.code
+    }
+  }
+
+  const ast = parseJavaScript(value, {
     sourceType: 'module',
     ecmaVersion: 'latest',
     sourceFile: filename,

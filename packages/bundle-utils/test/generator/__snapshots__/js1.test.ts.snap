@@ -1,8 +1,8 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`import > code 1`] = `
-"import mod1 from "./module1";
-import { mod2, mod3 as testing } from "./module2";
+"import mod1 from './module1'
+import { mod2, mod3 as testing } from './module2'
 const resource = {
   "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})(),
   "mod1": mod1,

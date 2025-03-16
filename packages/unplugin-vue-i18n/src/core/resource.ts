@@ -314,8 +314,8 @@ export function resourcePlugin(
           return result(generatedCode)
         } catch (err) {
           if (err instanceof DynamicResourceError) {
-            console.error(
-              `Unable to precompile or optimize \`${filename}\`, excluding from virtual bundle \`${INTLIFY_BUNDLE_IMPORT_ID}\`.\n`,
+            error(
+              `Unable to precompile or optimize \`${filename}\` - excluding from virtual bundle \`${INTLIFY_BUNDLE_IMPORT_ID}\`.\n`,
               err
             )
             // transform to empty resource to ensure a working merged bundle

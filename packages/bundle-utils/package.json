@@ -19,8 +19,8 @@
     }
   },
   "dependencies": {
-    "@intlify/message-compiler": "next",
-    "@intlify/shared": "next",
+    "@intlify/message-compiler": "^11.1.2",
+    "@intlify/shared": "^11.1.2",
     "acorn": "^8.8.2",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",

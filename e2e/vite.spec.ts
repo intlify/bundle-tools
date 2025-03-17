@@ -2,7 +2,7 @@ import { startServer } from './setup-server'
 import { getText } from './helper'
 
 import type { ServerContext } from './setup-server'
-import type { Browser, Page } from 'playwright'
+import type { Browser, Page } from 'playwright-core'
 import { describe, expect, test, beforeAll, afterAll } from 'vitest'
 
 // TODO: extract to shim.d.ts

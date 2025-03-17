@@ -1,4 +1,25 @@
 
+## @intlify/bundle-utils@11.0.0-beta.0 (2025-03-17)
+
+#### :star: Features
+* [#447](https://github.com/intlify/bundle-tools/pull/447) fix: transform/parse ts files and bundle using imports ([@BobbieGoede](https://github.com/BobbieGoede))
+
+#### Committers: 1
+- Bobbie Goede ([@BobbieGoede](https://github.com/BobbieGoede))
+
+
+## @intlify/bundle-utils@11.0.0-beta.0 (2025-02-25)
+
+#### :star: Features
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### :boom: Breaking Change
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### Committers: 1
+- bab ([@babu-ch](https://github.com/babu-ch))
+
+
 ## @intlify/bundle-utils@10.0.0 (2024-11-16)
 
 #### :star: Features

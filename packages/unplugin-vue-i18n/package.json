@@ -1,7 +1,7 @@
 {
   "name": "@intlify/unplugin-vue-i18n",
   "type": "module",
-  "version": "6.0.3",
+  "version": "6.0.4",
   "description": "unplugin for Vue I18n",
   "author": {
     "name": "kazuya kawaguchi",
@@ -25,7 +25,7 @@
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
-    "@intlify/bundle-utils": "workspace:*",
+    "@intlify/bundle-utils": "^10.0.1",
     "@intlify/shared": "^11.1.2",
     "@intlify/vue-i18n-extensions": "^8.0.0",
     "@rollup/pluginutils": "^5.1.0",

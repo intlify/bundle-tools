@@ -235,8 +235,8 @@ importers:
         specifier: ^4.4.0
         version: 4.4.0(eslint@9.14.0(jiti@2.4.2))
       '@intlify/bundle-utils':
-        specifier: workspace:*
-        version: link:../bundle-utils
+        specifier: ^10.0.1
+        version: 10.0.1(petite-vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))
       '@intlify/shared':
         specifier: ^11.1.2
         version: 11.1.2
@@ -892,6 +892,18 @@ packages:
   '@humanwhocodes/retry@0.4.1':
     resolution: {integrity: sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==}
     engines: {node: '>=18.18'}
+
+  '@intlify/bundle-utils@10.0.1':
+    resolution: {integrity: sha512-WkaXfSevtpgtUR4t8K2M6lbR7g03mtOxFeh+vXp5KExvPqS12ppaRj1QxzwRuRI5VUto54A22BjKoBMLyHILWQ==}
+    engines: {node: '>= 18'}
+    peerDependencies:
+      petite-vue-i18n: '*'
+      vue-i18n: '*'
+    peerDependenciesMeta:
+      petite-vue-i18n:
+        optional: true
+      vue-i18n:
+        optional: true
 
   '@intlify/core-base@11.1.2':
     resolution: {integrity: sha512-nmG512G8QOABsserleechwHGZxzKSAlggGf9hQX0nltvSwyKNVuB/4o6iFeG2OnjXK253r8p8eSDOZf8PgFdWw==}
@@ -6522,6 +6534,21 @@ snapshots:
   '@humanwhocodes/retry@0.3.1': {}
 
   '@humanwhocodes/retry@0.4.1': {}
+
+  '@intlify/bundle-utils@10.0.1(petite-vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))(vue-i18n@9.13.1(vue@3.4.29(typescript@5.6.3)))':
+    dependencies:
+      '@intlify/message-compiler': 11.1.2
+      '@intlify/shared': 11.1.2
+      acorn: 8.14.0
+      escodegen: 2.1.0
+      estree-walker: 2.0.2
+      jsonc-eslint-parser: 2.4.0
+      mlly: 1.7.4
+      source-map-js: 1.2.1
+      yaml-eslint-parser: 1.2.3
+    optionalDependencies:
+      petite-vue-i18n: 9.13.1(vue@3.4.29(typescript@5.6.3))
+      vue-i18n: 9.13.1(vue@3.4.29(typescript@5.6.3))
 
   '@intlify/core-base@11.1.2':
     dependencies:

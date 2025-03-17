@@ -56,5 +56,8 @@ jobs:
         # does not need to explicitly set chromium after https://github.com/microsoft/playwright/issues/14862 is solved
         run: pnpm playwright install chromium
 
+      - name: Building
+        run: pnpm build
+
       - name: Testing
         run: pnpm test

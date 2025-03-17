@@ -67,22 +67,23 @@ test.skipIf(!isTestFramework('vite'))('ts resource', async () => {
 
 test('dynamical resource with js / ts', async () => {
   const { module } = await bundleAndRun('ka-JP.ts', bundler, {
-    allowDynamic: true,
-    ...options
+    ...options,
+    allowDynamic: true
   })
   expect(isFunction(module)).toBe(true)
 })
 
 test.skipIf(!isTestFramework('vite'))('strict message', async () => {
-  let occured = false
+  let occurred = false
   try {
-    await bundleAndRun('html.json', bundler, {
+    const { module } = await bundleAndRun('html.json', bundler, {
       ...options
     })
+    console.log(module)
   } catch (_e) {
-    occured = true
+    occurred = true
   }
-  expect(occured).toBe(true)
+  expect(occurred).toBe(true)
 })
 
 test('escape message', async () => {

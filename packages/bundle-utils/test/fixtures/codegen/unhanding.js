@@ -1,5 +1,8 @@
+const val2 = ['hello', 'world']
 const val1 = 'hello'
+
 export default {
+  val2,
   trueValue: true,
   falseValue: false,
   nullValue: null,

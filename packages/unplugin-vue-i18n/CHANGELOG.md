@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@7.0.0-beta.2 (2025-03-17)
+
+#### :star: Features
+* [#447](https://github.com/intlify/bundle-tools/pull/447) fix: transform/parse ts files and bundle using imports ([@BobbieGoede](https://github.com/BobbieGoede))
+
+#### Committers: 1
+- Bobbie Goede ([@BobbieGoede](https://github.com/BobbieGoede))
+
+
 ## @intlify/unplugin-vue-i18n@7.0.0-beta.1 (2025-03-09)
 
 #### :star: Features

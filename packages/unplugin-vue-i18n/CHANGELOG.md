@@ -1,4 +1,28 @@
 
+## @intlify/unplugin-vue-i18n@6.0.4 (2025-03-17)
+
+#### :bug: Bug Fixes
+* [#454](https://github.com/intlify/bundle-tools/pull/454) fix(unpluing-vue-i18n): pinned deps ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
+## @intlify/unplugin-vue-i18n@6.0.4 (2025-03-17)
+
+#### :star: Features
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### :boom: Breaking Change
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### :pencil: Documentation
+* [#439](https://github.com/intlify/bundle-tools/pull/439) docs: Fixed highlighting of alert syntax ([@babu-ch](https://github.com/babu-ch))
+
+#### Committers: 1
+- bab ([@babu-ch](https://github.com/babu-ch))
+
+
 ## @intlify/unplugin-vue-i18n@6.0.3 (2024-12-30)
 
 #### :zap: Improvement Features

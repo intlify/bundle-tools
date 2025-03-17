@@ -1,4 +1,16 @@
 
+## @intlify/bundle-utils@10.0.1 (2025-03-17)
+
+#### :star: Features
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### :boom: Breaking Change
+* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+#### Committers: 1
+- bab ([@babu-ch](https://github.com/babu-ch))
+
+
 ## @intlify/bundle-utils@10.0.0 (2024-11-16)
 
 #### :star: Features

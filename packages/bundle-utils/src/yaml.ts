@@ -114,36 +114,46 @@ function _generate(
   const codeMaps = new Map<string, RawSourceMap>()
   const { type, sourceMap, isGlobal, locale, jit } = options
 
-  const codegenFn: CodeGenFunction = jit
+  const _codegenFn: CodeGenFunction = jit
     ? generateResourceAst
     : generateMessageFunction
+
+  function codegenFn(value: string) {
+    const { code, map } = _codegenFn(value, options, pathStack)
+    sourceMap && map != null && codeMaps.set(value, map)
+    return code
+  }
 
   const componentNamespace = '_Component'
 
   traverseNodes(node, {
     enterNode(node: YAMLNode, parent: YAMLNode) {
+      if (parent?.type === 'YAMLSequence') {
+        const lastIndex = itemsCountStack.length - 1
+        const currentCount = parent.entries.length - itemsCountStack[lastIndex]
+        pathStack.push(currentCount.toString())
+        itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+      } else if (parent?.type === 'YAMLMapping') {
+        const lastIndex = propsCountStack.length - 1
+        propsCountStack[lastIndex] = --propsCountStack[lastIndex]
+      }
+
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
             generator.push(`const resource = `)
           } else if (type === 'sfc') {
-            const variableName =
-              type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
-            const localeName =
-              type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            const exportSyntax = 'export default'
-            generator.push(`${exportSyntax} function (Component) {`)
+            const variableName = !isGlobal ? '__i18n' : '__i18nGlobal'
+            const localeName = JSON.stringify(locale ?? `""`)
+            generator.push(`export default function (Component) {`)
             generator.indent()
-            const componentVariable = `Component`
-            generator.pushline(
-              `const ${componentNamespace} = ${componentVariable}`
-            )
+            generator.pushline(`const ${componentNamespace} = Component`)
             generator.pushline(
               `${componentNamespace}.${variableName} = ${componentNamespace}.${variableName} || []`
             )
             generator.push(`${componentNamespace}.${variableName}.push({`)
             generator.indent()
-            generator.pushline(`"locale": ${JSON.stringify(localeName)},`)
+            generator.pushline(`"locale": ${localeName},`)
             generator.push(`"resource": `)
           }
           break
@@ -151,94 +161,48 @@ function _generate(
           generator.push(`{`)
           generator.indent()
           propsCountStack.push(node.pairs.length)
-          if (parent.type === 'YAMLSequence') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.entries.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
-          }
-          break
-        case 'YAMLPair':
-          if (
-            node.value &&
-            node.value.type === 'YAMLScalar' &&
-            node.key &&
-            node.key.type === 'YAMLScalar'
-          ) {
-            const name = node.key.value
-            const value = node.value.value
-            if (isString(value)) {
-              generator.push(`${JSON.stringify(name)}: `)
-              name && pathStack.push(name.toString())
-              const { code, map } = codegenFn(value, options, pathStack)
-              sourceMap && map != null && codeMaps.set(value, map)
-              generator.push(`${code}`, node.value, value)
-            } else {
-              if (forceStringify) {
-                const strValue = JSON.stringify(value)
-                generator.push(`${JSON.stringify(name)}: `)
-                name && pathStack.push(name.toString())
-                const { code, map } = codegenFn(strValue, options, pathStack)
-                sourceMap && map != null && codeMaps.set(strValue, map)
-                generator.push(`${code}`, node.value, strValue)
-              } else {
-                generator.push(
-                  `${JSON.stringify(name)}: ${JSON.stringify(value)}`
-                )
-                name && pathStack.push(name.toString())
-              }
-            }
-          } else if (
-            node.value &&
-            (node.value.type === 'YAMLMapping' ||
-              node.value.type === 'YAMLSequence') &&
-            node.key &&
-            node.key.type === 'YAMLScalar'
-          ) {
-            const name = node.key.value
-            generator.push(`${JSON.stringify(name)}: `)
-            name && pathStack.push(name.toString())
-          }
-          const lastIndex = propsCountStack.length - 1
-          propsCountStack[lastIndex] = --propsCountStack[lastIndex]
           break
         case 'YAMLSequence':
           generator.push(`[`)
           generator.indent()
-          if (parent.type === 'YAMLSequence') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.entries.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
-          }
           itemsCountStack.push(node.entries.length)
+          break
+        case 'YAMLPair':
+          if (node.key?.type !== 'YAMLScalar') break
+          if (node.value?.type === 'YAMLScalar') {
+            const name = node.key.value
+            const value = node.value.value
+            const strName = JSON.stringify(name)
+            const strValue = JSON.stringify(value)
+            name && pathStack.push(name.toString())
+            generator.push(`${strName}: `)
+            if (isString(value)) {
+              generator.push(codegenFn(value), node.value, value)
+            } else if (forceStringify) {
+              generator.push(codegenFn(strValue), node.value, strValue)
+            } else {
+              generator.push(strValue)
+            }
+          } else if (
+            node.value?.type === 'YAMLMapping' ||
+            node.value?.type === 'YAMLSequence'
+          ) {
+            const name = node.key.value
+            name && pathStack.push(name.toString())
+            generator.push(`${JSON.stringify(name)}: `)
+          }
           break
         case 'YAMLScalar':
           if (parent.type === 'YAMLSequence') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.entries.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            if (node.type === 'YAMLScalar') {
-              const value = node.value
-              if (isString(value)) {
-                const { code, map } = codegenFn(value, options, pathStack)
-                sourceMap && map != null && codeMaps.set(value, map)
-                generator.push(`${code}`, node, value)
-              } else {
-                if (forceStringify) {
-                  const strValue = JSON.stringify(value)
-                  const { code, map } = codegenFn(strValue, options, pathStack)
-                  sourceMap && map != null && codeMaps.set(strValue, map)
-                  generator.push(`${code}`, node, strValue)
-                } else {
-                  generator.push(`${JSON.stringify(value)}`)
-                }
-              }
+            const value = node.value
+            const strValue = JSON.stringify(value)
+            if (isString(value)) {
+              generator.push(codegenFn(value), node, value)
+            } else if (forceStringify) {
+              generator.push(codegenFn(strValue), node, strValue)
+            } else {
+              generator.push(strValue)
             }
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
           }
           break
         default:
@@ -265,18 +229,6 @@ function _generate(
           }
           generator.deindent()
           generator.push(`}`)
-          if (parent.type === 'YAMLSequence') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            }
-          }
-          break
-        case 'YAMLPair':
-          if (propsCountStack[propsCountStack.length - 1] !== 0) {
-            pathStack.pop()
-            generator.pushline(`,`)
-          }
           break
         case 'YAMLSequence':
           if (itemsCountStack[itemsCountStack.length - 1] === 0) {
@@ -285,25 +237,21 @@ function _generate(
           }
           generator.deindent()
           generator.push(`]`)
-          if (parent.type === 'YAMLSequence') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            }
-          }
-          break
-        case 'YAMLScalar':
-          if (parent.type === 'YAMLSequence') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            } else {
-              generator.pushline(`,`)
-            }
-          }
           break
         default:
           break
+      }
+
+      // if not last obj property or array value
+      const stackArr =
+        node.type === 'YAMLPair' ? propsCountStack : itemsCountStack
+      if (parent?.type === 'YAMLSequence' || parent?.type === 'YAMLMapping') {
+        if (stackArr[stackArr.length - 1] !== 0) {
+          pathStack.pop()
+          generator.pushline(`,`)
+        } else if (node.type === 'YAMLScalar') {
+          generator.pushline(`,`)
+        }
       }
     }
   })

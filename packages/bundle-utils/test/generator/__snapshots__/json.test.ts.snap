@@ -9,12 +9,10 @@ exports[`AST code generation > array basic > code 1`] = `
     "resource": {
       "foo": [
         [
-          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"bar"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"bar"}},
-          
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"bar"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"bar"}}
         ],
         [
-          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"baz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"baz"}},
-          
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"baz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"baz"}}
         ]
       ]
     }
@@ -42,14 +40,12 @@ exports[`AST code generation > array mixed > code 1`] = `
             {
               "foo": {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"foo"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"foo"}}
             },
-            {"type":0,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"source":"hoge"},"body":{"type":2,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}}}],"static":"hoge"}},
-            
+            {"type":0,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4},"source":"hoge"},"body":{"type":2,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}},"items":[{"type":3,"start":0,"end":4,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":5,"offset":4}}}],"static":"hoge"}}
           ]
         ],
         {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"baz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"baz"}},
         [
-          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"buz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"buz"}},
-          
+          {"type":0,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3},"source":"buz"},"body":{"type":2,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}},"items":[{"type":3,"start":0,"end":3,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":4,"offset":3}}}],"static":"buz"}}
         ]
       ]
     }
@@ -85,8 +81,7 @@ exports[`AST code generation > complex > code 1`] = `
   "backslash-backslash": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"\\\\\\\\"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"\\\\\\\\"}},
   "errors": [
     {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1001"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1001"}},
-    {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1002"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1002"}},
-    
+    {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1002"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1002"}}
   ],
   "complex": {
     "warnings": [
@@ -267,12 +262,10 @@ exports[`code generation > array basic > code 1`] = `
     "resource": {
       "foo": [
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
-          
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})()
         ],
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})(),
-          
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})()
         ]
       ]
     }
@@ -318,14 +311,12 @@ exports[`code generation > array mixed > code 1`] = `
             {
               "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})()
             },
-            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hoge"])};fn.source="hoge";return fn;})(),
-            
+            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hoge"])};fn.source="hoge";return fn;})()
           ]
         ],
         (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})(),
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["buz"])};fn.source="buz";return fn;})(),
-          
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["buz"])};fn.source="buz";return fn;})()
         ]
       ]
     }
@@ -416,8 +407,7 @@ exports[`code generation > complex > code 1`] = `
   "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
   "errors": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
-    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})(),
-    
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})()
   ],
   "complex": {
     "warnings": [

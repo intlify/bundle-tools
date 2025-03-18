@@ -254,13 +254,14 @@ function _generate(
           case 'VariableDeclarator':
             this.skip()
         }
-      }
-
-      if (parent?.type === 'ArrayExpression') {
+      } else if (parent?.type === 'ArrayExpression') {
         const lastIndex = itemsCountStack.length - 1
         const currentCount = parent.elements.length - itemsCountStack[lastIndex]
         pathStack.push(currentCount.toString())
         itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+      } else if (parent?.type === 'ObjectExpression') {
+        const lastIndex = propsCountStack.length - 1
+        propsCountStack[lastIndex] = --propsCountStack[lastIndex]
       }
 
       switch (node.type) {
@@ -268,7 +269,7 @@ function _generate(
           if (type === 'plain') {
             generator.push(`const resource = `)
           } else if (type === 'sfc') {
-            const localeName = JSON.stringify(locale ?? '')
+            const localeName = JSON.stringify(locale ?? '""')
             const variableName = !isGlobal ? '__i18n' : '__i18nGlobal'
             generator.push(`export default function (Component) {`)
             generator.indent()
@@ -342,7 +343,6 @@ function _generate(
               const identifierName =
                 (node.value.type === 'Identifier' && String(node.value.name)) ||
                 (node.value.type === 'Literal' && String(node.value.value))
-
               generator.push(`${strName}: ${identifierName || name}`)
               skipStack.push(false)
             } else {
@@ -350,8 +350,6 @@ function _generate(
               skipStack.push(true)
             }
           }
-          const lastIndex = propsCountStack.length - 1
-          propsCountStack[lastIndex] = --propsCountStack[lastIndex]
           break
         case 'SpreadElement':
           const spreadIdentifier =
@@ -424,6 +422,7 @@ function _generate(
           break
       }
 
+      // if not last obj property or array value
       if (
         parent?.type === 'ArrayExpression' ||
         parent?.type === 'ObjectExpression'

@@ -1,0 +1,25 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": true,
+  "editor.codeActionsOnSave": {
+    "source.organizeImports": "always",
+    "source.fixAll.eslint": "explicit"
+  },
+  "eslint.useFlatConfig": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "json",
+    "jsonc",
+    "json5",
+    "markdown",
+    "yaml"
+  ],
+  "files.associations": {
+    "*.json": "jsonc"
+  },
+  "typescript.referencesCodeLens.enabled": true,
+  "typescript.tsdk": "node_modules/typescript/lib"
+}

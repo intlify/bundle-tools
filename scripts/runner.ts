@@ -1,57 +1,59 @@
-import path from 'path'
-import chalk from 'chalk'
-import glob from 'tiny-glob'
-import prompts from 'prompts'
-import { getRootPath, getRelativePath, readPackageJson } from './utils'
+import chalk from "chalk";
+import path from "path";
+import prompts from "prompts";
+import glob from "tiny-glob";
+import { getRelativePath, getRootPath, readPackageJson } from "./utils";
 
-export type CommandType = 'release' | 'changelog'
-export type Command = (log: Logger) => Promise<void>
+export type CommandType = "release" | "changelog";
+export type Command = (log: Logger) => Promise<void>;
 
-import type { Mode, Logger } from './utils'
+import type { Logger, Mode } from "./utils";
 
 async function confirmBatchMode(type: CommandType): Promise<boolean> {
   const { yes } = await prompts({
-    type: 'confirm',
-    name: 'yes',
-    message: `Are you sure to ${type} with batch mode?`
-  })
-  return yes as boolean
+    type: "confirm",
+    name: "yes",
+    message: `Are you sure to ${type} with batch mode?`,
+  });
+  return yes as boolean;
 }
 
 export async function execute(type: CommandType, command: Command) {
-  const rootDir = await getRootPath()
-  const pkgDir = path.resolve(rootDir, await getRelativePath())
+  const rootDir = await getRootPath();
+  const pkgDir = path.resolve(rootDir, await getRelativePath());
 
-  let mode: Mode = 'single'
+  let mode: Mode = "single";
   if (rootDir === pkgDir) {
-    mode = 'batch'
+    mode = "batch";
   }
   const log = (...args) => {
     const ch =
-      mode === 'single' ? chalk.black.bgGreenBright : chalk.black.bgYellowBright
-    console.log(ch.bold(` ${mode} mode `), '', chalk.cyan(...args))
-  }
+      mode === "single"
+        ? chalk.black.bgGreenBright
+        : chalk.black.bgYellowBright;
+    console.log(ch.bold(` ${mode} mode `), "", chalk.cyan(...args));
+  };
 
-  if (mode === 'batch') {
-    log(`'${type}' confirm`)
+  if (mode === "batch") {
+    log(`'${type}' confirm`);
     if (!(await confirmBatchMode(type))) {
-      return
+      return;
     }
-    const pkgPath = path.resolve(pkgDir, 'package.json')
-    const pkg = await readPackageJson(pkgPath)
+    const pkgPath = path.resolve(pkgDir, "package.json");
+    const pkg = await readPackageJson(pkgPath);
     if (!pkg.workspaces) {
-      return
+      return;
     }
     for (const workspace of pkg.workspaces) {
-      const packages = await glob(workspace)
+      const packages = await glob(workspace);
       for (const p of packages) {
-        const org = process.cwd()
-        process.chdir(`${rootDir}/${p}`)
-        await command(log)
-        process.chdir(org)
+        const org = process.cwd();
+        process.chdir(`${rootDir}/${p}`);
+        await command(log);
+        process.chdir(org);
       }
     }
   } else {
-    await command(log)
+    await command(log);
   }
 }

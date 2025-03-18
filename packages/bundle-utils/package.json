@@ -2,7 +2,7 @@
   "name": "@intlify/bundle-utils",
   "type": "module",
   "description": "Bundle utilities for Intlify project",
-  "version": "11.0.0-beta.0",
+  "version": "10.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -19,10 +19,8 @@
     }
   },
   "dependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/preset-typescript": "^7.26.0",
-    "@intlify/message-compiler": "next",
-    "@intlify/shared": "next",
+    "@intlify/message-compiler": "^11.1.2",
+    "@intlify/shared": "^11.1.2",
     "acorn": "^8.8.2",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
@@ -32,7 +30,6 @@
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.5",
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
     "unbuild": "^2.0.0"
@@ -51,6 +48,7 @@
   "types": "lib/index.d.ts",
   "exports": {
     ".": {
+      "types": "./lib/index.d.ts",
       "import": "./lib/index.mjs",
       "require": "./lib/index.cjs"
     },
@@ -63,10 +61,6 @@
     "directory": "packages/bundle-utils"
   },
   "scripts": {
-    "build": "unbuild",
-    "clean": "run-p \"clean:*\"",
-    "clean:lib": "rm -rf ./lib",
-    "changelog": "jiti ../../scripts/changelog.ts",
-    "release": "jiti ../../scripts/release.ts"
+    "build": "unbuild"
   }
 }

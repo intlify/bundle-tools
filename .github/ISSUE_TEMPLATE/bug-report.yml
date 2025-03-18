@@ -37,11 +37,11 @@ body:
       label: Issue Package
       description: Select the package
       options:
+        - bundle-utils
+        - unplugin-vue-i18n
         - vite-plugin-vue-i18n
         - vue-i18n-loader
         - rollup-plugin-vue-i18n
-        - unplugin-vue-i18n
-        - bundle-utils
     validations:
       required: true
   - type: textarea

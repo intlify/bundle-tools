@@ -1,6 +1,5 @@
 {
   "name": "@intlify/bundle-tools",
-  "version": "1.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -8,25 +7,11 @@
   "bugs": {
     "url": "https://github.com/intlify/bundle-tools/issues"
   },
-  "changelog": {
-    "labels": {
-      "Type: Feature": ":star: Features",
-      "Type: Bug": ":bug: Bug Fixes",
-      "Type: Security": ":lock: Security Fixes",
-      "Type: Performance": ":chart_with_upwards_trend: Performance Fixes",
-      "Type: Improvement": ":zap: Improvement Features",
-      "Type: Breaking": ":boom: Breaking Change",
-      "Type: Deprecated": ":warning: Deprecated Features",
-      "Type: I18n": ":globe_with_meridians: Internationalization",
-      "Type: A11y": ":wheelchair: Accessibility",
-      "Type: Documentation": ":pencil: Documentation"
-    }
-  },
   "devDependencies": {
     "@eslint/js": "^9.14.0",
     "@intlify/core-base": "next",
     "@kazupon/eslint-config": "^0.22.0",
-    "@kazupon/lerna-changelog": "^4.3.0",
+    "@kazupon/prettier-config": "^0.1.1",
     "@octokit/rest": "^20.0.0",
     "@rollup/plugin-alias": "^3.1.5",
     "@rollup/plugin-commonjs": "^19.0.0",

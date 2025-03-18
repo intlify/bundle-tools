@@ -73,18 +73,22 @@
   "types": "./index.d.ts",
   "exports": {
     ".": {
+      "types": "./index.d.ts",
       "import": "./lib/index.mjs",
       "require": "./lib/index.cjs"
     },
     "./vite": {
+      "types": "./lib/vite.d.ts",
       "import": "./lib/vite.mjs",
       "require": "./lib/vite.cjs"
     },
     "./webpack": {
+      "types": "./lib/webpack.d.ts",
       "import": "./lib/webpack.mjs",
       "require": "./lib/webpack.cjs"
     },
     "./rspack": {
+      "types": "./lib/rspack.d.ts",
       "import": "./lib/rspack.mjs",
       "require": "./lib/rspack.cjs"
     },
@@ -108,10 +112,6 @@
     "directory": "packages/unplugin-vue-i18n"
   },
   "scripts": {
-    "build": "unbuild",
-    "clean": "run-p \"clean:*\"",
-    "clean:lib": "rm -rf ./lib",
-    "changelog": "jiti ../../scripts/changelog.ts",
-    "release": "jiti ../../scripts/release.ts"
+    "build": "unbuild"
   }
 }

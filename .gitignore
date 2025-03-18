@@ -1,8 +1,8 @@
 coverage
 node_modules
-packages/rollup-plugin-vue-i18n/examples/global/index.js
-packages/rollup-plugin-vue-i18n/examples/composition/index.js
-packages/vite-plugin-vue-i18n/examples/dist
+unmaintained/rollup-plugin-vue-i18n/examples/global/index.js
+unmaintained/rollup-plugin-vue-i18n/examples/composition/index.js
+unmaintained/vite-plugin-vue-i18n/examples/dist
 packages/unplugin-vue-i18n/examples/**/dist
 .DS_Store
 lib

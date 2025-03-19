@@ -41,8 +41,7 @@
     "node": ">= 18"
   },
   "files": [
-    "lib",
-    "index.mjs"
+    "lib"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",

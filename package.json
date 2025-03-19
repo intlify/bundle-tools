@@ -47,7 +47,6 @@
     "lint-staged": "^13.1.4",
     "memory-fs": "^0.5.0",
     "minimist": "^1.2.8",
-    "npm-run-all2": "^7.0.1",
     "opener": "^1.5.2",
     "playwright-core": "^1.51.0",
     "pkg-pr-new": "^0.0.41",
@@ -118,15 +117,15 @@
     "lint": "pnpm run --stream --color \"/^lint:/\"",
     "lint:eslint": "eslint --flag unstable_ts_config .",
     "lint:prettier": "prettier . --check",
-    "test": "pnpm test:unit && pnpm test:e2e",
-    "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",
-    "test:e2e:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n test:e2e",
-    "test:unit": "pnpm run --stream --sequential --color \"/^test:unit:/\"",
+    "test": "pnpm run --stream --sequential --color \"/^test:(typecheck|unit|e2e)/\"",
+    "test:typecheck": "tsc --noEmit",
     "test:unit:utils": "vitest run packages/bundle-utils",
     "test:unit:unplugin": "vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:vite": "TEST_FRAMEWORK=vite vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:webpack": "TEST_FRAMEWORK=webpack vitest run packages/unplugin-vue-i18n/test",
-    "test:unit:unplugin:rspack": "TEST_FRAMEWORK=rspack vitest run packages/unplugin-vue-i18n/test"
+    "test:unit:unplugin:rspack": "TEST_FRAMEWORK=rspack vitest run packages/unplugin-vue-i18n/test",
+    "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",
+    "test:e2e:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n test:e2e"
   },
   "packageManager": "pnpm@10.6.4"
 }

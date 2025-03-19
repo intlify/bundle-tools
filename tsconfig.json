@@ -46,7 +46,6 @@
     /* List of folders to include type definitions from. */
     "typeRoots": [
       "./packages/bundle-utils/dist",
-      "./packages/vue-i18n-loader/@types",
       "./node_modules/@types",
       "./node_modules/vue-i18n/dist",
     ],
@@ -77,4 +76,7 @@
     "scripts/*.ts",
     "e2e/*.ts"
   ],
+  "exclude": [
+    "unmaintained/**/*",
+  ]
 }

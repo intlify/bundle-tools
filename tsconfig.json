@@ -83,5 +83,6 @@
   ],
   "exclude": [
     "unmaintained/**/*",
+    "**/fixtures/**",
   ]
 }

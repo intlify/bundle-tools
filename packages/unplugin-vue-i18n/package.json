@@ -45,7 +45,13 @@
     "vue": "^3.4"
   },
   "devDependencies": {
+    "@babel/preset-typescript": "^7.26.0",
+    "@types/babel__core": "^7.20.5",
+    "@types/estree": "^1.0.0",
     "@types/node": "^20.14.8",
+    "estree-walker": "^2.0.2",
+    "magic-string": "^0.30.17",
+    "ufo": "^1.5.4",
     "unbuild": "^2.0.0"
   },
   "engines": {

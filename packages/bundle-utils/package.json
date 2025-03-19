@@ -21,8 +21,8 @@
   "dependencies": {
     "@babel/core": "^7.26.10",
     "@babel/preset-typescript": "^7.26.0",
-    "@intlify/message-compiler": "next",
-    "@intlify/shared": "next",
+    "@intlify/message-compiler": "^10",
+    "@intlify/shared": "^10",
     "acorn": "^8.8.2",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",

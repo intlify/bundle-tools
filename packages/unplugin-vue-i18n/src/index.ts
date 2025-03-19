@@ -5,6 +5,7 @@ import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
 import type { PluginOptions } from './types'
+import { autoDeclarePlugin } from './core/auto-declare'
 
 const debug = createDebug(resolveNamespace('root'))
 
@@ -25,6 +26,7 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
   debug('plugin options (resolved):', resolvedOptions)
 
   const plugins = [resourcePlugin(resolvedOptions, meta)]
+  plugins.push(autoDeclarePlugin({ sourcemap: true }))
   if (resolvedOptions.optimizeTranslationDirective) {
     if (meta.framework === 'webpack' || meta.framework === 'rspack') {
       raiseError(

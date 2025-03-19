@@ -1,14 +1,14 @@
-import { SourceMapGenerator, SourceMapConsumer } from 'source-map-js'
+import { baseCompile, detectHtmlTag, LOCATION_STUB } from '@intlify/message-compiler'
 import {
   format,
-  escapeHtml as sanitizeHtml,
+  friendlyJSONstringify,
   isBoolean,
-  friendlyJSONstringify
+  escapeHtml as sanitizeHtml
 } from '@intlify/shared'
-import { baseCompile, detectHtmlTag, LOCATION_STUB } from '@intlify/message-compiler'
+import { SourceMapConsumer, SourceMapGenerator } from 'source-map-js'
 
-import type { RawSourceMap, MappedPosition, MappingItem } from 'source-map-js'
-import type { CompileError, ResourceNode, CompileOptions } from '@intlify/message-compiler'
+import type { CompileError, CompileOptions, ResourceNode } from '@intlify/message-compiler'
+import type { MappedPosition, MappingItem, RawSourceMap } from 'source-map-js'
 
 /**
  * Compilation dev environments

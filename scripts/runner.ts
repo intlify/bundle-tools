@@ -1,13 +1,13 @@
-import path from 'path'
 import chalk from 'chalk'
-import glob from 'tiny-glob'
+import path from 'path'
 import prompts from 'prompts'
-import { getRootPath, getRelativePath, readPackageJson } from './utils'
+import glob from 'tiny-glob'
+import { getRelativePath, getRootPath, readPackageJson } from './utils'
 
 export type CommandType = 'release' | 'changelog'
 export type Command = (log: Logger) => Promise<void>
 
-import type { Mode, Logger } from './utils'
+import type { Logger, Mode } from './utils'
 
 async function confirmBatchMode(type: CommandType): Promise<boolean> {
   const { yes } = await prompts({

@@ -1,7 +1,7 @@
-import { afterAll, beforeAll } from 'vitest'
 import playwright from 'playwright-core'
+import { afterAll, beforeAll } from 'vitest'
 
-import type { Browser, Page, LaunchOptions } from 'playwright-core'
+import type { Browser, LaunchOptions, Page } from 'playwright-core'
 
 // TODO: extract to shim.d.ts
 // eslint-disable-next-line @typescript-eslint/no-namespace

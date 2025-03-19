@@ -1,7 +1,7 @@
-import { createUnplugin } from 'unplugin'
 import createDebug from 'debug'
+import { createUnplugin } from 'unplugin'
+import { directivePlugin, resolveOptions, resourcePlugin } from './core'
 import { raiseError, resolveNamespace } from './utils'
-import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
 import type { PluginOptions } from './types'

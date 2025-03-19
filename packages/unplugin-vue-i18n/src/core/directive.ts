@@ -1,19 +1,19 @@
-import path from 'node:path'
-import createDebug from 'debug'
 import { isBoolean } from '@intlify/shared'
 import { transformVTDirective } from '@intlify/vue-i18n-extensions'
 import { analyze as analyzeScope } from '@typescript-eslint/scope-manager'
-import { parse, simpleTraverse, AST_NODE_TYPES } from '@typescript-eslint/typescript-estree'
+import { AST_NODE_TYPES, parse, simpleTraverse } from '@typescript-eslint/typescript-estree'
+import createDebug from 'debug'
+import path from 'node:path'
 // @ts-expect-error -- FIXME: missing types
 import eslintUitls from '@eslint-community/eslint-utils'
-import { resolveNamespace, getVitePlugin, checkVuePlugin, normalizePath } from '../utils'
-import { parseVueRequest, getVuePluginOptions, getDescriptor } from '../vue'
+import { checkVuePlugin, getVitePlugin, normalizePath, resolveNamespace } from '../utils'
+import { getDescriptor, getVuePluginOptions, parseVueRequest } from '../vue'
 
 import type { TranslationSignatureResolver } from '@intlify/vue-i18n-extensions'
 import type { Scope } from '@typescript-eslint/scope-manager'
 import { ParserServicesWithTypeInformation, TSESTree } from '@typescript-eslint/typescript-estree'
-import type { UnpluginOptions, RollupPlugin } from 'unplugin'
-import type { VuePluginResolvedOptions, TranslationDirectiveResolveIndetifier } from '../vue'
+import type { RollupPlugin, UnpluginOptions } from 'unplugin'
+import type { TranslationDirectiveResolveIndetifier, VuePluginResolvedOptions } from '../vue'
 import type { ResolvedOptions } from './options'
 
 type Node = Parameters<ParserServicesWithTypeInformation['getSymbolAtLocation']>[0]

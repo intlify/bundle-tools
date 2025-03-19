@@ -1,9 +1,9 @@
-import path from 'path'
-import fs from 'fs/promises'
-import semver from 'semver'
-import prompts from 'prompts'
+import { Changelog, loadConfig } from '@kazupon/lerna-changelog'
 import execa from 'execa'
-import { loadConfig, Changelog } from '@kazupon/lerna-changelog'
+import fs from 'fs/promises'
+import path from 'path'
+import prompts from 'prompts'
+import semver from 'semver'
 
 export type PackageJson = {
   name: string

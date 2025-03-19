@@ -2,11 +2,11 @@
  * Code generator for i18n js resource
  */
 
-import { isString, isBoolean, isNumber } from '@intlify/shared'
+import { transform } from '@babel/core'
+import { isBoolean, isNumber, isString } from '@intlify/shared'
+import { parse as parseJavaScript } from 'acorn'
 import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
-import { parse as parseJavaScript } from 'acorn'
-import { transform } from '@babel/core'
 import {
   createCodeGenerator,
   generateMessageFunction,
@@ -14,9 +14,9 @@ import {
   mapLinesColumns
 } from './codegen'
 
-import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
-import type { CodeGenOptions, CodeGenerator, CodeGenResult, CodeGenFunction } from './codegen'
+import type { RawSourceMap } from 'source-map-js'
+import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
 export class DynamicResourceError extends Error {}
 
@@ -125,7 +125,7 @@ export function generate(
   const { code, map } = generator.context()
   // prettier-ignore
   const newMap = map
-    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null  
+    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null
     : null
   return {
     ast,

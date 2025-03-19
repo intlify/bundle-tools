@@ -1,17 +1,17 @@
-import path from 'path'
 import minimist from 'minimist'
+import path from 'path'
 import semver from 'semver'
+import { execute } from './runner'
 import {
-  getRootPath,
-  getRelativePath,
-  readPackageJson,
   getIncrementer,
+  getRelativePath,
+  getRootPath,
   getTags,
   getTargetVersion,
+  readPackageJson,
   renderChangelog,
   writeChangelog
 } from './utils'
-import { execute } from './runner'
 
 import type { Logger } from './utils'
 

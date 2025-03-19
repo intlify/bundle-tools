@@ -2,19 +2,19 @@
  * Code / AST generator for i18n json/json5 resource
  */
 
-import { parseJSON, traverseNodes, getStaticJSONValue } from 'jsonc-eslint-parser'
 import { isString } from '@intlify/shared'
+import { getStaticJSONValue, parseJSON, traverseNodes } from 'jsonc-eslint-parser'
 import {
   createCodeGenerator,
+  excludeLocales,
   generateMessageFunction,
   generateResourceAst,
-  mapLinesColumns,
-  excludeLocales
+  mapLinesColumns
 } from './codegen'
 
+import type { JSONNode, JSONProgram } from 'jsonc-eslint-parser/lib/parser/ast'
 import type { RawSourceMap } from 'source-map-js'
-import type { JSONProgram, JSONNode } from 'jsonc-eslint-parser/lib/parser/ast'
-import type { CodeGenOptions, CodeGenerator, CodeGenResult, CodeGenFunction } from './codegen'
+import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
 export function generate(
   targetSource: string | Buffer,
@@ -89,7 +89,7 @@ export function generate(
   // prettier-ignore
   const newMap =
     map && !jit
-      ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null  
+      ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null
       : null
   return {
     ast,

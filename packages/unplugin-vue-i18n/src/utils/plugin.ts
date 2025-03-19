@@ -2,7 +2,7 @@ import path from 'node:path'
 import { PKG_NAME } from '../constants'
 import { error } from './log'
 
-import type { VitePlugin, RollupPlugin } from 'unplugin'
+import type { RollupPlugin, VitePlugin } from 'unplugin'
 
 export function resolveNamespace(name: string): string {
   return `${PKG_NAME}:${name}`

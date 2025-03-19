@@ -1,6 +1,6 @@
 import { readFile, rm, writeFile } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
 import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineBuildConfig } from 'unbuild'
 
 const lib = fileURLToPath(new URL('./lib', import.meta.url))

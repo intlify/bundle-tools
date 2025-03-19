@@ -3,6 +3,7 @@
  */
 
 import { isString } from '@intlify/shared'
+import { getStaticYAMLValue, parseYAML, traverseNodes } from 'yaml-eslint-parser'
 import {
   createCodeGenerator,
   excludeLocales,
@@ -10,11 +11,10 @@ import {
   generateResourceAst,
   mapLinesColumns
 } from './codegen'
-import { parseYAML, traverseNodes, getStaticYAMLValue } from 'yaml-eslint-parser'
 
 import type { RawSourceMap } from 'source-map'
-import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
-import type { CodeGenOptions, CodeGenerator, CodeGenResult, CodeGenFunction } from './codegen'
+import type { YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
+import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
 /**
  * @internal
@@ -82,7 +82,7 @@ export function generate(
   const { code, map } = generator.context()
   // prettier-ignore
   const newMap = map
-    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null  
+    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null
     : null
   return {
     ast,

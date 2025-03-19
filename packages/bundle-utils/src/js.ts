@@ -16,12 +16,7 @@ import {
 
 import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
-import type {
-  CodeGenOptions,
-  CodeGenerator,
-  CodeGenResult,
-  CodeGenFunction
-} from './codegen'
+import type { CodeGenOptions, CodeGenerator, CodeGenResult, CodeGenFunction } from './codegen'
 
 export class DynamicResourceError extends Error {}
 
@@ -47,9 +42,7 @@ export function generate(
     jit = false
   }: CodeGenOptions
 ): CodeGenResult<Node> {
-  const target = Buffer.isBuffer(targetSource)
-    ? targetSource.toString()
-    : targetSource
+  const target = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
   let value = target
 
   const options = {
@@ -98,9 +91,7 @@ export function generate(
   const exportResult = scanAst(ast)
   if (!allowDynamic) {
     if (!exportResult) {
-      throw new Error(
-        `You need to define an object as the locale message with 'export default'.`
-      )
+      throw new Error(`You need to define an object as the locale message with 'export default'.`)
     }
 
     if (exportResult !== 'object') {
@@ -111,9 +102,7 @@ export function generate(
     }
   } else {
     if (!exportResult) {
-      throw new Error(
-        `You need to define 'export default' that will return the locale messages.`
-      )
+      throw new Error(`You need to define 'export default' that will return the locale messages.`)
     }
 
     if (exportResult !== 'object') {
@@ -182,9 +171,7 @@ function _generate(
   const codeMaps = new Map<string, RawSourceMap>()
   const { type, sourceMap, isGlobal, locale, jit } = options
 
-  const _codegenFn: CodeGenFunction = jit
-    ? generateResourceAst
-    : generateMessageFunction
+  const _codegenFn: CodeGenFunction = jit ? generateResourceAst : generateMessageFunction
 
   function codegenFn(value: string) {
     const { code, map } = _codegenFn(value, options, pathStack)
@@ -295,8 +282,7 @@ function _generate(
           break
         case 'Property':
           if (parent?.type !== 'ObjectExpression') break
-          if (node.key.type !== 'Literal' && node.key.type !== 'Identifier')
-            break
+          if (node.key.type !== 'Literal' && node.key.type !== 'Identifier') break
 
           // prettier-ignore
           const name = node.key.type === 'Literal'
@@ -353,8 +339,7 @@ function _generate(
           break
         case 'SpreadElement':
           const spreadIdentifier =
-            (node.argument.type === 'Identifier' &&
-              String(node.argument.name)) ||
+            (node.argument.type === 'Identifier' && String(node.argument.name)) ||
             (node.argument.type === 'Literal' && String(node.argument.value))
           generator.push(`...${spreadIdentifier}`)
           break
@@ -423,12 +408,8 @@ function _generate(
       }
 
       // if not last obj property or array value
-      if (
-        parent?.type === 'ArrayExpression' ||
-        parent?.type === 'ObjectExpression'
-      ) {
-        const stackArr =
-          node.type === 'Property' ? propsCountStack : itemsCountStack
+      if (parent?.type === 'ArrayExpression' || parent?.type === 'ObjectExpression') {
+        const stackArr = node.type === 'Property' ? propsCountStack : itemsCountStack
         if (stackArr[stackArr.length - 1] !== 0) {
           pathStack.pop()
           !skipStack.pop() && generator.pushline(',')

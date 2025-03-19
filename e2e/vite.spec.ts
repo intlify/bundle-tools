@@ -25,9 +25,7 @@ describe('vite', () => {
 
   test('initial rendering', async () => {
     expect(await getText(global.page, '#lang label')).toMatch('言語')
-    expect(await getText(global.page, '#fruits label')).toMatch(
-      'バナナが欲しい？'
-    )
+    expect(await getText(global.page, '#fruits label')).toMatch('バナナが欲しい？')
     expect(await getText(global.page, '#msg')).toMatch('こんにちは、世界！')
     expect(await getText(global.page, '#custom-directive')).toMatch('やあ！')
   })

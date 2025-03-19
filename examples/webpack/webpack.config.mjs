@@ -8,9 +8,7 @@ const __dirname = dirname(__filename)
 
 function transformI18nBlock(source) {
   const sourceCopy = source
-  const block = JSON.parse(
-    sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']')
-  )
+  const block = JSON.parse(sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']'))
   if (Array.isArray(block)) {
     const transformedBlock = JSON.stringify({
       en: {

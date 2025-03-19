@@ -26,26 +26,17 @@ const VersionIncrements = [
   'prerelease'
 ] as const
 
-export const run = (bin, args, opts = {}) =>
-  execa(bin, args, { stdio: 'inherit', ...opts })
+export const run = (bin, args, opts = {}) => execa(bin, args, { stdio: 'inherit', ...opts })
 
 export async function getRootPath() {
-  const { stdout: rootPath } = await run(
-    'git',
-    ['rev-parse', '--show-toplevel'],
-    { stdio: 'pipe' }
-  )
+  const { stdout: rootPath } = await run('git', ['rev-parse', '--show-toplevel'], { stdio: 'pipe' })
   return rootPath
 }
 
 export async function getRelativePath() {
-  const { stdout: relativePath } = await run(
-    'git',
-    ['rev-parse', '--show-prefix'],
-    {
-      stdio: 'pipe'
-    }
-  )
+  const { stdout: relativePath } = await run('git', ['rev-parse', '--show-prefix'], {
+    stdio: 'pipe'
+  })
   return relativePath
 }
 
@@ -68,31 +59,17 @@ export async function getRepoName() {
   return path.parse(rootPath).name
 }
 
-export function getIncrementer(
-  currentVersion: string,
-  release = 'beta'
-): Incrementer {
+export function getIncrementer(currentVersion: string, release = 'beta'): Incrementer {
   return i => semver.inc(currentVersion, i, release)
 }
 
-export function getTags(
-  pkgName: string,
-  currentVersion: string,
-  targetVersion = ''
-) {
-  const tag =
-    pkgName === 'intlify' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
-  const fromTag =
-    pkgName === 'intlify'
-      ? `v${currentVersion}`
-      : `${pkgName}@${currentVersion}`
+export function getTags(pkgName: string, currentVersion: string, targetVersion = '') {
+  const tag = pkgName === 'intlify' ? `v${targetVersion}` : `${pkgName}@${targetVersion}`
+  const fromTag = pkgName === 'intlify' ? `v${currentVersion}` : `${pkgName}@${currentVersion}`
   return { tag, fromTag }
 }
 
-export async function getTargetVersion(
-  currentVersion: string,
-  inc: Incrementer
-) {
+export async function getTargetVersion(currentVersion: string, inc: Incrementer) {
   const { release } = await prompts({
     type: 'select',
     name: 'release',
@@ -123,11 +100,7 @@ export async function renderChangelog(from: string, next: string, pkg: string) {
   return await changelog.createMarkdown({ tagFrom: from })
 }
 
-export async function writeChangelog(
-  pkgDir: string,
-  log: string,
-  next: string
-) {
+export async function writeChangelog(pkgDir: string, log: string, next: string) {
   const escapedVersion = next.replace(/\./g, '\\.')
   const regex = new RegExp(
     `(#+?\\s\\[?v?${escapedVersion}\\]?[\\s\\S]*?)(#+?\\s\\[?v?\\d\\.\\d\\.\\d\\]?)`,

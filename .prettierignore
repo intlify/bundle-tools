@@ -1,9 +1,7 @@
-packages/**/lib
 coverage
 tsconfig.json
+lib
 dist
+CHANGELOG.md
 pnpm-lock.yaml
-packages/**/examples/dist
-packages/**/CHANGELOG.md
-packages/rollup-plugin-vue-i18n/examples/composition/index.js
-packages/rollup-plugin-vue-i18n/examples/global/index.js
+unmaintained

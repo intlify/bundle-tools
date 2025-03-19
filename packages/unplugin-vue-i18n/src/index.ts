@@ -10,10 +10,7 @@ const debug = createDebug(resolveNamespace('root'))
 
 export * from './types'
 
-export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
-  options = {},
-  meta
-) => {
+export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (options = {}, meta) => {
   debug('meta framework', meta.framework)
   // check bundler type
   if (!['vite', 'webpack', 'rspack'].includes(meta.framework)) {

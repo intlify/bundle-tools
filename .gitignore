@@ -6,8 +6,8 @@ lib
 *.log
 *.swp
 *~
-.vscode
 examples/**/dist
+.eslintcache
 .env
 .idea
 .yarn/*

@@ -16,11 +16,7 @@ import type { MessageCompilerContext } from '@intlify/core-base'
       strictMessage: false,
       include: [resolve(__dirname, './fixtures/locales/**')]
     }
-    const { exports: messages } = await bundleAndRun(
-      fixture,
-      getCurrentTestBundler(),
-      options
-    )
+    const { exports: messages } = await bundleAndRun(fixture, getCurrentTestBundler(), options)
     ;['en', 'fr', 'ja', 'ko'].forEach(locale => {
       const fn = compile(messages[locale].message, {} as MessageCompilerContext)
       expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)

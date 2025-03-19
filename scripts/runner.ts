@@ -27,8 +27,7 @@ export async function execute(type: CommandType, command: Command) {
     mode = 'batch'
   }
   const log = (...args) => {
-    const ch =
-      mode === 'single' ? chalk.black.bgGreenBright : chalk.black.bgYellowBright
+    const ch = mode === 'single' ? chalk.black.bgGreenBright : chalk.black.bgYellowBright
     console.log(ch.bold(` ${mode} mode `), '', chalk.cyan(...args))
   }
 

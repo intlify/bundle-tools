@@ -13,8 +13,7 @@ declare namespace global {
 type BrowserType = 'chromium' | 'firefox' | 'webkit'
 
 beforeAll(async () => {
-  const type: BrowserType = (process.env.E2E_BROWSER ||
-    'chromium') as BrowserType
+  const type: BrowserType = (process.env.E2E_BROWSER || 'chromium') as BrowserType
   const launchOptions: LaunchOptions = { headless: true }
   if (!process.env.CI && !process.env.E2E_BROWSER) {
     launchOptions.channel = 'chrome'

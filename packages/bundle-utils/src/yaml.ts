@@ -10,20 +10,11 @@ import {
   generateResourceAst,
   mapLinesColumns
 } from './codegen'
-import {
-  parseYAML,
-  traverseNodes,
-  getStaticYAMLValue
-} from 'yaml-eslint-parser'
+import { parseYAML, traverseNodes, getStaticYAMLValue } from 'yaml-eslint-parser'
 
 import type { RawSourceMap } from 'source-map'
 import type { YAMLProgram, YAMLNode } from 'yaml-eslint-parser/lib/ast'
-import type {
-  CodeGenOptions,
-  CodeGenerator,
-  CodeGenResult,
-  CodeGenFunction
-} from './codegen'
+import type { CodeGenOptions, CodeGenerator, CodeGenResult, CodeGenFunction } from './codegen'
 
 /**
  * @internal
@@ -46,9 +37,7 @@ export function generate(
     jit = false
   }: CodeGenOptions
 ): CodeGenResult<YAMLProgram> {
-  let value = Buffer.isBuffer(targetSource)
-    ? targetSource.toString()
-    : targetSource
+  let value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
 
   const options = {
     type,
@@ -114,9 +103,7 @@ function _generate(
   const codeMaps = new Map<string, RawSourceMap>()
   const { type, sourceMap, isGlobal, locale, jit } = options
 
-  const _codegenFn: CodeGenFunction = jit
-    ? generateResourceAst
-    : generateMessageFunction
+  const _codegenFn: CodeGenFunction = jit ? generateResourceAst : generateMessageFunction
 
   function codegenFn(value: string) {
     const { code, map } = _codegenFn(value, options, pathStack)
@@ -183,10 +170,7 @@ function _generate(
             } else {
               generator.push(strValue)
             }
-          } else if (
-            node.value?.type === 'YAMLMapping' ||
-            node.value?.type === 'YAMLSequence'
-          ) {
+          } else if (node.value?.type === 'YAMLMapping' || node.value?.type === 'YAMLSequence') {
             const name = node.key.value
             name && pathStack.push(name.toString())
             generator.push(`${JSON.stringify(name)}: `)
@@ -243,8 +227,7 @@ function _generate(
       }
 
       // if not last obj property or array value
-      const stackArr =
-        node.type === 'YAMLPair' ? propsCountStack : itemsCountStack
+      const stackArr = node.type === 'YAMLPair' ? propsCountStack : itemsCountStack
       if (parent?.type === 'YAMLSequence' || parent?.type === 'YAMLMapping') {
         if (stackArr[stackArr.length - 1] !== 0) {
           pathStack.pop()

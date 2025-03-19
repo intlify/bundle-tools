@@ -116,12 +116,7 @@ async function releasePackage(log: Logger) {
   const repo = await getRepoName()
   log(`Releasing to ${repo} of GitHub Releases...`)
   if (!skipChangelog && !isDryRun) {
-    await releaseGitHub(
-      tag,
-      releaseVersion,
-      changelog,
-      isPrelease(targetVersion)
-    )
+    await releaseGitHub(tag, releaseVersion, changelog, isPrelease(targetVersion))
   } else {
     console.log(`(skipped)`)
   }
@@ -131,10 +126,7 @@ async function releasePackage(log: Logger) {
   }
 }
 
-async function confirmRelease(
-  tag: string,
-  releaseVersion: string
-): Promise<boolean> {
+async function confirmRelease(tag: string, releaseVersion: string): Promise<boolean> {
   const { yes } = await prompts({
     type: 'confirm',
     name: 'yes',
@@ -143,11 +135,7 @@ async function confirmRelease(
   return yes as boolean
 }
 
-async function updateVersion(
-  version: string,
-  pkg: PackageJson,
-  pkgPath: string
-) {
+async function updateVersion(version: string, pkg: PackageJson, pkgPath: string) {
   pkg.version = version
   return await fs.writeFile(pkgPath, JSON.stringify(pkg, null, 2) + '\n')
 }
@@ -171,19 +159,10 @@ async function publishPackage(version: string, pkgName: string, runIfNotDry) {
 }
 
 function isPrelease(version: string) {
-  return (
-    version.includes('beta') ||
-    version.includes('alpha') ||
-    version.includes('rc')
-  )
+  return version.includes('beta') || version.includes('alpha') || version.includes('rc')
 }
 
-async function releaseGitHub(
-  tag: string,
-  releaseName: string,
-  content = '',
-  prerelease = false
-) {
+async function releaseGitHub(tag: string, releaseName: string, content = '', prerelease = false) {
   const octokit = new Octokit({
     auth: process.env.GITHUB_AUTH || ''
   })

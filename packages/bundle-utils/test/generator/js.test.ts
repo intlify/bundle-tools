@@ -125,9 +125,7 @@ test('html tag in message', async () => {
 })
 
 test('no export default with object', async () => {
-  const { source } = await readFile(
-    './fixtures/codegen/no-export-default-with-object.js'
-  )
+  const { source } = await readFile('./fixtures/codegen/no-export-default-with-object.js')
   function doGenerate() {
     generate(source, {
       sourceMap: true,
@@ -170,9 +168,7 @@ describe(`'allowDynamic' option`, () => {
   })
 
   test('generate', async () => {
-    const { source } = await readFile(
-      './fixtures/codegen/export-default-with-object.js'
-    )
+    const { source } = await readFile('./fixtures/codegen/export-default-with-object.js')
     const { code, map } = generate(source, {
       allowDynamic: true,
       sourceMap: true,

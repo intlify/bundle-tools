@@ -2,11 +2,7 @@
  * Code / AST generator for i18n json/json5 resource
  */
 
-import {
-  parseJSON,
-  traverseNodes,
-  getStaticJSONValue
-} from 'jsonc-eslint-parser'
+import { parseJSON, traverseNodes, getStaticJSONValue } from 'jsonc-eslint-parser'
 import { isString } from '@intlify/shared'
 import {
   createCodeGenerator,
@@ -18,12 +14,7 @@ import {
 
 import type { RawSourceMap } from 'source-map-js'
 import type { JSONProgram, JSONNode } from 'jsonc-eslint-parser/lib/parser/ast'
-import type {
-  CodeGenOptions,
-  CodeGenerator,
-  CodeGenResult,
-  CodeGenFunction
-} from './codegen'
+import type { CodeGenOptions, CodeGenerator, CodeGenResult, CodeGenFunction } from './codegen'
 
 export function generate(
   targetSource: string | Buffer,
@@ -43,9 +34,7 @@ export function generate(
     jit = false
   }: CodeGenOptions
 ): CodeGenResult<JSONProgram> {
-  let value = Buffer.isBuffer(targetSource)
-    ? targetSource.toString()
-    : targetSource
+  let value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
   // const value = JSON.stringify(JSON.parse(target))
   //   .replace(/\u2028/g, '\\u2028') // line separator
   //   .replace(/\u2029/g, '\\u2029') // paragraph separator
@@ -121,9 +110,7 @@ function _generate(
   const codeMaps = new Map<string, RawSourceMap>()
   const { type, sourceMap, isGlobal, locale, jit } = options
 
-  const _codegenFn: CodeGenFunction = jit
-    ? generateResourceAst
-    : generateMessageFunction
+  const _codegenFn: CodeGenFunction = jit ? generateResourceAst : generateMessageFunction
 
   function codegenFn(value: string) {
     const { code, map } = _codegenFn(value, options, pathStack)
@@ -175,8 +162,7 @@ function _generate(
           itemsCountStack.push(node.elements.length)
           break
         case 'JSONProperty': {
-          const name =
-            node.key.type === 'JSONLiteral' ? node.key.value : node.key.name
+          const name = node.key.type === 'JSONLiteral' ? node.key.value : node.key.name
           const strName = JSON.stringify(name)
           generator.push(`${strName}: `)
           pathStack.push(name.toString())
@@ -243,12 +229,8 @@ function _generate(
       }
 
       // if not last obj property or array value
-      if (
-        parent?.type === 'JSONArrayExpression' ||
-        parent?.type === 'JSONObjectExpression'
-      ) {
-        const stackArr =
-          node.type === 'JSONProperty' ? propsCountStack : itemsCountStack
+      if (parent?.type === 'JSONArrayExpression' || parent?.type === 'JSONObjectExpression') {
+        const stackArr = node.type === 'JSONProperty' ? propsCountStack : itemsCountStack
         if (stackArr[stackArr.length - 1] !== 0) {
           pathStack.pop()
           generator.pushline(`,`)

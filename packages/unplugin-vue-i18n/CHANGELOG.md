@@ -1,4 +1,13 @@
 
+## @intlify/unplugin-vue-i18n@6.0.5 (2025-03-19)
+
+#### :bug: Bug Fixes
+* [#454](https://github.com/intlify/bundle-tools/pull/454) fix(unpluing-vue-i18n): pinned deps ([@kazupon](https://github.com/kazupon))
+
+#### Committers: 1
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
+
+
 ## @intlify/unplugin-vue-i18n@6.0.4 (2025-03-17)
 
 #### :bug: Bug Fixes

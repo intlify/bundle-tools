@@ -121,37 +121,46 @@ function _generate(
   const codeMaps = new Map<string, RawSourceMap>()
   const { type, sourceMap, isGlobal, locale, jit } = options
 
-  const codegenFn: CodeGenFunction = jit
+  const _codegenFn: CodeGenFunction = jit
     ? generateResourceAst
     : generateMessageFunction
+
+  function codegenFn(value: string) {
+    const { code, map } = _codegenFn(value, options, pathStack)
+    sourceMap && map != null && codeMaps.set(value, map)
+    return code
+  }
 
   const componentNamespace = '_Component'
 
   traverseNodes(node, {
     enterNode(node: JSONNode, parent: JSONNode) {
+      if (parent?.type === 'JSONArrayExpression') {
+        const lastIndex = itemsCountStack.length - 1
+        const currentCount = parent.elements.length - itemsCountStack[lastIndex]
+        pathStack.push(currentCount.toString())
+        itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+      } else if (parent?.type === 'JSONObjectExpression') {
+        const lastIndex = propsCountStack.length - 1
+        propsCountStack[lastIndex] = --propsCountStack[lastIndex]
+      }
+
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
             generator.push(`const resource = `)
           } else if (type === 'sfc') {
-            // for 'sfc'
-            const variableName =
-              type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
-            const localeName =
-              type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            const exportSyntax = 'export default'
-            generator.push(`${exportSyntax} function (Component) {`)
+            const variableName = !isGlobal ? '__i18n' : '__i18nGlobal'
+            const localeName = JSON.stringify(locale ?? `""`)
+            generator.push(`export default function (Component) {`)
             generator.indent()
-            const componentVariable = `Component`
-            generator.pushline(
-              `const ${componentNamespace} = ${componentVariable}`
-            )
+            generator.pushline(`const ${componentNamespace} = Component`)
             generator.pushline(
               `${componentNamespace}.${variableName} = ${componentNamespace}.${variableName} || []`
             )
             generator.push(`${componentNamespace}.${variableName}.push({`)
             generator.indent()
-            generator.pushline(`"locale": ${JSON.stringify(localeName)},`)
+            generator.pushline(`"locale": ${localeName},`)
             generator.push(`"resource": `)
           }
           break
@@ -159,94 +168,41 @@ function _generate(
           generator.push(`{`)
           generator.indent()
           propsCountStack.push(node.properties.length)
-          if (parent.type === 'JSONArrayExpression') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.elements.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
-          }
-          break
-        case 'JSONProperty':
-          if (
-            node.value.type === 'JSONLiteral' &&
-            (node.key.type === 'JSONLiteral' ||
-              node.key.type === 'JSONIdentifier')
-          ) {
-            const name =
-              node.key.type === 'JSONLiteral' ? node.key.value : node.key.name
-            const value = node.value.value
-            if (isString(value)) {
-              generator.push(`${JSON.stringify(name)}: `)
-              pathStack.push(name.toString())
-              const { code, map } = codegenFn(value, options, pathStack)
-              sourceMap && map != null && codeMaps.set(value, map)
-              generator.push(`${code}`, node.value, value)
-            } else {
-              if (forceStringify) {
-                const strValue = JSON.stringify(value)
-                generator.push(`${JSON.stringify(name)}: `)
-                pathStack.push(name.toString())
-                const { code, map } = codegenFn(strValue, options, pathStack)
-                sourceMap && map != null && codeMaps.set(strValue, map)
-                generator.push(`${code}`, node.value, strValue)
-              } else {
-                generator.push(
-                  `${JSON.stringify(name)}: ${JSON.stringify(value)}`
-                )
-                pathStack.push(name.toString())
-              }
-            }
-          } else if (
-            (node.value.type === 'JSONObjectExpression' ||
-              node.value.type === 'JSONArrayExpression') &&
-            (node.key.type === 'JSONLiteral' ||
-              node.key.type === 'JSONIdentifier')
-          ) {
-            const name =
-              node.key.type === 'JSONLiteral' ? node.key.value : node.key.name
-            generator.push(`${JSON.stringify(name)}: `)
-            pathStack.push(name.toString())
-          }
-          const lastIndex = propsCountStack.length - 1
-          propsCountStack[lastIndex] = --propsCountStack[lastIndex]
           break
         case 'JSONArrayExpression':
           generator.push(`[`)
           generator.indent()
-          if (parent.type === 'JSONArrayExpression') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.elements.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
-          }
           itemsCountStack.push(node.elements.length)
           break
-        case 'JSONLiteral':
-          if (parent.type === 'JSONArrayExpression') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.elements.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            if (node.type === 'JSONLiteral') {
-              const value = node.value
-              if (isString(value)) {
-                const { code, map } = codegenFn(value, options, pathStack)
-                sourceMap && map != null && codeMaps.set(value, map)
-                generator.push(`${code}`, node, value)
-              } else {
-                if (forceStringify) {
-                  const strValue = JSON.stringify(value)
-                  const { code, map } = codegenFn(strValue, options, pathStack)
-                  sourceMap && map != null && codeMaps.set(strValue, map)
-                  generator.push(`${code}`, node, strValue)
-                } else {
-                  generator.push(`${JSON.stringify(value)}`)
-                }
-              }
+        case 'JSONProperty': {
+          const name =
+            node.key.type === 'JSONLiteral' ? node.key.value : node.key.name
+          const strName = JSON.stringify(name)
+          generator.push(`${strName}: `)
+          pathStack.push(name.toString())
+          if (node.value.type === 'JSONLiteral') {
+            const value = node.value.value
+            const strValue = JSON.stringify(value)
+            if (isString(value)) {
+              generator.push(codegenFn(value), node.value, value)
+            } else if (forceStringify) {
+              generator.push(codegenFn(strValue), node.value, strValue)
+            } else {
+              generator.push(strValue)
             }
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+          }
+          break
+        }
+        case 'JSONLiteral':
+          if (parent.type !== 'JSONArrayExpression') break
+          const value = node.value
+          const strValue = JSON.stringify(value)
+          if (isString(value)) {
+            generator.push(codegenFn(value), node, value)
+          } else if (forceStringify) {
+            generator.push(codegenFn(strValue), node, strValue)
+          } else {
+            generator.push(strValue)
           }
           break
         default:
@@ -273,18 +229,6 @@ function _generate(
           }
           generator.deindent()
           generator.push(`}`)
-          if (parent.type === 'JSONArrayExpression') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            }
-          }
-          break
-        case 'JSONProperty':
-          if (propsCountStack[propsCountStack.length - 1] !== 0) {
-            pathStack.pop()
-            generator.pushline(`,`)
-          }
           break
         case 'JSONArrayExpression':
           if (itemsCountStack[itemsCountStack.length - 1] === 0) {
@@ -293,25 +237,22 @@ function _generate(
           }
           generator.deindent()
           generator.push(`]`)
-          if (parent.type === 'JSONArrayExpression') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            }
-          }
-          break
-        case 'JSONLiteral':
-          if (parent.type === 'JSONArrayExpression') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            } else {
-              generator.pushline(`,`)
-            }
-          }
           break
         default:
           break
+      }
+
+      // if not last obj property or array value
+      if (
+        parent?.type === 'JSONArrayExpression' ||
+        parent?.type === 'JSONObjectExpression'
+      ) {
+        const stackArr =
+          node.type === 'JSONProperty' ? propsCountStack : itemsCountStack
+        if (stackArr[stackArr.length - 1] !== 0) {
+          pathStack.pop()
+          generator.pushline(`,`)
+        }
       }
     }
   })

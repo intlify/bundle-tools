@@ -1,3 +1,2 @@
 packages:
-  - packages/bundle-utils
-  - packages/unplugin-vue-i18n
+  - packages/**

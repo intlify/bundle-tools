@@ -1,5 +1,6 @@
 {
   "name": "@intlify/bundle-tools",
+  "version": "10.0.0",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"
@@ -96,6 +97,10 @@
   },
   "scripts": {
     "prepare": "git config --local core.hooksPath .githooks",
+    "preinstall": "node ./scripts/preinstall.js",
+    "check-install": "jiti scripts/playwright.ts",
+    "release": "bumpp package.json packages/**/package.json --commit \"release: v\" --push --tag",
+    "clean": "git clean -fdx",
     "build": "pnpm run --stream --sequential --color \"/^build:(utils|unplugin)/\"",
     "build:utils": "pnpm --filter @intlify/bundle-utils build",
     "build:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n build",
@@ -107,9 +112,6 @@
     "play:webpack": "pnpm run build:unplugin && webpack serve --config ./examples/webpack/webpack.config.mjs",
     "play:rspack": "rspack dev --config ./examples/rspack/rspack.config.mjs",
     "preview:vite": "vite preview examples/vite --outDir dist",
-    "check-install": "jiti scripts/playwright.ts",
-    "clean": "git clean -fdx",
-    "coverage": "repener coverage/lcov-report/index.html",
     "fix": "pnpm run --stream --color \"/^fix:/\"",
     "fix:eslint": "eslint --flag unstable_ts_config . --fix",
     "fix:prettier": "prettier . --write",
@@ -117,8 +119,9 @@
     "lint": "pnpm run --stream --color \"/^lint:/\"",
     "lint:eslint": "eslint --flag unstable_ts_config .",
     "lint:prettier": "prettier . --check",
-    "test": "pnpm run --stream --sequential --color \"/^test:(typecheck|unit|e2e)/\"",
+    "test": "pnpm test:typecheck && pnpm test:unit && pnpm test:e2e",
     "test:typecheck": "tsc --noEmit",
+    "test:unit": "pnpm run --stream --sequential --color \"/^test:unit:/\"",
     "test:unit:utils": "vitest run packages/bundle-utils",
     "test:unit:unplugin": "vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:vite": "TEST_FRAMEWORK=vite vitest run packages/unplugin-vue-i18n/test",

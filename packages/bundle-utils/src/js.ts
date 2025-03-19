@@ -5,8 +5,8 @@
 import { isString, isBoolean, isNumber } from '@intlify/shared'
 import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
-import { parse as parseJavaScript } from 'acorn'
-import { transform } from '@babel/core'
+import { parseSync as parseJavaScript } from 'oxc-parser'
+import { transform } from 'oxc-transform'
 import {
   createCodeGenerator,
   generateMessageFunction,
@@ -71,15 +71,8 @@ export function generate(
   const generator = createCodeGenerator(options)
 
   if (options.filename && /.[c|m]?ts$/.test(options.filename)) {
-    const transformed = transform(value, {
-      filename: options.filename,
-      sourceMaps: options.sourceMap,
-      babelrc: false,
-      configFile: false,
-      browserslistConfigFile: false,
-      comments: false,
-      envName: 'development',
-      presets: ['@babel/preset-typescript']
+    const transformed = transform(options.filename, value, {
+      sourceType: 'module'
     })
 
     if (transformed && transformed.code) {
@@ -88,12 +81,11 @@ export function generate(
     }
   }
 
-  const ast = parseJavaScript(value, {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    sourceFile: filename,
-    allowImportExportEverywhere: true
-  }) as Node
+  const ast = parseJavaScript(filename, value, {
+    // ecmaVersion: 'latest',
+    sourceType: 'module'
+    // allowImportExportEverywhere: true
+  }).program as Node
 
   const exportResult = scanAst(ast)
   if (!allowDynamic) {

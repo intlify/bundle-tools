@@ -12,5 +12,11 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true
   },
-  externals: ['estree']
+  externals: [
+    'estree',
+    'oxc-parser',
+    '@oxc-parser/binding-wasm32-wasi',
+    'oxc-transform',
+    '@oxc-transform/binding-wasm32-wasi'
+  ]
 })

@@ -19,17 +19,21 @@
     }
   },
   "dependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/preset-typescript": "^7.26.0",
-    "@intlify/message-compiler": "next",
-    "@intlify/shared": "next",
+    "@intlify/message-compiler": "^11.1.2",
+    "@intlify/shared": "^11.1.2",
     "acorn": "^8.8.2",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",
     "mlly": "^1.2.0",
+    "oxc-parser": "^0.60.0",
+    "oxc-transform": "^0.60.0",
     "source-map-js": "^1.0.1",
     "yaml-eslint-parser": "^1.2.2"
+  },
+  "optionalDependencies": {
+    "@oxc-parser/binding-wasm32-wasi": "^0.60.0",
+    "@oxc-transform/binding-wasm32-wasi": "^0.60.0"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",

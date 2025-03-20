@@ -1,7 +1,7 @@
 {
   "name": "@intlify/unplugin-vue-i18n",
   "type": "module",
-  "version": "12.0.0-alpha.0",
+  "version": "7.0.0-beta.2",
   "description": "unplugin for Vue I18n",
   "author": {
     "name": "kazuya kawaguchi",

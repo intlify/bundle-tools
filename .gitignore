@@ -10,7 +10,4 @@ examples/**/dist
 .eslintcache
 .env
 .idea
-.yarn/*
-!.yarn/releases
-!.yarn/plugins
 *.tgz

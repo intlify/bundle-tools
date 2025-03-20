@@ -17,7 +17,7 @@ const resolveSnapshotPath = (testPath, extension) => {
 export default defineConfig({
   resolve: {
     alias: {
-      '@intlify/message-compiler': '@intlify/message-compiler/dist/message-compiler.node.mjs'
+      '@intlify/message-compiler': '@intlify/message-compiler/dist/message-compiler.node.js'
     }
   },
   test: {

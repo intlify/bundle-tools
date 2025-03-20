@@ -208,18 +208,18 @@ exports[`generateResourceAst > development 1`] = `
 exports[`generateResourceAst > production 1`] = `
 {
   "ast": {
-    "b": {
-      "i": [
+    "body": {
+      "items": [
         {
-          "t": 3,
+          "type": 3,
         },
       ],
-      "s": "hello",
-      "t": 2,
+      "static": "hello",
+      "type": 2,
     },
-    "t": 0,
+    "type": 0,
   },
-  "code": "{"t":0,"b":{"t":2,"i":[{"t":3}],"s":"hello"}}",
+  "code": "{"type":0,"body":{"type":2,"items":[{"type":3}],"static":"hello"}}",
   "errors": [],
   "map": undefined,
 }

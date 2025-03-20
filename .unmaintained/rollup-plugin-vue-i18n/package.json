@@ -24,7 +24,7 @@
     "puppeteer": "^10.4.0"
   },
   "peerDependencies": {
-    "petite-vue-i18n": "^9.0.0",
+    "petite-vue-i18n": "^11.0.0",
     "vue": "^3.0.0",
     "vue-i18n": "^9.0.0"
   },

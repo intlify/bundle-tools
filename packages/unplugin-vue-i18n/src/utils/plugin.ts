@@ -1,4 +1,3 @@
-import path from 'node:path'
 import { PKG_NAME } from '../constants'
 import { error } from './log'
 
@@ -24,15 +23,4 @@ export function checkVuePlugin(vuePlugin: RollupPlugin | null): boolean {
     return false
   }
   return true
-}
-
-const isWindows = typeof process !== 'undefined' && process.platform === 'win32'
-
-const windowsSlashRE = /\\/g
-function slash(p: string): string {
-  return p.replace(windowsSlashRE, '/')
-}
-
-export function normalizePath(id: string): string {
-  return path.posix.normalize(isWindows ? slash(id) : id)
 }

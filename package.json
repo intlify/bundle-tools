@@ -28,19 +28,6 @@
     "typescript-eslint": "^8.26.1",
     "vitest": "^3.0.8"
   },
-  "pnpm": {
-    "overrides": {
-      "vue-i18n": "next",
-      "petite-vue-i18n": "next",
-      "@intlify/shared": "next",
-      "@intlify/core-base": "next",
-      "@intlify/message-compiler": "next",
-      "@intlify/vue-i18n-extensions>@intlify/shared": "next",
-      "@intlify/vue-i18n-extensions>@intlify/message-compiler": "next",
-      "@intlify/bundle-utils>@intlify/shared": "^12.0.0-alpha.2",
-      "@intlify/bundle-utils>@intlify/message-compiler": "^12.0.0-alpha.2"
-    }
-  },
   "license": "MIT",
   "prettier": "@kazupon/prettier-config",
   "lint-staged": {

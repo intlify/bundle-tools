@@ -27,14 +27,12 @@ describe('vite', () => {
     expect(await getText(global.page, '#lang label')).toMatch('言語')
     expect(await getText(global.page, '#fruits label')).toMatch('バナナが欲しい？')
     expect(await getText(global.page, '#msg')).toMatch('こんにちは、世界！')
-    expect(await getText(global.page, '#custom-directive')).toMatch('やあ！')
   })
 
   test('change locale', async () => {
     await global.page.selectOption('#lang select', 'en')
     expect(await getText(global.page, '#lang label')).toMatch('Language')
     expect(await getText(global.page, '#msg')).toMatch('hello, world!')
-    expect(await getText(global.page, '#custom-directive')).toMatch('Hi!')
   })
 
   test('change banana select', async () => {

@@ -7,7 +7,6 @@
     </select>
   </form>
   <p id="msg">{{ t('hello') }}</p>
-  <p id="custom-directive" v-t="'hi'"></p>
   <Banana />
   <Apple />
 </template>

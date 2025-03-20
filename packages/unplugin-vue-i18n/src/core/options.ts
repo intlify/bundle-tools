@@ -3,7 +3,6 @@ import { normalize } from 'node:path'
 import { toArray } from '../utils/misc'
 
 import type { PluginOptions, SFCLangFormat } from '../types'
-import type { TranslationDirectiveResolveIndetifier } from '../vue'
 
 /**
  * Creates a path to the correct vue-i18n build used as alias (e.g. `vue-i18n/dist/vue-i18n.runtime.node.js`)
@@ -38,8 +37,7 @@ export function resolveOptions(options: PluginOptions) {
     forceStringify: false,
     defaultSFCLang: 'json' as SFCLangFormat,
     dropMessageCompiler: false,
-    transformI18nBlock: undefined,
-    optimizeTranslationDirective: false
+    transformI18nBlock: undefined
   })
 
   const include = res.include ? toArray(res.include).map(item => normalize(item)) : undefined
@@ -52,13 +50,6 @@ export function resolveOptions(options: PluginOptions) {
 
   const fullInstall = res.module !== 'vue-i18n' ? false : res.fullInstall
 
-  const optimizeTranslationDirective =
-    typeof res.optimizeTranslationDirective === 'boolean'
-      ? res.optimizeTranslationDirective
-      : toArray(res.optimizeTranslationDirective)
-
-  const translationIdentifiers = new Map<string, TranslationDirectiveResolveIndetifier>()
-
   const vueI18nAliasPath = getVueI18nAliasPath(res)
 
   return {
@@ -67,9 +58,7 @@ export function resolveOptions(options: PluginOptions) {
     exclude,
     fullInstall,
     onlyLocales,
-    vueI18nAliasPath,
-    translationIdentifiers,
-    optimizeTranslationDirective
+    vueI18nAliasPath
   }
 }
 

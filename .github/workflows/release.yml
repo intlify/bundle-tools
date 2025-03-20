@@ -51,7 +51,7 @@ jobs:
       - name: Commit changelog
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          branch: master
+          branch: main
           file_pattern: '*.md'
           commit_message: 'chore: sync changelog'
 

@@ -41,7 +41,7 @@
     "vue": "^3.4"
   },
   "devDependencies": {
-    "@types/node": "^20.14.8",
+    "@types/node": "^22.0.0",
     "@types/jsdom": "^16.2.5",
     "@types/memory-fs": "^0.3.2",
     "@types/debug": "^4.1.5",

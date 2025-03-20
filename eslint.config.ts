@@ -1,11 +1,6 @@
-import {
-  defineConfig,
-  javascript,
-  prettier,
-  typescript
-} from '@kazupon/eslint-config'
-import { fileURLToPath } from 'node:url'
+import { defineConfig, javascript, prettier, typescript } from '@kazupon/eslint-config'
 import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 const __dirname = fileURLToPath(new URL('.', import.meta.url))
 
@@ -23,15 +18,12 @@ export default defineConfig(
   {
     name: 'ignores',
     ignores: [
-      'packages/rollup-plugin-vue-i18n/*',
-      'packages/vite-plugin-vue-i18n/*',
-      'packages/vue-i18n-loader/*',
-      'packages/unplugin-vue-i18n/lib/*',
-      'packages/bundle-utils/lib/*',
-      'examples/*',
+      'examples/**',
+      '.unmaintained/**',
       '**/test/fixtures/**',
       '**/*.config.ts',
       '**/dist/**',
+      '**/lib/**',
       '**/.eslint-config-inspector/**',
       '**/tsconfig.json',
       '**/*.yml',

@@ -1,4 +1,4 @@
-import { resolve } from 'pathe'
+import { resolve } from 'node:path'
 import { expect, test } from 'vitest'
 import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
 /**

@@ -26,7 +26,7 @@
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
     "@intlify/bundle-utils": "workspace:*",
-    "@intlify/shared": "latest",
+    "@intlify/shared": "next",
     "@intlify/vue-i18n-extensions": "^8.0.0",
     "@rollup/pluginutils": "^5.1.0",
     "@typescript-eslint/scope-manager": "^8.13.0",
@@ -34,19 +34,28 @@
     "debug": "^4.3.3",
     "defu": "^6.1.4",
     "fast-glob": "^3.2.12",
-    "js-yaml": "^4.1.0",
-    "json5": "^2.2.3",
     "knitwork": "^1.2.0",
     "mlly": "^1.2.0",
-    "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
-    "source-map-js": "^1.0.2",
     "unplugin": "^2.2.0",
     "vue": "^3.4"
   },
   "devDependencies": {
     "@types/node": "^20.14.8",
-    "unbuild": "^2.0.0"
+    "@types/jsdom": "^16.2.5",
+    "@types/memory-fs": "^0.3.2",
+    "@types/debug": "^4.1.5",
+    "@rspack/core": "^1.2.7",
+    "@intlify/core-base": "next",
+    "vite": "^6.2.2",
+    "@vitejs/plugin-vue": "^5.2.3",
+    "jsdom": "^25.0.1",
+    "memory-fs": "^0.5.0",
+    "vue-loader": "^16.3.0",
+    "ts-loader": "^9.5.2",
+    "unbuild": "^2.0.0",
+    "webpack": "^5.88.2",
+    "webpack-merge": "^5.9.0"
   },
   "engines": {
     "node": ">= 18"
@@ -108,10 +117,6 @@
     "directory": "packages/unplugin-vue-i18n"
   },
   "scripts": {
-    "build": "unbuild",
-    "clean": "run-p \"clean:*\"",
-    "clean:lib": "rm -rf ./lib",
-    "changelog": "jiti ../../scripts/changelog.ts",
-    "release": "jiti ../../scripts/release.ts"
+    "build": "unbuild"
   }
 }

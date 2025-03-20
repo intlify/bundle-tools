@@ -8,28 +8,17 @@ import { assign, generateCodeFrame, isEmptyObject } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
-import fs from 'node:fs'
-import { parse as parsePath, resolve, dirname } from 'pathe'
-import { parse } from 'vue/compiler-sfc'
-import {
-  checkVuePlugin,
-  error,
-  getVitePlugin,
-  raiseError,
-  resolveNamespace,
-  warn
-} from '../utils'
-import { getVueCompiler, parseVueRequest } from '../vue'
 import { genImport, genSafeVariableName } from 'knitwork'
 import { findStaticImports } from 'mlly'
 import { createHash } from 'node:crypto'
+import fs from 'node:fs'
+import { dirname, parse as parsePath, resolve } from 'node:path'
+import { parse } from 'vue/compiler-sfc'
+import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
+import { getVueCompiler, parseVueRequest } from '../vue'
 
 import type { CodeGenOptions } from '@intlify/bundle-utils'
-import type {
-  RollupPlugin,
-  UnpluginContextMeta,
-  UnpluginOptions
-} from 'unplugin'
+import type { RollupPlugin, UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
 import type { SFCLangFormat } from '../types'
 import type { VueCompilerParser, VueQuery } from '../vue'
@@ -51,10 +40,7 @@ type PluginCtx = {
   sourceMap: boolean
 }
 
-export function resourcePlugin(
-  opts: ResolvedOptions,
-  meta: UnpluginContextMeta
-): UnpluginOptions {
+export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta): UnpluginOptions {
   const _filter = createFilter(opts.include, opts.exclude)
   const importedResources = new Set<string>()
   const filter = (val: string) => _filter(val) || importedResources.has(val)
@@ -69,8 +55,7 @@ export function resourcePlugin(
 
   // NOTE: webpack cannot dynamically resolve vue compiler, so use the compiler statically with import syntax
   let vuePlugin: RollupPlugin | null = null
-  const getSfcParser = () =>
-    vuePlugin ? getVueCompiler(vuePlugin).parse : parse
+  const getSfcParser = () => (vuePlugin ? getVueCompiler(vuePlugin).parse : parse)
 
   const resourcePaths = new Set<string>()
   for (const inc of opts.include || []) {
@@ -92,9 +77,7 @@ export function resourcePlugin(
   function sharedWebpackLikePlugin(compiler: WebpackLikeCompiler) {
     ctx.prod = compiler.options.mode !== 'development'
     ctx.sourceMap = !!compiler.options.devtool
-    debug(
-      `${meta.framework}: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`
-    )
+    debug(`${meta.framework}: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`)
 
     compiler.options.resolve.alias = {
       ...compiler.options.resolve.alias,
@@ -107,7 +90,7 @@ export function resourcePlugin(
       .then(mod => {
         if (mod) {
           compiler.options.plugins.push(
-            // @ts-expect-error type issue
+            // @ts-expect-error -- FIXME: webpack type
             new mod.DefinePlugin({
               __VUE_I18N_FULL_INSTALL__: JSON.stringify(opts.fullInstall),
               __INTLIFY_PROD_DEVTOOLS__: 'false'
@@ -115,9 +98,7 @@ export function resourcePlugin(
           )
           debug(`set __VUE_I18N_FULL_INSTALL__ is '${opts.fullInstall}'`)
         } else {
-          debug(
-            `ignore vue-i18n feature flags with ${meta.framework}.DefinePlugin`
-          )
+          debug(`ignore vue-i18n feature flags with ${meta.framework}.DefinePlugin`)
         }
       })
       .catch(_e => {
@@ -182,11 +163,8 @@ export function resourcePlugin(
         }
 
         ctx.prod = config.isProduction
-        ctx.sourceMap =
-          config.command === 'build' ? !!config.build.sourcemap : false
-        debug(
-          `configResolved: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`
-        )
+        ctx.sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
+        debug(`configResolved: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`)
 
         // json transform handling
         const jsonPlugin = getVitePlugin(config, 'vite:json')
@@ -232,10 +210,7 @@ export function resourcePlugin(
 
     load(id: string) {
       debug('load', id)
-      if (
-        INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
-        resourcePaths.size > 0
-      ) {
+      if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && resourcePaths.size > 0) {
         const code = generateBundleResources(resourcePaths)
 
         // watch resources to invalidate on change (webpack)
@@ -256,10 +231,7 @@ export function resourcePlugin(
       const { filename, query } = parseVueRequest(id)
 
       // vue file or virtual bundle
-      if (
-        filename.endsWith('vue') ||
-        filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID)
-      ) {
+      if (filename.endsWith('vue') || filename.endsWith(INTLIFY_BUNDLE_IMPORT_ID)) {
         return true
       }
 
@@ -270,11 +242,7 @@ export function resourcePlugin(
       }
 
       // locale resource
-      return (
-        supportedFileExtensionsRE.test(filename) &&
-        filter(filename) &&
-        isResourcePath
-      )
+      return supportedFileExtensionsRE.test(filename) && filter(filename) && isResourcePath
     },
 
     async transform(code, id) {
@@ -341,14 +309,7 @@ export function resourcePlugin(
         })
         debug('parseOptions', parseOptions)
 
-        let source = getCode(
-          code,
-          filename,
-          ctx.sourceMap,
-          query,
-          getSfcParser(),
-          meta
-        )
+        let source = getCode(code, filename, ctx.sourceMap, query, getSfcParser(), meta)
 
         if (typeof opts.transformI18nBlock === 'function') {
           const modifiedSource = opts.transformI18nBlock(source)
@@ -372,10 +333,7 @@ export function resourcePlugin(
   } as UnpluginOptions
 }
 
-type GeneratorFn =
-  | typeof generateJSON
-  | typeof generateJavaScript
-  | typeof generateYAML
+type GeneratorFn = typeof generateJSON | typeof generateJavaScript | typeof generateYAML
 function getGenerator(ext: string, fallback: GeneratorFn = generateJSON) {
   if (/\.?json5?$/.test(ext)) {
     return generateJSON
@@ -409,10 +367,7 @@ function generateBundleResources(resources: Set<string>) {
     debug(`${filename} bundle loading ...`)
     const { name } = parsePath(filename)
     const varName = genSafeVariableName(
-      [
-        name,
-        createHash('sha256').update(filename).digest('hex').substring(0, 8)
-      ].join('_')
+      [name, createHash('sha256').update(filename).digest('hex').substring(0, 8)].join('_')
     )
     imports.push({ statement: genImport(filename, varName), varName })
     codes.push(`${JSON.stringify(name)}: ${varName}`)
@@ -466,10 +421,7 @@ function getCode(
 
   // via `src=xxx` of SFC
   if (query.issuerPath) {
-    debug(
-      `getCode (${meta.framework}) ${query.index} via issuerPath`,
-      query.issuerPath
-    )
+    debug(`getCode (${meta.framework}) ${query.index} via issuerPath`, query.issuerPath)
     return readFile(filename)
   }
 
@@ -539,10 +491,7 @@ function getOptions(
   })
 }
 
-function getVirtualId(
-  id: string,
-  framework: UnpluginContextMeta['framework'] = 'vite'
-) {
+function getVirtualId(id: string, framework: UnpluginContextMeta['framework'] = 'vite') {
   // prettier-ignore
   return framework === 'vite'
     ? id.startsWith(VIRTUAL_PREFIX)
@@ -551,10 +500,7 @@ function getVirtualId(
     : id
 }
 
-function asVirtualId(
-  id: string,
-  framework: UnpluginContextMeta['framework'] = 'vite'
-) {
+function asVirtualId(id: string, framework: UnpluginContextMeta['framework'] = 'vite') {
   return framework === 'vite' ? VIRTUAL_PREFIX + id : id
 }
 

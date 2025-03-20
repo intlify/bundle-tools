@@ -2,13 +2,11 @@ import type { MessageCompilerContext } from '@intlify/core-base'
 import { vi, expect, test, beforeEach, afterEach } from 'vitest'
 import { compile, createMessageContext } from '@intlify/core-base'
 import { assign, isFunction } from '@intlify/shared'
-import { resolve } from 'pathe'
+import { resolve } from 'node:path'
 import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
 let spyConsoleError: any
 beforeEach(() => {
-  spyConsoleError = vi
-    .spyOn(global.console, 'error')
-    .mockImplementation(() => {})
+  spyConsoleError = vi.spyOn(global.console, 'error').mockImplementation(() => {})
 })
 
 afterEach(() => {
@@ -95,10 +93,10 @@ test('escape message', async () => {
       escapeHtml: true
     })
   )
-  expect(
-    compile(module.hi, {} as MessageCompilerContext)(createMessageContext())
-  ).toBe(`&lt;p&gt;hi there!&lt;/p&gt;`)
-  expect(
-    compile(module.alert, {} as MessageCompilerContext)(createMessageContext())
-  ).toBe(`&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;`)
+  expect(compile(module.hi, {} as MessageCompilerContext)(createMessageContext())).toBe(
+    `&lt;p&gt;hi there!&lt;/p&gt;`
+  )
+  expect(compile(module.alert, {} as MessageCompilerContext)(createMessageContext())).toBe(
+    `&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;`
+  )
 })

@@ -1,6 +1,6 @@
 import { readFile, rm, writeFile } from 'node:fs/promises'
-import { fileURLToPath } from 'node:url'
 import { resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { defineBuildConfig } from 'unbuild'
 
 const lib = fileURLToPath(new URL('./lib', import.meta.url))
@@ -45,10 +45,7 @@ export default defineBuildConfig({
             const content = await readFile(path, 'utf-8')
             await writeFile(
               path,
-              content.replace(
-                `export { ${name} as default };`,
-                `export = ${name};`
-              ),
+              content.replace(`export { ${name} as default };`, `export = ${name};`),
               { encoding: 'utf-8' }
             )
           }

@@ -1,0 +1,18 @@
+{
+  "name": "rspack-example",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "vue": "^3.5.13",
+    "vue-i18n": "next",
+    "@intlify/unplugin-vue-i18n": "workspace:*"
+  },
+  "devDependencies": {
+    "@rspack/cli": "^1.2.7",
+    "vue-loader": "^16.3.0"
+  },
+  "scripts": {
+    "dev": "rspack dev --config ./rspack.config.mjs",
+    "build": "rspack --config ./rspack.config.mjs"
+  }
+}

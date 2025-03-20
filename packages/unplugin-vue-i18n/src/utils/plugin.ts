@@ -2,7 +2,7 @@ import path from 'node:path'
 import { PKG_NAME } from '../constants'
 import { error } from './log'
 
-import type { VitePlugin, RollupPlugin } from 'unplugin'
+import type { RollupPlugin, VitePlugin } from 'unplugin'
 
 export function resolveNamespace(name: string): string {
   return `${PKG_NAME}:${name}`
@@ -11,10 +11,7 @@ export function resolveNamespace(name: string): string {
 // @ts-expect-error -- FIXME: plugin type
 type UserConfig = Parameters<VitePlugin['configResolved']>[0]
 
-export function getVitePlugin(
-  config: UserConfig,
-  name: string
-): RollupPlugin | null {
+export function getVitePlugin(config: UserConfig, name: string): RollupPlugin | null {
   // vite plugin has compoaibility for rollup plugin
   return config.plugins.find(p => p.name === name) as RollupPlugin
 }

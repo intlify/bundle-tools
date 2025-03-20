@@ -1,16 +1,14 @@
-import { dirname, resolve, join } from 'path'
-import { fileURLToPath } from 'url'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/webpack'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { VueLoaderPlugin } from 'vue-loader'
-import VueI18nPlugin from '../../packages/unplugin-vue-i18n/lib/webpack.mjs'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
 function transformI18nBlock(source) {
   const sourceCopy = source
-  const block = JSON.parse(
-    sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']')
-  )
+  const block = JSON.parse(sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']'))
   if (Array.isArray(block)) {
     const transformedBlock = JSON.stringify({
       en: {
@@ -35,11 +33,6 @@ export default {
     path: resolve(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/dist/'
-  },
-  resolve: {
-    alias: {
-      vue: resolve(__dirname, '../../node_modules/vue/dist/vue.esm-bundler.js')
-    }
   },
   devServer: {
     static: {

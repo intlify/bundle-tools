@@ -11,17 +11,13 @@ const resolveSnapshotPath = (testPath, extension) => {
     )
   }
 
-  return join(
-    join(dirname(testPath), '__snapshots__'),
-    `${basename(testPath)}${extension}`
-  )
+  return join(join(dirname(testPath), '__snapshots__'), `${basename(testPath)}${extension}`)
 }
 
 export default defineConfig({
   resolve: {
     alias: {
-      '@intlify/message-compiler':
-        '@intlify/message-compiler/dist/message-compiler.node.mjs'
+      '@intlify/message-compiler': '@intlify/message-compiler/dist/message-compiler.node.js'
     }
   },
   test: {

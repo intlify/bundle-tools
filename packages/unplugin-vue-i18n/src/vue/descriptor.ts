@@ -7,12 +7,12 @@ import type { CompilerError, SFCDescriptor } from 'vue/compiler-sfc'
 import type { VuePluginResolvedOptions } from './utils'
 
 // compiler-sfc should be exported so it can be re-used
-export interface SFCParseResult {
+interface SFCParseResult {
   descriptor: SFCDescriptor
   errors: (CompilerError | SyntaxError)[]
 }
 
-export function createDescriptor(
+function createDescriptor(
   filename: string,
   source: string,
   { template, compiler }: VuePluginResolvedOptions

@@ -2,7 +2,7 @@
   "extends": ["config:base", ":preserveSemverRanges"],
   "labels": ["Type: Dependency"],
   "automerge": true,
-  "ignoreDeps": ["puppeteer", "husky", "source-map"],
+  "ignoreDeps": ["playwright", "husky", "source-map"],
   "major": {
     "automerge": false
   }

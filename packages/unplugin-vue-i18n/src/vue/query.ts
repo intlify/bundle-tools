@@ -20,9 +20,7 @@ export function parseVueRequest(id: string) {
   const [filename, rawQuery] = id.split(`?`, 2)
   const params = new URLSearchParams(rawQuery)
   const ret = {} as VueQuery
-  const langPart = Object.keys(Object.fromEntries(params)).find(key =>
-    /lang\./i.test(key)
-  )
+  const langPart = Object.keys(Object.fromEntries(params)).find(key => /lang\./i.test(key))
   ret.vue = params.has('vue')
   ret.global = params.has('global')
   ret.src = params.has('src')

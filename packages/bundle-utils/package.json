@@ -1,6 +1,5 @@
 {
   "name": "@intlify/bundle-utils",
-  "type": "module",
   "description": "Bundle utilities for Intlify project",
   "version": "11.0.0-beta.0",
   "author": {
@@ -27,7 +26,6 @@
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",
-    "mlly": "^1.2.0",
     "source-map-js": "^1.0.1",
     "yaml-eslint-parser": "^1.2.2"
   },
@@ -41,11 +39,11 @@
     "node": ">= 18"
   },
   "files": [
-    "lib",
-    "index.mjs"
+    "lib"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",
+  "type": "module",
   "main": "lib/index.cjs",
   "module": "lib/index.mjs",
   "types": "lib/index.d.ts",
@@ -63,10 +61,6 @@
     "directory": "packages/bundle-utils"
   },
   "scripts": {
-    "build": "unbuild",
-    "clean": "run-p \"clean:*\"",
-    "clean:lib": "rm -rf ./lib",
-    "changelog": "jiti ../../scripts/changelog.ts",
-    "release": "jiti ../../scripts/release.ts"
+    "build": "unbuild"
   }
 }

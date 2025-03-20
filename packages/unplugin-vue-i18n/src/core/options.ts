@@ -1,5 +1,5 @@
 import defu from 'defu'
-import { normalize } from 'pathe'
+import { normalize } from 'node:path'
 import { toArray } from '../utils/misc'
 
 import type { PluginOptions, SFCLangFormat } from '../types'
@@ -8,11 +8,7 @@ import type { TranslationDirectiveResolveIndetifier } from '../vue'
 /**
  * Creates a path to the correct vue-i18n build used as alias (e.g. `vue-i18n/dist/vue-i18n.runtime.node.js`)
  */
-const getVueI18nAliasPath = (opts: {
-  runtimeOnly: boolean
-  ssr: boolean
-  module: string
-}) => {
+const getVueI18nAliasPath = (opts: { runtimeOnly: boolean; ssr: boolean; module: string }) => {
   const filename = [
     opts.module,
     opts.runtimeOnly ? 'runtime' : '',
@@ -46,13 +42,9 @@ export function resolveOptions(options: PluginOptions) {
     optimizeTranslationDirective: false
   })
 
-  const include = res.include
-    ? toArray(res.include).map(item => normalize(item))
-    : undefined
+  const include = res.include ? toArray(res.include).map(item => normalize(item)) : undefined
 
-  const _exclude = res.exclude
-    ? toArray(res.exclude).map(item => normalize(item))
-    : undefined
+  const _exclude = res.exclude ? toArray(res.exclude).map(item => normalize(item)) : undefined
 
   const exclude = res.include ? _exclude : ['**/**']
 
@@ -65,10 +57,7 @@ export function resolveOptions(options: PluginOptions) {
       ? res.optimizeTranslationDirective
       : toArray(res.optimizeTranslationDirective)
 
-  const translationIdentifiers = new Map<
-    string,
-    TranslationDirectiveResolveIndetifier
-  >()
+  const translationIdentifiers = new Map<string, TranslationDirectiveResolveIndetifier>()
 
   const vueI18nAliasPath = getVueI18nAliasPath(res)
 

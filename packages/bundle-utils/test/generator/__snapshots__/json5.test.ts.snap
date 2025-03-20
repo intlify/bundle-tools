@@ -2,30 +2,30 @@
 
 exports[`AST code generation > code 1`] = `
 "const resource = {
-  "hi": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"hi there!"}},
+  "hi": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"hi there!"}},
   "nested": {
-    "hello": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"hello world!"}},
+    "hello": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"hello world!"}},
     "more": {
-      "plural": {"t":0,"b":{"t":1,"c":[{"t":2,"i":[{"t":6,"k":{"t":9,"v":"no apples"},"m":{"t":8,"v":"caml"}}]},{"t":2,"i":[{"t":5,"i":0},{"t":3,"v":" apple"}]},{"t":2,"i":[{"t":4,"k":"n"},{"t":3,"v":" apples"}]}]}}
+      "plural": {"type":0,"body":{"type":1,"cases":[{"type":2,"items":[{"type":6,"modifier":{"type":8,"value":"caml"},"key":{"type":9,"value":"no apples"}}]},{"type":2,"items":[{"type":5,"index":0},{"type":3,"value":" apple"}]},{"type":2,"items":[{"type":4,"key":"n"},{"type":3,"value":" apples"}]}]}}
     },
-    "list": {"t":0,"b":{"t":2,"i":[{"t":3,"v":"hi, "},{"t":5,"i":0},{"t":3,"v":" !"}]}}
+    "list": {"type":0,"body":{"type":2,"items":[{"type":3,"value":"hi, "},{"type":5,"index":0},{"type":3,"value":" !"}]}}
   },
-  "こんにちは": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"こんにちは！"}},
-  "single-quote": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"I don\\u0027t know!"}},
-  "emoji": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"😺"}},
-  "unicode": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"A"}},
-  "unicode-escape": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"\\\\u0041"}},
-  "backslash-single-quote": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"\\\\\\u0027"}},
-  "backslash-backslash": {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"\\\\\\\\"}},
+  "こんにちは": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"こんにちは！"}},
+  "single-quote": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"I don\\u0027t know!"}},
+  "emoji": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"😺"}},
+  "unicode": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"A"}},
+  "unicode-escape": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\u0041"}},
+  "backslash-single-quote": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\\\u0027"}},
+  "backslash-backslash": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\\\\\"}},
   "errors": [
-    {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"ERROR1001"}},
-    {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"ERROR1002"}}
+    {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"ERROR1001"}},
+    {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"ERROR1002"}}
   ],
   "complex": {
     "warnings": [
-      {"t":0,"b":{"t":2,"i":[{"t":3}],"s":"NOTE: This is warning"}},
+      {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"NOTE: This is warning"}},
       {
-        "named-waring": {"t":0,"b":{"t":2,"i":[{"t":3,"v":"this is "},{"t":4,"k":"type"},{"t":3,"v":" warining"}]}}
+        "named-waring": {"type":0,"body":{"type":2,"items":[{"type":3,"value":"this is "},{"type":4,"key":"type"},{"type":3,"value":" warining"}]}}
       }
     ]
   }

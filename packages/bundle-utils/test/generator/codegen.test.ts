@@ -35,9 +35,7 @@ describe('generateMessageFunction', () => {
   })
 
   test('production', () => {
-    expect(
-      generateMessageFunction('hello', { env: 'production' })
-    ).toMatchSnapshot()
+    expect(generateMessageFunction('hello', { env: 'production' })).toMatchSnapshot()
   })
 
   test('syntax error', () => {

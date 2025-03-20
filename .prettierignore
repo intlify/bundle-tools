@@ -4,4 +4,4 @@ lib
 dist
 CHANGELOG.md
 pnpm-lock.yaml
-unmaintained
+.unmaintained

@@ -19,7 +19,7 @@ export default defineConfig(
     name: 'ignores',
     ignores: [
       'examples/**',
-      'unmaintained/**',
+      '.unmaintained/**',
       '**/test/fixtures/**',
       '**/*.config.ts',
       '**/dist/**',

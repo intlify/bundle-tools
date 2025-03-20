@@ -17,13 +17,13 @@ import type { MappedPosition, MappingItem, RawSourceMap } from 'source-map-js'
  */
 export type DevEnv = 'development' | 'production'
 
-export interface Position {
+interface Position {
   line: number
   column: number
   offset?: number
 }
 
-export interface SourceLocationable {
+interface SourceLocationable {
   start?: number
   loc?: {
     start: Position
@@ -65,7 +65,7 @@ export interface CodeGenOptions {
   ) => void
 }
 
-export interface CodeGenContext {
+interface CodeGenContext {
   source?: string
   code: string
   indentLevel: number

@@ -1,8 +1,8 @@
-// @ts-check
-import { dirname, resolve, join } from 'path'
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/rspack'
+import { defineConfig } from '@rspack/cli'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { VueLoaderPlugin } from 'vue-loader'
-import VueI18nPlugin from '../../packages/unplugin-vue-i18n/lib/rspack.mjs'
-import { fileURLToPath } from 'url'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
@@ -26,10 +26,7 @@ function transformI18nBlock(source) {
   return source
 }
 
-/**
- * @type {import('@rspack/core').RspackOptions}
- **/
-export default {
+export default defineConfig({
   mode: 'development',
   devtool: 'source-map',
   entry: resolve(__dirname, './src/main.js'),
@@ -37,11 +34,6 @@ export default {
     path: resolve(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/dist/'
-  },
-  resolve: {
-    alias: {
-      vue: resolve(__dirname, '../../node_modules/vue/dist/vue.esm-bundler.js')
-    }
   },
   devServer: {
     static: {
@@ -66,10 +58,6 @@ export default {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
-      },
-      {
-        test: /\.js$/,
-        loader: 'babel-loader'
       }
     ]
   },
@@ -80,4 +68,4 @@ export default {
       transformI18nBlock: transformI18nBlock
     })
   ]
-}
+})

@@ -1,5 +1,5 @@
 import defu from 'defu'
-import { normalize } from 'pathe'
+import { normalize } from 'node:path'
 import { toArray } from '../utils/misc'
 
 import type { PluginOptions, SFCLangFormat } from '../types'

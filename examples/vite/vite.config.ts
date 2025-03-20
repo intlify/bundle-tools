@@ -1,8 +1,9 @@
-import path, { dirname } from 'path'
-import { defineConfig } from 'vite'
+import vueI18n from '@intlify/unplugin-vue-i18n/vite'
 import vue from '@vitejs/plugin-vue'
-import vueI18n from '../../packages/unplugin-vue-i18n/src/vite'
-import { fileURLToPath } from 'url'
+import path, { dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { defineConfig } from 'vite'
+
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = dirname(__filename)
 
@@ -26,12 +27,8 @@ function transformI18nBlock(source) {
 }
 
 export default defineConfig({
-  resolve: {
-    alias: {
-      vue: path.resolve(__dirname, '../../node_modules/vue/dist/vue.esm-bundler.js')
-    }
-  },
   build: {
+    outDir: path.resolve(__dirname, './dist'),
     rollupOptions: {
       input: path.resolve(__dirname, './index.html')
     }

@@ -1,9 +1,9 @@
-import { startServer } from './setup-server'
 import { getText } from './helper'
+import { startServer } from './setup-server'
 
-import type { ServerContext } from './setup-server'
 import type { Browser, Page } from 'playwright-core'
-import { describe, expect, test, beforeAll, afterAll } from 'vitest'
+import { afterAll, beforeAll, describe, expect, test } from 'vitest'
+import type { ServerContext } from './setup-server'
 
 // TODO: extract to shim.d.ts
 // eslint-disable-next-line @typescript-eslint/no-namespace

@@ -2,7 +2,7 @@ import type { MessageCompilerContext } from '@intlify/core-base'
 import { vi, expect, test, beforeEach, afterEach } from 'vitest'
 import { compile, createMessageContext } from '@intlify/core-base'
 import { assign, isFunction } from '@intlify/shared'
-import { resolve } from 'pathe'
+import { resolve } from 'node:path'
 import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
 let spyConsoleError: any
 beforeEach(() => {

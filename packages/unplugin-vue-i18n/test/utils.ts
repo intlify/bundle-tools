@@ -3,17 +3,21 @@ import vue from '@vitejs/plugin-vue'
 import fg from 'fast-glob'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
-import { resolve } from 'pathe'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
 import { build } from 'vite'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
+import rspackPlugin from '../src/rspack'
 import vitePlugin from '../src/vite'
 import webpackPlugin from '../src/webpack'
-import rspackPlugin from '../src/rspack'
 
-import type { PluginOptions } from '../src/types'
 import rspack, { RspackOptions } from '@rspack/core'
+import type { PluginOptions } from '../src/types'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 let ignoreIds: string[] | null = null
 
@@ -26,7 +30,7 @@ type BundleResolve = {
 
 type BundleFunction = (fixture: string, options: Record<string, unknown>) => Promise<BundleResolve>
 
-export async function bundleVite(
+async function bundleVite(
   fixture: string,
   options: Record<string, unknown> = {}
 ): Promise<BundleResolve> {
@@ -43,7 +47,7 @@ export async function bundleVite(
   options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
   const alias: Record<string, string> = {
-    vue: 'vue/dist/vue.esm-bundler.js'
+    vue: resolve(__dirname, '../node_modules/vue/dist/vue.esm-bundler.js')
   }
   if (!fixture.startsWith('@')) {
     alias['~target'] = resolve(__dirname, target, fixture)
@@ -89,15 +93,15 @@ export async function bundleVite(
   }
 }
 
-export function bundleWebpack(fixture: string, options: Record<string, unknown> = {}) {
+function bundleWebpack(fixture: string, options: Record<string, unknown> = {}) {
   return bundleWebpackLike(fixture, webpackPlugin, webpack, 'webpack', options)
 }
 
-export function bundleRspack(fixture: string, options: Record<string, unknown> = {}) {
+function bundleRspack(fixture: string, options: Record<string, unknown> = {}) {
   return bundleWebpackLike(fixture, rspackPlugin, rspack, 'rspack', options)
 }
 
-export function bundleWebpackLike(
+function bundleWebpackLike(
   fixture: string,
   pluginFn: typeof rspackPlugin | typeof webpackPlugin,
   compilerFn: typeof rspack | typeof webpack,
@@ -105,7 +109,9 @@ export function bundleWebpackLike(
   options: Record<string, unknown> = {}
 ): Promise<BundleResolve> {
   const VueLoader = (options.vueLoader ? options.vueLoader : VueLoaderPlugin) as any
-  const vueLoaderPath = (options.vueLoaderPath ? options.vueLoaderPath : 'vue-loader') as string
+  const vueLoaderPath = (
+    options.vueLoaderPath ? options.vueLoaderPath : resolve(__dirname, '../node_modules/vue-loader')
+  ) as string
   const input = (options.input as string) || './fixtures/entry.js'
   const target = (options.target as string) || './fixtures'
   const include = (options.include as string[]) || [resolve(__dirname, './fixtures/**')]
@@ -149,7 +155,7 @@ export function bundleWebpackLike(
             }
           : {
               test: /\.tsx?$/,
-              loader: 'ts-loader',
+              loader: resolve(__dirname, '../node_modules/ts-loader'),
               exclude: /node_modules/,
               options: {
                 transpileOnly: true
@@ -174,6 +180,7 @@ export function bundleWebpackLike(
         return reject(err)
       }
       if (stats.hasErrors()) {
+        console.error(stats.toJson())
         return reject(new Error(stats.toJson().errors.join(' | ')))
       }
       resolve({
@@ -196,7 +203,7 @@ const bundlerMap = {
   rspack: bundleRspack
 }
 
-export function getCurrentTestFramework() {
+function getCurrentTestFramework() {
   return (process.env.TEST_FRAMEWORK as keyof typeof bundlerMap) || 'vite'
 }
 

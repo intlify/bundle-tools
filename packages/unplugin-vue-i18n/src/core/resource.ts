@@ -12,7 +12,7 @@ import { genImport, genSafeVariableName } from 'knitwork'
 import { findStaticImports } from 'mlly'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
-import { dirname, parse as parsePath, resolve } from 'pathe'
+import { dirname, parse as parsePath, resolve } from 'node:path'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
@@ -90,7 +90,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
       .then(mod => {
         if (mod) {
           compiler.options.plugins.push(
-            // @ts-expect-error type issue
+            // @ts-expect-error -- FIXME: webpack type
             new mod.DefinePlugin({
               __VUE_I18N_FULL_INSTALL__: JSON.stringify(opts.fullInstall),
               __INTLIFY_PROD_DEVTOOLS__: 'false'

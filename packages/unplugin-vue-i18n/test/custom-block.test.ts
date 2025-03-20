@@ -1,4 +1,5 @@
 import type { MessageCompilerContext } from '@intlify/core-base'
+
 import { compile, createMessageContext, isMessageAST } from '@intlify/core-base'
 import { expect, test } from 'vitest'
 import { bundleAndRun, getCurrentTestBundler } from './utils'

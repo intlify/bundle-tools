@@ -1,6 +1,11 @@
 import type { KnipConfig } from 'knip'
+
 export default {
-  project: ['!unmaintained/**'],
-  ignore: ['**/fixtures/**'],
-  ignoreDependencies: ['@babel/preset-typescript']
+  entry: [
+    'scripts/playwright.ts', // jiti
+    'examples/rspack/rspack.config.mjs' // cannot resolve rspack plugin ...
+  ],
+  ignore: ['**/fixtures/**', 'unmaintained/**'],
+  ignoreDependencies: ['@babel/preset-typescript', 'ts-loader'],
+  ignoreBinaries: ['dev']
 } satisfies KnipConfig

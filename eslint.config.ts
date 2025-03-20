@@ -18,7 +18,7 @@ export default defineConfig(
   {
     name: 'ignores',
     ignores: [
-      'examples/*',
+      'examples/**',
       'unmaintained/**',
       '**/test/fixtures/**',
       '**/*.config.ts',

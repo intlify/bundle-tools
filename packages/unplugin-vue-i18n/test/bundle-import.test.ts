@@ -1,8 +1,9 @@
-import { resolve } from 'pathe'
-import { bundleAndRun, getCurrentTestBundler } from './utils'
-import { createMessageContext, compile } from '@intlify/core-base'
-import { expect, test } from 'vitest'
 import type { MessageCompilerContext } from '@intlify/core-base'
+
+import { compile, createMessageContext } from '@intlify/core-base'
+import { resolve } from 'node:path'
+import { expect, test } from 'vitest'
+import { bundleAndRun, getCurrentTestBundler } from './utils'
 ;[
   {
     testcase: 'import',

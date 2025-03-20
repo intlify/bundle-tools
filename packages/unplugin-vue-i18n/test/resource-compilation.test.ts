@@ -1,10 +1,13 @@
-import type { MessageCompilerContext } from '@intlify/core-base'
-import { vi, expect, test, beforeEach, afterEach } from 'vitest'
 import { compile, createMessageContext } from '@intlify/core-base'
 import { assign, isFunction } from '@intlify/shared'
 import { resolve } from 'node:path'
+import { afterEach, beforeEach, expect, test, vi } from 'vitest'
 import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
+
+import type { MessageCompilerContext } from '@intlify/core-base'
+
 let spyConsoleError: any
+
 beforeEach(() => {
   spyConsoleError = vi.spyOn(global.console, 'error').mockImplementation(() => {})
 })

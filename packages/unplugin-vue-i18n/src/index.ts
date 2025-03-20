@@ -1,6 +1,6 @@
 import createDebug from 'debug'
 import { createUnplugin } from 'unplugin'
-import { directivePlugin, resolveOptions, resourcePlugin } from './core'
+import { resolveOptions, resourcePlugin } from './core'
 import { raiseError, resolveNamespace } from './utils'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
@@ -22,15 +22,6 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (opti
   debug('plugin options (resolved):', resolvedOptions)
 
   const plugins = [resourcePlugin(resolvedOptions, meta)]
-  if (resolvedOptions.optimizeTranslationDirective) {
-    if (meta.framework === 'webpack' || meta.framework === 'rspack') {
-      raiseError(
-        `The 'optimizeTranslationDirective' option still is not supported for ${meta.framework}.\n` +
-          `We are waiting for your Pull Request 🙂.`
-      )
-    }
-    plugins.push(directivePlugin(resolvedOptions))
-  }
 
   return plugins
 }

@@ -38,4 +38,5 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (opti
 export const unplugin: UnpluginInstance<PluginOptions | undefined, boolean> =
   /* #__PURE__ */ createUnplugin(unpluginFactory)
 
+/** @alias */
 export default unplugin

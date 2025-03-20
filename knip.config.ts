@@ -1,5 +1,6 @@
 import type { KnipConfig } from 'knip'
 export default {
   project: ['!unmaintained/**'],
-  ignore: ['**/fixtures/**']
+  ignore: ['**/fixtures/**'],
+  ignoreDependencies: ['@babel/preset-typescript']
 } satisfies KnipConfig

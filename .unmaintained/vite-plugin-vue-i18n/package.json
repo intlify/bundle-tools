@@ -11,7 +11,7 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "*",
-    "vite": "^2.9.0 || ^3.0.0",
+    "vite": "^6.0.0",
     "vue-i18n": "*"
   },
   "peerDependenciesMeta": {

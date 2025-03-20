@@ -58,7 +58,7 @@
     "webpack-merge": "^5.9.0"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "files": [
     "lib",

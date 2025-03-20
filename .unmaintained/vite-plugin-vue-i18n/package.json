@@ -40,7 +40,7 @@
     "jest": "^27.2.3",
     "jest-puppeteer": "^6.0.0",
     "jest-watch-typeahead": "^0.6.4",
-    "puppeteer": "^10.4.0"
+    "puppeteer": "^24.0.0"
   },
   "engines": {
     "node": ">= 14.6"

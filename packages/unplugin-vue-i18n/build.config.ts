@@ -33,7 +33,16 @@ export default defineBuildConfig({
   rollup: {
     emitCJS: true
   },
-  externals: ['vite', 'webpack', '@rspack/core'],
+  externals: [
+    'ufo',
+    'vite',
+    'webpack',
+    '@rspack/core',
+    'magic-string',
+    'estree-walker',
+    '@vue/compiler-sfc',
+    '@jridgewell/sourcemap-codec'
+  ],
   hooks: {
     'build:done': async () => {
       await Promise.all([

@@ -12,6 +12,7 @@
   "devDependencies": {
     "@kazupon/eslint-config": "^0.22.0",
     "@kazupon/prettier-config": "^0.1.1",
+    "@types/debug": "^4.1.12",
     "@types/node": "^20.14.5",
     "bumpp": "^10.0.3",
     "eslint": "^9.22.0",

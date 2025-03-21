@@ -3,13 +3,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "vue": "^3.5.13",
-    "vue-i18n": "next",
-    "@intlify/unplugin-vue-i18n": "workspace:*"
+    "@intlify/unplugin-vue-i18n": "workspace:*",
+    "vue": "catalog:vue",
+    "vue-i18n": "catalog:intlify"
   },
   "devDependencies": {
     "@rspack/cli": "^1.2.7",
-    "vue-loader": "^16.3.0"
+    "vue-loader": "catalog:webpack"
   },
   "scripts": {
     "dev": "rspack dev --config ./rspack.config.mjs",

@@ -21,7 +21,7 @@
     "@babel/core": "^7.26.10",
     "@babel/preset-typescript": "^7.26.0",
     "@intlify/message-compiler": "next",
-    "@intlify/shared": "next",
+    "@intlify/shared": "catalog:intlify",
     "acorn": "^8.8.2",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
@@ -33,7 +33,7 @@
     "@types/babel__core": "^7.20.5",
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
-    "unbuild": "^2.0.0"
+    "unbuild": "catalog:"
   },
   "engines": {
     "node": ">= 20"

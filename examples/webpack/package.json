@@ -3,15 +3,15 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "vue": "^3.5.13",
-    "vue-i18n": "next",
-    "@intlify/unplugin-vue-i18n": "workspace:*"
+    "@intlify/unplugin-vue-i18n": "workspace:*",
+    "vue": "catalog:vue",
+    "vue-i18n": "catalog:intlify"
   },
   "devDependencies": {
-    "webpack": "^5.88.2",
-    "vue-loader": "^16.3.0",
     "babel-loader": "^8.2.2",
-    "ts-loader": "^9.5.2",
+    "ts-loader": "catalog:webpack",
+    "vue-loader": "catalog:webpack",
+    "webpack": "catalog:webpack",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },

@@ -3,13 +3,13 @@
   "private": true,
   "type": "module",
   "dependencies": {
-    "vue": "^3.5.13",
-    "vue-i18n": "next",
-    "@intlify/unplugin-vue-i18n": "workspace:*"
+    "@intlify/unplugin-vue-i18n": "workspace:*",
+    "vue": "catalog:vue",
+    "vue-i18n": "catalog:intlify"
   },
   "devDependencies": {
-    "vite": "^6.2.2",
-    "@vitejs/plugin-vue": "^5.2.3"
+    "@vitejs/plugin-vue": "catalog:vite",
+    "vite": "catalog:vite"
   },
   "scripts": {
     "dev": "vite",

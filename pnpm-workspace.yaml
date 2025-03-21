@@ -3,3 +3,19 @@ packages:
   - examples/**
 onlyBuiltDependencies:
   - esbuild
+catalogs:
+  default:
+    '@types/node': ^22.13.11
+    unbuild: ^3.5.0
+  intlify:
+    '@intlify/shared': next
+    vue-i18n: next
+  vite:
+    '@vitejs/plugin-vue': ^5.2.3
+    vite: ^6.2.2
+  vue:
+    vue: ^3.5.13
+  webpack:
+    ts-loader: ^9.5.2
+    vue-loader: ^16.8.3
+    webpack: ^5.92.0

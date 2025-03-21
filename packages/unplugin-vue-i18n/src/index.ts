@@ -1,6 +1,7 @@
 import createDebug from 'debug'
 import { createUnplugin } from 'unplugin'
 import { resolveOptions, resourcePlugin } from './core'
+import { autoDeclarePlugin } from './core/auto-declare'
 import { raiseError, resolveNamespace } from './utils'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
@@ -22,6 +23,7 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (opti
   debug('plugin options (resolved):', resolvedOptions)
 
   const plugins = [resourcePlugin(resolvedOptions, meta)]
+  plugins.push(autoDeclarePlugin({ sourcemap: true }))
 
   return plugins
 }

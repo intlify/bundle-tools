@@ -229,9 +229,6 @@ importers:
       '@rspack/core':
         specifier: ^1.2.8
         version: 1.2.8
-      '@types/babel__core':
-        specifier: ^7.20.5
-        version: 7.20.5
       '@types/estree':
         specifier: ^1.0.0
         version: 1.0.6

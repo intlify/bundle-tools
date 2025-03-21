@@ -40,7 +40,6 @@
   "devDependencies": {
     "@babel/preset-typescript": "^7.26.0",
     "@rspack/core": "^1.2.8",
-    "@types/babel__core": "^7.20.5",
     "@types/estree": "^1.0.0",
     "@types/node": "^20.14.8",
     "@vitejs/plugin-vue": "^5.2.3",

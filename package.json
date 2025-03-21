@@ -10,7 +10,7 @@
   },
   "type": "module",
   "devDependencies": {
-    "@kazupon/eslint-config": "^0.23.0",
+    "@kazupon/eslint-config": "^0.24.0",
     "@kazupon/prettier-config": "^0.1.1",
     "@types/node": "catalog:",
     "bumpp": "^10.0.3",

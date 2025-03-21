@@ -29,7 +29,6 @@
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
-    "@types/babel__core": "^7.20.5",
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
     "unbuild": "catalog:"

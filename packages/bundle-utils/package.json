@@ -18,11 +18,10 @@
     }
   },
   "dependencies": {
-    "@babel/core": "^7.26.10",
-    "@babel/preset-typescript": "^7.26.0",
     "@intlify/message-compiler": "next",
     "@intlify/shared": "catalog:intlify",
     "acorn": "^8.8.2",
+    "esbuild": "^0.25.1",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",

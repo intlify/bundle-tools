@@ -2,7 +2,6 @@
  * Code generator for i18n js resource
  */
 
-import { transform } from '@babel/core'
 import { isBoolean, isNumber, isString } from '@intlify/shared'
 import { parse as parseJavaScript } from 'acorn'
 import { generate as generateJavaScript } from 'escodegen'
@@ -42,8 +41,7 @@ export function generate(
     jit = false
   }: CodeGenOptions
 ): CodeGenResult<Node> {
-  const target = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
-  let value = target
+  const value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
 
   const options = {
     type,
@@ -62,24 +60,6 @@ export function generate(
     jit
   } as CodeGenOptions
   const generator = createCodeGenerator(options)
-
-  if (options.filename && /.[c|m]?ts$/.test(options.filename)) {
-    const transformed = transform(value, {
-      filename: options.filename,
-      sourceMaps: options.sourceMap,
-      babelrc: false,
-      configFile: false,
-      browserslistConfigFile: false,
-      comments: false,
-      envName: 'development',
-      presets: ['@babel/preset-typescript']
-    })
-
-    if (transformed && transformed.code) {
-      value = transformed.code
-      options.source = transformed.code
-    }
-  }
 
   const ast = parseJavaScript(value, {
     ecmaVersion: 'latest',

@@ -34,7 +34,7 @@
     "source-map": "0.6.1"
   },
   "devDependencies": {
-    "unbuild": "^1.1.2",
+    "unbuild": "^3.0.0",
     "@types/jest": "^27.0.2",
     "ts-jest": "^27.0.5",
     "jest": "^27.2.3",

@@ -88,6 +88,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     const loader = meta.framework === 'webpack' ? loadWebpack : loadRspack
     loader()
       .then(mod => {
+        // eslint-disable-next-line promise/always-return
         if (mod) {
           compiler.options.plugins.push(
             // @ts-expect-error -- FIXME: webpack type
@@ -116,6 +117,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     //  HMR for webpack/rspack
   }
 
+  // eslint-disable-next-line regexp/no-unused-capturing-group -- FIXME:
   const supportedFileExtensionsRE = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
 
   return {

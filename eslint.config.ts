@@ -1,8 +1,19 @@
-import { defineConfig, javascript, prettier, typescript } from '@kazupon/eslint-config'
+import {
+  comments,
+  defineConfig,
+  javascript,
+  jsonc,
+  markdown,
+  prettier,
+  promise,
+  regexp,
+  typescript,
+  vitest,
+  yaml
+} from '@kazupon/eslint-config'
 import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
+const __dirname = import.meta.dirname
 
 export default defineConfig(
   javascript(),
@@ -14,12 +25,31 @@ export default defineConfig(
       ]
     }
   }),
+  comments(),
+  promise(),
+  regexp(),
+  jsonc({
+    json: true,
+    json5: true,
+    jsonc: true
+  }),
+  yaml(),
+  markdown(),
+  vitest(),
   prettier(),
+  {
+    name: 'docs',
+    files: ['**/*.md/*.ts', '**/*.md/*.js'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off'
+    }
+  },
   {
     name: 'ignores',
     ignores: [
       'examples/**',
       '.unmaintained/**',
+      '**/*.md/*.ts',
       '**/test/fixtures/**',
       '**/*.config.ts',
       '**/dist/**',

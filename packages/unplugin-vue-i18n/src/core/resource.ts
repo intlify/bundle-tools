@@ -2,6 +2,7 @@ import {
   DynamicResourceError,
   generateJavaScript,
   generateJSON,
+  generateTypescript,
   generateYAML
 } from '@intlify/bundle-utils'
 import { assign, generateCodeFrame, isEmptyObject } from '@intlify/shared'
@@ -17,7 +18,7 @@ import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
 
-import type { CodeGenOptions } from '@intlify/bundle-utils'
+import type { CodeGenOptions, CodeGenResult } from '@intlify/bundle-utils'
 import type { RollupPlugin, UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
 import type { SFCLangFormat } from '../types'
@@ -274,7 +275,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         debug('parseOptions', parseOptions)
 
         try {
-          const { code: generatedCode, map } = generate(code, parseOptions)
+          const { code: generatedCode, map } = await generate(code, parseOptions)
 
           debug('generated code', generatedCode)
           debug('sourcemap', map, ctx.sourceMap)
@@ -323,7 +324,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         }
 
         const generate = getGenerator(langInfo, generateYAML)
-        const { code: generatedCode, map } = generate(source, parseOptions)
+        const { code: generatedCode, map } = await generate(source, parseOptions)
         debug('generated code', generatedCode)
         debug('sourcemap', map, ctx.sourceMap)
 
@@ -334,9 +335,11 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     }
   } as UnpluginOptions
 }
-
-type GeneratorFn = typeof generateJSON | typeof generateJavaScript | typeof generateYAML
-function getGenerator(ext: string, fallback: GeneratorFn = generateJSON) {
+type GeneratorLike = (
+  source: string | Buffer,
+  options: CodeGenOptions
+) => Promise<CodeGenResult<unknown>> | CodeGenResult<unknown>
+function getGenerator(ext: string, fallback: GeneratorLike = generateJSON) {
   if (/\.?json5?$/.test(ext)) {
     return generateJSON
   }
@@ -345,8 +348,12 @@ function getGenerator(ext: string, fallback: GeneratorFn = generateJSON) {
     return generateYAML
   }
 
-  if (/\.[c|m]?[j|t]s$/.test(ext)) {
+  if (/\.[c|m]?js$/.test(ext)) {
     return generateJavaScript
+  }
+
+  if (/\.[c|m]?ts$/.test(ext)) {
+    return generateTypescript
   }
 
   return fallback

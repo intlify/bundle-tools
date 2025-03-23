@@ -6,6 +6,6 @@ export default {
     'examples/rspack/rspack.config.mjs' // cannot resolve rspack plugin ...
   ],
   ignore: ['**/fixtures/**', '.unmaintained/**'],
-  ignoreDependencies: ['@babel/preset-typescript', 'ts-loader', 'lint-staged'],
+  ignoreDependencies: ['ts-loader', 'lint-staged'],
   ignoreBinaries: ['dev']
 } satisfies KnipConfig

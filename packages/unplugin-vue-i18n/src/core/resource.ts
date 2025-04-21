@@ -136,17 +136,30 @@ export function resourcePlugin(
           `configResolved: isProduction = ${isProduction}, sourceMap = ${sourceMap}`
         )
 
+        /**
+         * NOTE(kazupon):
+         * For the native rolldown plugin, we need to change to another solution from the current workaround.
+         * Currently, the rolldown team and vite team are discussing this issue.
+         * https://github.com/vitejs/rolldown-vite/issues/120
+         */
+
         // json transform handling
         const jsonPlugin = getVitePlugin(config, 'vite:json')
         if (jsonPlugin) {
-          const orgTransform = jsonPlugin.transform // backup @rollup/plugin-json
-          jsonPlugin.transform = async function (code: string, id: string) {
+          // saving `vite:json` plugin instance
+          const orgTransform =
+            'handler' in jsonPlugin.transform!
+              ? jsonPlugin.transform!.handler
+              : jsonPlugin.transform!
+
+          // override json transform
+          async function overrideJson(code: string, id: string) {
             if (!/\.json$/.test(id) || filter(id)) {
               return
             }
 
             /**
-             * NOTE:
+             * NOTE(kazupon):
              * `vite:json` plugin will be handled if the query generated from the result of parse SFC
              * with `vite:vue` plugin contains json as follows.
              * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
@@ -160,8 +173,18 @@ export function resourcePlugin(
 
             debug('org json plugin')
             // @ts-expect-error
-            return orgTransform!.apply(this, [code, id])
+            return orgTransform.apply(this, [code, id])
           }
+
+          /**
+           * NOTE(kazupon):
+           * We need to override the transform function of the `vite:json` plugin for `transform` and `transform.handler`.
+           * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
+           */
+          if ('handler' in jsonPlugin.transform!) {
+            jsonPlugin.transform.handler = overrideJson
+          }
+          jsonPlugin.transform = overrideJson
         }
 
         /**

@@ -15,16 +15,7 @@ import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import { dirname, parse as parsePath, resolve } from 'node:path'
 import { parse } from 'vue/compiler-sfc'
-import {
-  checkVuePlugin,
-  error,
-  getVitePlugin,
-  getVitePluginTransform,
-  overrideVitePluginTransform,
-  raiseError,
-  resolveNamespace,
-  warn
-} from '../utils'
+import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
 
 import type { CodeGenOptions, CodeGenResult } from '@intlify/bundle-utils'
@@ -178,23 +169,12 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         ctx.sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
         debug(`configResolved: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`)
 
-        /**
-         * NOTE:
-         * For the native rolldown plugin, we need to change to another solution from the current workaround.
-         * Currently, the rolldown team and vite team are discussing this issue.
-         * https://github.com/vitejs/rolldown-vite/issues/120
-         */
-
         // json transform handling
         const jsonPlugin = getVitePlugin(config, 'vite:json')
         if (jsonPlugin) {
-          // saving `vite:json` plugin instance
-          const [orgTransform, transformWay] = getVitePluginTransform(jsonPlugin)
-          if (!orgTransform) {
-            throw new Error('vite:json plugin not found!')
-          }
-
-          async function overrideViteJsonPlugin(code: string, id: string) {
+          // backup @rollup/plugin-json
+          const orgTransform = jsonPlugin.transform
+          jsonPlugin.transform = async function (code: string, id: string) {
             if (!/\.json$/.test(id) || filter(id)) {
               return
             }
@@ -216,9 +196,6 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
             // @ts-expect-error
             return orgTransform!.apply(this, [code, id])
           }
-
-          // override `vite:json` plugin transform function
-          overrideVitePluginTransform(jsonPlugin, overrideViteJsonPlugin, transformWay!)
         }
       }
     },

@@ -21,7 +21,7 @@
     "jiti": "^2.4.0",
     "knip": "^5.46.0",
     "lint-staged": "^15.5.0",
-    "pkg-pr-new": "^0.0.41",
+    "pkg-pr-new": "^0.0.43",
     "playwright-core": "^1.51.0",
     "prettier": "^3.5.3",
     "source-map": "0.6.1",

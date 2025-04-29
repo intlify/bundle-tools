@@ -23,7 +23,7 @@
     "acorn": "^8.8.2",
     "esbuild": "^0.25.1",
     "escodegen": "^2.1.0",
-    "estree-walker": "^2.0.2",
+    "estree-walker": "^3.0.0",
     "jsonc-eslint-parser": "^2.3.0",
     "source-map-js": "^1.0.1",
     "yaml-eslint-parser": "^1.2.2"

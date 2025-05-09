@@ -151,7 +151,7 @@ function _generate(
   const componentNamespace = '_Component'
   const variableDeclarations: string[] = []
 
-  // slice and reseuse imports and top-level variable declarations as-is
+  // slice and reuse imports and top-level variable declarations as-is
   // NOTE: this prevents optimization/compilation of top-level variables, we may be able to add support for this
   walk(node, {
     /**

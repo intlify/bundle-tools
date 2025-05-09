@@ -22,54 +22,43 @@ export class DynamicResourceError extends Error {}
 /**
  * @internal
  */
+export const DEFAULT_OPTIONS: CodeGenOptions = {
+  type: 'plain',
+  filename: 'vue-i18n-loader.js',
+  inSourceMap: undefined,
+  locale: '',
+  isGlobal: false,
+  sourceMap: false,
+  env: 'development',
+  forceStringify: false,
+  onError: undefined,
+  onWarn: undefined,
+  strictMessage: true,
+  escapeHtml: false,
+  allowDynamic: false,
+  jit: false
+}
+
+/**
+ * @internal
+ */
 export function generate(
   targetSource: string | Buffer,
-  {
-    type = 'plain',
-    filename = 'vue-i18n-loader.js',
-    inSourceMap = undefined,
-    locale = '',
-    isGlobal = false,
-    sourceMap = false,
-    env = 'development',
-    forceStringify = false,
-    onError = undefined,
-    onWarn = undefined,
-    strictMessage = true,
-    escapeHtml = false,
-    allowDynamic = false,
-    jit = false
-  }: CodeGenOptions
+  options: CodeGenOptions
 ): CodeGenResult<Node> {
   const value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
 
-  const options = {
-    type,
-    source: value,
-    sourceMap,
-    locale,
-    isGlobal,
-    inSourceMap,
-    env,
-    filename,
-    forceStringify,
-    onError,
-    onWarn,
-    strictMessage,
-    escapeHtml,
-    jit
-  } as CodeGenOptions
-  const generator = createCodeGenerator(options)
-
+  const _options = Object.assign({}, DEFAULT_OPTIONS, options, { source: value })
+  const generator = createCodeGenerator(_options)
   const ast = parseJavaScript(value, {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    sourceFile: filename,
+    sourceFile: _options.filename,
     allowImportExportEverywhere: true
   }) as Node
 
   const exportResult = scanAst(ast)
-  if (!allowDynamic) {
+  if (!_options.allowDynamic) {
     if (!exportResult) {
       throw new Error(`You need to define an object as the locale message with 'export default'.`)
     }
@@ -95,17 +84,17 @@ export function generate(
       return {
         ast,
         code: value,
-        map: inSourceMap
+        map: _options.inSourceMap
       }
     }
   }
 
-  const codeMaps = _generate(generator, ast, options)
+  const codeMaps = _generate(generator, ast, _options)
 
   const { code, map } = generator.context()
   // prettier-ignore
   const newMap = map
-    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null
+    ? mapLinesColumns((map as any).toJSON(), codeMaps, _options.inSourceMap) || null
     : null
   return {
     ast,

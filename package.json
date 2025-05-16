@@ -150,5 +150,5 @@
     "release:webpack": "pnpm --filter @intlify/vue-i18n-loader release",
     "release:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n release"
   },
-  "packageManager": "pnpm@9.15.1"
+  "packageManager": "pnpm@10.10.0"
 }

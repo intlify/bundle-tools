@@ -41,6 +41,13 @@ import type { VueQuery } from '../vue'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
+const RE_INTLIFY_BUNDLE_IMPORT_ID = new RegExp(`^${INTLIFY_BUNDLE_IMPORT_ID}$`)
+const RE_VIRTUAL_PREFIXED_INTLIFY_BUNDLE_IMPORT_ID = new RegExp(
+  `^${VIRTUAL_PREFIX}${INTLIFY_BUNDLE_IMPORT_ID}$`
+)
+// const RE_RESOURCE_FORMAT = /\.(json5?|ya?ml)$/
+const RE_RESOURCE_FORMAT = /\.(json5?|ya?ml|[c|m]?js)$/
+const RE_SFC_I18N_CUSTOM_BLOCK = /\?vue&type=i18n/
 
 const debug = createDebug(resolveNamespace('resource'))
 
@@ -66,6 +73,15 @@ export function resourcePlugin(
   meta: UnpluginContextMeta
 ): UnpluginOptions {
   const filter = createFilter(include, exclude)
+  function resolveInclude() {
+    if (isArray(include)) {
+      return [...include, RE_SFC_I18N_CUSTOM_BLOCK]
+    } else if (isString(include)) {
+      return [include, RE_SFC_I18N_CUSTOM_BLOCK]
+    } else {
+      return [RE_RESOURCE_FORMAT, RE_SFC_I18N_CUSTOM_BLOCK]
+    }
+  }
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
     return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${
       !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
@@ -144,48 +160,48 @@ export function resourcePlugin(
          */
 
         // json transform handling
-        const jsonPlugin = getVitePlugin(config, 'vite:json')
-        if (jsonPlugin) {
-          // saving `vite:json` plugin instance
-          const orgTransform =
-            'handler' in jsonPlugin.transform!
-              ? jsonPlugin.transform!.handler
-              : jsonPlugin.transform!
+        // const jsonPlugin = getVitePlugin(config, 'vite:json')
+        // if (jsonPlugin) {
+        //   // saving `vite:json` plugin instance
+        //   const orgTransform =
+        //     'handler' in jsonPlugin.transform!
+        //       ? jsonPlugin.transform!.handler
+        //       : jsonPlugin.transform!
 
-          // override json transform
-          async function overrideJson(code: string, id: string) {
-            if (!/\.json$/.test(id) || filter(id)) {
-              return
-            }
+        //   // override json transform
+        //   async function overrideJson(code: string, id: string) {
+        //     if (!/\.json$/.test(id) || filter(id)) {
+        //       return
+        //     }
 
-            /**
-             * NOTE(kazupon):
-             * `vite:json` plugin will be handled if the query generated from the result of parse SFC
-             * with `vite:vue` plugin contains json as follows.
-             * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
-             *
-             * To avoid this, return the result that has already been processed (`enforce: 'pre'`) in the wrapped json plugin.
-             */
-            const { query } = parseVueRequest(id)
-            if (query.vue) {
-              return
-            }
+        //     /**
+        //      * NOTE(kazupon):
+        //      * `vite:json` plugin will be handled if the query generated from the result of parse SFC
+        //      * with `vite:vue` plugin contains json as follows.
+        //      * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
+        //      *
+        //      * To avoid this, return the result that has already been processed (`enforce: 'pre'`) in the wrapped json plugin.
+        //      */
+        //     const { query } = parseVueRequest(id)
+        //     if (query.vue) {
+        //       return
+        //     }
 
-            debug('org json plugin')
-            // @ts-expect-error
-            return orgTransform.apply(this, [code, id])
-          }
+        //     debug('org json plugin')
+        //     // @ts-expect-error
+        //     return orgTransform.apply(this, [code, id])
+        //   }
 
-          /**
-           * NOTE(kazupon):
-           * We need to override the transform function of the `vite:json` plugin for `transform` and `transform.handler`.
-           * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
-           */
-          if ('handler' in jsonPlugin.transform!) {
-            jsonPlugin.transform.handler = overrideJson
-          }
-          jsonPlugin.transform = overrideJson
-        }
+        //   /**
+        //    * NOTE(kazupon):
+        //    * We need to override the transform function of the `vite:json` plugin for `transform` and `transform.handler`.
+        //    * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
+        //    */
+        //   if ('handler' in jsonPlugin.transform!) {
+        //     jsonPlugin.transform.handler = overrideJson
+        //   }
+        //   jsonPlugin.transform = overrideJson
+        // }
 
         /**
          * typescript transform handling
@@ -193,69 +209,69 @@ export function resourcePlugin(
          * NOTE:
          *  Typescript resources are handled using the already existing `vite:esbuild` plugin.
          */
-        const esbuildPlugin = getVitePlugin(config, 'vite:esbuild')
-        if (esbuildPlugin) {
-          const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
-          // @ts-ignore
-          esbuildPlugin.transform = async function (code: string, id: string) {
-            // @ts-expect-error
-            const result = (await orgTransform!.apply(this, [
-              code,
-              id
-            ])) as TransformResult
-            if (result == null) {
-              return result
-            }
+        // const esbuildPlugin = getVitePlugin(config, 'vite:esbuild')
+        // if (esbuildPlugin) {
+        //   const orgTransform = esbuildPlugin.transform // backup @rollup/plugin-json
+        //   // @ts-ignore
+        //   esbuildPlugin.transform = async function (code: string, id: string) {
+        //     // @ts-expect-error
+        //     const result = (await orgTransform!.apply(this, [
+        //       code,
+        //       id
+        //     ])) as TransformResult
+        //     if (result == null) {
+        //       return result
+        //     }
 
-            const { filename, query } = parseVueRequest(id)
-            if (!query.vue && filter(id) && /\.[c|m]?ts$/.test(id)) {
-              const [_code, inSourceMap]: [string, RawSourceMap | undefined] =
-                isString(result)
-                  ? [result, undefined]
-                  : [result.code, result.map as RawSourceMap]
+        //     const { filename, query } = parseVueRequest(id)
+        //     if (!query.vue && filter(id) && /\.[c|m]?ts$/.test(id)) {
+        //       const [_code, inSourceMap]: [string, RawSourceMap | undefined] =
+        //         isString(result)
+        //           ? [result, undefined]
+        //           : [result.code, result.map as RawSourceMap]
 
-              let langInfo = defaultSFCLang
-              langInfo = parsePath(filename)
-                .ext as Required<PluginOptions>['defaultSFCLang']
+        //       let langInfo = defaultSFCLang
+        //       langInfo = parsePath(filename)
+        //         .ext as Required<PluginOptions>['defaultSFCLang']
 
-              const generate = getGenerator(langInfo)
-              const parseOptions = getOptions(
-                filename,
-                isProduction,
-                query as Record<string, unknown>,
-                sourceMap,
-                {
-                  inSourceMap,
-                  isGlobal: globalSFCScope,
-                  allowDynamic,
-                  strictMessage,
-                  escapeHtml,
-                  jit: true,
-                  onlyLocales,
-                  forceStringify
-                }
-              ) as CodeGenOptions
-              debug('parseOptions', parseOptions)
+        //       const generate = getGenerator(langInfo)
+        //       const parseOptions = getOptions(
+        //         filename,
+        //         isProduction,
+        //         query as Record<string, unknown>,
+        //         sourceMap,
+        //         {
+        //           inSourceMap,
+        //           isGlobal: globalSFCScope,
+        //           allowDynamic,
+        //           strictMessage,
+        //           escapeHtml,
+        //           jit: true,
+        //           onlyLocales,
+        //           forceStringify
+        //         }
+        //       ) as CodeGenOptions
+        //       debug('parseOptions', parseOptions)
 
-              const { code: generatedCode, map } = generate(_code, parseOptions)
-              debug('generated code', generatedCode)
-              debug('sourcemap', map, sourceMap)
+        //       const { code: generatedCode, map } = generate(_code, parseOptions)
+        //       debug('generated code', generatedCode)
+        //       debug('sourcemap', map, sourceMap)
 
-              if (_code === generatedCode) return
+        //       if (_code === generatedCode) return
 
-              return {
-                code: generatedCode,
-                map: { mappings: '' }
-              }
-            } else {
-              return result
-            }
-          }
-        }
+        //       return {
+        //         code: generatedCode,
+        //         map: { mappings: '' }
+        //       }
+        //     } else {
+        //       return result
+        //     }
+        //   }
+        // }
       },
 
       async handleHotUpdate({ file, server }) {
-        if (/\.(json5?|ya?ml)$/.test(file)) {
+        if (RE_RESOURCE_FORMAT.test(file)) {
           const module = server.moduleGraph.getModuleById(
             asVirtualId(INTLIFY_BUNDLE_IMPORT_ID, meta.framework)
           )
@@ -310,7 +326,7 @@ export function resourcePlugin(
        */
       if (compiler.options.module) {
         compiler.options.module.rules.push({
-          test: /\.(json5?|ya?ml)$/,
+          test: RE_RESOURCE_FORMAT,
           type: 'javascript/auto',
           include(resource: string) {
             return filter(resource)
@@ -322,13 +338,24 @@ export function resourcePlugin(
       //  HMR for webpack
     },
 
+    /*
     resolveId(id: string, importer: string) {
       debug('resolveId', id, importer)
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
         return asVirtualId(id, meta.framework)
       }
     },
+    */
+    resolveId: {
+      filter: {
+        id: RE_INTLIFY_BUNDLE_IMPORT_ID
+      },
+      handler(id: string) {
+        return asVirtualId(id, meta.framework)
+      }
+    },
 
+    /*
     async load(id: string) {
       debug('load', id)
       if (
@@ -360,7 +387,46 @@ export function resourcePlugin(
         }
       }
     },
+    */
+    load: {
+      filter: {
+        id: RE_VIRTUAL_PREFIXED_INTLIFY_BUNDLE_IMPORT_ID
+      },
+      async handler(id: string) {
+        debug('load', id)
+        if (
+          INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
+          include
+        ) {
+          let resourcePaths = [] as string[]
+          const includePaths = isArray(include) ? include : [include]
+          for (const inc of includePaths) {
+            resourcePaths = [...resourcePaths, ...(await fg(inc))]
+          }
+          resourcePaths = resourcePaths.filter(
+            (el, pos) => resourcePaths.indexOf(el) === pos
+          )
+          const code = await generateBundleResources(
+            resourcePaths,
+            isProduction,
+            {
+              forceStringify,
+              strictMessage,
+              escapeHtml
+            }
+          )
+          // TODO: support virtual import identifier
+          // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
+          return {
+            moduleType: 'js',
+            code,
+            map: { mappings: '' }
+          }
+        }
+      }
+    },
 
+    /*
     transformInclude(id) {
       debug('transformInclude', id)
       if (meta.framework === 'vite') {
@@ -374,7 +440,129 @@ export function resourcePlugin(
         )
       }
     },
+    */
 
+    transform: {
+      filter: {
+        id: {
+          include: resolveInclude(),
+          exclude
+        }
+      },
+      async handler(code: string, id: string) {
+        const { filename, query } = parseVueRequest(id)
+        debug('transform', id, JSON.stringify(query), filename)
+
+        let langInfo = defaultSFCLang
+        let inSourceMap: RawSourceMap | undefined
+
+        if (!query.vue) {
+          langInfo = parsePath(filename)
+            .ext as Required<PluginOptions>['defaultSFCLang']
+
+          const generate = getGenerator(langInfo)
+          const parseOptions = getOptions(
+            filename,
+            isProduction,
+            query as Record<string, unknown>,
+            sourceMap,
+            {
+              inSourceMap,
+              isGlobal: globalSFCScope,
+              allowDynamic,
+              strictMessage,
+              escapeHtml,
+              jit: true,
+              onlyLocales,
+              forceStringify
+            }
+          ) as CodeGenOptions
+          debug('parseOptions', parseOptions)
+
+          const { code: generatedCode, map } = generate(code, parseOptions)
+          debug('generated code', generatedCode)
+          debug('sourcemap', map, sourceMap)
+
+          if (code === generatedCode) return
+
+          return {
+            moduleType: 'js',
+            code: generatedCode,
+            // prettier-ignore
+            map: { mappings: '' }
+          }
+        } else {
+          // for Vue SFC
+          if (isCustomBlock(query)) {
+            if (isString(query.lang)) {
+              langInfo = (
+                query.src
+                  ? query.lang === 'i18n'
+                    ? defaultSFCLang
+                    : query.lang
+                  : query.lang
+              ) as Required<PluginOptions>['defaultSFCLang']
+            } else if (defaultSFCLang) {
+              langInfo = defaultSFCLang
+            }
+            debug('langInfo', langInfo)
+
+            const generate = /\.?json5?/.test(langInfo)
+              ? generateJSON
+              : generateYAML
+
+            const parseOptions = getOptions(
+              filename,
+              isProduction,
+              query as Record<string, unknown>,
+              sourceMap,
+              {
+                inSourceMap,
+                isGlobal: globalSFCScope,
+                jit: true,
+                strictMessage,
+                escapeHtml,
+                onlyLocales,
+                forceStringify
+              }
+            ) as CodeGenOptions
+            debug('parseOptions', parseOptions)
+
+            let source = await getCode(
+              code,
+              filename,
+              sourceMap,
+              query,
+              getSfcParser(),
+              meta.framework
+            )
+
+            if (typeof transformI18nBlock === 'function') {
+              const modifiedSource = transformI18nBlock(source)
+              if (modifiedSource && typeof modifiedSource === 'string') {
+                source = modifiedSource
+              } else {
+                warn('transformI18nBlock should return a string')
+              }
+            }
+
+            const { code: generatedCode, map } = generate(source, parseOptions)
+            debug('generated code', generatedCode)
+            debug('sourcemap', map, sourceMap)
+
+            if (code === generatedCode) return
+
+            return {
+              code: generatedCode,
+              // prettier-ignore
+              map: { mappings: '' }
+            }
+          }
+        }
+      }
+    }
+
+    /*
     async transform(code, id) {
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query), filename)
@@ -490,7 +678,8 @@ export function resourcePlugin(
         }
       }
     }
-  } as UnpluginOptions
+    */
+  } satisfies UnpluginOptions
 }
 
 function getGenerator(ext: string, defaultGen = generateJSON) {

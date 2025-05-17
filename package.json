@@ -70,7 +70,7 @@
     "tiny-glob": "^0.2.9",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.13.0",
-    "vite": "https://pkg.pr.new/vitejs/rolldown-vite@172",
+    "vite": "https://pkg.pr.new/vitejs/rolldown-vite@12e3568",
     "vitest": "^2.1.4",
     "vue": "^3.2.25",
     "vue-i18n": "^11.1.2",
@@ -87,7 +87,10 @@
   "pnpm": {
     "overrides": {
       "rolldown": "https://pkg.pr.new/rolldown@4554"
-    }
+    },
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "license": "MIT",
   "lint-staged": {

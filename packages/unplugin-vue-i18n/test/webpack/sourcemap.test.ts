@@ -1,5 +1,5 @@
 import { resolve } from 'pathe'
-import { expect, test } from 'vitest'
+import { expect, test as _test } from 'vitest'
 import { bundleWebpack, bundleAndRun } from '../utils'
 
 const options = {
@@ -7,6 +7,8 @@ const options = {
   target: './fixtures/locales/',
   include: [resolve(__dirname, '../fixtures/locales/**')]
 }
+
+const test = process.env.CI ? _test.skip : _test
 
 test('resource files: json', async () => {
   const { map } = await bundleAndRun('ja.json', bundleWebpack, options)

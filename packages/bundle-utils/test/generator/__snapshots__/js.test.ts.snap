@@ -214,12 +214,10 @@ exports[`array basic > code 1`] = `
     "resource": {
       "foo": [
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
-          
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})()
         ],
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})(),
-          
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})()
         ]
       ]
     }
@@ -254,14 +252,12 @@ exports[`array mixed > code 1`] = `
             {
               "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})()
             },
-            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hoge"])};fn.source="hoge";return fn;})(),
-            
+            (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hoge"])};fn.source="hoge";return fn;})()
           ]
         ],
         (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["baz"])};fn.source="baz";return fn;})(),
         [
-          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["buz"])};fn.source="buz";return fn;})(),
-          
+          (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["buz"])};fn.source="buz";return fn;})()
         ]
       ]
     }
@@ -295,7 +291,8 @@ exports[`bare > map 1`] = `
 `;
 
 exports[`complex > code 1`] = `
-"const resource = {
+"const val1 = 1
+const resource = {
   "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hi there!"])};fn.source="hi there!";return fn;})(),
   "nested": {
     "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello world!"])};fn.source="hello world!";return fn;})(),
@@ -314,8 +311,7 @@ exports[`complex > code 1`] = `
   "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
   "errors": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
-    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})(),
-    
+    (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})()
   ],
   "complex": {
     "warnings": [
@@ -339,24 +335,24 @@ exports[`complex > map 1`] = `
 `;
 
 exports[`force stringify > code 1`] = `
-"const resource = {
+"const val1 = 'hello'
+const resource = {
   "trueValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["true"])};fn.source="true";return fn;})(),
   "falseValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["false"])};fn.source="false";return fn;})(),
   "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
   "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})(),
-  "funcValue1": function () {
-},
-  "funcValue2": () => {
-},
+  "funcValue1": function(){},
+  "funcValue2": ()=>{},
+  "identifier": val1,
   "items": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})(),
     {
+      "identifier": val1,
       "nullValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["null"])};fn.source="null";return fn;})(),
       "numberValue": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["1"])};fn.source="1";return fn;})(),
       
-    },
-    
+    }
   ]
 }
 export default resource"
@@ -397,8 +393,8 @@ exports[`include function > code 1`] = `
 "const resource = {
   "hello": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["hello"])};fn.source="hello";return fn;})(),
   "pagination": {
-    "pages": ({named}) => \`\${ named('number') }/page\`,
-    "total": ({named}) => \`\${ named('number') } records in total\`
+    "pages": ({named})=>\`\${named('number')}/page\`,
+    "total": ({named})=>\`\${named('number')} records in total\`
   },
   "foo": {
     "bar": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})()
@@ -543,24 +539,24 @@ exports[`simple > map 1`] = `
 `;
 
 exports[`unhandling > code 1`] = `
-"const resource = {
+"const val1 = 'hello'
+const resource = {
   "trueValue": true,
   "falseValue": false,
   "nullValue": null,
   "numberValue": 1,
-  "funcValue1": function () {
-},
-  "funcValue2": () => {
-},
+  "funcValue1": function(){},
+  "funcValue2": ()=>{},
+  "identifier": val1,
   "items": [
     null,
     1,
     {
+      "identifier": val1,
       "nullValue": null,
       "numberValue": 1,
       
-    },
-    
+    }
   ]
 }
 export default resource"

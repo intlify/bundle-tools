@@ -2,7 +2,7 @@
  * Code generator for i18n js resource
  */
 
-import { isString, isBoolean, isNumber } from '@intlify/shared'
+import { isBoolean, isNumber, isString } from '@intlify/shared'
 import { parse as parseJavaScript } from 'acorn'
 import { generate as generateJavaScript } from 'escodegen'
 import { walk } from 'estree-walker'
@@ -13,70 +13,70 @@ import {
   mapLinesColumns
 } from './codegen'
 
-import type { RawSourceMap } from 'source-map-js'
 import type { Node } from 'estree'
+import type { RawSourceMap } from 'source-map-js'
 import type {
-  CodeGenOptions,
   CodeGenerator,
-  CodeGenResult,
-  CodeGenFunction
+  CodeGenFunction,
+  CodeGenOptions,
+  CodeGenResult
 } from './codegen'
+
+export class DynamicResourceError extends Error {}
+
+/**
+ * @internal
+ */
+export const DEFAULT_OPTIONS: CodeGenOptions = {
+  type: 'plain',
+  filename: 'vue-i18n-loader.js',
+  inSourceMap: undefined,
+  locale: '',
+  isGlobal: false,
+  sourceMap: false,
+  env: 'development',
+  forceStringify: false,
+  onError: undefined,
+  onWarn: undefined,
+  strictMessage: true,
+  escapeHtml: false,
+  allowDynamic: false,
+  jit: false
+}
 
 /**
  * @internal
  */
 export function generate(
   targetSource: string | Buffer,
-  {
-    type = 'plain',
-    filename = 'vue-i18n-loader.js',
-    inSourceMap = undefined,
-    locale = '',
-    isGlobal = false,
-    sourceMap = false,
-    env = 'development',
-    forceStringify = false,
-    onError = undefined,
-    strictMessage = true,
-    escapeHtml = false,
-    allowDynamic = false,
-    jit = false
-  }: CodeGenOptions
+  options: CodeGenOptions
 ): CodeGenResult<Node> {
-  const target = Buffer.isBuffer(targetSource)
+  const value = Buffer.isBuffer(targetSource)
     ? targetSource.toString()
     : targetSource
-  const value = target
 
-  const options = {
-    type,
-    source: value,
-    sourceMap,
-    locale,
-    isGlobal,
-    inSourceMap,
-    env,
-    filename,
-    forceStringify,
-    onError,
-    strictMessage,
-    escapeHtml,
-    jit
-  } as CodeGenOptions
-  const generator = createCodeGenerator(options)
-
+  const _options = Object.assign({}, DEFAULT_OPTIONS, options, {
+    source: value
+  })
+  const generator = createCodeGenerator(_options)
   const ast = parseJavaScript(value, {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    sourceFile: filename,
+    sourceFile: _options.filename,
     allowImportExportEverywhere: true
   }) as Node
 
   const exportResult = scanAst(ast)
-  if (!allowDynamic) {
-    // if (!astExportDefaultWithObject.length) {
-    if (!exportResult || exportResult !== 'object') {
+  if (!_options.allowDynamic) {
+    if (!exportResult) {
       throw new Error(
+        `You need to define an object as the locale message with 'export default'.`
+      )
+    }
+
+    if (exportResult !== 'object') {
+      // using custom error to gracefully deal with error in virtual file
+      throw new DynamicResourceError(
         `You need to define an object as the locale message with 'export default'.`
       )
     }
@@ -97,23 +97,17 @@ export function generate(
       return {
         ast,
         code: value,
-        map: inSourceMap
+        map: _options.inSourceMap
       }
     }
   }
 
-  const codeMaps = _generate(generator, ast, options)
+  const codeMaps = _generate(generator, ast, _options)
 
   const { code, map } = generator.context()
-  // if (map) {
-  //   const s = new SourceMapConsumer((map as any).toJSON())
-  //   s.eachMapping(m => {
-  //     console.log('sourcemap json', m)
-  //   })
-  // }
   // prettier-ignore
   const newMap = map
-    ? mapLinesColumns((map as any).toJSON(), codeMaps, inSourceMap) || null  
+    ? mapLinesColumns((map as any).toJSON(), codeMaps, _options.inSourceMap) || null
     : null
   return {
     ast,
@@ -127,22 +121,23 @@ function scanAst(ast: Node) {
     throw new Error('Invalid AST: does not have Program node')
   }
 
-  let ret: false | 'object' | 'function' | 'arrow-function' = false
   for (const node of ast.body) {
-    if (node.type === 'ExportDefaultDeclaration') {
-      if (node.declaration.type === 'ObjectExpression') {
-        ret = 'object'
-        break
-      } else if (node.declaration.type === 'FunctionDeclaration') {
-        ret = 'function'
-        break
-      } else if (node.declaration.type === 'ArrowFunctionExpression') {
-        ret = 'arrow-function'
-        break
-      }
+    if (node.type !== 'ExportDefaultDeclaration') continue
+
+    switch (node.declaration.type) {
+      case 'ObjectExpression':
+        return 'object'
+      case 'FunctionDeclaration':
+        return 'function'
+      case 'ArrowFunctionExpression':
+        return 'arrow-function'
+      // we need to optimize top-level variables to support this
+      // case 'Identifier':
+      //   return 'object'
     }
   }
-  return ret
+
+  return false
 }
 
 function _generate(
@@ -158,11 +153,60 @@ function _generate(
   const codeMaps = new Map<string, RawSourceMap>()
   const { type, sourceMap, isGlobal, locale, jit } = options
 
-  const codegenFn: CodeGenFunction = jit
+  const _codegenFn: CodeGenFunction = jit
     ? generateResourceAst
     : generateMessageFunction
 
+  function codegenFn(value: string) {
+    const { code, map } = _codegenFn(value, options, pathStack)
+    sourceMap && map != null && codeMaps.set(value, map)
+    return code
+  }
+
   const componentNamespace = '_Component'
+  const variableDeclarations: string[] = []
+
+  // slice and reuse imports and top-level variable declarations as-is
+  // NOTE: this prevents optimization/compilation of top-level variables, we may be able to add support for this
+  walk(node, {
+    /**
+     * NOTE:
+     *  force cast to Node of `estree-walker@3.x`,
+     *  because `estree-walker@3.x` is not dual packages,
+     *  so it's support only esm only ...
+     */
+    // @ts-ignore
+    enter(node: Node, _parent) {
+      if (_parent?.type != null) this.skip()
+      switch (node.type) {
+        case 'ExportDefaultDeclaration':
+          this.skip()
+          break
+        case 'ImportDeclaration':
+          // @ts-expect-error mismatching types
+          generator.push(options.source?.slice(node.start, node.end))
+          generator.newline()
+          break
+        case 'VariableDeclaration':
+          // @ts-expect-error mismatching types
+          generator.push(options.source?.slice(node.start, node.end))
+          generator.newline()
+
+          variableDeclarations.push(
+            // @ts-expect-error mismatching types
+            ...node.declarations.map(x => `\`${x.id.name}\``)
+          )
+
+          break
+      }
+    }
+  })
+
+  if (variableDeclarations.length > 0) {
+    options?.onWarn?.(
+      `\nVariable declarations are not optimized - found ${variableDeclarations.join(', ')}`
+    )
+  }
 
   walk(node, {
     /**
@@ -173,174 +217,138 @@ function _generate(
      */
     // @ts-ignore
     enter(node: Node, parent: Node) {
+      // skip imports and top-level variable declarations
+      if (parent?.type === 'Program') {
+        switch (node.type) {
+          case 'ImportDeclaration':
+          case 'VariableDeclaration':
+          case 'VariableDeclarator':
+            this.skip()
+        }
+      } else if (parent?.type === 'ArrayExpression') {
+        const lastIndex = itemsCountStack.length - 1
+        const currentCount = parent.elements.length - itemsCountStack[lastIndex]
+        pathStack.push(currentCount.toString())
+        itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+      } else if (parent?.type === 'ObjectExpression') {
+        const lastIndex = propsCountStack.length - 1
+        propsCountStack[lastIndex] = --propsCountStack[lastIndex]
+      }
+
       switch (node.type) {
         case 'Program':
           if (type === 'plain') {
             generator.push(`const resource = `)
           } else if (type === 'sfc') {
-            // for 'sfc'
-            const variableName =
-              type === 'sfc' ? (!isGlobal ? '__i18n' : '__i18nGlobal') : ''
-            const localeName =
-              type === 'sfc' ? (locale != null ? locale : `""`) : ''
-            const exportSyntax = 'export default'
-            generator.push(`${exportSyntax} function (Component) {`)
+            const localeName = JSON.stringify(locale ?? '""')
+            const variableName = !isGlobal ? '__i18n' : '__i18nGlobal'
+            generator.push(`export default function (Component) {`)
             generator.indent()
-            const componentVariable = `Component`
-            generator.pushline(
-              `const ${componentNamespace} = ${componentVariable}`
-            )
+            generator.pushline(`const ${componentNamespace} = Component`)
             generator.pushline(
               `${componentNamespace}.${variableName} = ${componentNamespace}.${variableName} || []`
             )
             generator.push(`${componentNamespace}.${variableName}.push({`)
             generator.indent()
-            generator.pushline(`"locale": ${JSON.stringify(localeName)},`)
+            generator.pushline(`"locale": ${localeName},`)
             generator.push(`"resource": `)
           }
           break
         case 'ObjectExpression':
-          generator.push(`{`)
+          generator.push('{')
           generator.indent()
           propsCountStack.push(node.properties.length)
-          if (parent != null && parent.type === 'ArrayExpression') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.elements.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
-          }
-          break
-        case 'Property':
-          if (parent != null && parent.type === 'ObjectExpression') {
-            if (node != null) {
-              if (
-                isJSONablePrimitiveLiteral(node.value) &&
-                (node.key.type === 'Literal' || node.key.type === 'Identifier')
-              ) {
-                // prettier-ignore
-                const name = node.key.type === 'Literal'
-                ? String(node.key.value)
-                : node.key.name
-                if (
-                  (node.value.type === 'Literal' &&
-                    isString(node.value.value)) ||
-                  node.value.type === 'TemplateLiteral'
-                ) {
-                  const value = getValue(node.value) as string
-                  generator.push(`${JSON.stringify(name)}: `)
-                  pathStack.push(name)
-                  const { code, map } = codegenFn(value, options, pathStack)
-                  sourceMap && map != null && codeMaps.set(value, map)
-                  generator.push(`${code}`, node.value, value)
-                  skipStack.push(false)
-                } else {
-                  const value = getValue(node.value)
-                  if (forceStringify) {
-                    const strValue = JSON.stringify(value)
-                    generator.push(`${JSON.stringify(name)}: `)
-                    pathStack.push(name)
-                    const { code, map } = codegenFn(
-                      strValue,
-                      options,
-                      pathStack
-                    )
-                    sourceMap && map != null && codeMaps.set(strValue, map)
-                    generator.push(`${code}`, node.value, strValue)
-                  } else {
-                    generator.push(
-                      `${JSON.stringify(name)}: ${JSON.stringify(value)}`
-                    )
-                    pathStack.push(name)
-                  }
-                  skipStack.push(false)
-                }
-              } else if (
-                (node.value.type === 'FunctionExpression' ||
-                  node.value.type === 'ArrowFunctionExpression') &&
-                (node.key.type === 'Literal' || node.key.type === 'Identifier')
-              ) {
-                // prettier-ignore
-                const name = node.key.type === 'Literal'
-                ? String(node.key.value)
-                : node.key.name
-                generator.push(`${JSON.stringify(name)}: `)
-                pathStack.push(name)
-                const code = generateJavaScript(node.value)
-                generator.push(`${code}`, node.value, code)
-                skipStack.push(false)
-              } else if (
-                (node.value.type === 'ObjectExpression' ||
-                  node.value.type === 'ArrayExpression') &&
-                (node.key.type === 'Literal' || node.key.type === 'Identifier')
-              ) {
-                // prettier-ignore
-                const name = node.key.type === 'Literal'
-                ? String(node.key.value)
-                : node.key.name
-                generator.push(`${JSON.stringify(name)}: `)
-                pathStack.push(name)
-              } else {
-                // for Regex, function, etc.
-                skipStack.push(true)
-              }
-            }
-            const lastIndex = propsCountStack.length - 1
-            propsCountStack[lastIndex] = --propsCountStack[lastIndex]
-          }
           break
         case 'ArrayExpression':
-          generator.push(`[`)
+          generator.push('[')
           generator.indent()
-          if (parent != null && parent.type === 'ArrayExpression') {
-            const lastIndex = itemsCountStack.length - 1
-            const currentCount =
-              parent.elements.length - itemsCountStack[lastIndex]
-            pathStack.push(currentCount.toString())
-            itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
-          }
           itemsCountStack.push(node.elements.length)
           break
-        default:
-          if (node != null && parent != null) {
-            if (parent.type === 'ArrayExpression') {
-              const lastIndex = itemsCountStack.length - 1
-              const currentCount =
-                parent.elements.length - itemsCountStack[lastIndex]
-              pathStack.push(currentCount.toString())
-              if (isJSONablePrimitiveLiteral(node)) {
-                if (
-                  (node.type === 'Literal' && isString(node.value)) ||
-                  node.type === 'TemplateLiteral'
-                ) {
-                  const value = getValue(node) as string
-                  const { code, map } = codegenFn(value, options, pathStack)
-                  sourceMap && map != null && codeMaps.set(value, map)
-                  generator.push(`${code}`, node, value)
-                } else {
-                  const value = getValue(node)
-                  if (forceStringify) {
-                    const strValue = JSON.stringify(value)
-                    const { code, map } = codegenFn(
-                      strValue,
-                      options,
-                      pathStack
-                    )
-                    sourceMap && map != null && codeMaps.set(strValue, map)
-                    generator.push(`${code}`, node, strValue)
-                  } else {
-                    generator.push(`${JSON.stringify(value)}`)
-                  }
-                }
-                skipStack.push(false)
-              } else {
-                // for Regex, function, etc.
-                skipStack.push(true)
-              }
-              itemsCountStack[lastIndex] = --itemsCountStack[lastIndex]
+        case 'Property':
+          if (parent?.type !== 'ObjectExpression') break
+          if (node.key.type !== 'Literal' && node.key.type !== 'Identifier')
+            break
+
+          // prettier-ignore
+          const name = node.key.type === 'Literal'
+            ? String(node.key.value)
+            : node.key.name
+          const strName = JSON.stringify(name)
+          if (isJSONablePrimitiveLiteral(node.value)) {
+            generator.push(`${strName}: `)
+            pathStack.push(name)
+            const value = getValue(node.value) as string
+            const strValue = JSON.stringify(value)
+            if (
+              (node.value.type === 'Literal' && isString(node.value.value)) ||
+              node.value.type === 'TemplateLiteral'
+            ) {
+              generator.push(codegenFn(value), node.value, value)
+            } else if (forceStringify) {
+              generator.push(codegenFn(strValue), node.value, strValue)
+            } else {
+              generator.push(strValue)
             }
+            skipStack.push(false)
+          } else if (
+            node.value.type === 'ArrayExpression' ||
+            node.value.type === 'ObjectExpression'
+          ) {
+            generator.push(`${strName}: `)
+            pathStack.push(name)
+            skipStack.push(false)
+          } else if (
+            node.value.type === 'FunctionExpression' ||
+            node.value.type === 'ArrowFunctionExpression'
+          ) {
+            generator.push(`${strName}: `)
+            pathStack.push(name)
+            const code = generateJavaScript(node.value, {
+              format: { compact: true }
+            })
+            generator.push(code, node.value, code)
+            skipStack.push(false)
           } else {
-            // ...
+            const skipProperty = 'regex' in node.value
+            if (!skipProperty && node.type === 'Property') {
+              const identifierName =
+                (node.value.type === 'Identifier' && String(node.value.name)) ||
+                (node.value.type === 'Literal' && String(node.value.value))
+              generator.push(`${strName}: ${identifierName || name}`)
+              skipStack.push(false)
+            } else {
+              // for Regex, function, etc.
+              skipStack.push(true)
+            }
+          }
+          break
+        case 'SpreadElement':
+          const spreadIdentifier =
+            (node.argument.type === 'Identifier' &&
+              String(node.argument.name)) ||
+            (node.argument.type === 'Literal' && String(node.argument.value))
+          generator.push(`...${spreadIdentifier}`)
+          break
+        default:
+          if (parent?.type === 'ArrayExpression') {
+            if (isJSONablePrimitiveLiteral(node)) {
+              const value = getValue(node) as string
+              const strValue = JSON.stringify(value)
+              if (
+                (node.type === 'Literal' && isString(node.value)) ||
+                node.type === 'TemplateLiteral'
+              ) {
+                generator.push(codegenFn(value), node, value)
+              } else if (forceStringify) {
+                generator.push(codegenFn(strValue), node, strValue)
+              } else {
+                generator.push(strValue)
+              }
+              skipStack.push(false)
+            } else {
+              // for Regex, function, etc.
+              skipStack.push(true)
+            }
           }
           break
       }
@@ -355,14 +363,14 @@ function _generate(
     leave(node: Node, parent: Node) {
       switch (node.type) {
         case 'Program':
-          if (type === 'sfc') {
-            generator.deindent()
-            generator.push(`})`)
-            generator.deindent()
-            generator.pushline(`}`)
-          } else if (type === 'plain') {
-            generator.push(`\n`)
+          if (type === 'plain') {
+            generator.push('\n')
             generator.push('export default resource')
+          } else if (type === 'sfc') {
+            generator.deindent()
+            generator.push('})')
+            generator.deindent()
+            generator.pushline('}')
           }
           break
         case 'ObjectExpression':
@@ -371,23 +379,7 @@ function _generate(
             propsCountStack.pop()
           }
           generator.deindent()
-          generator.push(`}`)
-          if (parent != null && parent.type === 'ArrayExpression') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              generator.pushline(`,`)
-            }
-          }
-          break
-        case 'Property':
-          if (parent != null && parent.type === 'ObjectExpression') {
-            if (propsCountStack[propsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              if (!skipStack.pop()) {
-                generator.pushline(`,`)
-              }
-            }
-          }
+          generator.push('}')
           break
         case 'ArrayExpression':
           if (itemsCountStack[itemsCountStack.length - 1] === 0) {
@@ -395,32 +387,23 @@ function _generate(
             itemsCountStack.pop()
           }
           generator.deindent()
-          generator.push(`]`)
-          if (parent != null && parent.type === 'ArrayExpression') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              if (!skipStack.pop()) {
-                generator.pushline(`,`)
-              }
-            }
-          }
-          break
-        case 'Literal':
-          if (parent != null && parent.type === 'ArrayExpression') {
-            if (itemsCountStack[itemsCountStack.length - 1] !== 0) {
-              pathStack.pop()
-              if (!skipStack.pop()) {
-                generator.pushline(`,`)
-              }
-            } else {
-              if (!skipStack.pop()) {
-                generator.pushline(`,`)
-              }
-            }
-          }
+          generator.push(']')
           break
         default:
           break
+      }
+
+      // if not last obj property or array value
+      if (
+        parent?.type === 'ArrayExpression' ||
+        parent?.type === 'ObjectExpression'
+      ) {
+        const stackArr =
+          node.type === 'Property' ? propsCountStack : itemsCountStack
+        if (stackArr[stackArr.length - 1] !== 0) {
+          pathStack.pop()
+          !skipStack.pop() && generator.pushline(',')
+        }
       }
     }
   })

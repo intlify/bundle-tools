@@ -1,22 +1,22 @@
-import { SourceMapGenerator, SourceMapConsumer } from 'source-map-js'
-import {
-  format,
-  escapeHtml as sanitizeHtml,
-  isBoolean,
-  friendlyJSONstringify
-} from '@intlify/shared'
 import {
   baseCompile,
   detectHtmlTag,
   LOCATION_STUB
 } from '@intlify/message-compiler'
+import {
+  format,
+  friendlyJSONstringify,
+  isBoolean,
+  escapeHtml as sanitizeHtml
+} from '@intlify/shared'
+import { SourceMapConsumer, SourceMapGenerator } from 'source-map-js'
 
-import type { RawSourceMap, MappedPosition, MappingItem } from 'source-map-js'
 import type {
   CompileError,
-  ResourceNode,
-  CompileOptions
+  CompileOptions,
+  ResourceNode
 } from '@intlify/message-compiler'
+import type { MappedPosition, MappingItem, RawSourceMap } from 'source-map-js'
 
 /**
  * Compilation dev environments
@@ -25,13 +25,13 @@ import type {
  */
 export type DevEnv = 'development' | 'production'
 
-export interface Position {
+interface Position {
   line: number
   column: number
   offset?: number
 }
 
-export interface SourceLocationable {
+interface SourceLocationable {
   start?: number
   loc?: {
     start: Position
@@ -44,8 +44,6 @@ export interface SourceLocationable {
  */
 export interface CodeGenOptions {
   type?: 'plain' | 'sfc' | 'bare'
-  legacy?: boolean
-  bridge?: boolean
   exportESM?: boolean
   onlyLocales?: string[]
   source?: string
@@ -75,7 +73,7 @@ export interface CodeGenOptions {
   ) => void
 }
 
-export interface CodeGenContext {
+interface CodeGenContext {
   source?: string
   code: string
   indentLevel: number

@@ -60,4 +60,4 @@ jobs:
         run: pnpm build
 
       - name: Testing
-        run: pnpm test
+        run: pnpm test:unit

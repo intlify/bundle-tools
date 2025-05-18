@@ -5,7 +5,7 @@ import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
 import { resolve } from 'pathe'
 import { build } from 'vite'
-import { VueLoaderPlugin } from 'vue-loader'
+import { VueLoaderPlugin } from 'vue-loader17'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
 import vitePlugin from '../src/vite'
@@ -107,7 +107,10 @@ export function bundleWebpack(
   const input = (options.input as string) || './fixtures/entry.js'
   const target = (options.target as string) || './fixtures'
   const include = (options.include as string[]) || [
-    resolve(__dirname, './fixtures/**')
+    resolve(__dirname, './fixtures/*.{json,yaml,yml,json5,js,ts}')
+  ]
+  const exclude = (options.exclude as string[]) || [
+    resolve(__dirname, './fixtures/entry.[jt]s')
   ]
   const sourcemap = isBoolean(options.sourcemap) || true
 
@@ -132,7 +135,7 @@ export function bundleWebpack(
         }
       ]
     },
-    plugins: [new VueLoader(), webpackPlugin({ include, ...options })]
+    plugins: [new VueLoader(), webpackPlugin({ include, exclude, ...options })]
   }
 
   // @ts-ignore
@@ -149,6 +152,7 @@ export function bundleWebpack(
         return reject(err)
       }
       if (stats.hasErrors()) {
+        console.log(stats.toJson().errors)
         return reject(new Error(stats.toJson().errors.join(' | ')))
       }
       resolve({

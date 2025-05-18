@@ -56,7 +56,7 @@ test('js resource', async () => {
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
 
-test.only('ts resource', async () => {
+test('ts resource', async () => {
   const { module } = await bundleAndRun('en-GB.ts', bundleVite, options)
   const fn = compile(module.message, {} as MessageCompilerContext)
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)

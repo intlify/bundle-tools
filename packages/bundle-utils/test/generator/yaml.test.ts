@@ -1,7 +1,6 @@
 import { generate } from '../../src/yaml'
 import { readFile } from '../utils'
 ;['yaml', 'yml'].forEach(format => {
-  // eslint-disable-next-line vitest/valid-title
   test(format, async () => {
     const { source } = await readFile(`./fixtures/codegen/complex.${format}`)
     const { code, map } = generate(source, {

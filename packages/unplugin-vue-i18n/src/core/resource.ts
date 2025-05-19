@@ -1,7 +1,7 @@
 import {
   generateJavaScript,
-  generateTypescript,
   generateJSON,
+  generateTypescript,
   generateYAML
 } from '@intlify/bundle-utils'
 import {
@@ -16,29 +16,14 @@ import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
-import { parse as parsePath } from 'pathe'
+import { parse as parsePath } from 'node:path'
 import { parse } from 'vue/compiler-sfc'
-import {
-  checkVuePlugin,
-  error,
-  getVitePlugin,
-  raiseError,
-  resolveNamespace,
-  warn
-} from '../utils'
+import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
 
-import type {
-  CodeGenOptions,
-  DevEnv,
-  CodeGenResult
-} from '@intlify/bundle-utils'
+import type { CodeGenOptions, CodeGenResult, DevEnv } from '@intlify/bundle-utils'
 import type { RawSourceMap } from 'source-map-js'
-import type {
-  RollupPlugin,
-  UnpluginContextMeta,
-  UnpluginOptions
-} from 'unplugin'
+import type { RollupPlugin, UnpluginContextMeta, UnpluginOptions } from 'unplugin'
 import type { ResolvedOptions } from '../core/options'
 import type { PluginOptions } from '../types'
 import type { VueQuery } from '../vue'
@@ -78,9 +63,7 @@ export function resourcePlugin(
 ): UnpluginOptions {
   function resolveInclude() {
     const customBlockInclude =
-      meta.framework === 'vite'
-        ? RE_SFC_I18N_CUSTOM_BLOCK
-        : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
+      meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
     if (isArray(include)) {
       return [...include, customBlockInclude]
     } else if (isString(include)) {
@@ -154,11 +137,8 @@ export function resourcePlugin(
         }
 
         isProduction = config.isProduction
-        sourceMap =
-          config.command === 'build' ? !!config.build.sourcemap : false
-        debug(
-          `configResolved: isProduction = ${isProduction}, sourceMap = ${sourceMap}`
-        )
+        sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
+        debug(`configResolved: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
       },
 
       async handleHotUpdate({ file, server }) {
@@ -183,11 +163,10 @@ export function resourcePlugin(
         compiler.options.resolve,
         meta.framework
       )
-      ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] =
-        getVueI18nAliasPath({
-          ssr: ssrBuild,
-          runtimeOnly
-        })
+      ;(compiler.options.resolve!.alias as any)[vueI18nAliasName] = getVueI18nAliasPath({
+        ssr: ssrBuild,
+        runtimeOnly
+      })
       debug(
         `set ${vueI18nAliasName}: ${getVueI18nAliasPath({
           ssr: ssrBuild,
@@ -195,7 +174,9 @@ export function resourcePlugin(
         })}`
       )
 
+      // eslint-disable-next-line promise/catch-or-return
       loadWebpack().then(webpack => {
+        // eslint-disable-next-line promise/always-return
         if (webpack) {
           compiler.options.plugins!.push(
             new webpack.DefinePlugin({
@@ -244,27 +225,18 @@ export function resourcePlugin(
       },
       async handler(id: string) {
         debug('load', id)
-        if (
-          INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
-          include
-        ) {
+        if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && include) {
           let resourcePaths = [] as string[]
           const includePaths = isArray(include) ? include : [include]
           for (const inc of includePaths) {
             resourcePaths = [...resourcePaths, ...(await fg(inc))]
           }
-          resourcePaths = resourcePaths.filter(
-            (el, pos) => resourcePaths.indexOf(el) === pos
-          )
-          const code = await generateBundleResources(
-            resourcePaths,
-            isProduction,
-            {
-              forceStringify,
-              strictMessage,
-              escapeHtml
-            }
-          )
+          resourcePaths = resourcePaths.filter((el, pos) => resourcePaths.indexOf(el) === pos)
+          const code = await generateBundleResources(resourcePaths, isProduction, {
+            forceStringify,
+            strictMessage,
+            escapeHtml
+          })
           // TODO: support virtual import identifier
           // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
           return {
@@ -291,8 +263,7 @@ export function resourcePlugin(
         let inSourceMap: RawSourceMap | undefined
 
         if (!query.vue) {
-          langInfo = parsePath(filename)
-            .ext as Required<PluginOptions>['defaultSFCLang']
+          langInfo = parsePath(filename).ext as Required<PluginOptions>['defaultSFCLang']
 
           const generate = getGenerator(langInfo)
           const parseOptions = getOptions(
@@ -313,10 +284,7 @@ export function resourcePlugin(
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
 
-          const { code: generatedCode, map } = await generate(
-            code,
-            parseOptions
-          )
+          const { code: generatedCode, map } = await generate(code, parseOptions)
           debug('generated code', generatedCode)
           debug('sourcemap', map, sourceMap)
 
@@ -333,20 +301,14 @@ export function resourcePlugin(
           if (isCustomBlock(query)) {
             if (isString(query.lang)) {
               langInfo = (
-                query.src
-                  ? query.lang === 'i18n'
-                    ? defaultSFCLang
-                    : query.lang
-                  : query.lang
+                query.src ? (query.lang === 'i18n' ? defaultSFCLang : query.lang) : query.lang
               ) as Required<PluginOptions>['defaultSFCLang']
             } else if (defaultSFCLang) {
               langInfo = defaultSFCLang
             }
             debug('langInfo', langInfo)
 
-            const generate = /\.?json5?/.test(langInfo)
-              ? generateJSON
-              : generateYAML
+            const generate = /\.?json5?/.test(langInfo) ? generateJSON : generateYAML
 
             const parseOptions = getOptions(
               filename,
@@ -487,6 +449,7 @@ async function generateBundleResources(
   for (const res of resources) {
     debug(`${res} bundle loading ...`)
 
+    // eslint-disable-next-line regexp/no-unused-capturing-group
     if (/\.(json5?|ya?ml)$/.test(res)) {
       const { ext, name } = parsePath(res)
       const source = await getRaw(res)
@@ -658,10 +621,7 @@ function getOptions(
   }
 }
 
-function getVirtualId(
-  id: string,
-  framework: UnpluginContextMeta['framework'] = 'vite'
-) {
+function getVirtualId(id: string, framework: UnpluginContextMeta['framework'] = 'vite') {
   // prettier-ignore
   return framework === 'vite'
     ? id.startsWith(VIRTUAL_PREFIX)
@@ -670,10 +630,7 @@ function getVirtualId(
     : id
 }
 
-function asVirtualId(
-  id: string,
-  framework: UnpluginContextMeta['framework'] = 'vite'
-) {
+function asVirtualId(id: string, framework: UnpluginContextMeta['framework'] = 'vite') {
   return framework === 'vite' ? VIRTUAL_PREFIX + id : id
 }
 

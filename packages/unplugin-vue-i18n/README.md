@@ -6,6 +6,8 @@
 
 unplugin for Vue I18n
 
+<!-- eslint-disable markdown/no-missing-label-refs -->
+
 ## 🌟 Features
 
 - i18n resource pre-compilation
@@ -269,7 +271,7 @@ About details, See the [here](https://vue-i18n.intlify.dev/guide/advanced/optimi
 
   A [picomatch](https://github.com/micromatch/picomatch) pattern, or array of patterns, you can specify a path to pre-compile i18n resources files. The extensions of i18n resources to be precompiled are as follows:
 
-  ```
+  ```md
   - json
   - json5
   - yaml
@@ -415,7 +417,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   Whether or not to automatically use Vue I18n **runtime-only** in production build, set `vue-i18n.runtime.esm-bundler.js` in the `vue-i18n` field of bundler config, the below:
 
-  ```
+  ```md
   - vite config: `resolve.alias`
   - webpack config: `resolve.alias`
   ```
@@ -510,7 +512,7 @@ If do you will use this option, you need to enable `jitCompilation` option.
 
   `defaultSFCLang` must have one of the following values:
 
-  ```
+  ```md
   - json
   - json5
   - yaml
@@ -691,3 +693,5 @@ Details changes for each release are documented in the [CHANGELOG.md](https://gi
 ## ©️ License
 
 [MIT](http://opensource.org/licenses/MIT)
+
+<!-- eslint-enable markdown/no-missing-label-refs -->

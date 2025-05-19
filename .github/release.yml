@@ -1,0 +1,45 @@
+changelog:
+  exclude:
+    labels:
+      - ignore-for-release
+    authors:
+      - octocat
+      - renovate[bot]
+  categories:
+    - title: 🌟 Features
+      labels:
+        - feature
+    - title: 🐛 Bug Fixes
+      labels:
+        - bug
+    - title: 💥 Breaking Changes
+      labels:
+        - breaking
+    - title: ⚠️ Deprecated Features
+      labels:
+        - deprecated
+    - title: ⚡ Improvement Features
+      labels:
+        - improvement
+    - title: 🔒 Security Fixes
+      labels:
+        - security
+    - title: 📈 Performance Fixes
+      labels:
+        - performance
+    - title: 📝️ Documentations
+      labels:
+        - documentation
+    - title: 👕 Refactoring
+      labels:
+        - refactoring
+    - title: 🍭 Examples
+      labels:
+        - example
+    - title: 🌐 ♿ Internationalization or Accessibility Fixes
+      labels:
+        - a11y
+        - i18n
+    - title: 🪄 Others
+      labels:
+        - chore

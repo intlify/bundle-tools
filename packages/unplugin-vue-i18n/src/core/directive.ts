@@ -1,39 +1,21 @@
-import path from 'node:path'
-import createDebug from 'debug'
+import eslintUitls from '@eslint-community/eslint-utils'
 import { isBoolean } from '@intlify/shared'
 import { transformVTDirective } from '@intlify/vue-i18n-extensions'
 import { analyze as analyzeScope } from '@typescript-eslint/scope-manager'
-import {
-  parse,
-  simpleTraverse,
-  AST_NODE_TYPES
-} from '@typescript-eslint/typescript-estree'
-// @ts-expect-error -- FIXME: missing types
-import eslintUitls from '@eslint-community/eslint-utils'
-import {
-  resolveNamespace,
-  getVitePlugin,
-  checkVuePlugin,
-  normalizePath
-} from '../utils'
-import { parseVueRequest, getVuePluginOptions, getDescriptor } from '../vue'
+import { AST_NODE_TYPES, parse, simpleTraverse } from '@typescript-eslint/typescript-estree'
+import createDebug from 'debug'
+import path from 'node:path'
+import { checkVuePlugin, getVitePlugin, normalizePath, resolveNamespace } from '../utils'
+import { getDescriptor, getVuePluginOptions, parseVueRequest } from '../vue'
 
 import type { TranslationSignatureResolver } from '@intlify/vue-i18n-extensions'
 import type { Scope } from '@typescript-eslint/scope-manager'
-import {
-  ParserServicesWithTypeInformation,
-  TSESTree
-} from '@typescript-eslint/typescript-estree'
-import type { UnpluginOptions, RollupPlugin } from 'unplugin'
-import type {
-  VuePluginResolvedOptions,
-  TranslationDirectiveResolveIndetifier
-} from '../vue'
+import { ParserServicesWithTypeInformation, TSESTree } from '@typescript-eslint/typescript-estree'
+import type { RollupPlugin, UnpluginOptions } from 'unplugin'
+import type { TranslationDirectiveResolveIndetifier, VuePluginResolvedOptions } from '../vue'
 import type { ResolvedOptions } from './options'
 
-type Node = Parameters<
-  ParserServicesWithTypeInformation['getSymbolAtLocation']
->[0]
+type Node = Parameters<ParserServicesWithTypeInformation['getSymbolAtLocation']>[0]
 
 const debug = createDebug(resolveNamespace('directive'))
 
@@ -117,15 +99,10 @@ function resolveVueOptions(
    * That is analyzing the identifier of the `t` function exposed by `useI18n` in vue-i18n.
    * The analyzed identifier is replaced by the directive transform of the Vue compiler.
    */
-  const translationSignatureResolver: TranslationSignatureResolver = (
-    context,
-    baseResolver
-  ) => {
+  const translationSignatureResolver: TranslationSignatureResolver = (context, baseResolver) => {
     const { filename } = context
     const vuePluginOptions = getVuePluginOptions(vuePlugin)
-    const normalizedFilename = normalizePath(
-      path.relative(vuePluginOptions.root, filename)
-    )
+    const normalizedFilename = normalizePath(path.relative(vuePluginOptions.root, filename))
     const resolveIdentifier = translationIdentifiers.get(normalizedFilename)
     debug('resolved vue-i18n Identifier', resolveIdentifier)
     if (resolveIdentifier == null) {
@@ -143,12 +120,11 @@ function resolveVueOptions(
     }
   }
 
-  vueOptions.template.compilerOptions.directiveTransforms.t =
-    transformVTDirective({
-      translationSignatures: isBoolean(optimizeTranslationDirective)
-        ? translationSignatureResolver
-        : optimizeTranslationDirective
-    })
+  vueOptions.template.compilerOptions.directiveTransforms.t = transformVTDirective({
+    translationSignatures: isBoolean(optimizeTranslationDirective)
+      ? translationSignatureResolver
+      : optimizeTranslationDirective
+  })
 
   return vueOptions
 }
@@ -183,9 +159,7 @@ function analyzeIdentifiers(
   const resolvedIdentifier = getVueI18nIdentifier(scope, importLocalName!)
 
   if (resolvedIdentifier) {
-    const normalizedFilename = normalizePath(
-      path.relative(root, descriptor.filename)
-    )
+    const normalizedFilename = normalizePath(path.relative(root, descriptor.filename))
     debug('set vue-i18n resolved identifier: ', resolvedIdentifier)
     translationIdentifiers.set(normalizedFilename, resolvedIdentifier)
   }
@@ -202,11 +176,7 @@ function getScope(manager: ReturnType<typeof analyzeScope>, node: Node): Scope {
   return manager.scopes[0]
 }
 
-function getImportLocalName(
-  scope: Scope,
-  source: string,
-  imported: string
-): string | null {
+function getImportLocalName(scope: Scope, source: string, imported: string): string | null {
   const importDecl = getImportDeclaration(scope, source)
   if (importDecl) {
     const specifierNode = importDecl.specifiers.find(
@@ -220,6 +190,7 @@ function getImportLocalName(
 }
 
 function getImportDeclaration(scope: Scope, source: string) {
+  // @ts-expect-error -- FIXME: type error
   const tracker = new eslintUitls.ReferenceTracker(scope)
   const traceMap = {
     [source]: {
@@ -227,6 +198,7 @@ function getImportDeclaration(scope: Scope, source: string) {
       [eslintUitls.ReferenceTracker.READ]: true
     }
   }
+  // @ts-expect-error -- FIXME: type error
   const refs = Array.from(tracker.iterateEsmReferences(traceMap)) satisfies {
     path: string
     node: Node
@@ -242,8 +214,7 @@ function isImportedIdentifierInImportClause(
 
 function getVueI18nIdentifier(scope: Scope, local: string) {
   // Get the CallExpression and ReturnStatement needed for analysis from scope.
-  const { callExpression, returnStatement } =
-    getCallExpressionAndReturnStatement(scope, local)
+  const { callExpression, returnStatement } = getCallExpressionAndReturnStatement(scope, local)
 
   // If CallExpression cannot get, `useI18n` will not be called and exit from this function
   if (callExpression == null) {
@@ -285,14 +256,14 @@ function getCallExpressionAndReturnStatement(
       returnStatement: TSESTree.ReturnStatement | null
     }
   | typeof EMPTY_NODE_RETURN {
-  // TODO: missing types (eslint-utils)
+  // @ts-expect-error -- FIXME: type error
   const variable = eslintUitls.findVariable(scope, local)
   if (variable == null) {
     return EMPTY_NODE_RETURN
   }
 
-  // @ts-expect-error -- FIXME: missing types (eslint-utils)
   const callExpressionRef = variable.references.find(ref => {
+    // @ts-expect-error -- FIXME: type error
     return ref.identifier.parent?.type === AST_NODE_TYPES.CallExpression
   })
   if (callExpressionRef == null) {
@@ -303,21 +274,22 @@ function getCallExpressionAndReturnStatement(
   if (
     callExpressionRef.from.type === 'function' &&
     callExpressionRef.from.block.type === AST_NODE_TYPES.FunctionExpression &&
+    // @ts-expect-error -- FIXME: type error
     callExpressionRef.from.block.parent.type === AST_NODE_TYPES.Property &&
-    callExpressionRef.from.block.parent.key.type ===
-      AST_NODE_TYPES.Identifier &&
+    // @ts-expect-error -- FIXME: type error
+    callExpressionRef.from.block.parent.key.type === AST_NODE_TYPES.Identifier &&
+    // @ts-expect-error -- FIXME: type error
     callExpressionRef.from.block.parent.key.name === 'setup'
   ) {
-    returnStatement = callExpressionRef.from.block.body.body.find(
-      (statement: Node) => {
-        return statement.type === AST_NODE_TYPES.ReturnStatement
-      }
-    ) as TSESTree.ReturnStatement | null
+    // @ts-expect-error -- FIXME: type error
+    returnStatement = callExpressionRef.from.block.body.body.find((statement: Node) => {
+      return statement.type === AST_NODE_TYPES.ReturnStatement
+    }) as TSESTree.ReturnStatement | null
   }
 
   return {
-    callExpression: callExpressionRef.identifier
-      .parent as TSESTree.CallExpression,
+    // @ts-expect-error -- FIXME: type error
+    callExpression: callExpressionRef.identifier.parent as TSESTree.CallExpression,
     returnStatement
   }
 }
@@ -334,9 +306,7 @@ type VariableIdPair = {
   value: string | null
 }
 
-function parseVariableId(
-  node: TSESTree.Identifier | TSESTree.ObjectPattern
-): VariableIdPair[] {
+function parseVariableId(node: TSESTree.Identifier | TSESTree.ObjectPattern): VariableIdPair[] {
   if (node.type === AST_NODE_TYPES.Identifier) {
     // Identifier
     // e.g `const i18n = useI18n()`
@@ -363,9 +333,7 @@ function parseVariableId(
   }
 }
 
-function parseReturnStatement(
-  node: TSESTree.ReturnStatement | null
-): VariableIdPair[] {
+function parseReturnStatement(node: TSESTree.ReturnStatement | null): VariableIdPair[] {
   const pairs = [] as VariableIdPair[]
   if (node == null || node.argument == null) {
     return pairs
@@ -429,9 +397,7 @@ function resolveIdentifier(
     // for `setup() {}` hook
     const variable = localVariables.find(pair => pair.key === 't')
     if (variable && variable.value) {
-      const returnVar = returnVariable.find(
-        pair => pair.value === variable.value
-      )
+      const returnVar = returnVariable.find(pair => pair.value === variable.value)
       if (returnVar && returnVar.key) {
         return { type: 'identifier', key: returnVar.key }
       }
@@ -439,9 +405,7 @@ function resolveIdentifier(
     const identifierOnly = localVariables.find(pair => pair.value === null)
     if (identifierOnly && identifierOnly.key) {
       const targetKey = identifierOnly.key
-      const returnVar = returnVariable.find(pair =>
-        pair.value?.startsWith(targetKey)
-      )
+      const returnVar = returnVariable.find(pair => pair.value?.startsWith(targetKey))
       if (returnVar && returnVar.key) {
         return { type: 'object', key: returnVar.key, style: 'setup-hook' }
       }

@@ -1,6 +1,6 @@
-import { resolve } from 'pathe'
-import { expect, test as _test } from 'vitest'
-import { bundleVite, bundleAndRun } from '../utils'
+import { resolve } from 'node:path'
+import { test as _test, expect } from 'vitest'
+import { bundleAndRun, bundleVite } from '../utils'
 /**
  * TODO:
  *  custom blocks source map cannot confirm fully supporting

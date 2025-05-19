@@ -1,4 +1,4 @@
-import type { Page } from 'playwright'
+import type { Page } from 'playwright-core'
 
 export async function getText(
   page: Page,

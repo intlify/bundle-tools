@@ -1,6 +1,5 @@
 {
   "name": "@intlify/unplugin-vue-i18n",
-  "type": "module",
   "version": "6.0.8",
   "description": "unplugin for Vue I18n",
   "author": {
@@ -25,28 +24,37 @@
   },
   "dependencies": {
     "@eslint-community/eslint-utils": "^4.4.0",
-    "@intlify/bundle-utils": "12.0.0-alpha.2",
-    "@intlify/shared": "12.0.0-alpha.2",
+    "@intlify/bundle-utils": "workspace:*",
+    "@intlify/shared": "catalog:intlify",
     "@intlify/vue-i18n-extensions": "^8.0.0",
     "@rollup/pluginutils": "^5.1.0",
     "@typescript-eslint/scope-manager": "^8.13.0",
     "@typescript-eslint/typescript-estree": "^8.13.0",
     "debug": "^4.3.3",
     "fast-glob": "^3.2.12",
-    "js-yaml": "^4.1.0",
-    "json5": "^2.2.3",
-    "pathe": "^1.0.0",
     "picocolors": "^1.0.0",
-    "source-map-js": "^1.0.2",
     "unplugin": "^2.3.4",
-    "vue": "^3.4"
+    "vue": "catalog:vue"
   },
   "devDependencies": {
-    "unbuild": "^3.5.0",
-    "@types/node": "^20.14.8"
+    "@intlify/core-base": "next",
+    "@types/debug": "^4.1.5",
+    "@types/jsdom": "^16.2.5",
+    "@types/memory-fs": "^0.3.2",
+    "@types/node": "catalog:",
+    "@vitejs/plugin-vue": "catalog:vite",
+    "jsdom": "^25.0.1",
+    "memory-fs": "^0.5.0",
+    "source-map-js": "catalog:",
+    "ts-loader": "catalog:webpack",
+    "unbuild": "catalog:",
+    "vite": "catalog:vite",
+    "vue-loader": "catalog:webpack",
+    "webpack": "catalog:webpack",
+    "webpack-merge": "^5.9.0"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "files": [
     "lib",
@@ -100,10 +108,6 @@
     "directory": "packages/unplugin-vue-i18n"
   },
   "scripts": {
-    "build": "unbuild",
-    "clean": "run-p \"clean:*\"",
-    "clean:lib": "rm -rf ./lib",
-    "changelog": "jiti ../../scripts/changelog.ts",
-    "release": "jiti ../../scripts/release.ts"
+    "build": "unbuild"
   }
 }

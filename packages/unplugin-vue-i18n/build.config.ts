@@ -41,10 +41,7 @@ export default defineBuildConfig({
             const content = await readFile(path, 'utf-8')
             await writeFile(
               path,
-              content.replace(
-                `export { ${name} as default };`,
-                `export = ${name};`
-              ),
+              content.replace(`export { ${name} as default };`, `export = ${name};`),
               { encoding: 'utf-8' }
             )
           }

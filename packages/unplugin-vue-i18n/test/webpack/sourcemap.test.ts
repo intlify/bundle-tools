@@ -1,6 +1,6 @@
-import { resolve } from 'pathe'
-import { expect, test as _test } from 'vitest'
-import { bundleWebpack, bundleAndRun } from '../utils'
+import { resolve } from 'node:path'
+import { test as _test, expect } from 'vitest'
+import { bundleAndRun, bundleWebpack } from '../utils'
 
 const options = {
   sourcemap: true,

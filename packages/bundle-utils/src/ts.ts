@@ -16,9 +16,7 @@ export async function generate(
   targetSource: string | Buffer,
   options: CodeGenOptions
 ): Promise<CodeGenResult<Node>> {
-  let value = Buffer.isBuffer(targetSource)
-    ? targetSource.toString()
-    : targetSource
+  let value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
 
   const _options = Object.assign({}, DEFAULT_OPTIONS, options, {
     source: value

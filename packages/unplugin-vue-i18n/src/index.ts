@@ -1,7 +1,7 @@
-import { createUnplugin } from 'unplugin'
 import createDebug from 'debug'
+import { createUnplugin } from 'unplugin'
+import { directivePlugin, resolveOptions, resourcePlugin } from './core'
 import { raiseError, resolveNamespace } from './utils'
-import { resolveOptions, resourcePlugin, directivePlugin } from './core'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
 import type { PluginOptions } from './types'
@@ -10,10 +10,7 @@ const debug = createDebug(resolveNamespace('root'))
 
 export * from './types'
 
-export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
-  options = {},
-  meta
-) => {
+export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (options = {}, meta) => {
   debug('meta framework', meta.framework)
   // check bundler type
   if (!['vite', 'webpack'].includes(meta.framework)) {
@@ -41,4 +38,5 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (
 export const unplugin: UnpluginInstance<PluginOptions | undefined, boolean> =
   /* #__PURE__ */ createUnplugin(unpluginFactory)
 
+/** @alias */
 export default unplugin

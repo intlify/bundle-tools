@@ -4,10 +4,7 @@ export type InstalledPackage = 'vue-i18n' | 'petite-vue-i18n'
 
 const _require = module.createRequire(import.meta.url)
 
-export function checkInstallPackage(
-  pkg: string,
-  debug: Function
-): InstalledPackage {
+export function checkInstallPackage(pkg: string, debug: Function): InstalledPackage {
   let installedVueI18n = false
   try {
     debug(`vue-i18n load path: ${_require.resolve('vue-i18n')}`)
@@ -37,10 +34,7 @@ export function checkInstallPackage(
 
 type VueI18nVersion = '9' | '10' | 'unknown' | ''
 
-export function getVueI18nVersion(
-  debug: Function,
-  pkg = 'vue-i18n'
-): VueI18nVersion {
+export function getVueI18nVersion(debug: Function, pkg = 'vue-i18n'): VueI18nVersion {
   const VueI18n = loadModule(pkg, debug)
   if (VueI18n == null) {
     return ''

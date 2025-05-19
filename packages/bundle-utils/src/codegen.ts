@@ -1,8 +1,4 @@
-import {
-  baseCompile,
-  detectHtmlTag,
-  LOCATION_STUB
-} from '@intlify/message-compiler'
+import { baseCompile, detectHtmlTag, LOCATION_STUB } from '@intlify/message-compiler'
 import {
   format,
   friendlyJSONstringify,
@@ -11,11 +7,7 @@ import {
 } from '@intlify/shared'
 import { SourceMapConsumer, SourceMapGenerator } from 'source-map-js'
 
-import type {
-  CompileError,
-  CompileOptions,
-  ResourceNode
-} from '@intlify/message-compiler'
+import type { CompileError, CompileOptions, ResourceNode } from '@intlify/message-compiler'
 import type { MappedPosition, MappingItem, RawSourceMap } from 'source-map-js'
 
 /**
@@ -88,19 +80,11 @@ interface CodeGenContext {
 
 export interface CodeGenerator {
   context(): CodeGenContext
-  push<Node extends SourceLocationable>(
-    code: string,
-    node?: Node,
-    name?: string
-  ): void
+  push<Node extends SourceLocationable>(code: string, node?: Node, name?: string): void
   indent(withNewLine?: boolean): void
   deindent(withNewLine?: boolean): void
   newline(): void
-  pushline<Node extends SourceLocationable>(
-    code: string,
-    node?: Node,
-    name?: string
-  ): void
+  pushline<Node extends SourceLocationable>(code: string, node?: Node, name?: string): void
 }
 
 export interface CodeGenResult<ASTNode, CodeGenError extends Error = Error> {
@@ -139,11 +123,7 @@ export function createCodeGenerator(
 
   const context = (): CodeGenContext => _context
 
-  function push<Node extends SourceLocationable>(
-    code: string,
-    node?: Node,
-    name?: string
-  ): void {
+  function push<Node extends SourceLocationable>(code: string, node?: Node, name?: string): void {
     _context.code += code
     if (_context.map && node) {
       if (node.loc && node.loc !== LOCATION_STUB) {
@@ -231,9 +211,7 @@ function advancePositionWithSource(
   pos.offset += numberOfCharacters
   pos.line += linesCount
   pos.column =
-    lastNewLinePos === -1
-      ? pos.column + numberOfCharacters
-      : numberOfCharacters - lastNewLinePos
+    lastNewLinePos === -1 ? pos.column + numberOfCharacters : numberOfCharacters - lastNewLinePos
 
   return pos
 }
@@ -251,9 +229,7 @@ export function generateMessageFunction(
   path?: string[]
 ): CodeGenResult<ResourceNode> {
   const env = options.env != null ? options.env : 'development'
-  const strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
+  const strictMessage = isBoolean(options.strictMessage) ? options.strictMessage : true
   const escapeHtml = !!options.escapeHtml
   const onError = options.onError || ON_ERROR_NOOP
   const errors = [] as CompileError[]
@@ -324,7 +300,7 @@ export function mapLinesColumns(
       return
     }
 
-    const map = codeMaps.get(res.name)
+    const map = codeMaps.get(res.name!)
     if (!map) {
       return
     }
@@ -333,7 +309,7 @@ export function mapLinesColumns(
     if (inMapConsumer) {
       inMapOrigin = inMapConsumer.originalPositionFor({
         line: res.originalLine,
-        column: res.originalColumn - 1
+        column: res.originalColumn! - 1
       })
       if (inMapOrigin.source == null) {
         inMapOrigin = null
@@ -346,22 +322,20 @@ export function mapLinesColumns(
       mergedMapGenerator.addMapping({
         original: {
           line: inMapFirstItem
-            ? inMapFirstItem.originalLine + res.originalLine - 2
-            : res.originalLine,
+            ? inMapFirstItem.originalLine! + res.originalLine! - 2
+            : res.originalLine!,
           column: inMapFirstItem
-            ? inMapFirstItem.originalColumn + res.originalColumn
-            : res.originalColumn
+            ? inMapFirstItem.originalColumn! + res.originalColumn!
+            : res.originalColumn!
         },
         generated: {
           line: inMapFirstItem
-            ? inMapFirstItem.generatedLine + res.originalLine - 2
-            : res.originalLine,
+            ? inMapFirstItem.generatedLine + res.originalLine! - 2
+            : res.originalLine!,
           // map column with message format compilation code map
           column: inMapFirstItem
-            ? inMapFirstItem.generatedColumn +
-              res.originalColumn +
-              m.generatedColumn
-            : res.originalColumn + m.generatedColumn
+            ? inMapFirstItem.generatedColumn + res.originalColumn! + m.generatedColumn
+            : res.originalColumn! + m.generatedColumn
         },
         source: inMapOrigin ? inMapOrigin.source : res.source,
         name: m.name // message format compilation code
@@ -381,9 +355,7 @@ export function mapLinesColumns(
     }
   })
 
-  generator._sourceRoot = inSourceMap
-    ? inSourceMap.sourceRoot
-    : resMap.sourceRoot
+  generator._sourceRoot = inSourceMap ? inSourceMap.sourceRoot : resMap.sourceRoot
   generator._file = inSourceMap ? inSourceMap.file : resMap.file
 
   return generator.toJSON()
@@ -395,9 +367,7 @@ export function generateResourceAst(
   path?: string[]
 ): CodeGenResult<ResourceNode> {
   const env = options.env != null ? options.env : 'development'
-  const strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
+  const strictMessage = isBoolean(options.strictMessage) ? options.strictMessage : true
   const escapeHtml = !!options.escapeHtml
   const onError = options.onError || ON_ERROR_NOOP
   const errors = [] as CompileError[]

@@ -1,0 +1,22 @@
+{
+  "name": "webpack-example",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@intlify/unplugin-vue-i18n": "workspace:*",
+    "vue": "catalog:vue",
+    "vue-i18n": "catalog:intlify"
+  },
+  "devDependencies": {
+    "babel-loader": "^8.2.2",
+    "ts-loader": "catalog:webpack",
+    "vue-loader": "catalog:webpack",
+    "webpack": "catalog:webpack",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^4.15.1"
+  },
+  "scripts": {
+    "dev": "webpack serve --config ./webpack.config.mjs",
+    "build": "webpack --config ./webpack.config.mjs"
+  }
+}

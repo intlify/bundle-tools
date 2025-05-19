@@ -1,0 +1,18 @@
+{
+  "name": "vite-example",
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@intlify/unplugin-vue-i18n": "workspace:*",
+    "vue": "catalog:vue",
+    "vue-i18n": "catalog:intlify"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "catalog:vite",
+    "vite": "catalog:vite"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --minify false"
+  }
+}

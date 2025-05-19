@@ -161,13 +161,9 @@ test('default lang and global scope', async () => {
 })
 
 test('global scope and import', async () => {
-  const { module } = await bundleAndRun(
-    'global-scope-import.vue',
-    bundleWebpack,
-    {
-      globalSFCScope: true
-    }
-  )
+  const { module } = await bundleAndRun('global-scope-import.vue', bundleWebpack, {
+    globalSFCScope: true
+  })
   expect(module.__i18nGlobal).toMatchSnapshot()
   const g = module.__i18nGlobal.pop()
   const fn = compile(g.resource.en.hello, {} as MessageCompilerContext)

@@ -9,20 +9,14 @@ export function resolveOptions(options: PluginOptions) {
   // normalize for `options.onlyLocales`
   let onlyLocales: string[] = []
   if (options.onlyLocales) {
-    onlyLocales = isArray(options.onlyLocales)
-      ? options.onlyLocales
-      : [options.onlyLocales]
+    onlyLocales = isArray(options.onlyLocales) ? options.onlyLocales : [options.onlyLocales]
   }
 
   const forceStringify = !!options.forceStringify
-  const defaultSFCLang = isString(options.defaultSFCLang)
-    ? options.defaultSFCLang
-    : 'json'
+  const defaultSFCLang = isString(options.defaultSFCLang) ? options.defaultSFCLang : 'json'
   const globalSFCScope = !!options.globalSFCScope
 
-  const runtimeOnly = isBoolean(options.runtimeOnly)
-    ? options.runtimeOnly
-    : true
+  const runtimeOnly = isBoolean(options.runtimeOnly) ? options.runtimeOnly : true
 
   const dropMessageCompiler = !!options.dropMessageCompiler
 
@@ -44,27 +38,19 @@ export function resolveOptions(options: PluginOptions) {
 
   const allowDynamic = !!options.allowDynamic
 
-  const strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
+  const strictMessage = isBoolean(options.strictMessage) ? options.strictMessage : true
 
   const escapeHtml = !!options.escapeHtml
 
   const optimizeTranslationDirective =
-    isString(options.optimizeTranslationDirective) ||
-    isArray(options.optimizeTranslationDirective)
+    isString(options.optimizeTranslationDirective) || isArray(options.optimizeTranslationDirective)
       ? options.optimizeTranslationDirective
       : !!options.optimizeTranslationDirective
 
-  const translationIdentifiers = new Map<
-    string,
-    TranslationDirectiveResolveIndetifier
-  >()
+  const translationIdentifiers = new Map<string, TranslationDirectiveResolveIndetifier>()
 
   const transformI18nBlock =
-    typeof options.transformI18nBlock === 'function'
-      ? options.transformI18nBlock
-      : null
+    typeof options.transformI18nBlock === 'function' ? options.transformI18nBlock : null
 
   return {
     include: options.include,

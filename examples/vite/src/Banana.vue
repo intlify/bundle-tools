@@ -11,7 +11,7 @@
   <p id="banana">{{ t('fruits.banana', select, { n: select }) }}</p>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 

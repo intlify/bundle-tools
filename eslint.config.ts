@@ -1,13 +1,22 @@
 import {
+  comments,
   defineConfig,
   javascript,
+  jsonc,
+  markdown,
   prettier,
-  typescript
+  promise,
+  regexp,
+  typescript,
+  vitest,
+  yaml
 } from '@kazupon/eslint-config'
+import { globalIgnores } from 'eslint/config'
 import { resolve } from 'node:path'
-import { fileURLToPath } from 'node:url'
 
-const __dirname = fileURLToPath(new URL('.', import.meta.url))
+import type { Linter } from 'eslint'
+
+const __dirname = import.meta.dirname
 
 export default defineConfig(
   javascript(),
@@ -19,29 +28,49 @@ export default defineConfig(
       ]
     }
   }),
+  comments({
+    kazupon: {
+      rules: {
+        '@kazupon/enforce-header-comment': 'off'
+      }
+    }
+  }),
+  promise(),
+  regexp(),
+  jsonc({
+    json: true,
+    json5: true,
+    jsonc: true
+  }),
+  yaml(),
+  markdown(),
+  vitest(),
   prettier(),
   {
-    name: 'ignores',
-    ignores: [
-      'packages/rollup-plugin-vue-i18n/*',
-      'packages/vite-plugin-vue-i18n/*',
-      'packages/vue-i18n-loader/*',
-      'packages/unplugin-vue-i18n/lib/*',
-      'packages/bundle-utils/lib/*',
-      'examples/*',
-      '**/test/fixtures/**',
-      '**/*.config.ts',
-      '**/dist/**',
-      '**/.eslint-config-inspector/**',
-      '**/tsconfig.json',
-      '**/*.yml',
-      '**/*.yaml',
-      '**/*.json',
-      '**/*.json5',
-      '**/*.jsonc',
-      '**/*.vue'
-    ]
+    name: 'docs',
+    files: ['**/*.md/*.ts', '**/*.md/*.js'],
+    rules: {
+      '@typescript-eslint/no-unused-vars': 'off'
+    }
   },
+  globalIgnores([
+    'examples/**',
+    '.unmaintained/**',
+    'packages/**/CHANGELOG.md',
+    '**/*.md/*.ts',
+    '**/test/fixtures/**',
+    '**/*.config.ts',
+    '**/dist/**',
+    '**/lib/**',
+    '**/.eslint-config-inspector/**',
+    '**/tsconfig.json',
+    '**/*.yml',
+    '**/*.yaml',
+    '**/*.json',
+    '**/*.json5',
+    '**/*.jsonc',
+    '**/*.vue'
+  ]) as Linter.Config,
   {
     rules: {
       'no-case-declarations': 'off',

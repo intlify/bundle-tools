@@ -1,7 +1,7 @@
-import { expect, test } from 'vitest'
-import { bundleVite, bundleAndRun } from '../utils'
-import { createMessageContext, isMessageAST, compile } from '@intlify/core-base'
 import type { MessageCompilerContext } from '@intlify/core-base'
+import { compile, createMessageContext, isMessageAST } from '@intlify/core-base'
+import { expect, test } from 'vitest'
+import { bundleAndRun, bundleVite } from '../utils'
 
 test('basic', async () => {
   const { module } = await bundleAndRun('basic.vue', bundleVite)
@@ -49,6 +49,7 @@ test('json: exclude locales when using mixed locales', async () => {
   })
   expect(module.__i18n).toMatchSnapshot()
 
+  // @ts-ignore -- ignore for test
   module.__i18n.forEach(i18n => {
     expect(i18n.resource.ja).toBeUndefined()
     expect(i18n.locale).not.toBe('ja')
@@ -61,6 +62,7 @@ test('yaml: exclude locales when using mixed locales', async () => {
   })
   expect(module.__i18n).toMatchSnapshot()
 
+  // @ts-ignore -- ignore for test
   module.__i18n.forEach(i18n => {
     expect(i18n.resource.ja).toBeUndefined()
     expect(i18n.locale).not.toBe('ja')
@@ -73,6 +75,7 @@ test('json5: exclude locales when using mixed locales', async () => {
   })
   expect(module.__i18n).toMatchSnapshot()
 
+  // @ts-ignore -- ignore for test
   module.__i18n.forEach(i18n => {
     expect(i18n.resource.ja).toBeUndefined()
     expect(i18n.locale).not.toBe('ja')

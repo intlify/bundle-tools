@@ -1,419 +1,463 @@
-
 ## @intlify/bundle-utils@10.0.1 (2025-03-17)
 
 #### :star: Features
-* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+- [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
 
 #### :boom: Breaking Change
-* [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
+
+- [#436](https://github.com/intlify/bundle-tools/pull/436) feat!(unplugin-vue-i18n):support vue-i18n v12 ([@babu-ch](https://github.com/babu-ch))
 
 #### Committers: 1
-- bab ([@babu-ch](https://github.com/babu-ch))
 
+- bab ([@babu-ch](https://github.com/babu-ch))
 
 ## @intlify/bundle-utils@10.0.0 (2024-11-16)
 
 #### :star: Features
-* [#418](https://github.com/intlify/bundle-tools/pull/418) feat!: move packages to ESM first ([@userquin](https://github.com/userquin))
+
+- [#418](https://github.com/intlify/bundle-tools/pull/418) feat!: move packages to ESM first ([@userquin](https://github.com/userquin))
 
 #### Committers: 1
-- Joaquín Sánchez ([@userquin](https://github.com/userquin))
 
+- Joaquín Sánchez ([@userquin](https://github.com/userquin))
 
 ## @intlify/bundle-utils@9.0.0 (2024-07-23)
 
 #### :star: Features
-* [#387](https://github.com/intlify/bundle-tools/pull/387) feat(unplugin-vue-i18n): allow for a custom i18n block transform hook ([@dgautsch](https://github.com/dgautsch))
+
+- [#387](https://github.com/intlify/bundle-tools/pull/387) feat(unplugin-vue-i18n): allow for a custom i18n block transform hook ([@dgautsch](https://github.com/dgautsch))
 
 #### Committers: 1
-- Dan Gautsch ([@dgautsch](https://github.com/dgautsch))
 
+- Dan Gautsch ([@dgautsch](https://github.com/dgautsch))
 
 ## @intlify/bundle-utils@9.0.0 (2024-06-25)
 
 #### :bug: Bug Fixes
-* [#385](https://github.com/intlify/bundle-tools/pull/385) fix: cannot resolve vue-i18n and petite-vue-i18n in monorepo ([@kazupon](https://github.com/kazupon))
+
+- [#385](https://github.com/intlify/bundle-tools/pull/385) fix: cannot resolve vue-i18n and petite-vue-i18n in monorepo ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@9.0.0-beta.0 (2024-05-17)
 
 #### :star: Features
-* [#369](https://github.com/intlify/bundle-tools/pull/369) feat(bundle-utils,unplugin-vue-i18n): pkg option for `getVueI18nVersion` ([@kazupon](https://github.com/kazupon))
+
+- [#369](https://github.com/intlify/bundle-tools/pull/369) feat(bundle-utils,unplugin-vue-i18n): pkg option for `getVueI18nVersion` ([@kazupon](https://github.com/kazupon))
 
 #### :bug: Bug Fixes
-* [#366](https://github.com/intlify/bundle-tools/pull/366) fix(bundle-utils,unplugin-vue-i18n): exclude locales when using mixed locales #329 ([@imslepov](https://github.com/imslepov))
+
+- [#366](https://github.com/intlify/bundle-tools/pull/366) fix(bundle-utils,unplugin-vue-i18n): exclude locales when using mixed locales #329 ([@imslepov](https://github.com/imslepov))
 
 #### :boom: Breaking Change
-* [#367](https://github.com/intlify/bundle-tools/pull/367) breaking(bundle-utils): drop `useClassComponent` option ([@kazupon](https://github.com/kazupon))
-* [#365](https://github.com/intlify/bundle-tools/pull/365) breaking(bundle-utils): drop unnecessary `vueVersion` option ([@kazupon](https://github.com/kazupon))
-* [#363](https://github.com/intlify/bundle-tools/pull/363) breaking(bundle-utils): drop node v18 lower ([@kazupon](https://github.com/kazupon))
+
+- [#367](https://github.com/intlify/bundle-tools/pull/367) breaking(bundle-utils): drop `useClassComponent` option ([@kazupon](https://github.com/kazupon))
+- [#365](https://github.com/intlify/bundle-tools/pull/365) breaking(bundle-utils): drop unnecessary `vueVersion` option ([@kazupon](https://github.com/kazupon))
+- [#363](https://github.com/intlify/bundle-tools/pull/363) breaking(bundle-utils): drop node v18 lower ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 2
+
 - Daniel Slepov ([@imslepov](https://github.com/imslepov))
 - kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
-
 
 ## @intlify/bundle-utils@8.0.0 (2024-03-26)
 
 #### :boom: Breaking Change
-* [#354](https://github.com/intlify/bundle-tools/pull/354) breaking: drop legacy compatible features for Vue 2 ([@kazupon](https://github.com/kazupon))
+
+- [#354](https://github.com/intlify/bundle-tools/pull/354) breaking: drop legacy compatible features for Vue 2 ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@7.5.1 (2024-02-29)
 
 #### :zap: Improvement Features
-* [#348](https://github.com/intlify/bundle-tools/pull/348) fix(bundle-utils): upgrade escodegen ([@kazupon](https://github.com/kazupon))
+
+- [#348](https://github.com/intlify/bundle-tools/pull/348) fix(bundle-utils): upgrade escodegen ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@7.5.0 (2023-12-13)
 
 #### :star: Features
-* [#331](https://github.com/intlify/bundle-tools/pull/331) feat(bundle-utils): support vue 2.7 custom block ([@kazupon](https://github.com/kazupon))
+
+- [#331](https://github.com/intlify/bundle-tools/pull/331) feat(bundle-utils): support vue 2.7 custom block ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@7.4.0 (2023-09-28)
 
 #### :star: Features
-* [#301](https://github.com/intlify/bundle-tools/pull/301) feat(unplugin-vue-i18n): exclude unused locales from the bundle ([@imslepov](https://github.com/imslepov))
+
+- [#301](https://github.com/intlify/bundle-tools/pull/301) feat(unplugin-vue-i18n): exclude unused locales from the bundle ([@imslepov](https://github.com/imslepov))
 
 #### Committers: 1
+
 - Daniel Slepov ([@imslepov](https://github.com/imslepov))
-
-
-
-
-
 
 ## @intlify/bundle-utils@7.1.0 (2023-08-30)
 
 #### :star: Features
-* [#287](https://github.com/intlify/bundle-tools/pull/287) feat(bundle-utils): support AST minify option ([@kazupon](https://github.com/kazupon))
+
+- [#287](https://github.com/intlify/bundle-tools/pull/287) feat(bundle-utils): support AST minify option ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@7.0.2 (2023-07-08)
 
 #### :bug: Bug Fixes
-* [#280](https://github.com/intlify/bundle-tools/pull/280) fix(unplugin-vue-i18n): support esm fully ([@kazupon](https://github.com/kazupon))
+
+- [#280](https://github.com/intlify/bundle-tools/pull/280) fix(unplugin-vue-i18n): support esm fully ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@7.0.1 (2023-07-02)
 
 #### :star: Features
-* [#277](https://github.com/intlify/bundle-tools/pull/277) feat(unplugin-vue-i18n): support jit compilation ([@kazupon](https://github.com/kazupon))
+
+- [#277](https://github.com/intlify/bundle-tools/pull/277) feat(unplugin-vue-i18n): support jit compilation ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@7.0.0 (2023-06-29)
 
 #### :star: Features
-* [#276](https://github.com/intlify/bundle-tools/pull/276) feat(bundle-utils): support AST generation for JIT compilation ([@kazupon](https://github.com/kazupon))
+
+- [#276](https://github.com/intlify/bundle-tools/pull/276) feat(bundle-utils): support AST generation for JIT compilation ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@6.0.1 (2023-05-26)
 
 #### :bug: Bug Fixes
-* [#270](https://github.com/intlify/bundle-tools/pull/270) fix: escape string, when there's a syntax failure ([@kazupon](https://github.com/kazupon))
+
+- [#270](https://github.com/intlify/bundle-tools/pull/270) fix: escape string, when there's a syntax failure ([@kazupon](https://github.com/kazupon))
 
 #### :zap: Improvement Features
-* [#269](https://github.com/intlify/bundle-tools/pull/269) fix(vue-facing-decorator): useClassComponent option ([@rdhainaut](https://github.com/rdhainaut))
+
+- [#269](https://github.com/intlify/bundle-tools/pull/269) fix(vue-facing-decorator): useClassComponent option ([@rdhainaut](https://github.com/rdhainaut))
 
 #### Committers: 2
+
 - kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 - rdhainaut ([@rdhainaut](https://github.com/rdhainaut))
-
 
 ## @intlify/bundle-utils@6.0.0 (2023-03-29)
 
 #### :zap: Improvement Features
-* [#255](https://github.com/intlify/bundle-tools/pull/255) feat(bundle-utils): support esm/cjs dual package ([@kazupon](https://github.com/kazupon))
+
+- [#255](https://github.com/intlify/bundle-tools/pull/255) feat(bundle-utils): support esm/cjs dual package ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.5.0 (2023-03-27)
 
 #### :zap: Improvement Features
-* [#254](https://github.com/intlify/bundle-tools/pull/254) fix(bundle-utils): improve plain code generation ([@kazupon](https://github.com/kazupon))
+
+- [#254](https://github.com/intlify/bundle-tools/pull/254) fix(bundle-utils): improve plain code generation ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.4.0 (2023-03-22)
 
 #### :star: Features
-* [#247](https://github.com/intlify/bundle-tools/pull/247) feat(bundle-utils): support strictly message transform ([@kazupon](https://github.com/kazupon))
+
+- [#247](https://github.com/intlify/bundle-tools/pull/247) feat(bundle-utils): support strictly message transform ([@kazupon](https://github.com/kazupon))
 
 #### :bug: Bug Fixes
-* [#248](https://github.com/intlify/bundle-tools/pull/248) fix(bundle-utils): existing functions not being generated ([@kazupon](https://github.com/kazupon))
+
+- [#248](https://github.com/intlify/bundle-tools/pull/248) fix(bundle-utils): existing functions not being generated ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.3.1 (2023-03-20)
 
 #### :bug: Bug Fixes
-* [#243](https://github.com/intlify/bundle-tools/pull/243) fix(bundle-utils): fallback code generation for SFC ([@kazupon](https://github.com/kazupon))
+
+- [#243](https://github.com/intlify/bundle-tools/pull/243) fix(bundle-utils): fallback code generation for SFC ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.3.0 (2023-03-20)
 
 #### :star: Features
-* [#242](https://github.com/intlify/bundle-tools/pull/242) feat(bundle-utils): support sfc custom block code generation for vue-i18n v8.x legacy options api ([@kazupon](https://github.com/kazupon))
+
+- [#242](https://github.com/intlify/bundle-tools/pull/242) feat(bundle-utils): support sfc custom block code generation for vue-i18n v8.x legacy options api ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
+
 - kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
-
-
-
 
 ## @intlify/bundle-utils@5.1.2 (2023-03-13)
 
 #### :bug: Bug Fixes
-* [#240](https://github.com/intlify/bundle-tools/pull/240) fix(bundle-utils): strictly js / ts syntax checking ([@kazupon](https://github.com/kazupon))
+
+- [#240](https://github.com/intlify/bundle-tools/pull/240) fix(bundle-utils): strictly js / ts syntax checking ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.1.1 (2023-03-13)
 
 #### :zap: Improvement Features
-* [#239](https://github.com/intlify/bundle-tools/pull/239) fix(bundle-utils): remove console logs ([@kazupon](https://github.com/kazupon))
+
+- [#239](https://github.com/intlify/bundle-tools/pull/239) fix(bundle-utils): remove console logs ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.1.0 (2023-03-13)
 
 #### :star: Features
-* [#237](https://github.com/intlify/bundle-tools/pull/237) feat: support allow dynamic resource for js and ts format ([@kazupon](https://github.com/kazupon))
+
+- [#237](https://github.com/intlify/bundle-tools/pull/237) feat: support allow dynamic resource for js and ts format ([@kazupon](https://github.com/kazupon))
 
 #### :zap: Improvement Features
-* [#236](https://github.com/intlify/bundle-tools/pull/236) fix(bundle-utils): switch to acorn ([@kazupon](https://github.com/kazupon))
+
+- [#236](https://github.com/intlify/bundle-tools/pull/236) fix(bundle-utils): switch to acorn ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.0.1 (2023-03-07)
 
 #### :bug: Bug Fixes
-* [#231](https://github.com/intlify/bundle-tools/pull/231) fix(bundle-utils): export js generate API ([@kazupon](https://github.com/kazupon))
+
+- [#231](https://github.com/intlify/bundle-tools/pull/231) fix(bundle-utils): export js generate API ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@5.0.0 (2023-03-07)
 
 #### :star: Features
-* [#230](https://github.com/intlify/bundle-tools/pull/230) feat(bundle-utils): support js resource ([@kazupon](https://github.com/kazupon))
+
+- [#230](https://github.com/intlify/bundle-tools/pull/230) feat(bundle-utils): support js resource ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@4.0.0 (2023-02-08)
 
 #### :zap: Improvement Features
-* [#224](https://github.com/intlify/bundle-tools/pull/224) feat(bundle-utils): support es module ([@kazupon](https://github.com/kazupon))
+
+- [#224](https://github.com/intlify/bundle-tools/pull/224) feat(bundle-utils): support es module ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.4.0 (2022-11-13)
 
 #### :star: Features
-* [#200](https://github.com/intlify/bundle-tools/pull/200) feat!: support getVueI18nVersion API ([@kazupon](https://github.com/kazupon))
+
+- [#200](https://github.com/intlify/bundle-tools/pull/200) feat!: support getVueI18nVersion API ([@kazupon](https://github.com/kazupon))
 
 #### :boom: Breaking Change
-* [#200](https://github.com/intlify/bundle-tools/pull/200) feat!: support getVueI18nVersion API ([@kazupon](https://github.com/kazupon))
+
+- [#200](https://github.com/intlify/bundle-tools/pull/200) feat!: support getVueI18nVersion API ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.3.0 (2022-11-12)
 
 #### :star: Features
-* [#199](https://github.com/intlify/bundle-tools/pull/199) feat(bundle-utils): add `isInstalledVue2` and `isInstalledVue3` APIs ([@kazupon](https://github.com/kazupon))
+
+- [#199](https://github.com/intlify/bundle-tools/pull/199) feat(bundle-utils): add `isInstalledVue2` and `isInstalledVue3` APIs ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.2.1 (2022-09-27)
 
 #### :bug: Bug Fixes
-* [#186](https://github.com/intlify/bundle-tools/pull/186) fix(bundle-utils): export `checkVueI18nBridgeInstallPackage` ([@kazupon](https://github.com/kazupon))
+
+- [#186](https://github.com/intlify/bundle-tools/pull/186) fix(bundle-utils): export `checkVueI18nBridgeInstallPackage` ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.2.0 (2022-09-27)
 
 #### :star: Features
-* [#185](https://github.com/intlify/bundle-tools/pull/185) feat: add vue-i18n-bridge install checking ([@kazupon](https://github.com/kazupon))
+
+- [#185](https://github.com/intlify/bundle-tools/pull/185) feat: add vue-i18n-bridge install checking ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.1.2 (2022-09-19)
 
 #### :zap: Improvement Features
-* [#178](https://github.com/intlify/bundle-tools/pull/178) fix(bundle-utils): improve compile error handling ([@kazupon](https://github.com/kazupon))
+
+- [#178](https://github.com/intlify/bundle-tools/pull/178) fix(bundle-utils): improve compile error handling ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.1.1 (2022-09-19)
 
 #### :bug: Bug Fixes
-* [#177](https://github.com/intlify/bundle-tools/pull/177) fix(bundle-utils): fix wrong error callbacking and error handling improvement ([@kazupon](https://github.com/kazupon))
+
+- [#177](https://github.com/intlify/bundle-tools/pull/177) fix(bundle-utils): fix wrong error callbacking and error handling improvement ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.1.0 (2022-05-06)
 
 #### :zap: Improvement Features
-* [#116](https://github.com/intlify/bundle-tools/pull/116) improvement(bundle-utils): support ESM exporting on bridge ([@kazupon](https://github.com/kazupon))
+
+- [#116](https://github.com/intlify/bundle-tools/pull/116) improvement(bundle-utils): support ESM exporting on bridge ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@3.0.0 (2022-04-05)
 
 #### :star: Features
-* [#101](https://github.com/intlify/bundle-tools/pull/101) feat(bundle-utils): pinned intlify related module next version ([@kazupon](https://github.com/kazupon))
+
+- [#101](https://github.com/intlify/bundle-tools/pull/101) feat(bundle-utils): pinned intlify related module next version ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@2.2.2 (2022-04-05)
 
 #### :zap: Improvement Features
-* [#100](https://github.com/intlify/bundle-tools/pull/100) fix(bundle-utils): pinned latest stable version ([@kazupon](https://github.com/kazupon))
+
+- [#100](https://github.com/intlify/bundle-tools/pull/100) fix(bundle-utils): pinned latest stable version ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@2.2.1 (2022-03-22)
 
 #### :bug: Bug Fixes
-* [#98](https://github.com/intlify/bundle-tools/pull/98) fix(bundle-utils): fix nested array code generation ([@kazupon](https://github.com/kazupon))
+
+- [#98](https://github.com/intlify/bundle-tools/pull/98) fix(bundle-utils): fix nested array code generation ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@2.2.1 (2022-03-22)
 
 #### :bug: Bug Fixes
-* [#98](https://github.com/intlify/bundle-tools/pull/98) fix(bundle-utils): fix nested array code generation ([@kazupon](https://github.com/kazupon))
+
+- [#98](https://github.com/intlify/bundle-tools/pull/98) fix(bundle-utils): fix nested array code generation ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@2.2.0 (2021-12-16)
 
 #### :zap: Improvement Features
-* [#75](https://github.com/intlify/bundle-tools/pull/75) Add vue-class-components support via loader option ([@SniperJoe](https://github.com/SniperJoe))
+
+- [#75](https://github.com/intlify/bundle-tools/pull/75) Add vue-class-components support via loader option ([@SniperJoe](https://github.com/SniperJoe))
 
 #### Committers: 1
-- [@SniperJoe](https://github.com/SniperJoe)
 
+- [@SniperJoe](https://github.com/SniperJoe)
 
 ## @intlify/bundle-utils@2.1.0 (2021-11-10)
 
 #### :zap: Improvement Features
-* [#67](https://github.com/intlify/bundle-tools/pull/67) fix: add vite and vue-i18n as peerDependencies ([@AlexandreBonaventure](https://github.com/AlexandreBonaventure))
+
+- [#67](https://github.com/intlify/bundle-tools/pull/67) fix: add vite and vue-i18n as peerDependencies ([@AlexandreBonaventure](https://github.com/AlexandreBonaventure))
 
 #### Committers: 1
-- Alexandre Bonaventure Geissmann ([@AlexandreBonaventure](https://github.com/AlexandreBonaventure))
 
+- Alexandre Bonaventure Geissmann ([@AlexandreBonaventure](https://github.com/AlexandreBonaventure))
 
 ## @intlify/bundle-utils@2.0.0 (2021-10-24)
 
 #### :star: Features
-* [#60](https://github.com/intlify/bundle-tools/pull/60) feat: change to intlify beta related deps ([@kazupon](https://github.com/kazupon))
+
+- [#60](https://github.com/intlify/bundle-tools/pull/60) feat: change to intlify beta related deps ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@1.0.0 (2021-10-24)
 
 #### :star: Features
-* [#56](https://github.com/intlify/bundle-tools/pull/56) feat: bump to major version ([@kazupon](https://github.com/kazupon))
+
+- [#56](https://github.com/intlify/bundle-tools/pull/56) feat: bump to major version ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@0.3.0 (2021-09-29)
 
 #### :star: Features
-* [#47](https://github.com/intlify/bundle-tools/pull/47) feat: support vue i18n bridge ([@kazupon](https://github.com/kazupon))
+
+- [#47](https://github.com/intlify/bundle-tools/pull/47) feat: support vue i18n bridge ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@0.2.0 (2021-07-26)
 
 #### :star: Features
-* [#36](https://github.com/intlify/bundle-tools/pull/36) add install package checking ([@kazupon](https://github.com/kazupon))
+
+- [#36](https://github.com/intlify/bundle-tools/pull/36) add install package checking ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
-- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
+- kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## @intlify/bundle-utils@0.1.0 (2021-07-12)
 
 #### :star: Features
-* [#26](https://github.com/intlify/bundle-tools/pull/26) feat: bundle-utils basic implementation ([@kazupon](https://github.com/kazupon))
+
+- [#26](https://github.com/intlify/bundle-tools/pull/26) feat: bundle-utils basic implementation ([@kazupon](https://github.com/kazupon))
 
 #### Committers: 1
+
 - kazuya kawaguchi ([@kazupon](https://github.com/kazupon))
 
 ## v0.0.0 (2021-07-13)

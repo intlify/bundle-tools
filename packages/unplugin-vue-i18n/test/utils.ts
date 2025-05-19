@@ -3,9 +3,9 @@ import vue from '@vitejs/plugin-vue'
 import fg from 'fast-glob'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
-import { resolve } from 'pathe'
+import { resolve } from 'node:path'
 import { build } from 'vite'
-import { VueLoaderPlugin } from 'vue-loader17'
+import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
 import vitePlugin from '../src/vite'
@@ -22,10 +22,7 @@ type BundleResolve = {
   stats?: webpack.Stats
 }
 
-type BundleFunction = (
-  fixture: string,
-  options: Record<string, unknown>
-) => Promise<BundleResolve>
+type BundleFunction = (fixture: string, options: Record<string, unknown>) => Promise<BundleResolve>
 
 export async function bundleVite(
   fixture: string,
@@ -33,17 +30,13 @@ export async function bundleVite(
 ): Promise<BundleResolve> {
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
-  const include = (options.include as string[]) || [
-    resolve(__dirname, './fixtures/locales/**')
-  ]
+  const include = (options.include as string[]) || [resolve(__dirname, './fixtures/locales/**')]
   const silent = isBoolean(options.silent)
     ? options.silent === false
       ? 'info'
       : 'silent'
     : 'silent'
-  options.strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
+  options.strictMessage = isBoolean(options.strictMessage) ? options.strictMessage : true
   options.escapeHtml = !!options.escapeHtml
   options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
@@ -98,20 +91,14 @@ export function bundleWebpack(
   fixture: string,
   options: Record<string, unknown> = {}
 ): Promise<BundleResolve> {
-  const VueLoader = (
-    options.vueLoader ? options.vueLoader : VueLoaderPlugin
-  ) as any
-  const vueLoaderPath = (
-    options.vueLoaderPath ? options.vueLoaderPath : 'vue-loader'
-  ) as string
+  const VueLoader = (options.vueLoader ? options.vueLoader : VueLoaderPlugin) as any
+  const vueLoaderPath = (options.vueLoaderPath ? options.vueLoaderPath : 'vue-loader') as string
   const input = (options.input as string) || './fixtures/entry.js'
   const target = (options.target as string) || './fixtures'
   const include = (options.include as string[]) || [
     resolve(__dirname, './fixtures/*.{json,yaml,yml,json5,js,ts}')
   ]
-  const exclude = (options.exclude as string[]) || [
-    resolve(__dirname, './fixtures/entry.[jt]s')
-  ]
+  const exclude = (options.exclude as string[]) || [resolve(__dirname, './fixtures/entry.[jt]s')]
   const sourcemap = isBoolean(options.sourcemap) || true
 
   const baseConfig: webpack.Configuration = {
@@ -144,6 +131,7 @@ export function bundleWebpack(
   const compiler = webpack(config)
 
   const mfs = new memoryfs()
+  // @ts-expect-error -- FIXME: type error
   compiler.outputFileSystem = mfs
 
   return new Promise((resolve, reject) => {
@@ -173,19 +161,13 @@ export async function bundleAndRun(
   options.defaultSFCLang = isString(options.defaultSFCLang)
     ? (options.defaultSFCLang as PluginOptions['defaultSFCLang'])
     : undefined
-  options.globalSFCScope = isBoolean(options.globalSFCScope)
-    ? options.globalSFCScope
-    : undefined
+  options.globalSFCScope = isBoolean(options.globalSFCScope) ? options.globalSFCScope : undefined
   options.sourcemap = isBoolean(options.sourcemap) || false
   options.bridge = isBoolean(options.bridge) || false
   options.legacy = isBoolean(options.legacy) || false
-  options.vueVersion = isString(options.vueVersion)
-    ? options.vueVersion
-    : 'v2.6'
+  options.vueVersion = isString(options.vueVersion) ? options.vueVersion : 'v2.6'
   options.allowDynamic = isBoolean(options.allowDynamic) || false
-  options.strictMessage = isBoolean(options.strictMessage)
-    ? options.strictMessage
-    : true
+  options.strictMessage = isBoolean(options.strictMessage) ? options.strictMessage : true
   options.escapeHtml = !!options.escapeHtml
   options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 

@@ -1,12 +1,14 @@
-const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
-const VueI18nPlugin = require('../../packages/unplugin-vue-i18n/lib/webpack.cjs')
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/webpack'
+import { dirname, join, resolve } from 'node:path'
+import { fileURLToPath } from 'node:url'
+import { VueLoaderPlugin } from 'vue-loader'
+
+const __filename = fileURLToPath(import.meta.url)
+const __dirname = dirname(__filename)
 
 function transformI18nBlock(source) {
   const sourceCopy = source
-  const block = JSON.parse(
-    sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']')
-  )
+  const block = JSON.parse(sourceCopy.replace(/[\n\s]/g, '').replace(/,\]$/, ']'))
   if (Array.isArray(block)) {
     const transformedBlock = JSON.stringify({
       en: {
@@ -23,30 +25,30 @@ function transformI18nBlock(source) {
   return source
 }
 
-module.exports = {
+export default {
   mode: 'development',
   devtool: 'source-map',
-  entry: path.resolve(__dirname, './src/main.js'),
+  entry: resolve(__dirname, './src/main.js'),
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: resolve(__dirname, 'dist'),
     filename: '[name].js',
     publicPath: '/dist/'
   },
-  resolve: {
-    alias: {
-      vue: path.resolve(
-        __dirname,
-        '../../node_modules/vue/dist/vue.esm-bundler.js'
-      )
-    }
-  },
   devServer: {
     static: {
-      directory: path.join(__dirname, './')
+      directory: join(__dirname, './')
     }
   },
   module: {
     rules: [
+      {
+        test: /\.tsx?$/,
+        loader: 'ts-loader',
+        exclude: /node_modules/,
+        options: {
+          transpileOnly: true
+        }
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader'
@@ -60,7 +62,8 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     VueI18nPlugin({
-      include: [path.resolve(__dirname, './src/locales/**')],
+      include: [resolve(__dirname, './src/locales/*.{json,yaml,yml,json5,jsonc}')],
+      // include: [/\.json$/],
       transformI18nBlock: transformI18nBlock
     })
   ]

@@ -9,11 +9,10 @@ export async function startServer(): Promise<ServerContext> {
   const host = '127.0.0.1'
   const port = await getRandomPort(host)
 
-  const serverProcess = spawn(
-    'pnpm',
-    ['play:vite', '--port', String(port), '--host', host],
-    { stdio: 'inherit', env: { ...process.env } }
-  )
+  const serverProcess = spawn('pnpm', ['play:vite', '--port', String(port), '--host', host], {
+    stdio: 'inherit',
+    env: { ...process.env }
+  })
 
   await waitForPort(port, { retries: 32, host })
 

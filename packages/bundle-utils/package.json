@@ -1,6 +1,5 @@
 {
   "name": "@intlify/bundle-utils",
-  "type": "module",
   "description": "Bundle utilities for Intlify project",
   "version": "10.0.1",
   "author": {
@@ -19,27 +18,26 @@
     }
   },
   "dependencies": {
-    "@intlify/message-compiler": "^11.1.2",
-    "@intlify/shared": "^11.1.2",
+    "@intlify/message-compiler": "catalog:intlify",
+    "@intlify/shared": "catalog:intlify",
     "acorn": "^8.8.2",
     "esbuild": "^0.25.4",
     "escodegen": "^2.1.0",
     "estree-walker": "^2.0.2",
     "jsonc-eslint-parser": "^2.3.0",
-    "source-map-js": "^1.0.1",
+    "source-map-js": "catalog:",
     "yaml-eslint-parser": "^1.2.2"
   },
   "devDependencies": {
     "@types/escodegen": "^0.0.10",
     "@types/estree": "^1.0.0",
-    "unbuild": "^2.0.0"
+    "unbuild": "catalog:"
   },
   "engines": {
-    "node": ">= 18"
+    "node": ">= 20"
   },
   "files": [
-    "lib",
-    "index.mjs"
+    "lib"
   ],
   "homepage": "https://github.com/intlify/bundle-tools/blob/main/packages/bundle-utils/README.md",
   "license": "MIT",
@@ -60,10 +58,6 @@
     "directory": "packages/bundle-utils"
   },
   "scripts": {
-    "build": "unbuild",
-    "clean": "run-p \"clean:*\"",
-    "clean:lib": "rm -rf ./lib",
-    "changelog": "jiti ../../scripts/changelog.ts",
-    "release": "jiti ../../scripts/release.ts"
+    "build": "unbuild"
   }
 }

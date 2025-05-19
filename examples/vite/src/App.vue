@@ -7,12 +7,11 @@
     </select>
   </form>
   <p id="msg">{{ t('hello') }}</p>
-  <p id="custom-directive" v-t="'hi'"></p>
   <Banana />
   <Apple />
 </template>
 
-<script>
+<script lang="ts">
 import { useI18n } from 'vue-i18n'
 import Apple from './Apple.vue'
 import Banana from './Banana.vue'

@@ -27,9 +27,7 @@ export type VuePluginResolvedOptions = {
   >
 }
 
-export function getVuePluginOptions(
-  vuePlugin: RollupPlugin
-): VuePluginResolvedOptions {
+export function getVuePluginOptions(vuePlugin: RollupPlugin): VuePluginResolvedOptions {
   return {
     isProduction: vuePlugin?.api?.options.isProduction,
     root: vuePlugin?.api?.options.root,

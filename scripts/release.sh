@@ -20,7 +20,7 @@ fi
 for PKG in packages/* ; do
   if [[ -d $PKG ]]; then
     pushd $PKG
-    TAG="v11"
+    TAG="beta"
     echo "⚡ Publishing $PKG with tag $TAG"
     pnpm publish --access public --no-git-checks --tag $TAG
     popd > /dev/null

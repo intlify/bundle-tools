@@ -14,6 +14,7 @@
     "@kazupon/eslint-config": "^0.29.0",
     "@kazupon/prettier-config": "^0.1.1",
     "@types/node": "catalog:",
+    "@vitest/eslint-plugin": "^1.2.0",
     "bumpp": "^10.1.1",
     "eslint": "^9.27.0",
     "eslint-config-prettier": "^10.1.5",

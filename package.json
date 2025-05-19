@@ -70,7 +70,7 @@
     "tiny-glob": "^0.2.9",
     "typescript": "^5.6.3",
     "typescript-eslint": "^8.13.0",
-    "vite": "^5.4.10",
+    "vite": "https://pkg.pr.new/vitejs/rolldown-vite@12e3568",
     "vitest": "^2.1.4",
     "vue": "^3.2.25",
     "vue-i18n": "^11.1.2",
@@ -79,10 +79,18 @@
     "vue-loader17": "npm:vue-loader@17.4.2",
     "vue-template-compiler": "^2.6.14",
     "vue2": "npm:vue@^2.6.14",
-    "webpack": "^5.88.2",
+    "webpack": "^5.99.8",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpack-merge": "^5.9.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "rolldown": "https://pkg.pr.new/rolldown@4554"
+    },
+    "onlyBuiltDependencies": [
+      "esbuild"
+    ]
   },
   "license": "MIT",
   "lint-staged": {
@@ -150,5 +158,5 @@
     "release:webpack": "pnpm --filter @intlify/vue-i18n-loader release",
     "release:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n release"
   },
-  "packageManager": "pnpm@9.15.1"
+  "packageManager": "pnpm@10.10.0"
 }

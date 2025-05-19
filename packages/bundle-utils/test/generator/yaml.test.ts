@@ -1,5 +1,5 @@
-import { readFile } from '../utils'
 import { generate } from '../../src/yaml'
+import { readFile } from '../utils'
 ;['yaml', 'yml'].forEach(format => {
   test(format, async () => {
     const { source } = await readFile(`./fixtures/codegen/complex.${format}`)

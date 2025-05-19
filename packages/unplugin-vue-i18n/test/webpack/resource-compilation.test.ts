@@ -42,3 +42,10 @@ test('yml resource', async () => {
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
+
+test('ts resource', async () => {
+  const { module } = await bundleAndRun('en-GB.ts', bundleWebpack, options)
+  const fn = compile(module.message, {} as MessageCompilerContext)
+  // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
+  expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
+})

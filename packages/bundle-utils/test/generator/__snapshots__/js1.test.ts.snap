@@ -1,11 +1,14 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
 exports[`import > code 1`] = `
-"const resource = {
-  \\"foo\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"foo\\"])};fn.source=\\"foo\\";return fn;})(),
-  \\"nest\\": {
-    \\"bar\\": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize([\\"bar\\"])};fn.source=\\"bar\\";return fn;})(),
-    
+"import mod1 from './module1'
+import { mod2 } from './module2'
+const resource = {
+  "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})(),
+  "mod1": mod1,
+  "nest": {
+    "bar": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
+    "mod2": mod2
   }
 }
 export default resource"

@@ -1,4 +1,3 @@
-import { normalize } from 'pathe'
 import { isString, isBoolean, isArray } from '@intlify/shared'
 
 import type { PluginOptions } from '../types'
@@ -13,19 +12,6 @@ export function resolveOptions(options: PluginOptions) {
     onlyLocales = isArray(options.onlyLocales)
       ? options.onlyLocales
       : [options.onlyLocales]
-  }
-
-  // normalize for `options.include`
-  let include = options.include
-  let exclude = undefined
-  if (include) {
-    if (isArray(include)) {
-      include = include.map(item => normalize(item))
-    } else if (isString(include)) {
-      include = normalize(include)
-    }
-  } else {
-    exclude = '**/**'
   }
 
   const forceStringify = !!options.forceStringify
@@ -81,8 +67,8 @@ export function resolveOptions(options: PluginOptions) {
       : null
 
   return {
-    include,
-    exclude,
+    include: options.include,
+    exclude: options.exclude,
     module: moduleType,
     onlyLocales,
     forceStringify,

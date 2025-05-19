@@ -10,6 +10,7 @@
   },
   "type": "module",
   "devDependencies": {
+    "@eslint/markdown": "^6.4.0",
     "@kazupon/eslint-config": "^0.29.0",
     "@kazupon/prettier-config": "^0.1.1",
     "@types/node": "catalog:",

@@ -23,7 +23,7 @@ type BundleResolve = {
   stats?: webpack.Stats
 }
 
-export type ViteBulderType = 'rollup' | 'rolldown'
+type ViteBulderType = 'rollup' | 'rolldown'
 
 type BundleFunction = (
   fixture: string,

@@ -17,6 +17,7 @@ import createDebug from 'debug'
 import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
 import { parse as parsePath } from 'node:path'
+import { normalize } from 'pathe'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
@@ -27,6 +28,10 @@ import type { RollupPlugin, UnpluginContextMeta, UnpluginOptions } from 'unplugi
 import type { ResolvedOptions } from '../core/options'
 import type { PluginOptions } from '../types'
 import type { VueQuery } from '../vue'
+
+type ViteCompaibleModule = {
+  rolldownVersion?: boolean
+}
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
@@ -61,6 +66,20 @@ export function resourcePlugin(
   }: ResolvedOptions,
   meta: UnpluginContextMeta
 ): UnpluginOptions {
+  let viteModule: ViteCompaibleModule | null = null
+  async function getViteModule() {
+    if (viteModule != null) {
+      return viteModule
+    }
+    try {
+      viteModule = (await import('vite')) as unknown as ViteCompaibleModule
+    } catch (e) {
+      error(`vite not found, please install vite.`, (e as Error).message)
+      throw e
+    }
+    return viteModule
+  }
+
   function resolveInclude() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
@@ -72,11 +91,45 @@ export function resourcePlugin(
       return [RE_RESOURCE_FORMAT, customBlockInclude]
     }
   }
-  const filter = createFilter(resolveInclude(), exclude)
+
+  // const filter = createFilter(resolveInclude(), exclude)
+  let _filter: ReturnType<typeof createFilter> | null = null
+  async function getFilter(): Promise<ReturnType<typeof createFilter>> {
+    if (_filter != null) {
+      return _filter
+    }
+
+    if (meta.framework == 'webpack') {
+      _filter = createFilter(resolveInclude(), exclude)
+    } else {
+      const viteModule = await getViteModule()
+      if (viteModule.rolldownVersion) {
+        debug('Using filter for rolldown-vite')
+        _filter = createFilter(resolveInclude(), exclude)
+      } else {
+        debug('Using filter for rollup-vite')
+        const customBlockInclude =
+          meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
+        let _include: string | (string | RegExp)[] | undefined = undefined
+        let _exclude: string | (string | RegExp)[] | undefined = undefined
+        if (include) {
+          if (isArray(include)) {
+            _include = [...include.map(item => normalize(item)), customBlockInclude]
+          } else if (isString(include)) {
+            _include = [normalize(include), customBlockInclude]
+          }
+        } else {
+          _exclude = '**/**'
+        }
+        _filter = createFilter(_include, _exclude)
+      }
+    }
+
+    return _filter
+  }
+
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
-    return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${
-      !ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'
-    }`
+    return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${!ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'}`
   }
   let isProduction = false
   let sourceMap = false
@@ -99,7 +152,7 @@ export function resourcePlugin(
      * For vite, If we have json (including SFC's custom block),
      * transform it first because it will be transformed into javascript code by `vite:json` plugin.
      *
-     * For webpack, This plugin will handle with ‘post’, because vue-loader generate the request query.
+     * For webpack, This plugin will handle with 'post', because vue-loader generate the request query.
      */
     enforce: meta.framework === 'vite' ? 'pre' : 'post',
 
@@ -130,7 +183,7 @@ export function resourcePlugin(
         return assign(defineConfig, aliasConfig)
       },
 
-      configResolved(config) {
+      async configResolved(config) {
         vuePlugin = getVitePlugin(config, 'vite:vue')
         if (!checkVuePlugin(vuePlugin)) {
           return
@@ -139,6 +192,64 @@ export function resourcePlugin(
         isProduction = config.isProduction
         sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
         debug(`configResolved: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
+
+        // Check if we're using rolldown-vite
+        const isRolldownVite = !!(await getViteModule()).rolldownVersion
+        debug(`Using ${isRolldownVite ? 'rolldown-vite' : 'vite'} for the build`)
+
+        /**
+         * NOTE(kazupon):
+         * For the native rolldown plugin, we need to change to another solution from the current workaround.
+         * Currently, the rolldown team and vite team are discussing this issue.
+         * https://github.com/vitejs/rolldown-vite/issues/120
+         */
+
+        // json transform handling for normal Vite (not rolldown-vite)
+        if (!isRolldownVite) {
+          const jsonPlugin = getVitePlugin(config, 'vite:json')
+          if (jsonPlugin) {
+            // saving `vite:json` plugin instance
+            const orgTransform =
+              'handler' in jsonPlugin.transform!
+                ? jsonPlugin.transform!.handler
+                : jsonPlugin.transform!
+
+            // override json transform
+            async function overrideJson(code: string, id: string) {
+              const filter = await getFilter()
+              if (!/\.json$/.test(id) || filter(id)) {
+                return
+              }
+
+              /**
+               * NOTE(kazupon):
+               * `vite:json` plugin will be handled if the query generated from the result of parse SFC
+               * with `vite:vue` plugin contains json as follows.
+               * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
+               *
+               * To avoid this, return the result that has already been processed (`enforce: 'pre'`) in the wrapped json plugin.
+               */
+              const { query } = parseVueRequest(id)
+              if (query.vue) {
+                return
+              }
+
+              debug('org json plugin')
+              // @ts-expect-error
+              return orgTransform.apply(this, [code, id])
+            }
+
+            /**
+             * NOTE(kazupon):
+             * We need to override the transform function of the `vite:json` plugin for `transform` and `transform.handler`.
+             * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
+             */
+            jsonPlugin.transform = overrideJson
+            if ('handler' in jsonPlugin.transform!) {
+              jsonPlugin.transform.handler = overrideJson
+            }
+          }
+        }
       },
 
       async handleHotUpdate({ file, server }) {
@@ -174,33 +285,27 @@ export function resourcePlugin(
         })}`
       )
 
-      // eslint-disable-next-line promise/catch-or-return
-      loadWebpack().then(webpack => {
-        // eslint-disable-next-line promise/always-return
-        if (webpack) {
-          compiler.options.plugins!.push(
-            new webpack.DefinePlugin({
-              __VUE_I18N_LEGACY_API__: JSON.stringify(compositionOnly),
-              __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
-              __INTLIFY_PROD_DEVTOOLS__: 'false'
-            })
-          )
-          debug(`set __VUE_I18N_LEGACY_API__ is '${compositionOnly}'`)
-          debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
-        } else {
-          debug('ignore vue-i18n feature flags with webpack.DefinePlugin')
-        }
-      })
+      compiler.options.plugins!.push(
+        new compiler.webpack.DefinePlugin({
+          __VUE_I18N_LEGACY_API__: JSON.stringify(compositionOnly),
+          __VUE_I18N_FULL_INSTALL__: JSON.stringify(fullInstall),
+          __INTLIFY_PROD_DEVTOOLS__: 'false'
+        })
+      )
+      debug(`set __VUE_I18N_LEGACY_API__ is '${compositionOnly}'`)
+      debug(`set __VUE_I18N_FULL_INSTALL__ is '${fullInstall}'`)
 
       /**
        * NOTE:
        * After i18n resources are transformed into javascript by transform, avoid further transforming by webpack.
        */
+      const filter = createFilter(resolveInclude(), exclude)
       if (compiler.options.module) {
         compiler.options.module.rules.push({
           test: RE_RESOURCE_FORMAT,
           type: 'javascript/auto',
           include(resource: string) {
+            debug('webpack resource include', resource)
             return filter(resource)
           }
         })
@@ -249,13 +354,12 @@ export function resourcePlugin(
     },
 
     transform: {
-      filter: {
-        id: {
-          include: resolveInclude(),
-          exclude
-        }
-      },
       async handler(code: string, id: string) {
+        const filter = await getFilter()
+        if (!filter(id)) {
+          return
+        }
+
         const { filename, query } = parseVueRequest(id)
         debug('transform', id, JSON.stringify(query), filename)
 
@@ -412,16 +516,6 @@ function normalizeConfigResolveAlias(
       return resolve
     }
   }
-}
-
-async function loadWebpack() {
-  let webpack = null
-  try {
-    webpack = await import('webpack').then(m => m.default || m)
-  } catch (_e) {
-    warn(`webpack not found, please install webpack.`)
-  }
-  return webpack
 }
 
 async function generateBundleResources(

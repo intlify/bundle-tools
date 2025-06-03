@@ -80,19 +80,35 @@ export function resourcePlugin(
     return viteModule
   }
 
-  function resolveInclude() {
+  function resolveIncludeExclude() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
     if (isArray(include)) {
-      return [...include, customBlockInclude]
+      return [[...include, customBlockInclude], exclude]
     } else if (isString(include)) {
-      return [include, customBlockInclude]
+      return [[include, customBlockInclude], exclude]
     } else {
-      return [RE_RESOURCE_FORMAT, customBlockInclude]
+      return [[RE_RESOURCE_FORMAT, customBlockInclude], exclude]
     }
   }
 
-  // const filter = createFilter(resolveInclude(), exclude)
+  function resolveIncludeExcludeForLegacy() {
+    const customBlockInclude =
+      meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
+    let _include: string | (string | RegExp)[] | undefined = undefined
+    let _exclude: string | (string | RegExp)[] | undefined = undefined
+    if (include) {
+      if (isArray(include)) {
+        _include = [...include.map(item => normalize(item)), customBlockInclude]
+      } else if (isString(include)) {
+        _include = [normalize(include), customBlockInclude]
+      }
+    } else {
+      _exclude = '**/**'
+    }
+    return [_include, _exclude]
+  }
+
   let _filter: ReturnType<typeof createFilter> | null = null
   async function getFilter(): Promise<ReturnType<typeof createFilter>> {
     if (_filter != null) {
@@ -100,28 +116,16 @@ export function resourcePlugin(
     }
 
     if (meta.framework == 'webpack') {
-      _filter = createFilter(resolveInclude(), exclude)
+      debug('Using filter for webpack')
+      _filter = createFilter(...resolveIncludeExclude())
     } else {
       const viteModule = await getViteModule()
       if (viteModule.rolldownVersion) {
         debug('Using filter for rolldown-vite')
-        _filter = createFilter(resolveInclude(), exclude)
+        _filter = createFilter(...resolveIncludeExclude())
       } else {
         debug('Using filter for rollup-vite')
-        const customBlockInclude =
-          meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
-        let _include: string | (string | RegExp)[] | undefined = undefined
-        let _exclude: string | (string | RegExp)[] | undefined = undefined
-        if (include) {
-          if (isArray(include)) {
-            _include = [...include.map(item => normalize(item)), customBlockInclude]
-          } else if (isString(include)) {
-            _include = [normalize(include), customBlockInclude]
-          }
-        } else {
-          _exclude = '**/**'
-        }
-        _filter = createFilter(_include, _exclude)
+        _filter = createFilter(...resolveIncludeExcludeForLegacy())
       }
     }
 
@@ -131,6 +135,7 @@ export function resourcePlugin(
   const getVueI18nAliasPath = ({ ssr = false, runtimeOnly = false }) => {
     return `${module}/dist/${module}${runtimeOnly ? '.runtime' : ''}.${!ssr ? 'esm-bundler.js' /* '.mjs' */ : 'node.mjs'}`
   }
+
   let isProduction = false
   let sourceMap = false
   const vueI18nAliasName = module
@@ -299,7 +304,7 @@ export function resourcePlugin(
        * NOTE:
        * After i18n resources are transformed into javascript by transform, avoid further transforming by webpack.
        */
-      const filter = createFilter(resolveInclude(), exclude)
+      const filter = createFilter(...resolveIncludeExclude())
       if (compiler.options.module) {
         compiler.options.module.rules.push({
           test: RE_RESOURCE_FORMAT,

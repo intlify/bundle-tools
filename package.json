@@ -41,7 +41,7 @@
   },
   "pnpm": {
     "overrides": {
-      "vite": "npm:rolldown-vite@latest"
+      "vite": "catalog:vite"
     },
     "onlyBuiltDependencies": [
       "esbuild",

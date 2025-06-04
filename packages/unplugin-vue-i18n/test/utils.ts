@@ -4,7 +4,8 @@ import fg from 'fast-glob'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
 import { resolve } from 'node:path'
-import { build } from 'vite'
+import { build as buildRollupVite } from 'rollup-vite'
+import { build as buildRolldownVite } from 'vite'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
@@ -22,11 +23,23 @@ type BundleResolve = {
   stats?: webpack.Stats
 }
 
-type BundleFunction = (fixture: string, options: Record<string, unknown>) => Promise<BundleResolve>
+type ViteBulderType = 'rollup' | 'rolldown'
+
+type BundleFunction = (
+  fixture: string,
+  options: Record<string, unknown>,
+  viteType: ViteBulderType
+) => Promise<BundleResolve>
+
+const VITE_BUILDERS: Record<ViteBulderType, typeof buildRollupVite | typeof buildRolldownVite> = {
+  rollup: buildRollupVite,
+  rolldown: buildRolldownVite
+}
 
 export async function bundleVite(
   fixture: string,
-  options: Record<string, unknown> = {}
+  options: Record<string, unknown> = {},
+  viteType: ViteBulderType = 'rolldown'
 ): Promise<BundleResolve> {
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
@@ -41,7 +54,7 @@ export async function bundleVite(
   options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
   const alias: Record<string, string> = {
-    vue: 'vue/dist/vue.esm-bundler.js'
+    vue: resolve(import.meta.dirname, '../node_modules/vue/dist/vue.esm-bundler.js')
   }
   if (!fixture.startsWith('@')) {
     alias['~target'] = resolve(__dirname, target, fixture)
@@ -51,6 +64,7 @@ export async function bundleVite(
     ignoreIds = await fg(resolve(__dirname, './fixtures/directives/*.vue'))
   }
 
+  const build = VITE_BUILDERS[viteType]
   // @ts-ignore
   const plugins = [vue(), vitePlugin({ include, ...options })]
   const result = await build({
@@ -58,6 +72,7 @@ export async function bundleVite(
     resolve: {
       alias
     },
+    // @ts-ignore -- NOTE: ignore type error for testing
     plugins,
     build: {
       sourcemap: options.sourcemap as boolean,
@@ -171,7 +186,8 @@ export async function bundleAndRun(
   options.escapeHtml = !!options.escapeHtml
   options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
-  const { code, map } = await bundler(fixture, options)
+  const rolldownVersion = ((await import('vite')) as any).rolldownVersion
+  const { code, map } = await bundler(fixture, options, !!rolldownVersion ? 'rolldown' : 'rollup')
 
   let dom: JSDOM | null = null
   let jsdomError

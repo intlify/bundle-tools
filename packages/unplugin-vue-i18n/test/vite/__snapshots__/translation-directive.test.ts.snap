@@ -2,312 +2,351 @@
 
 exports[`translation directive > script-setup-alias 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > script-setup-global-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > script-setup-local-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.t || _ctx.$t)("count", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.t || _ctx.$t)("count", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > script-setup-no-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > script-setup-no-use 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString(_ctx.$t("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString($setup.count),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString(_ctx.$t("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString($setup.count),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > script-setup-obj 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.i18n.t || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.i18n.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.i18n.t || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.i18n.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-alias 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-global-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-local-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.t || _ctx.$t)("count", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.t || _ctx.$t)("count", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-no-option 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.t || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.t("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-no-use 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString(_ctx.$t("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString($setup.count),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString(_ctx.$t("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString($setup.count),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-return-alias 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;
 
 exports[`translation directive > setup-return-alias-with-obj 1`] = `
 "function _sfc_render(_ctx, _cache, $props, $setup, $data, $options) {
-	return openBlock(), createElementBlock(
-		Fragment,
-		null,
-		[createBaseVNode(
-			"h1",
-			null,
-			toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
-			1
-			/* TEXT */
-), createBaseVNode(
-			"p",
-			null,
-			toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
-			1
-			/* TEXT */
-)],
-		64
-		/* STABLE_FRAGMENT */
-);
+  return openBlock(), createElementBlock(
+    Fragment,
+    null,
+    [
+      createBaseVNode(
+        "h1",
+        null,
+        toDisplayString$1(($setup.translation || _ctx.$t)("hello", {}, {})),
+        1
+        /* TEXT */
+      ),
+      createBaseVNode(
+        "p",
+        null,
+        toDisplayString$1($setup.count) + " " + toDisplayString$1($setup.translation("hello")),
+        1
+        /* TEXT */
+      )
+    ],
+    64
+    /* STABLE_FRAGMENT */
+  );
 }"
 `;

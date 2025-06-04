@@ -31,6 +31,7 @@
     "@typescript-eslint/scope-manager": "^8.13.0",
     "@typescript-eslint/typescript-estree": "^8.13.0",
     "debug": "^4.3.3",
+    "pathe": "^2.0.3",
     "fast-glob": "^3.2.12",
     "picocolors": "^1.0.0",
     "unplugin": "^2.3.4",
@@ -49,6 +50,7 @@
     "ts-loader": "catalog:webpack",
     "unbuild": "catalog:",
     "vite": "catalog:vite",
+    "rollup-vite": "npm:vite@^6.3.5",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
     "webpack-merge": "^5.9.0"

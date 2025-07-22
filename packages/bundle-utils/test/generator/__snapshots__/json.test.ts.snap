@@ -522,8 +522,8 @@ exports[`code generation > force stringify > map 1`] = `
 
 exports[`code generation > html tag in message > code 1`] = `
 "{
-  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hi there!&lt;/p&gt;"])};fn.source="<p>hi there!</p>";return fn;})(),
-  "alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;"])};fn.source="<script>window.alert('hi there!')</script>";return fn;})()
+  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hi there!&lt;&#x2F;p&gt;"])};fn.source="<p>hi there!</p>";return fn;})(),
+  "alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;&#x2F;script&gt;"])};fn.source="<script>window.alert('hi there!')</script>";return fn;})()
 }"
 `;
 

@@ -91,9 +91,9 @@ test('escape message', async () => {
     })
   )
   expect(compile(module.hi, {} as MessageCompilerContext)(createMessageContext())).toBe(
-    `&lt;p&gt;hi there!&lt;/p&gt;`
+    `&lt;p&gt;hi there!&lt;&#x2F;p&gt;`
   )
   expect(compile(module.alert, {} as MessageCompilerContext)(createMessageContext())).toBe(
-    `&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;`
+    `&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;&#x2F;script&gt;`
   )
 })

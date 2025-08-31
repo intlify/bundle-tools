@@ -44,7 +44,7 @@
     "@types/memory-fs": "^0.3.2",
     "@types/node": "catalog:",
     "@vitejs/plugin-vue": "catalog:vite",
-    "jsdom": "^25.0.1",
+    "jsdom": "^26.0.0",
     "memory-fs": "^0.5.0",
     "ts-loader": "catalog:webpack",
     "unbuild": "catalog:",

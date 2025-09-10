@@ -4,20 +4,12 @@ import {
   generateTypescript,
   generateYAML
 } from '@intlify/bundle-utils'
-import {
-  assign,
-  generateCodeFrame,
-  isArray,
-  isEmptyObject,
-  isNumber,
-  isString
-} from '@intlify/shared'
+import { assign, generateCodeFrame, isEmptyObject, isNumber, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
 import { parse as parsePath } from 'node:path'
-import { normalize } from 'pathe'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
@@ -83,30 +75,18 @@ export function resourcePlugin(
   function resolveIncludeExclude() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
-    if (isArray(include)) {
-      return [[...include, customBlockInclude], exclude]
-    } else if (isString(include)) {
-      return [[include, customBlockInclude], exclude]
-    } else {
-      return [[RE_RESOURCE_FORMAT, customBlockInclude], exclude]
-    }
+    return include
+      ? [[...include, customBlockInclude], exclude]
+      : [[RE_RESOURCE_FORMAT, customBlockInclude], exclude]
   }
 
   function resolveIncludeExcludeForLegacy() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
-    let _include: string | (string | RegExp)[] | undefined = undefined
-    let _exclude: string | (string | RegExp)[] | undefined = undefined
-    if (include) {
-      if (isArray(include)) {
-        _include = [...include.map(item => normalize(item)), customBlockInclude]
-      } else if (isString(include)) {
-        _include = [normalize(include), customBlockInclude]
-      }
-    } else {
-      _exclude = '**/**'
-    }
-    return [_include, _exclude]
+    // prettier-ignore
+    return include
+      ? [[...include, customBlockInclude], undefined]
+      : [undefined, ['**/**']]
   }
 
   let _filter: ReturnType<typeof createFilter> | null = null
@@ -337,8 +317,7 @@ export function resourcePlugin(
         debug('load', id)
         if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && include) {
           let resourcePaths = [] as string[]
-          const includePaths = isArray(include) ? include : [include]
-          for (const inc of includePaths) {
+          for (const inc of include) {
             resourcePaths = [...resourcePaths, ...(await fg(inc))]
           }
           resourcePaths = resourcePaths.filter((el, pos) => resourcePaths.indexOf(el) === pos)

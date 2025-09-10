@@ -1,7 +1,13 @@
-import { isString, isBoolean, isArray } from '@intlify/shared'
+import { isArray, isBoolean, isString } from '@intlify/shared'
+import { normalize } from 'pathe'
 
 import type { PluginOptions } from '../types'
 import type { TranslationDirectiveResolveIndetifier } from '../vue'
+
+function normalizeGlobOption(val: string | string[] | undefined) {
+  if (!val) return undefined
+  return isString(val) ? [normalize(val)] : val.map(normalize)
+}
 
 export function resolveOptions(options: PluginOptions) {
   const moduleType = (options.module || 'vue-i18n') as string
@@ -53,8 +59,8 @@ export function resolveOptions(options: PluginOptions) {
     typeof options.transformI18nBlock === 'function' ? options.transformI18nBlock : null
 
   return {
-    include: options.include,
-    exclude: options.exclude,
+    include: normalizeGlobOption(options.include),
+    exclude: normalizeGlobOption(options.exclude),
     module: moduleType,
     onlyLocales,
     forceStringify,

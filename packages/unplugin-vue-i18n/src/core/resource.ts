@@ -8,7 +8,7 @@ import {
 import { assign, generateCodeFrame, isEmptyObject } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
-import fg from 'fast-glob'
+import { globSync } from 'tinyglobby'
 import { genImport, genSafeVariableName } from 'knitwork'
 import { findStaticImports } from 'mlly'
 import { createHash } from 'node:crypto'
@@ -60,7 +60,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
 
   const resourcePaths = new Set<string>()
   for (const inc of opts.include || []) {
-    for (const resourcePath of fg.sync(inc, { ignore: opts.exclude })) {
+    for (const resourcePath of globSync(inc, { ignore: opts.exclude, expandDirectories: false })) {
       resourcePaths.add(resourcePath)
     }
   }

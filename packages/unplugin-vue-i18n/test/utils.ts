@@ -54,7 +54,9 @@ async function bundleVite(
   }
 
   if (ignoreIds == null) {
-    ignoreIds = await glob(resolve(__dirname, './fixtures/directives/*.vue'), { expandDirectories: false })
+    ignoreIds = await glob(resolve(__dirname, './fixtures/directives/*.vue'), {
+      expandDirectories: false
+    })
   }
 
   // @ts-ignore

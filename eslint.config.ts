@@ -55,6 +55,7 @@ export default defineConfig(
   },
   globalIgnores([
     'examples/**',
+    'CHANGELOG.md',
     '.unmaintained/**',
     'packages/**/CHANGELOG.md',
     '**/*.md/*.ts',

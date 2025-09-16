@@ -311,12 +311,10 @@ If you need to use programmatically dynamic resource construction, you would be 
   Bundle target vue-i18n module. You can specify either `‘vue-i18n’` or `‘petite-vue-i18n’`.
 
   The default is `'vue-i18n'`, and the following installed in node_modules will be bundled.
-
   - development: `vue-i18n.esm-bundler.js`
   - production: `vue-i18n.runtime.esm-bundler.js`
 
   In the case of `‘petite-vue-i18n’`, the following installed in node_modules will be bundled.
-
   - development: `petite-vue-i18n.esm-bundler.js`
   - production: `petite-vue-i18n.runtime.esm-bundler.js`
 

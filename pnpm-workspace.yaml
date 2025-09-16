@@ -1,25 +1,23 @@
 packages:
   - packages/**
   - examples/**
-onlyBuiltDependencies:
-  - esbuild
 catalogs:
   intlify:
-    '@intlify/shared': ^11.1.10
-    '@intlify/message-compiler': ^11.1.10
-    vue-i18n: ^11.1.10
+    '@intlify/shared': ^11.1.12
+    '@intlify/message-compiler': ^11.1.12
+    vue-i18n: ^11.1.12
   vite:
     '@vitejs/plugin-vue': ^5.2.4
-    vite: ^6.3.5
+    vite: ^6.3.6
   rolldown-vite:
     vite: npm:rolldown-vite@latest
   vue:
-    vue: ^3.5.14
+    vue: ^3.5.21
   webpack:
-    ts-loader: ^9.5.2
+    ts-loader: ^9.5.4
     vue-loader: ^17.4.2
-    webpack: ^5.99.8
+    webpack: ^5.101.3
 catalog:
-  '@types/node': ^22.15.19
-  unbuild: ^3.5.0
-  source-map-js: ^1.0.2
+  '@types/node': ^22.18.4
+  unbuild: ^3.6.1
+  source-map-js: ^1.2.1

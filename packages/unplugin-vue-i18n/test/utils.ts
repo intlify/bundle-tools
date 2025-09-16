@@ -140,10 +140,11 @@ export function bundleWebpack(
     plugins: [new VueLoader(), webpackPlugin({ include, exclude, ...options })]
   }
 
-  // @ts-ignore
   const config = merge({}, baseConfig)
-  // @ts-ignore
   const compiler = webpack(config)
+  if (compiler == null) {
+    return Promise.reject(new Error('Cannot create webpack compiler'))
+  }
 
   const mfs = new memoryfs()
   // @ts-expect-error -- FIXME: type error

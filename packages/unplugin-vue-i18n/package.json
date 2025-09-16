@@ -29,10 +29,10 @@
     "@rollup/pluginutils": "^5.1.0",
     "debug": "^4.3.3",
     "defu": "^6.1.4",
-    "fast-glob": "^3.2.12",
     "knitwork": "^1.2.0",
     "mlly": "^1.2.0",
     "picocolors": "^1.0.0",
+    "tinyglobby": "^0.2.15",
     "unplugin": "^2.2.0",
     "vue": "catalog:vue"
   },

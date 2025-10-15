@@ -1,10 +1,10 @@
 import { isBoolean, isString } from '@intlify/shared'
 import vue from '@vitejs/plugin-vue'
-import { glob } from 'tinyglobby'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { glob } from 'tinyglobby'
 import { build } from 'vite'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
@@ -55,7 +55,8 @@ async function bundleVite(
 
   if (ignoreIds == null) {
     ignoreIds = await glob(resolve(__dirname, './fixtures/directives/*.vue'), {
-      expandDirectories: false
+      expandDirectories: false,
+      absolute: true
     })
   }
 

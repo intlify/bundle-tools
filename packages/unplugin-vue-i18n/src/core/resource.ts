@@ -8,12 +8,12 @@ import {
 import { assign, generateCodeFrame, isEmptyObject } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
-import { globSync } from 'tinyglobby'
 import { genImport, genSafeVariableName } from 'knitwork'
 import { findStaticImports } from 'mlly'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import { dirname, parse as parsePath, resolve } from 'node:path'
+import { globSync } from 'tinyglobby'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
@@ -60,7 +60,11 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
 
   const resourcePaths = new Set<string>()
   for (const inc of opts.include || []) {
-    for (const resourcePath of globSync(inc, { ignore: opts.exclude, expandDirectories: false })) {
+    for (const resourcePath of globSync(inc, {
+      ignore: opts.exclude,
+      expandDirectories: false,
+      absolute: true
+    })) {
       resourcePaths.add(resourcePath)
     }
   }

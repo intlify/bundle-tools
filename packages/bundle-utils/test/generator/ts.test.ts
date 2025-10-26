@@ -3,7 +3,7 @@ import { readFile, validateSyntax } from '../utils'
 
 test('simple', async () => {
   const { source } = await readFile('./fixtures/codegen/simple.ts')
-  const { code } = await generate(source, {
+  const { code } = generate(source, {
     sourceMap: true,
     env: 'development'
   })

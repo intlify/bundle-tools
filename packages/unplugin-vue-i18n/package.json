@@ -51,7 +51,7 @@
     "vite": "catalog:vite",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
-    "webpack-merge": "^5.9.0"
+    "webpack-merge": "^6.0.0"
   },
   "engines": {
     "node": ">= 20"

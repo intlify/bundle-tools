@@ -279,7 +279,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         debug('parseOptions', parseOptions)
 
         try {
-          const { code: generatedCode, map } = await generate(code, parseOptions)
+          const { code: generatedCode, map } = generate(code, parseOptions)
 
           debug('generated code', generatedCode)
           debug('sourcemap', map, ctx.sourceMap)
@@ -328,7 +328,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         }
 
         const generate = getGenerator(langInfo, generateYAML)
-        const { code: generatedCode, map } = await generate(source, parseOptions)
+        const { code: generatedCode, map } = generate(source, parseOptions)
         debug('generated code', generatedCode)
         debug('sourcemap', map, ctx.sourceMap)
 
@@ -339,10 +339,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     }
   } as UnpluginOptions
 }
-type GeneratorLike = (
-  source: string | Buffer,
-  options: CodeGenOptions
-) => Promise<CodeGenResult<unknown>> | CodeGenResult<unknown>
+type GeneratorLike = (source: string | Buffer, options: CodeGenOptions) => CodeGenResult<unknown>
 function getGenerator(ext: string, fallback: GeneratorLike = generateJSON) {
   if (/\.?json5?$/.test(ext)) {
     return generateJSON

@@ -4,7 +4,7 @@
  * A wrapper for the js generator which transforms ts to js before generating
  */
 
-import { Node } from 'estree'
+import { Node } from 'oxc-parser'
 import { transform } from 'oxc-transform'
 import { CodeGenOptions, CodeGenResult } from './codegen'
 import { DEFAULT_OPTIONS, generate as generateJavaScript } from './js'

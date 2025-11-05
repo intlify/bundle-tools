@@ -3,9 +3,9 @@
  */
 
 import { isBoolean, isNumber, isString } from '@intlify/shared'
-import { parse as parseJavaScript } from 'acorn'
 import { generate as generateJavaScript } from 'escodegen'
-import { walk } from 'estree-walker'
+import { parseSync as parseJavaScript } from 'oxc-parser'
+import { walk } from 'oxc-walker'
 import {
   createCodeGenerator,
   generateMessageFunction,
@@ -13,7 +13,7 @@ import {
   mapLinesColumns
 } from './codegen'
 
-import type { Node } from 'estree'
+import type { Node } from 'oxc-parser'
 import type { RawSourceMap } from 'source-map-js'
 import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
@@ -50,12 +50,12 @@ export function generate(
 
   const _options = Object.assign({}, DEFAULT_OPTIONS, options, { source: value })
   const generator = createCodeGenerator(_options)
-  const ast = parseJavaScript(value, {
-    ecmaVersion: 'latest',
+
+  const ast = parseJavaScript(_options.filename ?? '', value, {
+    // ecmaVersion: 'latest',
     sourceType: 'module',
-    sourceFile: _options.filename,
-    allowImportExportEverywhere: true
-  }) as Node
+    lang: 'js'
+  }).program as Node
 
   const exportResult = scanAst(ast)
   if (!_options.allowDynamic) {
@@ -154,15 +154,9 @@ function _generate(
   // slice and reuse imports and top-level variable declarations as-is
   // NOTE: this prevents optimization/compilation of top-level variables, we may be able to add support for this
   walk(node, {
-    /**
-     * NOTE:
-     *  force cast to Node of `estree-walker@3.x`,
-     *  because `estree-walker@3.x` is not dual packages,
-     *  so it's support only esm only ...
-     */
     // @ts-ignore
-    enter(node: Node, _parent) {
-      if (_parent?.type != null) this.skip()
+    enter(node, parent) {
+      if (parent?.type != null) this.skip()
       switch (node.type) {
         case 'ExportDefaultDeclaration':
           this.skip()
@@ -201,7 +195,7 @@ function _generate(
      *  so it's support only esm only ...
      */
     // @ts-ignore
-    enter(node: Node, parent: Node) {
+    enter(node, parent) {
       // skip imports and top-level variable declarations
       if (parent?.type === 'Program') {
         switch (node.type) {
@@ -336,12 +330,6 @@ function _generate(
           break
       }
     },
-    /**
-     * NOTE:
-     *  force cast to Node of `estree-walker@3.x`,
-     *  because `estree-walker@3.x` is not dual packages,
-     *  so it's support only esm only ...
-     */
     // @ts-ignore
     leave(node: Node, parent: Node) {
       switch (node.type) {

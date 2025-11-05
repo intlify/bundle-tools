@@ -1,5 +1,5 @@
-import { parse } from 'acorn'
 import { promises as fs } from 'fs'
+import { parseSync } from 'oxc-parser'
 import path from 'path'
 
 export async function readFile(
@@ -14,13 +14,12 @@ export async function readFile(
 export function validateSyntax(code: string): boolean {
   let ret = false
   try {
-    parse(code, {
-      ecmaVersion: 'latest',
+    parseSync('test.js', code, {
       sourceType: 'module'
     })
     ret = true
   } catch (e) {
-    console.log(`invalid sytanx on \n${code}`)
+    console.log(`invalid syntax on \n${code}`)
     console.error(e)
   }
   return ret

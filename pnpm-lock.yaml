@@ -6,9 +6,6 @@ settings:
 
 catalogs:
   default:
-    '@types/node':
-      specifier: ^22.15.18
-      version: 22.15.18
     unbuild:
       specifier: ^3.5.0
       version: 3.5.0
@@ -16,30 +13,6 @@ catalogs:
     '@intlify/shared':
       specifier: next
       version: 12.0.0-alpha.3
-    vue-i18n:
-      specifier: next
-      version: 12.0.0-alpha.3
-  vite:
-    '@vitejs/plugin-vue':
-      specifier: ^5.2.4
-      version: 5.2.4
-    vite:
-      specifier: ^6.3.5
-      version: 6.3.5
-  vue:
-    vue:
-      specifier: ^3.5.14
-      version: 3.5.14
-  webpack:
-    ts-loader:
-      specifier: ^9.5.2
-      version: 9.5.2
-    vue-loader:
-      specifier: ^16.8.3
-      version: 16.8.3
-    webpack:
-      specifier: ^5.99.8
-      version: 5.99.8
 
 importers:
 
@@ -202,9 +175,6 @@ importers:
       '@types/escodegen':
         specifier: ^0.0.10
         version: 0.0.10
-      '@types/estree':
-        specifier: ^1.0.0
-        version: 1.0.5
       unbuild:
         specifier: 'catalog:'
         version: 3.5.0(typescript@5.8.3)(vue@3.5.14(typescript@5.8.3))

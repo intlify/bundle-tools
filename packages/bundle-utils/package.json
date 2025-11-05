@@ -30,7 +30,6 @@
   },
   "devDependencies": {
     "@types/escodegen": "^0.0.10",
-    "@types/estree": "^1.0.0",
     "unbuild": "catalog:"
   },
   "engines": {

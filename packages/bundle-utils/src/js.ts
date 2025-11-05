@@ -51,11 +51,10 @@ export function generate(
   const _options = Object.assign({}, DEFAULT_OPTIONS, options, { source: value })
   const generator = createCodeGenerator(_options)
 
-  const ast = parseJavaScript(_options.filename ?? '', value, {
-    // ecmaVersion: 'latest',
+  const { program: ast } = parseJavaScript(_options.filename ?? '', value, {
     sourceType: 'module',
     lang: 'js'
-  }).program as Node
+  })
 
   const exportResult = scanAst(ast)
   if (!_options.allowDynamic) {

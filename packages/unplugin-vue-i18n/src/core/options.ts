@@ -28,10 +28,10 @@ export function resolveOptions(options: PluginOptions) {
 
   // prettier-ignore
   const compositionOnly = moduleType === 'vue-i18n'
-      ? isBoolean(options.compositionOnly)
-        ? options.compositionOnly
-        : true
+    ? isBoolean(options.compositionOnly)
+      ? options.compositionOnly
       : true
+    : true
 
   // prettier-ignore
   const fullInstall = moduleType === 'vue-i18n'
@@ -59,7 +59,7 @@ export function resolveOptions(options: PluginOptions) {
     typeof options.transformI18nBlock === 'function' ? options.transformI18nBlock : null
 
   return {
-    include: normalizeGlobOption(options.include),
+    include: normalizeGlobOption(options.include || []),
     exclude: normalizeGlobOption(options.exclude),
     module: moduleType,
     onlyLocales,

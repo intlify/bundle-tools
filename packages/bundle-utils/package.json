@@ -1,7 +1,7 @@
 {
   "name": "@intlify/bundle-utils",
   "description": "Bundle utilities for Intlify project",
-  "version": "11.0.2",
+  "version": "11.0.3",
   "author": {
     "name": "kazuya kawaguchi",
     "email": "kawakazu80@gmail.com"

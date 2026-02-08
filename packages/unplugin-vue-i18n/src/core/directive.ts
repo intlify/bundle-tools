@@ -43,7 +43,14 @@ export function directivePlugin({
     name: resolveNamespace('directive'),
     enforce: 'pre',
     vite: {
-      config(config) {
+      async config(config) {
+        await import('@typescript-eslint/typescript-estree').then(r => {
+          tsEstree.parse = r.parse
+          tsEstree.simpleTraverse = r.simpleTraverse
+          tsEstree.AST_NODE_TYPES = r.AST_NODE_TYPES
+          return
+        })
+
         // @ts-expect-error -- TODO
         vuePlugin = getVitePlugin(config, 'vite:vue')
         if (!checkVuePlugin(vuePlugin!)) {
@@ -77,13 +84,6 @@ export function directivePlugin({
             vuePluginOptions = getVuePluginOptions(vuePlugin!)
           }
           if (vuePluginOptions?.compiler) {
-            await import('@typescript-eslint/typescript-estree').then(r => {
-              tsEstree.parse = r.parse
-              tsEstree.simpleTraverse = r.simpleTraverse
-              tsEstree.AST_NODE_TYPES = r.AST_NODE_TYPES
-              return
-            })
-
             analyzeIdentifiers(
               getDescriptor(filename, code, vuePluginOptions),
               vuePluginOptions,

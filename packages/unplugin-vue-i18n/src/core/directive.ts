@@ -2,7 +2,7 @@ import eslintUitls from '@eslint-community/eslint-utils'
 import { isBoolean } from '@intlify/shared'
 import { transformVTDirective } from '@intlify/vue-i18n-extensions'
 import { analyze as analyzeScope } from '@typescript-eslint/scope-manager'
-import { AST_NODE_TYPES, parse, simpleTraverse } from '@typescript-eslint/typescript-estree'
+import type { AST_NODE_TYPES, parse, simpleTraverse } from '@typescript-eslint/typescript-estree'
 import createDebug from 'debug'
 import path from 'node:path'
 import { checkVuePlugin, getVitePlugin, normalizePath, resolveNamespace } from '../utils'
@@ -10,7 +10,10 @@ import { getDescriptor, getVuePluginOptions, parseVueRequest } from '../vue'
 
 import type { TranslationSignatureResolver } from '@intlify/vue-i18n-extensions'
 import type { Scope } from '@typescript-eslint/scope-manager'
-import { ParserServicesWithTypeInformation, TSESTree } from '@typescript-eslint/typescript-estree'
+import type {
+  ParserServicesWithTypeInformation,
+  TSESTree
+} from '@typescript-eslint/typescript-estree'
 import type { RollupPlugin, UnpluginOptions } from 'unplugin'
 import type { TranslationDirectiveResolveIndetifier, VuePluginResolvedOptions } from '../vue'
 import type { ResolvedOptions } from './options'
@@ -18,7 +21,15 @@ import type { ResolvedOptions } from './options'
 type Node = Parameters<ParserServicesWithTypeInformation['getSymbolAtLocation']>[0]
 
 const debug = createDebug(resolveNamespace('directive'))
-
+const tsEstree = {
+  parse: undefined!,
+  simpleTraverse: undefined!,
+  AST_NODE_TYPES: undefined!
+} as {
+  parse: typeof parse
+  simpleTraverse: typeof simpleTraverse
+  AST_NODE_TYPES: typeof AST_NODE_TYPES
+}
 export function directivePlugin({
   optimizeTranslationDirective,
   translationIdentifiers
@@ -32,7 +43,14 @@ export function directivePlugin({
     name: resolveNamespace('directive'),
     enforce: 'pre',
     vite: {
-      config(config) {
+      async config(config) {
+        await import('@typescript-eslint/typescript-estree').then(r => {
+          tsEstree.parse = r.parse
+          tsEstree.simpleTraverse = r.simpleTraverse
+          tsEstree.AST_NODE_TYPES = r.AST_NODE_TYPES
+          return
+        })
+
         // @ts-expect-error -- TODO
         vuePlugin = getVitePlugin(config, 'vite:vue')
         if (!checkVuePlugin(vuePlugin!)) {
@@ -140,8 +158,8 @@ function analyzeIdentifiers(
     return
   }
 
-  const ast = parse(source, { range: true })
-  simpleTraverse(ast, {
+  const ast = tsEstree.parse(source, { range: true })
+  tsEstree.simpleTraverse(ast, {
     enter(node, parent) {
       if (parent) {
         node.parent = parent
@@ -264,7 +282,7 @@ function getCallExpressionAndReturnStatement(
 
   const callExpressionRef = variable.references.find(ref => {
     // @ts-expect-error -- FIXME: type error
-    return ref.identifier.parent?.type === AST_NODE_TYPES.CallExpression
+    return ref.identifier.parent?.type === tsEstree.AST_NODE_TYPES.CallExpression
   })
   if (callExpressionRef == null) {
     return EMPTY_NODE_RETURN
@@ -273,17 +291,17 @@ function getCallExpressionAndReturnStatement(
   let returnStatement: TSESTree.ReturnStatement | null = null
   if (
     callExpressionRef.from.type === 'function' &&
-    callExpressionRef.from.block.type === AST_NODE_TYPES.FunctionExpression &&
+    callExpressionRef.from.block.type === tsEstree.AST_NODE_TYPES.FunctionExpression &&
     // @ts-expect-error -- FIXME: type error
-    callExpressionRef.from.block.parent.type === AST_NODE_TYPES.Property &&
+    callExpressionRef.from.block.parent.type === tsEstree.AST_NODE_TYPES.Property &&
     // @ts-expect-error -- FIXME: type error
-    callExpressionRef.from.block.parent.key.type === AST_NODE_TYPES.Identifier &&
+    callExpressionRef.from.block.parent.key.type === tsEstree.AST_NODE_TYPES.Identifier &&
     // @ts-expect-error -- FIXME: type error
     callExpressionRef.from.block.parent.key.name === 'setup'
   ) {
     // @ts-expect-error -- FIXME: type error
     returnStatement = callExpressionRef.from.block.body.body.find((statement: Node) => {
-      return statement.type === AST_NODE_TYPES.ReturnStatement
+      return statement.type === tsEstree.AST_NODE_TYPES.ReturnStatement
     }) as TSESTree.ReturnStatement | null
   }
 
@@ -295,7 +313,7 @@ function getCallExpressionAndReturnStatement(
 }
 
 function getVariableDeclarationIdFrom(node: TSESTree.CallExpression) {
-  if (node.parent?.type !== AST_NODE_TYPES.VariableDeclarator) {
+  if (node.parent?.type !== tsEstree.AST_NODE_TYPES.VariableDeclarator) {
     return null
   }
   return node.parent.id as TSESTree.Identifier | TSESTree.ObjectPattern
@@ -307,7 +325,7 @@ type VariableIdPair = {
 }
 
 function parseVariableId(node: TSESTree.Identifier | TSESTree.ObjectPattern): VariableIdPair[] {
-  if (node.type === AST_NODE_TYPES.Identifier) {
+  if (node.type === tsEstree.AST_NODE_TYPES.Identifier) {
     // Identifier
     // e.g `const i18n = useI18n()`
     // [{ key: 'i18n', value: null }]
@@ -318,13 +336,13 @@ function parseVariableId(node: TSESTree.Identifier | TSESTree.ObjectPattern): Va
     // [{ key: 't', value: 't' }, { key: 'd', value: 'datetime' }]
     const props = node.properties.filter(
       // ignore RestElement
-      prop => prop.type === AST_NODE_TYPES.Property
+      prop => prop.type === tsEstree.AST_NODE_TYPES.Property
     ) as TSESTree.Property[]
     const pairs = [] as { key: string | null; value: string | null }[]
     for (const prop of props) {
       if (
-        prop?.key.type === AST_NODE_TYPES.Identifier &&
-        prop?.value.type === AST_NODE_TYPES.Identifier
+        prop?.key.type === tsEstree.AST_NODE_TYPES.Identifier &&
+        prop?.value.type === tsEstree.AST_NODE_TYPES.Identifier
       ) {
         pairs.push({ key: prop.key.name, value: prop.value.name })
       }
@@ -339,23 +357,23 @@ function parseReturnStatement(node: TSESTree.ReturnStatement | null): VariableId
     return pairs
   }
 
-  if (node.argument.type === AST_NODE_TYPES.ObjectExpression) {
+  if (node.argument.type === tsEstree.AST_NODE_TYPES.ObjectExpression) {
     // ObjectExpression
     for (const prop of node.argument.properties) {
-      if (prop.type === AST_NODE_TYPES.Property) {
+      if (prop.type === tsEstree.AST_NODE_TYPES.Property) {
         if (
-          prop.key.type === AST_NODE_TYPES.Identifier &&
-          prop.value.type === AST_NODE_TYPES.Identifier
+          prop.key.type === tsEstree.AST_NODE_TYPES.Identifier &&
+          prop.value.type === tsEstree.AST_NODE_TYPES.Identifier
         ) {
           // Identifier
           // e.g `return { t, d: datetime }`
           // [{ key: 't', value: 't' }, { key: 'd', value: 'datetime' }]
           pairs.push({ key: prop.key.name, value: prop.value.name })
         } else if (
-          prop.key.type === AST_NODE_TYPES.Identifier &&
-          prop.value.type === AST_NODE_TYPES.MemberExpression &&
-          prop.value.object.type === AST_NODE_TYPES.Identifier &&
-          prop.value.property.type === AST_NODE_TYPES.Identifier
+          prop.key.type === tsEstree.AST_NODE_TYPES.Identifier &&
+          prop.value.type === tsEstree.AST_NODE_TYPES.MemberExpression &&
+          prop.value.object.type === tsEstree.AST_NODE_TYPES.Identifier &&
+          prop.value.property.type === tsEstree.AST_NODE_TYPES.Identifier
         ) {
           // MemberExpression
           // e.g `return { t: i18n.t }`
@@ -368,7 +386,7 @@ function parseReturnStatement(node: TSESTree.ReturnStatement | null): VariableId
       }
     }
     return pairs
-  } else if (node.argument.type === AST_NODE_TYPES.Identifier) {
+  } else if (node.argument.type === tsEstree.AST_NODE_TYPES.Identifier) {
     // Identifier
     // e.g `return i18n`
     return pairs

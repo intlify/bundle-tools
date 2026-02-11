@@ -24,7 +24,7 @@
     "jsonc-eslint-parser": "^2.3.0",
     "oxc-parser": "^0.96.0",
     "oxc-transform": "^0.96.0",
-    "oxc-walker": "^0.5.2",
+    "oxc-walker": "^0.7.0",
     "source-map-js": "^1.0.1",
     "yaml-eslint-parser": "^1.2.2"
   },

@@ -85,5 +85,5 @@
     "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",
     "test:e2e:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n test:e2e"
   },
-  "packageManager": "pnpm@10.20.0"
+  "packageManager": "pnpm@10.29.2"
 }

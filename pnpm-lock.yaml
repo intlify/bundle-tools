@@ -21,8 +21,8 @@ catalogs:
       version: 12.0.0-alpha.3
   vite:
     '@vitejs/plugin-vue':
-      specifier: ^5.2.4
-      version: 5.2.4
+      specifier: ^6.0.0
+      version: 6.0.4
     vite:
       specifier: ^6.3.5
       version: 6.3.5
@@ -133,7 +133,7 @@ importers:
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:vite
-        version: 5.2.4(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))
+        version: 6.0.4(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))
       vite:
         specifier: catalog:vite
         version: 6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0)
@@ -268,7 +268,7 @@ importers:
         version: 22.15.18
       '@vitejs/plugin-vue':
         specifier: catalog:vite
-        version: 5.2.4(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))
+        version: 6.0.4(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))
       jsdom:
         specifier: ^25.0.1
         version: 25.0.1
@@ -1469,6 +1469,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@rolldown/pluginutils@1.0.0-rc.2':
+    resolution: {integrity: sha512-izyXV/v+cHiRfozX62W9htOAvwMo4/bXKDrQ+vom1L1qRuexPock/7VZDAhnpHCLNejd3NJ6hiab+tO0D44Rgw==}
+
   '@rollup/plugin-alias@5.1.1':
     resolution: {integrity: sha512-PR9zDb+rOzkRb2VD+EuKB7UC41vU5DIwZ5qqCpk0KJudcWAyi8rvYOhS7+L5aZCspw1stTViLgN5v6FF1p5cgQ==}
     engines: {node: '>=14.0.0'}
@@ -2011,11 +2014,11 @@ packages:
     peerDependencies:
       valibot: ^1.0.0 || ^1.0.0-beta.5 || ^1.0.0-rc
 
-  '@vitejs/plugin-vue@5.2.4':
-    resolution: {integrity: sha512-7Yx/SXSOcQq5HiiV3orevHUFn+pmMB4cgbEkDYgnkUWb0WfeQ/wa2yFv6D5ICiCQOVpjA7vYDXrC7AGO8yjDHA==}
-    engines: {node: ^18.0.0 || >=20.0.0}
+  '@vitejs/plugin-vue@6.0.4':
+    resolution: {integrity: sha512-uM5iXipgYIn13UUQCZNdWkYk+sysBeA97d5mHsAoAt1u/wpN3+zxOmsVJWosuzX+IMGRzeYUNytztrYznboIkQ==}
+    engines: {node: ^20.19.0 || >=22.12.0}
     peerDependencies:
-      vite: ^5.0.0 || ^6.0.0
+      vite: ^5.0.0 || ^6.0.0 || ^7.0.0 || ^8.0.0-0
       vue: ^3.2.25
 
   '@vitest/eslint-plugin@1.1.7':
@@ -6664,6 +6667,8 @@ snapshots:
   '@rolldown/binding-win32-x64-msvc@1.0.0-beta.3':
     optional: true
 
+  '@rolldown/pluginutils@1.0.0-rc.2': {}
+
   '@rollup/plugin-alias@5.1.1(rollup@4.34.8)':
     optionalDependencies:
       rollup: 4.34.8
@@ -7155,8 +7160,9 @@ snapshots:
     dependencies:
       valibot: 1.0.0-beta.12(typescript@5.8.3)
 
-  '@vitejs/plugin-vue@5.2.4(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))':
+  '@vitejs/plugin-vue@6.0.4(vite@6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0))(vue@3.5.14(typescript@5.8.3))':
     dependencies:
+      '@rolldown/pluginutils': 1.0.0-rc.2
       vite: 6.3.5(@types/node@22.15.18)(jiti@2.4.2)(terser@5.31.1)(yaml@2.8.0)
       vue: 3.5.14(typescript@5.8.3)
 

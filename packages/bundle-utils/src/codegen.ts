@@ -52,6 +52,11 @@ export interface CodeGenOptions {
   jit?: boolean
   minify?: boolean
   transformI18nBlock?: (source: string | Buffer) => string
+  /**
+   * When provided, only keys matching this filter will be included in output.
+   * The function receives a dot-separated key path and returns true to keep.
+   */
+  usedKeyFilter?: (keyPath: string) => boolean
   onWarn?: (msg: string) => void
   onError?: (
     msg: string,
@@ -415,6 +420,51 @@ export function generateResourceAst(
   const occured = errors.length > 0
   const code = !occured ? `${friendlyJSONstringify(ast)}` : `\`${_msg}\``
   return { code, ast, map, errors }
+}
+
+export function filterMessageKeys(
+  messages: Record<string, unknown>,
+  shouldKeep: (keyPath: string) => boolean,
+  parentPath: string[] = []
+): Record<string, unknown> {
+  const result: Record<string, unknown> = {}
+  for (const [key, value] of Object.entries(messages)) {
+    const currentPath = [...parentPath, key]
+    const dotPath = currentPath.join('.')
+    if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+      const filtered = filterMessageKeys(value as Record<string, unknown>, shouldKeep, currentPath)
+      if (Object.keys(filtered).length > 0) {
+        result[key] = filtered
+      }
+    } else {
+      if (shouldKeep(dotPath)) {
+        result[key] = value
+      }
+    }
+  }
+  return result
+}
+
+export function filterMultiLocaleMessages(
+  messages: Record<string, unknown>,
+  shouldKeep: (keyPath: string) => boolean
+): Record<string, unknown> {
+  const result: Record<string, unknown> = {}
+  for (const [locale, localeMessages] of Object.entries(messages)) {
+    if (
+      typeof localeMessages === 'object' &&
+      localeMessages !== null &&
+      !Array.isArray(localeMessages)
+    ) {
+      const filtered = filterMessageKeys(localeMessages as Record<string, unknown>, shouldKeep)
+      if (Object.keys(filtered).length > 0) {
+        result[locale] = filtered
+      }
+    } else {
+      result[locale] = localeMessages
+    }
+  }
+  return result
 }
 
 export function excludeLocales({

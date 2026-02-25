@@ -1,7 +1,7 @@
 import { isArray, isBoolean, isString } from '@intlify/shared'
 import { normalize } from 'pathe'
 
-import type { PluginOptions } from '../types'
+import type { PluginOptions, TreeShakingOptions } from '../types'
 import type { TranslationDirectiveResolveIndetifier } from '../vue'
 
 function normalizeGlobOption(val: string | string[] | undefined) {
@@ -58,6 +58,16 @@ export function resolveOptions(options: PluginOptions) {
   const transformI18nBlock =
     typeof options.transformI18nBlock === 'function' ? options.transformI18nBlock : null
 
+  const treeShaking: TreeShakingOptions | null = options.treeShaking
+    ? typeof options.treeShaking === 'object'
+      ? {
+          safelist: options.treeShaking.safelist || [],
+          dynamicKeyStrategy: options.treeShaking.dynamicKeyStrategy || 'keep-all',
+          scanPatterns: options.treeShaking.scanPatterns
+        }
+      : { safelist: [], dynamicKeyStrategy: 'keep-all' }
+    : null
+
   return {
     include: normalizeGlobOption(options.include || []),
     exclude: normalizeGlobOption(options.exclude),
@@ -76,7 +86,8 @@ export function resolveOptions(options: PluginOptions) {
     escapeHtml,
     optimizeTranslationDirective,
     translationIdentifiers,
-    transformI18nBlock
+    transformI18nBlock,
+    treeShaking
   }
 }
 

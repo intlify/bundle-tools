@@ -1,6 +1,12 @@
 import createDebug from 'debug'
 import { createUnplugin } from 'unplugin'
-import { directivePlugin, resolveOptions, resourcePlugin } from './core'
+import {
+  createUsedKeysCollector,
+  directivePlugin,
+  resolveOptions,
+  resourcePlugin,
+  treeShakingPlugin
+} from './core'
 import { raiseError, resolveNamespace } from './utils'
 
 import type { UnpluginFactory, UnpluginInstance } from 'unplugin'
@@ -21,7 +27,20 @@ export const unpluginFactory: UnpluginFactory<PluginOptions | undefined> = (opti
   const resolvedOptions = resolveOptions(options)
   debug('plugin options (resolved):', resolvedOptions)
 
-  const plugins = [resourcePlugin(resolvedOptions, meta)]
+  // Create shared collector if tree-shaking is enabled
+  const collector = resolvedOptions.treeShaking
+    ? createUsedKeysCollector(resolvedOptions.treeShaking)
+    : null
+
+  const plugins = []
+
+  // Tree-shaking plugin runs first to collect used keys before locale files are processed
+  if (resolvedOptions.treeShaking && collector) {
+    plugins.push(treeShakingPlugin(resolvedOptions, collector))
+  }
+
+  plugins.push(resourcePlugin(resolvedOptions, meta, collector))
+
   if (resolvedOptions.optimizeTranslationDirective) {
     if (meta.framework === 'webpack') {
       raiseError(

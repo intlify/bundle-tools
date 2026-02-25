@@ -56,7 +56,8 @@ export function resourcePlugin(
     escapeHtml,
     transformI18nBlock
   }: ResolvedOptions,
-  meta: UnpluginContextMeta
+  meta: UnpluginContextMeta,
+  collector?: import('./collector').UsedKeysCollector | null
 ): UnpluginOptions {
   let viteModule: ViteCompaibleModule | null = null
   async function getViteModule() {
@@ -324,7 +325,10 @@ export function resourcePlugin(
           const code = await generateBundleResources(resourcePaths, isProduction, {
             forceStringify,
             strictMessage,
-            escapeHtml
+            escapeHtml,
+            usedKeyFilter: collector
+              ? (keyPath: string) => collector.shouldKeepKey(keyPath)
+              : undefined
           })
           // TODO: support virtual import identifier
           // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
@@ -367,7 +371,10 @@ export function resourcePlugin(
               escapeHtml,
               jit: true,
               onlyLocales,
-              forceStringify
+              forceStringify,
+              usedKeyFilter: collector
+                ? (keyPath: string) => collector.shouldKeepKey(keyPath)
+                : undefined
             }
           ) as CodeGenOptions
           debug('parseOptions', parseOptions)
@@ -398,6 +405,8 @@ export function resourcePlugin(
 
             const generate = /\.?json5?/.test(langInfo) ? generateJSON : generateYAML
 
+            // For SFC custom blocks, only apply tree-shaking filter for global scope
+            const isGlobalBlock = globalSFCScope || !!query.global
             const parseOptions = getOptions(
               filename,
               isProduction,
@@ -410,7 +419,11 @@ export function resourcePlugin(
                 strictMessage,
                 escapeHtml,
                 onlyLocales,
-                forceStringify
+                forceStringify,
+                usedKeyFilter:
+                  collector && isGlobalBlock
+                    ? (keyPath: string) => collector.shouldKeepKey(keyPath)
+                    : undefined
               }
             ) as CodeGenOptions
             debug('parseOptions', parseOptions)
@@ -512,7 +525,8 @@ async function generateBundleResources(
     strictMessage = true,
     escapeHtml = false,
     jit = true,
-    transformI18nBlock = undefined
+    transformI18nBlock = undefined,
+    usedKeyFilter = undefined
   }: {
     forceStringify?: boolean
     isGlobal?: boolean
@@ -521,6 +535,7 @@ async function generateBundleResources(
     escapeHtml?: boolean
     jit?: boolean
     transformI18nBlock?: PluginOptions['transformI18nBlock']
+    usedKeyFilter?: ((keyPath: string) => boolean) | undefined
   }
 ) {
   const codes = []
@@ -539,7 +554,8 @@ async function generateBundleResources(
         strictMessage,
         escapeHtml,
         forceStringify,
-        transformI18nBlock
+        transformI18nBlock,
+        usedKeyFilter
       }) as CodeGenOptions
       parseOptions.type = 'bare'
       const { code } = generate(source, parseOptions)
@@ -635,7 +651,8 @@ function getOptions(
     strictMessage = true,
     escapeHtml = false,
     jit = true,
-    transformI18nBlock = null
+    transformI18nBlock = null,
+    usedKeyFilter = undefined
   }: {
     inSourceMap?: RawSourceMap
     forceStringify?: boolean
@@ -646,6 +663,7 @@ function getOptions(
     escapeHtml?: boolean
     jit?: boolean
     transformI18nBlock?: PluginOptions['transformI18nBlock'] | null
+    usedKeyFilter?: ((keyPath: string) => boolean) | undefined
   }
 ): Record<string, unknown> {
   const mode: DevEnv = isProduction ? 'production' : 'development'
@@ -660,6 +678,7 @@ function getOptions(
     escapeHtml,
     jit,
     onlyLocales,
+    usedKeyFilter,
     env: mode,
     transformI18nBlock,
     onWarn: (msg: string): void => {

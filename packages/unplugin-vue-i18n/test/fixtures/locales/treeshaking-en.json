@@ -1,0 +1,10 @@
+{
+  "hello": "hello!",
+  "unused": "this should be removed",
+  "other": "other message",
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "contact": "Contact"
+  }
+}

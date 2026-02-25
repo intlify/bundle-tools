@@ -17,6 +17,7 @@ unplugin for Vue I18n
   - Locale of i18n resource definition
   - Locale of i18n resource definition for global scope
   - i18n resource formatting
+- Locale message tree-shaking (remove unused message keys)
 
 ## 💿 Installation
 
@@ -248,6 +249,52 @@ If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplu
   }
 }
 ```
+
+### Locale message tree-shaking
+
+unplugin-vue-i18n can statically analyze your application code to detect which locale message keys are used via `t()`, `$t()`, `v-t` directive, etc., and remove unused keys from the production bundle.
+
+This is useful for large applications with many locale message keys where only a subset is actually used.
+
+```ts
+// vite.config.ts
+import VueI18nPlugin from '@intlify/unplugin-vue-i18n/vite'
+import path from 'path'
+
+export default defineConfig({
+  plugins: [
+    VueI18nPlugin({
+      include: [path.resolve(__dirname, './src/locales/**')],
+      treeShaking: true
+    })
+  ]
+})
+```
+
+With advanced options:
+
+```ts
+VueI18nPlugin({
+  include: [path.resolve(__dirname, './src/locales/**')],
+  treeShaking: {
+    // Keys to always keep (glob patterns)
+    safelist: ['errors.*', 'validation.**'],
+    // Strategy when dynamic keys like t(variable) are detected
+    // 'keep-all' (default): disable tree-shaking, keep all keys
+    // 'ignore': continue tree-shaking despite dynamic keys
+    dynamicKeyStrategy: 'keep-all'
+  }
+})
+```
+
+> [!NOTE]
+> Tree-shaking only runs in production builds. In development mode, all keys are preserved.
+
+> [!NOTE]
+> Tree-shaking currently supports JSON and YAML locale files for global scope. Component-scoped `<i18n>` blocks (without `global` attribute) and JS/TS locale files are not tree-shaken.
+
+> [!WARNING]
+> If your application uses dynamic keys (e.g., `t(variable)`, ``t(`prefix.${suffix}`)``), tree-shaking may remove keys that are only referenced dynamically. By default (`dynamicKeyStrategy: 'keep-all'`), tree-shaking is automatically disabled when dynamic key usage is detected. If you set `dynamicKeyStrategy: 'ignore'`, make sure to add dynamically accessed keys to `safelist`.
 
 ## 📦 Automatic bundling
 
@@ -606,6 +653,50 @@ If do you will use this option, you need to enable `jitCompilation` option.
 - **Default:** `[]`
 
   By using it you can exclude from the bundle those localizations that are not specified in this option.
+
+### `treeShaking`
+
+- **Type:** `boolean | TreeShakingOptions`
+- **Default:** `false`
+
+  Enable locale message tree-shaking to remove unused message keys from the production bundle. The plugin statically analyzes your source files to detect which keys are used via `t()`, `$t()`, `tc()`, `te()`, `d()`, `n()`, `v-t` directive, etc., and removes keys that are not referenced.
+
+  When set to `true`, default options are used. You can also pass an object for fine-grained control:
+
+  ```ts
+  interface TreeShakingOptions {
+    /**
+     * Message key patterns to always keep (never tree-shake).
+     * Supports glob-like patterns.
+     * `*` matches a single level, `**` matches multiple levels.
+     * @example ['errors.*', 'validation.**']
+     */
+    safelist?: string[]
+    /**
+     * Strategy when dynamic key usage (e.g., t(variable)) is detected.
+     * - 'keep-all': Disable tree-shaking and keep all keys (safe default).
+     * - 'ignore': Continue tree-shaking despite dynamic keys (use with safelist).
+     * @default 'keep-all'
+     */
+    dynamicKeyStrategy?: 'keep-all' | 'ignore'
+    /**
+     * Glob patterns for source files to scan for used message keys.
+     * @default ['${projectRoot}/src/**\/*.{vue,ts,js,tsx,jsx}']
+     */
+    scanPatterns?: string[]
+  }
+  ```
+
+  **Supported scope:**
+  - Global locale files (JSON/YAML matched by `include` option)
+  - SFC `<i18n global>` custom blocks
+
+  **Not supported (keys are always preserved):**
+  - Component-scoped `<i18n>` custom blocks (without `global` attribute)
+  - JS/TS locale files
+
+> [!NOTE]
+> Tree-shaking only runs in production builds.
 
 ### `useVueI18nImportName` (Experimental)
 

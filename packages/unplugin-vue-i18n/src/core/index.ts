@@ -1,3 +1,5 @@
 export * from './options'
 export * from './resource'
 export * from './directive'
+export * from './collector'
+export * from './treeshaking'

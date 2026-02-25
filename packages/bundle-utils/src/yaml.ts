@@ -7,6 +7,8 @@ import { getStaticYAMLValue, parseYAML, traverseNodes } from 'yaml-eslint-parser
 import {
   createCodeGenerator,
   excludeLocales,
+  filterMessageKeys,
+  filterMultiLocaleMessages,
   generateMessageFunction,
   generateResourceAst,
   mapLinesColumns
@@ -34,7 +36,8 @@ export function generate(
     onError = undefined,
     strictMessage = true,
     escapeHtml = false,
-    jit = false
+    jit = false,
+    usedKeyFilter = undefined
   }: CodeGenOptions
 ): CodeGenResult<YAMLProgram> {
   let value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
@@ -74,6 +77,18 @@ export function generate(
     ast = parseYAML(value, { filePath: filename })
     options.locale = ''
     options.source = undefined
+  }
+
+  // Tree-shaking: filter unused message keys
+  if (usedKeyFilter) {
+    const messages = getStaticYAMLValue(ast) as Record<string, unknown>
+    const isMultiLocale = !locale && type === 'sfc'
+    const filtered = isMultiLocale
+      ? filterMultiLocaleMessages(messages, usedKeyFilter)
+      : filterMessageKeys(messages, usedKeyFilter)
+    value = JSON.stringify(filtered)
+    ast = parseYAML(value, { filePath: filename })
+    options.source = value
   }
 
   const generator = createCodeGenerator(options)

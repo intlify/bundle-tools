@@ -12,7 +12,7 @@
     "ts-loader": "catalog:webpack",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
-    "webpack-cli": "^5.1.4",
+    "webpack-cli": "^6.0.0",
     "webpack-dev-server": "^4.15.1"
   },
   "scripts": {

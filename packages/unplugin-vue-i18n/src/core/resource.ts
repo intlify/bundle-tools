@@ -453,7 +453,7 @@ export function resourcePlugin(
               source = `export default ${source}`
             }
 
-            const { code: generatedCode, map } = generate(source, parseOptions)
+            const { code: generatedCode, map } = await generate(source, parseOptions)
             debug('generated code', generatedCode)
             debug('sourcemap', map, sourceMap)
 

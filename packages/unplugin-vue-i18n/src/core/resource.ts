@@ -450,7 +450,7 @@ export function resourcePlugin(
             // For JS/TS custom blocks, wrap source with `export default`
             // since the JS/TS generators require it
             if (/\.?[cm]?[jt]s$/.test(langInfo)) {
-              source = `export default ${source}`
+              source = `export default ${source.replace(/^[\s;]+/, '')}`
             }
 
             const { code: generatedCode, map } = await generate(source, parseOptions)

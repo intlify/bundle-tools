@@ -403,7 +403,7 @@ export function resourcePlugin(
             }
             debug('langInfo', langInfo)
 
-            const generate = /\.?json5?/.test(langInfo) ? generateJSON : generateYAML
+            const generate = getGenerator(langInfo, generateYAML)
 
             // For SFC custom blocks, only apply tree-shaking filter for global scope
             const isGlobalBlock = globalSFCScope || !!query.global
@@ -415,6 +415,7 @@ export function resourcePlugin(
               {
                 inSourceMap,
                 isGlobal: globalSFCScope,
+                allowDynamic,
                 jit: true,
                 strictMessage,
                 escapeHtml,
@@ -446,7 +447,13 @@ export function resourcePlugin(
               }
             }
 
-            const { code: generatedCode, map } = generate(source, parseOptions)
+            // For JS/TS custom blocks, wrap source with `export default`
+            // since the JS/TS generators require it
+            if (/\.?[cm]?[jt]s$/.test(langInfo)) {
+              source = `export default ${source.replace(/^[\s;]+/, '')}`
+            }
+
+            const { code: generatedCode, map } = await generate(source, parseOptions)
             debug('generated code', generatedCode)
             debug('sourcemap', map, sourceMap)
 
@@ -475,15 +482,15 @@ function getGenerator(ext: string, fallback: GeneratorLike = generateJSON) {
     return generateJSON
   }
 
-  if (/\.ya?ml$/.test(ext)) {
+  if (/\.?ya?ml$/.test(ext)) {
     return generateYAML
   }
 
-  if (/\.[c|m]?js$/.test(ext)) {
+  if (/\.?[cm]?js$/.test(ext)) {
     return generateJavaScript
   }
 
-  if (/\.[c|m]?ts$/.test(ext)) {
+  if (/\.?[cm]?ts$/.test(ext)) {
     return generateTypescript
   }
 

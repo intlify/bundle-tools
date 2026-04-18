@@ -5,5 +5,6 @@ export default {
     'scripts/playwright.ts' // jiti
   ],
   ignore: ['**/fixtures/**', '.unmaintained/**'],
-  ignoreDependencies: ['ts-loader', 'lint-staged']
+  ignoreDependencies: ['ts-loader', 'lint-staged'],
+  exclude: ['optionalPeerDependencies']
 } satisfies KnipConfig

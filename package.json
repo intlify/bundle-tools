@@ -45,7 +45,8 @@
     },
     "onlyBuiltDependencies": [
       "esbuild",
-      "oxc-resolver"
+      "oxc-resolver",
+      "unrs-resolver"
     ]
   },
   "license": "MIT",

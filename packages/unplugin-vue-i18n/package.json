@@ -11,11 +11,15 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "*",
+    "vite": "^6.0.0 || ^7.0.0 || ^8.0.0",
     "vue": "^3.2.25",
     "vue-i18n": "*"
   },
   "peerDependenciesMeta": {
     "petite-vue-i18n": {
+      "optional": true
+    },
+    "vite": {
       "optional": true
     },
     "vue-i18n": {

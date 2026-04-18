@@ -193,15 +193,23 @@ export function resourcePlugin(
         // json transform handling for normal Vite (not rolldown-vite)
         if (!isRolldownVite) {
           const jsonPlugin = getVitePlugin(config, 'vite:json')
-          if (jsonPlugin) {
-            // saving `vite:json` plugin instance
-            const orgTransform =
-              'handler' in jsonPlugin.transform!
-                ? jsonPlugin.transform!.handler
-                : jsonPlugin.transform!
+          if (jsonPlugin && jsonPlugin.transform) {
+            /**
+             * NOTE(kazupon):
+             * Detect the hook shape BEFORE mutation. Vite 8 changed `transform`
+             * to an `ObjectHook` (`{ handler, filter, order, ... }`), while
+             * earlier versions use a plain function. We must preserve the
+             * ObjectHook shape so that `filter`/`order` are not lost; otherwise
+             * Vite 8's `vite:json` will run on already-compiled JS output.
+             * ref: https://github.com/intlify/bundle-tools/issues/553
+             * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
+             */
+            const transform = jsonPlugin.transform
+            const isObjectHook = typeof transform !== 'function' && 'handler' in transform
+            const orgTransform = isObjectHook ? transform.handler : transform
 
             // override json transform
-            async function overrideJson(code: string, id: string) {
+            async function overrideJson(this: unknown, code: string, id: string) {
               const filter = await getFilter()
               if (!/\.json$/.test(id) || filter(id)) {
                 return
@@ -225,14 +233,10 @@ export function resourcePlugin(
               return orgTransform.apply(this, [code, id])
             }
 
-            /**
-             * NOTE(kazupon):
-             * We need to override the transform function of the `vite:json` plugin for `transform` and `transform.handler`.
-             * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
-             */
-            jsonPlugin.transform = overrideJson
-            if ('handler' in jsonPlugin.transform!) {
-              jsonPlugin.transform.handler = overrideJson
+            if (isObjectHook) {
+              transform.handler = overrideJson as typeof transform.handler
+            } else {
+              jsonPlugin.transform = overrideJson as typeof jsonPlugin.transform
             }
           }
         }

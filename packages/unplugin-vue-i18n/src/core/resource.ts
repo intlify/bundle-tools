@@ -21,10 +21,6 @@ import type { ResolvedOptions } from '../core/options'
 import type { PluginOptions } from '../types'
 import type { VueQuery } from '../vue'
 
-type ViteCompaibleModule = {
-  rolldownVersion?: boolean
-}
-
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 const RE_INTLIFY_BUNDLE_IMPORT_ID = new RegExp(`^${INTLIFY_BUNDLE_IMPORT_ID}$`)
@@ -59,20 +55,6 @@ export function resourcePlugin(
   meta: UnpluginContextMeta,
   collector?: import('./collector').UsedKeysCollector | null
 ): UnpluginOptions {
-  let viteModule: ViteCompaibleModule | null = null
-  async function getViteModule() {
-    if (viteModule != null) {
-      return viteModule
-    }
-    try {
-      viteModule = (await import('vite')) as unknown as ViteCompaibleModule
-    } catch (e) {
-      error(`vite not found, please install vite.`, (e as Error).message)
-      throw e
-    }
-    return viteModule
-  }
-
   function resolveIncludeExclude() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
@@ -99,15 +81,12 @@ export function resourcePlugin(
     if (meta.framework == 'webpack') {
       debug('Using filter for webpack')
       _filter = createFilter(...resolveIncludeExclude())
+    } else if (hasViteJsonPlugin) {
+      debug('Using filter for rollup-vite')
+      _filter = createFilter(...resolveIncludeExcludeForLegacy())
     } else {
-      const viteModule = await getViteModule()
-      if (viteModule.rolldownVersion) {
-        debug('Using filter for rolldown-vite')
-        _filter = createFilter(...resolveIncludeExclude())
-      } else {
-        debug('Using filter for rollup-vite')
-        _filter = createFilter(...resolveIncludeExcludeForLegacy())
-      }
+      debug('Using filter for rolldown-vite')
+      _filter = createFilter(...resolveIncludeExclude())
     }
 
     return _filter
@@ -119,6 +98,7 @@ export function resourcePlugin(
 
   let isProduction = false
   let sourceMap = false
+  let hasViteJsonPlugin = false
   const vueI18nAliasName = module
   debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
@@ -193,6 +173,7 @@ export function resourcePlugin(
          * ref: https://github.com/intlify/bundle-tools/issues/553
          */
         const jsonPlugin = getVitePlugin(config, 'vite:json')
+        hasViteJsonPlugin = !!jsonPlugin
         if (jsonPlugin && jsonPlugin.transform) {
           const transform = jsonPlugin.transform
           const isObjectHook = typeof transform !== 'function' && 'handler' in transform

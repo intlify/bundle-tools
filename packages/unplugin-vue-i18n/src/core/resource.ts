@@ -21,10 +21,6 @@ import type { ResolvedOptions } from '../core/options'
 import type { PluginOptions } from '../types'
 import type { VueQuery } from '../vue'
 
-type ViteCompaibleModule = {
-  rolldownVersion?: boolean
-}
-
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 const RE_INTLIFY_BUNDLE_IMPORT_ID = new RegExp(`^${INTLIFY_BUNDLE_IMPORT_ID}$`)
@@ -59,20 +55,6 @@ export function resourcePlugin(
   meta: UnpluginContextMeta,
   collector?: import('./collector').UsedKeysCollector | null
 ): UnpluginOptions {
-  let viteModule: ViteCompaibleModule | null = null
-  async function getViteModule() {
-    if (viteModule != null) {
-      return viteModule
-    }
-    try {
-      viteModule = (await import('vite')) as unknown as ViteCompaibleModule
-    } catch (e) {
-      error(`vite not found, please install vite.`, (e as Error).message)
-      throw e
-    }
-    return viteModule
-  }
-
   function resolveIncludeExclude() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
@@ -99,15 +81,12 @@ export function resourcePlugin(
     if (meta.framework == 'webpack') {
       debug('Using filter for webpack')
       _filter = createFilter(...resolveIncludeExclude())
+    } else if (hasViteJsonPlugin) {
+      debug('Using filter for rollup-vite')
+      _filter = createFilter(...resolveIncludeExcludeForLegacy())
     } else {
-      const viteModule = await getViteModule()
-      if (viteModule.rolldownVersion) {
-        debug('Using filter for rolldown-vite')
-        _filter = createFilter(...resolveIncludeExclude())
-      } else {
-        debug('Using filter for rollup-vite')
-        _filter = createFilter(...resolveIncludeExcludeForLegacy())
-      }
+      debug('Using filter for rolldown-vite')
+      _filter = createFilter(...resolveIncludeExclude())
     }
 
     return _filter
@@ -119,6 +98,7 @@ export function resourcePlugin(
 
   let isProduction = false
   let sourceMap = false
+  let hasViteJsonPlugin = false
   const vueI18nAliasName = module
   debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
@@ -179,61 +159,54 @@ export function resourcePlugin(
         sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
         debug(`configResolved: isProduction = ${isProduction}, sourceMap = ${sourceMap}`)
 
-        // Check if we're using rolldown-vite
-        const isRolldownVite = !!(await getViteModule()).rolldownVersion
-        debug(`Using ${isRolldownVite ? 'rolldown-vite' : 'vite'} for the build`)
-
         /**
          * NOTE(kazupon):
-         * For the native rolldown plugin, we need to change to another solution from the current workaround.
-         * Currently, the rolldown team and vite team are discussing this issue.
-         * https://github.com/vitejs/rolldown-vite/issues/120
+         * Override `vite:json` plugin transform to prevent it from processing
+         * JSON files that unplugin-vue-i18n has already compiled.
+         *
+         * We detect the builder by checking whether `vite:json` exists in
+         * `config.plugins` — rolldown-based Vite (v8+) uses
+         * `builtin:vite-json` instead, so `getVitePlugin` returns null and
+         * this block is naturally skipped. This is more reliable than
+         * `import('vite').rolldownVersion` which can resolve to the wrong
+         * copy in multi-vite setups (e.g. Nuxt 4 + UnoCSS).
+         * ref: https://github.com/intlify/bundle-tools/issues/553
          */
+        const jsonPlugin = getVitePlugin(config, 'vite:json')
+        hasViteJsonPlugin = !!jsonPlugin
+        if (jsonPlugin && jsonPlugin.transform) {
+          const transform = jsonPlugin.transform
+          const isObjectHook = typeof transform !== 'function' && 'handler' in transform
+          const orgTransform = isObjectHook ? transform.handler : transform
 
-        // json transform handling for normal Vite (not rolldown-vite)
-        if (!isRolldownVite) {
-          const jsonPlugin = getVitePlugin(config, 'vite:json')
-          if (jsonPlugin) {
-            // saving `vite:json` plugin instance
-            const orgTransform =
-              'handler' in jsonPlugin.transform!
-                ? jsonPlugin.transform!.handler
-                : jsonPlugin.transform!
-
-            // override json transform
-            async function overrideJson(code: string, id: string) {
-              const filter = await getFilter()
-              if (!/\.json$/.test(id) || filter(id)) {
-                return
-              }
-
-              /**
-               * NOTE(kazupon):
-               * `vite:json` plugin will be handled if the query generated from the result of parse SFC
-               * with `vite:vue` plugin contains json as follows.
-               * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
-               *
-               * To avoid this, return the result that has already been processed (`enforce: 'pre'`) in the wrapped json plugin.
-               */
-              const { query } = parseVueRequest(id)
-              if (query.vue) {
-                return
-              }
-
-              debug('org json plugin')
-              // @ts-expect-error
-              return orgTransform.apply(this, [code, id])
+          async function overrideJson(this: unknown, code: string, id: string) {
+            const filter = await getFilter()
+            if (!/\.json$/.test(id) || filter(id)) {
+              return
             }
 
             /**
              * NOTE(kazupon):
-             * We need to override the transform function of the `vite:json` plugin for `transform` and `transform.handler`.
-             * ref: https://github.com/vitejs/vite/pull/19878/files#diff-2cfbd4f4d8c32727cd8e1a561cffbde0b384a3ce0789340440e144f9d64c10f6R1086-R1088
+             * `vite:json` plugin will be handled if the query generated from the result of parse SFC
+             * with `vite:vue` plugin contains json as follows.
+             * e.g src/components/HelloI18n.vue?vue&type=i18n&index=1&lang.json
+             *
+             * To avoid this, return the result that has already been processed (`enforce: 'pre'`) in the wrapped json plugin.
              */
-            jsonPlugin.transform = overrideJson
-            if ('handler' in jsonPlugin.transform!) {
-              jsonPlugin.transform.handler = overrideJson
+            const { query } = parseVueRequest(id)
+            if (query.vue) {
+              return
             }
+
+            debug('org json plugin')
+            // @ts-expect-error
+            return orgTransform.apply(this, [code, id])
+          }
+
+          if (isObjectHook) {
+            transform.handler = overrideJson as typeof transform.handler
+          } else {
+            jsonPlugin.transform = overrideJson as typeof jsonPlugin.transform
           }
         }
       },

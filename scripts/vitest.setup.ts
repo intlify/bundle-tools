@@ -4,7 +4,7 @@ import { afterAll, beforeAll } from 'vitest'
 import type { Browser, LaunchOptions, Page } from 'playwright-core'
 
 // TODO: extract to shim.d.ts
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line @typescript-eslint/no-namespace -- ignore
 declare namespace global {
   let browser: Browser
   let page: Page

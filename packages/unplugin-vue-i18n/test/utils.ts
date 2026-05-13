@@ -161,7 +161,10 @@ function bundleWebpackLike(
               loader: resolve(__dirname, '../node_modules/ts-loader'),
               exclude: /node_modules/,
               options: {
-                transpileOnly: true
+                transpileOnly: true,
+                compilerOptions: {
+                  rootDir: '.'
+                }
               }
             }
       ]

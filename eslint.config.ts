@@ -57,10 +57,10 @@ export default defineConfig(
   },
   globalIgnores([
     'examples/**',
-    'README.md',
     'CHANGELOG.md',
     '.unmaintained/**',
     'packages/**/CHANGELOG.md',
+    'packages/unplugin-vue-i18n/README.md',
     '**/*.md/*.ts',
     '**/test/fixtures/**',
     '**/*.config.ts',

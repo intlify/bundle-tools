@@ -53,6 +53,7 @@ export default defineConfig(
       'CHANGELOG.md',
       '.unmaintained/**',
       '.claude/**',
+      '.plans/**',
       'packages/**/CHANGELOG.md',
       'packages/unplugin-vue-i18n/README.md',
       '**/*.md/*.ts',

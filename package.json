@@ -91,6 +91,8 @@
     "test:unit:utils": "vitest run packages/bundle-utils",
     "test:unit:unplugin": "vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:vite": "TEST_FRAMEWORK=vite vitest run packages/unplugin-vue-i18n/test",
+    "test:unit:unplugin:vite:vite8": "TEST_FRAMEWORK=vite TEST_VITE_TYPE=vite8 vitest run packages/unplugin-vue-i18n/test",
+    "test:unit:unplugin:vite:vite6": "TEST_FRAMEWORK=vite TEST_VITE_TYPE=vite6 vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:webpack": "TEST_FRAMEWORK=webpack vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:rspack": "TEST_FRAMEWORK=rspack vitest run packages/unplugin-vue-i18n/test",
     "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",

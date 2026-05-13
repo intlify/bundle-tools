@@ -12,11 +12,15 @@
   },
   "peerDependencies": {
     "petite-vue-i18n": "^12.0.0-alpha.2",
+    "vite": "^6.0.0 || ^7.0.0 || ^8.0.0",
     "vue": "^3.2.25",
     "vue-i18n": "^12.0.0-alpha.2"
   },
   "peerDependenciesMeta": {
     "petite-vue-i18n": {
+      "optional": true
+    },
+    "vite": {
       "optional": true
     },
     "vue-i18n": {
@@ -31,6 +35,7 @@
     "defu": "^6.1.4",
     "knitwork": "^1.2.0",
     "mlly": "^1.2.0",
+    "pathe": "^2.0.3",
     "picocolors": "^1.0.0",
     "tinyglobby": "^0.2.15",
     "unplugin": "^2.2.0",
@@ -46,9 +51,10 @@
     "@vitejs/plugin-vue": "catalog:vite",
     "jsdom": "^25.0.1",
     "memory-fs": "^0.5.0",
+    "rollup-vite": "npm:vite@6.3.5",
     "ts-loader": "catalog:webpack",
     "unbuild": "catalog:",
-    "vite": "catalog:vite",
+    "vite": "catalog:vite8",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
     "webpack-merge": "^5.9.0"

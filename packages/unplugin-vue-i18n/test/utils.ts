@@ -4,8 +4,9 @@ import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
 import { dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { build as buildVite6 } from 'rollup-vite'
 import { glob } from 'tinyglobby'
-import { build } from 'vite'
+import { build as buildVite8 } from 'vite'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
@@ -30,9 +31,16 @@ type BundleResolve = {
 
 type BundleFunction = (fixture: string, options: Record<string, unknown>) => Promise<BundleResolve>
 
+type ViteBuilderType = 'vite6' | 'vite8'
+const VITE_BUILDERS: Record<ViteBuilderType, typeof buildVite8> = {
+  vite6: buildVite6 as unknown as typeof buildVite8,
+  vite8: buildVite8
+}
+
 async function bundleVite(
   fixture: string,
-  options: Record<string, unknown> = {}
+  options: Record<string, unknown> = {},
+  viteType: ViteBuilderType = getCurrentViteType()
 ): Promise<BundleResolve> {
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
@@ -62,6 +70,7 @@ async function bundleVite(
 
   // @ts-ignore
   const plugins = [vue(), vitePlugin({ include, ...options })]
+  const build = VITE_BUILDERS[viteType]
   const result = await build({
     logLevel: silent,
     resolve: {
@@ -211,6 +220,10 @@ const bundlerMap = {
 
 function getCurrentTestFramework() {
   return (process.env.TEST_FRAMEWORK as keyof typeof bundlerMap) || 'vite'
+}
+
+function getCurrentViteType(): ViteBuilderType {
+  return (process.env.TEST_VITE_TYPE as ViteBuilderType) || 'vite8'
 }
 
 export function getCurrentTestBundler() {

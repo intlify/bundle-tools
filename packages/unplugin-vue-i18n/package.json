@@ -54,13 +54,13 @@
     "ts-loader": "catalog:webpack",
     "unbuild": "catalog:",
     "vite": "catalog:vite",
-    "rollup-vite": "npm:vite@^6.3.5",
+    "rollup-vite": "npm:vite@6.3.5",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
     "webpack-merge": "^5.9.0"
   },
   "engines": {
-    "node": ">= 20"
+    "node": ">= 22.13"
   },
   "files": [
     "lib",

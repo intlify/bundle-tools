@@ -26,7 +26,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [20]
+        node: [22]
 
     steps:
       - name: Checkout
@@ -64,7 +64,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [20]
+        node: [22]
 
     steps:
       - name: Checkout
@@ -103,7 +103,7 @@ jobs:
       fail-fast: false
       matrix:
         os: [ubuntu-latest]
-        node: [20, 22, 24]
+        node: [22, 24]
         framework: ['vite', 'webpack']
 
     steps:

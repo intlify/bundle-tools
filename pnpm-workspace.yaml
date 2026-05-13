@@ -3,22 +3,22 @@ packages:
   - examples/**
 catalogs:
   intlify:
-    '@intlify/shared': ~11.1.12
-    '@intlify/message-compiler': ~11.1.12
-    vue-i18n: ~11.1.12
+    '@intlify/shared': ~11.4.2
+    '@intlify/message-compiler': ~11.4.2
+    vue-i18n: ~11.4.2
   vite:
     '@vitejs/plugin-vue': 5.2.4
     vite: 6.3.5
   rolldown-vite:
     vite: npm:rolldown-vite@latest
   vue:
-    vue: ~3.5.21
+    vue: ~3.5.34
   webpack:
-    ts-loader: ~9.5.4
+    ts-loader: ~9.5.7
     vue-loader: ~17.4.2
-    webpack: ~5.101.3
+    webpack: ~5.106.2
 catalog:
-  '@types/node': ^22.18.4
+  '@types/node': ^25.7.0
   unbuild: ^3.6.1
   source-map-js: ^1.2.1
 allowBuilds:
@@ -27,8 +27,8 @@ allowBuilds:
   unrs-resolver: true
 overrides:
   vite: catalog:vite
-  '@intlify/shared': ~11.1.12
-  '@intlify/message-compiler': ~11.1.12
-  '@intlify/core-base': ~11.1.12
-  vue-i18n: ~11.1.12
-  petite-vue-i18n: ~11.1.12
+  '@intlify/shared': ~11.4.2
+  '@intlify/message-compiler': ~11.4.2
+  '@intlify/core-base': ~11.4.2
+  vue-i18n: ~11.4.2
+  petite-vue-i18n: ~11.4.2

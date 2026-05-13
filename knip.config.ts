@@ -1,10 +1,7 @@
 import type { KnipConfig } from 'knip'
 
 export default {
-  entry: [
-    'scripts/playwright.ts' // jiti
-  ],
   ignore: ['**/fixtures/**', '.unmaintained/**'],
   ignoreDependencies: ['ts-loader', 'lint-staged'],
-  exclude: ['optionalPeerDependencies']
+  exclude: ['optionalPeerDependencies', 'unlisted', 'catalog']
 } satisfies KnipConfig

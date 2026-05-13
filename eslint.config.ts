@@ -43,7 +43,9 @@ export default defineConfig(
     jsonc: true
   }),
   yaml(),
-  markdown(),
+  markdown({
+    preferences: true
+  }),
   vitest(),
   prettier(),
   {
@@ -55,6 +57,7 @@ export default defineConfig(
   },
   globalIgnores([
     'examples/**',
+    'README.md',
     'CHANGELOG.md',
     '.unmaintained/**',
     'packages/**/CHANGELOG.md',

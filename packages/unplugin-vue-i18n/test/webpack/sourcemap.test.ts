@@ -12,16 +12,19 @@ const test = process.env.CI ? _test.skip : _test
 
 test('resource files: json', async () => {
   const { map } = await bundleAndRun('ja.json', bundleWebpack, options)
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
 test('resource files: json5', async () => {
   const { map } = await bundleAndRun('en.json5', bundleWebpack, options)
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
 test('resource files: yaml', async () => {
   const { map } = await bundleAndRun('ko.yaml', bundleWebpack, options)
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 ;[

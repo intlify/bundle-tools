@@ -78,7 +78,7 @@ exports[`AST code generation > complex > code 1`] = `
   "unicode": {"type":0,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1},"source":"A"},"body":{"type":2,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1}},"items":[{"type":3,"start":0,"end":1,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":2,"offset":1}}}],"static":"A"}},
   "unicode-escape": {"type":0,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6},"source":"\\\\u0041"},"body":{"type":2,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6}},"items":[{"type":3,"start":0,"end":6,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":7,"offset":6}}}],"static":"\\\\u0041"}},
   "backslash-single-quote": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"\\\\\\u0027"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"\\\\\\u0027"}},
-  "backslash-backslash": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"\\\\\\\\"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"\\\\\\\\"}},
+  "backslash-backslash": {"type":0,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2},"source":"\\\\\\\\"},"body":{"type":2,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}},"items":[{"type":3,"start":0,"end":2,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":3,"offset":2}}}],"static":"\\\\"}},
   "errors": [
     {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1001"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1001"}},
     {"type":0,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9},"source":"ERROR1002"},"body":{"type":2,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}},"items":[{"type":3,"start":0,"end":9,"loc":{"start":{"line":1,"column":1,"offset":0},"end":{"line":1,"column":10,"offset":9}}}],"static":"ERROR1002"}}
@@ -404,7 +404,7 @@ exports[`code generation > complex > code 1`] = `
   "unicode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["A"])};fn.source="A";return fn;})(),
   "unicode-escape": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\u0041"])};fn.source="\\\\u0041";return fn;})(),
   "backslash-single-quote": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\'"])};fn.source="\\\\'";return fn;})(),
-  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
+  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\"])};fn.source="\\\\\\\\";return fn;})(),
   "errors": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})()
@@ -441,7 +441,7 @@ exports[`code generation > complex > map 1`] = `
     "A",
     "\\u0041",
     "\\'",
-    "\\\\",
+    "\\",
     "ERROR1001",
     "ERROR1002",
     "NOTE: This is warning",

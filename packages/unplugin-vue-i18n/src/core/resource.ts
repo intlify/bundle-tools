@@ -27,6 +27,10 @@ import type { VueCompilerParser, VueQuery } from '../vue'
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 
+const supportedFileExtensionsRE = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
+const RE_SFC_I18N_CUSTOM_BLOCK = /\?vue&type=i18n/
+const RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK = /blockType=i18n/
+
 const debug = createDebug(resolveNamespace('resource'))
 
 /**
@@ -42,9 +46,99 @@ type PluginCtx = {
 }
 
 export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta): UnpluginOptions {
-  const _filter = createFilter(opts.include, opts.exclude)
   const importedResources = new Set<string>()
-  const filter = (val: string) => _filter(val) || importedResources.has(val)
+
+  /**
+   * Build (include, exclude) for `createFilter` in the rolldown-vite / webpack / rspack path.
+   * - When the user specifies `include`, append the SFC custom-block matcher and pass through `exclude`.
+   * - When the user does not specify `include`, fall back to extension-based matching.
+   *
+   * Note: `opts.exclude` becomes `['**\/**']` when no include is set (legacy behavior baked into
+   * `core/options.ts`). For the rolldown path that quirk is undesirable, so we deliberately drop
+   * exclude here.
+   */
+  function resolveIncludeExclude(): Parameters<typeof createFilter> {
+    const customBlockInclude =
+      meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
+    return opts.include
+      ? [[...opts.include, customBlockInclude], opts.exclude]
+      : [[supportedFileExtensionsRE, customBlockInclude], undefined]
+  }
+
+  /**
+   * Build (include, exclude) for `createFilter` in the rollup-vite (legacy) path.
+   * Preserves the historical behavior where omitting `include` means "exclude everything"
+   * (driven by `opts.exclude === ['**\/**']`).
+   */
+  function resolveIncludeExcludeForLegacy(): Parameters<typeof createFilter> {
+    const customBlockInclude =
+      meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
+    return opts.include
+      ? [[...opts.include, customBlockInclude], opts.exclude]
+      : [undefined, opts.exclude]
+  }
+
+  let _filter: ReturnType<typeof createFilter> | null = null
+  let hasViteJsonPlugin = false
+
+  /**
+   * Lazily resolves the active filter based on the bundler in use.
+   * - webpack / rspack: regex-based filter (eagerly seeded by `sharedWebpackLikePlugin`).
+   * - vite with `vite:json` plugin (rollup-vite): legacy include/exclude path.
+   * - vite without `vite:json` plugin (rolldown-vite, v8+): regex-based filter.
+   *
+   * The returned wrapper composes `importedResources` so files discovered via
+   * static-import scanning continue to pass.
+   */
+  async function getFilter(): Promise<(val: string) => boolean> {
+    if (_filter == null) {
+      if (meta.framework === 'webpack' || meta.framework === 'rspack') {
+        debug('Using filter for webpack/rspack')
+        _filter = createFilter(...resolveIncludeExclude())
+      } else if (hasViteJsonPlugin) {
+        debug('Using filter for rollup-vite')
+        _filter = createFilter(...resolveIncludeExcludeForLegacy())
+      } else {
+        debug('Using filter for rolldown-vite')
+        _filter = createFilter(...resolveIncludeExclude())
+      }
+    }
+    return (val: string) => _filter!(val) || importedResources.has(val)
+  }
+
+  /**
+   * Virtual id machinery for vite 8+ (rolldown-based) builds.
+   *
+   * vite 8 ships `builtin:vite-json` as a Rust plugin whose `transform` cannot
+   * be overridden from JS — replacing the JS-side `.transform` is silently
+   * ignored because rolldown invokes the native binding directly. Without
+   * intervention, our `enforce: 'pre'` transform converts JSON to JS and then
+   * `builtin:vite-json` runs anyway and fails to parse our JS as JSON.
+   *
+   * Workaround: in `resolveId`, remap each matching resource file to a
+   * virtual id like `\0intlify-i18n-N`. The virtual id has no `.json` /
+   * `.json5` suffix, so `builtin:vite-json` (which matches by extension) does
+   * not claim it. Our `load` reads the original file from disk, runs the
+   * generator, and returns the compiled JS.
+   */
+  const VITE_VIRTUAL_PREFIX = '\0intlify-i18n-'
+  const virtualIdToRealPath = new Map<string, string>()
+  const realPathToVirtualId = new Map<string, string>()
+  let virtualCounter = 0
+
+  function intlifyVirtualize(realPath: string): string {
+    let virtualId = realPathToVirtualId.get(realPath)
+    if (!virtualId) {
+      virtualId = `${VITE_VIRTUAL_PREFIX}${virtualCounter++}`
+      virtualIdToRealPath.set(virtualId, realPath)
+      realPathToVirtualId.set(realPath, virtualId)
+    }
+    return virtualId
+  }
+
+  function isIntlifyVirtualId(id: string): boolean {
+    return virtualIdToRealPath.has(id)
+  }
 
   debug(`vue-i18n alias name: ${opts.module}`)
 
@@ -84,6 +178,11 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     ctx.sourceMap = !!compiler.options.devtool
     debug(`${meta.framework}: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`)
 
+    // Eagerly compute the filter — webpack/rspack `Rule.include` is sync-only.
+    // Seed the lazy cache so `getFilter()` reuses the same instance.
+    const syncFilter = createFilter(...resolveIncludeExclude())
+    _filter = syncFilter
+
     compiler.options.resolve.alias = {
       ...compiler.options.resolve.alias,
       [opts.module]: opts.vueI18nAliasPath
@@ -115,15 +214,12 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     compiler.options.module.rules.push({
       test: /\.(json5?|ya?ml)$/,
       type: 'javascript/auto',
-      include: resource => filter(resource)
+      include: resource => syncFilter(resource) || importedResources.has(resource)
     })
 
     // TODO:
     //  HMR for webpack/rspack
   }
-
-  // eslint-disable-next-line regexp/no-unused-capturing-group -- FIXME:
-  const supportedFileExtensionsRE = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
 
   return {
     name: resolveNamespace('resource'),
@@ -163,7 +259,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         return assign(defineConfig, aliasConfig)
       },
 
-      configResolved(config) {
+      async configResolved(config) {
         vuePlugin = getVitePlugin(config, 'vite:vue')
         if (!checkVuePlugin(vuePlugin)) {
           return
@@ -173,12 +269,28 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         ctx.sourceMap = config.command === 'build' ? !!config.build.sourcemap : false
         debug(`configResolved: isProduction = ${ctx.prod}, sourceMap = ${ctx.sourceMap}`)
 
-        // json transform handling
+        /**
+         * NOTE(kazupon):
+         * Override `vite:json` plugin transform to prevent it from re-processing
+         * JSON files that unplugin-vue-i18n has already compiled.
+         *
+         * Detect the builder by checking whether `vite:json` exists in
+         * `config.plugins` — rolldown-based Vite (v8+) uses
+         * `builtin:vite-json` instead, so `getVitePlugin` returns null and
+         * this block is naturally skipped. This is more reliable than
+         * `import('vite').rolldownVersion` which can resolve to the wrong
+         * copy in multi-vite setups (e.g. Nuxt 4 + UnoCSS).
+         * ref: https://github.com/intlify/bundle-tools/issues/553
+         */
         const jsonPlugin = getVitePlugin(config, 'vite:json')
-        if (jsonPlugin) {
-          // backup @rollup/plugin-json
-          const orgTransform = jsonPlugin.transform
-          jsonPlugin.transform = async function (code: string, id: string) {
+        hasViteJsonPlugin = !!jsonPlugin
+        if (jsonPlugin && jsonPlugin.transform) {
+          const transform = jsonPlugin.transform
+          const isObjectHook = typeof transform !== 'function' && 'handler' in transform
+          const orgTransform = isObjectHook ? transform.handler : transform
+
+          async function overrideJson(this: unknown, code: string, id: string) {
+            const filter = await getFilter()
             if (!/\.json$/.test(id) || filter(id)) {
               return
             }
@@ -197,25 +309,67 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
             }
 
             debug('org json plugin')
-            // @ts-expect-error
-            return orgTransform!.apply(this, [code, id])
+            // @ts-expect-error -- ignore
+            return orgTransform.apply(this, [code, id])
+          }
+
+          if (isObjectHook) {
+            transform.handler = overrideJson as typeof transform.handler
+          } else {
+            jsonPlugin.transform = overrideJson as typeof jsonPlugin.transform
           }
         }
       }
     },
 
-    resolveId(id: string, importer: string) {
-      debug('resolveId', id, importer)
+    async resolveId(id: string, importer: string | undefined) {
+      debug('resolveId', id, 'from', importer)
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
         return asVirtualId(id, meta.framework)
+      }
+
+      // For vite 8+ (no `vite:json` plugin), virtualize matching resource files
+      // so `builtin:vite-json` does not claim them. See VITE_VIRTUAL_PREFIX above.
+      if (meta.framework === 'vite' && !hasViteJsonPlugin) {
+        // SFC custom-block requests with `lang.json` / `lang.json5` (e.g.
+        // `Foo.vue?vue&type=i18n&index=0&lang.json`) also end in `.json` and
+        // would be claimed by `builtin:vite-json`. Virtualize them too — our
+        // `load` re-parses the SFC and extracts the block content.
+        if (id.includes('?vue&type=i18n') && /[?&]lang\.(?:json|json5)(?:$|&)/.test(id)) {
+          return intlifyVirtualize(id)
+        }
+
+        const idPath = id.split('?')[0]
+        if (!supportedFileExtensionsRE.test(idPath)) return
+
+        // unplugin v2.x does not expose `this.resolve`, so resolve relative
+        // and absolute paths manually. Bare specifiers (package imports,
+        // aliases) are left to vite's normal resolution.
+        let resolvedPath: string
+        if (idPath.startsWith('.')) {
+          const realImporter =
+            importer && isIntlifyVirtualId(importer) ? virtualIdToRealPath.get(importer)! : importer
+          if (!realImporter) return
+          resolvedPath = resolve(dirname(realImporter), idPath)
+        } else if (idPath.startsWith('/') || /^[a-z]:[/\\]/i.test(idPath)) {
+          resolvedPath = idPath
+        } else {
+          return
+        }
+
+        const filter = await getFilter()
+        if (!filter(resolvedPath)) return
+
+        return intlifyVirtualize(resolvedPath)
       }
     },
 
     loadInclude(id: string) {
-      return INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)
+      if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)) return true
+      return isIntlifyVirtualId(id)
     },
 
-    load(id: string) {
+    async load(id: string) {
       debug('load', id)
       if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && resourcePaths.size > 0) {
         const code = generateBundleResources(resourcePaths)
@@ -227,6 +381,84 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
 
         return result(code)
       }
+
+      // vite 8+ virtualized resource — read the real file, run the i18n
+      // generator, and return pre-compiled JS so `builtin:vite-json` never sees it.
+      if (isIntlifyVirtualId(id)) {
+        const realId = virtualIdToRealPath.get(id)!
+
+        // SFC custom-block: parse the SFC and extract the block content
+        // (mirrors what vite-plugin-vue's load would do, but yields a
+        // virtual id whose extension does not trigger `builtin:vite-json`).
+        if (realId.includes('?vue&type=i18n')) {
+          const { filename, query } = parseVueRequest(realId)
+          this.addWatchFile(filename)
+          const sfcSource = readFile(filename)
+          const { descriptor } = getSfcParser()(sfcSource, {
+            sourceMap: ctx.sourceMap,
+            filename
+          })
+          const block = descriptor.customBlocks[query.index!]
+          if (!block) return
+
+          let source = block.src ? readFile(block.src) : block.content
+          if (typeof opts.transformI18nBlock === 'function') {
+            const modifiedSource = opts.transformI18nBlock(source)
+            if (modifiedSource && typeof modifiedSource === 'string') {
+              source = modifiedSource
+            } else {
+              warn('transformI18nBlock should return a string')
+            }
+          }
+
+          const langInfo = (query.lang as SFCLangFormat) || (opts.defaultSFCLang as SFCLangFormat)
+          const generate = getGenerator(langInfo, generateYAML)
+          const parseOptions = getOptions(filename, ctx, query, {
+            ...opts,
+            allowDynamic: false,
+            transformI18nBlock: undefined
+          })
+          const { code: generatedCode } = generate(source, parseOptions)
+          return result(generatedCode)
+        }
+
+        // Plain resource file
+        const realPath = realId
+        this.addWatchFile(realPath)
+
+        const code = readFile(realPath)
+
+        // mirror the static-import discovery that `transform` does for the
+        // rollup-vite path — keeps `importedResources` populated so sibling
+        // imports also pass the filter.
+        const imports = findStaticImports(code)
+        for (const p of imports) {
+          const res = resolve(dirname(realPath), p.specifier)
+          importedResources.add(res)
+        }
+
+        const langInfo = parsePath(realPath).ext as SFCLangFormat
+        const generate = getGenerator(langInfo)
+        const parseOptions = getOptions(realPath, ctx, {} as VueQuery, {
+          ...opts,
+          transformI18nBlock: undefined
+        })
+
+        try {
+          const { code: generatedCode } = generate(code, parseOptions)
+          return result(generatedCode)
+        } catch (err) {
+          if (err instanceof DynamicResourceError) {
+            error(
+              `Unable to precompile or optimize \`${realPath}\` - excluding from virtual bundle \`${INTLIFY_BUNDLE_IMPORT_ID}\`.\n`,
+              err
+            )
+            return `export default {}`
+          } else {
+            throw err
+          }
+        }
+      }
     },
 
     transformInclude(id) {
@@ -234,6 +466,14 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
       if (meta.framework === 'vite') {
         return true
       }
+
+      // For webpack/rspack: `_filter` is guaranteed initialized by `sharedWebpackLikePlugin`
+      // before the bundler ever invokes `transformInclude`. Defensive bootstrap for safety.
+      const f = _filter ?? createFilter(...resolveIncludeExclude())
+      if (_filter == null) {
+        _filter = f
+      }
+      const filterWithImported = (v: string) => f(v) || importedResources.has(v)
 
       const { filename, query } = parseVueRequest(id)
 
@@ -249,15 +489,21 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
       }
 
       // locale resource
-      return supportedFileExtensionsRE.test(filename) && filter(filename) && isResourcePath
+      return (
+        supportedFileExtensionsRE.test(filename) && filterWithImported(filename) && isResourcePath
+      )
     },
 
     async transform(code, id) {
+      // Skip vite 8 virtualized resources — already loaded as compiled JS.
+      if (isIntlifyVirtualId(id)) return
+
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query), filename)
 
       let langInfo = opts.defaultSFCLang
 
+      const filter = await getFilter()
       if (filter(id)) {
         const imports = findStaticImports(code)
         for (const p of imports) {

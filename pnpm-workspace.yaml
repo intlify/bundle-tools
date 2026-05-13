@@ -6,10 +6,10 @@ catalogs:
     '@intlify/shared': next
     vue-i18n: next
   vite:
-    '@vitejs/plugin-vue': 5.2.4
+    '@vitejs/plugin-vue': ^6.0.6
     vite: 6.3.5
-  rolldown-vite:
-    vite: npm:rolldown-vite@latest
+  vite8:
+    vite: ^8.0.0
   vue:
     vue: ~3.5.34
   webpack:
@@ -24,5 +24,3 @@ allowBuilds:
   esbuild: true
   oxc-resolver: true
   unrs-resolver: true
-overrides:
-  vite: catalog:vite

@@ -4,10 +4,16 @@ import { defineConfig } from 'vitest/config'
 const resolveSnapshotPath = (testPath, extension) => {
   // only split snapshots for unplugin-vue-i18n tests
   if (testPath.includes('unplugin-vue-i18n/test')) {
-    const framework = '.' + (process.env.TEST_FRAMEWORK || 'vite')
+    const framework = process.env.TEST_FRAMEWORK || 'vite'
+    // For vite, also split by TEST_VITE_TYPE (rolldown vs rollup) so the per-bundler
+    // sourcemap differences don't collide on a single snapshot file.
+    const suffix =
+      framework === 'vite'
+        ? `.${framework}.${process.env.TEST_VITE_TYPE || 'vite8'}`
+        : `.${framework}`
     return join(
       join(dirname(testPath), '__snapshots__'),
-      `${basename(testPath)}${framework}${extension}`
+      `${basename(testPath)}${suffix}${extension}`
     )
   }
 

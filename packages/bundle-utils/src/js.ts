@@ -5,6 +5,7 @@
 import { isBoolean, isNumber, isString } from '@intlify/shared'
 import { parse as parseJavaScript } from 'acorn'
 import { generate as generateJavaScript } from 'escodegen'
+// @ts-ignore -- estree-walker package.json `exports` field lacks a `types` subpath; works at runtime
 import { walk } from 'estree-walker'
 import {
   createCodeGenerator,

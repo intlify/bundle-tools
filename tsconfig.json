@@ -39,8 +39,7 @@
     // "noFallthroughCasesInSwitch": true,    /* Report errors for fallthrough cases in switch statement. */
 
     /* Module Resolution Options */
-    "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
-    "ignoreDeprecations": "6.0",
+    "moduleResolution": "bundler",         /* Specify module resolution strategy: 'bundler' to support packages with ESM-only `exports` (vite 8+, etc.). */
     // "rootDirs": [],                        /* List of root folders whose combined content represents the structure of the project at runtime. */
     /* List of folders to include type definitions from. */
     // "typeRoots": [

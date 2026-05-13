@@ -104,7 +104,10 @@ jobs:
       matrix:
         os: [ubuntu-latest]
         node: [22, 24]
-        framework: ['vite', 'webpack']
+        include:
+          - { framework: 'vite', vite_type: 'vite8' }
+          - { framework: 'vite', vite_type: 'vite6' }
+          - { framework: 'webpack', vite_type: '' }
 
     steps:
       - name: Checkout
@@ -137,3 +140,4 @@ jobs:
         run: pnpm test
         env:
           TEST_FRAMEWORK: ${{ matrix.framework }}
+          TEST_VITE_TYPE: ${{ matrix.vite_type }}

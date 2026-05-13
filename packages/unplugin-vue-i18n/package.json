@@ -53,7 +53,7 @@
     "source-map-js": "catalog:",
     "ts-loader": "catalog:webpack",
     "unbuild": "catalog:",
-    "vite": "catalog:vite",
+    "vite": "catalog:vite8",
     "rollup-vite": "npm:vite@6.3.5",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",

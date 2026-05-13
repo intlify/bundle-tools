@@ -9,7 +9,7 @@ import { bundleAndRun, bundleWebpack } from '../utils'
     fixture: '@intlify/unplugin-vue-i18n/messages'
   }
 ].forEach(({ testcase, input, fixture }) => {
-  // eslint-disable-next-line vitest/valid-title
+  // eslint-disable-next-line vitest/valid-title -- ignore
   test.skip(testcase, async () => {
     const options = {
       input,

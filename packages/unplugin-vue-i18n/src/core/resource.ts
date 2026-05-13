@@ -522,7 +522,7 @@ async function generateBundleResources(
   for (const res of resources) {
     debug(`${res} bundle loading ...`)
 
-    // eslint-disable-next-line regexp/no-unused-capturing-group
+    // eslint-disable-next-line regexp/no-unused-capturing-group -- ignore
     if (/\.(json5?|ya?ml)$/.test(res)) {
       const { ext, name } = parsePath(res)
       const source = await getRaw(res)

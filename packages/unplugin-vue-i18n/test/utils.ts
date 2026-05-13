@@ -31,7 +31,7 @@ type BundleFunction = (
   viteType: ViteBulderType
 ) => Promise<BundleResolve>
 
-const VITE_BUILDERS: Record<ViteBulderType, typeof buildRollupVite | typeof buildRolldownVite> = {
+const VITE_BUILDERS: Record<ViteBulderType, typeof buildRollupVite> = {
   rollup: buildRollupVite,
   rolldown: buildRolldownVite
 }

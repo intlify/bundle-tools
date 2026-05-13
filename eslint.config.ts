@@ -43,7 +43,9 @@ export default defineConfig(
     jsonc: true
   }),
   yaml(),
-  markdown(),
+  markdown({
+    preferences: true
+  }),
   vitest(),
   prettier(),
   {
@@ -58,6 +60,7 @@ export default defineConfig(
     'CHANGELOG.md',
     '.unmaintained/**',
     'packages/**/CHANGELOG.md',
+    'packages/unplugin-vue-i18n/README.md',
     '**/*.md/*.ts',
     '**/test/fixtures/**',
     '**/*.config.ts',

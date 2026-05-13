@@ -8,7 +8,7 @@ describe('translation directive', async () => {
   fixtures.forEach(fixture => {
     const filename = path.basename(fixture)
     const basename = filename.replace(/\.vue$/, '')
-    // eslint-disable-next-line vitest/valid-title
+    // eslint-disable-next-line vitest/valid-title -- ignore
     test(basename, async () => {
       const options = {
         target: './fixtures/directives/',

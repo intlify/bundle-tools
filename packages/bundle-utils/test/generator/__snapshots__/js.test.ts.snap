@@ -308,7 +308,7 @@ const resource = {
   "unicode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["A"])};fn.source="A";return fn;})(),
   "unicode-escape": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\u0041"])};fn.source="\\\\u0041";return fn;})(),
   "backslash-single-quote": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\'"])};fn.source="\\\\'";return fn;})(),
-  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
+  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\"])};fn.source="\\\\\\\\";return fn;})(),
   "errors": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})()

@@ -17,16 +17,19 @@ const options = {
 
 test('resource files: json', async () => {
   const { map } = await bundleAndRun('ja.json', bundleVite, options)
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
 test('resource files: json5', async () => {
   const { map } = await bundleAndRun('en.json5', bundleVite, options)
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
 test('resource files: yaml', async () => {
   const { map } = await bundleAndRun('ko.yaml', bundleVite, options)
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
@@ -34,6 +37,7 @@ test('custom blocks: json', async () => {
   const { map } = await bundleAndRun('basic.vue', bundleVite, {
     sourcemap: true
   })
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
@@ -41,6 +45,7 @@ test('custom blocks: yaml', async () => {
   const { map } = await bundleAndRun('yaml.vue', bundleVite, {
     sourcemap: true
   })
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
@@ -48,6 +53,7 @@ test('custom blocks: yml', async () => {
   const { map } = await bundleAndRun('yml.vue', bundleVite, {
     sourcemap: true
   })
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })
 
@@ -55,5 +61,6 @@ test('custom blocks: json5', async () => {
   const { map } = await bundleAndRun('json5.vue', bundleVite, {
     sourcemap: true
   })
+  // eslint-disable-next-line vitest/no-standalone-expect -- igore
   expect(map.mappings).toMatchSnapshot()
 })

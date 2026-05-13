@@ -4,8 +4,8 @@ import fg from 'fast-glob'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
 import { resolve } from 'node:path'
-import { build as buildRollupVite } from 'rollup-vite'
-import { build as buildRolldownVite } from 'vite'
+import { build as buildVite6 } from 'rollup-vite'
+import { build as buildVite8 } from 'vite'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
@@ -23,23 +23,27 @@ type BundleResolve = {
   stats?: webpack.Stats
 }
 
-type ViteBulderType = 'rollup' | 'rolldown'
+type ViteBuilderType = 'vite6' | 'vite8'
 
 type BundleFunction = (
   fixture: string,
   options: Record<string, unknown>,
-  viteType: ViteBulderType
+  viteType: ViteBuilderType
 ) => Promise<BundleResolve>
 
-const VITE_BUILDERS: Record<ViteBulderType, typeof buildRollupVite> = {
-  rollup: buildRollupVite,
-  rolldown: buildRolldownVite
+const VITE_BUILDERS: Record<ViteBuilderType, typeof buildVite8> = {
+  vite6: buildVite6 as unknown as typeof buildVite8,
+  vite8: buildVite8
+}
+
+function getCurrentViteType(): ViteBuilderType {
+  return (process.env.TEST_VITE_TYPE as ViteBuilderType) || 'vite8'
 }
 
 export async function bundleVite(
   fixture: string,
   options: Record<string, unknown> = {},
-  viteType: ViteBulderType = 'rolldown'
+  viteType: ViteBuilderType = getCurrentViteType()
 ): Promise<BundleResolve> {
   const input = (options.input as string) || './fixtures/entry.ts'
   const target = (options.target as string) || './fixtures'
@@ -187,8 +191,7 @@ export async function bundleAndRun(
   options.escapeHtml = !!options.escapeHtml
   options.optimizeTranslationDirective = !!options.optimizeTranslationDirective
 
-  const rolldownVersion = ((await import('vite')) as any).rolldownVersion
-  const { code, map } = await bundler(fixture, options, !!rolldownVersion ? 'rolldown' : 'rollup')
+  const { code, map } = await bundler(fixture, options, getCurrentViteType())
 
   let dom: JSDOM | null = null
   let jsdomError

@@ -1,8 +1,6 @@
 packages:
   - packages/**
   - examples/**
-onlyBuiltDependencies:
-  - esbuild
 catalogs:
   intlify:
     '@intlify/shared': next
@@ -19,3 +17,7 @@ catalogs:
 catalog:
   '@types/node': ^22.15.18
   unbuild: ^3.5.0
+allowBuilds:
+  esbuild: true
+  oxc-resolver: true
+  unrs-resolver: true

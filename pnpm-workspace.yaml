@@ -6,7 +6,7 @@ catalogs:
     '@intlify/shared': next
     vue-i18n: next
   vite:
-    '@vitejs/plugin-vue': 5.2.4
+    '@vitejs/plugin-vue': 6.0.6
     vite: 6.3.5
   rolldown-vite:
     vite: npm:rolldown-vite@latest

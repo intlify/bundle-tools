@@ -7,7 +7,7 @@ catalogs:
     vue-i18n: next
   vite:
     '@vitejs/plugin-vue': ^6.0.6
-    vite: 6.3.5
+    vite: 6.4.2
   vite8:
     vite: ^8.0.0
   vue:

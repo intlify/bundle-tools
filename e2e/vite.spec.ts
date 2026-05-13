@@ -6,7 +6,7 @@ import { afterAll, beforeAll, describe, expect, test } from 'vitest'
 import type { ServerContext } from './setup-server'
 
 // TODO: extract to shim.d.ts
-// eslint-disable-next-line @typescript-eslint/no-namespace
+// eslint-disable-next-line @typescript-eslint/no-namespace -- ignore
 declare namespace global {
   let browser: Browser
   let page: Page

@@ -93,7 +93,7 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     const loader = meta.framework === 'webpack' ? loadWebpack : loadRspack
     loader()
       .then(mod => {
-        // eslint-disable-next-line promise/always-return
+        // eslint-disable-next-line promise/always-return -- ignore
         if (mod) {
           compiler.options.plugins.push(
             // @ts-expect-error -- FIXME: webpack type

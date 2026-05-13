@@ -11,7 +11,7 @@ import { bundleAndRun, getCurrentTestBundler } from './utils'
     fixture: '@intlify/unplugin-vue-i18n/messages'
   }
 ].forEach(({ testcase, input, fixture }) => {
-  // eslint-disable-next-line vitest/valid-title
+  // eslint-disable-next-line vitest/valid-title -- ignore
   test(testcase, async () => {
     const options = {
       input,

@@ -6,62 +6,141 @@ on:
       - '**'
     tags:
       - 'v*'
-permissions:
-  id-token: write
-  contents: write
+  workflow_dispatch:
+    inputs:
+      job:
+        description: Which job to run
+        type: choice
+        required: true
+        default: all
+        options:
+          - all
+          - npm-publish
+          - release-notes
+      tag:
+        description: Existing tag to release (e.g. v11.2.3 or v12.0.0-alpha.3)
+        type: string
+        required: true
+
+env:
+  TAG: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+
+permissions: {}
 
 jobs:
-  release:
+  npm-publish:
+    if: >-
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_dispatch' &&
+        (inputs.job == 'all' || inputs.job == 'npm-publish'))
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # npm trusted publisher (OIDC)
     steps:
       - name: Checkout codes
-        # zizmor: ignore[artipacked] needs persisted credentials so that
-        # stefanzweifel/git-auto-commit-action can push the changelog commit.
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: ${{ github.head_ref }}
+          ref: ${{ env.TAG }}
+          persist-credentials: false
+
+      - name: Resolve dist-tag from tag
+        id: meta
+        # When adding a new major (e.g. v13), append a case branch below.
+        run: |
+          case "$TAG" in
+            v11.*) echo "dist_tag=latest" >> "$GITHUB_OUTPUT" ;;
+            v12.*) echo "dist_tag=next" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unknown tag pattern: $TAG" >&2; exit 1 ;;
+          esac
 
       - name: Install pnpm
         uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
 
       - name: Setup Node
+        # zizmor: ignore[cache-poisoning] no package cache is enabled; toolchain only
         uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
         with:
           node-version: 24
 
       - name: Install dependencies
-        run: pnpm install --no-frozen-lockfile
+        run: pnpm install --frozen-lockfile
 
-      - name: Extract version tag
-        if: startsWith( github.ref, 'refs/tags/v' )
-        uses: jungwinter/split@7f51d99e7cc1f147f6f99be75acf5e641930af88 # v2.1.0
-        id: split
+      - name: Build packages
+        run: pnpm build
+
+      - name: Publish packages to npm
+        # OIDC trusted publisher (id-token: write). No NPM_AUTH_TOKEN needed.
+        run: |
+          for PKG in packages/*; do
+            if [[ -d "$PKG" ]]; then
+              pushd "$PKG" > /dev/null
+              echo "⚡ Publishing $PKG with --tag $DIST_TAG"
+              pnpm publish --access public --no-git-checks --tag "$DIST_TAG"
+              popd > /dev/null
+            fi
+          done
+        env:
+          DIST_TAG: ${{ steps.meta.outputs.dist_tag }}
+          NPM_CONFIG_PROVENANCE: true
+
+  release-notes:
+    needs: [npm-publish]
+    if: >-
+      always() && (
+        (github.event_name == 'push' && needs.npm-publish.result == 'success') ||
+        (github.event_name == 'workflow_dispatch' && inputs.job == 'release-notes') ||
+        (github.event_name == 'workflow_dispatch' && inputs.job == 'all' &&
+          needs.npm-publish.result == 'success')
+      )
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # GitHub Release 作成 + CHANGELOG push
+    steps:
+      - name: Resolve target branch from tag
+        id: meta
+        # When adding a new major (e.g. v13), append a case branch below.
+        run: |
+          case "$TAG" in
+            v11.*) echo "branch=v11" >> "$GITHUB_OUTPUT" ;;
+            v12.*) echo "branch=main" >> "$GITHUB_OUTPUT" ;;
+            *) echo "Unknown tag pattern: $TAG" >&2; exit 1 ;;
+          esac
+
+      - name: Checkout codes
+        # zizmor: ignore[artipacked] git-auto-commit-action requires persisted credentials
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          msg: ${{ github.ref }}
-          separator: '/'
+          ref: ${{ steps.meta.outputs.branch }}
+          fetch-depth: 0
 
-      - name: Create Github Release
-        run: gh release create "$TAG" --generate-notes
+      - name: Install pnpm
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4.4.0
+
+      - name: Setup Node
+        # zizmor: ignore[cache-poisoning] no package cache is enabled; toolchain only
+        uses: actions/setup-node@48b55a011bda9f5d6aeb4c2d9c7362e8dae4041e # v6.4.0
+        with:
+          node-version: 24
+
+      - name: Create GitHub Release (idempotent)
+        run: |
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG already exists, skipping creation"
+          else
+            gh release create "$TAG" --generate-notes
+          fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.split.outputs._2 }}
 
-      - name: Generate changelog
+      - name: Sync changelog from GitHub Releases
         run: pnpx gh-changelogen --repo=intlify/bundle-tools --tag="$TAG"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          TAG: ${{ steps.split.outputs._2 }}
 
       - name: Commit changelog
         uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
         with:
-          branch: main
+          branch: ${{ steps.meta.outputs.branch }}
           file_pattern: '*.md'
           commit_message: 'chore: sync changelog'
-
-      - name: Publish package
-        run: |
-          ./scripts/release.sh
-        env:
-          NPM_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
-          NPM_CONFIG_PROVENANCE: true

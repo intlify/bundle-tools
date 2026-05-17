@@ -51,7 +51,7 @@
     "@vitejs/plugin-vue": "catalog:vite",
     "jsdom": "^29.0.0",
     "memory-fs": "^0.5.0",
-    "rollup-vite": "npm:vite@6.4.2",
+    "rollup-vite": "npm:vite@8.0.13",
     "ts-loader": "catalog:webpack",
     "unbuild": "catalog:",
     "vite": "catalog:vite8",

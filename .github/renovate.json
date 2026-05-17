@@ -1,5 +1,6 @@
 {
   "extends": ["config:base", ":preserveSemverRanges"],
+  "baseBranches": ["main", "v11"],
   "labels": ["Type: Dependency"],
   "automerge": true,
   "ignoreDeps": ["playwright", "husky", "source-map"],

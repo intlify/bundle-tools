@@ -285,22 +285,33 @@ export function mapLinesColumns(
   const inMapConsumer = inSourceMap ? new SourceMapConsumer(inSourceMap) : null
   const mergedMapGenerator = new SourceMapGenerator()
 
-  let inMapFirstItem: MappingItem | null = null
+  type NonNullableMappingItem = MappingItem & {
+    originalLine: number
+    originalColumn: number
+  }
+
+  let inMapFirstItem: NonNullableMappingItem | null = null
   if (inMapConsumer) {
     inMapConsumer.eachMapping(m => {
       if (inMapFirstItem) {
         return
       }
-      inMapFirstItem = m
+      if (m.originalLine == null || m.originalColumn == null) {
+        return
+      }
+      inMapFirstItem = m as NonNullableMappingItem
     })
   }
 
   resMapConsumer.eachMapping(res => {
-    if (res.originalLine == null) {
+    const resOriginalLine = res.originalLine
+    const resOriginalColumn = res.originalColumn
+    const resName = res.name
+    if (resOriginalLine == null || resOriginalColumn == null || resName == null) {
       return
     }
 
-    const map = codeMaps.get(res.name)
+    const map = codeMaps.get(resName)
     if (!map) {
       return
     }
@@ -308,8 +319,8 @@ export function mapLinesColumns(
     let inMapOrigin: MappedPosition | null = null
     if (inMapConsumer) {
       inMapOrigin = inMapConsumer.originalPositionFor({
-        line: res.originalLine,
-        column: res.originalColumn - 1
+        line: resOriginalLine,
+        column: resOriginalColumn - 1
       })
       if (inMapOrigin.source == null) {
         inMapOrigin = null
@@ -317,25 +328,20 @@ export function mapLinesColumns(
       }
     }
 
+    const inMapFirst = inMapFirstItem
     const mapConsumer = new SourceMapConsumer(map)
     mapConsumer.eachMapping(m => {
       mergedMapGenerator.addMapping({
         original: {
-          line: inMapFirstItem
-            ? inMapFirstItem.originalLine + res.originalLine - 2
-            : res.originalLine,
-          column: inMapFirstItem
-            ? inMapFirstItem.originalColumn + res.originalColumn
-            : res.originalColumn
+          line: inMapFirst ? inMapFirst.originalLine + resOriginalLine - 2 : resOriginalLine,
+          column: inMapFirst ? inMapFirst.originalColumn + resOriginalColumn : resOriginalColumn
         },
         generated: {
-          line: inMapFirstItem
-            ? inMapFirstItem.generatedLine + res.originalLine - 2
-            : res.originalLine,
+          line: inMapFirst ? inMapFirst.generatedLine + resOriginalLine - 2 : resOriginalLine,
           // map column with message format compilation code map
-          column: inMapFirstItem
-            ? inMapFirstItem.generatedColumn + res.originalColumn + m.generatedColumn
-            : res.originalColumn + m.generatedColumn
+          column: inMapFirst
+            ? inMapFirst.generatedColumn + resOriginalColumn + m.generatedColumn
+            : resOriginalColumn + m.generatedColumn
         },
         source: inMapOrigin ? inMapOrigin.source : res.source,
         name: m.name // message format compilation code

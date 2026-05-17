@@ -82,7 +82,6 @@ jobs:
           done
         env:
           DIST_TAG: ${{ steps.meta.outputs.dist_tag }}
-          NPM_CONFIG_PROVENANCE: true
 
   release-notes:
     needs: [npm-publish]

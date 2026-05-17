@@ -57,7 +57,7 @@
     "rollup-vite": "npm:vite@6.3.5",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
-    "webpack-merge": "^5.9.0"
+    "webpack-merge": "^6.0.0"
   },
   "engines": {
     "node": ">= 22.13"

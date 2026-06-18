@@ -9,7 +9,7 @@ import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
-import { dirname, parse as parsePath, resolve } from 'pathe'
+import { dirname, normalize, parse as parsePath, resolve } from 'pathe'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
@@ -22,11 +22,13 @@ import type { PluginOptions } from '../types'
 import type { VueQuery } from '../vue'
 
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
-const VIRTUAL_PREFIX = '\0'
+// Use `virtual:` instead of Rollup's `\0` prefix — NUL bytes break WinAPI on Windows.
+// ref: https://github.com/intlify/bundle-tools/issues/595
+const VIRTUAL_PREFIX = 'virtual:'
 const RE_RESOURCE_FORMAT = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
 const RE_SFC_I18N_CUSTOM_BLOCK = /\?vue&type=i18n/
 const RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK = /blockType=i18n/
-const VITE_VIRTUAL_PREFIX = '\0intlify-i18n-'
+const VITE_VIRTUAL_PREFIX = 'virtual:intlify-i18n-'
 
 const debug = createDebug(resolveNamespace('resource'))
 
@@ -116,7 +118,7 @@ export function resourcePlugin(
    * `builtin:vite-json` runs anyway and fails to parse our JS as JSON.
    *
    * Workaround: in `resolveId`, remap each matching resource file to a
-   * virtual id like `\0intlify-i18n-N`. The virtual id has no `.json` /
+   * virtual id like `virtual:intlify-i18n-N`. The virtual id has no `.json` /
    * `.json5` suffix, so `builtin:vite-json` (which matches by extension) does
    * not claim it. Our `load` reads the original file from disk, runs the
    * generator, and returns the compiled JS.
@@ -126,11 +128,12 @@ export function resourcePlugin(
   let virtualCounter = 0
 
   function intlifyVirtualize(realPath: string): string {
-    let virtualId = realPathToVirtualId.get(realPath)
+    const normalized = normalize(realPath)
+    let virtualId = realPathToVirtualId.get(normalized)
     if (!virtualId) {
       virtualId = `${VITE_VIRTUAL_PREFIX}${virtualCounter++}`
-      virtualIdToRealPath.set(virtualId, realPath)
-      realPathToVirtualId.set(realPath, virtualId)
+      virtualIdToRealPath.set(virtualId, normalized)
+      realPathToVirtualId.set(normalized, virtualId)
     }
     return virtualId
   }
@@ -318,7 +321,20 @@ export function resourcePlugin(
           // would be claimed by `builtin:vite-json`. Virtualize them too — our
           // `load` re-parses the SFC and extracts the block content.
           if (id.includes('?vue&type=i18n') && /[?&]lang\.(?:json|json5)(?:$|&)/.test(id)) {
-            return intlifyVirtualize(id)
+            const { filename, query } = parseVueRequest(id)
+            let virtualKey = id
+            // @vitejs/plugin-vue routes `src` blocks through the sidecar file path
+            // (e.g. `./Foo.i18n.json5?vue&type=i18n&src=true&lang.json5`), not the .vue path.
+            if (query.src && importer) {
+              const importerPath = (
+                isIntlifyVirtualId(importer) ? virtualIdToRealPath.get(importer)! : importer
+              ).split('?')[0]
+              if (importerPath.endsWith('.vue')) {
+                const resolvedSidecar = resolve(dirname(importerPath), filename)
+                virtualKey = id.replace(filename, resolvedSidecar)
+              }
+            }
+            return intlifyVirtualize(virtualKey)
           }
 
           const idPath = id.split('?')[0]
@@ -386,16 +402,24 @@ export function resourcePlugin(
           // virtual id whose extension does not trigger `builtin:vite-json`).
           if (realId.includes('?vue&type=i18n')) {
             const { filename, query } = parseVueRequest(realId)
-            this.addWatchFile(filename)
-            const sfcSource = await fs.readFile(filename, 'utf-8')
-            const { descriptor } = getSfcParser()(sfcSource, {
-              sourceMap,
-              filename
-            })
-            const block = descriptor.customBlocks[query.index!]
-            if (!block) return
 
-            let source = block.src ? await fs.readFile(block.src, 'utf-8') : block.content
+            let source: string
+            if (query.src) {
+              // Sidecar module — read directly (mirrors @vitejs/plugin-vue load for `query.src`).
+              // resolveId resolves the sidecar path relative to the owner .vue when possible.
+              this.addWatchFile(filename)
+              source = await fs.readFile(filename, 'utf-8')
+            } else {
+              this.addWatchFile(filename)
+              const sfcSource = await fs.readFile(filename, 'utf-8')
+              const { descriptor } = getSfcParser()(sfcSource, {
+                sourceMap,
+                filename
+              })
+              const block = descriptor.customBlocks[query.index!]
+              if (!block) return
+              source = block.content
+            }
             if (typeof transformI18nBlock === 'function') {
               const modifiedSource = transformI18nBlock(source)
               if (modifiedSource && typeof modifiedSource === 'string') {
@@ -763,7 +787,7 @@ async function getCode(
       })
       const block = result.descriptor.customBlocks[index!]
       if (block) {
-        const code = block.src ? await getRaw(block.src) : block.content
+        const code = block.src ? await getRaw(resolveBlockSrc(block.src, filename)) : block.content
         debug(`getCode (webpack) ${index} from SFC`, code)
         return code
       } else {
@@ -864,6 +888,13 @@ function getOptions(
       isGlobal: false
     })
   }
+}
+
+function resolveBlockSrc(src: string, sfcFilename: string): string {
+  if (src.startsWith('.') || (!src.startsWith('/') && !/^[a-z]:[/\\]/i.test(src))) {
+    return resolve(dirname(sfcFilename), src)
+  }
+  return src
 }
 
 function getVirtualId(id: string, framework: UnpluginContextMeta['framework'] = 'vite') {

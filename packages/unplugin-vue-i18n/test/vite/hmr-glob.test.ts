@@ -285,7 +285,7 @@ describe('locale resource HMR', () => {
     return signal.type
   }
 
-  test('G-YML: glob yaml locale updates without restarting the server', async () => {
+  test('glob yaml locale updates without restarting the server', async () => {
     const { root, server, bootServer } = await boot('yml')
     const type = await changeAndAssert({
       server,
@@ -298,7 +298,7 @@ describe('locale resource HMR', () => {
     expect(type === 'update' || type === 'full-reload').toBe(true)
   })
 
-  test('G-JSON: glob json locale updates without restarting the server', async () => {
+  test('glob json locale updates without restarting the server', async () => {
     const { root, server, bootServer } = await boot('json')
     const type = await changeAndAssert({
       server,
@@ -311,7 +311,7 @@ describe('locale resource HMR', () => {
     expect(type === 'update' || type === 'full-reload').toBe(true)
   })
 
-  test('B-YML: bundle import yaml locale updates without restarting the server', async () => {
+  test('bundle import yaml locale updates without restarting the server', async () => {
     const { root, server, bootServer } = await boot('bundle')
     const type = await changeAndAssert({
       server,
@@ -324,7 +324,7 @@ describe('locale resource HMR', () => {
     expect(type === 'update' || type === 'full-reload').toBe(true)
   })
 
-  test('A-TS: app module still hot-updates', async () => {
+  test('app module still hot-updates', async () => {
     const { root, server, bootServer } = await boot('app')
     const type = await changeAndAssert({
       server,

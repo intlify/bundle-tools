@@ -15,10 +15,10 @@ catalogs:
   intlify:
     '@intlify/shared':
       specifier: next
-      version: 12.0.0-alpha.3
+      version: 12.0.0-alpha.4
     vue-i18n:
       specifier: next
-      version: 12.0.0-alpha.3
+      version: 12.0.0-alpha.4
   vite:
     '@vitejs/plugin-vue':
       specifier: ^6.0.6
@@ -54,7 +54,7 @@ importers:
         version: 8.0.1
       '@kazupon/eslint-config':
         specifier: ^0.45.0
-        version: 0.45.0(ac8085048a68080ba62c881775e577b2)
+        version: 0.45.0(b9d9f7c8acd436e7199b4e212cf8a770)
       '@kazupon/prettier-config':
         specifier: ^0.2.0
         version: 0.2.0
@@ -83,8 +83,8 @@ importers:
         specifier: ^3.1.2
         version: 3.1.2(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-markdown-preferences:
-        specifier: ^0.41.1
-        version: 0.41.1(@eslint/markdown@8.0.1)(eslint@10.3.0(jiti@2.7.0))
+        specifier: ^0.42.0
+        version: 0.42.0(@eslint/markdown@8.0.1)(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-promise:
         specifier: ^7.3.0
         version: 7.3.0(eslint@10.3.0(jiti@2.7.0))
@@ -150,7 +150,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
       vue-i18n:
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+        version: 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
     devDependencies:
       '@rspack/cli':
         specifier: ^1.2.7
@@ -169,7 +169,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
       vue-i18n:
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+        version: 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:vite
@@ -188,7 +188,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
       vue-i18n:
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+        version: 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
     devDependencies:
       babel-loader:
         specifier: ^8.2.2
@@ -213,10 +213,10 @@ importers:
     dependencies:
       '@intlify/message-compiler':
         specifier: next
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       '@intlify/shared':
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       escodegen:
         specifier: ^2.1.0
         version: 2.1.0
@@ -253,7 +253,7 @@ importers:
         version: link:../bundle-utils
       '@intlify/shared':
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       '@rollup/pluginutils':
         specifier: ^5.1.0
         version: 5.3.0(rollup@4.60.3)
@@ -293,7 +293,7 @@ importers:
     devDependencies:
       '@intlify/core-base':
         specifier: next
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       '@rspack/core':
         specifier: ^1.2.7
         version: 1.7.11
@@ -729,17 +729,35 @@ packages:
     resolution: {integrity: sha512-LEvBHBUbiOOtIBkp4IIQENVC5Fg2YHsvdXN1+WRIxQ8hzHbHSBiqZ2l68B/yg8sE1a4S7dqhkaAedunShWPH+Q==}
     engines: {node: '>= 16'}
 
+  '@intlify/core-base@12.0.0-alpha.4':
+    resolution: {integrity: sha512-7JZiWLP9ScL/DDgT6+t1HebP4IqiA0FmHkd7M17LgjchPdIxWCBJFbFANK9bYAj+ZyzR8urtPK65FxyARjPi3A==}
+    engines: {node: '>= 22'}
+
   '@intlify/message-compiler@12.0.0-alpha.3':
     resolution: {integrity: sha512-mDDTN3gfYOHhBnpnlby19UHyvMaOnzdlpsIrxUfs44R/vCATfn8pMOkE8PXD2t410xkocEj3FpDcC9XC/0v4Dg==}
     engines: {node: '>= 16'}
+
+  '@intlify/message-compiler@12.0.0-alpha.4':
+    resolution: {integrity: sha512-F4yHuJzI2ZXtXTW2B1VhuNULAOjR5bniFSC/Z0rLWRYPO43pVgKLu+FPDoJq13OjTFq4X5hx2s855M4gqPU/pA==}
+    engines: {node: '>= 22'}
 
   '@intlify/shared@12.0.0-alpha.3':
     resolution: {integrity: sha512-ryaNYBvxQjyJUmVuBBg+HHUsmGnfxcEUPR0NCeG4/K9N2qtyFE35C80S15IN6iYFE2MGWLN7HfOSyg0MXZIc9w==}
     engines: {node: '>= 16'}
 
+  '@intlify/shared@12.0.0-alpha.4':
+    resolution: {integrity: sha512-MfunEN3/yQjD1Q9HnD4Qtvg/qLYnR+tK3mEz/EEvikJO+Hu8ICe7Rqh6uusLSjpWy6ECVt2p5HGXlYA12UBweA==}
+    engines: {node: '>= 22'}
+
   '@intlify/vue-i18n-core@12.0.0-alpha.3':
     resolution: {integrity: sha512-YwAfTQILHN+VoK0P/Yv47GbKnEf1lhfbliyVyW3knAL1EmT8m0m3rwffXJnwyQhYw8Jpx85CpL49WkSgyi6d/g==}
     engines: {node: '>= 16'}
+    peerDependencies:
+      vue: ^3.0.0
+
+  '@intlify/vue-i18n-core@12.0.0-alpha.4':
+    resolution: {integrity: sha512-pQuMjLsUopwyPnWkv+HfOqFSv2leG78hgtihRba26N1GAs13yIGetHYkZSoEIjnAHmpCO1k5588F5WQVZUCMQg==}
+    engines: {node: '>= 22'}
     peerDependencies:
       vue: ^3.0.0
 
@@ -3107,8 +3125,8 @@ packages:
     peerDependencies:
       eslint: '>=9.38.0'
 
-  eslint-plugin-markdown-preferences@0.41.1:
-    resolution: {integrity: sha512-Xi4rlT7oBZ8PMGDl7J9khgO2vF9X0F/6ag05/25Vyq7r3llaK95x9D6DpzXidxC2Gagl/e8bp2Hw47r4I3wWSA==}
+  eslint-plugin-markdown-preferences@0.42.0:
+    resolution: {integrity: sha512-LVoGwsRDeLFooaj9OndJrof5OslnQQnZKStP+GX0DMnAt6Nt2tgJzP+URRNXqS54lYnIa0m6pBo7CO1n/utTsw==}
     engines: {node: ^20.19.0 || ^22.12.0 || >=24.0.0}
     peerDependencies:
       '@eslint/markdown': ^7.4.0 || ^8.0.0
@@ -5493,6 +5511,12 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
+  vue-i18n@12.0.0-alpha.4:
+    resolution: {integrity: sha512-qkIvoGxgA5lFKx3vb8l7R0FXw2B4zxUFi/AlnqBGOHq9E0Ik4FxNXbb0YtNyHjvn/dMSZACbDJcJRHkKdZFJVg==}
+    engines: {node: '>= 22'}
+    peerDependencies:
+      vue: ^3.0.0
+
   vue-loader@17.4.2:
     resolution: {integrity: sha512-yTKOA4R/VN4jqjw4y5HrynFL8AK0Z3/Jt7eOJXEitsm0GMRHDBjCfCiuTiLP7OESvsZYo2pATCWhDqxC5ZrM6w==}
     peerDependencies:
@@ -6079,17 +6103,36 @@ snapshots:
       '@intlify/message-compiler': 12.0.0-alpha.3
       '@intlify/shared': 12.0.0-alpha.3
 
+  '@intlify/core-base@12.0.0-alpha.4':
+    dependencies:
+      '@intlify/message-compiler': 12.0.0-alpha.4
+      '@intlify/shared': 12.0.0-alpha.4
+
   '@intlify/message-compiler@12.0.0-alpha.3':
     dependencies:
       '@intlify/shared': 12.0.0-alpha.3
       source-map-js: 1.2.1
 
+  '@intlify/message-compiler@12.0.0-alpha.4':
+    dependencies:
+      '@intlify/shared': 12.0.0-alpha.4
+      source-map-js: 1.2.1
+
   '@intlify/shared@12.0.0-alpha.3': {}
+
+  '@intlify/shared@12.0.0-alpha.4': {}
 
   '@intlify/vue-i18n-core@12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))':
     dependencies:
       '@intlify/core-base': 12.0.0-alpha.3
       '@intlify/shared': 12.0.0-alpha.3
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.34(typescript@6.0.3)
+
+  '@intlify/vue-i18n-core@12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))':
+    dependencies:
+      '@intlify/core-base': 12.0.0-alpha.4
+      '@intlify/shared': 12.0.0-alpha.4
       '@vue/devtools-api': 6.6.4
       vue: 3.5.34(typescript@6.0.3)
 
@@ -6244,7 +6287,7 @@ snapshots:
       '@jsonjoy.com/codegen': 17.67.0(tslib@2.8.1)
       tslib: 2.8.1
 
-  '@kazupon/eslint-config@0.45.0(ac8085048a68080ba62c881775e577b2)':
+  '@kazupon/eslint-config@0.45.0(b9d9f7c8acd436e7199b4e212cf8a770)':
     dependencies:
       '@eslint-community/eslint-plugin-eslint-comments': 4.7.1(eslint@10.3.0(jiti@2.7.0))
       '@eslint/js': 9.39.4
@@ -6262,7 +6305,7 @@ snapshots:
       eslint-import-resolver-typescript: 4.4.4(eslint-plugin-import@2.32.0)(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-import: 2.32.0(@typescript-eslint/parser@8.59.3(eslint@10.3.0(jiti@2.7.0))(typescript@6.0.3))(eslint-import-resolver-typescript@4.4.4)(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-jsonc: 3.1.2(eslint@10.3.0(jiti@2.7.0))
-      eslint-plugin-markdown-preferences: 0.41.1(@eslint/markdown@8.0.1)(eslint@10.3.0(jiti@2.7.0))
+      eslint-plugin-markdown-preferences: 0.42.0(@eslint/markdown@8.0.1)(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-promise: 7.3.0(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-regexp: 3.1.0(eslint@10.3.0(jiti@2.7.0))
       eslint-plugin-unicorn: 64.0.0(eslint@10.3.0(jiti@2.7.0))
@@ -8246,7 +8289,7 @@ snapshots:
     transitivePeerDependencies:
       - '@eslint/json'
 
-  eslint-plugin-markdown-preferences@0.41.1(@eslint/markdown@8.0.1)(eslint@10.3.0(jiti@2.7.0)):
+  eslint-plugin-markdown-preferences@0.42.0(@eslint/markdown@8.0.1)(eslint@10.3.0(jiti@2.7.0)):
     dependencies:
       '@eslint/markdown': 8.0.1
       diff-sequences: 29.6.3
@@ -8261,6 +8304,7 @@ snapshots:
       micromark-extension-math: 3.1.0
       micromark-factory-space: 2.0.1
       micromark-util-character: 2.1.1
+      micromark-util-normalize-identifier: 2.0.1
       micromark-util-symbol: 2.0.1
       string-width: 8.2.1
     transitivePeerDependencies:
@@ -11036,6 +11080,13 @@ snapshots:
       '@intlify/core-base': 12.0.0-alpha.3
       '@intlify/shared': 12.0.0-alpha.3
       '@intlify/vue-i18n-core': 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.34(typescript@6.0.3)
+
+  vue-i18n@12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3)):
+    dependencies:
+      '@intlify/core-base': 12.0.0-alpha.4
+      '@intlify/vue-i18n-core': 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
       '@vue/devtools-api': 6.6.4
       vue: 3.5.34(typescript@6.0.3)
 

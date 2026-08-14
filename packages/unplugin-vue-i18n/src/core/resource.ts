@@ -244,16 +244,26 @@ export function resourcePlugin(
         }
       },
 
-      async handleHotUpdate({ file, server }) {
-        if (RE_RESOURCE_FORMAT.test(file)) {
-          const module = server.moduleGraph.getModuleById(
-            asVirtualId(INTLIFY_BUNDLE_IMPORT_ID, meta.framework)
-          )
-          if (module) {
-            server.moduleGraph.invalidateModule(module)
-            return [module!]
-          }
+      handleHotUpdate({ file, modules, server }) {
+        const key = normalize(file)
+        const virtualId = realPathToVirtualId.get(key)
+        const inBundle = !!(include && createFilter(include, exclude)(key))
+
+        if (!virtualId && !inBundle) return
+
+        const affected = new Set(modules)
+        const addById = (id: string | undefined) => {
+          const mod = id && server.moduleGraph.getModuleById(id)
+          if (mod) affected.add(mod)
         }
+
+        addById(virtualId)
+        if (inBundle) {
+          addById(asVirtualId(INTLIFY_BUNDLE_IMPORT_ID, meta.framework))
+        }
+
+        if (affected.size === modules.length) return
+        return [...affected]
       }
     },
 

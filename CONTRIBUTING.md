@@ -52,6 +52,16 @@ $ pnpm test:unit
 $ pnpm test:e2e
 ```
 
+### `pnpm release`
+
+Bump versions, write root `CHANGELOG.md` from GitHub-generated notes, then commit, tag, and push. Run on a clean `main` or `v11` whose `HEAD` is already on `origin`. Provide a token with Contents: write:
+
+```bash
+$ GH_TOKEN="$(gh auth token)" pnpm release
+```
+
+Do not leave unrelated tracked changes: bumpp commits every tracked dirty file (`all: true`).
+
 ## Contributing Tests
 
 Unit tests are collocated with directories named `test` at each package. Consult the [Vitest docs](https://vitest.dev/api/) and existing test cases for how to write new test specs. Here are some additional guidelines:

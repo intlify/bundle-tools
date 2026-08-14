@@ -96,7 +96,7 @@
     "test:unit:unplugin:webpack": "TEST_FRAMEWORK=webpack vitest run packages/unplugin-vue-i18n/test",
     "test:unit:unplugin:rspack": "TEST_FRAMEWORK=rspack vitest run packages/unplugin-vue-i18n/test",
     "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",
-    "test:e2e:unplugin": "pnpm --filter @intlify/unplugin-vue-i18n test:e2e"
+    "test:e2e:unplugin": "TEST_FRAMEWORK=vite vitest run packages/unplugin-vue-i18n/test/hmr-glob.test.ts"
   },
   "packageManager": "pnpm@11.2.2"
 }

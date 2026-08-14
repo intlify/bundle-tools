@@ -94,33 +94,13 @@ jobs:
       )
     runs-on: ubuntu-latest
     permissions:
-      contents: write # GitHub Release 作成 + CHANGELOG push
+      contents: write # create GitHub Release
     steps:
-      - name: Resolve target branch from tag
-        id: meta
-        # When adding a new major (e.g. v13), append a case branch below.
-        run: |
-          case "$TAG" in
-            v11.*) echo "branch=v11" >> "$GITHUB_OUTPUT" ;;
-            v12.*) echo "branch=main" >> "$GITHUB_OUTPUT" ;;
-            *) echo "Unknown tag pattern: $TAG" >&2; exit 1 ;;
-          esac
-
-      - name: Checkout codes
-        # zizmor: ignore[artipacked] git-auto-commit-action requires persisted credentials
+      - name: Checkout tag
         uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6.1.0
         with:
-          ref: ${{ steps.meta.outputs.branch }}
-          fetch-depth: 0
-
-      - name: Install pnpm
-        uses: pnpm/action-setup@0977fd99725f1db4007ccb2928dbb4e90d06cc86 # v6.0.10
-
-      - name: Setup Node
-        # zizmor: ignore[cache-poisoning] no package cache is enabled; toolchain only
-        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
-        with:
-          node-version: 24
+          ref: ${{ env.TAG }}
+          persist-credentials: false
 
       - name: Create GitHub Release (idempotent)
         run: |
@@ -136,15 +116,3 @@ jobs:
           fi
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Sync changelog from GitHub Releases
-        run: pnpx gh-changelogen --repo=intlify/bundle-tools --tag="$TAG"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Commit changelog
-        uses: stefanzweifel/git-auto-commit-action@4a55954c782fc1ea30b9056cd3e7a2b40ca8887d # v7.2.0
-        with:
-          branch: ${{ steps.meta.outputs.branch }}
-          file_pattern: '*.md'
-          commit_message: 'chore: sync changelog'

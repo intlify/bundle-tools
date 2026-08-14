@@ -103,6 +103,9 @@ importers:
       get-port-please:
         specifier: ^3.2.0
         version: 3.2.0
+      gh-changelogen:
+        specifier: ^2.0.2
+        version: 2.0.2
       jiti:
         specifier: ^2.7.0
         version: 2.7.0
@@ -3415,6 +3418,11 @@ packages:
   get-tsconfig@4.14.0:
     resolution: {integrity: sha512-yTb+8DXzDREzgvYmh6s9vHsSVCHeC0G3PI5bEXNBHtmshPnO+S5O7qgLEOn0I5QvMy6kpZN8K1NKGyilLb93wA==}
 
+  gh-changelogen@2.0.2:
+    resolution: {integrity: sha512-4Qsyts73PSxeUNigYHa46TDAT/GDt5sW2B+C36wf0gUNGx8rjKuR21K9axE6nm1ZcRqSKfdpshsq4a9TMBNdpA==}
+    engines: {node: '>= 22'}
+    hasBin: true
+
   github-slugger@2.0.0:
     resolution: {integrity: sha512-IaOQ9puYtjrkq7Y0Ygl9KDZnrf/aiUJYUpVf89y8kyaxbRG7Y1SrX/jaumrv81vc61+kiMempujsM3Yw7w5qcw==}
 
@@ -3457,6 +3465,10 @@ packages:
 
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
+
+  gunshi@0.37.1:
+    resolution: {integrity: sha512-C3t35z65PQpAHay/gzEu4J/7SNWXn2NhfC4RfZQPxyOqkPfDTizthxCPoSU48OazoVherCuCpFDKI1qcY425Gw==}
+    engines: {node: '>= 22'}
 
   gzip-size@6.0.0:
     resolution: {integrity: sha512-ax7ZYomf6jqPTQ4+XCpUGyXKHk5WweS+e05MBO4/y3WJ5RkmPXNKvX+bx1behVILVwr6JSQvZAku021CHPXG3Q==}
@@ -4875,6 +4887,11 @@ packages:
 
   semver@7.8.0:
     resolution: {integrity: sha512-AcM7dV/5ul4EekoQ29Agm5vri8JNqRyj39o0qpX6vDF2GZrtutZl5RwgD1XnZjiTAfncsJhMI48QQH3sN87YNA==}
+    engines: {node: '>=10'}
+    hasBin: true
+
+  semver@7.8.5:
+    resolution: {integrity: sha512-Y7/KDsb8LjooZpwaqGyulO6DQlksgCncchHGk+sZIY4SBvUocMBEFH5Ur1fI4dV+Jvl0w6cjvucaIi40puRioA==}
     engines: {node: '>=10'}
     hasBin: true
 
@@ -8614,6 +8631,11 @@ snapshots:
     dependencies:
       resolve-pkg-maps: 1.0.0
 
+  gh-changelogen@2.0.2:
+    dependencies:
+      gunshi: 0.37.1
+      semver: 7.8.5
+
   github-slugger@2.0.0: {}
 
   glob-parent@5.1.2:
@@ -8651,6 +8673,8 @@ snapshots:
   gopd@1.2.0: {}
 
   graceful-fs@4.2.11: {}
+
+  gunshi@0.37.1: {}
 
   gzip-size@6.0.0:
     dependencies:
@@ -10373,6 +10397,8 @@ snapshots:
   semver@6.3.1: {}
 
   semver@7.8.0: {}
+
+  semver@7.8.5: {}
 
   send@0.19.2:
     dependencies:

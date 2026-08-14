@@ -57,7 +57,7 @@ $ pnpm test:e2e
 Bump versions, write root `CHANGELOG.md` from GitHub-generated notes, then commit, tag, and push. Run on a clean `main` or `v11` whose `HEAD` is already on `origin`. Provide a token with Contents: write:
 
 ```bash
-$ GH_TOKEN="$(gh auth token)" pnpm release
+GH_TOKEN="$(gh auth token)" pnpm release
 ```
 
 Do not leave unrelated tracked changes: bumpp commits every tracked dirty file (`all: true`).

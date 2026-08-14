@@ -13,6 +13,7 @@ import { findStaticImports } from 'mlly'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import { dirname, parse as parsePath, resolve } from 'node:path'
+import { normalize } from 'pathe'
 import { globSync } from 'tinyglobby'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
@@ -32,6 +33,11 @@ const RE_SFC_I18N_CUSTOM_BLOCK = /\?vue&type=i18n/
 const RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK = /blockType=i18n/
 
 const debug = createDebug(resolveNamespace('resource'))
+
+/** Slash-stable path key for virtual-id maps and HMR lookup. */
+export function normalizeResourcePath(file: string): string {
+  return normalize(file)
+}
 
 /**
  * Helper to handle both rspack/webpack due to similar API
@@ -127,11 +133,12 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
   let virtualCounter = 0
 
   function intlifyVirtualize(realPath: string): string {
-    let virtualId = realPathToVirtualId.get(realPath)
+    const key = normalizeResourcePath(realPath)
+    let virtualId = realPathToVirtualId.get(key)
     if (!virtualId) {
       virtualId = `${VITE_VIRTUAL_PREFIX}${virtualCounter++}`
-      virtualIdToRealPath.set(virtualId, realPath)
-      realPathToVirtualId.set(realPath, virtualId)
+      virtualIdToRealPath.set(virtualId, key)
+      realPathToVirtualId.set(key, virtualId)
     }
     return virtualId
   }
@@ -319,6 +326,16 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
             jsonPlugin.transform = overrideJson as typeof jsonPlugin.transform
           }
         }
+      },
+
+      handleHotUpdate({ file, modules, server }) {
+        const virtualId = realPathToVirtualId.get(normalizeResourcePath(file))
+        if (!virtualId) return
+
+        const virtualModule = server.moduleGraph.getModuleById(virtualId)
+        if (!virtualModule) return
+
+        return [...new Set([...modules, virtualModule])]
       }
     },
 

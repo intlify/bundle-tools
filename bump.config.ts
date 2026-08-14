@@ -4,7 +4,7 @@ import { updateChangelog } from 'gh-changelogen'
 export default defineConfig({
   files: ['package.json', 'packages/**/package.json'],
   all: true,
-  commit: 'release: v{version}',
+  commit: 'release: v',
   tag: true,
   push: true,
   execute: async operation => {

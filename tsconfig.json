@@ -75,7 +75,8 @@
     "packages/**/*.ts",
     "packages/**/*.d.ts",
     "scripts/*.ts",
-    "e2e/*.ts"
+    "e2e/*.ts",
+    "bump.config.ts"
   ],
   "exclude": [
     ".unmaintained/**/*",

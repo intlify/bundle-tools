@@ -15,10 +15,10 @@ catalogs:
   intlify:
     '@intlify/shared':
       specifier: next
-      version: 12.0.0-alpha.3
+      version: 12.0.0-alpha.4
     vue-i18n:
       specifier: next
-      version: 12.0.0-alpha.3
+      version: 12.0.0-alpha.4
   vite:
     '@vitejs/plugin-vue':
       specifier: ^6.0.6
@@ -116,8 +116,8 @@ importers:
         specifier: ^17.0.4
         version: 17.0.4
       pkg-pr-new:
-        specifier: ^0.0.74
-        version: 0.0.74
+        specifier: ^0.0.88
+        version: 0.0.88
       playwright-core:
         specifier: ^1.60.0
         version: 1.60.0
@@ -150,7 +150,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
       vue-i18n:
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+        version: 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
     devDependencies:
       '@rspack/cli':
         specifier: ^1.2.7
@@ -169,7 +169,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
       vue-i18n:
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+        version: 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:vite
@@ -188,7 +188,7 @@ importers:
         version: 3.5.34(typescript@6.0.3)
       vue-i18n:
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+        version: 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
     devDependencies:
       babel-loader:
         specifier: ^8.2.2
@@ -213,10 +213,10 @@ importers:
     dependencies:
       '@intlify/message-compiler':
         specifier: next
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       '@intlify/shared':
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       escodegen:
         specifier: ^2.1.0
         version: 2.1.0
@@ -253,7 +253,7 @@ importers:
         version: link:../bundle-utils
       '@intlify/shared':
         specifier: catalog:intlify
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       '@rollup/pluginutils':
         specifier: ^5.1.0
         version: 5.3.0(rollup@4.60.3)
@@ -293,7 +293,7 @@ importers:
     devDependencies:
       '@intlify/core-base':
         specifier: next
-        version: 12.0.0-alpha.3
+        version: 12.0.0-alpha.4
       '@rspack/core':
         specifier: ^1.2.7
         version: 1.7.11
@@ -729,17 +729,35 @@ packages:
     resolution: {integrity: sha512-LEvBHBUbiOOtIBkp4IIQENVC5Fg2YHsvdXN1+WRIxQ8hzHbHSBiqZ2l68B/yg8sE1a4S7dqhkaAedunShWPH+Q==}
     engines: {node: '>= 16'}
 
+  '@intlify/core-base@12.0.0-alpha.4':
+    resolution: {integrity: sha512-7JZiWLP9ScL/DDgT6+t1HebP4IqiA0FmHkd7M17LgjchPdIxWCBJFbFANK9bYAj+ZyzR8urtPK65FxyARjPi3A==}
+    engines: {node: '>= 22'}
+
   '@intlify/message-compiler@12.0.0-alpha.3':
     resolution: {integrity: sha512-mDDTN3gfYOHhBnpnlby19UHyvMaOnzdlpsIrxUfs44R/vCATfn8pMOkE8PXD2t410xkocEj3FpDcC9XC/0v4Dg==}
     engines: {node: '>= 16'}
+
+  '@intlify/message-compiler@12.0.0-alpha.4':
+    resolution: {integrity: sha512-F4yHuJzI2ZXtXTW2B1VhuNULAOjR5bniFSC/Z0rLWRYPO43pVgKLu+FPDoJq13OjTFq4X5hx2s855M4gqPU/pA==}
+    engines: {node: '>= 22'}
 
   '@intlify/shared@12.0.0-alpha.3':
     resolution: {integrity: sha512-ryaNYBvxQjyJUmVuBBg+HHUsmGnfxcEUPR0NCeG4/K9N2qtyFE35C80S15IN6iYFE2MGWLN7HfOSyg0MXZIc9w==}
     engines: {node: '>= 16'}
 
+  '@intlify/shared@12.0.0-alpha.4':
+    resolution: {integrity: sha512-MfunEN3/yQjD1Q9HnD4Qtvg/qLYnR+tK3mEz/EEvikJO+Hu8ICe7Rqh6uusLSjpWy6ECVt2p5HGXlYA12UBweA==}
+    engines: {node: '>= 22'}
+
   '@intlify/vue-i18n-core@12.0.0-alpha.3':
     resolution: {integrity: sha512-YwAfTQILHN+VoK0P/Yv47GbKnEf1lhfbliyVyW3knAL1EmT8m0m3rwffXJnwyQhYw8Jpx85CpL49WkSgyi6d/g==}
     engines: {node: '>= 16'}
+    peerDependencies:
+      vue: ^3.0.0
+
+  '@intlify/vue-i18n-core@12.0.0-alpha.4':
+    resolution: {integrity: sha512-pQuMjLsUopwyPnWkv+HfOqFSv2leG78hgtihRba26N1GAs13yIGetHYkZSoEIjnAHmpCO1k5588F5WQVZUCMQg==}
+    engines: {node: '>= 22'}
     peerDependencies:
       vue: ^3.0.0
 
@@ -4482,8 +4500,8 @@ packages:
     resolution: {integrity: sha512-HRDzbaKjC+AOWVXxAU/x54COGeIv9eb+6CkDSQoNTt4XyWoIJvuPsXizxu/Fr23EiekbtZwmh1IcIG/l/a10GQ==}
     engines: {node: '>=8'}
 
-  pkg-pr-new@0.0.74:
-    resolution: {integrity: sha512-f2gScB4cjpVcMLeCMEhkrkt3KJCx3TgHTqaWZx54dUgvQcYASh+Hj+txMLjCkSN5ofHEGEmzi1gXK3lWZ2imTA==}
+  pkg-pr-new@0.0.88:
+    resolution: {integrity: sha512-Xc6PMJ2gher0WZP+rtjefFk26hIb7V1PTLL30bmy1Z2vsRmSvqiss7Ag1XUdyplTGYzIlFNJp4L3vMNmK44N6g==}
     hasBin: true
 
   pkg-types@1.3.1:
@@ -5493,6 +5511,12 @@ packages:
     peerDependencies:
       vue: ^3.0.0
 
+  vue-i18n@12.0.0-alpha.4:
+    resolution: {integrity: sha512-qkIvoGxgA5lFKx3vb8l7R0FXw2B4zxUFi/AlnqBGOHq9E0Ik4FxNXbb0YtNyHjvn/dMSZACbDJcJRHkKdZFJVg==}
+    engines: {node: '>= 22'}
+    peerDependencies:
+      vue: ^3.0.0
+
   vue-loader@17.4.2:
     resolution: {integrity: sha512-yTKOA4R/VN4jqjw4y5HrynFL8AK0Z3/Jt7eOJXEitsm0GMRHDBjCfCiuTiLP7OESvsZYo2pATCWhDqxC5ZrM6w==}
     peerDependencies:
@@ -6079,17 +6103,36 @@ snapshots:
       '@intlify/message-compiler': 12.0.0-alpha.3
       '@intlify/shared': 12.0.0-alpha.3
 
+  '@intlify/core-base@12.0.0-alpha.4':
+    dependencies:
+      '@intlify/message-compiler': 12.0.0-alpha.4
+      '@intlify/shared': 12.0.0-alpha.4
+
   '@intlify/message-compiler@12.0.0-alpha.3':
     dependencies:
       '@intlify/shared': 12.0.0-alpha.3
       source-map-js: 1.2.1
 
+  '@intlify/message-compiler@12.0.0-alpha.4':
+    dependencies:
+      '@intlify/shared': 12.0.0-alpha.4
+      source-map-js: 1.2.1
+
   '@intlify/shared@12.0.0-alpha.3': {}
+
+  '@intlify/shared@12.0.0-alpha.4': {}
 
   '@intlify/vue-i18n-core@12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))':
     dependencies:
       '@intlify/core-base': 12.0.0-alpha.3
       '@intlify/shared': 12.0.0-alpha.3
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.34(typescript@6.0.3)
+
+  '@intlify/vue-i18n-core@12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))':
+    dependencies:
+      '@intlify/core-base': 12.0.0-alpha.4
+      '@intlify/shared': 12.0.0-alpha.4
       '@vue/devtools-api': 6.6.4
       vue: 3.5.34(typescript@6.0.3)
 
@@ -9949,7 +9992,7 @@ snapshots:
     dependencies:
       find-up: 4.1.0
 
-  pkg-pr-new@0.0.74: {}
+  pkg-pr-new@0.0.88: {}
 
   pkg-types@1.3.1:
     dependencies:
@@ -11036,6 +11079,13 @@ snapshots:
       '@intlify/core-base': 12.0.0-alpha.3
       '@intlify/shared': 12.0.0-alpha.3
       '@intlify/vue-i18n-core': 12.0.0-alpha.3(vue@3.5.34(typescript@6.0.3))
+      '@vue/devtools-api': 6.6.4
+      vue: 3.5.34(typescript@6.0.3)
+
+  vue-i18n@12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3)):
+    dependencies:
+      '@intlify/core-base': 12.0.0-alpha.4
+      '@intlify/vue-i18n-core': 12.0.0-alpha.4(vue@3.5.34(typescript@6.0.3))
       '@vue/devtools-api': 6.6.4
       vue: 3.5.34(typescript@6.0.3)
 

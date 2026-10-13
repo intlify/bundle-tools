@@ -423,6 +423,42 @@ export function generateResourceAst(
   return { code, ast, map, errors }
 }
 
+function describeResource({ type, filename }: CodeGenOptions): string {
+  return type === 'sfc' ? `the i18n custom block of ${filename}` : `${filename}`
+}
+
+/**
+ * @internal
+ */
+export function describeValue(value: unknown): string {
+  if (Array.isArray(value)) return 'an array'
+  if (value === undefined) return 'undefined'
+  return `a ${typeof value}`
+}
+
+/**
+ * @internal
+ */
+export function createResourceError(message: string, options: CodeGenOptions): Error {
+  return new Error(`${message} in ${describeResource(options)}.`)
+}
+
+/**
+ * @internal
+ */
+export function createResourceParseError(
+  err: unknown,
+  options: CodeGenOptions,
+  columnOffset = 0
+): unknown {
+  if (!(err instanceof Error)) return err
+  const { lineNumber, column } = err as Error & { lineNumber?: number; column?: number }
+  const position = lineNumber != null ? ` (${lineNumber}:${column! + columnOffset})` : ''
+  return new SyntaxError(`${err.message} in ${describeResource(options)}${position}`, {
+    cause: err
+  })
+}
+
 export function excludeLocales({
   messages,
   onlyLocales

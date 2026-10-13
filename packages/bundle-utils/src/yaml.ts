@@ -6,6 +6,9 @@ import { isString } from '@intlify/shared'
 import { getStaticYAMLValue, parseYAML, traverseNodes } from 'yaml-eslint-parser'
 import {
   createCodeGenerator,
+  createResourceError,
+  createResourceParseError,
+  describeValue,
   excludeLocales,
   generateMessageFunction,
   generateResourceAst,
@@ -13,7 +16,7 @@ import {
 } from './codegen'
 
 import type { RawSourceMap } from 'source-map'
-import type { YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
+import type { YAMLContent, YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
 import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
 /**
@@ -55,10 +58,32 @@ export function generate(
     jit
   } as CodeGenOptions
 
-  let ast = parseYAML(value, { filePath: filename })
+  let ast: YAMLProgram
+  try {
+    ast = parseYAML(value, { filePath: filename })
+  } catch (err) {
+    // yaml-eslint-parser counts columns from 0, jsonc-eslint-parser from 1
+    throw createResourceParseError(err, options, 1)
+  }
+
+  // the top-level value must be a mapping. an empty document and `null` are treated as an empty mapping.
+  const root = getRootContent(ast, options)
+  if (root?.type !== 'YAMLMapping') {
+    if (root != null && !(root.type === 'YAMLScalar' && root.value === null)) {
+      const actual =
+        root.type === 'YAMLAlias' ? 'an alias' : describeValue(getStaticYAMLValue(root))
+      throw createResourceError(
+        `You need to define an object as the locale messages at the top level, but got ${actual}`,
+        options
+      )
+    }
+    value = JSON.stringify({})
+    ast = parseYAML(value, { filePath: filename })
+    options.source = undefined
+  }
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {
-    const messages = getStaticYAMLValue(ast) as Record<string, unknown>
+    const messages = getStaticYAMLValue(getRootContent(ast, options)!) as Record<string, unknown>
 
     value = JSON.stringify(
       excludeLocales({
@@ -89,6 +114,22 @@ export function generate(
     code,
     map: newMap != null ? newMap : undefined
   }
+}
+
+/**
+ * Get the content of the only non-empty document, unwrapping anchors and tags.
+ */
+function getRootContent(ast: YAMLProgram, options: CodeGenOptions): YAMLContent | null {
+  // empty documents (e.g. a trailing `---`) generate nothing, so skip them
+  const documents = ast.body.filter(doc => doc.content != null)
+  if (documents.length > 1) {
+    throw createResourceError(
+      `You need to define the locale messages in a single YAML document, but got ${documents.length} documents`,
+      options
+    )
+  }
+  const content = documents[0]?.content ?? null
+  return content?.type === 'YAMLWithMeta' ? content.value : content
 }
 
 function _generate(

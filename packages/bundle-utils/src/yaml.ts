@@ -41,6 +41,10 @@ export function generate(
   }: CodeGenOptions
 ): CodeGenResult<YAMLProgram> {
   let value = Buffer.isBuffer(targetSource) ? targetSource.toString() : targetSource
+  // yaml-eslint-parser does not accept a BOM, so strip it as ESLint does before parsing
+  if (value.charCodeAt(0) === 0xfeff) {
+    value = value.slice(1)
+  }
 
   const options = {
     type,

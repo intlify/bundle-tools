@@ -161,7 +161,14 @@ export function bundleWebpack(
       }
       if (stats.hasErrors()) {
         console.log(stats.toJson().errors)
-        return reject(new Error(stats.toJson().errors.join(' | ')))
+        return reject(
+          new Error(
+            stats
+              .toJson()
+              .errors.map((error: { message: string }) => error.message)
+              .join(' | ')
+          )
+        )
       }
       resolve({
         type: 'webpack',

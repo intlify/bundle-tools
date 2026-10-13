@@ -6,6 +6,9 @@ import { isString } from '@intlify/shared'
 import { getStaticJSONValue, parseJSON, traverseNodes } from 'jsonc-eslint-parser'
 import {
   createCodeGenerator,
+  createResourceError,
+  createResourceParseError,
+  describeValue,
   excludeLocales,
   filterMessageKeys,
   filterMultiLocaleMessages,
@@ -58,7 +61,27 @@ export function generate(
     jit
   } as CodeGenOptions
 
-  let ast = parseJSON(value, { filePath: filename })
+  let ast: JSONProgram
+  try {
+    ast = parseJSON(value, { filePath: filename })
+  } catch (err) {
+    throw createResourceParseError(err, options)
+  }
+
+  // the top-level value must be an object. `null` is treated as an empty object.
+  const root = ast.body[0].expression
+  if (root.type !== 'JSONObjectExpression') {
+    const rootValue = getStaticJSONValue(root)
+    if (rootValue !== null) {
+      throw createResourceError(
+        `You need to define an object as the locale messages at the top level, but got ${describeValue(rootValue)}`,
+        options
+      )
+    }
+    value = JSON.stringify({})
+    ast = parseJSON(value, { filePath: filename })
+    options.source = undefined
+  }
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {
     const messages = getStaticJSONValue(ast) as Record<string, unknown>

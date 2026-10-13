@@ -196,7 +196,14 @@ function bundleWebpackLike(
       }
       if (stats.hasErrors()) {
         console.error(stats.toJson())
-        return reject(new Error(stats.toJson().errors.join(' | ')))
+        return reject(
+          new Error(
+            stats
+              .toJson()
+              .errors.map((error: { message: string }) => error.message)
+              .join(' | ')
+          )
+        )
       }
       resolve({
         type: framework,

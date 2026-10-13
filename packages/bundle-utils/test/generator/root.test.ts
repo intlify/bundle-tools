@@ -45,6 +45,8 @@ describe('non-object top-level value throws an error with the file name', () => 
     ['- a\n- b\n', 'an array'],
     ['["a"]\n', 'an array'],
     ['&a hello\n', 'a string'],
+    ['!!str null\n', 'a string'],
+    ['!!str 1\n', 'a string'],
     ['*a\n', 'an alias']
   ] as const
 
@@ -140,6 +142,15 @@ describe('onlyLocales', () => {
       onlyLocales: ['en']
     })
     expect(replaceMessageFunctions(code)).toContain('"hello": <fn>')
+  })
+
+  test('resolves the values with the YAML version of the document', () => {
+    const { code } = generateYAML('%YAML 1.1\n---\nen:\n  count: !!int 077\n', {
+      type: 'sfc',
+      onlyLocales: ['en']
+    })
+    // `077` is an octal number in YAML 1.1
+    expect(code).toContain('"count": 63')
   })
 
   test('does not hide a non-object top-level value', () => {

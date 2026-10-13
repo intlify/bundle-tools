@@ -16,7 +16,7 @@ import {
 } from './codegen'
 
 import type { RawSourceMap } from 'source-map'
-import type { YAMLContent, YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
+import type { YAMLDocument, YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
 import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
 /**
@@ -67,11 +67,17 @@ export function generate(
   }
 
   // the top-level value must be a mapping. an empty document and `null` are treated as an empty mapping.
-  const root = getRootContent(ast, options)
+  const rootDocument = getRootDocument(ast, options)
+  const content = rootDocument?.content
+  // unwrap anchors and tags to check the node type
+  const root = content?.type === 'YAMLWithMeta' ? content.value : content
   if (root?.type !== 'YAMLMapping') {
-    if (root != null && !(root.type === 'YAMLScalar' && root.value === null)) {
-      const actual =
-        root.type === 'YAMLAlias' ? 'an alias' : describeValue(getStaticYAMLValue(root))
+    // an alias is checked by the node type, because its value is resolved to `null`.
+    // the others are resolved with their tags and the YAML version (e.g. `!!str null` is a string).
+    const isAlias = root?.type === 'YAMLAlias'
+    const rootValue = rootDocument == null || isAlias ? null : getStaticYAMLValue(rootDocument)
+    if (isAlias || rootValue !== null) {
+      const actual = isAlias ? 'an alias' : describeValue(rootValue)
       throw createResourceError(
         `You need to define an object as the locale messages at the top level, but got ${actual}`,
         options
@@ -83,7 +89,8 @@ export function generate(
   }
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {
-    const messages = getStaticYAMLValue(getRootContent(ast, options)!) as Record<string, unknown>
+    // pass the document, to resolve the values with its YAML version
+    const messages = getStaticYAMLValue(getRootDocument(ast, options)!) as Record<string, unknown>
 
     value = JSON.stringify(
       excludeLocales({
@@ -117,9 +124,9 @@ export function generate(
 }
 
 /**
- * Get the content of the only non-empty document, unwrapping anchors and tags.
+ * Get the only non-empty document.
  */
-function getRootContent(ast: YAMLProgram, options: CodeGenOptions): YAMLContent | null {
+function getRootDocument(ast: YAMLProgram, options: CodeGenOptions): YAMLDocument | null {
   // empty documents (e.g. a trailing `---`) generate nothing, so skip them
   const documents = ast.body.filter(doc => doc.content != null)
   if (documents.length > 1) {
@@ -128,8 +135,7 @@ function getRootContent(ast: YAMLProgram, options: CodeGenOptions): YAMLContent 
       options
     )
   }
-  const content = documents[0]?.content ?? null
-  return content?.type === 'YAMLWithMeta' ? content.value : content
+  return documents[0] ?? null
 }
 
 function _generate(

@@ -6,6 +6,9 @@ import { isString } from '@intlify/shared'
 import { getStaticYAMLValue, parseYAML, traverseNodes } from 'yaml-eslint-parser'
 import {
   createCodeGenerator,
+  createResourceError,
+  createResourceParseError,
+  describeValue,
   excludeLocales,
   generateMessageFunction,
   generateResourceAst,
@@ -13,7 +16,7 @@ import {
 } from './codegen'
 
 import type { RawSourceMap } from 'source-map'
-import type { YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
+import type { YAMLDocument, YAMLNode, YAMLProgram } from 'yaml-eslint-parser/lib/ast'
 import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
 /**
@@ -55,10 +58,39 @@ export function generate(
     jit
   } as CodeGenOptions
 
-  let ast = parseYAML(value, { filePath: filename })
+  let ast: YAMLProgram
+  try {
+    ast = parseYAML(value, { filePath: filename })
+  } catch (err) {
+    // yaml-eslint-parser counts columns from 0, jsonc-eslint-parser from 1
+    throw createResourceParseError(err, options, 1)
+  }
+
+  // the top-level value must be a mapping. an empty document and `null` are treated as an empty mapping.
+  const rootDocument = getRootDocument(ast, options)
+  const content = rootDocument?.content
+  // unwrap anchors and tags to check the node type
+  const root = content?.type === 'YAMLWithMeta' ? content.value : content
+  if (root?.type !== 'YAMLMapping') {
+    // an alias is checked by the node type, because its value is resolved to `null`.
+    // the others are resolved with their tags and the YAML version (e.g. `!!str null` is a string).
+    const isAlias = root?.type === 'YAMLAlias'
+    const rootValue = rootDocument == null || isAlias ? null : getStaticYAMLValue(rootDocument)
+    if (isAlias || rootValue !== null) {
+      const actual = isAlias ? 'an alias' : describeValue(rootValue)
+      throw createResourceError(
+        `You need to define an object as the locale messages at the top level, but got ${actual}`,
+        options
+      )
+    }
+    value = JSON.stringify({})
+    ast = parseYAML(value, { filePath: filename })
+    options.source = undefined
+  }
 
   if (!locale && type === 'sfc' && onlyLocales?.length) {
-    const messages = getStaticYAMLValue(ast) as Record<string, unknown>
+    // pass the document, to resolve the values with its YAML version
+    const messages = getStaticYAMLValue(getRootDocument(ast, options)!) as Record<string, unknown>
 
     value = JSON.stringify(
       excludeLocales({
@@ -89,6 +121,21 @@ export function generate(
     code,
     map: newMap != null ? newMap : undefined
   }
+}
+
+/**
+ * Get the only non-empty document.
+ */
+function getRootDocument(ast: YAMLProgram, options: CodeGenOptions): YAMLDocument | null {
+  // empty documents (e.g. a trailing `---`) generate nothing, so skip them
+  const documents = ast.body.filter(doc => doc.content != null)
+  if (documents.length > 1) {
+    throw createResourceError(
+      `You need to define the locale messages in a single YAML document, but got ${documents.length} documents`,
+      options
+    )
+  }
+  return documents[0] ?? null
 }
 
 function _generate(

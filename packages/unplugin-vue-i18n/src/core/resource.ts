@@ -122,6 +122,12 @@ export function resourcePlugin(
    * `.json5` suffix, so `builtin:vite-json` (which matches by extension) does
    * not claim it. Our `load` reads the original file from disk, runs the
    * generator, and returns the compiled JS.
+   *
+   * Only existing JSON / JSON5 files are remapped:
+   * - other resources (YAML, JS, TS) are not claimed by `builtin:vite-json`,
+   *   so they keep their real ids and go through `transform`, as on vite 6.
+   * - `import.meta.glob` resolves an aliased pattern (e.g. `@/locales/*.json`)
+   *   through `resolveId` and needs an absolute path back, not a virtual id.
    */
   const virtualIdToRealPath = new Map<string, string>()
   const realPathToVirtualId = new Map<string, string>()
@@ -348,7 +354,8 @@ export function resourcePlugin(
           }
 
           const idPath = id.split('?')[0]
-          if (!RE_RESOURCE_FORMAT.test(idPath)) return
+          // `builtin:vite-json` claims only JSON / JSON5, so other resources keep their real ids.
+          if (!/\.json5?$/.test(idPath)) return
 
           // unplugin v2.x does not expose `this.resolve` reliably across
           // bundlers, so resolve relative and absolute paths manually. Bare
@@ -370,6 +377,9 @@ export function resourcePlugin(
 
           const filter = await getFilter()
           if (!filter(resolvedPath)) return
+          // Skip non-files, such as an aliased glob pattern (e.g. `@/locales/*.json`).
+          const stat = await fs.stat(resolvedPath).catch(() => null)
+          if (!stat?.isFile()) return
 
           return intlifyVirtualize(resolvedPath)
         }

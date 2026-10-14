@@ -1,6 +1,7 @@
 import type { MessageCompilerContext } from '@intlify/core-base'
 
 import { compile, createMessageContext, isMessageAST } from '@intlify/core-base'
+import { resolve } from 'node:path'
 import { expect, test } from 'vitest'
 import { bundleAndRun, getCurrentTestBundler } from './utils'
 
@@ -120,6 +121,22 @@ test('import', async () => {
 
   const i18n = module.__i18n.pop()
   expect(i18n.locale).toEqual('')
+  const fn = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
+  expect(fn(createMessageContext())).toEqual('hello world!')
+})
+
+test('import yaml with the src file in include', async () => {
+  // Vite 8 used to load the src file as a locale resource, and the block was lost
+  const { module } = await bundleAndRun('import-yaml.vue', bundler, {
+    // webpack and rspack transform the block only when the SFC is in `include` too
+    include: [
+      resolve(__dirname, './fixtures/import-yaml.vue'),
+      resolve(__dirname, './fixtures/message.yaml')
+    ]
+  })
+  expect(module.__i18n).toBeDefined()
+
+  const i18n = module.__i18n.pop()
   const fn = compile(i18n.resource.en.hello, {} as MessageCompilerContext)
   expect(fn(createMessageContext())).toEqual('hello world!')
 })

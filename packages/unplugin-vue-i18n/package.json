@@ -27,7 +27,6 @@
     }
   },
   "dependencies": {
-    "@eslint-community/eslint-utils": "^4.4.0",
     "@intlify/bundle-utils": "workspace:*",
     "@intlify/shared": "catalog:intlify",
     "@intlify/vue-i18n-extensions": "^8.0.0",

@@ -235,9 +235,6 @@ importers:
 
   packages/unplugin-vue-i18n:
     dependencies:
-      '@eslint-community/eslint-utils':
-        specifier: ^4.4.0
-        version: 4.9.1(eslint@10.3.0(jiti@2.7.0))
       '@intlify/bundle-utils':
         specifier: workspace:*
         version: link:../bundle-utils

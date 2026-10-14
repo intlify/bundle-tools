@@ -1,4 +1,3 @@
-import eslintUitls from '@eslint-community/eslint-utils'
 import { isBoolean } from '@intlify/shared'
 import { transformVTDirective } from '@intlify/vue-i18n-extensions'
 import { analyze as analyzeScope } from '@typescript-eslint/scope-manager'
@@ -208,20 +207,21 @@ function getImportLocalName(scope: Scope, source: string, imported: string): str
 }
 
 function getImportDeclaration(scope: Scope, source: string) {
-  // @ts-expect-error -- FIXME: type error
-  const tracker = new eslintUitls.ReferenceTracker(scope)
-  const traceMap = {
-    [source]: {
-      [eslintUitls.ReferenceTracker.ESM]: true,
-      [eslintUitls.ReferenceTracker.READ]: true
+  const program = scope.block as TSESTree.Program
+  const importDecl = program.body.find(
+    node => node.type === tsEstree.AST_NODE_TYPES.ImportDeclaration && node.source.value === source
+  )
+  return importDecl ? (importDecl as TSESTree.ImportDeclaration) : null
+}
+
+function findVariable(scope: Scope, name: string) {
+  for (let current: Scope | null = scope; current != null; current = current.upper) {
+    const variable = current.set.get(name)
+    if (variable != null) {
+      return variable
     }
   }
-  // @ts-expect-error -- FIXME: type error
-  const refs = Array.from(tracker.iterateEsmReferences(traceMap)) satisfies {
-    path: string
-    node: Node
-  }[]
-  return refs.length ? (refs[0].node as TSESTree.ImportDeclaration) : null
+  return null
 }
 
 function isImportedIdentifierInImportClause(
@@ -274,14 +274,12 @@ function getCallExpressionAndReturnStatement(
       returnStatement: TSESTree.ReturnStatement | null
     }
   | typeof EMPTY_NODE_RETURN {
-  // @ts-expect-error -- FIXME: type error
-  const variable = eslintUitls.findVariable(scope, local)
+  const variable = findVariable(scope, local)
   if (variable == null) {
     return EMPTY_NODE_RETURN
   }
 
   const callExpressionRef = variable.references.find(ref => {
-    // @ts-expect-error -- FIXME: type error
     return ref.identifier.parent?.type === tsEstree.AST_NODE_TYPES.CallExpression
   })
   if (callExpressionRef == null) {
@@ -292,21 +290,16 @@ function getCallExpressionAndReturnStatement(
   if (
     callExpressionRef.from.type === 'function' &&
     callExpressionRef.from.block.type === tsEstree.AST_NODE_TYPES.FunctionExpression &&
-    // @ts-expect-error -- FIXME: type error
     callExpressionRef.from.block.parent.type === tsEstree.AST_NODE_TYPES.Property &&
-    // @ts-expect-error -- FIXME: type error
     callExpressionRef.from.block.parent.key.type === tsEstree.AST_NODE_TYPES.Identifier &&
-    // @ts-expect-error -- FIXME: type error
     callExpressionRef.from.block.parent.key.name === 'setup'
   ) {
-    // @ts-expect-error -- FIXME: type error
     returnStatement = callExpressionRef.from.block.body.body.find((statement: Node) => {
       return statement.type === tsEstree.AST_NODE_TYPES.ReturnStatement
     }) as TSESTree.ReturnStatement | null
   }
 
   return {
-    // @ts-expect-error -- FIXME: type error
     callExpression: callExpressionRef.identifier.parent as TSESTree.CallExpression,
     returnStatement
   }

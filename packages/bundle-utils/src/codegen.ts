@@ -473,6 +473,42 @@ export function createResourceParseError(
   })
 }
 
+/**
+ * The part of an error of oxc-parser and oxc-transform that is used here
+ *
+ * @internal
+ */
+export interface OxcErrorLike {
+  severity: string
+  message: string
+  labels: { start: number }[]
+}
+
+/**
+ * Make the syntax error of a JS / TS resource from the errors that oxc reports
+ *
+ * @remarks
+ * `parseSync` of oxc-parser and `transform` of oxc-transform do not throw on a syntax error.
+ * They return the errors in `errors`, with an empty result.
+ *
+ * @internal
+ */
+export function createOxcParseError(
+  errors: OxcErrorLike[],
+  source: string,
+  options: CodeGenOptions
+): unknown {
+  const error = errors.find(e => e.severity === 'Error') ?? errors[0]
+  const err = new Error(error.message) as Error & { lineNumber?: number; column?: number }
+  const start = error.labels[0]?.start
+  if (start != null) {
+    const before = source.slice(0, start)
+    err.lineNumber = before.split('\n').length
+    err.column = start - before.lastIndexOf('\n')
+  }
+  return createResourceParseError(err, options)
+}
+
 export function excludeLocales({
   messages,
   onlyLocales

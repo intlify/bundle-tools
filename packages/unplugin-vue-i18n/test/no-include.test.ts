@@ -5,6 +5,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import { join, resolve } from 'node:path'
 import { runInNewContext } from 'node:vm'
+import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import { afterEach, describe, expect, test } from 'vitest'
 import rspackPlugin from '../src/rspack'
@@ -110,18 +111,20 @@ describe.skipIf(!isTestFramework('vite'))('without include on vite', () => {
 })
 
 describe.skipIf(isTestFramework('vite'))('without include on webpack and rspack', () => {
-  test('does not parse a JSON file that is not a locale as JavaScript', async () => {
-    const root = createProject()
-    roots.push(root)
+  async function bundle(root: string, entry: string) {
     const rspackLike = isTestFramework('rspack')
     const compile = (rspackLike ? rspack : webpack) as unknown as (options: object) => Compiler
     const compiler = compile({
       mode: 'development',
       devtool: false,
       context: root,
-      entry: resolve(root, 'src/data.js'),
+      entry: resolve(root, entry),
       output: { path: '/', filename: 'bundle.js', library: { type: 'commonjs2' } },
-      plugins: [rspackLike ? rspackPlugin() : webpackPlugin()]
+      externals: { vue: 'vue' },
+      module: {
+        rules: [{ test: /\.vue$/, loader: resolve(__dirname, '../node_modules/vue-loader') }]
+      },
+      plugins: [new VueLoaderPlugin(), rspackLike ? rspackPlugin() : webpackPlugin()]
     })
     const mfs = new memoryfs()
     compiler.outputFileSystem = mfs
@@ -135,8 +138,20 @@ describe.skipIf(isTestFramework('vite'))('without include on webpack and rspack'
         resolve()
       })
     })
+    return mfs.readFileSync('/bundle.js').toString()
+  }
+
+  test('builds an app that has only i18n custom blocks', async () => {
+    const root = createProject()
+    roots.push(root)
+    expect(await bundle(root, 'src/main.js')).toContain(MESSAGE)
+  })
+
+  test('does not parse a JSON file that is not a locale as JavaScript', async () => {
+    const root = createProject()
+    roots.push(root)
     const sandbox = { module: { exports: {} as { default?: unknown } } }
-    runInNewContext(mfs.readFileSync('/bundle.js').toString(), sandbox)
+    runInNewContext(await bundle(root, 'src/data.js'), sandbox)
     expect(sandbox.module.exports.default).toEqual(DATA)
   })
 })

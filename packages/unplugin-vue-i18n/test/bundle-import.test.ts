@@ -3,7 +3,7 @@ import type { MessageCompilerContext } from '@intlify/core-base'
 import { compile, createMessageContext } from '@intlify/core-base'
 import { resolve } from 'node:path'
 import { expect, test, vi } from 'vitest'
-import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
+import { bundleAndRun, getCurrentTestBundler } from './utils'
 ;[
   {
     testcase: 'import',
@@ -26,7 +26,7 @@ import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
   })
 })
 
-test.skipIf(!isTestFramework('vite'))('import with no matching resources', async () => {
+test('import with no matching resources', async () => {
   const spyConsoleWarn = vi.spyOn(global.console, 'warn').mockImplementation(() => {})
   try {
     const options = {

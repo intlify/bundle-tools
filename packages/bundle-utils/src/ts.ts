@@ -6,7 +6,7 @@
 
 import { Node } from 'oxc-parser'
 import { transform } from 'oxc-transform'
-import { CodeGenOptions, CodeGenResult } from './codegen'
+import { CodeGenOptions, CodeGenResult, createOxcParseError } from './codegen'
 import { DEFAULT_OPTIONS, generate as generateJavaScript } from './js'
 
 /**
@@ -21,6 +21,9 @@ export function generate(
   const _options = Object.assign({}, DEFAULT_OPTIONS, options, { source: value })
 
   const transformed = transform(_options.filename ?? '', value, { lang: 'ts' })
+  if (transformed.errors.length > 0) {
+    throw createOxcParseError(transformed.errors, value, _options, 'utf-8')
+  }
   if (transformed && transformed.code) {
     value = transformed.code
     _options.source = transformed.code

@@ -8,6 +8,7 @@ import { parseSync as parseJavaScript } from 'oxc-parser'
 import { walk } from 'oxc-walker'
 import {
   createCodeGenerator,
+  createOxcParseError,
   generateMessageFunction,
   generateResourceAst,
   mapLinesColumns
@@ -51,10 +52,13 @@ export function generate(
   const _options = Object.assign({}, DEFAULT_OPTIONS, options, { source: value })
   const generator = createCodeGenerator(_options)
 
-  const { program: ast } = parseJavaScript(_options.filename ?? '', value, {
+  const { program: ast, errors } = parseJavaScript(_options.filename ?? '', value, {
     sourceType: 'module',
     lang: 'js'
   })
+  if (errors.length > 0) {
+    throw createOxcParseError(errors, value, _options)
+  }
 
   const exportResult = scanAst(ast)
   if (!_options.allowDynamic) {

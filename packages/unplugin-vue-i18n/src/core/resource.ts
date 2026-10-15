@@ -444,6 +444,20 @@ export function resourcePlugin(
         // generator, and return pre-compiled JS so `builtin:vite-json` never sees it.
         const realId = virtualIdToRealPath(id)
         if (realId) {
+          // `virtualIdToRealPath` only checks that the id is well-formed, so re-apply the checks
+          // that `resolveId` makes before it virtualizes a request. Otherwise a crafted or stale id
+          // could make `load` read and return a file that is not an i18n resource: a dev server
+          // passes any `/@id/` url to plugin `load`, before its `server.fs.allow` / `deny` checks.
+          if (realId.includes('?vue&type=i18n')) {
+            const { filename, query } = parseVueRequest(realId)
+            const okBlock =
+              /[?&]lang\.(?:json|json5)(?:$|&)/.test(realId) &&
+              (query.src ? RE_RESOURCE_FORMAT.test(filename) : filename.endsWith('.vue'))
+            if (!okBlock) return
+          } else if (!(/\.json5?$/.test(realId) && (await getFilter())(realId))) {
+            return
+          }
+
           // SFC custom-block: parse the SFC and extract the block content
           // (mirrors what vite-plugin-vue's load would do, but yields a
           // virtual id whose extension does not trigger `builtin:vite-json`).

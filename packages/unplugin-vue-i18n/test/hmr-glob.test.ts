@@ -40,7 +40,7 @@ type ViteServer = {
 
 type HmrPayload = { type?: string }
 type LocaleKind = 'yml' | 'json'
-type CaseKind = 'yml' | 'json' | 'bundle' | 'app'
+type CaseKind = 'yml' | 'json' | 'direct' | 'bundle' | 'app'
 
 const OLD_TOKEN = 'hello-old'
 const NEW_TOKEN = 'hello-new'
@@ -83,8 +83,14 @@ export default locales
 export default messages
 `
   )
+  writeFile(
+    join(root, 'src/entry-direct.ts'),
+    `import en from './locales/en.json'
+export default en
+`
+  )
   writeFile(join(root, 'src/app.ts'), `export const label = '${OLD_TOKEN}'\n`)
-  if (kind === 'json') {
+  if (kind === 'json' || kind === 'direct') {
     writeLocale(join(root, 'src/locales/en.json'), OLD_TOKEN, 'json')
   } else if (kind !== 'app') {
     writeLocale(join(root, 'src/locales/en.yml'), OLD_TOKEN, 'yml')
@@ -309,6 +315,19 @@ describe.skipIf(!isTestFramework('vite'))('locale resource HMR', () => {
       file: join(root, 'src/locales/en.json'),
       url: '/src/locales/en.json',
       entry: '/src/entry.ts',
+      kind: 'json'
+    })
+    expect(type === 'update' || type === 'full-reload').toBe(true)
+  })
+
+  test('directly imported json locale updates without restarting the server', async () => {
+    const { root, server, bootServer } = await boot('direct')
+    const type = await changeAndAssert({
+      server,
+      bootServer,
+      file: join(root, 'src/locales/en.json'),
+      url: '/src/locales/en.json',
+      entry: '/src/entry-direct.ts',
       kind: 'json'
     })
     expect(type === 'update' || type === 'full-reload').toBe(true)

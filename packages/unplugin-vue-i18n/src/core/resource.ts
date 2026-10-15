@@ -28,7 +28,7 @@ import type { VueCompilerParser, VueQuery } from '../vue'
 const INTLIFY_BUNDLE_IMPORT_ID = '@intlify/unplugin-vue-i18n/messages'
 const VIRTUAL_PREFIX = '\0'
 
-const supportedFileExtensionsRE = /\.(json5?|ya?ml|[c|m]?[j|t]s)$/
+const supportedFileExtensionsRE = /\.(?:json5?|ya?ml|[c|m]?[j|t]s)$/
 const RE_SFC_I18N_CUSTOM_BLOCK = /\?vue&type=i18n/
 const RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK = /blockType=i18n/
 
@@ -57,18 +57,18 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
   /**
    * Build (include, exclude) for `createFilter` in the rolldown-vite / webpack / rspack path.
    * - When the user specifies `include`, append the SFC custom-block matcher and pass through `exclude`.
-   * - When the user does not specify `include`, fall back to extension-based matching.
+   * - When the user does not specify `include`, match only the SFC custom blocks: no resource
+   *   file is pre-compiled, as documented (and as on the rollup-vite path and in v11).
    *
    * Note: `opts.exclude` becomes `['**\/**']` when no include is set (legacy behavior baked into
-   * `core/options.ts`). For the rolldown path that quirk is undesirable, so we deliberately drop
-   * exclude here.
+   * `core/options.ts`). That would also exclude the custom blocks, so we deliberately drop it.
    */
   function resolveIncludeExclude(): Parameters<typeof createFilter> {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
     return opts.include
       ? [[...opts.include, customBlockInclude], opts.exclude]
-      : [[supportedFileExtensionsRE, customBlockInclude], undefined]
+      : [[customBlockInclude], undefined]
   }
 
   /**

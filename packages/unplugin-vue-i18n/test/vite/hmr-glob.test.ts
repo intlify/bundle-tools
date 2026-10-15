@@ -195,7 +195,9 @@ async function transformTarget(
   absFile: string,
   fallbackUrl: string
 ): Promise<{ url: string; code: string }> {
-  const candidates = new Set<string>([fallbackUrl, absFile])
+  // The absolute path resolves to the module the app imports (on Vite 8, the virtual module
+  // of a JSON file). A root-relative URL is not virtualized, and can give another module.
+  const candidates = new Set<string>([absFile, fallbackUrl])
 
   for (const mod of collectModules(server)) {
     if (mod.file && normalize(mod.file) === normalize(absFile)) {

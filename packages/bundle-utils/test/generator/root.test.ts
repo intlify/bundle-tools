@@ -1,15 +1,12 @@
-import { parseSync } from 'oxc-parser'
 import { generate as generateJSON } from '../../src/json'
 import { generate as generateYAML } from '../../src/yaml'
+import { validateSyntax } from '../utils'
 
 const types = ['plain', 'sfc', 'bare'] as const
 
-// `validateSyntax` in `../utils` cannot be used to check broken code,
-// because `parseSync` reports syntax errors in `errors` instead of throwing them
 function isValidSyntax(code: string, type: (typeof types)[number]): boolean {
   // `bare` generates an expression, so parse it as the default export
-  const source = type === 'bare' ? `export default ${code}` : code
-  return parseSync('test.js', source, { sourceType: 'module' }).errors.length === 0
+  return validateSyntax(type === 'bare' ? `export default ${code}` : code)
 }
 
 // replace the generated message functions, to check the message keys

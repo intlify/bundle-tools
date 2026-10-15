@@ -12,15 +12,14 @@ export async function readFile(
 }
 
 export function validateSyntax(code: string): boolean {
-  let ret = false
-  try {
-    parseSync('test.js', code, {
-      sourceType: 'module'
-    })
-    ret = true
-  } catch (e) {
+  // `parseSync` does not throw on a syntax error. it reports the error in `errors`
+  const { errors } = parseSync('test.js', code, {
+    sourceType: 'module'
+  })
+  if (errors.length > 0) {
     console.log(`invalid syntax on \n${code}`)
-    console.error(e)
+    console.error(errors)
+    return false
   }
-  return ret
+  return true
 }

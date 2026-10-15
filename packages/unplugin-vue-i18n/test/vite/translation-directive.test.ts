@@ -1,10 +1,12 @@
-import fg from 'fast-glob'
 import path from 'node:path'
+import { glob } from 'tinyglobby'
 import { describe, expect, test } from 'vitest'
 import { bundleAndRun, bundleVite } from '../utils'
 
 describe('translation directive', async () => {
-  const fixtures = await fg(path.resolve(__dirname, '../fixtures/directives/*.vue'))
+  const fixtures = await glob(path.resolve(__dirname, '../fixtures/directives/*.vue'), {
+    expandDirectories: false
+  })
   fixtures.forEach(fixture => {
     const filename = path.basename(fixture)
     const basename = filename.replace(/\.vue$/, '')

@@ -1,10 +1,10 @@
 import { isBoolean, isString } from '@intlify/shared'
 import vue from '@vitejs/plugin-vue'
-import fg from 'fast-glob'
 import { JSDOM, VirtualConsole } from 'jsdom'
 import memoryfs from 'memory-fs'
 import { resolve } from 'node:path'
 import { build as buildVite6 } from 'rollup-vite'
+import { glob } from 'tinyglobby'
 import { build as buildVite8 } from 'vite'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
@@ -65,7 +65,10 @@ export async function bundleVite(
   }
 
   if (ignoreIds == null) {
-    ignoreIds = await fg(resolve(__dirname, './fixtures/directives/*.vue'))
+    ignoreIds = await glob(resolve(__dirname, './fixtures/directives/*.vue'), {
+      expandDirectories: false,
+      absolute: true
+    })
   }
 
   const build = VITE_BUILDERS[viteType]

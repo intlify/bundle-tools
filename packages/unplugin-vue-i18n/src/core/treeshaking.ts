@@ -1,4 +1,4 @@
-import fg from 'fast-glob'
+import { glob } from 'tinyglobby'
 import { promises as fs } from 'node:fs'
 import createDebug from 'debug'
 import { resolveNamespace } from '../utils'
@@ -37,8 +37,11 @@ export function treeShakingPlugin(
 
       debug('scanning patterns:', patterns)
 
-      const files = await fg(patterns, {
+      // tinyglobby 0.2.16 takes its default `cwd` on import, so pass the current one
+      const files = await glob(patterns, {
+        cwd: process.cwd(),
         ignore: ['**/node_modules/**'],
+        expandDirectories: false,
         absolute: true
       })
 

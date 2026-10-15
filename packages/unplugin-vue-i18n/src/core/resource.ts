@@ -475,7 +475,9 @@ export function resourcePlugin(
               filename
             })
             const block = descriptor.customBlocks[query.index!]
-            if (!block) return
+            // only an i18n block at this index is ours — a crafted id must not select another
+            // custom block (e.g. `<config src>`) and have its content returned as i18n
+            if (!block || block.type !== 'i18n') return
 
             let source: string
             if (block.attrs.src) {

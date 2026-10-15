@@ -22,7 +22,7 @@ export function generate(
 
   const transformed = transform(_options.filename ?? '', value, { lang: 'ts' })
   if (transformed.errors.length > 0) {
-    throw createOxcParseError(transformed.errors, value, _options)
+    throw createOxcParseError(transformed.errors, value, _options, 'utf-8')
   }
   if (transformed && transformed.code) {
     value = transformed.code

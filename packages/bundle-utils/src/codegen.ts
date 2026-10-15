@@ -490,21 +490,26 @@ export interface OxcErrorLike {
  * @remarks
  * `parseSync` of oxc-parser and `transform` of oxc-transform do not throw on a syntax error.
  * They return the errors in `errors`, with an empty result.
+ * oxc-parser counts the offsets of the errors in UTF-16 code units, and oxc-transform counts them in UTF-8 bytes.
  *
  * @internal
  */
 export function createOxcParseError(
   errors: OxcErrorLike[],
   source: string,
-  options: CodeGenOptions
+  options: CodeGenOptions,
+  offsetUnit: 'utf-16' | 'utf-8' = 'utf-16'
 ): unknown {
   const error = errors.find(e => e.severity === 'Error') ?? errors[0]
   const err = new Error(error.message) as Error & { lineNumber?: number; column?: number }
   const start = error.labels[0]?.start
   if (start != null) {
-    const before = source.slice(0, start)
+    const before =
+      offsetUnit === 'utf-8'
+        ? Buffer.from(source).subarray(0, start).toString()
+        : source.slice(0, start)
     err.lineNumber = before.split('\n').length
-    err.column = start - before.lastIndexOf('\n')
+    err.column = before.length - before.lastIndexOf('\n')
   }
   return createResourceParseError(err, options)
 }

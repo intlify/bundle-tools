@@ -35,6 +35,12 @@ describe('syntax errors in JS resources', () => {
       })
     ).toThrowError('Unexpected token in /path/to/en.js (1:25)')
   })
+
+  test('counts columns in characters after non-ASCII text', () => {
+    expect(() =>
+      generateJavaScript('export default {\n  "あいう": }', { filename: '/path/to/en.js' })
+    ).toThrowError('Unexpected token in /path/to/en.js (2:10)')
+  })
 })
 
 describe('syntax errors in TS resources', () => {
@@ -51,5 +57,12 @@ describe('syntax errors in TS resources', () => {
         filename: '/path/to/en.ts'
       })
     ).toThrowError('Unexpected token in /path/to/en.ts (1:10)')
+  })
+
+  // oxc-transform counts the offsets in UTF-8 bytes, not in UTF-16 code units
+  test('counts columns in characters after non-ASCII text', () => {
+    expect(() =>
+      generateTypescript('export default {\n  "あいう": } as const', { filename: '/path/to/en.ts' })
+    ).toThrowError('Unexpected token in /path/to/en.ts (2:10)')
   })
 })

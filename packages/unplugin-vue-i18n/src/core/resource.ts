@@ -480,7 +480,9 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
             filename
           })
           const block = descriptor.customBlocks[query.index!]
-          if (!block) {
+          // only an i18n block at this index is ours — a crafted id must not select another custom
+          // block (e.g. `<config src>`) and have its content returned as i18n
+          if (!block || block.type !== 'i18n') {
             // returning nothing makes the bundler read the virtual id as a file
             raiseError(`cannot find the i18n custom block (index: ${query.index}) in ${filename}`)
             return

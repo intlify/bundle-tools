@@ -1,4 +1,5 @@
-import { createMessageContext } from '@intlify/core-base'
+import type { MessageCompilerContext } from '@intlify/core-base'
+import { compile, createMessageContext } from '@intlify/core-base'
 import { resolve } from 'node:path'
 import { expect, test } from 'vitest'
 import { bundleAndRun, bundleWebpack } from '../utils'
@@ -10,14 +11,15 @@ import { bundleAndRun, bundleWebpack } from '../utils'
   }
 ].forEach(({ testcase, input, fixture }) => {
   // eslint-disable-next-line vitest/valid-title -- ignore
-  test.skip(testcase, async () => {
+  test(testcase, async () => {
     const options = {
       input,
+      strictMessage: false,
       include: [resolve(__dirname, '../fixtures/locales/**')]
     }
     const { exports: messages } = await bundleAndRun(fixture, bundleWebpack, options)
     ;['en', 'fr', 'ja', 'ko'].forEach(locale => {
-      const fn = messages[locale].message
+      const fn = compile(messages[locale].message, {} as MessageCompilerContext)
       expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
     })
   })

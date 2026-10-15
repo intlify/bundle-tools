@@ -359,7 +359,20 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         // would be claimed by `builtin:vite-json`. Virtualize them too — our
         // `load` re-parses the SFC and extracts the block content.
         if (id.includes('?vue&type=i18n') && /[?&]lang\.(?:json|json5)(?:$|&)/.test(id)) {
-          return intlifyVirtualize(id)
+          const { filename, query } = parseVueRequest(id)
+          let virtualKey = id
+          // @vitejs/plugin-vue routes `src` blocks through the sidecar file path
+          // (e.g. `./Foo.i18n.json5?vue&type=i18n&src=true&lang.json5`), not the .vue path.
+          if (query.src && importer) {
+            const importerPath = (
+              isIntlifyVirtualId(importer) ? virtualIdToRealPath.get(importer)! : importer
+            ).split('?')[0]
+            if (importerPath.endsWith('.vue')) {
+              const resolvedSidecar = resolve(dirname(importerPath), filename)
+              virtualKey = id.replace(filename, resolvedSidecar)
+            }
+          }
+          return intlifyVirtualize(virtualKey)
         }
 
         const idPath = id.split('?')[0]
@@ -418,16 +431,24 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         // virtual id whose extension does not trigger `builtin:vite-json`).
         if (realId.includes('?vue&type=i18n')) {
           const { filename, query } = parseVueRequest(realId)
-          this.addWatchFile(filename)
-          const sfcSource = readFile(filename)
-          const { descriptor } = getSfcParser()(sfcSource, {
-            sourceMap: ctx.sourceMap,
-            filename
-          })
-          const block = descriptor.customBlocks[query.index!]
-          if (!block) return
 
-          let source = block.src ? readFile(block.src) : block.content
+          let source: string
+          if (query.src) {
+            // Sidecar module — read directly (mirrors @vitejs/plugin-vue load for `query.src`).
+            // resolveId resolves the sidecar path relative to the owner .vue when possible.
+            this.addWatchFile(filename)
+            source = readFile(filename)
+          } else {
+            this.addWatchFile(filename)
+            const sfcSource = readFile(filename)
+            const { descriptor } = getSfcParser()(sfcSource, {
+              sourceMap: ctx.sourceMap,
+              filename
+            })
+            const block = descriptor.customBlocks[query.index!]
+            if (!block) return
+            source = block.content
+          }
           if (typeof opts.transformI18nBlock === 'function') {
             const modifiedSource = opts.transformI18nBlock(source)
             if (modifiedSource && typeof modifiedSource === 'string') {
@@ -710,7 +731,7 @@ function getCode(
   const result = parser(readFile(filename), { sourceMap, filename })
   const block = result.descriptor.customBlocks[query.index!]
   if (block) {
-    const code = block.src ? readFile(block.src) : block.content
+    const code = block.src ? readFile(resolveBlockSrc(block.src, filename)) : block.content
     debug(`getCode (${meta.framework}) ${query.index} from SFC`, code)
     return code
   }
@@ -771,6 +792,13 @@ function getOptions(
     type: 'plain' as const,
     isGlobal: false
   })
+}
+
+function resolveBlockSrc(src: string, sfcFilename: string): string {
+  if (src.startsWith('.') || (!src.startsWith('/') && !/^[a-z]:[/\\]/i.test(src))) {
+    return resolve(dirname(sfcFilename), src)
+  }
+  return src
 }
 
 function getVirtualId(id: string, framework: UnpluginContextMeta['framework'] = 'vite') {

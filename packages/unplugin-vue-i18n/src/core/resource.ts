@@ -413,7 +413,17 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
 
     async load(id: string) {
       debug('load', id)
-      if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && resourcePaths.size > 0) {
+      if (
+        INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
+        (resourcePaths.size > 0 || meta.framework === 'vite')
+      ) {
+        // Return an empty bundle rather than nothing: with nothing, Vite reads the virtual id as a
+        // file and fails with an unclear error (the id has a NUL byte).
+        if (resourcePaths.size === 0) {
+          warn(
+            `\`${INTLIFY_BUNDLE_IMPORT_ID}\` is imported, but no locale resources match \`include\``
+          )
+        }
         const code = generateBundleResources(resourcePaths)
 
         // watch resources to invalidate on change (webpack)
@@ -449,7 +459,11 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
               filename
             })
             const block = descriptor.customBlocks[query.index!]
-            if (!block) return
+            if (!block) {
+              // returning nothing makes the bundler read the virtual id as a file
+              raiseError(`cannot find the i18n custom block (index: ${query.index}) in ${filename}`)
+              return
+            }
             source = block.content
           }
           if (typeof opts.transformI18nBlock === 'function') {

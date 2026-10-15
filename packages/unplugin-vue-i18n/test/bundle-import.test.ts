@@ -2,8 +2,8 @@ import type { MessageCompilerContext } from '@intlify/core-base'
 
 import { compile, createMessageContext } from '@intlify/core-base'
 import { resolve } from 'node:path'
-import { expect, test } from 'vitest'
-import { bundleAndRun, getCurrentTestBundler } from './utils'
+import { expect, test, vi } from 'vitest'
+import { bundleAndRun, getCurrentTestBundler, isTestFramework } from './utils'
 ;[
   {
     testcase: 'import',
@@ -24,4 +24,26 @@ import { bundleAndRun, getCurrentTestBundler } from './utils'
       expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
     })
   })
+})
+
+test.skipIf(!isTestFramework('vite'))('import with no matching resources', async () => {
+  const spyConsoleWarn = vi.spyOn(global.console, 'warn').mockImplementation(() => {})
+  try {
+    const options = {
+      input: './fixtures/bundle-messages.ts',
+      include: [resolve(__dirname, './fixtures/no-locales/**')]
+    }
+    const { exports: messages } = await bundleAndRun(
+      '@intlify/unplugin-vue-i18n/messages',
+      getCurrentTestBundler(),
+      options
+    )
+    expect(Object.keys(messages)).toEqual([])
+    expect(spyConsoleWarn).toHaveBeenCalledWith(
+      expect.anything(),
+      '`@intlify/unplugin-vue-i18n/messages` is imported, but no locale resources match `include`'
+    )
+  } finally {
+    spyConsoleWarn.mockRestore()
+  }
 })

@@ -35,8 +35,8 @@
     "@typescript-eslint/typescript-estree": "^8.13.0",
     "debug": "^4.3.3",
     "pathe": "^2.0.3",
-    "fast-glob": "^3.2.12",
     "picocolors": "^1.0.0",
+    "tinyglobby": "^0.2.15",
     "unplugin": "^2.3.4",
     "vue": "catalog:vue"
   },

@@ -7,9 +7,9 @@ import {
 import { assign, generateCodeFrame, isEmptyObject, isNumber, isString } from '@intlify/shared'
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
-import fg from 'fast-glob'
 import { promises as fs } from 'node:fs'
 import { dirname, normalize, parse as parsePath, resolve } from 'pathe'
+import { glob } from 'tinyglobby'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
 import { getVueCompiler, parseVueRequest } from '../vue'
@@ -392,7 +392,11 @@ export function resourcePlugin(
         if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && include) {
           let resourcePaths = [] as string[]
           for (const inc of include) {
-            resourcePaths = [...resourcePaths, ...(await fg(inc))]
+            // tinyglobby 0.2.16 takes its default `cwd` on import, so pass the current one
+            resourcePaths = [
+              ...resourcePaths,
+              ...(await glob(inc, { cwd: process.cwd(), expandDirectories: false, absolute: true }))
+            ]
           }
           resourcePaths = resourcePaths.filter((el, pos) => resourcePaths.indexOf(el) === pos)
           const code = await generateBundleResources(resourcePaths, isProduction, {

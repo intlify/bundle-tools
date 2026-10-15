@@ -178,7 +178,10 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
 
   function result(code: string) {
     if (meta.framework === 'vite') {
-      return { code, map: { mappings: '' } }
+      // `moduleType: 'js'` tells rolldown (Vite 8) that the code is JavaScript now, so
+      // `builtin:vite-json` does not read it as JSON. A JSON file imported through a
+      // root-relative path (e.g. `/src/locales/en.json`) is not virtualized, and reaches here.
+      return { code, map: { mappings: '' }, moduleType: 'js' as const }
     }
 
     // NOTE: `map` property breaks virtuals in webpack/rspack

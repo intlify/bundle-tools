@@ -386,6 +386,10 @@ export function resourcePlugin(
       }
     },
 
+    loadInclude(id: string) {
+      return INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) || isIntlifyVirtualId(id)
+    },
+
     load: {
       async handler(id: string) {
         debug('load', id)

@@ -481,6 +481,20 @@ export function describeValue(value: unknown): string {
 }
 
 /**
+ * Write a value that is not a string as JavaScript code
+ *
+ * @remarks
+ * `JSON.stringify` writes `Infinity` and `NaN` as `null`, and `-0` as `0`.
+ *
+ * @internal
+ */
+export function stringifyValue(value: unknown): string {
+  if (typeof value === 'number') return Object.is(value, -0) ? '-0' : String(value)
+  if (value === undefined) return 'undefined'
+  return JSON.stringify(value)
+}
+
+/**
  * @internal
  */
 export function createResourceError(message: string, options: CodeGenOptions): Error {

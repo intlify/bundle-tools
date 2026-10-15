@@ -14,7 +14,8 @@ import {
   filterMultiLocaleMessages,
   generateMessageFunction,
   generateResourceAst,
-  mapLinesColumns
+  mapLinesColumns,
+  stringifyValue
 } from './codegen'
 
 import type { RawSourceMap } from 'source-map'
@@ -227,7 +228,7 @@ function _generate(
             const name = node.key.value
             const value = node.value.value
             const strName = JSON.stringify(name)
-            const strValue = JSON.stringify(value)
+            const strValue = stringifyValue(value)
             name && pathStack.push(name.toString())
             generator.push(`${strName}: `)
             if (isString(value)) {
@@ -246,7 +247,7 @@ function _generate(
         case 'YAMLScalar':
           if (parent.type === 'YAMLSequence') {
             const value = node.value
-            const strValue = JSON.stringify(value)
+            const strValue = stringifyValue(value)
             if (isString(value)) {
               generator.push(codegenFn(value), node, value)
             } else if (forceStringify) {

@@ -14,10 +14,11 @@ import {
   filterMultiLocaleMessages,
   generateMessageFunction,
   generateResourceAst,
-  mapLinesColumns
+  mapLinesColumns,
+  stringifyValue
 } from './codegen'
 
-import type { JSONNode, JSONProgram } from 'jsonc-eslint-parser/lib/parser/ast'
+import type { JSONExpression, JSONNode, JSONProgram } from 'jsonc-eslint-parser/lib/parser/ast'
 import type { RawSourceMap } from 'source-map-js'
 import type { CodeGenerator, CodeGenFunction, CodeGenOptions, CodeGenResult } from './codegen'
 
@@ -156,6 +157,22 @@ function _generate(
     return code
   }
 
+  // a value written as an expression, not as a literal:
+  // `-1`, `+1`, `Infinity`, `NaN`, `undefined`, a template literal, or `1 + 2`
+  function pushExpressionValue(node: JSONExpression) {
+    const value = getStaticJSONValue(node)
+    if (isString(value)) {
+      generator.push(codegenFn(value), node, value)
+      return
+    }
+    const strValue = stringifyValue(value)
+    if (forceStringify) {
+      generator.push(codegenFn(strValue), node, strValue)
+    } else {
+      generator.push(strValue)
+    }
+  }
+
   const componentNamespace = '_Component'
 
   traverseNodes(node, {
@@ -214,6 +231,11 @@ function _generate(
             } else {
               generator.push(strValue)
             }
+          } else if (
+            node.value.type !== 'JSONObjectExpression' &&
+            node.value.type !== 'JSONArrayExpression'
+          ) {
+            pushExpressionValue(node.value)
           }
           break
         }
@@ -227,6 +249,14 @@ function _generate(
             generator.push(codegenFn(strValue), node, strValue)
           } else {
             generator.push(strValue)
+          }
+          break
+        case 'JSONUnaryExpression':
+        case 'JSONIdentifier':
+        case 'JSONTemplateLiteral':
+        case 'JSONBinaryExpression':
+          if (parent.type === 'JSONArrayExpression') {
+            pushExpressionValue(node as JSONExpression)
           }
           break
         default:

@@ -49,3 +49,11 @@ test('ts resource', async () => {
   // expect(fn.source).toEqual(`@.caml:{'no apples'} | {0} apple | {n} apples`)
   expect(fn(createMessageContext({ named: { n: 3 } }))).toEqual(`3 apples`)
 })
+
+test('json that is not a locale resource', async () => {
+  // `message.json` is outside `include`, so webpack reads it as JSON
+  const { module } = await bundleAndRun('message.json', bundleWebpack, {
+    include: [resolve(__dirname, '../fixtures/locales/**')]
+  })
+  expect(module).toEqual({ en: { hello: 'hello world!' } })
+})

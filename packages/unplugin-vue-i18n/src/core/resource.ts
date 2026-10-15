@@ -386,6 +386,10 @@ export function resourcePlugin(
       }
     },
 
+    loadInclude(id: string) {
+      return INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) || isIntlifyVirtualId(id)
+    },
+
     load: {
       async handler(id: string) {
         debug('load', id)
@@ -409,6 +413,11 @@ export function resourcePlugin(
           })
           // TODO: support virtual import identifier
           // for virtual import identifier (@intlify/unplugin-vue-i18n/messages)
+          // webpack takes `map` as the source map of the module, and an empty one without `sources`
+          // breaks the source maps of the bundle
+          if (meta.framework !== 'vite') {
+            return { code }
+          }
           return {
             moduleType: 'js',
             code,

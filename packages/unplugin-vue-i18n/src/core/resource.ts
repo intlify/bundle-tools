@@ -413,12 +413,10 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
 
     async load(id: string) {
       debug('load', id)
-      if (
-        INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) &&
-        (resourcePaths.size > 0 || meta.framework === 'vite')
-      ) {
-        // Return an empty bundle rather than nothing: with nothing, Vite reads the virtual id as a
-        // file and fails with an unclear error (the id has a NUL byte).
+      if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)) {
+        // Return an empty bundle rather than nothing, with a warning: with nothing, Vite reads the
+        // virtual id as a file and fails with an unclear error (the id has a NUL byte), and webpack
+        // and rspack give an empty module silently.
         if (resourcePaths.size === 0) {
           warn(
             `\`${INTLIFY_BUNDLE_IMPORT_ID}\` is imported, but no locale resources match \`include\``

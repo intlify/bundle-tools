@@ -1,4 +1,5 @@
 import { baseCompile, detectHtmlTag, LOCATION_STUB } from '@intlify/message-compiler'
+import * as messageCompiler from '@intlify/message-compiler'
 import {
   format,
   friendlyJSONstringify,
@@ -228,6 +229,25 @@ function parsePath(path?: string[]): string {
   return path ? path.join('.') : ''
 }
 
+// The text of each message compiler error, by code. The message compiler exports it but leaves it
+// out of its type declarations, so read it off the namespace (it is undefined if it ever goes away)
+const COMPILE_ERROR_MESSAGES = (
+  messageCompiler as unknown as { errorMessages?: Record<number, string> }
+).errorMessages
+
+/**
+ * The text of a message compiler error. The message compiler leaves only the error code in the
+ * message when `NODE_ENV` is `production` (as during `vite build`), so put the text back. The
+ * arguments of the text are gone by then, so their placeholders go too.
+ */
+function getCompileErrorMessage(err: CompileError): string {
+  if (err.message !== String(err.code)) {
+    return err.message
+  }
+  const text = COMPILE_ERROR_MESSAGES?.[err.code]
+  return text ? text.replace(/:\s*\\?'?\{\d+\}'?/g, '') : err.message
+}
+
 export function generateMessageFunction(
   msg: string,
   options: CodeGenOptions = {},
@@ -263,7 +283,7 @@ export function generateMessageFunction(
         domain: err.domain,
         location: err.location
       }
-      onError(err.message, extra)
+      onError(getCompileErrorMessage(err), extra)
       errors.push(err)
     }
   }
@@ -412,7 +432,7 @@ export function generateResourceAst(
         domain: err.domain,
         location: err.location
       }
-      onError(err.message, extra)
+      onError(getCompileErrorMessage(err), extra)
       errors.push(err)
     }
   }

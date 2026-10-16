@@ -8,7 +8,7 @@ import { assign, generateCodeFrame, isEmptyObject, isNumber, isString } from '@i
 import { createFilter } from '@rollup/pluginutils'
 import createDebug from 'debug'
 import { promises as fs } from 'node:fs'
-import { dirname, normalize, parse as parsePath, resolve } from 'pathe'
+import { dirname, normalize, parse as parsePath, relative, resolve } from 'pathe'
 import { glob } from 'tinyglobby'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
@@ -97,6 +97,7 @@ export function resourcePlugin(
   let isProduction = false
   let sourceMap = false
   let hasViteJsonPlugin = false
+  let warnedScriptResources = false
   const vueI18nAliasName = module
   debug(`vue-i18n alias name: ${vueI18nAliasName}`)
 
@@ -312,6 +313,20 @@ export function resourcePlugin(
             ]
           }
           resourcePaths = resourcePaths.filter((el, pos) => resourcePaths.indexOf(el) === pos)
+          // This bundle takes only JSON / YAML resources on v11, so JS / TS files under `include`
+          // are left out of it. Say so once, rather than leaving them out without a word (#503)
+          if (!warnedScriptResources) {
+            const scripts = resourcePaths.filter(path => /\.[cm]?[jt]s$/.test(path)).sort()
+            if (scripts.length > 0) {
+              warnedScriptResources = true
+              const listed = scripts.slice(0, 10).map(path => relative(process.cwd(), path))
+              const more =
+                scripts.length > listed.length ? `, and ${scripts.length - listed.length} more` : ''
+              warn(
+                `JS / TS files under \`include\` are not bundled into \`${INTLIFY_BUNDLE_IMPORT_ID}\` (v11 bundles JSON / YAML only): ${listed.join(', ')}${more}. Import them directly, or collect them with \`import.meta.glob\`.`
+              )
+            }
+          }
           const code = await generateBundleResources(resourcePaths, isProduction, {
             forceStringify,
             strictMessage,

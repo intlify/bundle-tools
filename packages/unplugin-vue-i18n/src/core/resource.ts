@@ -349,7 +349,10 @@ export function resourcePlugin(
         let langInfo = defaultSFCLang
         let inSourceMap: RawSourceMap | undefined
 
-        if (!query.vue) {
+        // Compile a resource only when the id itself ends in a resource extension. A `?raw` / `?url`
+        // (or other query) import keeps its real suffix off the end, so it is left to vite — otherwise
+        // the generator would try to parse the raw text / url as YAML/JSON (#505).
+        if (!query.vue && RE_RESOURCE_FORMAT.test(id)) {
           langInfo = parsePath(filename).ext as Required<PluginOptions>['defaultSFCLang']
 
           const generate = getGenerator(langInfo)

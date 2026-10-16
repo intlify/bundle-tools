@@ -238,6 +238,18 @@ export default defineConfig({
 
 unplugin-vue-i18n will automatically merge locale files into `@intlify/unplugin-vue-i18n/messages`. This allows locales to be split across multiple files, for example `src/locales/fruits/en.json` and `src/locales/vegetables/en.json`.
 
+> [!NOTE]
+> On v11, `@intlify/unplugin-vue-i18n/messages` bundles JSON and YAML resources only. JS / TS resources under `include` are left out of it, and the plugin warns about them. v12 bundles JS / TS resources too.
+
+To load JS / TS resources at once on v11, import them directly, or collect them with `import.meta.glob`:
+
+```ts
+const modules = import.meta.glob('./src/locales/*.{ts,js}', { eager: true, import: 'default' })
+const messages = Object.fromEntries(
+  Object.entries(modules).map(([path, m]) => [path.replace(/^.*\/|\.[jt]s$/g, ''), m])
+)
+```
+
 ### Types
 
 If you want type definition of `@intlify/unplugin-vue-i18n/messages`, add `unplugin-vue-i18n/messages` to `compilerOptions.types` of your tsconfig:

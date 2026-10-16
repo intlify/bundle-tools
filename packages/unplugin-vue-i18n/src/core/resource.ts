@@ -13,7 +13,7 @@ import { findStaticImports } from 'mlly'
 import { createHash } from 'node:crypto'
 import fs from 'node:fs'
 import { dirname, parse as parsePath, resolve } from 'node:path'
-import { normalize, relative as relativePath, resolve as resolvePath } from 'pathe'
+import { normalize } from 'pathe'
 import { globSync } from 'tinyglobby'
 import { parse } from 'vue/compiler-sfc'
 import { checkVuePlugin, error, getVitePlugin, raiseError, resolveNamespace, warn } from '../utils'
@@ -113,64 +113,13 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
   }
 
   /**
-   * Virtual id machinery for vite 8+ (rolldown-based) builds.
-   *
-   * vite 8 ships `builtin:vite-json` as a Rust plugin whose `transform` cannot
-   * be overridden from JS — replacing the JS-side `.transform` is silently
-   * ignored because rolldown invokes the native binding directly. Without
-   * intervention, our `enforce: 'pre'` transform converts JSON to JS and then
-   * `builtin:vite-json` runs anyway and fails to parse our JS as JSON.
-   *
-   * Workaround: in `resolveId`, remap each matching resource file to a
-   * virtual id like `\0intlify-i18n-<key>/<name>`. The virtual id has no `.json` /
-   * `.json5` suffix, so `builtin:vite-json` (which matches by extension) does
-   * not claim it. Our `load` reads the original file from disk, runs the
-   * generator, and returns the compiled JS.
-   *
-   * The key is the path of the resource relative to the root, in base64url. The
-   * same resource gets the same id in every process, and any process can read
-   * the resource from the id alone, e.g. for an importer that a persistent
-   * transform cache (such as Vitest's `fsModuleCache`) kept from an earlier run.
-   * The path is relative so that the id, which can appear in the output (region
-   * comments), does not depend on where the project is.
-   *
-   * The id ends with the name of the file (e.g. `/en` for `en.json`): bundlers
-   * name chunks and variables after the end of an id, so a lazily loaded
-   * resource gets a chunk like `en-<hash>.js`, as on vite 6, and not a name
-   * with the key, which can be longer than a file name can be.
-   *
-   * Only existing JSON / JSON5 files are remapped:
-   * - other resources (YAML, JS, TS) are not claimed by `builtin:vite-json`,
-   *   so they keep their real ids and go through `transform`, as on vite 6.
-   * - `import.meta.glob` resolves an aliased pattern (e.g. `@/locales/*.json`)
-   *   through `resolveId` and needs an absolute path back, not a virtual id.
+   * vite 8 (rolldown) ships `builtin:vite-json`, which reads `.json` / `.json5`
+   * files as JSON. Our `enforce: 'pre'` transform compiles a locale resource to
+   * JS and returns `moduleType: 'js'` (see `result()`), which tells rolldown the
+   * module is JavaScript, so `builtin:vite-json` leaves it alone. JSON / JSON5
+   * resources and SFC `lang.json` / `lang.json5` blocks therefore go through
+   * `transform` like YAML / JS / TS, with no virtual ids.
    */
-  const VITE_VIRTUAL_PREFIX = '\0intlify-i18n-'
-  // the root that the keys of virtual ids are relative to (set in `configResolved`)
-  let virtualRoot = normalizeResourcePath(process.cwd())
-
-  function virtualIdFromKey(key: string): string {
-    // the name of the file, with only the characters that mean nothing in an id or a url
-    const name = parsePath(key.split('?')[0]).name.replace(/[^\w-]/g, '_')
-    return `${VITE_VIRTUAL_PREFIX}${Buffer.from(key).toString('base64url')}/${name}`
-  }
-
-  function intlifyVirtualize(realPath: string): string {
-    return virtualIdFromKey(relativePath(virtualRoot, normalizeResourcePath(realPath)))
-  }
-
-  function virtualIdToRealPath(id: string): string | undefined {
-    if (!id.startsWith(VITE_VIRTUAL_PREFIX)) return
-    const encoded = id.slice(VITE_VIRTUAL_PREFIX.length).split('/')[0]
-    const key = Buffer.from(encoded, 'base64url').toString()
-    // an id in another form, such as a numbered one cached by an older version, is not ours
-    if (!key || virtualIdFromKey(key) !== id) return
-    return resolvePath(virtualRoot, key)
-  }
-
-  function isIntlifyVirtualId(id: string): boolean {
-    return virtualIdToRealPath(id) !== undefined
-  }
 
   debug(`vue-i18n alias name: ${opts.module}`)
 
@@ -295,7 +244,6 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
       },
 
       async configResolved(config) {
-        virtualRoot = normalizeResourcePath(config.root)
         vuePlugin = getVitePlugin(config, 'vite:vue')
         if (!checkVuePlugin(vuePlugin)) {
           return
@@ -355,13 +303,6 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
             jsonPlugin.transform = overrideJson as typeof jsonPlugin.transform
           }
         }
-      },
-
-      handleHotUpdate({ file, modules, server }) {
-        const virtualModule = server.moduleGraph.getModuleById(intlifyVirtualize(file))
-        if (!virtualModule) return
-
-        return [...new Set([...modules, virtualModule])]
       }
     },
 
@@ -370,61 +311,12 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
       if (id === INTLIFY_BUNDLE_IMPORT_ID) {
         return asVirtualId(id, meta.framework)
       }
-
-      // For vite 8+ (no `vite:json` plugin), virtualize matching resource files
-      // so `builtin:vite-json` does not claim them. See VITE_VIRTUAL_PREFIX above.
-      if (meta.framework === 'vite' && !hasViteJsonPlugin) {
-        // SFC custom-block requests with `lang.json` / `lang.json5` (e.g.
-        // `Foo.vue?vue&type=i18n&index=0&lang.json`) also end in `.json` and
-        // would be claimed by `builtin:vite-json`. Virtualize them too — our
-        // `load` re-parses the SFC and extracts the block content.
-        if (id.includes('?vue&type=i18n') && /[?&]lang\.(?:json|json5)(?:$|&)/.test(id)) {
-          const { filename, query } = parseVueRequest(id)
-          let virtualKey = id
-          // @vitejs/plugin-vue routes `src` blocks through the sidecar file path
-          // (e.g. `./Foo.i18n.json5?vue&type=i18n&index=0&src=true&lang.json5`), not the .vue path.
-          // Key on the owning .vue instead, keeping the query (`index`, `src`): `load` then reads the
-          // SFC and resolves the sidecar from the block's own `src` attribute, so the sidecar path
-          // comes from the component, not from the id. The id always points at a .vue this way.
-          if (query.src && importer) {
-            const importerPath = (virtualIdToRealPath(importer) ?? importer).split('?')[0]
-            if (importerPath.endsWith('.vue')) {
-              virtualKey = id.replace(filename, importerPath)
-            }
-          }
-          return intlifyVirtualize(virtualKey)
-        }
-
-        const idPath = id.split('?')[0]
-        // `builtin:vite-json` claims only JSON / JSON5, so other resources keep their real ids.
-        if (!/\.json5?$/.test(idPath)) return
-
-        // unplugin v2.x does not expose `this.resolve`, so resolve relative
-        // and absolute paths manually. Bare specifiers (package imports,
-        // aliases) are left to vite's normal resolution.
-        let resolvedPath: string
-        if (idPath.startsWith('.')) {
-          const realImporter = (importer && virtualIdToRealPath(importer)) || importer
-          if (!realImporter) return
-          resolvedPath = resolve(dirname(realImporter), idPath)
-        } else if (idPath.startsWith('/') || /^[a-z]:[/\\]/i.test(idPath)) {
-          resolvedPath = idPath
-        } else {
-          return
-        }
-
-        const filter = await getFilter()
-        if (!filter(resolvedPath)) return
-        // Skip non-files, such as an aliased glob pattern (e.g. `@/locales/*.json`).
-        if (!fs.statSync(resolvedPath, { throwIfNoEntry: false })?.isFile()) return
-
-        return intlifyVirtualize(resolvedPath)
-      }
+      // JSON / JSON5 resources keep their real ids on vite 8 now; `transform` compiles them and
+      // returns `moduleType: 'js'` so `builtin:vite-json` does not re-read them (see `result()`).
     },
 
     loadInclude(id: string) {
-      if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)) return true
-      return isIntlifyVirtualId(id)
+      return INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework)
     },
 
     async load(id: string) {
@@ -446,114 +338,6 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         }
 
         return result(code)
-      }
-
-      // vite 8+ virtualized resource — read the real file, run the i18n
-      // generator, and return pre-compiled JS so `builtin:vite-json` never sees it.
-      const realId = virtualIdToRealPath(id)
-      if (realId) {
-        // `virtualIdToRealPath` only checks that the id is well-formed, so re-apply the checks
-        // that `resolveId` makes before it virtualizes a request. Otherwise a crafted or stale id
-        // could make `load` read and return a file that is not an i18n resource: a dev server
-        // passes any `/@id/` url to plugin `load`, before its `server.fs.allow` / `deny` checks.
-        if (realId.includes('?vue&type=i18n')) {
-          const { filename } = parseVueRequest(realId)
-          // Both inline and src blocks are keyed on the owning .vue (see resolveId), so the id must
-          // name a .vue. `load` reads the SFC and, for a src block, resolves the sidecar from the
-          // block's `src` attribute — the id never carries the sidecar path.
-          if (!(/[?&]lang\.(?:json|json5)(?:$|&)/.test(realId) && filename.endsWith('.vue'))) return
-        } else if (!(/\.json5?$/.test(realId) && (await getFilter())(realId))) {
-          return
-        }
-
-        // SFC custom-block: parse the SFC and extract the block content
-        // (mirrors what vite-plugin-vue's load would do, but yields a
-        // virtual id whose extension does not trigger `builtin:vite-json`).
-        if (realId.includes('?vue&type=i18n')) {
-          const { filename, query } = parseVueRequest(realId)
-
-          // `filename` is the owning .vue (see resolveId). Parse the SFC and take the block at `index`.
-          this.addWatchFile(filename)
-          const sfcSource = readFile(filename)
-          const { descriptor } = getSfcParser()(sfcSource, {
-            sourceMap: ctx.sourceMap,
-            filename
-          })
-          const block = descriptor.customBlocks[query.index!]
-          // only an i18n block at this index is ours — a crafted id must not select another custom
-          // block (e.g. `<config src>`) and have its content returned as i18n
-          if (!block || block.type !== 'i18n') {
-            // returning nothing makes the bundler read the virtual id as a file
-            raiseError(`cannot find the i18n custom block (index: ${query.index}) in ${filename}`)
-            return
-          }
-
-          let source: string
-          if (block.attrs.src) {
-            // `<i18n src="...">`: the sidecar comes from the block's own `src` attribute, resolved
-            // relative to the .vue — not from the id, so a crafted id cannot point it elsewhere.
-            const sidecar = resolve(dirname(filename), String(block.attrs.src))
-            this.addWatchFile(sidecar)
-            source = readFile(sidecar)
-          } else {
-            source = block.content
-          }
-          if (typeof opts.transformI18nBlock === 'function') {
-            const modifiedSource = opts.transformI18nBlock(source)
-            if (modifiedSource && typeof modifiedSource === 'string') {
-              source = modifiedSource
-            } else {
-              warn('transformI18nBlock should return a string')
-            }
-          }
-
-          const langInfo = (query.lang as SFCLangFormat) || (opts.defaultSFCLang as SFCLangFormat)
-          const generate = getGenerator(langInfo, generateYAML)
-          const parseOptions = getOptions(filename, ctx, query, {
-            ...opts,
-            allowDynamic: false,
-            transformI18nBlock: undefined
-          })
-          const { code: generatedCode } = generate(source, parseOptions)
-          return result(generatedCode)
-        }
-
-        // Plain resource file
-        const realPath = realId
-        this.addWatchFile(realPath)
-
-        const code = readFile(realPath)
-
-        // mirror the static-import discovery that `transform` does for the
-        // rollup-vite path — keeps `importedResources` populated so sibling
-        // imports also pass the filter.
-        const imports = findStaticImports(code)
-        for (const p of imports) {
-          const res = resolve(dirname(realPath), p.specifier)
-          importedResources.add(res)
-        }
-
-        const langInfo = parsePath(realPath).ext as SFCLangFormat
-        const generate = getGenerator(langInfo)
-        const parseOptions = getOptions(realPath, ctx, {} as VueQuery, {
-          ...opts,
-          transformI18nBlock: undefined
-        })
-
-        try {
-          const { code: generatedCode } = generate(code, parseOptions)
-          return result(generatedCode)
-        } catch (err) {
-          if (err instanceof DynamicResourceError) {
-            error(
-              `Unable to precompile or optimize \`${realPath}\` - excluding from virtual bundle \`${INTLIFY_BUNDLE_IMPORT_ID}\`.\n`,
-              err
-            )
-            return `export default {}`
-          } else {
-            throw err
-          }
-        }
       }
     },
 
@@ -591,9 +375,6 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
     },
 
     async transform(code, id) {
-      // Skip vite 8 virtualized resources — already loaded as compiled JS.
-      if (isIntlifyVirtualId(id)) return
-
       const { filename, query } = parseVueRequest(id)
       debug('transform', id, JSON.stringify(query), filename)
 

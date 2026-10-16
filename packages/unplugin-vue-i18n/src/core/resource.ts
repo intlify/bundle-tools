@@ -335,6 +335,15 @@ export function resourcePlugin(
               )
             }
           }
+          // Watch the resources this bundle reads. It inlines them, so they are not modules: Vite
+          // watches them only under its root, and webpack not at all, so without this an edit to
+          // a resource outside the root (e.g. another package of a monorepo) never reaches the
+          // bundle, and webpack never rebuilds it (#386)
+          for (const path of resourcePaths) {
+            if (/\.(?:json5?|ya?ml)$/.test(path)) {
+              this.addWatchFile(path)
+            }
+          }
           const code = await generateBundleResources(resourcePaths, isProduction, {
             forceStringify,
             strictMessage,

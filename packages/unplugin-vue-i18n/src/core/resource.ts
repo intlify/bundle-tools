@@ -360,12 +360,14 @@ export function resourcePlugin(
             const { filename, query } = parseVueRequest(id)
             let virtualKey = id
             // @vitejs/plugin-vue routes `src` blocks through the sidecar file path
-            // (e.g. `./Foo.i18n.json5?vue&type=i18n&src=true&lang.json5`), not the .vue path.
+            // (e.g. `./Foo.i18n.json5?vue&type=i18n&index=0&src=true&lang.json5`), not the .vue path.
+            // Key on the owning .vue instead, keeping the query (`index`, `src`): `load` then reads the
+            // SFC and resolves the sidecar from the block's own `src` attribute, so the sidecar path
+            // comes from the component, not from the id. The id always points at a .vue this way.
             if (query.src && importer) {
               const importerPath = (virtualIdToRealPath(importer) ?? importer).split('?')[0]
               if (importerPath.endsWith('.vue')) {
-                const resolvedSidecar = resolve(dirname(importerPath), filename)
-                virtualKey = id.replace(filename, resolvedSidecar)
+                virtualKey = id.replace(filename, importerPath)
               }
             }
             return intlifyVirtualize(virtualKey)
@@ -449,11 +451,12 @@ export function resourcePlugin(
           // could make `load` read and return a file that is not an i18n resource: a dev server
           // passes any `/@id/` url to plugin `load`, before its `server.fs.allow` / `deny` checks.
           if (realId.includes('?vue&type=i18n')) {
-            const { filename, query } = parseVueRequest(realId)
-            const okBlock =
-              /[?&]lang\.(?:json|json5)(?:$|&)/.test(realId) &&
-              (query.src ? RE_RESOURCE_FORMAT.test(filename) : filename.endsWith('.vue'))
-            if (!okBlock) return
+            const { filename } = parseVueRequest(realId)
+            // Both inline and src blocks are keyed on the owning .vue (see resolveId), so the id must
+            // name a .vue. `load` reads the SFC and, for a src block, resolves the sidecar from the
+            // block's `src` attribute — the id never carries the sidecar path.
+            if (!(/[?&]lang\.(?:json|json5)(?:$|&)/.test(realId) && filename.endsWith('.vue')))
+              return
           } else if (!(/\.json5?$/.test(realId) && (await getFilter())(realId))) {
             return
           }
@@ -464,21 +467,26 @@ export function resourcePlugin(
           if (realId.includes('?vue&type=i18n')) {
             const { filename, query } = parseVueRequest(realId)
 
+            // `filename` is the owning .vue (see resolveId). Parse the SFC and take the block at `index`.
+            this.addWatchFile(filename)
+            const sfcSource = await fs.readFile(filename, 'utf-8')
+            const { descriptor } = getSfcParser()(sfcSource, {
+              sourceMap,
+              filename
+            })
+            const block = descriptor.customBlocks[query.index!]
+            // only an i18n block at this index is ours — a crafted id must not select another
+            // custom block (e.g. `<config src>`) and have its content returned as i18n
+            if (!block || block.type !== 'i18n') return
+
             let source: string
-            if (query.src) {
-              // Sidecar module — read directly (mirrors @vitejs/plugin-vue load for `query.src`).
-              // resolveId resolves the sidecar path relative to the owner .vue when possible.
-              this.addWatchFile(filename)
-              source = await fs.readFile(filename, 'utf-8')
+            if (block.attrs.src) {
+              // `<i18n src="...">`: the sidecar comes from the block's own `src` attribute, resolved
+              // relative to the .vue — not from the id, so a crafted id cannot point it elsewhere.
+              const sidecar = resolve(dirname(filename), String(block.attrs.src))
+              this.addWatchFile(sidecar)
+              source = await fs.readFile(sidecar, 'utf-8')
             } else {
-              this.addWatchFile(filename)
-              const sfcSource = await fs.readFile(filename, 'utf-8')
-              const { descriptor } = getSfcParser()(sfcSource, {
-                sourceMap,
-                filename
-              })
-              const block = descriptor.customBlocks[query.index!]
-              if (!block) return
               source = block.content
             }
             if (typeof transformI18nBlock === 'function') {

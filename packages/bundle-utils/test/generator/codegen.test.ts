@@ -15,7 +15,7 @@ describe('generateResourceAst', () => {
   })
   test('syntax error', () => {
     const errors: string[] = []
-    const { code } = generateMessageFunction(`|`, {
+    const { code } = generateResourceAst(`|`, {
       onError(msg) {
         errors.push(msg)
       }

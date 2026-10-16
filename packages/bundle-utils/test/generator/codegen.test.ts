@@ -86,3 +86,52 @@ describe('generateMessageFunction', () => {
     })
   })
 })
+
+// The message compiler leaves only the error code in the message of its errors when `NODE_ENV`
+// is `production` (as during `vite build`); the generators put the text back.
+describe('compile errors when NODE_ENV is production', () => {
+  let nodeEnv: string | undefined
+  beforeEach(() => {
+    nodeEnv = process.env.NODE_ENV
+    process.env.NODE_ENV = 'production'
+  })
+  afterEach(() => {
+    if (nodeEnv === undefined) {
+      delete process.env.NODE_ENV
+    } else {
+      process.env.NODE_ENV = nodeEnv
+    }
+  })
+
+  test('generateMessageFunction', () => {
+    const errors: string[] = []
+    generateMessageFunction('hello {name', {
+      onError(msg) {
+        errors.push(msg)
+      }
+    })
+    expect(errors).toEqual(['Unterminated closing brace'])
+  })
+
+  test('generateResourceAst', () => {
+    const errors: string[] = []
+    generateResourceAst('hello {name', {
+      onError(msg) {
+        errors.push(msg)
+      }
+    })
+    expect(errors).toEqual(['Unterminated closing brace'])
+  })
+
+  test('drops the placeholder of an argument the text had', () => {
+    const errors: string[] = []
+    generateResourceAst('{.}', {
+      onError(msg) {
+        errors.push(msg)
+      }
+    })
+    // 12.0.0-alpha.4 / alpha.5 of the message compiler keep the whole text, with the argument,
+    // as their bundler and Node.js builds always took the development branches
+    expect(errors).toEqual([expect.stringMatching(/^Invalid token in placeholder(: '\.')?$/)])
+  })
+})

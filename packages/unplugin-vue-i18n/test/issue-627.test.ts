@@ -136,5 +136,27 @@ describe.skipIf(!isTestFramework('vite') || process.env.TEST_VITE_TYPE === 'vite
         expect.stringMatching(/^assets\/en-[\w-]+\.js$/)
       )
     })
+
+    // a `<i18n src>` block's virtual id points at the owning .vue, not the sidecar path, so a
+    // crafted id cannot make `load` read an arbitrary file: `load` resolves the sidecar from the
+    // SFC's own `src` attribute. (The sidecar is outside `include`, as a real `src` often is.)
+    test('keys a src i18n block on the owning .vue, not the sidecar', async () => {
+      const root = createProject()
+      roots.push(root)
+      fs.writeFileSync(join(root, 'src/messages.json5'), '{ en: { hi: "hi" } }\n')
+      fs.writeFileSync(
+        join(root, 'src/Comp.vue'),
+        '<template></template>\n<i18n lang="json5" src="./messages.json5"></i18n>\n'
+      )
+      const server = await createServer(root)
+      servers.push(server)
+      const result = await server.transformRequest('/src/Comp.vue')
+      const url = result?.code.match(/["'](\/@id\/[^"']*intlify-i18n-[^"']*)["']/)?.[1]
+      expect(url).toBeDefined()
+      const id = url!.replace(/^\/@id\/__x00__/, '\0').replace(/^\/@id\//, '')
+      const encoded = id.replace(/^(?:\0|virtual:)?intlify-i18n-/, '').split('/')[0]
+      const key = Buffer.from(encoded, 'base64url').toString()
+      expect(key.split('?')[0]).toMatch(/\.vue$/)
+    })
   }
 )

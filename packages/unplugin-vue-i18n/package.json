@@ -54,6 +54,7 @@
     "unbuild": "catalog:",
     "vite": "catalog:vite8",
     "rollup-vite": "npm:vite@6.3.5",
+    "vite7": "npm:vite@^7.0.0",
     "vue-loader": "catalog:webpack",
     "webpack": "catalog:webpack",
     "webpack-merge": "^5.9.0"

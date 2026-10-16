@@ -108,6 +108,7 @@ jobs:
         node: [22, 24]
         include:
           - { framework: 'vite', vite_type: 'vite8' }
+          - { framework: 'vite', vite_type: 'vite7' }
           - { framework: 'vite', vite_type: 'vite6' }
           - { framework: 'webpack', vite_type: '' }
 

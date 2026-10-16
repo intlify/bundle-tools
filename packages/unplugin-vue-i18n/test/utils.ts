@@ -6,6 +6,7 @@ import { resolve } from 'node:path'
 import { build as buildVite6 } from 'rollup-vite'
 import { glob } from 'tinyglobby'
 import { build as buildVite8 } from 'vite'
+import { build as buildVite7 } from 'vite7'
 import { VueLoaderPlugin } from 'vue-loader'
 import webpack from 'webpack'
 import merge from 'webpack-merge'
@@ -23,7 +24,7 @@ type BundleResolve = {
   stats?: webpack.Stats
 }
 
-type ViteBuilderType = 'vite6' | 'vite8'
+type ViteBuilderType = 'vite6' | 'vite7' | 'vite8'
 
 type BundleFunction = (
   fixture: string,
@@ -33,6 +34,7 @@ type BundleFunction = (
 
 const VITE_BUILDERS: Record<ViteBuilderType, typeof buildVite8> = {
   vite6: buildVite6 as unknown as typeof buildVite8,
+  vite7: buildVite7 as unknown as typeof buildVite8,
   vite8: buildVite8
 }
 

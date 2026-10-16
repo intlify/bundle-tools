@@ -64,9 +64,11 @@ export function resourcePlugin(
   function resolveIncludeExcludeForLegacy() {
     const customBlockInclude =
       meta.framework === 'vite' ? RE_SFC_I18N_CUSTOM_BLOCK : RE_SFC_I18N_WEBPACK_CUSTOM_BLOCK
+    // pass `exclude` through as the other path does; leaving it out let Vite 6 / 7 compile
+    // excluded files anyway
     // prettier-ignore
     return include
-      ? [[...include, customBlockInclude], undefined]
+      ? [[...include, customBlockInclude], exclude]
       : [undefined, ['**/**']]
   }
 
@@ -306,10 +308,16 @@ export function resourcePlugin(
         if (INTLIFY_BUNDLE_IMPORT_ID === getVirtualId(id, meta.framework) && include) {
           let resourcePaths = [] as string[]
           for (const inc of include) {
-            // tinyglobby 0.2.16 takes its default `cwd` on import, so pass the current one
+            // tinyglobby 0.2.16 takes its default `cwd` on import, so pass the current one. Leave
+            // out what `exclude` matches, as the transform filter does
             resourcePaths = [
               ...resourcePaths,
-              ...(await glob(inc, { cwd: process.cwd(), expandDirectories: false, absolute: true }))
+              ...(await glob(inc, {
+                cwd: process.cwd(),
+                expandDirectories: false,
+                absolute: true,
+                ignore: exclude
+              }))
             ]
           }
           resourcePaths = resourcePaths.filter((el, pos) => resourcePaths.indexOf(el) === pos)

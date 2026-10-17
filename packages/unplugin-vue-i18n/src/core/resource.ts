@@ -368,6 +368,17 @@ export function resourcePlugin(
       }
     },
 
+    // webpack puts the transform loader on every module this lets through. A loader in the chain
+    // stops html-webpack-plugin from rendering its template, and turns binary assets into UTF-8
+    // text, so let through only what `transform` handles (the same filter as the one in it)
+    transformInclude(id: string) {
+      if (meta.framework !== 'webpack') {
+        return true
+      }
+      _filter ??= createFilter(...resolveIncludeExclude())
+      return _filter(id)
+    },
+
     transform: {
       async handler(code: string, id: string) {
         const filter = await getFilter()

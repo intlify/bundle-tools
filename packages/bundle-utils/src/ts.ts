@@ -21,13 +21,12 @@ export async function generate(
   const _options = Object.assign({}, DEFAULT_OPTIONS, options, {
     source: value
   })
-  if (_options.filename && /.[c|m]?ts$/.test(_options.filename)) {
-    const transformed = await transform(value, { loader: 'ts' })
-
-    if (transformed && transformed.code) {
-      value = transformed.code
-      _options.source = transformed.code
-    }
+  // the source is TypeScript whatever its filename is: a custom block of an SFC has the filename
+  // of the SFC
+  const transformed = await transform(value, { loader: 'ts' })
+  if (transformed && transformed.code) {
+    value = transformed.code
+    _options.source = transformed.code
   }
 
   return generateJavaScript(value, _options)

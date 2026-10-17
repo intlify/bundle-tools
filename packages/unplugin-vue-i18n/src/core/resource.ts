@@ -451,7 +451,9 @@ export function resourcePlugin(opts: ResolvedOptions, meta: UnpluginContextMeta)
         }
 
         const generate = getGenerator(langInfo, generateYAML)
-        const { code: generatedCode, map } = generate(source, parseOptions)
+        const { code: generatedCode, map } = /\.?[cm]?[jt]s$/.test(langInfo)
+          ? generateJsTsBlock(generate, source, parseOptions)
+          : generate(source, parseOptions)
         debug('generated code', generatedCode)
         debug('sourcemap', map, ctx.sourceMap)
 
@@ -468,19 +470,41 @@ function getGenerator(ext: string, fallback: GeneratorLike = generateJSON) {
     return generateJSON
   }
 
-  if (/\.ya?ml$/.test(ext)) {
+  if (/\.?ya?ml$/.test(ext)) {
     return generateYAML
   }
 
-  if (/\.[c|m]?js$/.test(ext)) {
+  if (/\.?[cm]?js$/.test(ext)) {
     return generateJavaScript
   }
 
-  if (/\.[c|m]?ts$/.test(ext)) {
+  if (/\.?[cm]?ts$/.test(ext)) {
     return generateTypescript
   }
 
   return fallback
+}
+
+/**
+ * A JS / TS custom block is a module (`export default { ... }`, which may import other modules, as
+ * a `src` file does), or only the object of the messages (#548). Generate it as it is, and wrap it
+ * with `export default` when that fails
+ */
+function generateJsTsBlock(
+  generate: GeneratorLike,
+  source: string,
+  options: CodeGenOptions
+): CodeGenResult<unknown> {
+  try {
+    return generate(source, options)
+  } catch (error) {
+    try {
+      return generate(`export default ${source.replace(/^[\s;]+/, '')}`, options)
+    } catch (wrappedError) {
+      // report the error of the form that the block is written in
+      throw /^\s*export\s+default\b/m.test(source) ? error : wrappedError
+    }
+  }
 }
 
 async function loadWebpack() {

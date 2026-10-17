@@ -54,7 +54,10 @@ export function generate(
 
   const { program: ast, errors } = parseJavaScript(_options.filename ?? '', value, {
     sourceType: 'module',
-    lang: 'js'
+    lang: 'js',
+    // `(value)` is the value itself: `export default ({ ... })` is an object, a parenthesized
+    // message is compiled, and escodegen does not know `ParenthesizedExpression`
+    preserveParens: false
   })
   if (errors.length > 0) {
     throw createOxcParseError(errors, value, _options)

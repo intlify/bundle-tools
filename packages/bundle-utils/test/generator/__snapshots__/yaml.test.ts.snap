@@ -16,7 +16,7 @@ exports[`AST code generation > code 1`] = `
   "unicode": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"A"}},
   "unicode-escape": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\u0041"}},
   "backslash-single-quote": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\\\u0027"}},
-  "backslash-backslash": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\\\\\"}},
+  "backslash-backslash": {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"\\\\"}},
   "errors": [
     {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"ERROR1001"}},
     {"type":0,"body":{"type":2,"items":[{"type":3}],"static":"ERROR1002"}},
@@ -160,8 +160,8 @@ exports[`bare > map 1`] = `
 
 exports[`html tag in message > code 1`] = `
 "{
-  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hi there!&lt;/p&gt;"])};fn.source="<p>hi there!</p>";return fn;})(),
-  "alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;/script&gt;"])};fn.source="<script>window.alert('hi there!')</script>";return fn;})()
+  "hi": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hi there!&lt;&#x2F;p&gt;"])};fn.source="<p>hi there!</p>";return fn;})(),
+  "alert": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;script&gt;window.alert(&apos;hi there!&apos;)&lt;&#x2F;script&gt;"])};fn.source="<script>window.alert('hi there!')</script>";return fn;})()
 }"
 `;
 
@@ -313,7 +313,7 @@ exports[`yaml > code 1`] = `
   "unicode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["A"])};fn.source="A";return fn;})(),
   "unicode-escape": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\u0041"])};fn.source="\\\\u0041";return fn;})(),
   "backslash-single-quote": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\'"])};fn.source="\\\\'";return fn;})(),
-  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
+  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\"])};fn.source="\\\\\\\\";return fn;})(),
   "errors": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})(),
@@ -351,7 +351,7 @@ exports[`yaml > map 1`] = `
     "A",
     "\\u0041",
     "\\'",
-    "\\\\",
+    "\\",
     "ERROR1001",
     "ERROR1002",
     "NOTE: This is warning",
@@ -405,7 +405,7 @@ exports[`yml > code 1`] = `
   "unicode": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["A"])};fn.source="A";return fn;})(),
   "unicode-escape": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\u0041"])};fn.source="\\\\u0041";return fn;})(),
   "backslash-single-quote": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\'"])};fn.source="\\\\'";return fn;})(),
-  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\\\\\"])};fn.source="\\\\\\\\";return fn;})(),
+  "backslash-backslash": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["\\\\"])};fn.source="\\\\\\\\";return fn;})(),
   "errors": [
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1001"])};fn.source="ERROR1001";return fn;})(),
     (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["ERROR1002"])};fn.source="ERROR1002";return fn;})(),
@@ -443,7 +443,7 @@ exports[`yml > map 1`] = `
     "A",
     "\\u0041",
     "\\'",
-    "\\\\",
+    "\\",
     "ERROR1001",
     "ERROR1002",
     "NOTE: This is warning",

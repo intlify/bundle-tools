@@ -4,11 +4,11 @@ exports[`import > code 1`] = `
 "import mod1 from './module1'
 import { mod2 } from './module2'
 const resource = {
-  "foo": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})(),
-  "mod1": mod1,
-  "nest": {
-    "bar": (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
-    "mod2": mod2
+  foo: (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["foo"])};fn.source="foo";return fn;})(),
+  mod1,
+  nest: {
+    bar: (()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["bar"])};fn.source="bar";return fn;})(),
+    mod2: mod2
   }
 }
 export default resource"

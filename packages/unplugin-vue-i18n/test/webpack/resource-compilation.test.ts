@@ -57,3 +57,18 @@ test('json that is not a locale resource', async () => {
   })
   expect(module).toEqual({ en: { hello: 'hello world!' } })
 })
+
+// a member of another locale module (#245), and a key from a constant
+test('js resource whose values are not messages', async () => {
+  const { module } = await bundleAndRun('en.js', bundleWebpack, {
+    target: './fixtures/js-values/',
+    include: [resolve(__dirname, '../fixtures/js-values/**')]
+  })
+  expect(compile(module.home.title, {} as MessageCompilerContext)(createMessageContext())).toBe(
+    'Home'
+  )
+  expect(compile(module.title, {} as MessageCompilerContext)(createMessageContext())).toBe('Home')
+  expect(compile(module.welcome, {} as MessageCompilerContext)(createMessageContext())).toBe(
+    'Welcome'
+  )
+})

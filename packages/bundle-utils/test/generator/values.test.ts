@@ -1,4 +1,5 @@
 import { runInThisContext } from 'node:vm'
+import { generate as generateJavaScript } from '../../src/js'
 import { generate as generateJSON } from '../../src/json'
 import { generate as generateYAML } from '../../src/yaml'
 
@@ -145,4 +146,76 @@ describe('tree-shaking', () => {
     expect(resource.list).toEqual([1, -2])
     expect('unused' in resource).toBe(false)
   })
+})
+
+describe('JS values that are not literals', () => {
+  // the generator compiles strings, and writes any other value as it is in the source
+  const source = `const pages = { home: { title: 'Home' }, list: ['two', 'three'] }
+export default {
+  member: pages.home,
+  call: String(1),
+  conditional: pages ? 'yes' : 'no',
+  negative: -1,
+  parenthesized: ('message'),
+  regex: /x/,
+  object: Object.freeze({ nested: 'x' }),
+  fn: () => ({ nested: 'x' }),
+  spread: { ...pages.home, after: 'after' },
+  items: [pages.home.title, () => 'x', ...pages.list, 'last']
+}`
+
+  for (const type of ['plain', 'sfc'] as const) {
+    test(`values (${type})`, () => {
+      const { code } = generateJavaScript(source, { type, filename: '/path/to/en.js' })
+      const resource = evaluate(code, type)
+      expect(resource.member).toEqual({ title: 'Home' })
+      expect(resource.call).toBe('1')
+      expect(resource.conditional).toBe('yes')
+      expect(resource.negative).toBe(-1)
+      expect(resource.parenthesized.source).toBe('message')
+      expect(resource.regex).toEqual(/x/)
+      expect(resource.object).toEqual({ nested: 'x' })
+      expect(resource.fn()).toEqual({ nested: 'x' })
+      expect(resource.spread.title).toBe('Home')
+      expect(resource.spread.after.source).toBe('after')
+      expect(resource.items).toHaveLength(5)
+      expect(resource.items[0]).toBe('Home')
+      expect(resource.items[1]()).toBe('x')
+      expect(resource.items.slice(2, 4)).toEqual(['two', 'three'])
+      expect(resource.items[4].source).toBe('last')
+    })
+  }
+})
+
+describe('JS resources that are kept as they are written', () => {
+  // only the messages are compiled; the rest of the module and of the resource stays as it is
+  const source = `const Keys = { home: 'home' }
+function make() {
+  return 'made'
+}
+const brand = 'Vue'
+export default {
+  [Keys.home]: 'Home',
+  template: \`Hello \${brand}!\`,
+  made: make(),
+  holes: ['a', , 'b'],
+  get title() {
+    return 'Title'
+  }
+}`
+
+  for (const type of ['plain', 'sfc'] as const) {
+    test(`kept as written (${type})`, () => {
+      const { code } = generateJavaScript(source, { type, filename: '/path/to/en.js' })
+      const resource = evaluate(code, type)
+      expect(resource.home.source).toBe('Home')
+      expect(resource.template).toBe('Hello Vue!')
+      expect(resource.made).toBe('made')
+      expect(resource.holes).toHaveLength(3)
+      expect(1 in resource.holes).toBe(false)
+      expect(resource.holes[2].source).toBe('b')
+      expect(Object.getOwnPropertyDescriptor(resource, 'title')).toHaveProperty('get')
+      expect(resource.title).toBe('Title')
+    })
+  }
 })

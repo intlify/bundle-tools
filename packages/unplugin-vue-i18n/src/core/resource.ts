@@ -488,13 +488,9 @@ export function resourcePlugin(
               }
             }
 
-            // For JS/TS custom blocks, wrap source with `export default`
-            // since the JS/TS generators require it
-            if (/\.?[cm]?[jt]s$/.test(langInfo)) {
-              source = `export default ${source.replace(/^[\s;]+/, '')}`
-            }
-
-            const { code: generatedCode, map } = await generate(source, parseOptions)
+            const { code: generatedCode, map } = /\.?[cm]?[jt]s$/.test(langInfo)
+              ? await generateJsTsBlock(generate, source, parseOptions)
+              : await generate(source, parseOptions)
             debug('generated code', generatedCode)
             debug('sourcemap', map, sourceMap)
 
@@ -536,6 +532,28 @@ function getGenerator(ext: string, fallback: GeneratorLike = generateJSON) {
   }
 
   return fallback
+}
+
+/**
+ * A JS / TS custom block is a module (`export default { ... }`, which may import other modules, as
+ * a `src` file does), or only the object of the messages (#548). Generate it as it is, and wrap it
+ * with `export default` when that fails
+ */
+async function generateJsTsBlock(
+  generate: GeneratorLike,
+  source: string,
+  options: CodeGenOptions
+): Promise<CodeGenResult<unknown>> {
+  try {
+    return await generate(source, options)
+  } catch (error) {
+    try {
+      return await generate(`export default ${source.replace(/^[\s;]+/, '')}`, options)
+    } catch (wrappedError) {
+      // report the error of the form that the block is written in
+      throw /^\s*export\s+default\b/m.test(source) ? error : wrappedError
+    }
+  }
 }
 
 function normalizeConfigResolveAlias(

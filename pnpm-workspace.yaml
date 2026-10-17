@@ -3,9 +3,9 @@ packages:
   - examples/**
 catalogs:
   intlify:
-    '@intlify/shared': ~11.4.2
-    '@intlify/message-compiler': ~11.4.2
-    vue-i18n: ~11.4.2
+    '@intlify/shared': ~11.4.15
+    '@intlify/message-compiler': ~11.4.15
+    vue-i18n: ~11.4.15
   vite:
     '@vitejs/plugin-vue': ^6.0.6
     vite: 6.3.5
@@ -26,8 +26,8 @@ allowBuilds:
   oxc-resolver: true
   unrs-resolver: true
 overrides:
-  '@intlify/shared': ~11.4.2
-  '@intlify/message-compiler': ~11.4.2
-  '@intlify/core-base': ~11.4.2
-  vue-i18n: ~11.4.2
-  petite-vue-i18n: ~11.4.2
+  '@intlify/shared': ~11.4.15
+  '@intlify/message-compiler': ~11.4.15
+  '@intlify/core-base': ~11.4.15
+  vue-i18n: ~11.4.15
+  petite-vue-i18n: ~11.4.15

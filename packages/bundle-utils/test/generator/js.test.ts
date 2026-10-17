@@ -202,3 +202,9 @@ test('AST code generation', async () => {
   expect(validateSyntax(code)).toBe(true)
   expect(code).toMatchSnapshot('code')
 })
+
+test('export default with parentheses', () => {
+  const { code } = generate(`export default ({ hello: ('hello') })`, { env: 'development' })
+  expect(validateSyntax(code)).toBe(true)
+  expect(code).toContain('_normalize(["hello"])')
+})

@@ -11,7 +11,7 @@ catalogs:
   vite8:
     vite: ^8.0.0
   vue:
-    vue: ~3.5.34
+    vue: ~3.6.0-rc.12
   webpack:
     ts-loader: ~9.5.7
     vue-loader: ~17.4.2
@@ -24,3 +24,21 @@ allowBuilds:
   esbuild: true
   oxc-resolver: true
   unrs-resolver: true
+# pnpm 11 holds back a version for a day after it is published (minimumReleaseAge), also when it
+# verifies the lockfile. vue-i18n 12.0.0-alpha.6 came out on 2026-10-17; these entries can go after
+# 2026-10-18 15:31 UTC.
+minimumReleaseAgeExclude:
+  - '@intlify/core-base@12.0.0-alpha.6'
+  - '@intlify/devtools-types@12.0.0-alpha.6'
+  - '@intlify/message-compiler@12.0.0-alpha.6'
+  - '@intlify/shared@12.0.0-alpha.6'
+  - '@intlify/vue-i18n-core@12.0.0-alpha.6'
+  - petite-vue-i18n@12.0.0-alpha.6
+  - vue-i18n@12.0.0-alpha.6
+overrides:
+  '@intlify/shared': next
+  '@intlify/message-compiler': next
+  '@intlify/core-base': next
+  '@intlify/vue-i18n-core': next
+  vue-i18n: next
+  petite-vue-i18n: next

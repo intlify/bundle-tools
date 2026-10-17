@@ -77,7 +77,7 @@ exports[`generateMessageFunction > development 1`] = `
 
 exports[`generateMessageFunction > escapeHtml > default: should not be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["<p>hello</p>"])};fn.source="<p>hello</p>";return fn;})()"`;
 
-exports[`generateMessageFunction > escapeHtml > true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hello&lt;/p&gt;"])};fn.source="<p>hello</p>";return fn;})()"`;
+exports[`generateMessageFunction > escapeHtml > true: should be escaped 1`] = `"(()=>{const fn=(ctx) => {const { normalize: _normalize } = ctx;return _normalize(["&lt;p&gt;hello&lt;&#x2F;p&gt;"])};fn.source="<p>hello</p>";return fn;})()"`;
 
 exports[`generateMessageFunction > production 1`] = `
 {

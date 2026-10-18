@@ -151,7 +151,7 @@ importers:
         version: 3.6.0-rc.12(typescript@6.0.3)
       vue-i18n:
         specifier: next
-        version: 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+        version: 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
     devDependencies:
       '@rspack/cli':
         specifier: ^1.2.7
@@ -170,7 +170,7 @@ importers:
         version: 3.6.0-rc.12(typescript@6.0.3)
       vue-i18n:
         specifier: next
-        version: 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+        version: 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
     devDependencies:
       '@vitejs/plugin-vue':
         specifier: catalog:vite
@@ -189,7 +189,7 @@ importers:
         version: 3.6.0-rc.12(typescript@6.0.3)
       vue-i18n:
         specifier: next
-        version: 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+        version: 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
     devDependencies:
       babel-loader:
         specifier: ^8.2.2
@@ -214,10 +214,10 @@ importers:
     dependencies:
       '@intlify/message-compiler':
         specifier: next
-        version: 12.0.0-alpha.6
+        version: 12.0.0-alpha.7
       '@intlify/shared':
         specifier: next
-        version: 12.0.0-alpha.6
+        version: 12.0.0-alpha.7
       escodegen:
         specifier: ^2.1.0
         version: 2.1.0
@@ -254,7 +254,7 @@ importers:
         version: link:../bundle-utils
       '@intlify/shared':
         specifier: next
-        version: 12.0.0-alpha.6
+        version: 12.0.0-alpha.7
       '@rollup/pluginutils':
         specifier: ^5.1.0
         version: 5.3.0(rollup@4.60.3)
@@ -275,7 +275,7 @@ importers:
         version: 2.0.3
       petite-vue-i18n:
         specifier: next
-        version: 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+        version: 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
       picocolors:
         specifier: ^1.0.0
         version: 1.1.1
@@ -290,11 +290,11 @@ importers:
         version: 3.6.0-rc.12(typescript@6.0.3)
       vue-i18n:
         specifier: next
-        version: 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+        version: 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
     devDependencies:
       '@intlify/core-base':
         specifier: next
-        version: 12.0.0-alpha.6
+        version: 12.0.0-alpha.7
       '@rspack/core':
         specifier: ^1.2.7
         version: 1.7.11
@@ -739,24 +739,24 @@ packages:
     resolution: {integrity: sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==}
     engines: {node: '>=18.18'}
 
-  '@intlify/core-base@12.0.0-alpha.6':
-    resolution: {integrity: sha512-n3UI0ouuV9Laps61PXT/RmHqx5+BOh9OhzzUygfzPCQCtDkWNwIiQG+R/nA5DWKX2dNyY6CM0NAahOWc6K0kow==}
+  '@intlify/core-base@12.0.0-alpha.7':
+    resolution: {integrity: sha512-NcsfIsikgewEgwurYVEbW1AS2094Ual1PI6qZmbq4Ew3OiYthWOJ5UiwXmyNrjJaZVdHi9kbekxcSlZ1RPyg8Q==}
     engines: {node: '>= 22'}
 
-  '@intlify/devtools-types@12.0.0-alpha.6':
-    resolution: {integrity: sha512-yI/34lKp9OTain3iElcLqjJhpPNOa2h4zaRpx1FnvNQ8KJAaVwj0pts5C5UbhkS58vGjKX9myg6qyOLBLovCwA==}
+  '@intlify/devtools-types@12.0.0-alpha.7':
+    resolution: {integrity: sha512-QBLmJDLOu50N/QaoYZLuLIMoOBwn3vHN7pYec4bca2TWffwy/bROnB/zMwZwOyfkjcTnE0g1WhOY/Kj2pRwCgA==}
     engines: {node: '>= 22'}
 
-  '@intlify/message-compiler@12.0.0-alpha.6':
-    resolution: {integrity: sha512-ZPTI4sv6YG8Z2z6uAprgMEz5j0l9rxNXDAUICqWmhejvafZzOS3ysORSW0L3rhLdp3z/csOTSAAPWtzL1BO2FQ==}
+  '@intlify/message-compiler@12.0.0-alpha.7':
+    resolution: {integrity: sha512-bf5nnw9QipT7MXUdo7t1hjybbTVkSouoM22PbwafAaMjLvq+8VyJlmmd5DhmZuwJSdnXC66unu5z5aWKixIBBQ==}
     engines: {node: '>= 22'}
 
-  '@intlify/shared@12.0.0-alpha.6':
-    resolution: {integrity: sha512-3H0fbxSQdO1/ywuCVPDSuCjOzQBv0Rlt0IxBI89zf6X5PymPk48WfoiEqD4BDTAqUb/2qNUe1xGmc6k8sExh+g==}
+  '@intlify/shared@12.0.0-alpha.7':
+    resolution: {integrity: sha512-mKyLA9OmggcR0haCJinmEgWRscweIaHtEaMfw+JWVyOXKkXtMuhEVVgiMnzirG1SvA/g+vcS+gK7CJR9ej+tNw==}
     engines: {node: '>= 22'}
 
-  '@intlify/vue-i18n-core@12.0.0-alpha.6':
-    resolution: {integrity: sha512-x193w5RavcRppvVo3aRV2maX1rfUEUEfCY5hU5QZVK/4bEqReM2lUXAOsPpYefVXgFSnNiqtEcJQNB6p9bQUpw==}
+  '@intlify/vue-i18n-core@12.0.0-alpha.7':
+    resolution: {integrity: sha512-/mvFWxEMwZLctmfF2NJO+C/B6ffcmbg0DspirkLZjGjAf5u5Y1k/gY2aaD7aLHq7BSbCTgC5dLLAjVcGj30AJQ==}
     engines: {node: '>= 22'}
     peerDependencies:
       vue: ^3.6.0-beta.2
@@ -4496,8 +4496,8 @@ packages:
   pathe@2.0.3:
     resolution: {integrity: sha512-WUjGcAqP1gQacoQe+OBJsFA7Ld4DyXuUIjZ5cc75cLHvJ7dtNsTugphxIADwspS+AraAUePCKrSVtPLFj/F88w==}
 
-  petite-vue-i18n@12.0.0-alpha.6:
-    resolution: {integrity: sha512-kti1sUa2LUogqn0g/clNBXbDTlT071IfLD+2rrQ4j+xDBNCqxaD9RoHA9hhdmqGKadxl2Ol88UFZUq/lbgZ4Jg==}
+  petite-vue-i18n@12.0.0-alpha.7:
+    resolution: {integrity: sha512-WvfrLcu4O6w0SkFepzVDRKZJbfqewIr8rIzSqTj0lAdhTPLAD8WwO0NdgOb5Nw5ESDRieYCHGHAL4YyWhltXpw==}
     engines: {node: '>= 22'}
     peerDependencies:
       vue: ^3.6.0-beta.2
@@ -5537,8 +5537,8 @@ packages:
       jsdom:
         optional: true
 
-  vue-i18n@12.0.0-alpha.6:
-    resolution: {integrity: sha512-bqJ+ch4ojLWIfubHRt++jODHqbO2ErSemUoiQ4HpJ5imSFGsN9a/UO/SXcEksvM49L4tZxZ5BRpU8/9tQSDdPg==}
+  vue-i18n@12.0.0-alpha.7:
+    resolution: {integrity: sha512-OpleirkEgSoijBzuN650/72dB58DqEWB6SlnnU+DPh+WA88sqYr8NqQ5jGwgZ+hSDpRYQRcqUZ1QVJ5xwco9jQ==}
     engines: {node: '>= 22'}
     peerDependencies:
       vue: ^3.6.0-beta.2
@@ -6147,29 +6147,29 @@ snapshots:
 
   '@humanwhocodes/retry@0.4.3': {}
 
-  '@intlify/core-base@12.0.0-alpha.6':
+  '@intlify/core-base@12.0.0-alpha.7':
     dependencies:
-      '@intlify/devtools-types': 12.0.0-alpha.6
-      '@intlify/message-compiler': 12.0.0-alpha.6
-      '@intlify/shared': 12.0.0-alpha.6
+      '@intlify/devtools-types': 12.0.0-alpha.7
+      '@intlify/message-compiler': 12.0.0-alpha.7
+      '@intlify/shared': 12.0.0-alpha.7
 
-  '@intlify/devtools-types@12.0.0-alpha.6':
+  '@intlify/devtools-types@12.0.0-alpha.7':
     dependencies:
-      '@intlify/core-base': 12.0.0-alpha.6
-      '@intlify/shared': 12.0.0-alpha.6
+      '@intlify/core-base': 12.0.0-alpha.7
+      '@intlify/shared': 12.0.0-alpha.7
 
-  '@intlify/message-compiler@12.0.0-alpha.6':
+  '@intlify/message-compiler@12.0.0-alpha.7':
     dependencies:
-      '@intlify/shared': 12.0.0-alpha.6
-      source-map-js: 1.2.1
+      '@intlify/shared': 12.0.0-alpha.7
+      source-map-js: 1.2.2
 
-  '@intlify/shared@12.0.0-alpha.6': {}
+  '@intlify/shared@12.0.0-alpha.7': {}
 
-  '@intlify/vue-i18n-core@12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))':
+  '@intlify/vue-i18n-core@12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))':
     dependencies:
-      '@intlify/core-base': 12.0.0-alpha.6
-      '@intlify/devtools-types': 12.0.0-alpha.6
-      '@intlify/shared': 12.0.0-alpha.6
+      '@intlify/core-base': 12.0.0-alpha.7
+      '@intlify/devtools-types': 12.0.0-alpha.7
+      '@intlify/shared': 12.0.0-alpha.7
       '@vue/devtools-api': 6.6.4
       vue: 3.6.0-rc.12(typescript@6.0.3)
 
@@ -7896,7 +7896,7 @@ snapshots:
   css-tree@3.2.1:
     dependencies:
       mdn-data: 2.27.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   css-what@6.2.2: {}
 
@@ -10032,11 +10032,11 @@ snapshots:
 
   pathe@2.0.3: {}
 
-  petite-vue-i18n@12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3)):
+  petite-vue-i18n@12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3)):
     dependencies:
-      '@intlify/core-base': 12.0.0-alpha.6
-      '@intlify/devtools-types': 12.0.0-alpha.6
-      '@intlify/vue-i18n-core': 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+      '@intlify/core-base': 12.0.0-alpha.7
+      '@intlify/devtools-types': 12.0.0-alpha.7
+      '@intlify/vue-i18n-core': 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
       '@vue/devtools-api': 6.6.4
       vue: 3.6.0-rc.12(typescript@6.0.3)
 
@@ -10239,7 +10239,7 @@ snapshots:
     dependencies:
       nanoid: 3.3.12
       picocolors: 1.1.1
-      source-map-js: 1.2.1
+      source-map-js: 1.2.2
 
   postcss@8.5.30:
     dependencies:
@@ -11147,11 +11147,11 @@ snapshots:
     transitivePeerDependencies:
       - msw
 
-  vue-i18n@12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3)):
+  vue-i18n@12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3)):
     dependencies:
-      '@intlify/core-base': 12.0.0-alpha.6
-      '@intlify/devtools-types': 12.0.0-alpha.6
-      '@intlify/vue-i18n-core': 12.0.0-alpha.6(vue@3.6.0-rc.12(typescript@6.0.3))
+      '@intlify/core-base': 12.0.0-alpha.7
+      '@intlify/devtools-types': 12.0.0-alpha.7
+      '@intlify/vue-i18n-core': 12.0.0-alpha.7(vue@3.6.0-rc.12(typescript@6.0.3))
       '@vue/devtools-api': 6.6.4
       vue: 3.6.0-rc.12(typescript@6.0.3)
 

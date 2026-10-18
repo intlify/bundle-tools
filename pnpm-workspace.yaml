@@ -13,7 +13,7 @@ catalogs:
   vue:
     vue: ~3.6.0-rc.12
   webpack:
-    ts-loader: ~9.5.7
+    ts-loader: ~9.6.0
     vue-loader: ~17.4.2
     webpack: ~5.106.2
 catalog:

@@ -29,8 +29,8 @@ catalogs:
       version: 3.6.0-rc.12
   webpack:
     ts-loader:
-      specifier: ~9.5.7
-      version: 9.5.7
+      specifier: ~9.6.0
+      version: 9.6.2
     vue-loader:
       specifier: ~17.4.2
       version: 17.4.2
@@ -196,7 +196,7 @@ importers:
         version: 8.4.1(@babel/core@7.29.0)(webpack@5.106.2)
       ts-loader:
         specifier: catalog:webpack
-        version: 9.5.7(typescript@6.0.3)(webpack@5.106.2)
+        version: 9.6.2(loader-utils@2.0.4)(typescript@6.0.3)(webpack@5.106.2)
       vue-loader:
         specifier: catalog:webpack
         version: 17.4.2(vue@3.6.0-rc.12(typescript@6.0.3))(webpack@5.106.2)
@@ -324,7 +324,7 @@ importers:
         version: vite@6.4.4(@types/node@25.7.0)(jiti@2.7.0)(lightningcss@1.32.0)(terser@5.47.1)(yaml@2.9.1)
       ts-loader:
         specifier: catalog:webpack
-        version: 9.5.7(typescript@6.0.3)(webpack@5.106.2(lightningcss@1.32.0))
+        version: 9.6.2(loader-utils@2.0.4)(typescript@6.0.3)(webpack@5.106.2(lightningcss@1.32.0))
       unbuild:
         specifier: 'catalog:'
         version: 3.6.1(typescript@6.0.3)(vue@3.6.0-rc.12(typescript@6.0.3))
@@ -5273,12 +5273,16 @@ packages:
     peerDependencies:
       typescript: '>=4.8.4'
 
-  ts-loader@9.5.7:
-    resolution: {integrity: sha512-/ZNrKgA3K3PtpMYOC71EeMWIloGw3IYEa5/t1cyz2r5/PyUwTXGzYJvcD3kfUvmhlfpz1rhV8B2O6IVTQ0avsg==}
+  ts-loader@9.6.2:
+    resolution: {integrity: sha512-R4iuczmtgxvtuI556s+hTZ6/7Ee03VCAk/l/M8LY1OAsUgB7YydsCxkgq9D9pKRaD7GJqUi2u8fp9zZP/ufjKA==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
+      loader-utils: '*'
       typescript: '*'
-      webpack: ^5.0.0
+      webpack: ^4.0.0 || ^5.0.0
+    peerDependenciesMeta:
+      loader-utils:
+        optional: true
 
   tsconfig-paths@3.15.0:
     resolution: {integrity: sha512-2Ac2RgzDe/cn48GvOe3M+o82pEFewD3UPbyoUHHdKasHwJKjds4fLXWf/Ux5kATBKN20oaFGu+jbElp1pos0mg==}
@@ -6734,10 +6738,10 @@ snapshots:
       '@rollup/pluginutils': 5.3.0(rollup@4.60.3)
       commondir: 1.0.1
       estree-walker: 2.0.2
-      fdir: 6.5.0(picomatch@4.0.4)
+      fdir: 6.5.0(picomatch@4.0.7)
       is-reference: 1.2.1
       magic-string: 0.30.21
-      picomatch: 4.0.4
+      picomatch: 4.0.7
     optionalDependencies:
       rollup: 4.60.3
 
@@ -8603,6 +8607,10 @@ snapshots:
   fdir@6.5.0(picomatch@4.0.4):
     optionalDependencies:
       picomatch: 4.0.4
+
+  fdir@6.5.0(picomatch@4.0.7):
+    optionalDependencies:
+      picomatch: 4.0.7
 
   file-entry-cache@8.0.0:
     dependencies:
@@ -10858,25 +10866,25 @@ snapshots:
     dependencies:
       typescript: 6.0.3
 
-  ts-loader@9.5.7(typescript@6.0.3)(webpack@5.106.2(lightningcss@1.32.0)):
+  ts-loader@9.6.2(loader-utils@2.0.4)(typescript@6.0.3)(webpack@5.106.2(lightningcss@1.32.0)):
     dependencies:
       chalk: 4.1.2
-      enhanced-resolve: 5.21.3
-      micromatch: 4.0.8
-      semver: 7.8.0
+      picomatch: 4.0.7
       source-map: 0.7.6
       typescript: 6.0.3
       webpack: 5.106.2(lightningcss@1.32.0)
+    optionalDependencies:
+      loader-utils: 2.0.4
 
-  ts-loader@9.5.7(typescript@6.0.3)(webpack@5.106.2):
+  ts-loader@9.6.2(loader-utils@2.0.4)(typescript@6.0.3)(webpack@5.106.2):
     dependencies:
       chalk: 4.1.2
-      enhanced-resolve: 5.21.3
-      micromatch: 4.0.8
-      semver: 7.8.0
+      picomatch: 4.0.7
       source-map: 0.7.6
       typescript: 6.0.3
       webpack: 5.106.2(webpack-cli@5.1.4)
+    optionalDependencies:
+      loader-utils: 2.0.4
 
   tsconfig-paths@3.15.0:
     dependencies:

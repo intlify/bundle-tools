@@ -10,3 +10,6 @@ examples/**/dist
 .env
 .idea
 *.tgz
+.issues
+.notes
+.plans

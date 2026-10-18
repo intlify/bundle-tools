@@ -25,16 +25,16 @@ allowBuilds:
   oxc-resolver: true
   unrs-resolver: true
 # pnpm 11 holds back a version for a day after it is published (minimumReleaseAge), also when it
-# verifies the lockfile. vue-i18n 12.0.0-alpha.6 came out on 2026-10-17; these entries can go after
-# 2026-10-18 15:31 UTC.
+# verifies the lockfile. vue-i18n 12.0.0-alpha.7 came out on 2026-10-18; these entries can go after
+# 2026-10-19 07:56 UTC.
 minimumReleaseAgeExclude:
-  - '@intlify/core-base@12.0.0-alpha.6'
-  - '@intlify/devtools-types@12.0.0-alpha.6'
-  - '@intlify/message-compiler@12.0.0-alpha.6'
-  - '@intlify/shared@12.0.0-alpha.6'
-  - '@intlify/vue-i18n-core@12.0.0-alpha.6'
-  - petite-vue-i18n@12.0.0-alpha.6
-  - vue-i18n@12.0.0-alpha.6
+  - '@intlify/core-base@12.0.0-alpha.7'
+  - '@intlify/devtools-types@12.0.0-alpha.7'
+  - '@intlify/message-compiler@12.0.0-alpha.7'
+  - '@intlify/shared@12.0.0-alpha.7'
+  - '@intlify/vue-i18n-core@12.0.0-alpha.7'
+  - petite-vue-i18n@12.0.0-alpha.7
+  - vue-i18n@12.0.0-alpha.7
 overrides:
   '@intlify/shared': next
   '@intlify/message-compiler': next

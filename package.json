@@ -99,5 +99,5 @@
     "test:e2e": "pnpm check-install && vitest -c ./vitest.e2e.config.ts run",
     "test:e2e:unplugin": "TEST_FRAMEWORK=vite vitest run packages/unplugin-vue-i18n/test/hmr-glob.test.ts"
   },
-  "packageManager": "pnpm@11.28.6"
+  "packageManager": "pnpm@11.28.8"
 }

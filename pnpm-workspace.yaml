@@ -15,7 +15,7 @@ catalogs:
   webpack:
     ts-loader: ~9.6.0
     vue-loader: ~17.4.2
-    webpack: ~5.106.2
+    webpack: ~5.112.0
 catalog:
   '@types/node': ^25.7.0
   unbuild: ^3.6.1

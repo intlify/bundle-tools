@@ -43,7 +43,7 @@
   },
   "devDependencies": {
     "@intlify/core-base": "next",
-    "@rspack/core": "^1.2.7",
+    "@rspack/core": "^2.0.0",
     "@types/debug": "^4.1.5",
     "@types/jsdom": "^28.0.0",
     "@types/memory-fs": "^0.3.2",
